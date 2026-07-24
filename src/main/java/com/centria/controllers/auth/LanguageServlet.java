@@ -121,7 +121,7 @@ protected void doGet(
 
         response.sendRedirect(
             request.getContextPath()
-            + "/admin/super_admin_dashboard.jsp"
+            + "/admin/dashboard.jsp"
         );
 
 
