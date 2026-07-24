@@ -1,6 +1,6 @@
 /*
  * Centria
- * Super Admin Dashboard
+ * Dashboard
  */
 
 

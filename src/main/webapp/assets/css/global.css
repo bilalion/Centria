@@ -1,0 +1,445 @@
+/*
+==========================================================
+File        : global.css
+Project     : CENTRIA
+Module      : Global Styles
+Author      : Chentouf Bilal
+
+Description :
+Global CSS foundation.
+Contains:
+- CSS Variables
+- Reset
+- Base Typography
+- Common Elements
+- Accessibility
+- Scrollbar
+- RTL/LTR foundation
+
+Do not add page/module styles here.
+==========================================================
+*/
+
+
+/* ======================================================
+   CSS VARIABLES
+   ====================================================== */
+
+:root{
+
+    --primary:#2563eb;
+
+    --primary-dark:#1e40af;
+
+    --success:#059669;
+
+    --warning:#f59e0b;
+
+    --danger:#dc2626;
+
+    --purple:#7c3aed;
+
+
+    --white:#ffffff;
+
+    --background:#f1f5f9;
+
+    --surface:#ffffff;
+
+
+    --title:#0f172a;
+
+    --text:#475569;
+
+    --muted:#94a3b8;
+
+    --border:#e2e8f0;
+
+
+    --sidebar-start:#1e293b;
+
+    --sidebar-end:#0f172a;
+
+
+    --radius-sm:10px;
+
+    --radius:14px;
+
+    --radius-lg:18px;
+
+    --radius-xl:22px;
+
+
+    --shadow-sm:
+    0 4px 10px rgba(15,23,42,.05);
+
+
+    --shadow:
+    0 10px 24px rgba(15,23,42,.08);
+
+
+    --shadow-lg:
+    0 18px 40px rgba(15,23,42,.12);
+
+
+    --transition:.30s ease;
+
+}
+
+
+
+/* ======================================================
+   GLOBAL RESET
+   ====================================================== */
+
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+/* ======================================================
+   BODY BASE
+   ====================================================== */
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    line-height:1.6;
+
+    display:flex;
+
+    overflow:hidden;
+
+}
+
+
+
+/* ======================================================
+   PAGE DIRECTION
+   ====================================================== */
+
+
+html[dir="rtl"]{
+
+    direction:rtl;
+
+}
+
+
+
+html[dir="ltr"]{
+
+    direction:ltr;
+
+}
+
+
+
+/* ======================================================
+   MAIN PAGE DIRECTION CONTROL
+
+   Arabic:
+   Sidebar right
+   Content left
+
+   French / English:
+   Sidebar left
+   Content right
+   ====================================================== */
+
+
+html[dir="rtl"] body{
+
+    flex-direction:row-reverse;
+
+}
+
+
+
+html[dir="ltr"] body{
+
+    flex-direction:row;
+
+}
+
+
+
+/* ======================================================
+   TYPOGRAPHY
+   ====================================================== */
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    color:var(--title);
+
+    font-weight:700;
+
+}
+
+
+
+p{
+
+    color:var(--text);
+
+}
+
+
+
+/* ======================================================
+   LINKS
+   ====================================================== */
+
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+
+/* ======================================================
+   BUTTONS
+   ====================================================== */
+
+
+button{
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    border:none;
+
+}
+
+
+
+/* ======================================================
+   FORMS
+   ====================================================== */
+
+
+input,
+select,
+textarea{
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+
+
+/* ======================================================
+   IMAGES
+   ====================================================== */
+
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+
+
+/* ======================================================
+   TABLE
+   ====================================================== */
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+/* ======================================================
+   UTILITIES
+   ====================================================== */
+
+
+.text-center{
+
+    text-align:center;
+
+}
+
+
+
+.hidden{
+
+    display:none !important;
+
+}
+
+
+
+/* ======================================================
+   SCROLLBAR
+   ====================================================== */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#e2e8f0;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#94a3b8;
+
+    border-radius:20px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+
+}
+
+
+
+*{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#94a3b8 #e2e8f0;
+
+}
+
+
+
+/* ======================================================
+   ACCESSIBILITY
+   ====================================================== */
+
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible{
+
+    outline:
+    3px solid rgba(37,99,235,.30);
+
+    outline-offset:3px;
+
+}
+
+
+
+/* ======================================================
+   CONTAINER
+   ====================================================== */
+
+
+.container{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:0 20px;
+
+}
+
+
+
+/* ======================================================
+   ANIMATION BASE
+   ====================================================== */
+
+
+@keyframes fadeInUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ======================================================
+   END global.css
+   ====================================================== */

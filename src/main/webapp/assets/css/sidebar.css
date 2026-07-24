@@ -1,0 +1,683 @@
+/*
+==========================================================
+File        : sidebar.css
+Project     : CENTRIA
+Module      : Sidebar Component
+
+Description :
+Sidebar layout, branding, navigation menu
+and logout button.
+
+RTL / LTR Ready.
+==========================================================
+*/
+
+
+/* ======================================================
+   SIDEBAR CONTAINER
+   ====================================================== */
+
+
+.sidebar{
+
+    width:280px;
+
+    min-width:280px;
+
+    height:100vh;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex-shrink:0;
+
+    padding:28px 20px;
+
+    color:var(--white);
+
+    background:
+    linear-gradient(
+        180deg,
+        var(--sidebar-start),
+        var(--sidebar-end)
+    );
+
+    box-shadow:
+    4px 0 20px rgba(15,23,42,.10);
+
+    transition:var(--transition);
+
+}
+
+
+
+/* ======================================================
+   IMPORTANT :
+   SIDEBAR POSITION CONTROL
+   ====================================================== */
+
+
+html[dir="rtl"] body{
+
+    flex-direction:row-reverse;
+
+}
+
+
+html[dir="ltr"] body{
+
+    flex-direction:row;
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   BRAND SECTION
+   ====================================================== */
+
+
+.brand-section{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+
+
+
+/* ======================================================
+   LOGO
+   ====================================================== */
+
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    padding:8px;
+
+    margin-bottom:14px;
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.30);
+
+    transition:.3s ease;
+
+}
+
+
+
+.logo:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+
+
+.brand-name{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--white);
+
+    letter-spacing:.5px;
+
+}
+
+
+
+.brand-subtitle{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#cbd5e1;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+
+
+
+
+/* ======================================================
+   DIVIDER
+   ====================================================== */
+
+
+.sidebar hr{
+
+    border:none;
+
+    height:1px;
+
+    margin:24px 0;
+
+    background:
+
+    rgba(255,255,255,.12);
+
+}
+
+
+
+
+
+/* ======================================================
+   WELCOME
+   ====================================================== */
+
+
+.welcome-text{
+
+    margin-bottom:22px;
+
+    text-align:center;
+
+    color:#e2e8f0;
+
+    line-height:1.7;
+
+}
+
+
+
+
+
+
+/* ======================================================
+   MENU
+   ====================================================== */
+
+
+.menu-section{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow-y:auto;
+
+}
+
+
+
+.menu-section a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 16px;
+
+    margin-bottom:10px;
+
+    border-radius:var(--radius);
+
+    text-decoration:none;
+
+    color:var(--white);
+
+    background:
+
+    rgba(255,255,255,.05);
+
+    transition:
+
+    background var(--transition),
+    transform var(--transition);
+
+}
+
+
+
+
+.menu-section a:hover{
+
+    background:var(--primary);
+
+    transform:none;
+
+    box-shadow:
+
+        0 6px 14px rgba(37,99,235,.25);
+
+}
+
+
+
+
+/* ======================================================
+   ACTIVE MENU
+   ====================================================== */
+
+
+.menu-section a.active{
+
+    background:#1e40af;
+
+    color:white;
+
+    box-shadow:
+
+    0 10px 22px rgba(30,64,175,.35);
+
+}
+
+
+
+
+
+/* ======================================================
+   MENU ICON
+   ====================================================== */
+
+
+.menu-icon{
+
+    width:24px;
+
+    min-width:24px;
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+
+
+
+.menu-text{
+
+    flex:1;
+
+}
+
+
+
+
+
+/* ======================================================
+   RTL MENU
+   ====================================================== */
+
+
+html[dir="rtl"] .menu-section{
+
+    direction:rtl;
+
+}
+
+
+
+html[dir="rtl"] .menu-section a{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="rtl"] .menu-icon{
+
+    order:2;
+
+}
+
+
+
+html[dir="rtl"] .menu-text{
+
+    order:1;
+
+    text-align:right;
+
+}
+
+
+
+
+
+/* ======================================================
+   LTR MENU
+   ====================================================== */
+
+
+html[dir="ltr"] .menu-section{
+
+    direction:ltr;
+
+}
+
+
+
+html[dir="ltr"] .menu-section a{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .menu-icon{
+
+    order:1;
+
+}
+
+
+
+html[dir="ltr"] .menu-text{
+
+    order:2;
+
+    text-align:left;
+
+}
+
+
+
+
+
+/* ======================================================
+   LOGOUT BUTTON
+   ====================================================== */
+
+
+.logout-btn{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    border-radius:var(--radius);
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    color:var(--white);
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
+
+
+    transition:
+
+    transform var(--transition),
+    box-shadow var(--transition);
+
+}
+
+
+
+
+
+.logout-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+
+    0 10px 22px rgba(239,68,68,.35);
+
+}
+
+
+
+
+
+.logout-btn .menu-icon{
+
+    width:auto;
+
+    min-width:auto;
+
+}
+
+
+
+.logout-btn .menu-text{
+
+    flex:none;
+
+    text-align:center;
+
+}
+
+
+
+
+
+/* ======================================================
+   LOGOUT RTL
+   ====================================================== */
+
+
+html[dir="rtl"] .logout-btn{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="rtl"] .logout-btn .menu-icon{
+
+    order:2;
+
+}
+
+
+
+html[dir="rtl"] .logout-btn .menu-text{
+
+    order:1;
+
+}
+
+
+
+
+
+/* ======================================================
+   LOGOUT LTR
+   ====================================================== */
+
+
+html[dir="ltr"] .logout-btn{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .logout-btn .menu-icon{
+
+    order:1;
+
+}
+
+
+
+html[dir="ltr"] .logout-btn .menu-text{
+
+    order:2;
+
+}
+
+
+
+
+
+/* ======================================================
+   SIDEBAR SCROLLBAR
+   ====================================================== */
+
+
+.sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+
+.sidebar::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.25);
+
+    border-radius:20px;
+
+}
+
+
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+
+    background:rgba(255,255,255,.40);
+
+}
+
+
+
+
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+
+
+@media(max-width:900px){
+
+
+    .sidebar{
+
+        width:100%;
+
+        min-width:100%;
+
+        height:auto;
+
+        padding:20px;
+
+    }
+
+
+
+    .menu-section{
+
+        overflow:visible;
+
+    }
+
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+    .brand-name{
+
+        font-size:26px;
+
+    }
+
+
+
+    .logo{
+
+        width:75px;
+
+        height:75px;
+
+    }
+
+
+
+    .menu-section a{
+
+        padding:12px 14px;
+
+    }
+
+
+}
+
+
+
+
+
+/* ======================================================
+   END sidebar.css
+   ====================================================== */

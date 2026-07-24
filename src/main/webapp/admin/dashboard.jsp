@@ -15,9 +15,7 @@ String direction =
         ? "ltr"
         : "rtl";
 
-
 %>
-
 
 
 
@@ -33,19 +31,52 @@ String direction =
 
 
 <title>
-
 <%= LanguageManager.get("dashboard.title", session) %>
-
 </title>
 
 
 
+<!-- =================================================
+     GLOBAL STYLE
+     ================================================= -->
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/dashboard.css?v=1008">
+href="<%=request.getContextPath()%>/assets/css/global.css?v=1">
+
+
+
+<!-- =================================================
+     DASHBOARD LAYOUT
+     ================================================= -->
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/centres.css?v=1009">
+href="<%=request.getContextPath()%>/assets/css/dashboard.css?v=1">
+
+
+
+<!-- =================================================
+     COMPONENTS
+     ================================================= -->
+
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/sidebar.css?v=1">
+
+
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/header.css?v=1">
+
+
+
+<!-- =================================================
+     MODULES
+     ================================================= -->
+
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
+
+
+
+
 
 <script>
 
@@ -56,9 +87,19 @@ window.contextPath =
 
 
 
-<script src="<%=request.getContextPath()%>/assets/js/centres.js?v=2"></script>
-<script src="<%=request.getContextPath()%>/assets/js/dashboard.js"></script>
 
+<!-- =================================================
+     JAVASCRIPT
+     ================================================= -->
+
+<script defer
+src="<%=request.getContextPath()%>/assets/js/dashboard.js">
+</script>
+
+
+<script defer
+src="<%=request.getContextPath()%>/assets/js/centres.js?v=2">
+</script>
 
 
 
@@ -73,14 +114,12 @@ window.contextPath =
 
 
 
-
 <!-- =================================================
      SIDEBAR COMPONENT
      ================================================= -->
 
 
 <jsp:include page="components/sidebar.jsp"/>
-
 
 
 
@@ -98,14 +137,8 @@ window.contextPath =
 
 
 
-
-
 <!-- =================================================
      HEADER COMPONENT
-     يحتوي:
-     - عنوان النظام
-     - اللغة
-     - المستخدم
      ================================================= -->
 
 
@@ -117,12 +150,13 @@ window.contextPath =
 
 
 
-
 <!-- =================================================
      DYNAMIC CONTENT AREA
      ================================================= -->
 
+
 <div id="content-area">
+
 
 
 <%
@@ -131,15 +165,16 @@ String section =
         request.getParameter("section");
 
 
+
 if(section == null 
    || section.isEmpty()
-  || "home".equals(section)){
+   || "home".equals(section)){
 
 
 %>
 
 
-    <jsp:include page="pages/accueil.jsp"/>
+<jsp:include page="pages/accueil.jsp"/>
 
 
 <%
@@ -151,7 +186,7 @@ if(section == null
 %>
 
 
-    <jsp:include page="pages/centres.jsp"/>
+<jsp:include page="pages/centres.jsp"/>
 
 
 <%
@@ -163,7 +198,7 @@ if(section == null
 %>
 
 
-    <jsp:include page="pages/payments.jsp"/>
+<jsp:include page="pages/payments.jsp"/>
 
 
 <%
@@ -175,7 +210,7 @@ if(section == null
 %>
 
 
-    <jsp:include page="pages/settings.jsp"/>
+<jsp:include page="pages/settings.jsp"/>
 
 
 <%
@@ -187,7 +222,7 @@ if(section == null
 %>
 
 
-    <jsp:include page="pages/accueil.jsp"/>
+<jsp:include page="pages/accueil.jsp"/>
 
 
 <%
@@ -199,13 +234,12 @@ if(section == null
 %>
 
 
-</div>
-
-
-
 
 </div>
 
+
+
+</div>
 
 
 
@@ -213,7 +247,6 @@ if(section == null
 
 
 </body>
-
 
 
 </html>
