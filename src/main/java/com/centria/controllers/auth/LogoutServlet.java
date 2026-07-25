@@ -1,156 +1,84 @@
 /*
- * Centria
- * Logout Controller
- * Module : Authentication
- * Author : Chentouf Bilal
+ * File        : LogoutServlet.java
+ * Project     : CENTRIA
  *
- * Description:
- * Terminates Super Admin session
- * and keeps selected language.
+ * Description :
+ * إنهاء جلسة المدير مع حفظ اللغة.
  */
 
-
 package com.centria.controllers.auth;
-
-
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-
 import javax.servlet.http.HttpServlet;
-
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
 
 
-
-
 @WebServlet("/LogoutServlet")
-
 public class LogoutServlet extends HttpServlet {
 
 
+    // ====================
+    // تسجيل الخروج
+    // ====================
+
+    @Override
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws ServletException, IOException {
 
 
-@Override
-protected void doGet(
-        HttpServletRequest request,
-        HttpServletResponse response)
-
-        throws ServletException, IOException {
+        HttpSession oldSession =
+                request.getSession(false);
 
 
+        String language = "ar";
 
 
-    /*
-     =====================================
-     الحصول على الجلسة الحالية
-     =====================================
-     */
+        // ====================
+        // حفظ اللغة وإنهاء الجلسة
+        // ====================
 
+        if(oldSession != null){
 
-    HttpSession oldSession =
-            request.getSession(false);
+            Object currentLang =
+                    oldSession.getAttribute("lang");
 
+            if(currentLang != null){
+                language = currentLang.toString();
+            }
 
-
-
-    String language = "ar";
-
-
-
-
-    /*
-     =====================================
-     حفظ اللغة قبل إنهاء الجلسة
-     =====================================
-     */
-
-
-    if(oldSession != null){
-
-
-
-        Object currentLang =
-                oldSession.getAttribute("lang");
-
-
-
-        if(currentLang != null){
-
-
-            language =
-            currentLang.toString();
-
-
+            oldSession.invalidate();
         }
 
 
+        // ====================
+        // إنشاء جلسة جديدة
+        // ====================
+
+        HttpSession newSession =
+                request.getSession(true);
 
 
-        /*
-         إنهاء الجلسة
-        */
+        newSession.setAttribute(
+                "lang",
+                language
+        );
 
 
-        oldSession.invalidate();
+        // ====================
+        // العودة لتسجيل الدخول
+        // ====================
 
-
-
+        response.sendRedirect(
+                request.getContextPath()
+                + "/admin/superlogin.jsp"
+        );
     }
-
-
-
-
-
-
-
-    /*
-     =====================================
-     إنشاء جلسة جديدة للصفحة الأولى
-     =====================================
-     */
-
-
-    HttpSession newSession =
-            request.getSession(true);
-
-
-
-    newSession.setAttribute(
-            "lang",
-            language
-    );
-
-
-
-
-
-
-    /*
-     =====================================
-     العودة إلى تسجيل الدخول
-     =====================================
-     */
-
-
-    response.sendRedirect(
-
-        request.getContextPath()
-        + "/admin/superlogin.jsp"
-
-    );
-
-
-
-
-}
-
-
-
 }

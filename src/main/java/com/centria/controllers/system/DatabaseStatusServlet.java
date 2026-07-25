@@ -17,185 +17,91 @@
  */
 
 
-
 package com.centria.controllers.system;
-
 
 
 import com.centria.utils.DBConnection;
 
-
 import java.io.IOException;
-
 import java.sql.Connection;
 
-
 import javax.servlet.ServletException;
-
 import javax.servlet.annotation.WebServlet;
-
 import javax.servlet.http.HttpServlet;
 
-
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 
-
-
-
 @WebServlet("/DatabaseStatusServlet")
-
 public class DatabaseStatusServlet extends HttpServlet {
 
 
-
-
-
-
-@Override
-protected void doGet(
-        HttpServletRequest request,
-        HttpServletResponse response)
-
-        throws ServletException, IOException {
-
-
-
-
-
-    /*
-     =====================================
-     JSON Response
-     =====================================
-     */
-
-
-    response.setContentType(
-            "application/json;charset=UTF-8"
-    );
-
-
-
-
-
-
-
-
-    try {
-
+    @Override
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
 
 
         /*
          =====================================
-         اختبار الاتصال
+         JSON Response
          =====================================
          */
 
+        response.setContentType(
+                "application/json;charset=UTF-8"
+        );
 
-        try(Connection con =
-                DBConnection.getConnection()) {
+        try {
+            /*
+             =====================================
+             اختبار الاتصال
+             =====================================
+             */
 
-
-
-
-            if(con != null && !con.isClosed()){
-
-
-
-
-
-                response.getWriter()
-                        .print(
-                        "{\"status\":\"connected\"}"
-                        );
+            try(Connection con =
+                    DBConnection.getConnection()) {
 
 
+                if(con != null && !con.isClosed()){
 
 
-
-            }
-
-            else{
-
-
+                    response.getWriter()
+                            .print(
+                            "{\"status\":\"connected\"}"
+                            );
 
 
+                }
 
-                response.getWriter()
-                        .print(
-                        "{\"status\":\"failed\"}"
-                        );
+                else{
 
 
+                    response.getWriter()
+                            .print(
+                            "{\"status\":\"failed\"}"
+                            );
+}}}
+        catch(Exception e){
 
+            /*
+             =====================================
+             تسجيل الخطأ في السيرفر فقط
+             =====================================
+             */
+            e.printStackTrace();
+            /*
+             =====================================
+             رسالة عامة للمستخدم
+             =====================================
+             */
 
-
-            }
-
-
-
-
-
+            response.getWriter()
+                    .print(
+                    "{\"status\":\"error\"}"
+                    );
         }
-
-
-
-
-
-
     }
-
-    catch(Exception e){
-
-
-
-
-
-
-        /*
-         =====================================
-         تسجيل الخطأ في السيرفر فقط
-         =====================================
-         */
-
-
-        e.printStackTrace();
-
-
-
-
-
-
-        /*
-         =====================================
-         رسالة عامة للمستخدم
-         =====================================
-         */
-
-
-        response.getWriter()
-                .print(
-
-                "{\"status\":\"error\"}"
-
-                );
-
-
-
-
-
-
-    }
-
-
-
-
-
-}
-
-
-
-
 }
