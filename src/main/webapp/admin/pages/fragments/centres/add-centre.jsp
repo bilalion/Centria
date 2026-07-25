@@ -533,7 +533,7 @@ session
 
 
 <a class="btn-back"
-   href="<%=request.getContextPath()%>/admin/super_admin_dashboard.jsp?section=centres">
+   href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
 
 <%=LanguageManager.get(
 "centers.back",

@@ -34,13 +34,11 @@ public class CentreServlet extends HttpServlet {
 
     private CentreDAO centreDAO;
 
-
     // Initialisation du DAO
     @Override
     public void init() throws ServletException {
         centreDAO = new CentreDAO();
     }
-
 
     // Traitement des requêtes GET
     @Override
@@ -73,23 +71,18 @@ public class CentreServlet extends HttpServlet {
         }
     }
 
-
     // Traitement des requêtes POST
     @Override
     protected void doPost(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
-
         String action=request.getParameter("action");
-
         if("add".equals(action)){
             addCentre(request,response);
             return;
         }
-
         doGet(request,response);
     }
 
@@ -144,8 +137,6 @@ public class CentreServlet extends HttpServlet {
                 (int)Math.ceil(
                         (double)totalCentres/pageSize
                 );
-
-
         request.setAttribute("centres",centres);
         request.setAttribute("currentPage",page);
         request.setAttribute("pageSize",pageSize);
@@ -204,7 +195,6 @@ public class CentreServlet extends HttpServlet {
                 )
         );
 
-
         centre.setSubscriptionStart(
                 Date.valueOf(start)
         );
@@ -230,7 +220,6 @@ public class CentreServlet extends HttpServlet {
         boolean saved =
                 centreDAO.addCentre(centre);
 
-
         if(saved){
 
             request.setAttribute("created",true);
@@ -238,13 +227,10 @@ public class CentreServlet extends HttpServlet {
             request.setAttribute("username",username);
             request.setAttribute("password",temporaryPassword);
 
-
             request.getRequestDispatcher(
                 "/admin/pages/fragments/centres/centre-created.jsp"
             ).forward(request,response);
-
         }else{
-
             request.setAttribute(
                     "error",
                     "Erreur création centre"
@@ -256,7 +242,6 @@ public class CentreServlet extends HttpServlet {
             ).forward(request,response);
         }
     }
-
 
     // Mise à jour du statut via AJAX
     private void updateStatus(
@@ -307,7 +292,6 @@ public class CentreServlet extends HttpServlet {
             );
         }
     }
-
 
     @Override
     public String getServletInfo(){
