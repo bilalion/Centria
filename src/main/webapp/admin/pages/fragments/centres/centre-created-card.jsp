@@ -4,8 +4,27 @@
 
 <!-- =================================================
      CENTRE CREATED SUCCESS CARD
-     Fragment loaded inside dashboard
+     AJAX FRAGMENT
      ================================================= -->
+
+
+<%
+
+String username =
+        request.getAttribute("username") != null
+        ? request.getAttribute("username").toString()
+        : "-";
+
+
+String password =
+        request.getAttribute("password") != null
+        ? request.getAttribute("password").toString()
+        : "-";
+
+%>
+
+
+
 
 
 <div class="centre-success-card">
@@ -39,9 +58,13 @@
 
 
 
-    <!-- CREDENTIALS -->
+
+
+    <!-- GENERATED CREDENTIALS -->
 
     <div class="credentials-box">
+
+
 
 
 
@@ -58,14 +81,18 @@
             </span>
 
 
+
             <span class="value">
 
-                <%=request.getAttribute("username")%>
+                <%=username%>
 
             </span>
 
 
         </div>
+
+
+
 
 
 
@@ -84,14 +111,18 @@
             </span>
 
 
+
             <span class="value">
 
-                <%=request.getAttribute("password")%>
+                <%=password%>
 
             </span>
 
 
         </div>
+
+
+
 
 
 
@@ -103,7 +134,8 @@
 
 
 
-    <!-- WARNING -->
+
+    <!-- WARNING MESSAGE -->
 
 
     <div class="warning-box">
@@ -121,12 +153,19 @@
 
 
 
-    <!-- ACTION -->
+
+
+
+
+    <!-- RETURN BUTTON -->
 
 
     <button type="button"
+
             class="btn-primary"
+
             onclick="hideCreatedCentre()">
+
 
 
         ⬅
@@ -138,6 +177,8 @@
 
 
     </button>
+
+
 
 
 

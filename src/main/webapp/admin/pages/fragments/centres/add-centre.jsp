@@ -230,7 +230,7 @@ button{
 )%>
 </label>
 
-<select name="duration">
+<select name="subscription_duration">
 
 <option value="1">
 <%=LanguageManager.get(

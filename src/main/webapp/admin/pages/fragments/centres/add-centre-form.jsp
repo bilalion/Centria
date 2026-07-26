@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@page import="com.centria.utils.LanguageManager"%>
 
 
@@ -9,15 +8,19 @@
      ================================================= -->
 
 
-<div class="container">
+<div class="container add-centre-container">
 
 
 
 <h1>
-➕ <%=LanguageManager.get(
+
+➕ 
+
+<%=LanguageManager.get(
         "centers.add.title",
         session
 )%>
+
 </h1>
 
 
@@ -39,13 +42,22 @@
 
 
 
-<form method="post"
-      action="<%=request.getContextPath()%>/CentreServlet">
+<form id="addCentreForm"
+
+      method="post"
+
+      action="<%=request.getContextPath()%>/CentreServlet"
+
+      class="centre-form">
+
+
 
 
 
 <input type="hidden"
+
        name="action"
+
        value="add">
 
 
@@ -54,10 +66,7 @@
 
 
 
-<!-- ==========================
-     CENTRE NAME
-     ========================== -->
-
+<!-- CENTRE NAME -->
 
 <div class="form-group">
 
@@ -72,8 +81,11 @@
 </label>
 
 
+
 <input type="text"
+
        name="name"
+
        required>
 
 
@@ -85,10 +97,8 @@
 
 
 
-<!-- ==========================
-     OWNER
-     ========================== -->
 
+<!-- OWNER -->
 
 <div class="form-group">
 
@@ -103,8 +113,11 @@
 </label>
 
 
+
 <input type="text"
+
        name="owner_name"
+
        required>
 
 
@@ -116,10 +129,8 @@
 
 
 
-<!-- ==========================
-     USERNAME
-     ========================== -->
 
+<!-- USERNAME -->
 
 <div class="form-group">
 
@@ -134,8 +145,11 @@
 </label>
 
 
+
 <input type="text"
+
        name="username"
+
        required>
 
 
@@ -147,10 +161,8 @@
 
 
 
-<!-- ==========================
-     PHONE
-     ========================== -->
 
+<!-- PHONE -->
 
 <div class="form-group">
 
@@ -165,7 +177,9 @@
 </label>
 
 
+
 <input type="text"
+
        name="phone">
 
 
@@ -177,10 +191,8 @@
 
 
 
-<!-- ==========================
-     SUBSCRIPTION START
-     ========================== -->
 
+<!-- SUBSCRIPTION START -->
 
 <div class="form-group">
 
@@ -195,8 +207,11 @@
 </label>
 
 
+
 <input type="date"
+
        name="subscription_start"
+
        required>
 
 
@@ -208,10 +223,8 @@
 
 
 
-<!-- ==========================
-     SUBSCRIPTION DURATION
-     ========================== -->
 
+<!-- SUBSCRIPTION DURATION -->
 
 <div class="form-group">
 
@@ -227,7 +240,10 @@
 
 
 
-<select name="duration">
+
+<select name="duration"
+
+        id="subscriptionDuration">
 
 
 
@@ -289,17 +305,21 @@
 
 
 
-<!-- ==========================
-     BUTTONS
-     ========================== -->
 
+<!-- BUTTONS -->
 
 <div class="buttons">
 
 
 
+
+
 <button type="button"
+
+        class="btn-back"
+
         onclick="hideAddCentre()">
+
 
 
 <%=LanguageManager.get(
@@ -313,7 +333,13 @@
 
 
 
-<button type="submit">
+
+
+
+<button type="submit"
+
+        class="btn-primary">
+
 
 
 <%=LanguageManager.get(
@@ -326,6 +352,9 @@
 
 
 
+
+
+
 </div>
 
 
@@ -333,7 +362,10 @@
 
 
 
+
 </form>
+
+
 
 
 

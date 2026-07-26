@@ -261,7 +261,7 @@ h1{
 
 
 <a class="btn"
-   href="<%=request.getContextPath()%>/admin/super_admin_dashboard.jsp?section=centres">
+   href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
 
 ⬅
 
