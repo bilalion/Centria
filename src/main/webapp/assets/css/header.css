@@ -15,7 +15,6 @@ user information and RTL/LTR support.
    HEADER CONTAINER
    ====================================================== */
 
-
 .header{
 
     display:flex;
@@ -39,11 +38,9 @@ user information and RTL/LTR support.
 }
 
 
-
 /* ======================================================
    HEADER TITLE
    ====================================================== */
-
 
 .header-title{
 
@@ -54,7 +51,6 @@ user information and RTL/LTR support.
     gap:6px;
 
 }
-
 
 
 .header-title h2{
@@ -68,7 +64,6 @@ user information and RTL/LTR support.
 }
 
 
-
 .header-title p{
 
     color:var(--text);
@@ -78,11 +73,9 @@ user information and RTL/LTR support.
 }
 
 
-
 /* ======================================================
    HEADER ACTIONS
    ====================================================== */
-
 
 .header-actions{
 
@@ -97,11 +90,9 @@ user information and RTL/LTR support.
 }
 
 
-
 /* ======================================================
    USER INFO
    ====================================================== */
-
 
 .header-user{
 
@@ -122,7 +113,6 @@ user information and RTL/LTR support.
     font-weight:600;
 
 }
-
 
 
 .user-icon{
@@ -148,18 +138,15 @@ user information and RTL/LTR support.
 }
 
 
-
 /* ======================================================
    RTL SUPPORT
    ====================================================== */
-
 
 html[dir="rtl"] .header{
 
     direction:rtl;
 
 }
-
 
 
 html[dir="rtl"] .header-actions{
@@ -169,7 +156,6 @@ html[dir="rtl"] .header-actions{
 }
 
 
-
 html[dir="rtl"] .header-user{
 
     flex-direction:row-reverse;
@@ -177,18 +163,15 @@ html[dir="rtl"] .header-user{
 }
 
 
-
 /* ======================================================
    LTR SUPPORT
    ====================================================== */
-
 
 html[dir="ltr"] .header{
 
     direction:ltr;
 
 }
-
 
 
 html[dir="ltr"] .header-actions{
@@ -198,7 +181,6 @@ html[dir="ltr"] .header-actions{
 }
 
 
-
 html[dir="ltr"] .header-user{
 
     flex-direction:row;
@@ -206,14 +188,11 @@ html[dir="ltr"] .header-user{
 }
 
 
-
 /* ======================================================
    RESPONSIVE HEADER
    ====================================================== */
 
-
 @media(max-width:900px){
-
 
     .header{
 
@@ -226,7 +205,6 @@ html[dir="ltr"] .header-user{
     }
 
 
-
     .header-actions{
 
         justify-content:center;
@@ -236,16 +214,13 @@ html[dir="ltr"] .header-user{
 }
 
 
-
 @media(max-width:600px){
-
 
     .header{
 
         padding:18px;
 
     }
-
 
 
     .header-user{
