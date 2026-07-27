@@ -17,8 +17,6 @@ String direction =
 
 %>
 
-
-
 <!DOCTYPE html>
 
 <html lang="<%=lang%>" dir="<%=direction%>">
@@ -106,10 +104,6 @@ src="<%=request.getContextPath()%>/assets/js/centres.js?v=2">
 </head>
 
 
-
-
-
-
 <body>
 
 
@@ -122,10 +116,6 @@ src="<%=request.getContextPath()%>/assets/js/centres.js?v=2">
 <jsp:include page="components/sidebar.jsp"/>
 
 
-
-
-
-
 <!-- =================================================
      MAIN CONTENT
      ================================================= -->
@@ -134,29 +124,17 @@ src="<%=request.getContextPath()%>/assets/js/centres.js?v=2">
 <div class="main-content">
 
 
-
-
-
 <!-- =================================================
      HEADER COMPONENT
      ================================================= -->
 
-
 <jsp:include page="components/header.jsp"/>
-
-
-
-
-
-
 
 <!-- =================================================
      DYNAMIC CONTENT AREA
      ================================================= -->
 
-
 <div id="content-area">
-
 
 
 <%
@@ -209,7 +187,6 @@ if(section == null
 
 %>
 
-
 <jsp:include page="pages/settings.jsp"/>
 
 
@@ -234,14 +211,11 @@ if(section == null
 %>
 
 
-
 </div>
 
 
 
 </div>
-
-
 
 
 
