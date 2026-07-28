@@ -2,167 +2,43 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
+<%
+String lang =
+        session.getAttribute("lang") != null
+        ? session.getAttribute("lang").toString()
+        : "ar";
+
+String direction =
+        lang.equals("ar")
+        ? "rtl"
+        : "ltr";
+%>
+
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+<html lang="<%=lang%>" dir="<%=direction%>">
+
 
 <head>
 
 <meta charset="UTF-8">
 
+
 <title>
-    <%=LanguageManager.get("centers.created.success",session)%>
+
+<%=LanguageManager.get(
+        "centers.created.success",
+        session
+)%>
+
 </title>
 
 
-<style>
 
-body{
+<link rel="stylesheet"
+      href="<%=request.getContextPath()%>/assets/css/centre-created.css">
 
-    font-family:'Segoe UI',Tahoma,sans-serif;
-
-    background:#f1f5f9;
-
-    margin:0;
-
-    padding:40px;
-
-}
-
-
-
-.container{
-
-    max-width:600px;
-
-    margin:auto;
-
-    background:white;
-
-    padding:35px;
-
-    border-radius:18px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-    text-align:center;
-
-}
-
-
-
-.success-icon{
-
-    font-size:60px;
-
-    margin-bottom:20px;
-
-}
-
-
-
-h1{
-
-    color:#16a34a;
-
-    margin-bottom:25px;
-
-}
-
-
-
-.info-box{
-
-    background:#f8fafc;
-
-    border-radius:15px;
-
-    padding:20px;
-
-    margin-top:20px;
-
-    text-align:right;
-
-}
-
-
-
-.info-item{
-
-    margin:15px 0;
-
-    font-size:17px;
-
-}
-
-
-
-.label{
-
-    font-weight:bold;
-
-    color:#334155;
-
-}
-
-
-
-.value{
-
-    color:#2563eb;
-
-    font-weight:bold;
-
-}
-
-
-
-.warning{
-
-    margin-top:25px;
-
-    background:#fff7ed;
-
-    color:#c2410c;
-
-    padding:15px;
-
-    border-radius:12px;
-
-}
-
-
-
-.btn{
-
-    display:inline-block;
-
-    margin-top:30px;
-
-    padding:12px 30px;
-
-    background:#2563eb;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:12px;
-
-    font-weight:bold;
-
-}
-
-
-
-.btn:hover{
-
-    background:#1d4ed8;
-
-}
-
-
-</style>
 
 
 </head>
@@ -173,106 +49,395 @@ h1{
 
 
 
-<div class="container">
+<div class="created-container">
 
 
 
-<div class="success-icon">
+    <!-- SUCCESS ICON -->
 
-✅
+    <div class="success-icon">
+
+        ✓
+
+    </div>
+
+
+
+
+
+    <!-- TITLE -->
+
+    <h1>
+
+        <%=LanguageManager.get(
+                "centers.created.success",
+                session
+        )%>
+
+
+    </h1>
+
+
+
+
+
+
+
+    <!-- CREDENTIALS CARD -->
+
+
+    <div class="credentials-card">
+
+
+
+
+
+        <div class="credentials-title">
+
+
+            🔐
+
+
+            <span>
+
+
+                <%=LanguageManager.get(
+                        "centers.credentials.title",
+                        session
+                )%>
+
+
+            </span>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- USERNAME -->
+
+
+        <div class="info-item">
+
+
+
+            <span class="label">
+
+
+                👤
+
+
+                <%=LanguageManager.get(
+                        "centers.username.label",
+                        session
+                )%>
+
+
+                :
+
+
+            </span>
+
+
+
+
+
+            <span class="value"
+                  id="generatedUsername">
+
+
+                <%=request.getAttribute("username")%>
+
+
+            </span>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- PASSWORD -->
+
+
+        <div class="info-item">
+
+
+
+            <span class="label">
+
+
+                🔑
+
+
+                <%=LanguageManager.get(
+                        "centers.password.label",
+                        session
+                )%>
+
+
+                :
+
+
+            </span>
+
+
+
+
+
+            <span class="value password"
+                  id="generatedPassword">
+
+
+                <%=request.getAttribute("password")%>
+
+
+            </span>
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- COPY BUTTON -->
+
+
+    <button class="copy-btn"
+            id="copyCredentialsBtn"
+            type="button">
+
+
+        📋
+
+
+        <%=LanguageManager.get(
+                "centers.copy.credentials",
+                session
+        )%>
+
+
+    </button>
+
+
+
+
+
+
+
+
+
+    <!-- WARNING -->
+
+
+    <div class="warning-box">
+
+
+        ⚠️
+
+
+        <%=LanguageManager.get(
+                "centers.send.credentials",
+                session
+        )%>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- BACK BUTTON -->
+
+
+    <a class="btn-back"
+       href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
+
+
+
+        ←
+
+
+        <%=LanguageManager.get(
+                "centers.back",
+                session
+        )%>
+
+
+
+    </a>
+
+
+
+
 
 </div>
 
 
 
-<h1>
-
-<%=LanguageManager.get("centers.created.success",session)%>
-
-</h1>
-
-
-
-
-<div class="info-box">
-
-
-
-<div class="info-item">
-
-<span class="label">
-
-<%=LanguageManager.get("centers.generated.username",session)%> :
-
-</span>
-
-
-<span class="value">
-
-<%=request.getAttribute("username")%>
-
-</span>
-
-
-</div>
 
 
 
 
 
-<div class="info-item">
+<script>
 
 
-<span class="label">
-
-<%=LanguageManager.get("centers.generated.password",session)%> :
-
-</span>
-
-
-
-<span class="value">
-
-<%=request.getAttribute("password")%>
-
-</span>
-
-
-</div>
+document
+.getElementById("copyCredentialsBtn")
+.addEventListener("click",function(){
 
 
 
-</div>
+    let username =
+
+        document
+        .getElementById("generatedUsername")
+        .innerText;
 
 
 
 
+    let password =
+
+        document
+        .getElementById("generatedPassword")
+        .innerText;
 
 
-<div class="warning">
 
-<%=LanguageManager.get("centers.send.credentials",session)%>
 
-</div>
+
+    let usernameLabel =
+
+        "<%=LanguageManager.get(
+            "centers.username.label",
+            session
+        )%>";
+
+
+
+
+    let passwordLabel =
+
+        "<%=LanguageManager.get(
+            "centers.password.label",
+            session
+        )%>";
+
+
+
+
+
+    let successMessage =
+
+        "<%=LanguageManager.get(
+            "centers.copy.success",
+            session
+        )%>";
 
 
 
 
 
 
-<a class="btn"
-   href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
+    let text =
 
-⬅
+        usernameLabel
+        + " : "
+        + username
 
-<%=LanguageManager.get("centers.back",session)%>
+        + "\n\n"
 
-</a>
+        + passwordLabel
+        + " : "
+        + password;
 
 
 
 
-</div>
+
+
+
+    navigator.clipboard.writeText(text)
+
+    .then(()=>{
+
+
+        this.innerHTML =
+        "✅ "
+        + successMessage;
+
+
+
+
+        setTimeout(()=>{
+
+
+            this.innerHTML =
+            "📋 "
+            +
+            "<%=LanguageManager.get(
+                "centers.copy.credentials",
+                session
+            )%>";
+
+
+
+        },2000);
+
+
+
+    })
+
+    .catch(()=>{
+
+
+        alert("Copy failed");
+
+
+    });
+
+
+
+});
+
+
+
+</script>
+
+
+
+
 
 
 

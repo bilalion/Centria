@@ -1,0 +1,1166 @@
+/*
+==========================================================
+CENTRIA
+Centre Created Success Module
+
+Professional SaaS Success UI
+Improved Glass Version
+RTL / LTR Support
+Responsive Design
+
+Part 1/2
+==========================================================
+*/
+
+
+/* ======================================================
+   RESET
+   ====================================================== */
+
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+
+
+
+/* ======================================================
+   BODY
+   ====================================================== */
+
+
+body{
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    overflow:hidden;
+
+
+
+    font-family:
+
+
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle at top,
+
+            #475569,
+
+            #0f172a 60%
+
+        );
+
+
+
+    padding:20px;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   MAIN SUCCESS CARD
+   ====================================================== */
+
+
+.created-container{
+
+
+    width:100%;
+
+
+    max-width:540px;
+
+
+
+    padding:42px;
+
+
+
+    background:
+
+
+        rgba(255,255,255,.96);
+
+
+
+    backdrop-filter:
+
+        blur(18px);
+
+
+
+    border-radius:28px;
+
+
+
+    text-align:center;
+
+
+
+    box-shadow:
+
+
+        0 25px 70px rgba(0,0,0,.35);
+
+
+
+    animation:
+
+
+        showCard .6s ease;
+
+
+}
+
+
+
+
+
+
+@keyframes showCard{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+
+            translateY(35px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+
+            translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SUCCESS ICON
+   ====================================================== */
+
+
+.success-icon{
+
+
+    width:90px;
+
+
+    height:90px;
+
+
+
+    margin:0 auto 22px;
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    border-radius:50%;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #22c55e,
+
+            #15803d
+
+        );
+
+
+
+    color:white;
+
+
+
+    font-size:50px;
+
+
+
+    font-weight:900;
+
+
+
+    box-shadow:
+
+
+        0 15px 35px rgba(22,163,74,.40);
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   TITLE
+   ====================================================== */
+
+
+.created-container h1{
+
+
+    color:#166534;
+
+
+
+    font-size:28px;
+
+
+
+    font-weight:800;
+
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   CREDENTIALS CARD
+   ====================================================== */
+
+
+.credentials-card{
+
+
+    background:
+
+
+        #f8fafc;
+
+
+
+    border:
+
+
+        1px solid #e2e8f0;
+
+
+
+    border-radius:20px;
+
+
+
+    padding:25px;
+
+
+
+    direction:inherit;
+
+
+
+}
+
+
+
+
+
+
+
+.credentials-title{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    gap:10px;
+
+
+
+    margin-bottom:25px;
+
+
+
+    color:#2563eb;
+
+
+
+    font-size:18px;
+
+
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   INFORMATION ROW
+   ====================================================== */
+
+
+.info-item{
+
+
+    display:flex;
+
+
+
+    justify-content:space-between;
+
+
+
+    align-items:center;
+
+
+
+    gap:20px;
+
+
+
+    padding:16px;
+
+
+
+    margin-bottom:15px;
+
+
+
+    background:white;
+
+
+
+    border-radius:14px;
+
+
+
+    border:
+
+
+        1px solid #e2e8f0;
+
+
+
+}
+
+
+
+
+
+
+
+.label{
+
+
+    color:#475569;
+
+
+
+    font-size:14px;
+
+
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+.value{
+
+
+    color:#2563eb;
+
+
+
+    font-size:16px;
+
+
+
+    font-weight:800;
+
+
+
+    word-break:break-word;
+
+
+}
+
+
+
+
+
+.password{
+
+
+    color:#dc2626;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   COPY BUTTON READY
+   ====================================================== */
+
+
+.copy-btn{
+
+
+    width:100%;
+
+
+
+    height:46px;
+
+
+
+    margin-top:22px;
+
+
+
+    border:none;
+
+
+
+    border-radius:14px;
+
+
+
+    cursor:pointer;
+
+
+
+    color:white;
+
+
+
+    font-size:15px;
+
+
+
+    font-weight:700;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #2563eb,
+
+            #1d4ed8
+
+        );
+
+
+
+    transition:.25s;
+
+
+}
+
+
+
+
+
+.copy-btn:hover{
+
+
+    transform:
+
+
+        translateY(-3px);
+
+
+
+    box-shadow:
+
+
+        0 12px 25px rgba(37,99,235,.30);
+
+
+}
+
+/*
+==========================================================
+CENTRIA
+Centre Created Success Module
+
+Professional SaaS Success UI
+Improved Glass Version
+RTL / LTR Support
+Responsive Design
+
+Part 2/2
+==========================================================
+*/
+
+
+
+/* ======================================================
+   WARNING BOX
+   ====================================================== */
+
+
+.warning-box{
+
+
+    margin-top:25px;
+
+
+
+    padding:17px;
+
+
+
+    border-radius:15px;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #fff7ed,
+
+            #ffedd5
+
+        );
+
+
+
+    border:
+
+
+        1px solid #fed7aa;
+
+
+
+    color:#c2410c;
+
+
+
+    font-size:14px;
+
+
+
+    font-weight:600;
+
+
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   BACK BUTTON
+   ====================================================== */
+
+
+.btn-back{
+
+
+    display:inline-flex;
+
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+    gap:10px;
+
+
+
+    margin-top:28px;
+
+
+
+    padding:13px 35px;
+
+
+
+    border-radius:14px;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #64748b,
+
+            #475569
+
+        );
+
+
+
+    color:white;
+
+
+
+    text-decoration:none;
+
+
+
+    font-size:15px;
+
+
+
+    font-weight:700;
+
+
+
+    transition:.25s;
+
+
+}
+
+
+
+
+
+
+
+.btn-back:hover{
+
+
+    transform:
+
+
+        translateY(-3px);
+
+
+
+    box-shadow:
+
+
+        0 10px 20px rgba(15,23,42,.25);
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   RTL SUPPORT
+   ====================================================== */
+
+
+html[dir="rtl"] .created-container{
+
+
+    direction:rtl;
+
+
+}
+
+
+
+html[dir="rtl"] .credentials-card{
+
+
+    text-align:right;
+
+
+}
+
+
+
+
+
+html[dir="rtl"] .info-item{
+
+
+    flex-direction:row;
+
+
+
+    direction:rtl;
+
+
+}
+
+
+
+
+
+html[dir="rtl"] .label{
+
+
+    text-align:right;
+
+
+}
+
+
+
+
+
+html[dir="rtl"] .value{
+
+
+    text-align:left;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   LTR SUPPORT
+   ====================================================== */
+
+
+html[dir="ltr"] .created-container{
+
+
+    direction:ltr;
+
+
+}
+
+
+
+
+
+html[dir="ltr"] .credentials-card{
+
+
+    text-align:left;
+
+
+}
+
+
+
+
+
+html[dir="ltr"] .info-item{
+
+
+    flex-direction:row;
+
+
+}
+
+
+
+
+
+html[dir="ltr"] .label{
+
+
+    text-align:left;
+
+
+}
+
+
+
+
+
+html[dir="ltr"] .value{
+
+
+    text-align:right;
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   FOCUS ACCESSIBILITY
+   ====================================================== */
+
+
+.copy-btn:focus-visible,
+.btn-back:focus-visible{
+
+
+    outline:
+
+
+        3px solid rgba(37,99,235,.35);
+
+
+
+    outline-offset:
+
+
+        3px;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   RESPONSIVE DESIGN
+   ====================================================== */
+
+
+@media(max-width:600px){
+
+
+
+    body{
+
+
+        padding:15px;
+
+
+
+        overflow:auto;
+
+
+    }
+
+
+
+
+
+    .created-container{
+
+
+        padding:28px 20px;
+
+
+
+        border-radius:22px;
+
+
+    }
+
+
+
+
+
+    .success-icon{
+
+
+        width:75px;
+
+
+
+        height:75px;
+
+
+
+        font-size:40px;
+
+
+    }
+
+
+
+
+
+    .created-container h1{
+
+
+        font-size:23px;
+
+
+    }
+
+
+
+
+
+    .info-item{
+
+
+        flex-direction:column;
+
+
+
+        align-items:stretch;
+
+
+
+        gap:8px;
+
+
+    }
+
+
+
+
+
+    .value,
+    .label{
+
+
+        text-align:center!important;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+@media(max-width:420px){
+
+
+
+    .created-container{
+
+
+        padding:22px 15px;
+
+
+    }
+
+
+
+
+
+    .credentials-card{
+
+
+        padding:18px;
+
+
+    }
+
+
+
+
+
+    .btn-back{
+
+
+        width:100%;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SMOOTH EFFECTS
+   ====================================================== */
+
+
+.credentials-card,
+.warning-box,
+.btn-back,
+.copy-btn{
+
+
+    animation:
+
+
+        fadeIn .5s ease;
+
+
+}
+
+
+
+
+
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+
+        opacity:0;
+
+
+
+        transform:
+
+
+            translateY(10px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+
+        transform:
+
+
+            translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   END OF CENTRE-CREATED.CSS
+   ======================================================
+*/
