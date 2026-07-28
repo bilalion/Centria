@@ -110,13 +110,13 @@ public class CentreDAO {
            !search.trim().isEmpty()){
 
 
-            sql.append(
-                    " AND (name LIKE ? "
-                    + "OR owner_name LIKE ? "
-                    + "OR username LIKE ? "
-                    + "OR phone LIKE ?) "
-            );
-
+          sql.append(
+            " AND (centre_code LIKE ? "
+            + "OR name LIKE ? "
+            + "OR owner_name LIKE ? "
+            + "OR username LIKE ? "
+            + "OR phone LIKE ?) "
+    );
 
         }
 
@@ -235,29 +235,34 @@ public class CentreDAO {
                         "%" + search + "%";
 
 
-
-                ps.setString(
-                        index++,
-                        value
-                );
-
-
-                ps.setString(
-                        index++,
-                        value
-                );
+ps.setString(
+        index++,
+        value
+); // centre_code
 
 
-                ps.setString(
-                        index++,
-                        value
-                );
+ps.setString(
+        index++,
+        value
+); // name
 
 
-                ps.setString(
-                        index++,
-                        value
-                );
+ps.setString(
+        index++,
+        value
+); // owner_name
+
+
+ps.setString(
+        index++,
+        value
+); // username
+
+
+ps.setString(
+        index++,
+        value
+); // phone
 
 
             }
@@ -459,12 +464,13 @@ public class CentreDAO {
            !search.trim().isEmpty()){
 
 
-            sql.append(
-                    " AND (name LIKE ? "
-                    + "OR owner_name LIKE ? "
-                    + "OR username LIKE ? "
-                    + "OR phone LIKE ?) "
-            );
+         sql.append(
+        " AND (centre_code LIKE ? "
+        + "OR name LIKE ? "
+        + "OR owner_name LIKE ? "
+        + "OR username LIKE ? "
+        + "OR phone LIKE ?) "
+);
 
 
         }
@@ -519,7 +525,10 @@ public class CentreDAO {
                         "%" + search + "%";
 
 
-
+               ps.setString(
+                        index++,
+                        value
+                );
                 ps.setString(
                         index++,
                         value

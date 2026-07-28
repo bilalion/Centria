@@ -76,23 +76,15 @@ String direction =
 <span>
 
 <%=LanguageManager.get(
-        "centers.password.generated.info",
+        "centers.connection.generated",
         session
 )%>
-
-<br>
-
-<small>
-Les informations de connexion seront générées automatiquement.
-</small>
 
 
 </span>
 
 
 </div>
-
-
 
 
 
