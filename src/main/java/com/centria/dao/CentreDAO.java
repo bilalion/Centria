@@ -15,15 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class CentreDAO {
+
 
 
     /*
     ======================================================
     GET ALL CENTRES
-    القديمة تبقى بدون تغيير
     ======================================================
     */
+
 
     public List<Centre> getAllCentres(){
 
@@ -36,13 +38,16 @@ public class CentreDAO {
     }
 
 
+
+
+
+
     /*
     ======================================================
     SEARCH CENTRES (OLD VERSION)
-
-    نحافظ عليها حتى لا ينكسر المشروع
     ======================================================
     */
+
 
     public List<Centre> searchCentres(
             String search,
@@ -61,11 +66,17 @@ public class CentreDAO {
     }
 
 
+
+
+
+
+
     /*
     ======================================================
     SEARCH CENTRES WITH PAGINATION
     ======================================================
     */
+
 
     public List<Centre> searchCentres(
             String search,
@@ -75,17 +86,23 @@ public class CentreDAO {
             int pageSize
     ){
 
+
         List<Centre> centres =
                 new ArrayList<>();
+
 
 
         StringBuilder sql =
                 new StringBuilder();
 
 
+
         sql.append(
                 "SELECT * FROM centres WHERE 1=1 "
         );
+
+
+
 
 
         if(search != null &&
@@ -103,6 +120,10 @@ public class CentreDAO {
         }
 
 
+
+
+
+
         if(status != null &&
            !status.equals("ALL")){
 
@@ -115,11 +136,17 @@ public class CentreDAO {
         }
 
 
+
+
+
         if(order == null){
 
             order="NEW";
 
         }
+
+
+
 
 
         switch(order){
@@ -134,6 +161,7 @@ public class CentreDAO {
                 break;
 
 
+
             case "NAME":
 
                 sql.append(
@@ -141,6 +169,7 @@ public class CentreDAO {
                 );
 
                 break;
+
 
 
             default:
@@ -155,20 +184,25 @@ public class CentreDAO {
         }
 
 
-        /*
-        ======================================
-        PAGINATION
-        ======================================
-        */
+
+
+
 
 
         int offset =
                 (page - 1) * pageSize;
 
 
+
+
+
         sql.append(
                 " LIMIT ? OFFSET ? "
         );
+
+
+
+
 
 
         try(
@@ -185,7 +219,11 @@ public class CentreDAO {
         ){
 
 
+
             int index = 1;
+
+
+
 
 
             if(search != null &&
@@ -194,6 +232,7 @@ public class CentreDAO {
 
                 String value =
                         "%" + search + "%";
+
 
 
                 ps.setString(
@@ -221,6 +260,10 @@ public class CentreDAO {
 
 
             }
+
+
+
+
 
 
             if(status != null &&
@@ -236,10 +279,15 @@ public class CentreDAO {
             }
 
 
+
+
+
+
             ps.setInt(
                     index++,
                     pageSize
             );
+
 
 
             ps.setInt(
@@ -248,15 +296,27 @@ public class CentreDAO {
             );
 
 
+
+
+
+
+
             ResultSet rs =
                     ps.executeQuery();
+
+
+
+
 
 
             while(rs.next()){
 
 
+
                 Centre centre =
                         new Centre();
+
+
 
 
                 centre.setId(
@@ -264,9 +324,19 @@ public class CentreDAO {
                 );
 
 
+
+                // NEW : Centre unique code
+
+                centre.setCentreCode(
+                        rs.getString("centre_code")
+                );
+
+
+
                 centre.setName(
                         rs.getString("name")
                 );
+
 
 
                 centre.setOwnerName(
@@ -274,9 +344,11 @@ public class CentreDAO {
                 );
 
 
+
                 centre.setUsername(
                         rs.getString("username")
                 );
+
 
 
                 centre.setPasswordHash(
@@ -284,9 +356,11 @@ public class CentreDAO {
                 );
 
 
+
                 centre.setPhone(
                         rs.getString("phone")
                 );
+
 
 
                 centre.setSubscriptionStart(
@@ -294,17 +368,23 @@ public class CentreDAO {
                 );
 
 
+
                 centre.setSubscriptionEnd(
                         rs.getDate("subscription_end")
                 );
 
 
+
                 centre.setStatus(
                         rs.getString("status")
                 );
-                                centre.setCreatedAt(
+
+
+
+                centre.setCreatedAt(
                         rs.getTimestamp("created_at")
                 );
+
 
 
                 centre.setMustChangePassword(
@@ -312,9 +392,11 @@ public class CentreDAO {
                 );
 
 
+
                 centre.setLastLogin(
                         rs.getTimestamp("last_login")
                 );
+
 
 
                 centres.add(centre);
@@ -323,7 +405,9 @@ public class CentreDAO {
             }
 
 
+
         }
+
 
         catch(Exception e){
 
@@ -334,19 +418,18 @@ public class CentreDAO {
         }
 
 
+
+
         return centres;
 
 
     }
-
-
-    /*
+        /*
     ======================================================
     COUNT CENTRES
-    حساب العدد الإجمالي للصفوف
-    من أجل pagination
     ======================================================
     */
+
 
     public int countCentres(
             String search,
@@ -357,13 +440,18 @@ public class CentreDAO {
         int count = 0;
 
 
+
         StringBuilder sql =
                 new StringBuilder();
+
 
 
         sql.append(
                 "SELECT COUNT(*) FROM centres WHERE 1=1 "
         );
+
+
+
 
 
         if(search != null &&
@@ -381,6 +469,10 @@ public class CentreDAO {
         }
 
 
+
+
+
+
         if(status != null &&
            !status.equals("ALL")){
 
@@ -391,6 +483,10 @@ public class CentreDAO {
 
 
         }
+
+
+
+
 
 
         try(
@@ -407,7 +503,11 @@ public class CentreDAO {
         ){
 
 
+
             int index = 1;
+
+
+
 
 
             if(search != null &&
@@ -416,6 +516,7 @@ public class CentreDAO {
 
                 String value =
                         "%" + search + "%";
+
 
 
                 ps.setString(
@@ -443,6 +544,10 @@ public class CentreDAO {
 
 
             }
+
+
+
+
 
 
             if(status != null &&
@@ -458,8 +563,16 @@ public class CentreDAO {
             }
 
 
+
+
+
+
             ResultSet rs =
                     ps.executeQuery();
+
+
+
+
 
 
             if(rs.next()){
@@ -472,7 +585,10 @@ public class CentreDAO {
             }
 
 
+
+
         }
+
 
         catch(Exception e){
 
@@ -483,11 +599,31 @@ public class CentreDAO {
         }
 
 
+
+
+
         return count;
 
 
     }
-        public boolean addCentre(Centre centre){
+
+
+
+
+
+
+
+
+
+    /*
+    ======================================================
+    ADD CENTRE
+    ======================================================
+    */
+
+
+    public boolean addCentre(Centre centre){
+
 
 
         String sql =
@@ -497,6 +633,9 @@ public class CentreDAO {
         + "phone,subscription_start,subscription_end,"
         + "status,must_change_password) "
         + "VALUES (?,?,?,?,?,?,?,?,1)";
+
+
+
 
 
         try(
@@ -511,10 +650,12 @@ public class CentreDAO {
         ){
 
 
+
             ps.setString(
                     1,
                     centre.getName()
             );
+
 
 
             ps.setString(
@@ -523,10 +664,12 @@ public class CentreDAO {
             );
 
 
+
             ps.setString(
                     3,
                     centre.getUsername()
             );
+
 
 
             ps.setString(
@@ -535,10 +678,12 @@ public class CentreDAO {
             );
 
 
+
             ps.setString(
                     5,
                     centre.getPhone()
             );
+
 
 
             ps.setDate(
@@ -547,10 +692,12 @@ public class CentreDAO {
             );
 
 
+
             ps.setDate(
                     7,
                     centre.getSubscriptionEnd()
             );
+
 
 
             ps.setString(
@@ -559,22 +706,44 @@ public class CentreDAO {
             );
 
 
+
             return ps.executeUpdate() > 0;
 
 
+
         }
+
 
         catch(Exception e){
 
+
             e.printStackTrace();
 
+
         }
+
+
+
 
 
         return false;
 
 
     }
+
+
+
+
+
+
+
+
+
+    /*
+    ======================================================
+    RESET PASSWORD
+    ======================================================
+    */
 
 
     public boolean resetPassword(
@@ -591,6 +760,9 @@ public class CentreDAO {
         + "WHERE id=?";
 
 
+
+
+
         try(
 
             Connection con =
@@ -603,6 +775,7 @@ public class CentreDAO {
         ){
 
 
+
             ps.setString(
                     1,
                     PasswordUtil.hashPassword(
@@ -611,28 +784,51 @@ public class CentreDAO {
             );
 
 
+
             ps.setInt(
                     2,
                     centreId
             );
 
 
+
             return ps.executeUpdate() > 0;
 
 
+
         }
+
 
         catch(Exception e){
 
+
             e.printStackTrace();
 
+
         }
+
+
+
 
 
         return false;
 
 
     }
+
+
+
+
+
+
+
+
+
+    /*
+    ======================================================
+    UPDATE STATUS
+    ======================================================
+    */
 
 
     public boolean updateStatus(
@@ -646,6 +842,9 @@ public class CentreDAO {
         "UPDATE centres SET status=? WHERE id=?";
 
 
+
+
+
         try(
 
             Connection con =
@@ -658,10 +857,12 @@ public class CentreDAO {
         ){
 
 
+
             ps.setString(
                     1,
                     status
             );
+
 
 
             ps.setInt(
@@ -670,16 +871,24 @@ public class CentreDAO {
             );
 
 
+
             return ps.executeUpdate() > 0;
 
 
+
         }
+
 
         catch(Exception e){
 
+
             e.printStackTrace();
 
+
         }
+
+
+
 
 
         return false;
@@ -688,10 +897,25 @@ public class CentreDAO {
     }
 
 
+
+
+
+
+
+
+
+    /*
+    ======================================================
+    UPDATE SUBSCRIPTION
+    ======================================================
+    */
+
+
     public boolean updateSubscription(
             int centreId,
             Date endDate
     ){
+
 
 
         String sql =
@@ -702,6 +926,9 @@ public class CentreDAO {
         + "WHERE id=?";
 
 
+
+
+
         try(
 
             Connection con =
@@ -714,10 +941,12 @@ public class CentreDAO {
         ){
 
 
+
             ps.setDate(
                     1,
                     endDate
             );
+
 
 
             ps.setInt(
@@ -726,22 +955,32 @@ public class CentreDAO {
             );
 
 
+
             return ps.executeUpdate() > 0;
 
 
+
         }
+
 
         catch(Exception e){
 
+
             e.printStackTrace();
 
+
         }
+
+
+
 
 
         return false;
 
 
     }
+
+
 
 
 }

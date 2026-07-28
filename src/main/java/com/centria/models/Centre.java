@@ -9,6 +9,9 @@ public class Centre {
 
     private int id;
 
+    // Nouveau : Code unique du centre
+    private String centreCode;
+
     private String name;
 
     private String ownerName;
@@ -41,6 +44,7 @@ public class Centre {
 
     public Centre(
             int id,
+            String centreCode,
             String name,
             String ownerName,
             String username,
@@ -55,6 +59,7 @@ public class Centre {
     ){
 
         this.id = id;
+        this.centreCode = centreCode;
         this.name = name;
         this.ownerName = ownerName;
         this.username = username;
@@ -86,6 +91,24 @@ public class Centre {
         this.id = id;
 
     }
+
+
+
+    public String getCentreCode() {
+
+        return centreCode;
+
+    }
+
+
+
+    public void setCentreCode(String centreCode) {
+
+        this.centreCode = centreCode;
+
+    }
+
+
 
 
 
