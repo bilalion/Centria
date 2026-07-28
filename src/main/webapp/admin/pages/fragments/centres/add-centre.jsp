@@ -21,38 +21,33 @@ String direction =
 
 <head>
 
-
 <meta charset="UTF-8">
 
 
 <title>
-<%=LanguageManager.get("centers.add.title",session)%>
+<%=LanguageManager.get(
+        "centers.add.title",
+        session
+)%>
 </title>
-
 
 
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/add-centre.css">
 
 
-
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
 
 </head>
 
 
 
-
 <body>
 
 
-
 <div class="container">
-
-
 
 
 
@@ -72,7 +67,6 @@ String direction =
 
 
 
-
 <div class="info-box">
 
 
@@ -85,6 +79,12 @@ String direction =
         "centers.password.generated.info",
         session
 )%>
+
+<br>
+
+<small>
+Les informations de connexion seront générées automatiquement.
+</small>
 
 
 </span>
@@ -101,11 +101,9 @@ String direction =
       action="<%=request.getContextPath()%>/CentreServlet">
 
 
-
 <input type="hidden"
        name="action"
        value="add">
-
 
 
 
@@ -118,7 +116,9 @@ String direction =
 
 
 
-<!-- CENTRE NAME -->
+<!-- ==========================
+     CENTRE NAME
+     ========================== -->
 
 
 <div class="form-group full">
@@ -148,7 +148,9 @@ String direction =
 
 
 
-<!-- OWNER -->
+<!-- ==========================
+     OWNER NAME
+     ========================== -->
 
 
 <div class="form-group">
@@ -162,7 +164,6 @@ String direction =
         "centers.owner.name",
         session
 )%>
-
 
 </label>
 
@@ -179,40 +180,9 @@ String direction =
 
 
 
-
-<!-- USERNAME -->
-
-
-<div class="form-group">
-
-
-<label>
-
-<i class="fa-solid fa-user-lock"></i>
-
-<%=LanguageManager.get(
-        "centers.username",
-        session
-)%>
-
-
-</label>
-
-
-<input type="text"
-       name="username"
-       required>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- PHONE -->
+<!-- ==========================
+     PHONE
+     ========================== -->
 
 
 <div class="form-group">
@@ -226,7 +196,6 @@ String direction =
         "centers.phone",
         session
 )%>
-
 
 </label>
 
@@ -242,8 +211,9 @@ String direction =
 
 
 
-
-<!-- DATE -->
+<!-- ==========================
+     START DATE
+     ========================== -->
 
 
 <div class="form-group">
@@ -258,7 +228,6 @@ String direction =
         "centers.subscription.start",
         session
 )%>
-
 
 </label>
 
@@ -276,7 +245,9 @@ String direction =
 
 
 
-<!-- DURATION -->
+<!-- ==========================
+     DURATION
+     ========================== -->
 
 
 <div class="form-group full">
@@ -292,12 +263,12 @@ String direction =
         session
 )%>
 
-
 </label>
 
 
 
-<select name="subscription_duration">
+<select name="subscription_duration"
+        required>
 
 
 
@@ -360,10 +331,7 @@ String direction =
 
 
 
-
 </div>
-
-
 
 
 
@@ -410,7 +378,6 @@ href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
 )%>
 
 
-
 </button>
 
 
@@ -424,6 +391,7 @@ href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
 
 
 
+
 </form>
 
 
@@ -432,10 +400,6 @@ href="<%=request.getContextPath()%>/admin/dashboard.jsp?section=centres">
 
 
 </div>
-
-
-
-
 
 
 

@@ -3,6 +3,7 @@ package com.centria.dao;
 
 import com.centria.config.DatabaseConfig;
 import com.centria.models.Centre;
+import com.centria.utils.CentreCodeGenerator;
 import com.centria.utils.PasswordUtil;
 
 
@@ -622,115 +623,186 @@ public class CentreDAO {
     */
 
 
-    public boolean addCentre(Centre centre){
+   public boolean addCentre(Centre centre){
+
+
+    String insertSql =
+
+    "INSERT INTO centres "
+    + "(name,owner_name,username,password_hash,"
+    + "phone,subscription_start,subscription_end,"
+    + "status,must_change_password) "
+    + "VALUES (?,?,?,?,?,?,?,?,1)";
 
 
 
-        String sql =
+    String updateSql =
 
-        "INSERT INTO centres "
-        + "(name,owner_name,username,password_hash,"
-        + "phone,subscription_start,subscription_end,"
-        + "status,must_change_password) "
-        + "VALUES (?,?,?,?,?,?,?,?,1)";
+    "UPDATE centres SET "
+    + "centre_code=?, username=? "
+    + "WHERE id=?";
 
 
 
+    try(
+
+        Connection con =
+                DatabaseConfig.getConnection();
 
 
-        try(
+        PreparedStatement ps =
+                con.prepareStatement(
+                        insertSql,
+                        java.sql.Statement.RETURN_GENERATED_KEYS
+                )
 
-            Connection con =
-                    DatabaseConfig.getConnection();
-
-
-            PreparedStatement ps =
-                    con.prepareStatement(sql)
-
-        ){
+    ){
 
 
+        ps.setString(
+                1,
+                centre.getName()
+        );
 
-            ps.setString(
+
+        ps.setString(
+                2,
+                centre.getOwnerName()
+        );
+
+
+        /*
+          username مؤقت
+          سيتم تغييره بعد توليد id
+        */
+        ps.setString(
+                3,
+                "TEMP"
+        );
+
+
+        ps.setString(
+                4,
+                centre.getPasswordHash()
+        );
+
+
+        ps.setString(
+                5,
+                centre.getPhone()
+        );
+
+
+        ps.setDate(
+                6,
+                centre.getSubscriptionStart()
+        );
+
+
+        ps.setDate(
+                7,
+                centre.getSubscriptionEnd()
+        );
+
+
+        ps.setString(
+                8,
+                "PENDING"
+        );
+
+
+
+        int result =
+                ps.executeUpdate();
+
+
+
+        if(result == 0){
+            return false;
+        }
+
+
+
+
+        ResultSet rs =
+                ps.getGeneratedKeys();
+
+
+
+        if(rs.next()){
+
+
+            int id =
+                    rs.getInt(1);
+
+
+
+            String code =
+                    CentreCodeGenerator.generateCode(id);
+
+
+
+            String username =
+                    CentreCodeGenerator.generateUsername(code);
+
+
+
+            PreparedStatement update =
+                    con.prepareStatement(
+                            updateSql
+                    );
+
+
+
+            update.setString(
                     1,
-                    centre.getName()
+                    code
             );
 
 
-
-            ps.setString(
+            update.setString(
                     2,
-                    centre.getOwnerName()
+                    username
             );
 
 
-
-            ps.setString(
+            update.setInt(
                     3,
-                    centre.getUsername()
+                    id
             );
 
 
-
-            ps.setString(
-                    4,
-                    centre.getPasswordHash()
-            );
+            update.executeUpdate();
 
 
 
-            ps.setString(
-                    5,
-                    centre.getPhone()
-            );
+            centre.setId(id);
+            centre.setCentreCode(code);
+            centre.setUsername(username);
 
 
 
-            ps.setDate(
-                    6,
-                    centre.getSubscriptionStart()
-            );
-
-
-
-            ps.setDate(
-                    7,
-                    centre.getSubscriptionEnd()
-            );
-
-
-
-            ps.setString(
-                    8,
-                    "PENDING"
-            );
-
-
-
-            return ps.executeUpdate() > 0;
-
+            return true;
 
 
         }
 
-
-        catch(Exception e){
-
-
-            e.printStackTrace();
-
-
-        }
-
-
-
-
-
-        return false;
 
 
     }
 
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
+
+
+
+    return false;
+
+
+}
 
 
 
