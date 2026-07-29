@@ -106,6 +106,15 @@ public class CentreServlet extends HttpServlet {
 
         break;
         
+        case "edit":
+
+    editCentre(
+        request,
+        response
+    );
+
+    break;
+        
     case "resetPassword":
 
        resetPassword(request,response);
@@ -1119,6 +1128,98 @@ throws IOException {
 
 
     }
+
+}
+
+/*
+ * ======================================================
+ * EDIT CENTRE DIALOG
+ * ======================================================
+ */
+
+private void editCentre(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
+
+
+    try{
+
+
+        int id =
+        Integer.parseInt(
+            request.getParameter("id")
+        );
+
+
+
+        Centre centre =
+        centreDAO.getCentreById(id);
+
+
+
+        if(centre == null){
+
+
+            response.getWriter().println(
+
+                "<div class='empty-state'>"
+                +
+                "<p>Centre introuvable</p>"
+                +
+                "</div>"
+
+            );
+
+
+            return;
+
+        }
+
+
+
+
+
+        request.setAttribute(
+            "centre",
+            centre
+        );
+
+
+
+
+        request.getRequestDispatcher(
+            "/admin/pages/fragments/centres/centre-edit.jsp"
+        )
+        .forward(
+            request,
+            response
+        );
+
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+
+        response.getWriter().println(
+
+            "<div class='empty-state'>"
+            +
+            "<p>Erreur chargement modification centre</p>"
+            +
+            "</div>"
+
+        );
+
+
+    }
+
 
 }
 

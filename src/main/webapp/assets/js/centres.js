@@ -827,15 +827,19 @@ let editCentreId = null;
 function editCentre(id){
 
 
-    editCentreId = id;
+    console.log(
+        "OPEN EDIT CONFIRM:",
+        id
+    );
 
+
+    editCentreId = id;
 
 
     let modal =
     document.getElementById(
         "edit-confirm-modal"
     );
-
 
 
     if(modal){
@@ -850,8 +854,6 @@ function editCentre(id){
 
 
 }
-
-
 
 
 // =====================================
@@ -883,22 +885,156 @@ function closeEditConfirm(){
 
 
 
-
 // =====================================
 // CONFIRM EDIT CENTRE
+// OPEN EDIT DIALOG
 // =====================================
 
 function confirmEditCentre(){
+
+
+    console.log(
+        "CONFIRM EDIT CENTRE:",
+        editCentreId
+    );
+
 
 
     closeEditConfirm();
 
 
 
-    console.log(
-        "Confirmed edit centre:",
-        editCentreId
-    );
+    let url =
+        window.contextPath
+        +
+        "/CentreServlet?action=edit&id="
+        +
+        editCentreId;
+
+
+
+
+
+    fetch(url)
+
+
+
+    .then(response => {
+
+
+        if(!response.ok){
+
+
+            throw new Error(
+                "HTTP ERROR "
+                +
+                response.status
+            );
+
+
+        }
+
+
+
+        return response.text();
+
+
+
+    })
+
+
+
+    .then(html => {
+
+
+
+        console.log(
+            "EDIT HTML RECEIVED:",
+            html
+        );
+
+
+
+
+        let modalBody =
+        document.getElementById(
+            "centre-modal-body"
+        );
+
+
+
+        let modal =
+        document.getElementById(
+            "centre-modal"
+        );
+
+
+
+
+
+        if(!modalBody || !modal){
+
+
+            console.error(
+                "EDIT MODAL NOT FOUND"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+        /*
+         * تنظيف المحتوى القديم
+         */
+
+        modalBody.innerHTML = "";
+
+
+
+
+        /*
+         * تحميل edit jsp
+         */
+
+        modalBody.innerHTML =
+        html;
+
+
+
+
+
+        /*
+         * فتح dialog edit
+         */
+
+        modal.classList.add(
+            "show"
+        );
+
+
+
+
+    })
+
+
+
+    .catch(error => {
+
+
+
+        console.error(
+            "Edit Centre Error:",
+            error
+        );
+
+
+
+    });
 
 
 
