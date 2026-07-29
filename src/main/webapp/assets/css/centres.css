@@ -1089,7 +1089,7 @@ html[dir="rtl"] .info-box{
 
 .centre-modal-content{
 
-    width:650px;
+    width:680px;
 
     max-width:95%;
 
@@ -1240,10 +1240,6 @@ transform:scale(1);
 }
 
 
-
-
-
-
 .centre-view-header{
 
 
@@ -1287,7 +1283,6 @@ transform:scale(1);
 }
 
 
-
 .centre-view-header p{
 
 
@@ -1316,7 +1311,7 @@ transform:scale(1);
 
     display:grid;
 
-    grid-template-columns:repeat(2,minmax(280px,1fr));
+    grid-template-columns:repeat(2,minmax(300px,1fr));
 
     gap:12px;
 
@@ -1336,13 +1331,14 @@ transform:scale(1);
    INFO ROW
    ====================================================== */
 
+
 .info-row{
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:10px;
 
     padding:12px 15px;
 
@@ -1358,8 +1354,6 @@ transform:scale(1);
 
     box-sizing:border-box;
 
-    overflow:hidden;
-
     transition:.25s;
 
 }
@@ -1371,7 +1365,6 @@ transform:scale(1);
     transform:translateY(-2px);
 
     box-shadow:
-
     0 8px 18px rgba(15,23,42,.08);
 
 }
@@ -1382,9 +1375,10 @@ transform:scale(1);
    LABEL
    ====================================================== */
 
+
 .info-row span{
 
-    flex:0 0 135px;
+    flex:0 0 auto;
 
     color:#64748b;
 
@@ -1397,37 +1391,14 @@ transform:scale(1);
 }
 
 
-.info-row strong{
 
-    flex:1;
-
-    min-width:0;
-
-    color:#0f172a;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    text-align:right;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:clip;
-
-}
-
-
-
-/* : separator */
+/* separator */
 
 .info-row span::after{
 
     content: ":";
 
-    margin-left:6px;
+    margin-left:5px;
 
     color:#94a3b8;
 
@@ -1439,6 +1410,7 @@ transform:scale(1);
    VALUE
    ====================================================== */
 
+
 .info-row strong{
 
     flex:1;
@@ -1453,32 +1425,22 @@ transform:scale(1);
 
     text-align:right;
 
-    white-space:nowrap;
+    white-space:normal;
 
-    overflow:hidden;
-
-    text-overflow:clip;
+    overflow:visible;
 
 }
+
 
 
 /* ======================================================
    RTL
    ====================================================== */
 
+
 html[dir="rtl"] .centre-card{
 
     direction:rtl;
-
-}
-
-
-
-html[dir="rtl"] .info-row span::after{
-
-    margin-left:0;
-
-    margin-right:6px;
 
 }
 
@@ -1490,6 +1452,15 @@ html[dir="rtl"] .info-row strong{
 
 }
 
+
+
+html[dir="rtl"] .info-row span::after{
+
+    margin-left:0;
+
+    margin-right:5px;
+
+}
 
 
 /* ======================================================
