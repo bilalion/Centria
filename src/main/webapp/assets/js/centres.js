@@ -456,3 +456,115 @@ function closeCentreModal(){
 
 
 }
+
+
+// =====================================
+// RESET CENTRE PASSWORD
+// =====================================
+
+function resetCentrePassword(id){
+
+
+    if(!confirm("Reset password ?")){
+
+        return;
+
+    }
+
+
+
+    let url =
+        window.contextPath
+        +
+        "/CentreServlet?action=resetPassword&id="
+        +
+        id;
+
+
+
+
+    fetch(url)
+
+
+
+    .then(response => {
+
+
+        if(!response.ok){
+
+
+            throw new Error(
+                "HTTP ERROR "
+                +
+                response.status
+            );
+
+
+        }
+
+
+        return response.text();
+
+
+    })
+
+
+
+    .then(data => {
+
+
+
+        let modalBody =
+        document.getElementById(
+            "centre-modal-body"
+        );
+
+
+        let modal =
+        document.getElementById(
+            "centre-modal"
+        );
+
+
+
+
+        if(modalBody && modal){
+
+
+            modalBody.innerHTML =
+            data;
+
+
+
+            modal.classList.add(
+                "show"
+            );
+
+
+        }
+
+
+
+    })
+
+
+
+    .catch(error => {
+
+
+        console.error(
+            "Reset Password Error:",
+            error
+        );
+
+
+        alert(
+            "Error resetting password"
+        );
+
+
+    });
+
+
+
+}

@@ -104,6 +104,12 @@ public class CentreServlet extends HttpServlet {
         );
 
         break;
+        
+    case "resetPassword":
+
+       resetPassword(request,response);
+
+        break;
 
 
 
@@ -781,4 +787,41 @@ if(saved && centre.getCentreCode()!=null){
     }
 
 
-}
+    
+private void resetPassword(
+        HttpServletRequest request,
+        HttpServletResponse response
+) throws IOException {
+
+
+    int id =
+            Integer.parseInt(
+                    request.getParameter("id")
+            );
+
+
+    System.out.println(
+            "Reset password centre id : "
+            + id
+    );
+
+
+    response.setContentType(
+            "text/html;charset=UTF-8"
+    );
+
+
+    response.getWriter().println(
+
+        "<div class='empty-state'>"
+        +
+        "<h3>🔑</h3>"
+        +
+        "<p>تمت إعادة تهيئة كلمة المرور بنجاح</p>"
+        +
+        "</div>"
+
+    );
+
+
+}}

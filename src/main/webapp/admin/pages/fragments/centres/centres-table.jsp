@@ -527,16 +527,15 @@ title="<%=LanguageManager.get("centers.edit",session)%>">
 
 
 
-
-<a href="#"
-class="action-btn action-renew"
-title="<%=LanguageManager.get("centers.reset.password",session)%>">
+<button
+type="button"
+class="action-btn action-reset"
+title="<%=LanguageManager.get("centers.reset.password",session)%>"
+onclick="resetCentrePassword(<%=centre.getId()%>)">
 
 🔑
 
-</a>
-
-
+</button>
 
 </div>
 

@@ -1646,8 +1646,13 @@ html[dir="rtl"] .info-row span::after{
 
 
 
+/* ======================================================
+   button reset password
+   ====================================================== */
 
-
+.action-reset{
+    background:#f59e0b;
+}
 
 
 
