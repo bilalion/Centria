@@ -2030,6 +2030,525 @@ html[dir="rtl"] .reset-info{
 
 }
 
+/* ======================================================
+   EDIT CENTRE DIALOG
+   ====================================================== */
+
+
+#centre-modal .centre-view-container{
+
+    width:100%;
+
+}
+
+
+
+/* ===============================
+   EDIT FORM GROUP
+   =============================== */
+
+
+#editCentreForm .form-group{
+
+    margin-bottom:18px;
+
+}
+
+
+
+#editCentreForm .form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    font-weight:800;
+
+}
+
+
+
+
+#editCentreForm .form-group input{
+
+    width:100%;
+
+    height:46px;
+
+    padding:0 15px;
+
+    border-radius:14px;
+
+    border:1px solid #e2e8f0;
+
+    background:#ffffff;
+
+    color:#0f172a;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+    box-sizing:border-box;
+
+}
+
+
+
+
+
+#editCentreForm .form-group input:hover{
+
+    border-color:#93c5fd;
+
+}
+
+
+
+
+#editCentreForm .form-group input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+    0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+
+
+
+
+/* ===============================
+   READ ONLY CODE
+   =============================== */
+
+
+#editCentreForm .readonly-field{
+
+    background:#f1f5f9;
+
+    color:#475569;
+
+    cursor:not-allowed;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    border-style:dashed;
+
+}
+
+
+
+
+
+/* ===============================
+   SUBSCRIPTION CARD
+   =============================== */
+
+
+.subscription-info{
+
+
+    margin-top:25px;
+
+    padding:18px;
+
+
+    background:#f8fafc;
+
+
+    border-radius:18px;
+
+
+    border:1px solid #e2e8f0;
+
+
+}
+
+
+
+
+.subscription-info h5{
+
+
+    margin:0 0 15px;
+
+
+    padding-bottom:10px;
+
+
+    border-bottom:1px solid #e2e8f0;
+
+
+    color:#334155;
+
+
+    font-size:15px;
+
+
+    font-weight:900;
+
+
+}
+
+
+
+
+.subscription-info p{
+
+
+    margin:10px 0;
+
+
+    background:white;
+
+
+    padding:12px 15px;
+
+
+    border-radius:12px;
+
+
+    border:1px solid #e5e7eb;
+
+
+    color:#475569;
+
+
+    font-size:14px;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+/* ===============================
+   RTL EDIT
+   =============================== */
+
+
+html[dir="rtl"] #editCentreForm .form-group label{
+
+    text-align:right;
+
+}
+
+
+
+html[dir="rtl"] #editCentreForm input{
+
+    text-align:right;
+
+}
+
+
+
+html[dir="ltr"] #editCentreForm input{
+
+    text-align:left;
+
+}
+
+
+
+
+
+/* ===============================
+   MOBILE
+   =============================== */
+
+
+@media(max-width:600px){
+
+
+    #editCentreForm .form-group input{
+
+
+        height:44px;
+
+
+    }
+
+
+    .subscription-info p{
+
+
+        font-size:13px;
+
+
+    }
+
+
+}
+
+
+/* ======================================================
+   EDIT CENTRE GRID
+   ====================================================== */
+
+
+.edit-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+
+
+.edit-grid .form-group{
+
+    margin-bottom:0;
+
+}
+
+
+
+.edit-grid input{
+
+    width:100%;
+
+    height:42px;
+
+    border-radius:10px;
+
+}
+
+
+
+.readonly-field{
+
+    background:#f1f5f9;
+
+    color:#64748b;
+
+    cursor:not-allowed;
+
+}
+
+
+
+
+.subscription-info{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:14px;
+
+}
+
+
+
+.subscription-info p{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:8px 0;
+
+}
+
+html[dir="rtl"] .edit-grid{
+
+    direction:rtl;
+
+}
+
+@media(max-width:600px){
+
+    .edit-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* ======================================================
+   EDIT CENTRE FINAL COMPACT DESIGN
+   ====================================================== */
+
+
+#editCentreForm{
+
+    margin-top:10px;
+
+}
+
+
+/* MAIN INFORMATION GRID */
+
+#editCentreForm .edit-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+    margin-top:10px;
+
+}
+
+
+
+#editCentreForm .form-group{
+
+    margin-bottom:0;
+
+}
+
+
+
+#editCentreForm .form-group label{
+
+    margin-bottom:5px;
+
+    font-size:12px;
+
+}
+
+
+
+#editCentreForm .form-group input{
+
+    height:38px;
+
+    font-size:13px;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+/* SUBSCRIPTION COMPACT */
+
+#editCentreForm .subscription-info{
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:14px;
+
+}
+
+
+
+#editCentreForm .subscription-info h5{
+
+    margin-bottom:8px;
+
+    padding-bottom:6px;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+#editCentreForm .subscription-info p{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:6px 0;
+
+    padding:8px 12px;
+
+    font-size:12px;
+
+}
+
+
+
+
+
+/* BUTTONS */
+
+#editCentreForm .reset-confirm-actions{
+
+    margin-top:15px;
+
+}
+
+
+
+#editCentreForm .reset-confirm-actions button{
+
+    padding:9px 24px;
+
+    font-size:13px;
+
+}
+
+
+
+
+
+
+/* RTL */
+
+html[dir="rtl"] #editCentreForm .subscription-info p{
+
+    direction:rtl;
+
+}
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+
+    #editCentreForm .edit-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+}
 
 /* ======================================================
    END CENTRES.CSS
