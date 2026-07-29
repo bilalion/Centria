@@ -10,6 +10,7 @@ package com.centria.controllers.admin;
 
 import com.centria.dao.CentreDAO;
 import com.centria.models.Centre;
+import com.centria.utils.LanguageManager;
 import com.centria.utils.PasswordGenerator;
 import com.centria.utils.PasswordUtil;
 
@@ -536,11 +537,6 @@ throws ServletException, IOException {
         centre.setPhone(phone);
 
 
-
-
-
-
-
         centre.setPasswordHash(
 
                 PasswordUtil.hashPassword(
@@ -786,24 +782,11 @@ if(saved && centre.getCentreCode()!=null){
 
     }
 
-
-    
 private void resetPassword(
         HttpServletRequest request,
         HttpServletResponse response
-) throws IOException {
-
-
-    int id =
-            Integer.parseInt(
-                    request.getParameter("id")
-            );
-
-
-    System.out.println(
-            "Reset password centre id : "
-            + id
-    );
+)
+throws IOException {
 
 
     response.setContentType(
@@ -811,17 +794,332 @@ private void resetPassword(
     );
 
 
-    response.getWriter().println(
-
-        "<div class='empty-state'>"
-        +
-        "<h3>🔑</h3>"
-        +
-        "<p>تمت إعادة تهيئة كلمة المرور بنجاح</p>"
-        +
-        "</div>"
-
-    );
+    try{
 
 
-}}
+        int id =
+        Integer.parseInt(
+                request.getParameter("id")
+        );
+
+
+
+        /*
+         * جلب بيانات المركز
+         */
+        Centre centre =
+                centreDAO.getCentreById(id);
+
+
+
+        if(centre == null){
+
+
+            response.getWriter().println(
+
+                "<div class='empty-state'>"
+                +
+                "<p>Centre introuvable</p>"
+                +
+                "</div>"
+
+            );
+
+
+            return;
+
+        }
+
+
+
+
+
+
+        /*
+         * توليد كلمة مرور جديدة
+         */
+        String newPassword =
+                PasswordGenerator.generatePassword();
+
+
+
+
+
+
+
+        /*
+         * تحديث كلمة المرور
+         */
+        boolean updated =
+
+                centreDAO.resetPassword(
+                        id,
+                        newPassword
+                );
+
+
+
+
+
+
+
+        if(updated){
+
+
+
+            String codeLabel =
+                    LanguageManager.get(
+                            "centers.details.code",
+                            request.getSession()
+                    );
+
+
+
+            String usernameLabel =
+                    LanguageManager.get(
+                            "centers.details.username",
+                            request.getSession()
+                    );
+
+
+
+            String passwordLabel =
+                    LanguageManager.get(
+                            "centers.reset.password.label",
+                            request.getSession()
+                    );
+
+
+
+            String warning =
+                    LanguageManager.get(
+                            "centers.reset.warning",
+                            request.getSession()
+                    );
+
+
+
+
+
+
+            String copyText =
+
+                    codeLabel
+                    +
+                    " : "
+                    +
+                    centre.getCentreCode()
+
+                    +
+                    "\n"
+
+                    +
+                    usernameLabel
+                    +
+                    " : "
+                    +
+                    centre.getUsername()
+
+                    +
+                    "\n"
+
+                    +
+                    passwordLabel
+                    +
+                    " : "
+                    +
+                    newPassword
+
+                    +
+                    "\n\n⚠ "
+
+                    +
+                    warning;
+
+
+
+
+
+
+
+            response.getWriter().println(
+
+
+                "<div class='reset-success'>"
+
+
+
+                + "<h3>🔑</h3>"
+
+
+
+                + "<h4>"
+                + LanguageManager.get(
+                        "centers.reset.success",
+                        request.getSession()
+                  )
+                + "</h4>"
+
+
+
+
+
+
+                + "<div class='reset-info' id='resetPasswordMessage'>"
+
+
+
+
+
+                + "<p>"
+                + "<strong>"
+                + codeLabel
+                + " :</strong> "
+                + centre.getCentreCode()
+                + "</p>"
+
+
+
+
+
+                + "<p>"
+                + "<strong>"
+                + usernameLabel
+                + " :</strong> "
+                + centre.getUsername()
+                + "</p>"
+
+
+
+
+
+                + "<p>"
+                + "<strong>"
+                + passwordLabel
+                + " :</strong>"
+                + "</p>"
+
+
+
+
+
+                + "<div class='temporary-password'>"
+                + newPassword
+                + "</div>"
+
+
+
+
+
+                + "</div>"
+
+
+
+
+
+
+
+
+                /*
+                 * زر النسخ
+                 */
+                + "<button "
+                + "type='button' "
+                + "class='copy-password-btn' "
+                + "onclick='copyLoginInfo()'>"
+
+
+                + "📋 "
+                + LanguageManager.get(
+                        "centers.copy.password",
+                        request.getSession()
+                  )
+
+
+                + "</button>"
+
+
+
+
+
+
+
+
+                /*
+                 * النص المخفي للنسخ
+                 */
+                + "<textarea "
+                + "id='loginInfoText' "
+                + "hidden>"
+                + copyText
+                + "</textarea>"
+
+
+
+
+
+
+
+                + "<p class='reset-warning'>⚠ "
+                + warning
+                + "</p>"
+
+
+
+
+
+                + "</div>"
+
+
+            );
+
+
+
+        }
+        else{
+
+
+            response.getWriter().println(
+
+
+                "<div class='empty-state'>"
+                +
+                "<p>Error resetting password</p>"
+                +
+                "</div>"
+
+
+            );
+
+
+        }
+
+
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+
+        response.getWriter().println(
+
+
+            "<div class='empty-state'>"
+            +
+            "<p>Server error</p>"
+            +
+            "</div>"
+
+
+        );
+
+
+    }
+
+}
+
+}

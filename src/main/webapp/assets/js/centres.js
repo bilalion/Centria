@@ -459,17 +459,86 @@ function closeCentreModal(){
 
 
 // =====================================
-// RESET CENTRE PASSWORD
+// RESET CENTRE PASSWORD - OPEN CONFIRM
 // =====================================
+
+let resetCentreId = null;
+
+
 
 function resetCentrePassword(id){
 
 
-    if(!confirm("Reset password ?")){
+    resetCentreId = id;
 
-        return;
+
+
+    let modal =
+    document.getElementById(
+        "reset-confirm-modal"
+    );
+
+
+
+    if(modal){
+
+
+        modal.classList.add(
+            "show"
+        );
+
 
     }
+
+
+}
+
+
+
+
+
+
+// =====================================
+// CLOSE RESET CONFIRM
+// =====================================
+
+function closeResetConfirm(){
+
+
+    let modal =
+    document.getElementById(
+        "reset-confirm-modal"
+    );
+
+
+
+    if(modal){
+
+
+        modal.classList.remove(
+            "show"
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+
+// =====================================
+// CONFIRM RESET PASSWORD
+// =====================================
+
+function confirmResetPassword(){
+
+
+
+    closeResetConfirm();
 
 
 
@@ -478,7 +547,7 @@ function resetCentrePassword(id){
         +
         "/CentreServlet?action=resetPassword&id="
         +
-        id;
+        resetCentreId;
 
 
 
@@ -488,6 +557,7 @@ function resetCentrePassword(id){
 
 
     .then(response => {
+
 
 
         if(!response.ok){
@@ -503,14 +573,17 @@ function resetCentrePassword(id){
         }
 
 
+
         return response.text();
+
 
 
     })
 
 
 
-    .then(data => {
+
+    .then(html => {
 
 
 
@@ -518,6 +591,7 @@ function resetCentrePassword(id){
         document.getElementById(
             "centre-modal-body"
         );
+
 
 
         let modal =
@@ -531,14 +605,16 @@ function resetCentrePassword(id){
         if(modalBody && modal){
 
 
+
             modalBody.innerHTML =
-            data;
+            html;
 
 
 
             modal.classList.add(
                 "show"
             );
+
 
 
         }
@@ -549,7 +625,9 @@ function resetCentrePassword(id){
 
 
 
+
     .catch(error => {
+
 
 
         console.error(
@@ -558,12 +636,187 @@ function resetCentrePassword(id){
         );
 
 
-        alert(
-            "Error resetting password"
+
+
+        let modalBody =
+        document.getElementById(
+            "centre-modal-body"
+        );
+
+
+
+        let modal =
+        document.getElementById(
+            "centre-modal"
+        );
+
+
+
+        if(modalBody && modal){
+
+
+
+            modalBody.innerHTML =
+
+
+
+            `
+            <div class="empty-state">
+
+                <h3>⚠️</h3>
+
+                <p>
+                    Error resetting password
+                </p>
+
+            </div>
+            `;
+
+
+
+            modal.classList.add(
+                "show"
+            );
+
+        }
+
+
+
+    });
+
+
+
+}
+
+// =====================================
+// COPY TEMPORARY PASSWORD
+// =====================================
+
+
+
+// =====================================
+// COPY RESET PASSWORD MESSAGE
+// =====================================
+
+function copyLoginInfo(){
+
+
+    let text =
+    document.getElementById(
+        "loginInfoText"
+    );
+
+
+    if(!text){
+        return;
+    }
+
+
+    navigator.clipboard.writeText(
+        text.value
+    )
+    .then(()=>{
+
+
+        let btn =
+        document.querySelector(
+            ".copy-password-btn"
+        );
+
+
+        if(btn){
+
+
+            let old =
+            btn.innerHTML;
+
+
+            btn.innerHTML =
+            "✅ " + old;
+
+
+
+            setTimeout(()=>{
+
+                btn.innerHTML = old;
+
+            },1500);
+
+
+        }
+
+
+    })
+    .catch(error=>{
+
+
+        console.error(
+            "Copy error:",
+            error
         );
 
 
     });
+
+
+}
+
+// =====================================
+// COPY MESSAGE
+// =====================================
+
+// =====================================
+// COPY SUCCESS FEEDBACK
+// =====================================
+
+function showCopyMessage(){
+
+
+    let button =
+    document.querySelector(
+        ".copy-password-btn"
+    );
+
+
+
+    if(!button){
+
+        return;
+
+    }
+
+
+
+    let oldText =
+        button.innerHTML;
+
+
+
+    button.innerHTML =
+        "✅ " + oldText;
+
+
+
+    button.classList.add(
+        "copied"
+    );
+
+
+
+    setTimeout(()=>{
+
+
+        button.innerHTML =
+            oldText;
+
+
+
+        button.classList.remove(
+            "copied"
+        );
+
+
+    },2000);
 
 
 

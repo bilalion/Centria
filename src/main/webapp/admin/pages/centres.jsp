@@ -237,11 +237,6 @@
 
 
 
-
-
-
-
-
 <!-- =================================================
      TABLE
      AJAX LOAD
@@ -304,11 +299,107 @@
 
 
 
+
 <!-- =================================================
-     JAVASCRIPT
+     RESET PASSWORD CONFIRM MODAL
      ================================================= -->
 
 
+<div id="reset-confirm-modal"
+     class="centre-modal">
+
+
+    <div class="centre-modal-content reset-confirm-box">
+
+
+        <button type="button"
+                class="modal-close"
+                onclick="closeResetConfirm()">
+
+            ✖
+
+        </button>
+
+
+
+        <div class="reset-confirm-content">
+
+
+            <h3>
+                🔑
+            </h3>
+
+
+
+            <p>
+
+            <%=LanguageManager.get(
+                "centers.reset.confirm",
+                session
+            )%>
+
+            </p>
+
+
+
+            <div class="reset-confirm-actions">
+
+
+
+                <button
+                type="button"
+                class="btn-secondary"
+                onclick="closeResetConfirm()">
+
+
+                <%=LanguageManager.get(
+                    "centers.cancel",
+                    session
+                )%>
+
+
+                </button>
+
+
+
+
+
+                <button
+                type="button"
+                class="btn-primary"
+                onclick="confirmResetPassword()">
+
+
+                <%=LanguageManager.get(
+                    "centers.confirm",
+                    session
+                )%>
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+                
+                
+                
+                
+<!-- =================================================
+     JAVASCRIPT
+     ================================================= -->
+                
 <script>
 
 
@@ -320,3 +411,4 @@ window.contextPath =
 
 
 <script src="<%=request.getContextPath()%>/assets/js/centres.js"></script>
+
