@@ -1732,8 +1732,11 @@ html[dir="rtl"] .info-row span::after{
 
     padding:25px;
 
-}
+    background:#faf5ff;
 
+    border-radius:18px;
+
+}
 
 
 .reset-success h3{
@@ -1907,6 +1910,123 @@ html[dir="rtl"] .reset-info{
     box-shadow:
     0 10px 25px rgba(0,0,0,.2);
 
+
+}
+
+
+.confirm-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:15px;
+
+}
+
+
+.confirm-icon{
+
+    font-size:24px;
+
+}
+
+
+.confirm-title{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:var(--title);
+
+}
+
+/* ======================================================
+   CONFIRM DIALOG ACTIONS
+   ====================================================== */
+
+
+.reset-confirm-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+
+
+
+.reset-confirm-actions .btn-secondary{
+
+    background:#dc2626;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 28px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.reset-confirm-actions .btn-secondary:hover{
+
+    background:#b91c1c;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+
+
+.reset-confirm-actions .btn-primary{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 28px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.reset-confirm-actions .btn-primary:hover{
+
+    background:#15803d;
+
+    transform:translateY(-2px);
 
 }
 

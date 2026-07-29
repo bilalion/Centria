@@ -322,12 +322,35 @@
 
 
 
+
         <div class="reset-confirm-content">
 
 
-            <h3>
-                🔑
-            </h3>
+            <div class="confirm-header">
+
+
+                <div class="confirm-icon">
+
+                    🔑
+
+                </div>
+
+
+
+                <h4 class="confirm-title">
+
+                    <%=LanguageManager.get(
+                        "centers.reset.title",
+                        session
+                    )%>
+
+                </h4>
+
+
+            </div>
+
+
+
 
 
 
@@ -342,13 +365,16 @@
 
 
 
+
+
+
             <div class="reset-confirm-actions">
 
 
 
                 <button
                 type="button"
-                class="btn-secondary"
+                class="btn-secondary btn-cancel"
                 onclick="closeResetConfirm()">
 
 
@@ -364,9 +390,10 @@
 
 
 
+
                 <button
                 type="button"
-                class="btn-primary"
+                class="btn-primary btn-confirm"
                 onclick="confirmResetPassword()">
 
 
@@ -391,11 +418,131 @@
 
 
 </div>
+                
+       
+                
+   <!-- =================================================
+     EDIT CENTRE CONFIRM MODAL
+     ================================================= -->
 
+<div id="edit-confirm-modal"
+     class="centre-modal">
+
+
+    <div class="centre-modal-content reset-confirm-box">
+
+
+        <button type="button"
+                class="modal-close"
+                onclick="closeEditConfirm()">
+
+            ✖
+
+        </button>
+
+
+
+        <div class="reset-confirm-content">
+
+
+            <div class="confirm-header">
+
+
+                <span class="confirm-icon">
+
+                    ⚠️
+
+                </span>
+
+
+
+                <h4 class="confirm-title">
+
+                    <%=LanguageManager.get(
+                        "centers.edit.title",
+                        session
+                    )%>
+
+                </h4>
+
+
+            </div>
+
+
+
+
+
+            <p>
+
+            <%=LanguageManager.get(
+                "centers.edit.confirm",
+                session
+            )%>
+
+            </p>
+
+
+
+
+
+            <div class="reset-confirm-actions">
+
+
+
+                <button
+                type="button"
+                class="btn-secondary"
+                onclick="closeEditConfirm()">
+
+
+
+                    <%=LanguageManager.get(
+                        "centers.cancel",
+                        session
+                    )%>
+
+
+
+                </button>
+
+
+
+
+
+
+
+                <button
+                type="button"
+                class="btn-primary"
+                onclick="confirmEditCentre()">
+
+
+
+                    <%=LanguageManager.get(
+                        "centers.confirm",
+                        session
+                    )%>
+
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>             
                 
                 
-                
-                
+
 <!-- =================================================
      JAVASCRIPT
      ================================================= -->

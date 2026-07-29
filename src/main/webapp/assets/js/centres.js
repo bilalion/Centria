@@ -688,10 +688,6 @@ function confirmResetPassword(){
 
 }
 
-// =====================================
-// COPY TEMPORARY PASSWORD
-// =====================================
-
 
 
 // =====================================
@@ -761,9 +757,6 @@ function copyLoginInfo(){
 
 }
 
-// =====================================
-// COPY MESSAGE
-// =====================================
 
 // =====================================
 // COPY SUCCESS FEEDBACK
@@ -817,6 +810,95 @@ function showCopyMessage(){
 
 
     },2000);
+
+
+
+}
+
+
+
+// =====================================
+// EDIT CENTRE - OPEN CONFIRM
+// =====================================
+
+let editCentreId = null;
+
+
+function editCentre(id){
+
+
+    editCentreId = id;
+
+
+
+    let modal =
+    document.getElementById(
+        "edit-confirm-modal"
+    );
+
+
+
+    if(modal){
+
+
+        modal.classList.add(
+            "show"
+        );
+
+
+    }
+
+
+}
+
+
+
+
+// =====================================
+// CLOSE EDIT CONFIRM
+// =====================================
+
+function closeEditConfirm(){
+
+
+    let modal =
+    document.getElementById(
+        "edit-confirm-modal"
+    );
+
+
+    if(modal){
+
+
+        modal.classList.remove(
+            "show"
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+// =====================================
+// CONFIRM EDIT CENTRE
+// =====================================
+
+function confirmEditCentre(){
+
+
+    closeEditConfirm();
+
+
+
+    console.log(
+        "Confirmed edit centre:",
+        editCentreId
+    );
 
 
 

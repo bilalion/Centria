@@ -516,13 +516,15 @@ onclick="viewCentre(<%=centre.getId()%>)">
 
 
 
-<a href="#"
+<button
+type="button"
 class="action-btn action-edit"
-title="<%=LanguageManager.get("centers.edit",session)%>">
+title="<%=LanguageManager.get("centers.edit",session)%>"
+onclick="editCentre(<%=centre.getId()%>)">
 
 ✏️
 
-</a>
+</button>
 
 
 
