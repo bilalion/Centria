@@ -71,41 +71,52 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        switch(action){
+ switch(action){
 
 
-            case "list":
+    case "list":
 
-                listCentres(
-                        request,
-                        response
-                );
+        listCentres(
+                request,
+                response
+        );
 
-                break;
-
-
-
-            case "status":
-
-                updateStatus(
-                        request,
-                        response
-                );
-
-                break;
+        break;
 
 
 
-            default:
+    case "status":
 
-                listCentres(
-                        request,
-                        response
-                );
+        updateStatus(
+                request,
+                response
+        );
 
-                break;
+        break;
 
-        }
+
+
+    case "view":
+
+        viewCentre(
+                request,
+                response
+        );
+
+        break;
+
+
+
+    default:
+
+        listCentres(
+                request,
+                response
+        );
+
+        break;
+
+}
 
     }
 
@@ -340,14 +351,122 @@ public class CentreServlet extends HttpServlet {
 
 
 
+    
+
+
+
+/*
+ * ======================================================
+ * VIEW CENTRE
+ * ======================================================
+ */
+
+private void viewCentre(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
+
+
+    try{
+
+
+        int id =
+        Integer.parseInt(
+                request.getParameter("id")
+        );
+
+
+
+        Centre centre =
+                centreDAO.getCentreById(id);
+
+
+
+        /*
+         * إذا كان المركز غير موجود
+         */
+
+        if(centre == null){
+
+
+            response.sendRedirect(
+                    request.getContextPath()
+                    + "/CentreServlet?action=list"
+            );
+
+
+            return;
+
+        }
 
 
 
 
+        /*
+         * إرسال بيانات المركز
+         */
 
-    /*
+        request.setAttribute(
+                "centre",
+                centre
+        );
+
+
+
+        /*
+         * تحديد القسم داخل Dashboard
+         */
+
+    
+
+
+
+       
+
+        request.getRequestDispatcher(
+                 "/admin/pages/fragments/centres/centre-view.jsp"
+        )
+        .forward(
+                request,
+                response
+        );
+
+
+
+    }
+    catch(NumberFormatException e){
+
+
+        response.sendRedirect(
+                request.getContextPath()
+                + "/CentreServlet?action=list"
+        );
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+        response.sendRedirect(
+                request.getContextPath()
+                + "/CentreServlet?action=list"
+        );
+
+
+    }
+
+
+}
+
+
+    /* ====================================
      * ADD CENTRE
-     */
+     * ====================================
+*/
 
     private void addCentre(
             HttpServletRequest request,
@@ -567,8 +686,6 @@ if(saved && centre.getCentreCode()!=null){
 
 
 
-
-
     private void updateStatus(
             HttpServletRequest request,
             HttpServletResponse response
@@ -651,7 +768,6 @@ if(saved && centre.getCentreCode()!=null){
 
 
     }
-
 
 
 

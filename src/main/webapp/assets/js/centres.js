@@ -336,3 +336,123 @@ function(){
     loadCentres(1);
 
 });
+
+
+// =====================================
+// VIEW CENTRE MODAL
+// =====================================
+
+function viewCentre(id){
+
+
+    let url =
+        window.contextPath
+        +
+        "/CentreServlet?action=view&id="
+        +
+        id;
+
+
+
+    fetch(url)
+
+
+    .then(response => {
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP ERROR "
+                +
+                response.status
+            );
+
+        }
+
+
+        return response.text();
+
+
+    })
+
+
+
+    .then(html => {
+
+
+        let modalBody =
+        document.getElementById(
+            "centre-modal-body"
+        );
+
+
+        let modal =
+        document.getElementById(
+            "centre-modal"
+        );
+
+
+
+        if(modalBody && modal){
+
+
+            modalBody.innerHTML =
+            html;
+
+
+            modal.classList.add(
+                "show"
+            );
+
+
+        }
+
+
+    })
+
+
+    .catch(error=>{
+
+
+        console.error(
+            "View Centre Error:",
+            error
+        );
+
+
+    });
+
+
+}
+
+// =====================================
+// CLOSE CENTRE MODAL
+// =====================================
+
+function closeCentreModal(){
+
+
+    let modal =
+    document.getElementById(
+        "centre-modal"
+    );
+
+
+    if(modal){
+
+
+        modal.classList.remove(
+            "show"
+        );
+
+
+        document.getElementById(
+            "centre-modal-body"
+        ).innerHTML="";
+
+
+    }
+
+
+}

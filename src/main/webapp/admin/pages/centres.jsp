@@ -3,11 +3,9 @@
 <%@page import="com.centria.utils.LanguageManager"%>
 
 
-
 <!-- =================================================
      HEADER
      ================================================= -->
-
 
 <div class="dashboard-header">
 
@@ -30,22 +28,17 @@
 
 
 
-
-
 <!-- =================================================
      TOOLBAR
      ================================================= -->
 
-
 <div class="card centres-toolbar">
-
 
 
 <form id="centresFilterForm"
       method="get"
       action="<%=request.getContextPath()%>/CentreServlet"
       class="centres-filter-form">
-
 
 
 <input type="hidden"
@@ -58,14 +51,9 @@
 
 
 
-
-<!-- ==========================
-     SEARCH LIVE
-     ========================== -->
-
+<!-- SEARCH -->
 
 <div class="search-box">
-
 
 <input type="text"
        id="centreSearch"
@@ -78,8 +66,6 @@
                     session
        )%>">
 
-
-
 </div>
 
 
@@ -88,17 +74,11 @@
 
 
 
-
-
-<!-- ==========================
-     STATUS
-     ========================== -->
-
+<!-- STATUS -->
 
 <select id="centreStatus"
         name="status"
         class="centre-select">
-
 
 
 <option value="ALL">
@@ -109,7 +89,6 @@
 )%>
 
 </option>
-
 
 
 
@@ -124,7 +103,6 @@
 
 
 
-
 <option value="ACTIVE">
 
 <%=LanguageManager.get(
@@ -133,7 +111,6 @@
 )%>
 
 </option>
-
 
 
 
@@ -148,7 +125,6 @@
 
 
 
-
 <option value="ARCHIVED">
 
 <%=LanguageManager.get(
@@ -159,7 +135,6 @@
 </option>
 
 
-
 </select>
 
 
@@ -168,17 +143,11 @@
 
 
 
-
-
-<!-- ==========================
-     ORDER
-     ========================== -->
-
+<!-- ORDER -->
 
 <select id="centreOrder"
         name="order"
         class="centre-select">
-
 
 
 <option value="NEW">
@@ -189,7 +158,6 @@
 )%>
 
 </option>
-
 
 
 
@@ -204,7 +172,6 @@
 
 
 
-
 <option value="NAME">
 
 <%=LanguageManager.get(
@@ -215,9 +182,7 @@
 </option>
 
 
-
 </select>
-
 
 
 
@@ -230,7 +195,6 @@
         onclick="loadCentres(1)"
         class="btn-primary">
 
-
 🔎
 
 <%=LanguageManager.get(
@@ -238,12 +202,7 @@
         session
 )%>
 
-
 </button>
-
-
-
-
 
 
 
@@ -255,12 +214,7 @@
 
 
 
-
-
-<!-- ==========================
-     ADD CENTRE
-     ========================== -->
-
+<!-- ADD CENTRE -->
 
 <a href="<%=request.getContextPath()%>/admin/pages/fragments/centres/add-centre.jsp"
    class="btn-primary btn-no-underline">
@@ -278,7 +232,23 @@
 
 
 
+</div>
 
+
+
+
+
+
+
+
+
+<!-- =================================================
+     TABLE
+     AJAX LOAD
+     ================================================= -->
+
+
+<div id="centres-table-container">
 
 
 </div>
@@ -292,26 +262,42 @@
 
 
 <!-- =================================================
-     TABLE CONTAINER
+     CENTRE VIEW MODAL
+     JOptionPane STYLE
      ================================================= -->
 
 
-<div id="centres-table-container">
+<div id="centre-modal"
+     class="centre-modal">
+
+
+    <div class="centre-modal-content">
+
+
+        <button type="button"
+                class="modal-close"
+                onclick="closeCentreModal()">
+
+            ✖
+
+        </button>
 
 
 
-<!--
-    هنا سيتم تحميل:
+        <div id="centre-modal-body">
 
-    centres-table.jsp
 
-    بواسطة AJAX
+        </div>
 
--->
 
+
+    </div>
 
 
 </div>
+
+
+
 
 
 
@@ -320,9 +306,17 @@
 
 <!-- =================================================
      JAVASCRIPT
-     External File
      ================================================= -->
 
+
+<script>
+
+
+window.contextPath =
+"<%=request.getContextPath()%>";
+
+
+</script>
+
+
 <script src="<%=request.getContextPath()%>/assets/js/centres.js"></script>
-
-

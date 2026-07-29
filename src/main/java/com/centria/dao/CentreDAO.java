@@ -430,6 +430,156 @@ ps.setString(
 
 
     }
+    
+    
+    /*
+======================================================
+GET CENTRE BY ID
+======================================================
+*/
+
+public Centre getCentreById(int id){
+
+
+    Centre centre = null;
+
+
+
+    String sql =
+            "SELECT * FROM centres WHERE id=?";
+
+
+
+    try(
+
+        Connection con =
+                DatabaseConfig.getConnection();
+
+
+        PreparedStatement ps =
+                con.prepareStatement(sql)
+
+    ){
+
+
+        ps.setInt(
+                1,
+                id
+        );
+
+
+
+        ResultSet rs =
+                ps.executeQuery();
+
+
+
+
+        if(rs.next()){
+
+
+            centre = new Centre();
+
+
+
+            centre.setId(
+                    rs.getInt("id")
+            );
+
+
+            centre.setCentreCode(
+                    rs.getString("centre_code")
+            );
+
+
+            centre.setName(
+                    rs.getString("name")
+            );
+
+
+            centre.setOwnerName(
+                    rs.getString("owner_name")
+            );
+
+
+            centre.setUsername(
+                    rs.getString("username")
+            );
+
+
+            /*
+              لا نعرض كلمة المرور في الواجهة
+              لكنها تبقى داخل Model إذا احتجناها
+            */
+            centre.setPasswordHash(
+                    rs.getString("password_hash")
+            );
+
+
+
+            centre.setPhone(
+                    rs.getString("phone")
+            );
+
+
+            centre.setSubscriptionStart(
+                    rs.getDate("subscription_start")
+            );
+
+
+            centre.setSubscriptionEnd(
+                    rs.getDate("subscription_end")
+            );
+
+
+            centre.setStatus(
+                    rs.getString("status")
+            );
+
+
+            centre.setCreatedAt(
+                    rs.getTimestamp("created_at")
+            );
+
+
+            centre.setMustChangePassword(
+                    rs.getBoolean("must_change_password")
+            );
+
+
+            centre.setLastLogin(
+                    rs.getTimestamp("last_login")
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+    }
+
+
+
+
+    return centre;
+
+
+}
+    
+    
+    
+    
+    
         /*
     ======================================================
     COUNT CENTRES

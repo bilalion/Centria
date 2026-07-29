@@ -507,15 +507,12 @@ onchange="updateCentreStatus(this)"
 
 
 
-<a href="#"
+<button
+type="button"
 class="action-btn action-view"
-title="<%=LanguageManager.get("centers.view",session)%>">
-
+onclick="viewCentre(<%=centre.getId()%>)">
 👁
-
-</a>
-
-
+</button>
 
 
 

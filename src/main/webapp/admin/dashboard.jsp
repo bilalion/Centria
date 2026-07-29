@@ -96,7 +96,7 @@ src="<%=request.getContextPath()%>/assets/js/dashboard.js">
 
 
 <script defer
-src="<%=request.getContextPath()%>/assets/js/centres.js?v=2">
+src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
 </script>
 
 
@@ -140,9 +140,11 @@ src="<%=request.getContextPath()%>/assets/js/centres.js?v=2">
 <%
 
 String section =
+        request.getAttribute("section") != null
+        ?
+        request.getAttribute("section").toString()
+        :
         request.getParameter("section");
-
-
 
 if(section == null 
    || section.isEmpty()
@@ -165,6 +167,20 @@ if(section == null
 
 
 <jsp:include page="pages/centres.jsp"/>
+
+
+<%
+
+
+}else if("centre-view".equals(section)){
+
+
+%>
+
+
+<jsp:include page="pages/fragments/centres/centre-view.jsp"/>
+
+
 
 
 <%
