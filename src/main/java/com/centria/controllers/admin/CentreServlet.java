@@ -10,7 +10,7 @@ package com.centria.controllers.admin;
 
 import com.centria.dao.CentreDAO;
 import com.centria.models.Centre;
-import com.centria.utils.LanguageManager;
+import com.centria.language.LanguageManager;
 import com.centria.utils.PasswordGenerator;
 import com.centria.utils.PasswordUtil;
 

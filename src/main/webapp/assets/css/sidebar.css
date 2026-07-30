@@ -4,22 +4,20 @@ File        : sidebar.css
 Project     : CENTRIA
 Module      : Sidebar Component
 
-Description :
-Sidebar layout, branding, navigation menu
-and logout button.
+Responsive SaaS Sidebar
 
 Contains:
-- Sidebar container
-- Brand section
-- Navigation menu
-- Logout action
+- Desktop sidebar
+- Tablet compact mode
+- Mobile drawer preparation
+- Branding
+- Navigation
+- Logout
 - RTL/LTR support
-- Responsive layout
 
-Do not add:
-- Global styles
-- Header styles
-- Page styles
+Compatible with:
+sidebar.jsp
+
 ==========================================================
 */
 
@@ -31,15 +29,11 @@ Do not add:
 
 .sidebar{
 
-    width:280px;
+    width:var(--sidebar-width);
 
-    min-width:280px;
+    min-width:var(--sidebar-width);
 
     height:100vh;
-
-    overflow-y:auto;
-
-    overflow-x:hidden;
 
     display:flex;
 
@@ -47,22 +41,29 @@ Do not add:
 
     flex-shrink:0;
 
-    padding:28px 20px;
+    padding:28px 22px;
 
-    color:var(--white);
-
+    color:white;
 
     background:
+
     linear-gradient(
         180deg,
         var(--sidebar-start),
         var(--sidebar-end)
     );
 
-
     box-shadow:
 
-    0 0 20px rgba(15,23,42,.10);
+    0 0 30px rgba(15,23,42,.18);
+
+    overflow:hidden;
+
+    transition:
+
+    width .3s ease,
+    min-width .3s ease,
+    transform .3s ease;
 
 }
 
@@ -85,11 +86,12 @@ Do not add:
 
     align-items:center;
 
-    justify-content:center;
-
     text-align:center;
 
+    flex-shrink:0;
+
 }
+
 
 
 
@@ -103,9 +105,9 @@ Do not add:
 
 .logo{
 
-    width:90px;
+    width:88px;
 
-    height:90px;
+    height:88px;
 
     object-fit:cover;
 
@@ -115,17 +117,23 @@ Do not add:
 
     padding:8px;
 
-    margin-bottom:14px;
+    border:
 
+    3px solid rgba(255,255,255,.35);
+
+    margin-bottom:14px;
 
     box-shadow:
 
-    0 8px 20px rgba(0,0,0,.30);
+    0 10px 30px rgba(0,0,0,.35);
 
+    transition:
 
-    transition:.3s ease;
+    transform var(--transition);
 
 }
+
+
 
 
 
@@ -138,23 +146,31 @@ Do not add:
 
 
 
+
+
+
+/* ======================================================
+   04 - BRAND TEXT
+   ====================================================== */
+
+
 .brand-name{
 
-    font-size:30px;
+    color:white;
 
-    font-weight:700;
+    font-size:32px;
 
-    color:var(--white);
+    font-weight:900;
 
-    letter-spacing:.5px;
+    letter-spacing:1px;
 
 }
 
 
 
-.brand-subtitle{
 
-    display:block;
+
+.brand-subtitle{
 
     margin-top:8px;
 
@@ -165,22 +181,31 @@ Do not add:
     line-height:1.6;
 
 }
+
+
+
+
+
+
+
 /* ======================================================
-   04 - DIVIDER
+   05 - DIVIDER
    ====================================================== */
 
 
 .sidebar hr{
 
-    border:none;
+    width:100%;
 
     height:1px;
 
-    margin:24px 0;
+    margin:25px 0;
+
+    border:none;
 
     background:
 
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.15);
 
 }
 
@@ -188,8 +213,10 @@ Do not add:
 
 
 
+
+
 /* ======================================================
-   05 - WELCOME TEXT
+   06 - WELCOME TEXT
    ====================================================== */
 
 
@@ -203,28 +230,28 @@ Do not add:
 
     line-height:1.7;
 
+    font-size:14px;
+
 }
+
+
 
 
 
 
 
 /* ======================================================
-   06 - MENU SECTION
+   07 - MENU SECTION
    ====================================================== */
 
 
 .menu-section{
 
-    flex:1;
-
     display:flex;
 
     flex-direction:column;
 
-    overflow-y:auto;
-
-    scrollbar-width:none;
+    gap:14px;
 
 }
 
@@ -233,46 +260,43 @@ Do not add:
 
 
 
-.menu-section::-webkit-scrollbar{
 
-    display:none;
-
-}
-
-
-
-
+/* ======================================================
+   08 - MENU ITEM
+   ====================================================== */
 
 
 .menu-section a{
+
+    min-height:62px;
 
     display:flex;
 
     align-items:center;
 
+    justify-content:center;
+
     gap:14px;
 
-    padding:14px 16px;
+    padding:14px;
 
-    margin-bottom:10px;
+    border-radius:16px;
 
-    border-radius:var(--radius);
-
-
-    color:var(--white);
+    color:white;
 
     background:
 
-    rgba(255,255,255,.05);
+    rgba(255,255,255,.07);
 
+    box-shadow:
 
-    text-decoration:none;
-
+    inset 0 0 0 1px rgba(255,255,255,.05);
 
     transition:
 
     background var(--transition),
-    transform var(--transition);
+    transform var(--transition),
+    box-shadow var(--transition);
 
 }
 
@@ -282,21 +306,22 @@ Do not add:
 
 .menu-section a:hover{
 
-    background:var(--primary);
+    background:
 
-    transform:translateX(3px);
+    rgba(255,255,255,.15);
+
+    transform:
+
+    translateY(-2px);
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.18);
 
 }
 
 
 
-
-
-
-
-/* ======================================================
-   07 - ACTIVE MENU ITEM
-   ====================================================== */
 
 
 .menu-section a.active{
@@ -309,13 +334,13 @@ Do not add:
         var(--primary-dark)
     );
 
-
-    color:white;
-
-
     box-shadow:
 
-    0 8px 18px rgba(37,99,235,.30);
+    0 12px 25px rgba(37,99,blue,.35);
+
+    transform:
+
+    translateY(-2px);
 
 }
 
@@ -326,19 +351,31 @@ Do not add:
 
 
 /* ======================================================
-   08 - MENU ICON
+   09 - MENU ICON
    ====================================================== */
 
 
 .menu-icon{
 
-    width:24px;
+    width:38px;
 
-    min-width:24px;
+    height:38px;
 
-    text-align:center;
+    display:flex;
 
-    font-size:18px;
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    background:
+
+    rgba(255,255,255,.12);
+
+    font-size:20px;
 
 }
 
@@ -353,18 +390,12 @@ Do not add:
 }
 
 
-
-
-
-
-
-
 /* ======================================================
-   09 - RTL MENU SUPPORT
+   10 - RTL SUPPORT
    ====================================================== */
 
 
-html[dir="rtl"] .menu-section{
+html[dir="rtl"] .sidebar{
 
     direction:rtl;
 
@@ -373,19 +404,10 @@ html[dir="rtl"] .menu-section{
 
 
 
+
 html[dir="rtl"] .menu-section a{
 
-    flex-direction:row;
-
-}
-
-
-
-
-
-html[dir="rtl"] .menu-icon{
-
-    order:2;
+    flex-direction:row-reverse;
 
 }
 
@@ -394,8 +416,6 @@ html[dir="rtl"] .menu-icon{
 
 
 html[dir="rtl"] .menu-text{
-
-    order:1;
 
     text-align:right;
 
@@ -407,17 +427,17 @@ html[dir="rtl"] .menu-text{
 
 
 
-
 /* ======================================================
-   10 - LTR MENU SUPPORT
+   11 - LTR SUPPORT
    ====================================================== */
 
 
-html[dir="ltr"] .menu-section{
+html[dir="ltr"] .sidebar{
 
     direction:ltr;
 
 }
+
 
 
 
@@ -432,25 +452,20 @@ html[dir="ltr"] .menu-section a{
 
 
 
-html[dir="ltr"] .menu-icon{
-
-    order:1;
-
-}
-
-
-
-
-
 html[dir="ltr"] .menu-text{
-
-    order:2;
 
     text-align:left;
 
 }
+
+
+
+
+
+
+
 /* ======================================================
-   11 - LOGOUT BUTTON
+   12 - LOGOUT BUTTON
    ====================================================== */
 
 
@@ -458,27 +473,25 @@ html[dir="ltr"] .menu-text{
 
     width:100%;
 
+    margin-top:auto;
+
+    margin-bottom:10px;
+
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
     gap:10px;
 
     padding:14px;
 
-    margin-top:10px;
-
     border-radius:var(--radius);
 
+    color:white;
 
-    color:var(--white);
-
-    text-decoration:none;
-
-    font-weight:700;
-
+    font-weight:800;
 
     background:
 
@@ -488,10 +501,10 @@ html[dir="ltr"] .menu-text{
         #dc2626
     );
 
-
     transition:
 
     transform var(--transition),
+
     box-shadow var(--transition);
 
 }
@@ -502,12 +515,13 @@ html[dir="ltr"] .menu-text{
 
 .logout-btn:hover{
 
-    transform:translateY(-3px);
+    transform:
 
+    translateY(-3px);
 
     box-shadow:
 
-    0 10px 22px rgba(239,68,68,.35);
+    0 12px 25px rgba(239,68,68,.35);
 
 }
 
@@ -517,153 +531,11 @@ html[dir="ltr"] .menu-text{
 
 .logout-btn .menu-icon{
 
-    width:auto;
-
-    min-width:auto;
-
-}
-
-
-
-
-
-.logout-btn .menu-text{
-
-    flex:none;
-
-    text-align:center;
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   12 - LOGOUT RTL
-   ====================================================== */
-
-
-html[dir="rtl"] .logout-btn{
-
-    flex-direction:row;
-
-}
-
-
-
-
-
-html[dir="rtl"] .logout-btn .menu-icon{
-
-    order:2;
-
-}
-
-
-
-
-
-html[dir="rtl"] .logout-btn .menu-text{
-
-    order:1;
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   13 - LOGOUT LTR
-   ====================================================== */
-
-
-html[dir="ltr"] .logout-btn{
-
-    flex-direction:row;
-
-}
-
-
-
-
-
-html[dir="ltr"] .logout-btn .menu-icon{
-
-    order:1;
-
-}
-
-
-
-
-
-html[dir="ltr"] .logout-btn .menu-text{
-
-    order:2;
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   14 - SIDEBAR SCROLLBAR
-   ====================================================== */
-
-
-.sidebar::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-
-
-
-
-.sidebar::-webkit-scrollbar-track{
-
-    background:transparent;
-
-}
-
-
-
-
-
-.sidebar::-webkit-scrollbar-thumb{
-
     background:
 
-    rgba(255,255,255,.25);
-
-
-    border-radius:20px;
+    rgba(255,255,255,.15);
 
 }
-
-
-
-
-
-.sidebar::-webkit-scrollbar-thumb:hover{
-
-    background:
-
-    rgba(255,255,255,.40);
-
-}
-
 
 
 
@@ -672,22 +544,23 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 /* ======================================================
-   15 - RESPONSIVE
+   13 - TABLET COMPACT MODE
+
+   Sidebar becomes icons only
+
    ====================================================== */
 
 
-@media(max-width:900px){
+@media(max-width:1100px){
 
 
     .sidebar{
 
-        width:100%;
+        width:90px;
 
-        min-width:100%;
+        min-width:90px;
 
-        height:auto;
-
-        padding:20px;
+        padding:25px 12px;
 
     }
 
@@ -695,28 +568,13 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 
-    .menu-section{
-
-        overflow:visible;
-
-    }
-
-
-}
+    .brand-name,
+    .brand-subtitle,
+    .welcome-text,
+    .menu-text{
 
 
-
-
-
-
-
-
-@media(max-width:600px){
-
-
-    .brand-name{
-
-        font-size:26px;
+        display:none;
 
     }
 
@@ -726,9 +584,19 @@ html[dir="ltr"] .logout-btn .menu-text{
 
     .logo{
 
-        width:75px;
+        width:60px;
 
-        height:75px;
+        height:60px;
+
+    }
+
+
+
+
+
+    .sidebar hr{
+
+        margin:18px 0;
 
     }
 
@@ -738,7 +606,295 @@ html[dir="ltr"] .logout-btn .menu-text{
 
     .menu-section a{
 
-        padding:12px 14px;
+        justify-content:center;
+
+        padding:12px;
+
+        min-height:50px;
+
+    }
+
+
+
+
+
+    .menu-icon{
+
+        width:42px;
+
+        height:42px;
+
+        font-size:22px;
+
+    }
+
+
+
+
+
+    .logout-btn{
+
+        padding:12px;
+
+    }
+
+
+
+
+
+    .logout-btn .menu-text{
+
+        display:none;
+
+    }
+
+}
+
+/* ======================================================
+   14 - MOBILE MODE
+
+   Sidebar transforms into
+   compact navigation panel
+
+   ====================================================== */
+
+
+@media(max-width:700px){
+
+
+    .sidebar{
+
+        position:fixed;
+
+        top:0;
+
+        bottom:0;
+
+        z-index:1000;
+
+
+        width:75px;
+
+        min-width:75px;
+
+
+        padding:20px 10px;
+
+
+        overflow-y:auto;
+
+
+    }
+
+
+
+
+
+    .logo{
+
+        width:52px;
+
+        height:52px;
+
+    }
+
+
+
+
+
+    .brand-name,
+    .brand-subtitle,
+    .welcome-text,
+    .menu-text{
+
+
+        display:none;
+
+    }
+
+
+
+
+
+    .menu-section{
+
+        gap:12px;
+
+    }
+
+
+
+
+
+    .menu-section a{
+
+
+        min-height:48px;
+
+
+        padding:10px;
+
+
+        justify-content:center;
+
+
+        border-radius:14px;
+
+
+    }
+
+
+
+
+
+    .menu-icon{
+
+
+        width:36px;
+
+
+        height:36px;
+
+
+        font-size:19px;
+
+
+    }
+
+
+
+
+
+    .logout-btn{
+
+
+        width:45px;
+
+
+        height:45px;
+
+
+        margin-left:auto;
+
+        margin-right:auto;
+
+
+        padding:0;
+
+
+        border-radius:12px;
+
+
+    }
+
+
+
+
+
+    .logout-btn .menu-icon{
+
+
+        margin:0;
+
+    }
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   15 - SIDEBAR TOGGLE PREPARATION
+
+   Future hamburger / collapse button
+
+   ====================================================== */
+
+
+.sidebar-toggle{
+
+
+    display:none;
+
+
+    position:fixed;
+
+
+    top:15px;
+
+
+    z-index:2000;
+
+
+    width:42px;
+
+
+    height:42px;
+
+
+    border-radius:12px;
+
+
+    background:var(--primary);
+
+
+    color:white;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:22px;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+html[dir="ltr"] .sidebar-toggle{
+
+
+    left:15px;
+
+
+}
+
+
+
+
+
+html[dir="rtl"] .sidebar-toggle{
+
+
+    right:15px;
+
+
+}
+
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+    .sidebar-toggle{
+
+
+        display:flex;
 
     }
 
@@ -751,7 +907,102 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 
+/* ======================================================
+   16 - COLLAPSED STATE
+
+   Activated by JavaScript
+
+   ====================================================== */
+
+
+.sidebar.collapsed{
+
+
+    width:90px;
+
+
+    min-width:90px;
+
+}
+
+
+
+
+
+.sidebar.collapsed .brand-name,
+.sidebar.collapsed .brand-subtitle,
+.sidebar.collapsed .welcome-text,
+.sidebar.collapsed .menu-text{
+
+
+    display:none;
+
+}
+
+
+
+
+
+.sidebar.collapsed .menu-section a{
+
+
+    justify-content:center;
+
+}
+
+
+
+
+
+.sidebar.collapsed .logout-btn{
+
+
+    justify-content:center;
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   17 - SMOOTH TRANSITION
+
+   ====================================================== */
+
+
+.sidebar{
+
+
+    transition:
+
+    width var(--transition),
+
+    min-width var(--transition);
+
+}
+
+
+
+
+
+
 
 /* ======================================================
    END sidebar.css
-   ====================================================== */
+
+   Optimized goals:
+
+   ✔ Desktop professional sidebar
+   ✔ Tablet icon mode
+   ✔ Mobile compact mode
+   ✔ Future collapse button ready
+   ✔ RTL / LTR preserved
+   ✔ No header interference
+   ✔ No page styles
+
+======================================================
+*/
+

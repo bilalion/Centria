@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.centria.utils.LanguageManager"%>
+<%@page import="com.centria.language.LanguageManager"%>
 
 
 <div class="header">

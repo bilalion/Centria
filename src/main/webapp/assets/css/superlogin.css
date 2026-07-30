@@ -23,7 +23,6 @@ Loads before global.css.
 */
 
 
-
 /* ======================================================
    01. CSS VARIABLES
    ====================================================== */
@@ -533,6 +532,7 @@ html[dir="rtl"] .language-selector select{
 
 
 }
+
 /* ======================================================
    06. BRAND SECTION
    ====================================================== */
@@ -764,37 +764,95 @@ html[dir="rtl"] .db-status{
 
 /* ======================================================
    09. ERROR MESSAGE
+   Validation / Login Errors
    ====================================================== */
 
 
 .error-message{
 
+    display:flex;
 
-    margin-bottom:18px;
+    align-items:center;
 
+    justify-content:center;
 
-
-    padding:12px;
-
-
-
-    border-radius:12px;
+    gap:8px;
 
 
+    width:100%;
 
-    background:#fee2e2;
 
+    margin-bottom:16px;
+
+
+    padding:10px 14px;
+
+
+    border-radius:10px;
+
+
+    background:#fef2f2;
+
+
+    border:
+
+        1px solid #fecaca;
 
 
     color:var(--danger);
 
 
+    font-size:14px;
 
-    font-weight:700;
 
+    font-weight:600;
+
+
+    line-height:1.5;
+
+
+    animation:
+
+        fadeError .3s ease;
 
 }
 
+
+
+
+@keyframes fadeError{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+            translateY(-5px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+            translateY(0);
+
+
+    }
+
+
+}
 
 
 
@@ -895,7 +953,7 @@ html[dir="rtl"] .db-status{
     box-shadow:
 
 
-        0 0 0 4px rgba(37,99,235,.12);
+        0 0 0 4px rgba(37,99,blue,.12);
 
 
 
@@ -1131,6 +1189,7 @@ html[dir="ltr"] .password-wrapper input{
 
 
 }
+
 /* ======================================================
    12. REMEMBER ME
    ====================================================== */

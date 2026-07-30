@@ -17,61 +17,118 @@ Contains:
 - Scrollbar
 - RTL/LTR foundation
 
-Do not add page/module styles here.
+Do not add:
+- Page styles
+- Module styles
+- Component styles
 ==========================================================
 */
 
 
 /* ======================================================
-   01 - CSS VARIABLES
+   01 - DESIGN SYSTEM VARIABLES
    ====================================================== */
 
 
 :root{
 
+
+    /* Primary */
+
     --primary:#2563eb;
-    --primary-dark:#1e40af;
+
+    --primary-dark:#1d4ed8;
+
+
+
+    /* Semantic Colors */
 
     --success:#059669;
+
     --warning:#f59e0b;
+
     --danger:#dc2626;
+
     --purple:#7c3aed;
+
+
+
+    /* Surfaces */
 
     --white:#ffffff;
 
     --background:#f1f5f9;
+
     --surface:#ffffff;
 
+
+
+    /* Text */
+
     --title:#0f172a;
+
     --text:#475569;
+
     --muted:#94a3b8;
+
+
+
+    /* Borders */
+
     --border:#e2e8f0;
 
+
+
+    /* Sidebar */
+
     --sidebar-start:#1e293b;
+
     --sidebar-end:#0f172a;
 
 
-    --radius-sm:10px;
-    --radius:14px;
-    --radius-lg:18px;
-    --radius-xl:22px;
 
+    /* Radius */
+
+    --radius-sm:10px;
+
+    --radius:14px;
+
+    --radius-lg:18px;
+
+    --radius-xl:24px;
+
+
+
+    /* Shadows */
 
     --shadow-sm:
-    0 4px 10px rgba(15,23,42,.05);
+    0 4px 10px rgba(15,23,42,.06);
+
 
 
     --shadow:
-    0 10px 24px rgba(15,23,42,.08);
+    0 10px 25px rgba(15,23,42,.08);
+
 
 
     --shadow-lg:
-    0 18px 40px rgba(15,23,42,.12);
+    0 20px 45px rgba(15,23,42,.12);
 
 
-    --transition:.30s ease;
+
+    /* Animation */
+
+    --transition:.25s ease;
+
+
+
+    /* Layout */
+
+    --sidebar-width:290px;
+
 
 }
+
 
 
 
@@ -87,26 +144,14 @@ Do not add page/module styles here.
 *::before,
 *::after{
 
+
     margin:0;
 
     padding:0;
 
+
     box-sizing:border-box;
 
-
-    scrollbar-width:thin;
-
-    scrollbar-color:
-    #94a3b8
-    #e2e8f0;
-
-}
-
-
-
-html{
-
-    scroll-behavior:smooth;
 
 }
 
@@ -117,35 +162,70 @@ html{
 
 
 /* ======================================================
-   03 - BODY BASE
+   03 - HTML BASE
+   ====================================================== */
+
+
+html{
+
+
+    min-height:100%;
+
+
+    scroll-behavior:smooth;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   04 - BODY FOUNDATION
    ====================================================== */
 
 
 body{
 
+
     min-height:100vh;
 
 
     font-family:
-    "Segoe UI",
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+
+
+        "Segoe UI",
+
+        Tahoma,
+
+        Geneva,
+
+        Verdana,
+
+        sans-serif;
+
 
 
     background:var(--background);
 
+
     color:var(--text);
+
 
 
     line-height:1.6;
 
 
+
     display:flex;
 
 
+
     overflow:hidden;
+
 
 }
 
@@ -156,21 +236,26 @@ body{
 
 
 /* ======================================================
-   04 - PAGE DIRECTION
+   05 - DIRECTION FOUNDATION
    ====================================================== */
 
 
 html[dir="rtl"]{
 
+
     direction:rtl;
 
+
 }
+
 
 
 
 html[dir="ltr"]{
 
+
     direction:ltr;
+
 
 }
 
@@ -181,28 +266,27 @@ html[dir="ltr"]{
 
 
 /* ======================================================
-   05 - LAYOUT DIRECTION
-
-   RTL:
-   Sidebar right
-
-   LTR:
-   Sidebar left
-
+   06 - LAYOUT DIRECTION
    ====================================================== */
 
 
 html[dir="rtl"] body{
 
+
     flex-direction:row-reverse;
+
 
 }
 
 
 
+
+
 html[dir="ltr"] body{
 
+
     flex-direction:row;
+
 
 }
 
@@ -213,7 +297,7 @@ html[dir="ltr"] body{
 
 
 /* ======================================================
-   06 - TYPOGRAPHY
+   07 - TYPOGRAPHY
    ====================================================== */
 
 
@@ -224,17 +308,23 @@ h4,
 h5,
 h6{
 
+
     color:var(--title);
+
 
     font-weight:700;
 
+
 }
+
 
 
 
 p{
 
+
     color:var(--text);
+
 
 }
 
@@ -245,15 +335,18 @@ p{
 
 
 /* ======================================================
-   07 - LINKS
+   08 - LINKS
    ====================================================== */
 
 
 a{
 
-    text-decoration:none;
 
     color:inherit;
+
+
+    text-decoration:none;
+
 
 }
 
@@ -264,17 +357,21 @@ a{
 
 
 /* ======================================================
-   08 - BUTTONS
+   09 - BUTTONS
    ====================================================== */
 
 
 button{
 
+
     font-family:inherit;
+
 
     cursor:pointer;
 
+
     border:none;
+
 
 }
 
@@ -285,7 +382,7 @@ button{
 
 
 /* ======================================================
-   09 - FORMS
+   10 - FORM ELEMENTS
    ====================================================== */
 
 
@@ -293,9 +390,12 @@ input,
 select,
 textarea{
 
+
     font-family:inherit;
 
+
     outline:none;
+
 
 }
 
@@ -306,15 +406,18 @@ textarea{
 
 
 /* ======================================================
-   10 - IMAGES
+   11 - MEDIA
    ====================================================== */
 
 
 img{
 
+
     max-width:100%;
 
+
     display:block;
+
 
 }
 
@@ -325,15 +428,18 @@ img{
 
 
 /* ======================================================
-   11 - TABLE
+   12 - TABLE FOUNDATION
    ====================================================== */
 
 
 table{
 
+
     width:100%;
 
+
     border-collapse:collapse;
+
 
 }
 
@@ -344,21 +450,26 @@ table{
 
 
 /* ======================================================
-   12 - UTILITIES
+   13 - COMMON UTILITIES
    ====================================================== */
 
 
 .text-center{
 
+
     text-align:center;
 
+
 }
+
 
 
 
 .hidden{
 
-    display:none !important;
+
+    display:none!important;
+
 
 }
 
@@ -369,41 +480,72 @@ table{
 
 
 /* ======================================================
-   13 - SCROLLBAR
+   14 - SCROLLBAR
    ====================================================== */
 
 
+*{
+
+
+    scrollbar-width:thin;
+
+
+    scrollbar-color:
+
+
+        #94a3b8
+
+        #e2e8f0;
+
+
+}
+
+
+
+
 ::-webkit-scrollbar{
+
 
     width:10px;
 
     height:10px;
 
+
 }
+
 
 
 
 ::-webkit-scrollbar-track{
 
+
     background:#e2e8f0;
 
+
 }
+
 
 
 
 ::-webkit-scrollbar-thumb{
 
+
     background:#94a3b8;
 
+
     border-radius:20px;
+
 
 }
 
 
 
+
 ::-webkit-scrollbar-thumb:hover{
 
+
     background:#64748b;
+
 
 }
 
@@ -414,20 +556,25 @@ table{
 
 
 /* ======================================================
-   14 - ACCESSIBILITY
+   15 - ACCESSIBILITY
    ====================================================== */
 
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-select:focus-visible{
+select:focus-visible,
+textarea:focus-visible{
+
 
     outline:
-    3px solid rgba(37,99,235,.30);
+
+    3px solid rgba(37,99,235,.35);
+
 
 
     outline-offset:3px;
+
 
 }
 
@@ -438,23 +585,27 @@ select:focus-visible{
 
 
 /* ======================================================
-   15 - GLOBAL CONTAINER
+   16 - GLOBAL CONTAINER
 
-   Do not use for pages.
-   Page containers belong to modules.
+   Reserved for global layouts only.
 
    ====================================================== */
 
 
 .global-container{
 
+
     width:100%;
+
 
     max-width:1400px;
 
+
     margin:auto;
 
+
     padding:0 20px;
+
 
 }
 
@@ -465,7 +616,7 @@ select:focus-visible{
 
 
 /* ======================================================
-   16 - BASE ANIMATION
+   17 - GLOBAL ANIMATION
    ====================================================== */
 
 
@@ -474,21 +625,30 @@ select:focus-visible{
 
     from{
 
+
         opacity:0;
 
+
         transform:
+
         translateY(18px);
+
 
     }
 
 
 
+
     to{
+
 
         opacity:1;
 
+
         transform:
+
         translateY(0);
+
 
     }
 
@@ -503,4 +663,5 @@ select:focus-visible{
 
 /* ======================================================
    END global.css
-   ====================================================== */
+   ======================================================
+*/

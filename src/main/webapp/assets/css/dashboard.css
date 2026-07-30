@@ -24,29 +24,42 @@ Do not add:
 
 
 /* ======================================================
-   01 - MAIN CONTENT LAYOUT
+   01 - MAIN CONTENT
    ====================================================== */
 
 
 .main-content{
 
+
     flex:1;
+
 
     min-width:0;
 
+
     height:100vh;
+
 
     padding:30px;
 
+
     display:flex;
+
 
     flex-direction:column;
 
+
     overflow-y:auto;
+
 
     overflow-x:hidden;
 
+
 }
+
+
+
+
 
 
 
@@ -55,23 +68,21 @@ Do not add:
    ====================================================== */
 
 
-#content-area{
+#content-area,
+.content-area{
+
 
     width:100%;
+
 
     flex:1;
 
-}
-
-
-
-.content-area{
-
-    width:100%;
-
-    overflow-x:auto;
 
 }
+
+
+
+
 
 
 
@@ -82,33 +93,54 @@ Do not add:
 
 .dashboard-header{
 
+
     margin-bottom:32px;
 
+
 }
+
+
 
 
 
 .dashboard-header h1{
 
+
     margin-bottom:10px;
 
-    color:var(--title);
 
     font-size:38px;
 
-    font-weight:700;
+
+    color:var(--title);
+
+
+    font-weight:800;
+
 
 }
+
+
 
 
 
 .dashboard-header p{
 
+
     color:var(--text);
+
+
+    font-size:16px;
+
 
     line-height:1.7;
 
+
 }
+
+
+
+
 
 
 
@@ -119,61 +151,98 @@ Do not add:
 
 .stats-container{
 
+
+    width:100%;
+
+
     display:grid;
 
+
     grid-template-columns:
+
     repeat(auto-fit,minmax(240px,1fr));
+
 
     gap:24px;
 
-    margin-bottom:32px;
+
+    margin-bottom:30px;
+
 
 }
 
 
 
+
+
+
+
 /* ======================================================
-   05 - COMMON CARD
+   05 - CARD BASE
    ====================================================== */
 
 
 .card{
 
+
     background:var(--surface);
+
 
     border-radius:var(--radius-lg);
 
+
     padding:25px;
+
 
     box-shadow:var(--shadow);
 
+
     transition:
 
+
         transform var(--transition),
+
         box-shadow var(--transition);
 
+
     animation:
+
+
         fadeInUp .45s ease both;
 
+
 }
+
+
 
 
 
 .card:hover{
 
-    transform:translateY(-6px);
+
+    transform:translateY(-5px);
+
 
     box-shadow:var(--shadow-lg);
 
+
 }
+
+
 
 
 
 .card h3{
 
+
     color:var(--text);
 
+
 }
+
+
+
+
 
 
 
@@ -184,15 +253,24 @@ Do not add:
 
 .dashboard-card{
 
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
 
     min-height:145px;
 
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:20px;
+
+
 }
+
+
+
+
 
 
 
@@ -203,64 +281,97 @@ Do not add:
 
 .card-icon{
 
+
     width:72px;
+
 
     height:72px;
 
+
+    flex-shrink:0;
+
+
     display:flex;
 
-    justify-content:center;
 
     align-items:center;
 
+
+    justify-content:center;
+
+
     border-radius:50%;
 
-    font-size:34px;
 
     background:#f8fafc;
 
-    flex-shrink:0;
+
+    font-size:34px;
+
 
 }
 
 
 
+
+
+
+
 /* ======================================================
-   08 - CARD INFO
+   08 - CARD INFORMATION
    ====================================================== */
 
 
 .card-info{
 
+
     flex:1;
 
+
 }
+
+
 
 
 
 .card-info h3{
 
-    margin-bottom:10px;
+
+    margin-bottom:8px;
+
 
     font-size:16px;
 
+
     font-weight:600;
 
+
 }
+
+
 
 
 
 .card-info strong{
 
+
     display:block;
 
-    font-size:36px;
-
-    font-weight:700;
 
     color:var(--title);
 
+
+    font-size:36px;
+
+
+    font-weight:800;
+
+
 }
+
+
+
+
 
 
 
@@ -271,117 +382,173 @@ Do not add:
 
 .blue-card{
 
+
     border-inline-start:
+
     6px solid var(--primary);
 
+
 }
+
+
 
 
 
 .green-card{
 
+
     border-inline-start:
+
     6px solid var(--success);
 
+
 }
+
+
 
 
 
 .orange-card{
 
+
     border-inline-start:
+
     6px solid var(--warning);
 
+
 }
+
+
 
 
 
 .purple-card{
 
+
     border-inline-start:
+
     6px solid var(--purple);
 
+
 }
+
+
 
 
 
 .red-card{
 
+
     border-inline-start:
+
     6px solid var(--danger);
+
 
 }
 
+
+
+
+
+
+
 /* ======================================================
-   10 - WELCOME CARD
+   10 - WELCOME SECTION
    ====================================================== */
 
 
 .welcome-card{
 
+
     display:flex;
+
 
     align-items:center;
 
-    gap:24px;
 
-    margin-top:30px;
+    gap:25px;
+
+
+    margin-top:20px;
+
 
 }
+
+
 
 
 
 .welcome-icon{
 
+
     width:90px;
+
 
     height:90px;
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:50%;
-
-    background:#eff6ff;
-
-    color:var(--primary);
-
-    font-size:44px;
 
     flex-shrink:0;
 
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    background:#eff6ff;
+
+
+    color:var(--primary);
+
+
+    font-size:44px;
+
+
 }
+
+
 
 
 
 .welcome-content{
 
+
     flex:1;
 
+
 }
+
+
 
 
 
 .welcome-content h2{
 
+
     margin-bottom:10px;
 
-    color:var(--title);
 
 }
+
+
 
 
 
 .welcome-content p{
 
-    color:var(--text);
 
     line-height:1.8;
 
+
 }
+
 
 
 
@@ -389,113 +556,90 @@ Do not add:
 
 
 /* ======================================================
-   11 - RTL / LTR SUPPORT
+   11 - RTL SUPPORT
    ====================================================== */
-
-
-/*
-   Arabic Mode
-
-   Sidebar:
-   Right
-
-   Content:
-   Left
-
-*/
 
 
 html[dir="rtl"] .main-content{
 
+
     direction:rtl;
 
-    text-align:right;
-
-}
-
-
-
-html[dir="rtl"] .dashboard-header{
 
     text-align:right;
 
-}
-
-
-
-html[dir="rtl"] .dashboard-card{
-
-    flex-direction:row-reverse;
 
 }
 
 
 
+
+
+html[dir="rtl"] .dashboard-card,
 html[dir="rtl"] .welcome-card{
 
+
     flex-direction:row-reverse;
 
+
 }
+
+
 
 
 
 html[dir="rtl"] .card-info{
 
+
     text-align:right;
+
 
 }
 
 
 
-/*
-   French / English Mode
 
-   Sidebar:
-   Left
 
-   Content:
-   Right
 
-*/
+
+/* ======================================================
+   12 - LTR SUPPORT
+   ====================================================== */
 
 
 html[dir="ltr"] .main-content{
 
+
     direction:ltr;
 
-    text-align:left;
-
-}
-
-
-
-html[dir="ltr"] .dashboard-header{
 
     text-align:left;
 
-}
-
-
-
-html[dir="ltr"] .dashboard-card{
-
-    flex-direction:row;
 
 }
 
 
 
+
+
+html[dir="ltr"] .dashboard-card,
 html[dir="ltr"] .welcome-card{
 
+
     flex-direction:row;
 
+
 }
+
+
 
 
 
 html[dir="ltr"] .card-info{
 
+
     text-align:left;
+
 
 }
 
@@ -504,43 +648,64 @@ html[dir="ltr"] .card-info{
 
 
 
+
 /* ======================================================
-   12 - LAYOUT ORDER
+   13 - LAYOUT ORDER
    ====================================================== */
 
 
 html[dir="rtl"] .main-content{
 
+
     order:1;
 
+
 }
+
+
 
 
 
 html[dir="rtl"] .sidebar{
 
+
     order:2;
 
+
 }
+
+
 
 
 
 html[dir="ltr"] .sidebar{
 
+
     order:1;
 
+
 }
+
+
 
 
 
 html[dir="ltr"] .main-content{
 
+
     order:2;
+
 
 }
 
+
+
+
+
+
+
 /* ======================================================
-   13 - RESPONSIVE DESIGN
+   14 - RESPONSIVE
    ====================================================== */
 
 
@@ -549,13 +714,18 @@ html[dir="ltr"] .main-content{
 
     .stats-container{
 
+
         grid-template-columns:
-        repeat(2,minmax(240px,1fr));
+
+        repeat(2,minmax(220px,1fr));
+
 
     }
 
 
 }
+
+
 
 
 
@@ -565,33 +735,40 @@ html[dir="ltr"] .main-content{
 
     .main-content{
 
+
         padding:20px;
 
-    }
-
-
-
-    .dashboard-card{
-
-        flex-direction:column;
-
-        text-align:center;
 
     }
 
 
 
+    .dashboard-card,
     .welcome-card{
 
-        flex-direction:column;
+
+        flex-direction:column!important;
+
 
         text-align:center;
 
+
     }
 
+
+
+    .card-info{
+
+
+        text-align:center!important;
+
+
+    }
 
 
 }
+
+
 
 
 
@@ -601,38 +778,50 @@ html[dir="ltr"] .main-content{
 
     .dashboard-header h1{
 
+
         font-size:30px;
 
+
     }
+
 
 
 
     .card{
 
+
         padding:20px;
 
+
     }
+
 
 
 
     .card-icon{
 
+
         width:60px;
+
 
         height:60px;
 
+
         font-size:28px;
 
+
     }
+
 
 
 
     .card-info strong{
 
+
         font-size:30px;
 
-    }
 
+    }
 
 
 }
@@ -642,6 +831,8 @@ html[dir="ltr"] .main-content{
 
 
 
+
 /* ======================================================
    END dashboard.css
-   ====================================================== */
+   ======================================================
+*/

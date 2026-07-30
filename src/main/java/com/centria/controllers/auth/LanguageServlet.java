@@ -2,29 +2,51 @@
  * File        : LanguageServlet.java
  * Project     : CENTRIA
  *
+ * Module      : Authentication / Language
+ *
  * Description :
- * إدارة لغة النظام.
+ * Manage system language selection.
+ *
+ * Responsibilities:
+ * - Receive selected language
+ * - Validate language using SupportedLanguage
+ * - Store language in session
+ * - Redirect user back
  */
+
 
 package com.centria.controllers.auth;
 
+
+
 import java.io.IOException;
+
+import com.centria.language.SupportedLanguage;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
 
 
 @WebServlet("/LanguageServlet")
 public class LanguageServlet extends HttpServlet {
 
 
-    // ====================
-    // تغيير لغة النظام
-    // ====================
+
+
+    /*
+     ======================================================
+     01 - CHANGE SYSTEM LANGUAGE
+     ======================================================
+     */
+
 
     @Override
     protected void doGet(
@@ -34,33 +56,69 @@ public class LanguageServlet extends HttpServlet {
     throws ServletException, IOException {
 
 
+
+
+        /*
+         ==================================================
+         02 - GET USER SESSION
+         ==================================================
+         */
+
+
         HttpSession session =
                 request.getSession();
+
+
+
+
+
+
+
+        /*
+         ==================================================
+         03 - RECEIVE LANGUAGE CODE
+         ==================================================
+         */
 
 
         String lang =
                 request.getParameter("lang");
 
 
-        if(lang == null || lang.isEmpty()){
-            lang = "ar";
-        }
 
 
-        // ====================
-        // التحقق من اللغة
-        // ====================
-
-        if(!lang.equals("ar")
-                && !lang.equals("fr")
-                && !lang.equals("en")){
-            lang = "ar";
-        }
 
 
-        // ====================
-        // حفظ اللغة
-        // ====================
+
+
+        /*
+         ==================================================
+         04 - VALIDATE LANGUAGE
+         
+         SupportedLanguage handles:
+         - null value
+         - empty value
+         - unsupported language
+         ==================================================
+         */
+
+
+        lang =
+        SupportedLanguage.normalize(lang);
+
+
+
+
+
+
+
+
+        /*
+         ==================================================
+         05 - SAVE LANGUAGE IN SESSION
+         ==================================================
+         */
+
 
         session.setAttribute(
                 "lang",
@@ -68,22 +126,50 @@ public class LanguageServlet extends HttpServlet {
         );
 
 
-        // ====================
-        // العودة للصفحة السابقة
-        // ====================
+
+
+
+
+
+
+        /*
+         ==================================================
+         06 - RETURN TO PREVIOUS PAGE
+         ==================================================
+         */
+
 
         String referer =
                 request.getHeader("Referer");
 
 
+
+
         if(referer != null){
+
+
             response.sendRedirect(referer);
+
+
         }
         else{
+
+
             response.sendRedirect(
+
                     request.getContextPath()
                     + "/admin/dashboard.jsp"
+
             );
+
+
         }
+
+
+
+
     }
+
+
+
 }

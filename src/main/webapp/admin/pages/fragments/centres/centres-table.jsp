@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="com.centria.utils.LanguageManager"%>
+<%@page import="com.centria.language.LanguageManager"%>
 <%@page import="com.centria.models.Centre"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
