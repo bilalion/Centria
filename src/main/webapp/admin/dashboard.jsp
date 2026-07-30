@@ -27,6 +27,7 @@ String direction =
 
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
 <%= LanguageManager.get("dashboard.title", session) %>
@@ -108,6 +109,8 @@ src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
 
 
 
+<div class="app-layout">
+    
 <!-- =================================================
      SIDEBAR COMPONENT
      ================================================= -->
@@ -231,6 +234,7 @@ if(section == null
 
 
 
+</div>
 </div>
 
 

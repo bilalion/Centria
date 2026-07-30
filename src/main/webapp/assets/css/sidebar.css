@@ -651,62 +651,68 @@ html[dir="ltr"] .menu-text{
 }
 
 /* ======================================================
-   14 - MOBILE MODE
-
-   Sidebar transforms into
-   compact navigation panel
-
+   14 - MOBILE APP BOTTOM NAVIGATION
    ====================================================== */
 
-
 @media(max-width:700px){
+
+    .app-layout{
+
+        display:flex;
+
+        flex-direction:column;
+
+        min-height:100vh;
+
+    }
 
 
     .sidebar{
 
         position:fixed;
 
-        top:0;
+        left:0;
+
+        right:0;
 
         bottom:0;
+
+        top:auto;
+
+
+        width:100%;
+
+        min-width:100%;
+
+
+        height:72px;
+
+
+        padding:8px 12px;
+
+
+        display:flex;
+
+        flex-direction:row;
+
+        align-items:center;
+
+
+        border-radius:22px 22px 0 0;
+
 
         z-index:1000;
 
 
-        width:75px;
-
-        min-width:75px;
-
-
-        padding:20px 10px;
-
-
-        overflow-y:auto;
-
+        overflow:hidden;
 
     }
 
 
 
-
-
-    .logo{
-
-        width:52px;
-
-        height:52px;
-
-    }
-
-
-
-
-
-    .brand-name,
-    .brand-subtitle,
-    .welcome-text,
-    .menu-text{
-
+    .brand-section,
+    .sidebar hr,
+    .welcome-text{
 
         display:none;
 
@@ -714,95 +720,90 @@ html[dir="ltr"] .menu-text{
 
 
 
-
-
     .menu-section{
 
-        gap:12px;
+        width:100%;
+
+        height:100%;
+
+        display:flex;
+
+        flex-direction:row;
+
+        align-items:center;
+
+        justify-content:space-around;
+
+        gap:6px;
 
     }
-
-
 
 
 
     .menu-section a{
 
+        width:50px;
 
-        min-height:48px;
+        height:50px;
+
+        min-height:50px;
+
+        padding:0;
 
 
-        padding:10px;
-
+        display:flex;
 
         justify-content:center;
 
-
         border-radius:14px;
-
 
     }
 
 
+
+    .menu-text{
+
+        display:none;
+
+    }
 
 
 
     .menu-icon{
 
-
         width:36px;
-
 
         height:36px;
 
-
-        font-size:19px;
-
+        font-size:18px;
 
     }
-
-
 
 
 
     .logout-btn{
 
+        width:50px;
 
-        width:45px;
+        height:50px;
 
-
-        height:45px;
-
-
-        margin-left:auto;
-
-        margin-right:auto;
-
+        margin:0;
 
         padding:0;
 
-
-        border-radius:12px;
-
+        border-radius:14px;
 
     }
 
 
 
+    .main-content{
 
-
-    .logout-btn .menu-icon{
-
-
-        margin:0;
+        padding-bottom:90px;
 
     }
 
 }
-
-
-
-
 
 
 
@@ -983,7 +984,6 @@ html[dir="rtl"] .sidebar-toggle{
     min-width var(--transition);
 
 }
-
 
 
 

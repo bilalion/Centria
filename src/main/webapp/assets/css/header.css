@@ -7,12 +7,10 @@ Module      : Header Component
 Professional SaaS Header
 
 Optimized:
-- Flexible desktop layout
-- No unwanted wrapping
-- Username always visible
-- Responsive spacing
+- Stable flex layout
+- Username visible
+- Mobile friendly
 - RTL / LTR support
-
 ==========================================================
 */
 
@@ -26,8 +24,6 @@ Optimized:
     width:100%;
 
     min-height:82px;
-
-    height:auto;
 
     display:flex;
 
@@ -62,13 +58,14 @@ Optimized:
 }
 
 
+
 /* ======================================================
    02 - HEADER TITLE
    ====================================================== */
 
 .header-title{
 
-    flex:1 1 auto;
+    flex:1;
 
     min-width:0;
 
@@ -84,8 +81,6 @@ Optimized:
 
 
 
-
-
 .header-title h2{
 
     color:var(--title);
@@ -96,15 +91,13 @@ Optimized:
 
     line-height:1.2;
 
+    white-space:nowrap;
+
     overflow:hidden;
 
     text-overflow:ellipsis;
 
-    white-space:nowrap;
-
 }
-
-
 
 
 
@@ -116,15 +109,13 @@ Optimized:
 
     line-height:1.6;
 
+    white-space:nowrap;
+
     overflow:hidden;
 
     text-overflow:ellipsis;
 
-    white-space:nowrap;
-
 }
-
-
 
 
 
@@ -142,9 +133,9 @@ Optimized:
 
     gap:12px;
 
-    flex:0 1 auto;
+    flex:0 0 auto;
 
-    min-width:0;
+    min-width:max-content;
 
     flex-wrap:nowrap;
 
@@ -152,15 +143,11 @@ Optimized:
 
 
 
-
-
 .header-actions>*{
 
-    flex-shrink:1;
+    flex-shrink:0;
 
 }
-
-
 
 
 
@@ -176,13 +163,13 @@ Optimized:
 
     justify-content:center;
 
-    flex:0 1 auto;
-
-    min-width:0;
-
     gap:10px;
 
     padding:8px 14px;
+
+    flex:0 1 auto;
+
+    min-width:0;
 
     background:#f8fafc;
 
@@ -192,7 +179,7 @@ Optimized:
 
     white-space:nowrap;
 
-    overflow:hidden;
+    overflow:visible;
 
     transition:
 
@@ -203,8 +190,6 @@ Optimized:
     transform var(--transition);
 
 }
-
-
 
 
 
@@ -252,7 +237,9 @@ Optimized:
 
 
 
-
+/* ======================================================
+   06 - USER NAME
+   ====================================================== */
 
 .user-name{
 
@@ -268,18 +255,16 @@ Optimized:
 
     text-overflow:ellipsis;
 
-    max-width:160px;
+    max-width:220px;
 
-    flex-shrink:1;
+    min-width:0;
 
 }
 
 
 
-
-
 /* ======================================================
-   06 - HEADER TOOLS
+   07 - HEADER TOOLS
    ====================================================== */
 
 .header-tools{
@@ -290,11 +275,9 @@ Optimized:
 
     gap:10px;
 
-    flex-shrink:1;
+    flex-shrink:0;
 
 }
-
-
 
 
 
@@ -332,8 +315,6 @@ Optimized:
 
 
 
-
-
 .header-tool:hover{
 
     background:#eef4ff;
@@ -346,10 +327,8 @@ Optimized:
 
 
 
-
-
 /* ======================================================
-   07 - RTL SUPPORT
+   08 - RTL SUPPORT
    ====================================================== */
 
 html[dir="rtl"] .header{
@@ -357,8 +336,6 @@ html[dir="rtl"] .header{
     direction:rtl;
 
 }
-
-
 
 
 
@@ -370,15 +347,11 @@ html[dir="rtl"] .header-actions{
 
 
 
-
-
 html[dir="rtl"] .header-user{
 
     flex-direction:row-reverse;
 
 }
-
-
 
 
 
@@ -390,10 +363,8 @@ html[dir="rtl"] .header-title{
 
 
 
-
-
 /* ======================================================
-   08 - LTR SUPPORT
+   09 - LTR SUPPORT
    ====================================================== */
 
 html[dir="ltr"] .header{
@@ -401,8 +372,6 @@ html[dir="ltr"] .header{
     direction:ltr;
 
 }
-
-
 
 
 
@@ -414,15 +383,11 @@ html[dir="ltr"] .header-actions{
 
 
 
-
-
 html[dir="ltr"] .header-user{
 
     flex-direction:row;
 
 }
-
-
 
 
 
@@ -434,10 +399,8 @@ html[dir="ltr"] .header-title{
 
 
 
-
-
 /* ======================================================
-   09 - TABLET MODE
+   10 - TABLET MODE
    ====================================================== */
 
 @media(max-width:1100px){
@@ -470,17 +433,13 @@ html[dir="ltr"] .header-title{
 
     .header-actions{
 
-        gap:6px;
-
-        min-width:0;
+        gap:8px;
 
     }
 
 
 
     .header-user{
-
-        gap:8px;
 
         padding:7px 10px;
 
@@ -490,7 +449,7 @@ html[dir="ltr"] .header-title{
 
     .user-name{
 
-        max-width:120px;
+        max-width:160px;
 
     }
 
@@ -507,10 +466,10 @@ html[dir="ltr"] .header-title{
     }
 
 }
-/* ======================================================
-   10 - MOBILE MODE
-   ====================================================== */
 
+/* ======================================================
+   11 - MOBILE MODE
+   ====================================================== */
 
 @media(max-width:700px){
 
@@ -566,7 +525,7 @@ html[dir="ltr"] .header-title{
 
         align-items:center;
 
-        flex-wrap:nowrap;
+        gap:8px;
 
         min-height:48px;
 
@@ -576,11 +535,9 @@ html[dir="ltr"] .header-title{
 
     .header-user{
 
-        justify-content:center;
-
         padding:8px 12px;
 
-        min-height:42px;
+        max-width:100%;
 
     }
 
@@ -588,17 +545,18 @@ html[dir="ltr"] .header-title{
 
     .user-name{
 
-        display:block;
+        max-width:180px;
 
-        max-width:140px;
+        font-size:14px;
 
     }
 
 }
 
 
+
 /* ======================================================
-   11 - SMALL MOBILE
+   12 - SMALL MOBILE
    ====================================================== */
 
 @media(max-width:480px){
@@ -608,8 +566,6 @@ html[dir="ltr"] .header-title{
         padding:15px 12px;
 
         gap:16px;
-
-        min-height:auto;
 
     }
 
@@ -635,8 +591,6 @@ html[dir="ltr"] .header-title{
 
         gap:6px;
 
-        min-height:46px;
-
     }
 
 
@@ -644,8 +598,6 @@ html[dir="ltr"] .header-title{
     .header-user{
 
         padding:7px 10px;
-
-        min-height:40px;
 
     }
 
@@ -665,7 +617,7 @@ html[dir="ltr"] .header-title{
 
     .user-name{
 
-        max-width:100px;
+        max-width:170px;
 
         font-size:14px;
 
@@ -683,11 +635,21 @@ html[dir="ltr"] .header-title{
 
 }
 
+
+
 /* ======================================================
-   12 - VERY SMALL DEVICES
+   13 - VERY SMALL DEVICES
    ====================================================== */
 
 @media(max-width:360px){
+
+    .header{
+
+        padding:12px 10px;
+
+    }
+
+
 
     .header-actions{
 
@@ -707,7 +669,19 @@ html[dir="ltr"] .header-title{
 
     .user-name{
 
-        max-width:80px;
+        max-width:140px;
+
+        font-size:13px;
+
+    }
+
+
+
+    .user-icon{
+
+        width:34px;
+
+        height:34px;
 
     }
 
@@ -715,18 +689,13 @@ html[dir="ltr"] .header-title{
 
 
 
-
-
 /* ======================================================
-   13 - SMOOTH TRANSITIONS
+   14 - FINAL TRANSITIONS
    ====================================================== */
 
 .header,
-
 .header-user,
-
 .user-icon,
-
 .header-tool{
 
     transition:
@@ -741,20 +710,16 @@ html[dir="ltr"] .header-title{
 
 
 
-
-
 /* ======================================================
    END header.css
 
-   Final optimization:
+   Final goals:
 
-   ✔ Username always visible
-   ✔ No forced hiding on mobile
-   ✔ Better flex calculations
-   ✔ Elements move closer naturally
-   ✔ Desktop SaaS layout
-   ✔ Tablet compression
-   ✔ Mobile adaptation
-   ✔ RTL / LTR ready
+   ✔ Username visible on mobile
+   ✔ No unwanted line wrapping
+   ✔ Icons fixed size
+   ✔ Better flex calculation
+   ✔ RTL/LTR compatible
+   ✔ Stable SaaS header layout
 
 ======================================================*/
