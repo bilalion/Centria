@@ -7,6 +7,7 @@ Author      : Chentouf Bilal
 
 Description :
 Global CSS foundation.
+
 Contains:
 - CSS Variables
 - Reset
@@ -22,8 +23,9 @@ Do not add page/module styles here.
 
 
 /* ======================================================
-   CSS VARIABLES
+   01 - CSS VARIABLES
    ====================================================== */
+
 
 :root{
 
@@ -48,38 +50,58 @@ Do not add page/module styles here.
     --sidebar-start:#1e293b;
     --sidebar-end:#0f172a;
 
+
     --radius-sm:10px;
     --radius:14px;
     --radius-lg:18px;
     --radius-xl:22px;
 
+
     --shadow-sm:
     0 4px 10px rgba(15,23,42,.05);
+
 
     --shadow:
     0 10px 24px rgba(15,23,42,.08);
 
+
     --shadow-lg:
     0 18px 40px rgba(15,23,42,.12);
+
 
     --transition:.30s ease;
 
 }
 
 
+
+
+
+
 /* ======================================================
-   GLOBAL RESET
+   02 - GLOBAL RESET
    ====================================================== */
+
 
 *,
 *::before,
 *::after{
 
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
 
+
+    scrollbar-width:thin;
+
+    scrollbar-color:
+    #94a3b8
+    #e2e8f0;
+
 }
+
 
 
 html{
@@ -89,13 +111,20 @@ html{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   BODY BASE
+   03 - BODY BASE
    ====================================================== */
+
 
 body{
 
     min-height:100vh;
+
 
     font-family:
     "Segoe UI",
@@ -104,27 +133,39 @@ body{
     Verdana,
     sans-serif;
 
+
     background:var(--background);
+
     color:var(--text);
+
 
     line-height:1.6;
 
+
     display:flex;
+
 
     overflow:hidden;
 
 }
 
 
+
+
+
+
+
 /* ======================================================
-   PAGE DIRECTION
+   04 - PAGE DIRECTION
    ====================================================== */
+
 
 html[dir="rtl"]{
 
     direction:rtl;
 
 }
+
 
 
 html[dir="ltr"]{
@@ -134,16 +175,20 @@ html[dir="ltr"]{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   MAIN PAGE DIRECTION CONTROL
+   05 - LAYOUT DIRECTION
 
-   Arabic:
+   RTL:
    Sidebar right
-   Content left
 
-   French / English:
+   LTR:
    Sidebar left
-   Content right
+
    ====================================================== */
 
 
@@ -154,15 +199,23 @@ html[dir="rtl"] body{
 }
 
 
+
 html[dir="ltr"] body{
 
     flex-direction:row;
 
 }
 
+
+
+
+
+
+
 /* ======================================================
-   TYPOGRAPHY
+   06 - TYPOGRAPHY
    ====================================================== */
+
 
 h1,
 h2,
@@ -178,6 +231,7 @@ h6{
 }
 
 
+
 p{
 
     color:var(--text);
@@ -185,9 +239,15 @@ p{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   LINKS
+   07 - LINKS
    ====================================================== */
+
 
 a{
 
@@ -198,9 +258,15 @@ a{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   BUTTONS
+   08 - BUTTONS
    ====================================================== */
+
 
 button{
 
@@ -213,9 +279,15 @@ button{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   FORMS
+   09 - FORMS
    ====================================================== */
+
 
 input,
 select,
@@ -228,9 +300,15 @@ textarea{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   IMAGES
+   10 - IMAGES
    ====================================================== */
+
 
 img{
 
@@ -241,9 +319,15 @@ img{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   TABLE
+   11 - TABLE
    ====================================================== */
+
 
 table{
 
@@ -254,9 +338,15 @@ table{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   UTILITIES
+   12 - UTILITIES
    ====================================================== */
+
 
 .text-center{
 
@@ -265,22 +355,32 @@ table{
 }
 
 
+
 .hidden{
 
     display:none !important;
 
 }
 
+
+
+
+
+
+
 /* ======================================================
-   SCROLLBAR
+   13 - SCROLLBAR
    ====================================================== */
+
 
 ::-webkit-scrollbar{
 
     width:10px;
+
     height:10px;
 
 }
+
 
 
 ::-webkit-scrollbar-track{
@@ -288,6 +388,7 @@ table{
     background:#e2e8f0;
 
 }
+
 
 
 ::-webkit-scrollbar-thumb{
@@ -299,6 +400,7 @@ table{
 }
 
 
+
 ::-webkit-scrollbar-thumb:hover{
 
     background:#64748b;
@@ -306,18 +408,15 @@ table{
 }
 
 
-*{
 
-    scrollbar-width:thin;
 
-    scrollbar-color:#94a3b8 #e2e8f0;
 
-}
 
 
 /* ======================================================
-   ACCESSIBILITY
+   14 - ACCESSIBILITY
    ====================================================== */
+
 
 a:focus-visible,
 button:focus-visible,
@@ -327,16 +426,27 @@ select:focus-visible{
     outline:
     3px solid rgba(37,99,235,.30);
 
+
     outline-offset:3px;
 
 }
 
 
+
+
+
+
+
 /* ======================================================
-   CONTAINER
+   15 - GLOBAL CONTAINER
+
+   Do not use for pages.
+   Page containers belong to modules.
+
    ====================================================== */
 
-.container{
+
+.global-container{
 
     width:100%;
 
@@ -349,30 +459,46 @@ select:focus-visible{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   ANIMATION BASE
+   16 - BASE ANIMATION
    ====================================================== */
 
+
 @keyframes fadeInUp{
+
 
     from{
 
         opacity:0;
 
-        transform:translateY(18px);
+        transform:
+        translateY(18px);
 
     }
+
 
 
     to{
 
         opacity:1;
 
-        transform:translateY(0);
+        transform:
+        translateY(0);
 
     }
 
+
 }
+
+
+
+
+
 
 
 /* ======================================================

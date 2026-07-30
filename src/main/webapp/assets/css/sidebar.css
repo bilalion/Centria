@@ -8,14 +8,26 @@ Description :
 Sidebar layout, branding, navigation menu
 and logout button.
 
-RTL / LTR Ready.
+Contains:
+- Sidebar container
+- Brand section
+- Navigation menu
+- Logout action
+- RTL/LTR support
+- Responsive layout
+
+Do not add:
+- Global styles
+- Header styles
+- Page styles
 ==========================================================
 */
 
 
 /* ======================================================
-   SIDEBAR CONTAINER
+   01 - SIDEBAR CONTAINER
    ====================================================== */
+
 
 .sidebar{
 
@@ -39,6 +51,7 @@ RTL / LTR Ready.
 
     color:var(--white);
 
+
     background:
     linear-gradient(
         180deg,
@@ -46,34 +59,21 @@ RTL / LTR Ready.
         var(--sidebar-end)
     );
 
+
     box-shadow:
+
     0 0 20px rgba(15,23,42,.10);
 
 }
 
 
-/* ======================================================
-   IMPORTANT :
-   SIDEBAR POSITION CONTROL
-   ====================================================== */
 
-html[dir="rtl"] body{
-
-    flex-direction:row-reverse;
-
-}
-
-
-html[dir="ltr"] body{
-
-    flex-direction:row;
-
-}
 
 
 /* ======================================================
-   BRAND SECTION
+   02 - BRAND SECTION
    ====================================================== */
+
 
 .brand-section{
 
@@ -92,9 +92,14 @@ html[dir="ltr"] body{
 }
 
 
+
+
+
+
 /* ======================================================
-   LOGO
+   03 - LOGO
    ====================================================== */
+
 
 .logo{
 
@@ -106,19 +111,22 @@ html[dir="ltr"] body{
 
     border-radius:50%;
 
-    background:#ffffff;
+    background:white;
 
     padding:8px;
 
     margin-bottom:14px;
 
+
     box-shadow:
 
     0 8px 20px rgba(0,0,0,.30);
 
+
     transition:.3s ease;
 
 }
+
 
 
 .logo:hover{
@@ -126,6 +134,8 @@ html[dir="ltr"] body{
     transform:scale(1.05);
 
 }
+
+
 
 
 .brand-name{
@@ -141,6 +151,7 @@ html[dir="ltr"] body{
 }
 
 
+
 .brand-subtitle{
 
     display:block;
@@ -154,11 +165,10 @@ html[dir="ltr"] body{
     line-height:1.6;
 
 }
-
-
 /* ======================================================
-   DIVIDER
+   04 - DIVIDER
    ====================================================== */
+
 
 .sidebar hr{
 
@@ -175,9 +185,13 @@ html[dir="ltr"] body{
 }
 
 
+
+
+
 /* ======================================================
-   WELCOME
+   05 - WELCOME TEXT
    ====================================================== */
+
 
 .welcome-text{
 
@@ -190,9 +204,15 @@ html[dir="ltr"] body{
     line-height:1.7;
 
 }
+
+
+
+
+
 /* ======================================================
-   MENU
+   06 - MENU SECTION
    ====================================================== */
+
 
 .menu-section{
 
@@ -210,6 +230,20 @@ html[dir="ltr"] body{
 
 
 
+
+
+
+.menu-section::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+
+
+
+
+
 .menu-section a{
 
     display:flex;
@@ -224,17 +258,25 @@ html[dir="ltr"] body{
 
     border-radius:var(--radius);
 
-    text-decoration:none;
 
     color:var(--white);
 
-    background:rgba(255,255,255,.05);
+    background:
+
+    rgba(255,255,255,.05);
+
+
+    text-decoration:none;
+
 
     transition:
 
-    background var(--transition);
+    background var(--transition),
+    transform var(--transition);
 
 }
+
+
 
 
 
@@ -242,27 +284,51 @@ html[dir="ltr"] body{
 
     background:var(--primary);
 
+    transform:translateX(3px);
+
 }
 
 
 
+
+
+
+
 /* ======================================================
-   ACTIVE MENU
+   07 - ACTIVE MENU ITEM
    ====================================================== */
+
 
 .menu-section a.active{
 
-    background:#1e40af;
+    background:
+
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
 
     color:white;
+
+
+    box-shadow:
+
+    0 8px 18px rgba(37,99,235,.30);
 
 }
 
 
 
+
+
+
+
 /* ======================================================
-   MENU ICON
+   08 - MENU ICON
    ====================================================== */
+
 
 .menu-icon{
 
@@ -278,6 +344,8 @@ html[dir="ltr"] body{
 
 
 
+
+
 .menu-text{
 
     flex:1;
@@ -286,15 +354,22 @@ html[dir="ltr"] body{
 
 
 
+
+
+
+
+
 /* ======================================================
-   RTL MENU
+   09 - RTL MENU SUPPORT
    ====================================================== */
+
 
 html[dir="rtl"] .menu-section{
 
     direction:rtl;
 
 }
+
 
 
 
@@ -306,11 +381,15 @@ html[dir="rtl"] .menu-section a{
 
 
 
+
+
 html[dir="rtl"] .menu-icon{
 
     order:2;
 
 }
+
+
 
 
 
@@ -324,15 +403,22 @@ html[dir="rtl"] .menu-text{
 
 
 
+
+
+
+
+
 /* ======================================================
-   LTR MENU
+   10 - LTR MENU SUPPORT
    ====================================================== */
+
 
 html[dir="ltr"] .menu-section{
 
     direction:ltr;
 
 }
+
 
 
 
@@ -344,11 +430,15 @@ html[dir="ltr"] .menu-section a{
 
 
 
+
+
 html[dir="ltr"] .menu-icon{
 
     order:1;
 
 }
+
+
 
 
 
@@ -359,10 +449,10 @@ html[dir="ltr"] .menu-text{
     text-align:left;
 
 }
-
 /* ======================================================
-   LOGOUT BUTTON
+   11 - LOGOUT BUTTON
    ====================================================== */
+
 
 .logout-btn{
 
@@ -382,18 +472,22 @@ html[dir="ltr"] .menu-text{
 
     border-radius:var(--radius);
 
+
+    color:var(--white);
+
     text-decoration:none;
 
     font-weight:700;
 
-    color:var(--white);
 
     background:
+
     linear-gradient(
         135deg,
         #ef4444,
         #dc2626
     );
+
 
     transition:
 
@@ -404,15 +498,20 @@ html[dir="ltr"] .menu-text{
 
 
 
+
+
 .logout-btn:hover{
 
     transform:translateY(-3px);
+
 
     box-shadow:
 
     0 10px 22px rgba(239,68,68,.35);
 
 }
+
+
 
 
 
@@ -426,6 +525,8 @@ html[dir="ltr"] .menu-text{
 
 
 
+
+
 .logout-btn .menu-text{
 
     flex:none;
@@ -436,15 +537,22 @@ html[dir="ltr"] .menu-text{
 
 
 
+
+
+
+
 /* ======================================================
-   LOGOUT RTL
+   12 - LOGOUT RTL
    ====================================================== */
+
 
 html[dir="rtl"] .logout-btn{
 
     flex-direction:row;
 
 }
+
+
 
 
 
@@ -456,6 +564,8 @@ html[dir="rtl"] .logout-btn .menu-icon{
 
 
 
+
+
 html[dir="rtl"] .logout-btn .menu-text{
 
     order:1;
@@ -464,15 +574,22 @@ html[dir="rtl"] .logout-btn .menu-text{
 
 
 
+
+
+
+
 /* ======================================================
-   LOGOUT LTR
+   13 - LOGOUT LTR
    ====================================================== */
+
 
 html[dir="ltr"] .logout-btn{
 
     flex-direction:row;
 
 }
+
+
 
 
 
@@ -484,6 +601,8 @@ html[dir="ltr"] .logout-btn .menu-icon{
 
 
 
+
+
 html[dir="ltr"] .logout-btn .menu-text{
 
     order:2;
@@ -492,15 +611,23 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 
+
+
+
+
+
 /* ======================================================
-   SIDEBAR SCROLLBAR
+   14 - SIDEBAR SCROLLBAR
    ====================================================== */
+
 
 .sidebar::-webkit-scrollbar{
 
     width:8px;
 
 }
+
+
 
 
 
@@ -512,9 +639,14 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 
+
+
 .sidebar::-webkit-scrollbar-thumb{
 
-    background:rgba(255,255,255,.25);
+    background:
+
+    rgba(255,255,255,.25);
+
 
     border-radius:20px;
 
@@ -522,19 +654,30 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 
+
+
 .sidebar::-webkit-scrollbar-thumb:hover{
 
-    background:rgba(255,255,255,.40);
+    background:
+
+    rgba(255,255,255,.40);
 
 }
 
 
 
+
+
+
+
+
 /* ======================================================
-   RESPONSIVE
+   15 - RESPONSIVE
    ====================================================== */
 
+
 @media(max-width:900px){
+
 
     .sidebar{
 
@@ -549,23 +692,35 @@ html[dir="ltr"] .logout-btn .menu-text{
     }
 
 
+
+
+
     .menu-section{
 
         overflow:visible;
 
     }
 
+
 }
 
 
 
+
+
+
+
+
 @media(max-width:600px){
+
 
     .brand-name{
 
         font-size:26px;
 
     }
+
+
 
 
 
@@ -579,13 +734,21 @@ html[dir="ltr"] .logout-btn .menu-text{
 
 
 
+
+
     .menu-section a{
 
         padding:12px 14px;
 
     }
 
+
 }
+
+
+
+
+
 
 
 

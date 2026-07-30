@@ -1,59 +1,92 @@
 /*
- * Centria
- * Dashboard
- */
+==========================================================
+ CENTRIA
+ Dashboard JavaScript
+ Clean Professional Version
+==========================================================
+*/
 
 
-/*
- * Load Dashboard Content
- */
-
-function loadContent(page, element) {
+/* ======================================================
+   01 - LOAD DASHBOARD CONTENT
+   ====================================================== */
 
 
-    /*
-     * Active Menu Handling
-     */
+function loadContent(
+    page,
+    element
+){
+
+
+
+    /* ==================================================
+       ACTIVE MENU HANDLING
+       ================================================== */
+
 
     if(element){
 
 
+
         document
-        .querySelectorAll(".menu-link")
-        .forEach(function(link){
-
-            link.classList.remove("active");
-
-        });
-
+        .querySelectorAll(
+            ".menu-link"
+        )
+        .forEach(
+            function(link){
 
 
-        element.classList.add("active");
+                link.classList.remove(
+                    "active"
+                );
+
+
+            }
+        );
+
+
+
+        element.classList.add(
+            "active"
+        );
 
 
     }
 
 
 
+
+
+
+
+    /* ==================================================
+       BUILD REQUEST URL
+       ================================================== */
 
 
     let url;
 
 
 
-
     /*
-     * Servlet loading
-     * Example:
-     * CentreServlet?action=list
-     */
+       Servlet pages
+       Example:
+       CentreServlet?action=list
+    */
 
-    if(page.startsWith("CentreServlet")) {
+
+    if(
+        page.startsWith(
+            "CentreServlet"
+        )
+    ){
 
 
         url =
-        window.contextPath +
-        "/" +
+        window.contextPath
+        +
+        "/"
+        +
         page;
 
 
@@ -62,17 +95,19 @@ function loadContent(page, element) {
 
 
 
-
     /*
-     * Normal JSP pages
-     */
+       Normal JSP pages
+    */
+
 
     else {
 
 
         url =
-        window.contextPath +
-        "/admin/pages/" +
+        window.contextPath
+        +
+        "/admin/pages/"
+        +
         page;
 
 
@@ -83,103 +118,139 @@ function loadContent(page, element) {
 
 
 
-    console.log("Loading:", url);
 
+
+    /* ==================================================
+       AJAX LOAD CONTENT
+       ================================================== */
 
 
     fetch(url)
 
 
 
-    .then(response => {
+    .then(
+        response => {
 
 
 
-        if(!response.ok) {
+            if(!response.ok){
 
 
-            throw new Error(
-                "HTTP ERROR : " + response.status
+                throw new Error(
+                    "HTTP ERROR : "
+                    +
+                    response.status
+                );
+
+
+            }
+
+
+
+            return response.text();
+
+
+
+        }
+    )
+
+
+
+
+
+    .then(
+        data => {
+
+
+
+            let container =
+            document.getElementById(
+                "content-area"
             );
 
 
-        }
+
+            if(container){
 
 
 
-        return response.text();
+                container.innerHTML =
+                data;
 
 
 
-    })
-
-
-
-
-
-
-    .then(data => {
-
-
-
-        document.getElementById(
-            "content-area"
-        ).innerHTML = data;
+            }
 
 
 
 
 
-        /*
-         * Initialize Centres Page
-         */
-
-        if(
-            page.includes("CentreServlet")
-            &&
-            typeof initCentresPage === "function"
-        ){
 
 
-            initCentresPage();
+            /*
+             * CENTRES MODULE INITIALIZATION
+             */
+
+
+            if(
+                page.includes(
+                    "CentreServlet"
+                )
+                &&
+                typeof initCentresPage === "function"
+            ){
+
+
+                initCentresPage();
+
+
+            }
+
 
 
         }
-
-
-
-    })
-
+    )
 
 
 
 
 
 
-    .catch(error => {
+    .catch(
+        error => {
 
 
 
-        console.error(
-            "Loading error:",
-            error
-        );
+            let container =
+            document.getElementById(
+                "content-area"
+            );
 
 
 
-        document.getElementById(
-            "content-area"
-        ).innerHTML =
-
-        `
-        <div class="card">
-            Error loading content
-        </div>
-        `;
+            if(container){
 
 
 
-    });
+                container.innerHTML =
+
+
+                `
+                <div class="card">
+
+                    Error loading content
+
+                </div>
+                `;
+
+
+            }
+
+
+
+        }
+    );
 
 
 

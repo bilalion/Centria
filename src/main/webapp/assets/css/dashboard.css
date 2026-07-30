@@ -9,11 +9,11 @@ Dashboard page styles only.
 
 Contains:
 - Main content layout
-- Dashboard title
+- Dashboard header
 - Statistics cards
 - Welcome section
 - RTL/LTR support
-- Responsive dashboard layout
+- Responsive layout
 
 Do not add:
 - Global styles
@@ -24,8 +24,9 @@ Do not add:
 
 
 /* ======================================================
-   MAIN CONTENT LAYOUT
+   01 - MAIN CONTENT LAYOUT
    ====================================================== */
+
 
 .main-content{
 
@@ -48,9 +49,11 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   CONTENT AREA
+   02 - CONTENT AREA
    ====================================================== */
+
 
 #content-area{
 
@@ -59,6 +62,7 @@ Do not add:
     flex:1;
 
 }
+
 
 
 .content-area{
@@ -70,15 +74,18 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   DASHBOARD HEADER
+   03 - DASHBOARD HEADER
    ====================================================== */
+
 
 .dashboard-header{
 
     margin-bottom:32px;
 
 }
+
 
 
 .dashboard-header h1{
@@ -94,6 +101,7 @@ Do not add:
 }
 
 
+
 .dashboard-header p{
 
     color:var(--text);
@@ -103,9 +111,11 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   STATISTICS GRID
+   04 - STATISTICS GRID
    ====================================================== */
+
 
 .stats-container{
 
@@ -121,9 +131,11 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   COMMON CARD
+   05 - COMMON CARD
    ====================================================== */
+
 
 .card{
 
@@ -140,9 +152,11 @@ Do not add:
         transform var(--transition),
         box-shadow var(--transition);
 
-    animation:fadeInUp .45s ease both;
+    animation:
+        fadeInUp .45s ease both;
 
 }
+
 
 
 .card:hover{
@@ -154,6 +168,7 @@ Do not add:
 }
 
 
+
 .card h3{
 
     color:var(--text);
@@ -161,9 +176,11 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   DASHBOARD CARD
+   06 - DASHBOARD CARD
    ====================================================== */
+
 
 .dashboard-card{
 
@@ -178,9 +195,11 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   CARD ICON
+   07 - CARD ICON
    ====================================================== */
+
 
 .card-icon{
 
@@ -205,15 +224,18 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   CARD INFO
+   08 - CARD INFO
    ====================================================== */
+
 
 .card-info{
 
     flex:1;
 
 }
+
 
 
 .card-info h3{
@@ -225,6 +247,7 @@ Do not add:
     font-weight:600;
 
 }
+
 
 
 .card-info strong{
@@ -240,9 +263,11 @@ Do not add:
 }
 
 
+
 /* ======================================================
-   CARD COLORS
+   09 - CARD COLORS
    ====================================================== */
+
 
 .blue-card{
 
@@ -250,6 +275,7 @@ Do not add:
     6px solid var(--primary);
 
 }
+
 
 
 .green-card{
@@ -260,12 +286,14 @@ Do not add:
 }
 
 
+
 .orange-card{
 
     border-inline-start:
     6px solid var(--warning);
 
 }
+
 
 
 .purple-card{
@@ -276,6 +304,7 @@ Do not add:
 }
 
 
+
 .red-card{
 
     border-inline-start:
@@ -284,8 +313,9 @@ Do not add:
 }
 
 /* ======================================================
-   WELCOME CARD
+   10 - WELCOME CARD
    ====================================================== */
+
 
 .welcome-card{
 
@@ -298,6 +328,7 @@ Do not add:
     margin-top:30px;
 
 }
+
 
 
 .welcome-icon{
@@ -325,11 +356,13 @@ Do not add:
 }
 
 
+
 .welcome-content{
 
     flex:1;
 
 }
+
 
 
 .welcome-content h2{
@@ -341,6 +374,7 @@ Do not add:
 }
 
 
+
 .welcome-content p{
 
     color:var(--text);
@@ -350,15 +384,35 @@ Do not add:
 }
 
 
+
+
+
+
 /* ======================================================
-   RTL SUPPORT
+   11 - RTL / LTR SUPPORT
    ====================================================== */
 
+
+/*
+   Arabic Mode
+
+   Sidebar:
+   Right
+
+   Content:
+   Left
+
+*/
+
+
 html[dir="rtl"] .main-content{
+
+    direction:rtl;
 
     text-align:right;
 
 }
+
 
 
 html[dir="rtl"] .dashboard-header{
@@ -368,11 +422,13 @@ html[dir="rtl"] .dashboard-header{
 }
 
 
+
 html[dir="rtl"] .dashboard-card{
 
     flex-direction:row-reverse;
 
 }
+
 
 
 html[dir="rtl"] .welcome-card{
@@ -382,6 +438,7 @@ html[dir="rtl"] .welcome-card{
 }
 
 
+
 html[dir="rtl"] .card-info{
 
     text-align:right;
@@ -389,15 +446,27 @@ html[dir="rtl"] .card-info{
 }
 
 
-/* ======================================================
-   LTR SUPPORT
-   ====================================================== */
+
+/*
+   French / English Mode
+
+   Sidebar:
+   Left
+
+   Content:
+   Right
+
+*/
+
 
 html[dir="ltr"] .main-content{
+
+    direction:ltr;
 
     text-align:left;
 
 }
+
 
 
 html[dir="ltr"] .dashboard-header{
@@ -407,11 +476,13 @@ html[dir="ltr"] .dashboard-header{
 }
 
 
+
 html[dir="ltr"] .dashboard-card{
 
     flex-direction:row;
 
 }
+
 
 
 html[dir="ltr"] .welcome-card{
@@ -421,17 +492,60 @@ html[dir="ltr"] .welcome-card{
 }
 
 
+
 html[dir="ltr"] .card-info{
 
     text-align:left;
 
 }
 
+
+
+
+
+
 /* ======================================================
-   RESPONSIVE
+   12 - LAYOUT ORDER
    ====================================================== */
 
+
+html[dir="rtl"] .main-content{
+
+    order:1;
+
+}
+
+
+
+html[dir="rtl"] .sidebar{
+
+    order:2;
+
+}
+
+
+
+html[dir="ltr"] .sidebar{
+
+    order:1;
+
+}
+
+
+
+html[dir="ltr"] .main-content{
+
+    order:2;
+
+}
+
+/* ======================================================
+   13 - RESPONSIVE DESIGN
+   ====================================================== */
+
+
 @media(max-width:1200px){
+
 
     .stats-container{
 
@@ -440,16 +554,21 @@ html[dir="ltr"] .card-info{
 
     }
 
+
 }
 
 
+
+
 @media(max-width:900px){
+
 
     .main-content{
 
         padding:20px;
 
     }
+
 
 
     .dashboard-card{
@@ -461,6 +580,7 @@ html[dir="ltr"] .card-info{
     }
 
 
+
     .welcome-card{
 
         flex-direction:column;
@@ -469,10 +589,15 @@ html[dir="ltr"] .card-info{
 
     }
 
+
+
 }
 
 
+
+
 @media(max-width:600px){
+
 
     .dashboard-header h1{
 
@@ -481,11 +606,13 @@ html[dir="ltr"] .card-info{
     }
 
 
+
     .card{
 
         padding:20px;
 
     }
+
 
 
     .card-icon{
@@ -499,63 +626,20 @@ html[dir="ltr"] .card-info{
     }
 
 
+
     .card-info strong{
 
         font-size:30px;
 
     }
 
-}
 
-
-/* ======================================================
-   MAIN LAYOUT DIRECTION
-   ====================================================== */
-
-html[dir="rtl"] .main-content{
-
-    direction:rtl;
 
 }
 
 
-html[dir="ltr"] .main-content{
-
-    direction:ltr;
-
-}
 
 
-/* ======================================================
-   FIX FLEX ORDER
-   ====================================================== */
-
-html[dir="rtl"] .main-content{
-
-    order:1;
-
-}
-
-
-html[dir="rtl"] .sidebar{
-
-    order:2;
-
-}
-
-
-html[dir="ltr"] .sidebar{
-
-    order:1;
-
-}
-
-
-html[dir="ltr"] .main-content{
-
-    order:2;
-
-}
 
 
 /* ======================================================

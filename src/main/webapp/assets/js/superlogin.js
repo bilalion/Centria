@@ -1,140 +1,194 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
 /*
- * superadmin.js
- */
+==========================================================
+ CENTRIA
+ Super Admin Login JavaScript
+ Clean Professional Version
+==========================================================
+*/
+
+
+/* ======================================================
+   01 - PASSWORD VISIBILITY
+   ====================================================== */
 
 
 function togglePassword(){
 
 
-    let pass = document.getElementById("password");
+    let pass =
+    document.getElementById(
+        "password"
+    );
 
 
     if(pass.type === "password"){
 
-        pass.type = "text";
+
+        pass.type =
+        "text";
+
 
     }
     else{
 
-        pass.type = "password";
+
+        pass.type =
+        "password";
+
 
     }
+
 
 }
 
 
 
 
-window.onload = function(){
+
+
+
+/* ======================================================
+   02 - DATABASE STATUS CHECK
+   ====================================================== */
+
+
+function checkDatabaseStatus(){
 
 
 
     let status =
-        document.getElementById("dbStatus");
+    document.getElementById(
+        "dbStatus"
+    );
+
 
 
     let btn =
-        document.getElementById("loginBtn");
+    document.getElementById(
+        "loginBtn"
+    );
 
 
 
-    fetch(contextPath + "/DatabaseStatusServlet")
+    fetch(
+        contextPath
+        +
+        "/DatabaseStatusServlet"
+    )
 
 
 
-    .then(response => {
+    .then(
+        response => {
 
 
-        console.log("HTTP STATUS : " + response.status);
+            return response.json();
 
 
-        return response.text();
-
-
-    })
-
-
-
-    .then(text => {
-
-
-        console.log("SERVER RESPONSE : " + text);
+        }
+    )
 
 
 
-        let data = JSON.parse(text);
+    .then(
+        data => {
 
 
 
-        if(data.status === "connected"){
+            if(data.status === "connected"){
 
 
 
-            status.innerHTML =
-            "🟢";
+                status.innerHTML =
+                "🟢";
 
 
-            status.className =
-            "db-status connected";
+
+                status.className =
+                "db-status connected";
 
 
-            btn.disabled = false;
+
+                btn.disabled =
+                false;
+
+
+
+            }
+
+            else {
+
+
+
+                status.innerHTML =
+                "🔴 "
+                +
+                (data.message || "");
+
+
+
+                status.className =
+                "db-status failed";
+
+
+
+                btn.disabled =
+                true;
+
+
+
+            }
 
 
 
         }
+    )
 
-        else {
+
+
+    .catch(
+        error => {
 
 
 
             status.innerHTML =
-            "🔴 " + (data.message || "");
+            "🟠";
+
 
 
             status.className =
             "db-status failed";
 
 
-            btn.disabled = true;
+
+            btn.disabled =
+            true;
+
 
 
         }
+    );
+
+
+}
 
 
 
-    })
 
 
 
-    .catch(error => {
+
+/* ======================================================
+   03 - PAGE INITIALIZATION
+   ====================================================== */
 
 
-        console.error(
-            "FETCH ERROR : ",
-            error
-        );
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
 
-
-        status.innerHTML =
-        "🟠";
+    checkDatabaseStatus();
 
 
-        status.className =
-        "db-status failed";
-
-
-        btn.disabled = true;
-
-
-
-    });
-
-
-
-};
+});

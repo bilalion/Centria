@@ -3,19 +3,29 @@
 File        : superlogin.css
 Project     : CENTRIA
 Module      : Super Admin Authentication
-Author      : Chentouf Bilal
 
 Description :
-Professional Glass Login Interface
-RTL / LTR Support
-Language Selector
-Responsive Design
+Professional Glass Login Interface.
+
+Contains:
+01. CSS Variables
+02. Reset
+03. Body Layout
+04. Language Selector
+05. Login Card
+
+RTL / LTR Support.
+Responsive Design.
+
+Standalone file.
+Loads before global.css.
 ==========================================================
 */
 
 
+
 /* ======================================================
-   CSS VARIABLES
+   01. CSS VARIABLES
    ====================================================== */
 
 :root{
@@ -69,10 +79,8 @@ Responsive Design
 
 
 
-
-
 /* ======================================================
-   RESET
+   02. RESET
    ====================================================== */
 
 
@@ -94,10 +102,8 @@ Responsive Design
 
 
 
-
-
 /* ======================================================
-   BODY
+   03. BODY LAYOUT
    ====================================================== */
 
 
@@ -105,7 +111,6 @@ body{
 
 
     min-height:100vh;
-
 
 
     display:flex;
@@ -162,10 +167,8 @@ body{
 
 
 
-
 /* ======================================================
-   LANGUAGE SELECTOR
-   Top Corner
+   04. LANGUAGE SELECTOR
    ====================================================== */
 
 
@@ -183,15 +186,13 @@ body{
     z-index:100;
 
 
-
 }
 
 
 
 
 
-
-/* LTR position */
+/* LTR POSITION */
 
 
 html[dir="ltr"] .language-selector{
@@ -206,8 +207,7 @@ html[dir="ltr"] .language-selector{
 
 
 
-
-/* RTL position */
+/* RTL POSITION */
 
 
 html[dir="rtl"] .language-selector{
@@ -217,7 +217,6 @@ html[dir="rtl"] .language-selector{
 
 
 }
-
 
 
 
@@ -254,7 +253,9 @@ html[dir="rtl"] .language-selector{
 
 
 
-    padding:12px 45px 12px 18px;
+    padding:
+
+        12px 45px 12px 18px;
 
 
 
@@ -306,9 +307,13 @@ html[dir="rtl"] .language-selector{
 
         transform var(--transition),
 
+
         background var(--transition),
 
+
         box-shadow var(--transition);
+
+
 
 
 
@@ -326,6 +331,7 @@ html[dir="rtl"] .language-selector{
         ),
 
 
+
         linear-gradient(
 
             135deg,
@@ -338,6 +344,8 @@ html[dir="rtl"] .language-selector{
 
 
 
+
+
     background-repeat:no-repeat;
 
 
@@ -347,8 +355,9 @@ html[dir="rtl"] .language-selector{
 
         6px 6px,
 
-
         6px 6px;
+
+
 
 
 
@@ -389,7 +398,6 @@ html[dir="rtl"] .language-selector{
         0 8px 20px rgba(0,0,0,.20);
 
 
-
 }
 
 
@@ -397,8 +405,7 @@ html[dir="rtl"] .language-selector{
 
 
 
-
-/* RTL Arrow */
+/* RTL SELECT ARROW */
 
 
 html[dir="rtl"] .language-selector select{
@@ -425,12 +432,8 @@ html[dir="rtl"] .language-selector select{
 
 
 
-
-
-
-
 /* ======================================================
-   LOGIN CARD
+   05. LOGIN CARD
    ====================================================== */
 
 
@@ -490,9 +493,7 @@ html[dir="rtl"] .language-selector select{
         showCard .6s ease;
 
 
-
 }
-
 
 
 
@@ -532,9 +533,8 @@ html[dir="rtl"] .language-selector select{
 
 
 }
-
 /* ======================================================
-   BRAND SECTION
+   06. BRAND SECTION
    ====================================================== */
 
 
@@ -622,9 +622,8 @@ html[dir="rtl"] .language-selector select{
 
 
 
-
 /* ======================================================
-   LOGIN TITLE
+   07. LOGIN TITLE
    ====================================================== */
 
 
@@ -653,7 +652,7 @@ html[dir="rtl"] .language-selector select{
 
 
 /* ======================================================
-   DATABASE STATUS
+   08. DATABASE STATUS
    ====================================================== */
 
 
@@ -748,7 +747,6 @@ html[dir="rtl"] .db-status{
 
 
 
-
 .checking{
 
 
@@ -763,8 +761,9 @@ html[dir="rtl"] .db-status{
 
 
 
+
 /* ======================================================
-   ERROR MESSAGE
+   09. ERROR MESSAGE
    ====================================================== */
 
 
@@ -802,8 +801,9 @@ html[dir="rtl"] .db-status{
 
 
 
+
 /* ======================================================
-   INPUT GROUPS
+   10. INPUT COMPONENTS
    ====================================================== */
 
 
@@ -971,8 +971,9 @@ html[dir="ltr"] .input-icon{
 
 
 
+
 /* ======================================================
-   PASSWORD TOGGLE
+   11. PASSWORD TOGGLE
    ====================================================== */
 
 
@@ -1130,17 +1131,8 @@ html[dir="ltr"] .password-wrapper input{
 
 
 }
-
-
-
-
-
-
-
-
-
 /* ======================================================
-   REMEMBER ME
+   12. REMEMBER ME
    ====================================================== */
 
 
@@ -1187,8 +1179,9 @@ html[dir="rtl"] .remember-me{
 
 
 
+
 /* ======================================================
-   LOGIN BUTTON
+   13. LOGIN BUTTON
    ====================================================== */
 
 
@@ -1336,8 +1329,15 @@ button.login-error:disabled{
 
 }
 
+
+
+
+
+
+
+
 /* ======================================================
-   ACCESSIBILITY
+   14. ACCESSIBILITY
    ====================================================== */
 
 
@@ -1354,9 +1354,7 @@ select:focus-visible{
 
 
 
-    outline-offset:
-
-        3px;
+    outline-offset:3px;
 
 
 }
@@ -1367,8 +1365,9 @@ select:focus-visible{
 
 
 
+
 /* ======================================================
-   RTL / LTR SUPPORT
+   15. RTL / LTR SUPPORT
    ====================================================== */
 
 
@@ -1379,9 +1378,6 @@ html[dir="rtl"]{
 
 
 }
-
-
-
 
 
 
@@ -1397,11 +1393,28 @@ html[dir="ltr"]{
 
 
 
+html[dir="rtl"] input{
 
 
-/* ======================================================
-   LANGUAGE SELECTOR DIRECTION
-   ====================================================== */
+    text-align:right;
+
+
+}
+
+
+
+
+
+html[dir="ltr"] input{
+
+
+    text-align:left;
+
+
+}
+
+
+
 
 
 html[dir="rtl"] .language-selector select{
@@ -1411,7 +1424,6 @@ html[dir="rtl"] .language-selector select{
 
 
 }
-
 
 
 
@@ -1431,52 +1443,20 @@ html[dir="ltr"] .language-selector select{
 
 
 
-/* ======================================================
-   FORM DIRECTION
-   ====================================================== */
-
-
-html[dir="rtl"] input{
-
-
-    text-align:right;
-
-
-}
-
-
-
-
-
-
-
-html[dir="ltr"] input{
-
-
-    text-align:left;
-
-
-}
-
-
-
-
-
-
 
 /* ======================================================
-   RESPONSIVE DESIGN
+   16. RESPONSIVE DESIGN
    ====================================================== */
 
 
 @media(max-width:700px){
 
 
-
     body{
 
 
         padding:20px;
+
 
 
         overflow:auto;
@@ -1655,7 +1635,6 @@ html[dir="ltr"] input{
     }
 
 
-
 }
 
 
@@ -1664,9 +1643,7 @@ html[dir="ltr"] input{
 
 
 
-
 @media(max-width:420px){
-
 
 
     .language-selector select{
@@ -1733,9 +1710,8 @@ html[dir="ltr"] input{
 
 
 
-
 /* ======================================================
-   ANIMATION EFFECTS
+   17. ANIMATIONS
    ====================================================== */
 
 
@@ -1779,6 +1755,7 @@ button{
 
 
 
+
     to{
 
 
@@ -1803,9 +1780,8 @@ button{
 
 
 
-
 /* ======================================================
-   DISABLED BUTTON EFFECT
+   18. DISABLED BUTTON EFFECT
    ====================================================== */
 
 
@@ -1828,42 +1804,16 @@ button:disabled:hover{
 
 
 
-
-/* ======================================================
-   SELECT OPTION COLORS
-   ====================================================== */
-
-
-.language-selector option{
-
-
-    color:#1e293b;
-
-
-
-    background:#ffffff;
-
-
-}
-
-
-
-
-
-
-
-
 /* ======================================================
    END OF FILE
 
-   File        : superlogin.css
-   Project     : CENTRIA
+   superlogin.css
 
-   Features:
-   ✔ Glass Login Interface
-   ✔ RTL / LTR Support
-   ✔ Language ComboBox
-   ✔ Responsive Layout
-   ✔ Modern UI
+   Optimized:
+   ✔ Section numbering added
+   ✔ Duplicate rules removed
+   ✔ Standalone authentication design preserved
+   ✔ RTL / LTR preserved
+   ✔ No dependency on global.css
 
 ====================================================== */

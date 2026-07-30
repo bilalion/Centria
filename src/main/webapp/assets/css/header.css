@@ -7,13 +7,26 @@ Module      : Header Component
 Description :
 Header layout, title section,
 user information and RTL/LTR support.
+
+Contains:
+- Header container
+- Title section
+- Actions
+- User information
+- Responsive layout
+
+Do not add:
+- Global styles
+- Sidebar styles
+- Page styles
 ==========================================================
 */
 
 
 /* ======================================================
-   HEADER CONTAINER
+   01 - HEADER CONTAINER
    ====================================================== */
+
 
 .header{
 
@@ -38,9 +51,13 @@ user information and RTL/LTR support.
 }
 
 
+
+
+
 /* ======================================================
-   HEADER TITLE
+   02 - HEADER TITLE
    ====================================================== */
+
 
 .header-title{
 
@@ -51,6 +68,7 @@ user information and RTL/LTR support.
     gap:6px;
 
 }
+
 
 
 .header-title h2{
@@ -64,6 +82,7 @@ user information and RTL/LTR support.
 }
 
 
+
 .header-title p{
 
     color:var(--text);
@@ -73,9 +92,13 @@ user information and RTL/LTR support.
 }
 
 
+
+
+
 /* ======================================================
-   HEADER ACTIONS
+   03 - HEADER ACTIONS
    ====================================================== */
+
 
 .header-actions{
 
@@ -90,9 +113,13 @@ user information and RTL/LTR support.
 }
 
 
+
+
+
 /* ======================================================
-   USER INFO
+   04 - USER INFORMATION
    ====================================================== */
+
 
 .header-user{
 
@@ -113,6 +140,7 @@ user information and RTL/LTR support.
     font-weight:600;
 
 }
+
 
 
 .user-icon{
@@ -136,17 +164,23 @@ user information and RTL/LTR support.
     font-size:20px;
 
 }
-
-
 /* ======================================================
-   RTL SUPPORT
+   05 - RTL / LTR SUPPORT
    ====================================================== */
+
+
+/*
+   Arabic Mode
+   Header direction follows RTL layout
+*/
+
 
 html[dir="rtl"] .header{
 
     direction:rtl;
 
 }
+
 
 
 html[dir="rtl"] .header-actions{
@@ -156,6 +190,7 @@ html[dir="rtl"] .header-actions{
 }
 
 
+
 html[dir="rtl"] .header-user{
 
     flex-direction:row-reverse;
@@ -163,15 +198,19 @@ html[dir="rtl"] .header-user{
 }
 
 
-/* ======================================================
-   LTR SUPPORT
-   ====================================================== */
+
+
+/*
+   French / English Mode
+*/
+
 
 html[dir="ltr"] .header{
 
     direction:ltr;
 
 }
+
 
 
 html[dir="ltr"] .header-actions{
@@ -181,6 +220,7 @@ html[dir="ltr"] .header-actions{
 }
 
 
+
 html[dir="ltr"] .header-user{
 
     flex-direction:row;
@@ -188,15 +228,22 @@ html[dir="ltr"] .header-user{
 }
 
 
+
+
+
+
+
 /* ======================================================
-   RESPONSIVE HEADER
+   06 - RESPONSIVE HEADER
    ====================================================== */
+
 
 @media(max-width:900px){
 
+
     .header{
 
-        flex-direction:column !important;
+        flex-direction:column;
 
         align-items:stretch;
 
@@ -205,16 +252,23 @@ html[dir="ltr"] .header-user{
     }
 
 
+
     .header-actions{
 
         justify-content:center;
 
     }
 
+
+
 }
 
 
+
+
+
 @media(max-width:600px){
+
 
     .header{
 
@@ -223,13 +277,21 @@ html[dir="ltr"] .header-user{
     }
 
 
+
     .header-user{
 
         justify-content:center;
 
     }
 
+
+
 }
+
+
+
+
+
 
 
 /* ======================================================
