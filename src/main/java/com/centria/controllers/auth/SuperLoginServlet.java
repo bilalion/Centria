@@ -205,7 +205,7 @@ public class SuperLoginServlet extends HttpServlet {
                 response.sendRedirect(
 
                         request.getContextPath()
-                        + "/admin/dashboard.jsp"
+                        + "/admin/dashboard.jsp?section=accueil"
 
                 );
 

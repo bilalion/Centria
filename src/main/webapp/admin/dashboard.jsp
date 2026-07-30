@@ -39,8 +39,10 @@ String direction =
      GLOBAL STYLE
      ================================================= -->
 
+
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/global.css?v=1">
+
 
 
 
@@ -69,6 +71,9 @@ href="<%=request.getContextPath()%>/assets/css/header.css?v=1">
 <!-- =================================================
      MODULES
      ================================================= -->
+
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/accueil.css?v=1">
 
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
