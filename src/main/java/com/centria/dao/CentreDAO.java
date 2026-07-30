@@ -1135,81 +1135,9 @@ public Centre getCentreById(int id){
 
 
 
-    /*
-    ======================================================
-    UPDATE SUBSCRIPTION
-    ======================================================
-    */
+   
 
-
-    public boolean updateSubscription(
-            int centreId,
-            Date endDate
-    ){
-
-
-
-        String sql =
-
-        "UPDATE centres SET "
-        + "subscription_end=?, "
-        + "status='ACTIVE' "
-        + "WHERE id=?";
-
-
-
-
-
-        try(
-
-            Connection con =
-                    DatabaseConfig.getConnection();
-
-
-            PreparedStatement ps =
-                    con.prepareStatement(sql)
-
-        ){
-
-
-
-            ps.setDate(
-                    1,
-                    endDate
-            );
-
-
-
-            ps.setInt(
-                    2,
-                    centreId
-            );
-
-
-
-            return ps.executeUpdate() > 0;
-
-
-
-        }
-
-
-        catch(Exception e){
-
-
-            e.printStackTrace();
-
-
-        }
-
-
-
-
-
-        return false;
-
-
-    }
+   
 
     
     /*
@@ -1222,10 +1150,6 @@ public boolean updateCentreProfile(Centre centre){
 
 
     if(centre == null){
-
-        System.out.println(
-            "UPDATE CENTRE PROFILE : CENTRE NULL"
-        );
 
         return false;
 
@@ -1283,13 +1207,6 @@ public boolean updateCentreProfile(Centre centre){
 
         int rows =
                 ps.executeUpdate();
-
-
-
-        System.out.println(
-            "UPDATE CENTRE PROFILE ROWS = "
-            + rows
-        );
 
 
 

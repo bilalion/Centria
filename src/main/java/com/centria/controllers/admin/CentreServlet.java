@@ -1398,7 +1398,7 @@ private void updateCentreProfile(
 )
 throws IOException {
     
-System.out.println(">>> ENTER UPDATE PROFILE");
+
 
     response.setContentType(
             "application/json;charset=UTF-8"
@@ -1432,21 +1432,7 @@ System.out.println(">>> ENTER UPDATE PROFILE");
 
 
 
-        System.out.println(
-            "EDIT UPDATE ==> "
-            +
-            "ID="
-            + id
-            +
-            " NAME="
-            + name
-            +
-            " OWNER="
-            + owner
-            +
-            " PHONE="
-            + phone
-        );
+    
 
 
 
@@ -1475,10 +1461,6 @@ System.out.println(">>> ENTER UPDATE PROFILE");
                 centreDAO.updateCentreProfile(
                         centre
                 );
-
-
-
-
 
 
         response.getWriter().print(

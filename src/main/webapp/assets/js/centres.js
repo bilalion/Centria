@@ -15,7 +15,6 @@
 function loadCentres(page){
 
 
-
     if(!page){
 
         page = 1;
@@ -24,24 +23,49 @@ function loadCentres(page){
 
 
 
-    let search =
+    let searchElement =
     document.getElementById(
         "centreSearch"
-    ).value;
+    );
+
+
+    let statusElement =
+    document.getElementById(
+        "centreStatus"
+    );
+
+
+    let orderElement =
+    document.getElementById(
+        "centreOrder"
+    );
+
+
+
+    let search =
+    searchElement
+    ?
+    searchElement.value
+    :
+    "";
 
 
 
     let status =
-    document.getElementById(
-        "centreStatus"
-    ).value;
+    statusElement
+    ?
+    statusElement.value
+    :
+    "ALL";
 
 
 
     let order =
-    document.getElementById(
-        "centreOrder"
-    ).value;
+    orderElement
+    ?
+    orderElement.value
+    :
+    "NEW";
 
 
 
@@ -141,14 +165,21 @@ function loadCentres(page){
 
         }
     )
+
+
+
     .catch(
         error => {
+
             console.error(
                 "Centres AJAX Error:",
                 error
             );
+
         }
     );
+
+
 }
 
 // =====================================
@@ -1048,15 +1079,12 @@ function confirmEditCentre(){
 function saveEditCentre(){
 
 
-    console.log(
-        "========== SAVE EDIT START =========="
-    );
-
 
     let form =
     document.getElementById(
         "editCentreForm"
     );
+
 
 
     if(!form){
@@ -1071,8 +1099,10 @@ function saveEditCentre(){
 
 
 
+
     let data =
     new URLSearchParams();
+
 
 
 
@@ -1080,6 +1110,7 @@ function saveEditCentre(){
         "action",
         "updateProfile"
     );
+
 
 
 
@@ -1092,12 +1123,14 @@ function saveEditCentre(){
 
 
 
+
     data.append(
         "name",
         form.querySelector(
             "[name='name']"
         ).value
     );
+
 
 
 
@@ -1110,6 +1143,7 @@ function saveEditCentre(){
 
 
 
+
     data.append(
         "phone",
         form.querySelector(
@@ -1119,9 +1153,6 @@ function saveEditCentre(){
 
 
 
-    console.log(
-        "ACTION SENT = updateProfile"
-    );
 
 
 
@@ -1145,14 +1176,9 @@ function saveEditCentre(){
 
 
 
+
     .then(
         response => {
-
-            console.log(
-                "STATUS = ",
-                response.status
-            );
-
 
             return response.text();
 
@@ -1160,26 +1186,15 @@ function saveEditCentre(){
     )
 
 
+
+
     .then(
         text => {
-
-
-            console.log(
-                "SERVER RESPONSE = ",
-                text
-            );
-
 
 
             let json =
             JSON.parse(text);
 
-
-
-            console.log(
-                "JSON = ",
-                json
-            );
 
 
 
@@ -1209,6 +1224,8 @@ function saveEditCentre(){
     )
 
 
+
+
     .catch(
         error=>{
 
@@ -1221,6 +1238,7 @@ function saveEditCentre(){
 
         }
     );
+
 
 
 }
