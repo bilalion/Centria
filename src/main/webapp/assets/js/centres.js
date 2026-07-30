@@ -1039,3 +1039,188 @@ function confirmEditCentre(){
 
 
 }
+
+
+// =====================================
+// SAVE EDIT CENTRE PROFILE
+// =====================================
+
+function saveEditCentre(){
+
+
+    console.log(
+        "========== SAVE EDIT START =========="
+    );
+
+
+    let form =
+    document.getElementById(
+        "editCentreForm"
+    );
+
+
+    if(!form){
+
+        console.error(
+            "EDIT FORM NOT FOUND"
+        );
+
+        return;
+
+    }
+
+
+
+    let data =
+    new URLSearchParams();
+
+
+
+    data.append(
+        "action",
+        "updateProfile"
+    );
+
+
+
+    data.append(
+        "id",
+        form.querySelector(
+            "[name='id']"
+        ).value
+    );
+
+
+
+    data.append(
+        "name",
+        form.querySelector(
+            "[name='name']"
+        ).value
+    );
+
+
+
+    data.append(
+        "owner_name",
+        form.querySelector(
+            "[name='owner_name']"
+        ).value
+    );
+
+
+
+    data.append(
+        "phone",
+        form.querySelector(
+            "[name='phone']"
+        ).value
+    );
+
+
+
+    console.log(
+        "ACTION SENT = updateProfile"
+    );
+
+
+
+    fetch(
+        window.contextPath
+        +
+        "/CentreServlet",
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+
+            body:data.toString()
+
+        }
+    )
+
+
+
+    .then(
+        response => {
+
+            console.log(
+                "STATUS = ",
+                response.status
+            );
+
+
+            return response.text();
+
+        }
+    )
+
+
+    .then(
+        text => {
+
+
+            console.log(
+                "SERVER RESPONSE = ",
+                text
+            );
+
+
+
+            let json =
+            JSON.parse(text);
+
+
+
+            console.log(
+                "JSON = ",
+                json
+            );
+
+
+
+            if(json.success){
+
+
+                closeCentreModal();
+
+
+                loadCentres(1);
+
+
+            }
+            else{
+
+
+                alert(
+                    json.error
+                );
+
+
+            }
+
+
+
+        }
+    )
+
+
+    .catch(
+        error=>{
+
+
+            console.error(
+                "SAVE ERROR:",
+                error
+            );
+
+
+        }
+    );
+
+
+}

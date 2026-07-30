@@ -140,24 +140,113 @@ public class CentreServlet extends HttpServlet {
 
 
 
-    @Override
-    protected void doPost(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws ServletException, IOException {
+@Override
+protected void doPost(
+        HttpServletRequest request,
+        HttpServletResponse response
+) throws ServletException, IOException {
+
+
+    System.out.println("========== ENTER DO POST CENTRE ==========");
+
+
+    /*
+     * مهم جدا
+     * يجب أن تكون قبل قراءة parameters
+     */
+    request.setCharacterEncoding("UTF-8");
 
 
 
-        request.setCharacterEncoding("UTF-8");
+    System.out.println(
+            "REQUEST URI = "
+            + request.getRequestURI()
+    );
+
+
+    System.out.println(
+            "CONTENT TYPE = "
+            + request.getContentType()
+    );
 
 
 
-        String action =
-                request.getParameter("action");
+    String action =
+            request.getParameter("action");
 
 
 
-        if("add".equals(action)){
+    System.out.println(
+            "ACTION RECEIVED = "
+            + action
+    );
+
+
+
+    System.out.println(
+            "ID RECEIVED = "
+            + request.getParameter("id")
+    );
+
+
+
+
+
+    /*
+    ==================================================
+    CHECK ACTION
+    ==================================================
+    */
+
+
+    if(action == null || action.trim().isEmpty()){
+
+
+        System.out.println(
+                "ERROR : ACTION EMPTY"
+        );
+
+
+        response.setContentType(
+                "application/json;charset=UTF-8"
+        );
+
+
+        response.getWriter().write(
+                "{"
+                + "\"success\":false,"
+                + "\"error\":\"action missing\""
+                + "}"
+        );
+
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    ACTION ROUTER
+    ==================================================
+    */
+
+
+    switch(action){
+
+
+
+        case "add":
+
+
+            System.out.println(
+                    "EXECUTE ADD CENTRE"
+            );
 
 
             addCentre(
@@ -165,22 +254,94 @@ public class CentreServlet extends HttpServlet {
                     response
             );
 
-            return;
 
-        }
-
+            break;
 
 
-        doGet(
-                request,
-                response
-        );
+
+
+
+
+        case "updateProfile":
+
+
+            System.out.println(
+                    "EXECUTE UPDATE PROFILE"
+            );
+
+
+
+            updateCentreProfile(
+                    request,
+                    response
+            );
+
+
+
+            break;
+
+
+
+
+
+
+
+        case "resetPassword":
+
+
+            System.out.println(
+                    "EXECUTE RESET PASSWORD"
+            );
+
+
+
+            resetPassword(
+                    request,
+                    response
+            );
+
+
+            break;
+
+
+
+
+
+
+        default:
+
+
+            System.out.println(
+                    "UNKNOWN ACTION = "
+                    + action
+            );
+
+
+
+            response.setContentType(
+                    "application/json;charset=UTF-8"
+            );
+
+
+
+            response.getWriter().write(
+                    "{"
+                    + "\"success\":false,"
+                    + "\"error\":\"unknown action\""
+                    + "}"
+            );
+
+
+
+            break;
+
+
 
     }
 
 
 
-
+}
 
 
 
@@ -1214,6 +1375,135 @@ throws ServletException, IOException {
             "<p>Erreur chargement modification centre</p>"
             +
             "</div>"
+
+        );
+
+
+    }
+
+
+}
+
+
+/*
+ * ======================================================
+ * UPDATE CENTRE PROFILE
+ * EDIT DIALOG AJAX
+ * ======================================================
+ */
+
+private void updateCentreProfile(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws IOException {
+    
+System.out.println(">>> ENTER UPDATE PROFILE");
+
+    response.setContentType(
+            "application/json;charset=UTF-8"
+    );
+
+
+    try{
+
+
+        int id =
+        Integer.parseInt(
+                request.getParameter("id")
+        );
+
+
+
+        String name =
+                request.getParameter("name");
+
+
+
+        String owner =
+                request.getParameter("owner_name");
+
+
+
+        String phone =
+                request.getParameter("phone");
+
+
+
+
+
+        System.out.println(
+            "EDIT UPDATE ==> "
+            +
+            "ID="
+            + id
+            +
+            " NAME="
+            + name
+            +
+            " OWNER="
+            + owner
+            +
+            " PHONE="
+            + phone
+        );
+
+
+
+
+
+        Centre centre =
+                new Centre();
+
+
+
+        centre.setId(id);
+
+        centre.setName(name);
+
+        centre.setOwnerName(owner);
+
+        centre.setPhone(phone);
+
+
+
+
+
+
+        boolean updated =
+
+                centreDAO.updateCentreProfile(
+                        centre
+                );
+
+
+
+
+
+
+        response.getWriter().print(
+
+            "{\"success\":"
+            +
+            updated
+            +
+            "}"
+
+        );
+
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+
+        response.getWriter().print(
+
+            "{\"success\":false}"
 
         );
 

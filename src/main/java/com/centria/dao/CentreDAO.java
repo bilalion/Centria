@@ -1211,6 +1211,111 @@ public Centre getCentreById(int id){
 
     }
 
+    
+    /*
+ * ======================================================
+ * UPDATE CENTRE PROFILE
+ * Used by Edit Dialog
+ * ======================================================
+ */
+public boolean updateCentreProfile(Centre centre){
+
+
+    if(centre == null){
+
+        System.out.println(
+            "UPDATE CENTRE PROFILE : CENTRE NULL"
+        );
+
+        return false;
+
+    }
+
+
+
+    String sql =
+
+    "UPDATE centres SET "
+    + "name=?, "
+    + "owner_name=?, "
+    + "phone=? "
+    + "WHERE id=?";
+
+
+
+
+    try(
+        Connection con =
+                DatabaseConfig.getConnection();
+
+
+        PreparedStatement ps =
+                con.prepareStatement(sql)
+
+    ){
+
+
+
+        ps.setString(
+                1,
+                centre.getName()
+        );
+
+
+        ps.setString(
+                2,
+                centre.getOwnerName()
+        );
+
+
+        ps.setString(
+                3,
+                centre.getPhone()
+        );
+
+
+        ps.setInt(
+                4,
+                centre.getId()
+        );
+
+
+
+        int rows =
+                ps.executeUpdate();
+
+
+
+        System.out.println(
+            "UPDATE CENTRE PROFILE ROWS = "
+            + rows
+        );
+
+
+
+        return rows > 0;
+
+
+
+    }
+    catch(Exception e){
+
+
+        System.err.println(
+            "UPDATE CENTRE PROFILE ERROR"
+        );
+
+
+        e.printStackTrace();
+
+
+    }
+
+
+
+    return false;
+
+}
 
 
 

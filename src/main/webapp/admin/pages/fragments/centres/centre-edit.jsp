@@ -61,6 +61,9 @@ Centre centre =
 
 
 
+
+
+
 <input type="hidden"
        name="id"
        value="<%=centre.getId()%>">
