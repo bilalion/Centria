@@ -26,7 +26,6 @@ sidebar.jsp
    01 - SIDEBAR CONTAINER
    ====================================================== */
 
-
 .sidebar{
 
     width:var(--sidebar-width);
@@ -41,12 +40,13 @@ sidebar.jsp
 
     flex-shrink:0;
 
-    padding:28px 22px;
+    padding:20px 22px;
+
+    box-sizing:border-box;
 
     color:white;
 
     background:
-
     linear-gradient(
         180deg,
         var(--sidebar-start),
@@ -54,19 +54,16 @@ sidebar.jsp
     );
 
     box-shadow:
-
     0 0 30px rgba(15,23,42,.18);
 
     overflow:hidden;
 
     transition:
-
     width .3s ease,
     min-width .3s ease,
     transform .3s ease;
 
 }
-
 
 
 
@@ -253,8 +250,9 @@ sidebar.jsp
 
     gap:14px;
 
-}
+    flex:1;
 
+}
 
 
 
@@ -463,19 +461,17 @@ html[dir="ltr"] .menu-text{
 
 
 
-
 /* ======================================================
    12 - LOGOUT BUTTON
    ====================================================== */
-
 
 .logout-btn{
 
     width:100%;
 
-    margin-top:auto;
+    margin-top:20px;
 
-    margin-bottom:10px;
+    flex-shrink:0;
 
     display:flex;
 
@@ -494,7 +490,6 @@ html[dir="ltr"] .menu-text{
     font-weight:800;
 
     background:
-
     linear-gradient(
         135deg,
         #ef4444,
@@ -502,43 +497,24 @@ html[dir="ltr"] .menu-text{
     );
 
     transition:
-
     transform var(--transition),
-
     box-shadow var(--transition);
 
 }
 
-
-
-
-
 .logout-btn:hover{
 
-    transform:
+    transform:translateY(-3px);
 
-    translateY(-3px);
-
-    box-shadow:
-
-    0 12px 25px rgba(239,68,68,.35);
+    box-shadow:0 12px 25px rgba(239,68,68,.35);
 
 }
-
-
-
-
 
 .logout-btn .menu-icon{
 
-    background:
-
-    rgba(255,255,255,.15);
+    background:rgba(255,255,255,.15);
 
 }
-
-
-
 
 
 
