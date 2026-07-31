@@ -8,23 +8,55 @@
 
 package com.centria.controllers.admin;
 
+
+/*
+======================================================
+IMPORTS
+======================================================
+*/
+
+import com.centria.config.DatabaseConfig;
 import com.centria.dao.CentreDAO;
+import com.centria.dao.PaymentDAO;
+
 import com.centria.models.Centre;
+
 import com.centria.language.LanguageManager;
+
 import com.centria.utils.PasswordGenerator;
 import com.centria.utils.PasswordUtil;
 
+
 import java.io.IOException;
+import java.sql.Connection;
+
 import java.sql.Date;
+import java.sql.PreparedStatement;
+
 import java.time.LocalDate;
+
 import java.util.List;
 
+
 import javax.servlet.ServletException;
+
 import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
+
+
+
+/*
+======================================================
+CENTRE SERVLET
+Gestion des centres + création paiement initial
+======================================================
+*/
 
 
 @WebServlet(
@@ -34,193 +66,190 @@ import javax.servlet.http.HttpServletResponse;
 public class CentreServlet extends HttpServlet {
 
 
+
+    /*
+    ==================================================
+    DAO OBJECTS
+    ==================================================
+    */
+
+
     private CentreDAO centreDAO;
 
+    private PaymentDAO paymentDAO;
+
+
+
+
+
+    /*
+    ==================================================
+    INITIALISATION SERVLET
+    ==================================================
+    */
 
 
     @Override
     public void init() throws ServletException {
 
+
         centreDAO = new CentreDAO();
+
+
+        /*
+        DAO paiement
+        utilisé après création centre
+        */
+
+
+        paymentDAO = new PaymentDAO();
+
 
     }
 
 
+
+
+
+    /*
+    ==================================================
+    GET REQUEST
+    ==================================================
+    */
 
 
     @Override
     protected void doGet(
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws ServletException, IOException {
+    )
+    throws ServletException, IOException {
 
 
-        request.setCharacterEncoding("UTF-8");
+
+        request.setCharacterEncoding(
+                "UTF-8"
+        );
+
 
 
         String action =
-                request.getParameter("action");
+                request.getParameter(
+                        "action"
+                );
 
+
+
+        /*
+        Action par défaut
+        */
 
 
         if(action == null || action.isEmpty()){
 
+
             action="list";
+
 
         }
 
 
 
 
- switch(action){
 
-
-    case "list":
-
-        listCentres(
-                request,
-                response
-        );
-
-        break;
+        switch(action){
 
 
 
-    case "status":
-
-        updateStatus(
-                request,
-                response
-        );
-
-        break;
+            case "list":
 
 
+                listCentres(
+                        request,
+                        response
+                );
 
-    case "view":
 
-        viewCentre(
-                request,
-                response
-        );
-
-        break;
-        
-        case "edit":
-
-    editCentre(
-        request,
-        response
-    );
-
-    break;
-        
-    case "resetPassword":
-
-       resetPassword(request,response);
-
-        break;
+                break;
 
 
 
-    default:
 
-        listCentres(
-                request,
-                response
-        );
+            case "status":
 
-        break;
 
-}
+                updateStatus(
+                        request,
+                        response
+                );
 
-    }
+
+                break;
 
 
 
 
 
-@Override
-protected void doPost(
-        HttpServletRequest request,
-        HttpServletResponse response
-) throws ServletException, IOException {
+            case "view":
 
 
-    System.out.println("========== ENTER DO POST CENTRE ==========");
+                viewCentre(
+                        request,
+                        response
+                );
 
 
-    /*
-     * مهم جدا
-     * يجب أن تكون قبل قراءة parameters
-     */
-    request.setCharacterEncoding("UTF-8");
-
-
-
-    System.out.println(
-            "REQUEST URI = "
-            + request.getRequestURI()
-    );
-
-
-    System.out.println(
-            "CONTENT TYPE = "
-            + request.getContentType()
-    );
-
-
-
-    String action =
-            request.getParameter("action");
-
-
-
-    System.out.println(
-            "ACTION RECEIVED = "
-            + action
-    );
-
-
-
-    System.out.println(
-            "ID RECEIVED = "
-            + request.getParameter("id")
-    );
+                break;
 
 
 
 
 
-    /*
-    ==================================================
-    CHECK ACTION
-    ==================================================
-    */
+            case "edit":
 
 
-    if(action == null || action.trim().isEmpty()){
+                editCentre(
+                        request,
+                        response
+                );
 
 
-        System.out.println(
-                "ERROR : ACTION EMPTY"
-        );
+                break;
 
 
-        response.setContentType(
-                "application/json;charset=UTF-8"
-        );
 
 
-        response.getWriter().write(
-                "{"
-                + "\"success\":false,"
-                + "\"error\":\"action missing\""
-                + "}"
-        );
+
+            case "resetPassword":
 
 
-        return;
+                resetPassword(
+                        request,
+                        response
+                );
+
+
+                break;
+
+
+
+
+
+            default:
+
+
+                listCentres(
+                        request,
+                        response
+                );
+
+
+                break;
+
+
+
+        }
+
 
     }
 
@@ -232,90 +261,41 @@ protected void doPost(
 
     /*
     ==================================================
-    ACTION ROUTER
+    POST REQUEST
+    إضافة وتعديل بيانات المركز
     ==================================================
     */
 
 
-    switch(action){
+    @Override
+    protected void doPost(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws ServletException, IOException {
 
 
 
-        case "add":
-
-
-            System.out.println(
-                    "EXECUTE ADD CENTRE"
-            );
-
-
-            addCentre(
-                    request,
-                    response
-            );
-
-
-            break;
+        request.setCharacterEncoding(
+                "UTF-8"
+        );
 
 
 
-
-
-
-        case "updateProfile":
-
-
-            System.out.println(
-                    "EXECUTE UPDATE PROFILE"
-            );
-
-
-
-            updateCentreProfile(
-                    request,
-                    response
-            );
-
-
-
-            break;
+        String action =
+                request.getParameter(
+                        "action"
+                );
 
 
 
 
+        /*
+        إذا لم يصل action
+        */
 
 
-
-        case "resetPassword":
-
-
-            System.out.println(
-                    "EXECUTE RESET PASSWORD"
-            );
-
-
-
-            resetPassword(
-                    request,
-                    response
-            );
-
-
-            break;
-
-
-
-
-
-
-        default:
-
-
-            System.out.println(
-                    "UNKNOWN ACTION = "
-                    + action
-            );
-
+        if(action == null || action.trim().isEmpty()){
 
 
             response.setContentType(
@@ -325,15 +305,116 @@ protected void doPost(
 
 
             response.getWriter().write(
-                    "{"
-                    + "\"success\":false,"
-                    + "\"error\":\"unknown action\""
-                    + "}"
+                    "{\"success\":false,\"error\":\"action missing\"}"
             );
 
 
+            return;
 
-            break;
+        }
+
+
+
+
+
+
+
+        switch(action){
+
+
+
+            /*
+            ==========================================
+            CREATE CENTRE
+            ==========================================
+            */
+
+
+            case "add":
+
+
+                addCentre(
+                        request,
+                        response
+                );
+
+
+                break;
+
+
+
+
+
+
+
+            /*
+            ==========================================
+            UPDATE PROFILE
+            ==========================================
+            */
+
+
+            case "updateProfile":
+
+
+                updateCentreProfile(
+                        request,
+                        response
+                );
+
+
+                break;
+
+
+
+
+
+
+
+
+            /*
+            ==========================================
+            RESET PASSWORD
+            ==========================================
+            */
+
+
+            case "resetPassword":
+
+
+                resetPassword(
+                        request,
+                        response
+                );
+
+
+                break;
+
+
+
+
+
+
+
+            default:
+
+
+                response.setContentType(
+                        "application/json;charset=UTF-8"
+                );
+
+
+
+                response.getWriter().write(
+                        "{\"success\":false,\"error\":\"unknown action\"}"
+                );
+
+
+                break;
+
+
+
+        }
 
 
 
@@ -341,42 +422,69 @@ protected void doPost(
 
 
 
-}
 
+
+
+
+
+    /*
+    ==================================================
+    LIST CENTRES
+    ==================================================
+    */
 
 
     private void listCentres(
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws ServletException, IOException {
+    )
+    throws ServletException, IOException {
 
 
 
         String search =
-                request.getParameter("search");
+                request.getParameter(
+                        "search"
+                );
+
 
 
         String status =
-                request.getParameter("status");
+                request.getParameter(
+                        "status"
+                );
+
 
 
         String order =
-                request.getParameter("order");
+                request.getParameter(
+                        "order"
+                );
+
+
 
 
 
         if(search == null)
+
             search="";
 
 
 
+
+
         if(status == null || status.isEmpty())
+
             status="ALL";
 
 
 
+
+
         if(order == null || order.isEmpty())
+
             order="NEW";
+
 
 
 
@@ -387,30 +495,38 @@ protected void doPost(
 
 
 
+
+
         try{
+
 
             if(request.getParameter("page")!=null){
 
+
                 page =
                 Integer.parseInt(
-                    request.getParameter("page")
+                        request.getParameter("page")
                 );
 
+
             }
+
 
         }
         catch(Exception e){
 
+
             page=1;
 
-        }
 
+        }
 
 
 
 
 
         List<Centre> centres =
+
 
                 centreDAO.searchCentres(
                         search,
@@ -424,8 +540,8 @@ protected void doPost(
 
 
 
-
         int totalCentres =
+
 
                 centreDAO.countCentres(
                         search,
@@ -436,13 +552,12 @@ protected void doPost(
 
 
 
-
         int totalPages =
+
 
                 (int)Math.ceil(
                         (double)totalCentres/pageSize
                 );
-
 
 
 
@@ -454,10 +569,12 @@ protected void doPost(
         );
 
 
+
         request.setAttribute(
                 "currentPage",
                 page
         );
+
 
 
         request.setAttribute(
@@ -473,10 +590,12 @@ protected void doPost(
         );
 
 
+
         request.setAttribute(
                 "status",
                 status
         );
+
 
 
         request.setAttribute(
@@ -487,16 +606,13 @@ protected void doPost(
 
 
 
-
-
-
         if("true".equals(
                 request.getParameter("ajax")
         )){
 
 
             request.getRequestDispatcher(
-                "/admin/pages/fragments/centres/centres-table.jsp"
+                    "/admin/pages/fragments/centres/centres-table.jsp"
             )
             .forward(
                     request,
@@ -507,8 +623,6 @@ protected void doPost(
             return;
 
         }
-
-
 
 
 
@@ -524,47 +638,79 @@ protected void doPost(
 
 
     }
-
-
-
-
     
+    /*
+    ==================================================
+    VIEW CENTRE
+    عرض معلومات مركز
+    ==================================================
+    */
+
+
+    private void viewCentre(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws ServletException, IOException {
 
 
 
-/*
- * ======================================================
- * VIEW CENTRE
- * ======================================================
- */
-
-private void viewCentre(
-        HttpServletRequest request,
-        HttpServletResponse response
-)
-throws ServletException, IOException {
+        try{
 
 
-    try{
-
-
-        int id =
-        Integer.parseInt(
-                request.getParameter("id")
-        );
+            int id =
+            Integer.parseInt(
+                    request.getParameter("id")
+            );
 
 
 
-        Centre centre =
-                centreDAO.getCentreById(id);
+            Centre centre =
+
+                    centreDAO.getCentreById(id);
 
 
 
-        /*
-         * إذا كان المركز غير موجود
-         */
 
-        if(centre == null){
+            if(centre == null){
+
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/CentreServlet?action=list"
+                );
+
+
+                return;
+
+            }
+
+
+
+
+            request.setAttribute(
+                    "centre",
+                    centre
+            );
+
+
+
+
+            request.getRequestDispatcher(
+                    "/admin/pages/fragments/centres/centre-view.jsp"
+            )
+            .forward(
+                    request,
+                    response
+            );
+
+
+
+        }
+        catch(Exception e){
+
+
+            e.printStackTrace();
 
 
             response.sendRedirect(
@@ -573,36 +719,404 @@ throws ServletException, IOException {
             );
 
 
-            return;
+        }
+
+
+    }
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    ADD CENTRE
+    إنشاء مركز جديد + إنشاء سجل دفع UNPAID
+    ==================================================
+    */
+
+
+   /*
+==================================================
+ADD CENTRE
+
+Create new centre
++
+Create initial payment UNPAID
+
+Subscription dates are saved in centres table.
+After payment confirmation,
+PaymentDAO will update dates and status.
+
+==================================================
+*/
+
+/*
+==================================================
+ADD CENTRE
+
+Create new centre
++
+Create initial payment UNPAID
+
+Centre starts as PENDING.
+Subscription activation happens after payment confirmation.
+
+==================================================
+*/
+
+/*
+==================================================
+ADD CENTRE
+
+Create new centre
++
+Initial subscription is already PAID
+
+Process:
+
+1- Save centre
+2- Status = ACTIVE
+3- Calculate subscription_end
+4- Create payment record PAID
+5- Generate invoice
+
+==================================================
+*/
+
+private void addCentre(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
+
+
+
+    String name =
+            request.getParameter("name");
+
+
+    String owner =
+            request.getParameter("owner_name");
+
+
+    String phone =
+            request.getParameter("phone");
+
+
+    String start =
+            request.getParameter("subscription_start");
+
+
+    String duration =
+            request.getParameter("subscription_duration");
+
+
+
+
+
+
+
+    /*
+    ==============================================
+    CREATE TEMPORARY PASSWORD
+    ==============================================
+    */
+
+
+    String temporaryPassword =
+            PasswordGenerator.generatePassword();
+
+
+
+
+
+
+
+
+    Centre centre =
+            new Centre();
+
+
+
+
+
+
+    centre.setName(name);
+
+
+    centre.setOwnerName(owner);
+
+
+    centre.setPhone(phone);
+
+
+
+
+
+
+    centre.setPasswordHash(
+
+            PasswordUtil.hashPassword(
+                    temporaryPassword
+            )
+
+    );
+
+
+
+
+
+
+
+
+
+    /*
+    ==============================================
+    SUBSCRIPTION START
+    ==============================================
+    */
+
+
+    centre.setSubscriptionStart(
+
+            Date.valueOf(start)
+
+    );
+
+
+
+
+
+
+
+
+
+    /*
+    ==============================================
+    CALCULATE SUBSCRIPTION END
+
+    According to duration
+
+    ==============================================
+    */
+
+
+    int months = 1;
+
+
+
+    if("3".equals(duration)){
+
+
+        months = 3;
+
+
+    }
+    else if("6".equals(duration)){
+
+
+        months = 6;
+
+
+    }
+    else if("12".equals(duration)){
+
+
+        months = 12;
+
+
+    }
+
+
+
+
+
+
+    LocalDate end =
+
+            LocalDate.parse(start)
+            .plusMonths(months);
+
+
+
+
+
+
+    centre.setSubscriptionEnd(
+
+            Date.valueOf(end)
+
+    );
+
+
+
+
+
+
+
+
+    /*
+    ==============================================
+    FIRST SUBSCRIPTION IS ALREADY PAID
+
+    New centre starts ACTIVE
+
+    ==============================================
+    */
+
+
+    centre.setStatus(
+            "ACTIVE"
+    );
+
+
+
+
+
+
+
+
+
+    /*
+    ==============================================
+    SAVE CENTRE
+
+    ==============================================
+    */
+
+
+    boolean saved =
+
+            centreDAO.addCentre(centre);
+
+
+
+
+
+
+
+
+
+    if(saved && centre.getCentreCode()!=null){
+
+
+
+
+
+
+
+        /*
+        ==========================================
+        CREATE INITIAL PAYMENT
+
+        Creates:
+
+        payments
+        +
+        payment_history
+
+        ==========================================
+        */
+
+
+        boolean paymentCreated =
+
+                paymentDAO.createInitialPayment(
+                        centre.getCentreCode()
+                );
+
+
+
+
+
+
+
+        if(!paymentCreated){
+
+
+            System.out.println(
+                    "WARNING : Initial payment not created"
+            );
+
 
         }
 
 
 
 
-        /*
-         * إرسال بيانات المركز
-         */
 
-        request.setAttribute(
-                "centre",
-                centre
+
+
+
+
+        /*
+        ==========================================
+        SAVE LOGIN INFORMATION TEMPORARILY
+
+        Display once after creation
+
+        ==========================================
+        */
+
+
+        request.getSession().setAttribute(
+                "centreCode",
+                centre.getCentreCode()
         );
 
 
 
-        /*
-         * تحديد القسم داخل Dashboard
-         */
-
-    
-
+        request.getSession().setAttribute(
+                "username",
+                centre.getUsername()
+        );
 
 
-       
+
+        request.getSession().setAttribute(
+                "password",
+                temporaryPassword
+        );
+
+
+
+
+
+
+
+
+        response.sendRedirect(
+
+                request.getContextPath()
+                +
+                "/admin/pages/fragments/centres/centre-created.jsp"
+
+        );
+
+
+
+
+
+
+    }
+    else {
+
+
+
+
+        request.setAttribute(
+                "error",
+                "Erreur création centre"
+        );
+
+
+
 
         request.getRequestDispatcher(
-                 "/admin/pages/fragments/centres/centre-view.jsp"
+                "/admin/pages/add-centre.jsp"
         )
         .forward(
                 request,
@@ -612,268 +1126,34 @@ throws ServletException, IOException {
 
 
     }
-    catch(NumberFormatException e){
 
-
-        response.sendRedirect(
-                request.getContextPath()
-                + "/CentreServlet?action=list"
-        );
-
-
-    }
-    catch(Exception e){
-
-
-        e.printStackTrace();
-
-
-        response.sendRedirect(
-                request.getContextPath()
-                + "/CentreServlet?action=list"
-        );
-
-
-    }
 
 
 }
 
 
-    /* ====================================
-     * ADD CENTRE
-     * ====================================
-*/
 
-    private void addCentre(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws ServletException, IOException {
 
 
-
-        String name =
-                request.getParameter("name");
-
-
-
-        String owner =
-                request.getParameter("owner_name");
-
-
-
-        String phone =
-                request.getParameter("phone");
-
-
-
-        String start =
-                request.getParameter("subscription_start");
-
-
-
-        String duration =
-                request.getParameter("subscription_duration");
-
-
-
-
-
-
-
-        String temporaryPassword =
-
-                PasswordGenerator.generatePassword();
-
-
-
-
-
-
-
-        Centre centre =
-                new Centre();
-
-
-
-
-
-        centre.setName(name);
-
-
-        centre.setOwnerName(owner);
-
-
-        centre.setPhone(phone);
-
-
-        centre.setPasswordHash(
-
-                PasswordUtil.hashPassword(
-                        temporaryPassword
-                )
-
-        );
-
-
-
-
-
-
-
-
-        centre.setSubscriptionStart(
-
-                Date.valueOf(start)
-
-        );
-
-
-
-
-
-
-
-
-        int months=1;
-
-
-
-        if("3".equals(duration))
-            months=3;
-
-
-
-        if("6".equals(duration))
-            months=6;
-
-
-
-        if("12".equals(duration))
-            months=12;
-
-
-
-
-
-
-
-
-        LocalDate end =
-
-                LocalDate.parse(start)
-                .plusMonths(months);
-
-
-
-
-
-
-
-        centre.setSubscriptionEnd(
-
-                Date.valueOf(end)
-
-        );
-
-
-
-
-
-
-
-
-        boolean saved =
-
-                centreDAO.addCentre(centre);
-
-
-
-
-
-
-
-if(saved && centre.getCentreCode()!=null){
-
-
-    request.getSession().setAttribute(
-            "centreCode",
-            centre.getCentreCode()
-    );
-
-
-    request.getSession().setAttribute(
-            "username",
-            centre.getUsername()
-    );
-
-
-    request.getSession().setAttribute(
-            "password",
-            temporaryPassword
-    );
-
-
-
-    response.sendRedirect(
-
-        request.getContextPath()
-        + "/admin/pages/fragments/centres/centre-created.jsp"
-
-    );
-
-
-}
-
-        else {
-
-
-
-            request.setAttribute(
-                    "error",
-                    "Erreur création centre"
-            );
-
-
-
-            request.getRequestDispatcher(
-
-                "/admin/pages/add-centre.jsp"
-
-            )
-            .forward(
-                    request,
-                    response
-            );
-
-
-        }
-
-
-    }
-
-
-
-
-
+    /*
+    ==================================================
+    UPDATE STATUS
+    تغيير حالة المركز
+    ==================================================
+    */
 
 
     private void updateStatus(
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws IOException {
+    )
+    throws IOException {
 
 
 
         response.setContentType(
-                "application/json"
+                "application/json;charset=UTF-8"
         );
-
-
-        response.setCharacterEncoding(
-                "UTF-8"
-        );
-
 
 
 
@@ -881,13 +1161,15 @@ if(saved && centre.getCentreCode()!=null){
 
 
             int id =
+
             Integer.parseInt(
-                request.getParameter("id")
+                    request.getParameter("id")
             );
 
 
 
             String status =
+
                     request.getParameter("status");
 
 
@@ -903,11 +1185,144 @@ if(saved && centre.getCentreCode()!=null){
 
 
 
+            response.getWriter().print(
+
+                    "{\"success\":"
+                    + updated
+                    + "}"
+
+            );
+
+
+
+        }
+        catch(Exception e){
+
+
+            e.printStackTrace();
+
+
+            response.getWriter().print(
+                    "{\"success\":false}"
+            );
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    RESET PASSWORD
+    ==================================================
+    */
+
+
+    private void resetPassword(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws IOException {
+
+
+
+        response.setContentType(
+                "text/html;charset=UTF-8"
+        );
+
+
+
+        try{
+
+
+            int id =
+
+            Integer.parseInt(
+                    request.getParameter("id")
+            );
+
+
+
+            Centre centre =
+
+                    centreDAO.getCentreById(id);
+
+
+
+
+
+            if(centre == null){
+
+
+                response.getWriter().println(
+                        "<p>Centre introuvable</p>"
+                );
+
+
+                return;
+
+            }
+
+
+
+
+
+
+            String newPassword =
+
+                    PasswordGenerator.generatePassword();
+
+
+
+
+
+
+            boolean updated =
+
+                    centreDAO.resetPassword(
+                            id,
+                            newPassword
+                    );
+
+
+
+
+
             if(updated){
 
 
-                response.getWriter().print(
-                    "{\"success\":true}"
+
+                response.getWriter().println(
+
+                        "<div class='reset-success'>"
+
+                        + "<h4>🔑 Password Reset</h4>"
+
+                        + "<p>Code : "
+                        + centre.getCentreCode()
+                        + "</p>"
+
+                        + "<p>Username : "
+                        + centre.getUsername()
+                        + "</p>"
+
+                        + "<p>Password :</p>"
+
+                        + "<div class='temporary-password'>"
+                        + newPassword
+                        + "</div>"
+
+                        + "</div>"
+
                 );
 
 
@@ -915,8 +1330,8 @@ if(saved && centre.getCentreCode()!=null){
             else{
 
 
-                response.getWriter().print(
-                    "{\"success\":false}"
+                response.getWriter().println(
+                        "<p>Error resetting password</p>"
                 );
 
 
@@ -931,8 +1346,185 @@ if(saved && centre.getCentreCode()!=null){
             e.printStackTrace();
 
 
+            response.getWriter().println(
+                    "<p>Server error</p>"
+            );
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    EDIT CENTRE
+    ==================================================
+    */
+
+
+    private void editCentre(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws ServletException, IOException {
+
+
+
+        try{
+
+
+            int id =
+
+            Integer.parseInt(
+                    request.getParameter("id")
+            );
+
+
+
+            Centre centre =
+
+                    centreDAO.getCentreById(id);
+
+
+
+
+            request.setAttribute(
+                    "centre",
+                    centre
+            );
+
+
+
+
+            request.getRequestDispatcher(
+                    "/admin/pages/fragments/centres/centre-edit.jsp"
+            )
+            .forward(
+                    request,
+                    response
+            );
+
+
+
+        }
+        catch(Exception e){
+
+
+            e.printStackTrace();
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    UPDATE PROFILE
+    ==================================================
+    */
+
+
+    private void updateCentreProfile(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws IOException {
+
+
+
+        response.setContentType(
+                "application/json;charset=UTF-8"
+        );
+
+
+
+        try{
+
+
+            int id =
+
+            Integer.parseInt(
+                    request.getParameter("id")
+            );
+
+
+
+            Centre centre =
+
+                    new Centre();
+
+
+
+
+            centre.setId(id);
+
+
+
+            centre.setName(
+                    request.getParameter("name")
+            );
+
+
+
+            centre.setOwnerName(
+                    request.getParameter("owner_name")
+            );
+
+
+
+            centre.setPhone(
+                    request.getParameter("phone")
+            );
+
+
+
+
+
+            boolean updated =
+
+                    centreDAO.updateCentreProfile(
+                            centre
+                    );
+
+
+
+
+
             response.getWriter().print(
-                "{\"success\":false}"
+
+                    "{\"success\":"
+                    + updated
+                    + "}"
+
+            );
+
+
+
+        }
+        catch(Exception e){
+
+
+            e.printStackTrace();
+
+
+            response.getWriter().print(
+                    "{\"success\":false}"
             );
 
 
@@ -940,6 +1532,8 @@ if(saved && centre.getCentreCode()!=null){
 
 
     }
+
+
 
 
 
@@ -952,547 +1546,7 @@ if(saved && centre.getCentreCode()!=null){
 
     }
 
-private void resetPassword(
-        HttpServletRequest request,
-        HttpServletResponse response
-)
-throws IOException {
-
-
-    response.setContentType(
-            "text/html;charset=UTF-8"
-    );
-
-
-    try{
-
-
-        int id =
-        Integer.parseInt(
-                request.getParameter("id")
-        );
-
-
-
-        /*
-         * جلب بيانات المركز
-         */
-        Centre centre =
-                centreDAO.getCentreById(id);
-
-
-
-        if(centre == null){
-
-
-            response.getWriter().println(
-
-                "<div class='empty-state'>"
-                +
-                "<p>Centre introuvable</p>"
-                +
-                "</div>"
-
-            );
-
-
-            return;
-
-        }
-
-
-
-
-
-
-        /*
-         * توليد كلمة مرور جديدة
-         */
-        String newPassword =
-                PasswordGenerator.generatePassword();
-
-
-
-
-
-
-
-        /*
-         * تحديث كلمة المرور
-         */
-        boolean updated =
-
-                centreDAO.resetPassword(
-                        id,
-                        newPassword
-                );
-
-
-
-
-
-
-
-        if(updated){
-
-
-
-            String codeLabel =
-                    LanguageManager.get(
-                            "centers.details.code",
-                            request.getSession()
-                    );
-
-
-
-            String usernameLabel =
-                    LanguageManager.get(
-                            "centers.details.username",
-                            request.getSession()
-                    );
-
-
-
-            String passwordLabel =
-                    LanguageManager.get(
-                            "centers.reset.password.label",
-                            request.getSession()
-                    );
-
-
-
-            String warning =
-                    LanguageManager.get(
-                            "centers.reset.warning",
-                            request.getSession()
-                    );
-
-
-
-
-
-
-            String copyText =
-
-                    codeLabel
-                    +
-                    " : "
-                    +
-                    centre.getCentreCode()
-
-                    +
-                    "\n"
-
-                    +
-                    usernameLabel
-                    +
-                    " : "
-                    +
-                    centre.getUsername()
-
-                    +
-                    "\n"
-
-                    +
-                    passwordLabel
-                    +
-                    " : "
-                    +
-                    newPassword
-
-                    +
-                    "\n\n⚠ "
-
-                    +
-                    warning;
-
-
-
-
-
-
-
-            response.getWriter().println(
-
-
-                "<div class='reset-success'>"
-
-
-
-                + "<h3>🔑</h3>"
-
-
-
-                + "<h4>"
-                + LanguageManager.get(
-                        "centers.reset.success",
-                        request.getSession()
-                  )
-                + "</h4>"
-
-
-
-
-
-
-                + "<div class='reset-info' id='resetPasswordMessage'>"
-
-
-
-
-
-                + "<p>"
-                + "<strong>"
-                + codeLabel
-                + " :</strong> "
-                + centre.getCentreCode()
-                + "</p>"
-
-
-
-
-
-                + "<p>"
-                + "<strong>"
-                + usernameLabel
-                + " :</strong> "
-                + centre.getUsername()
-                + "</p>"
-
-
-
-
-
-                + "<p>"
-                + "<strong>"
-                + passwordLabel
-                + " :</strong>"
-                + "</p>"
-
-
-
-
-
-                + "<div class='temporary-password'>"
-                + newPassword
-                + "</div>"
-
-
-
-
-
-                + "</div>"
-
-
-
-
-
-
-
-
-                /*
-                 * زر النسخ
-                 */
-                + "<button "
-                + "type='button' "
-                + "class='copy-password-btn' "
-                + "onclick='copyLoginInfo()'>"
-
-
-                + "📋 "
-                + LanguageManager.get(
-                        "centers.copy.password",
-                        request.getSession()
-                  )
-
-
-                + "</button>"
-
-
-
-
-
-
-
-
-                /*
-                 * النص المخفي للنسخ
-                 */
-                + "<textarea "
-                + "id='loginInfoText' "
-                + "hidden>"
-                + copyText
-                + "</textarea>"
-
-
-
-
-
-
-
-                + "<p class='reset-warning'>⚠ "
-                + warning
-                + "</p>"
-
-
-
-
-
-                + "</div>"
-
-
-            );
-
-
-
-        }
-        else{
-
-
-            response.getWriter().println(
-
-
-                "<div class='empty-state'>"
-                +
-                "<p>Error resetting password</p>"
-                +
-                "</div>"
-
-
-            );
-
-
-        }
-
-
-
-
-    }
-    catch(Exception e){
-
-
-        e.printStackTrace();
-
-
-
-        response.getWriter().println(
-
-
-            "<div class='empty-state'>"
-            +
-            "<p>Server error</p>"
-            +
-            "</div>"
-
-
-        );
-
-
-    }
-
-}
-
-/*
- * ======================================================
- * EDIT CENTRE DIALOG
- * ======================================================
- */
-
-private void editCentre(
-        HttpServletRequest request,
-        HttpServletResponse response
-)
-throws ServletException, IOException {
-
-
-    try{
-
-
-        int id =
-        Integer.parseInt(
-            request.getParameter("id")
-        );
-
-
-
-        Centre centre =
-        centreDAO.getCentreById(id);
-
-
-
-        if(centre == null){
-
-
-            response.getWriter().println(
-
-                "<div class='empty-state'>"
-                +
-                "<p>Centre introuvable</p>"
-                +
-                "</div>"
-
-            );
-
-
-            return;
-
-        }
-
-
-
-
-
-        request.setAttribute(
-            "centre",
-            centre
-        );
-
-
-
-
-        request.getRequestDispatcher(
-            "/admin/pages/fragments/centres/centre-edit.jsp"
-        )
-        .forward(
-            request,
-            response
-        );
-
-
-
-    }
-    catch(Exception e){
-
-
-        e.printStackTrace();
-
-
-
-        response.getWriter().println(
-
-            "<div class='empty-state'>"
-            +
-            "<p>Erreur chargement modification centre</p>"
-            +
-            "</div>"
-
-        );
-
-
-    }
-
-
-}
-
-
-/*
- * ======================================================
- * UPDATE CENTRE PROFILE
- * EDIT DIALOG AJAX
- * ======================================================
- */
-
-private void updateCentreProfile(
-        HttpServletRequest request,
-        HttpServletResponse response
-)
-throws IOException {
     
 
-
-    response.setContentType(
-            "application/json;charset=UTF-8"
-    );
-
-
-    try{
-
-
-        int id =
-        Integer.parseInt(
-                request.getParameter("id")
-        );
-
-
-
-        String name =
-                request.getParameter("name");
-
-
-
-        String owner =
-                request.getParameter("owner_name");
-
-
-
-        String phone =
-                request.getParameter("phone");
-
-
-
-
-
-    
-
-
-
-
-
-        Centre centre =
-                new Centre();
-
-
-
-        centre.setId(id);
-
-        centre.setName(name);
-
-        centre.setOwnerName(owner);
-
-        centre.setPhone(phone);
-
-
-
-
-
-
-        boolean updated =
-
-                centreDAO.updateCentreProfile(
-                        centre
-                );
-
-
-        response.getWriter().print(
-
-            "{\"success\":"
-            +
-            updated
-            +
-            "}"
-
-        );
-
-
-
-    }
-    catch(Exception e){
-
-
-        e.printStackTrace();
-
-
-
-        response.getWriter().print(
-
-            "{\"success\":false}"
-
-        );
-
-
-    }
-
-
-}
 
 }

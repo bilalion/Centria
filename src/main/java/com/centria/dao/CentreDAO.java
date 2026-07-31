@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -866,7 +867,7 @@ public Centre getCentreById(int id){
 
         ps.setString(
                 8,
-                "PENDING"
+                "ACTIVE"
         );
 
 
@@ -1235,5 +1236,129 @@ public boolean updateCentreProfile(Centre centre){
 }
 
 
+    /*
+======================================================
+ACTIVATE CENTRE AFTER PAYMENT
 
+Called after payment confirmation.
+
+Updates centres table:
+
+- subscription_start = new payment date
+- subscription_end = start + duration
+- status = ACTIVE
+
+======================================================
+*/
+
+public boolean activateCentreAfterPayment(
+        String centreCode,
+        int durationMonths
+){
+
+
+    String sql =
+
+    "UPDATE centres SET "
+    + "subscription_start=?, "
+    + "subscription_end=?, "
+    + "status=? "
+    + "WHERE centre_code=?";
+
+
+
+
+    try(
+
+        Connection con =
+                DatabaseConfig.getConnection();
+
+
+        PreparedStatement ps =
+                con.prepareStatement(sql)
+
+    ){
+
+
+
+        /*
+        New subscription start date
+        = Today
+        */
+
+        Date startDate =
+
+                new Date(
+                    System.currentTimeMillis()
+                );
+
+
+
+        /*
+        Calculate new end date
+        */
+
+        LocalDate end =
+
+                startDate.toLocalDate()
+                .plusMonths(durationMonths);
+
+
+
+        Date endDate =
+
+                Date.valueOf(end);
+
+
+
+
+
+        ps.setDate(
+                1,
+                startDate
+        );
+
+
+
+        ps.setDate(
+                2,
+                endDate
+        );
+
+
+
+        ps.setString(
+                3,
+                "ACTIVE"
+        );
+
+
+
+        ps.setString(
+                4,
+                centreCode
+        );
+
+
+
+
+        return ps.executeUpdate() > 0;
+
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+    }
+
+
+
+    return false;
+
+
+}
 }
