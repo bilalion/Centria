@@ -267,8 +267,6 @@
 
 
 
-
-
 /* ======================================================
    08 - PAYMENT TABLE CONTAINER
    ====================================================== */
@@ -278,7 +276,7 @@
 
     width:100%;
 
-    overflow-x:auto;
+    overflow:hidden;
 
     background:white;
 
@@ -287,7 +285,6 @@
     box-shadow:var(--shadow);
 
 }
-
 
 
 
@@ -301,9 +298,9 @@
 
     width:100%;
 
-    min-width:1050px;
-
     border-collapse:collapse;
+
+    table-layout:auto;
 
 }
 
@@ -334,7 +331,7 @@
 
     height:52px;
 
-    padding:0 12px;
+    padding:0 10px;
 
     color:white;
 
@@ -359,7 +356,7 @@
 
     height:58px;
 
-    padding:10px 12px;
+    padding:10px;
 
     text-align:center;
 
@@ -369,14 +366,187 @@
 
     font-size:13px;
 
-    border-bottom:
+    border-bottom:1px solid var(--border);
 
-    1px solid var(--border);
+    white-space:nowrap;
 
 }
 
 
 
+
+
+
+
+/* ======================================================
+   TAB1 COLUMN CONTROL
+
+   1- Code
+   2- Name
+   3- Subscription End
+   4- Invoice
+   5- Payment Status
+   6- Account Status
+   7- Start Date
+   8- Duration
+   9- Action
+
+   ====================================================== */
+
+
+
+/* Centre Code */
+
+.payments-table th:nth-child(1),
+.payments-table td:nth-child(1){
+
+    width:120px;
+
+}
+
+
+
+
+
+/* Centre Name */
+
+.payments-table th:nth-child(2),
+.payments-table td:nth-child(2){
+
+    width:150px;
+
+    max-width:150px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+
+
+
+/* Subscription End */
+
+.payments-table th:nth-child(3),
+.payments-table td:nth-child(3){
+
+    width:110px;
+
+}
+
+
+
+
+
+/* Invoice */
+
+.payments-table th:nth-child(4),
+.payments-table td:nth-child(4){
+
+    width:230px;
+
+    max-width:230px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    font-size:12px;
+
+}
+
+
+
+
+
+/* Payment Status */
+
+.payments-table th:nth-child(5),
+.payments-table td:nth-child(5){
+
+    width:120px;
+
+}
+
+
+
+
+
+/* Account Status */
+
+.payments-table th:nth-child(6),
+.payments-table td:nth-child(6){
+
+    width:130px;
+
+}
+
+
+
+
+
+/* New Start Date */
+
+.payments-table th:nth-child(7),
+.payments-table td:nth-child(7){
+
+    width:130px;
+
+}
+
+
+
+
+
+/* Duration */
+
+.payments-table th:nth-child(8),
+.payments-table td:nth-child(8){
+
+    width:80px;
+
+}
+
+
+
+
+
+/* Action */
+
+.payments-table th:nth-child(9),
+.payments-table td:nth-child(9){
+
+    width:90px;
+
+}
+
+
+
+
+
+
+/* LONG TEXT PROTECTION */
+
+
+.payments-table td:nth-child(2),
+.payments-table td:nth-child(4){
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+
+
+
+
+
+/* ROW EFFECT */
 
 
 .payments-table tbody tr{
@@ -1335,13 +1505,6 @@ to{
 
 
 
-    .payments-table{
-
-
-        min-width:850px;
-
-
-    }
 
 
 

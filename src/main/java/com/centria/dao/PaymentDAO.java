@@ -840,7 +840,7 @@ public List<Payment> getUnpaidPayments(
 "SELECT "
 + "p.centre_code, "
 + "c.name, "
-+ "c.phone, "
++ "c.subscription_end, "
 + "p.code_facture, "
 + "p.status_payment, "
 + "c.status "
@@ -1012,11 +1012,9 @@ else{
 
 
 
-            payment.setPhone(
-                    rs.getString(
-                            "phone"
-                    )
-            );
+         payment.setSubscriptionEnd(
+                   rs.getDate("subscription_end")
+         );
 
 
 

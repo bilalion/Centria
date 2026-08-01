@@ -43,7 +43,7 @@ List<Payment> payments =
 
 <th>
 <%=LanguageManager.get(
-        "payments.phone",
+        "payments.subscription.end",
         session
 )%>
 </th>
@@ -120,23 +120,82 @@ if(payments != null && !payments.isEmpty()){
 
 
 <td>
+
+<span class="cell-text"
+title="<%=payment.getCentreCode()%>">
+
 <%=payment.getCentreCode()%>
+
+</span>
+
 </td>
 
 
+
+
+
 <td>
+
+<span class="cell-text"
+title="<%=payment.getCentreName()%>">
+
 <%=payment.getCentreName()%>
+
+</span>
+
 </td>
 
 
+
+
+
 <td>
-<%=payment.getPhone()%>
+
+<%
+
+if(payment.getSubscriptionEnd() != null){
+
+    java.text.SimpleDateFormat sdf =
+            new java.text.SimpleDateFormat("dd/MM/yyyy");
+
+%>
+
+<%=sdf.format(payment.getSubscriptionEnd())%>
+
+<%
+
+}
+else{
+
+%>
+
+-
+
+<%
+
+}
+
+%>
+
 </td>
 
 
+
+
+
 <td>
+
+<span class="cell-text"
+title="<%=payment.getCodeFacture()%>">
+
 <%=payment.getCodeFacture()%>
+
+</span>
+
 </td>
+
+
+
 
 
 
@@ -162,9 +221,12 @@ if(payments != null && !payments.isEmpty()){
 
 
 
+
+
 <!-- =========================
      ACCOUNT STATUS
 ========================= -->
+
 
 <td>
 
@@ -178,6 +240,7 @@ String accountStatus =
 if("ACTIVE".equals(accountStatus)){
 
 %>
+
 
 <span class="account-status account-active">
 
@@ -264,15 +327,21 @@ else{
      NEW START DATE
 ========================= -->
 
+
 <td>
 
 <input
+
 type="date"
+
 class="payment-start-date"
+
 data-centre="<%=payment.getCentreCode()%>"
+
 >
 
 </td>
+
 
 
 
@@ -282,11 +351,15 @@ data-centre="<%=payment.getCentreCode()%>"
      DURATION
 ========================= -->
 
+
 <td>
 
 <select
+
 class="payment-duration"
+
 data-centre="<%=payment.getCentreCode()%>"
+
 >
 
 
@@ -319,26 +392,34 @@ data-centre="<%=payment.getCentreCode()%>"
 
 
 
+
 <!-- =========================
      ACTION
 ========================= -->
+
 
 <td>
 
 
 <button
+
 type="button"
+
 class="btn-primary payment-action-btn"
+
 title="<%=LanguageManager.get(
         "payments.register",
         session
 )%>"
+
 onclick="openPaymentConfirm('<%=payment.getCentreCode()%>')"
+
 >
 
 💳
 
 </button>
+
 
 </td>
 
