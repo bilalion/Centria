@@ -382,6 +382,23 @@ Actions:
 ======================================================
 */
 
+/*
+======================================================
+CONFIRM PAYMENT
+
+TAB1 : UNPAID
+
+Flow:
+
+1- Get current UNPAID payment
+2- Generate new code_facture
+3- Update centres
+4- Update payments
+5- Insert history_payment
+
+======================================================
+*/
+
 public boolean confirmPayment(
         String centreCode,
         Date newStartDate,
@@ -390,7 +407,9 @@ public boolean confirmPayment(
 
     Connection con = null;
 
+
     try{
+
 
         con = DatabaseConfig.getConnection();
 
@@ -400,8 +419,7 @@ public boolean confirmPayment(
 
         /*
         ==============================================
-        STEP 1
-        GET PAYMENT ID
+        1 - GET CURRENT PAYMENT
         ==============================================
         */
 
@@ -409,32 +427,38 @@ public boolean confirmPayment(
 
         "SELECT id "
         + "FROM payments "
-        + "WHERE centre_code=?";
+        + "WHERE centre_code=? "
+        + "AND status_payment='UNPAID' "
+        + "LIMIT 1";
 
 
-
-        PreparedStatement getPayment =
+        PreparedStatement psSelect =
 
                 con.prepareStatement(
                         selectPayment
                 );
 
 
-
-        getPayment.setString(
+        psSelect.setString(
                 1,
                 centreCode
         );
 
 
-
         ResultSet rs =
 
-                getPayment.executeQuery();
+                psSelect.executeQuery();
 
 
 
         if(!rs.next()){
+
+
+            System.out.println(
+                    "NO UNPAID PAYMENT FOUND : "
+                    + centreCode
+            );
+
 
             con.rollback();
 
@@ -450,128 +474,19 @@ public boolean confirmPayment(
 
 
 
-        /*
-        ==============================================
-        STEP 2
-        GENERATE NEW INVOICE CODE
-        ==============================================
-        */
-
-        String invoiceCode =
-
-                InvoiceCodeGenerator.generateCode(
-                        paymentId
-                );
-                /*
-        ==============================================
-        STEP 3
-        UPDATE PAYMENTS
-        ==============================================
-        */
-
-        String updatePayment =
-
-        "UPDATE payments SET "
-        + "code_facture=?, "
-        + "status_payment=? "
-        + "WHERE id=?";
-
-
-
-        PreparedStatement payment =
-
-                con.prepareStatement(
-                        updatePayment
-                );
-
-
-
-        payment.setString(
-                1,
-                invoiceCode
-        );
-
-
-        payment.setString(
-                2,
-                "PAID"
-        );
-
-
-        payment.setInt(
-                3,
-                paymentId
-        );
-
-
-
-        payment.executeUpdate();
-
-
-
 
 
         /*
         ==============================================
-        STEP 4
-        INSERT PAYMENT HISTORY
+        2 - CALCULATE END DATE
         ==============================================
         */
 
-        String insertHistory =
 
-        "INSERT INTO history_payment "
-        + "(code_facture, centre_code, date_paiement) "
-        + "VALUES (?, ?, ?)";
-
-
-
-        PreparedStatement history =
-
-                con.prepareStatement(
-                        insertHistory
-                );
-
-
-
-        history.setString(
-                1,
-                invoiceCode
-        );
-
-
-        history.setString(
-                2,
-                centreCode
-        );
-
-
-        history.setDate(
-                3,
-                new Date(
-                        System.currentTimeMillis()
-                )
-        );
-
-
-
-        history.executeUpdate();
-
-
-
-
-
-        /*
-        ==============================================
-        STEP 5
-        CALCULATE SUBSCRIPTION END DATE
-        ==============================================
-        */
-
-        
         java.util.Calendar calendar =
 
                 java.util.Calendar.getInstance();
+
 
 
         calendar.setTime(
@@ -588,14 +503,21 @@ public boolean confirmPayment(
         Date subscriptionEnd =
 
                 new Date(
-                        calendar.getTimeInMillis()
+                    calendar.getTimeInMillis()
                 );
-                /*
+
+
+
+
+
+
+
+        /*
         ==============================================
-        STEP 6
-        UPDATE CENTRE SUBSCRIPTION
+        3 - UPDATE CENTRES
         ==============================================
         */
+
 
         String updateCentre =
 
@@ -606,8 +528,7 @@ public boolean confirmPayment(
         + "WHERE centre_code=?";
 
 
-
-        PreparedStatement centre =
+        PreparedStatement psCentre =
 
                 con.prepareStatement(
                         updateCentre
@@ -615,32 +536,194 @@ public boolean confirmPayment(
 
 
 
-        centre.setDate(
+        psCentre.setDate(
                 1,
                 newStartDate
         );
 
 
-        centre.setDate(
+        psCentre.setDate(
                 2,
                 subscriptionEnd
         );
 
 
-        centre.setString(
+        psCentre.setString(
                 3,
                 "ACTIVE"
         );
 
 
-        centre.setString(
+        psCentre.setString(
                 4,
                 centreCode
         );
 
 
 
-        centre.executeUpdate();
+        if(psCentre.executeUpdate()==0){
+
+
+            System.out.println(
+                    "CENTRE UPDATE FAILED"
+            );
+
+
+            con.rollback();
+
+            return false;
+
+        }
+
+
+
+
+
+
+
+
+        /*
+        ==============================================
+        4 - GENERATE NEW INVOICE CODE
+        ==============================================
+        */
+
+
+        String newInvoiceCode =
+
+                InvoiceCodeGenerator.generateCode(
+                        paymentId
+                );
+
+
+
+
+
+
+
+
+        /*
+        ==============================================
+        5 - UPDATE PAYMENTS
+        ==============================================
+        */
+
+
+        String updatePayment =
+
+        "UPDATE payments SET "
+        + "code_facture=?, "
+        + "status_payment=? "
+        + "WHERE id=?";
+
+
+
+        PreparedStatement psPayment =
+
+                con.prepareStatement(
+                        updatePayment
+                );
+
+
+
+        psPayment.setString(
+                1,
+                newInvoiceCode
+        );
+
+
+        psPayment.setString(
+                2,
+                "PAID"
+        );
+
+
+        psPayment.setInt(
+                3,
+                paymentId
+        );
+
+
+
+        if(psPayment.executeUpdate()==0){
+
+
+            System.out.println(
+                    "PAYMENT UPDATE FAILED"
+            );
+
+
+            con.rollback();
+
+            return false;
+
+        }
+
+
+
+
+
+
+
+        /*
+        ==============================================
+        6 - INSERT HISTORY PAYMENT
+        ==============================================
+        */
+
+
+        String insertHistory =
+
+        "INSERT INTO history_payment "
+        + "(code_facture, centre_code, date_paiement) "
+        + "VALUES (?, ?, ?)";
+
+
+
+        PreparedStatement psHistory =
+
+                con.prepareStatement(
+                        insertHistory
+                );
+
+
+
+        psHistory.setString(
+                1,
+                newInvoiceCode
+        );
+
+
+        psHistory.setString(
+                2,
+                centreCode
+        );
+
+
+        psHistory.setDate(
+                3,
+                new Date(
+                    System.currentTimeMillis()
+                )
+        );
+
+
+
+        if(psHistory.executeUpdate()==0){
+
+
+            System.out.println(
+                    "HISTORY INSERT FAILED"
+            );
+
+
+            con.rollback();
+
+            return false;
+
+        }
+
+
 
 
 
@@ -652,22 +735,36 @@ public boolean confirmPayment(
         ==============================================
         */
 
+
         con.commit();
 
+
+        System.out.println(
+                "PAYMENT CONFIRMED SUCCESSFULLY : "
+                + centreCode
+        );
+
+
         return true;
+
+
 
     }
     catch(Exception e){
 
+
         e.printStackTrace();
 
+
         try{
+
 
             if(con != null){
 
                 con.rollback();
 
             }
+
 
         }
         catch(Exception rollback){
@@ -676,16 +773,20 @@ public boolean confirmPayment(
 
         }
 
+
     }
     finally{
 
+
         try{
+
 
             if(con != null){
 
                 con.close();
 
             }
+
 
         }
         catch(Exception close){
@@ -694,13 +795,14 @@ public boolean confirmPayment(
 
         }
 
+
     }
+
+
 
     return false;
 
 }
-    
-
 
 
 /* ======================================================

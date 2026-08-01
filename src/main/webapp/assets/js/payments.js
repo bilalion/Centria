@@ -116,7 +116,7 @@ function loadPayments(page = 1){
 
 
 
-    let url =
+   let url =
 
         window.contextPath
 
@@ -127,14 +127,6 @@ function loadPayments(page = 1){
         +
 
         "&ajax=true"
-
-        +
-
-        "&tab="
-
-        +
-
-        currentPaymentTab
 
         +
 
@@ -159,19 +151,6 @@ function loadPayments(page = 1){
         +
 
         encodeURIComponent(order);
-
-
-
-
-
-
-
-    console.log(
-        "Loading payments:",
-        url
-    );
-
-
 
 
 

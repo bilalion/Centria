@@ -96,6 +96,16 @@ TAB1 implemented
 ======================================================
 */
 
+/*
+======================================================
+LIST PAYMENTS
+
+CURRENT MODULE:
+TAB1 ONLY - UNPAID
+
+======================================================
+*/
+
 private void listPayments(
         HttpServletRequest request,
         HttpServletResponse response
@@ -105,25 +115,11 @@ throws ServletException, IOException {
 
     /*
     ==============================================
-    GET TAB
+    FORCE TAB1 ONLY
     ==============================================
     */
 
-
-    String tab =
-
-            request.getParameter(
-                    "tab"
-            );
-
-
-    if(tab == null || tab.isEmpty()){
-
-
-        tab = "UNPAID";
-
-
-    }
+    String tab = "UNPAID";
 
 
 
@@ -134,7 +130,6 @@ throws ServletException, IOException {
     SEARCH / ORDER
     ==============================================
     */
-
 
     String search =
 
@@ -154,9 +149,7 @@ throws ServletException, IOException {
 
     if(order == null || order.isEmpty()){
 
-
         order = "NEW";
-
 
     }
 
@@ -170,7 +163,6 @@ throws ServletException, IOException {
     PAGINATION
     ==============================================
     */
-
 
     int page = 1;
 
@@ -207,34 +199,31 @@ throws ServletException, IOException {
 
 
 
+
     /*
     ==============================================
-    LOAD PAYMENTS
+    LOAD TAB1 DATA
 
-    TAB1 ONLY FOR NOW
+    ONLY UNPAID
 
     ==============================================
     */
 
 
-    List<Payment> payments = null;
+    List<Payment> payments =
+
+
+            paymentDAO.getUnpaidPayments(
+                    search,
+                    order,
+                    page,
+                    pageSize
+            );
 
 
 
-    if("UNPAID".equals(tab)){
 
 
-        payments =
-
-                paymentDAO.getUnpaidPayments(
-                        search,
-                        order,
-                        page,
-                        pageSize
-                );
-
-
-    }
 
 
 
@@ -284,52 +273,50 @@ throws ServletException, IOException {
 
 
 
-  /*
-======================================================
-FORWARD RESPONSE
-
-AJAX:
-Return only table fragment
-
-Normal:
-Return full payments page
-
-======================================================
-*/
 
 
-if("true".equals(
-        request.getParameter("ajax")
-)){
+    /*
+    ==============================================
+    AJAX RESPONSE
+
+    ONLY unpaid-table.jsp
+
+    ==============================================
+    */
 
 
-    request.getRequestDispatcher(
-
-            "/admin/pages/fragments/payments/unpaid-table.jsp"
-
-    )
-    .forward(
-            request,
-            response
-    );
+    if("true".equals(
+            request.getParameter("ajax")
+    )){
 
 
-}
-else{
+        request.getRequestDispatcher(
+
+                "/admin/pages/fragments/payments/unpaid-table.jsp"
+
+        )
+        .forward(
+                request,
+                response
+        );
 
 
-    request.getRequestDispatcher(
-
-            "/admin/pages/payments.jsp"
-
-    )
-    .forward(
-            request,
-            response
-    );
+    }
+    else{
 
 
-}
+        request.getRequestDispatcher(
+
+                "/admin/pages/payments.jsp"
+
+        )
+        .forward(
+                request,
+                response
+        );
+
+
+    }
 
 
 }
@@ -360,68 +347,126 @@ CONFIRM PAYMENT
 ==============================================
 */
 
+/*
+==============================================
+CONFIRM PAYMENT
+
+TAB1 : UNPAID
+
+Receive:
+- centreCode
+- startDate
+- duration
+
+Call DAO:
+paymentDAO.confirmPayment()
+
+==============================================
+*/
+
 private void confirmPayment(
         HttpServletRequest request,
         HttpServletResponse response
 )
 throws ServletException, IOException {
 
+
+    response.setContentType(
+            "text/plain;charset=UTF-8"
+    );
+
+
     try{
 
-        /*
-        ==============================================
-        GET PARAMETERS
-        ==============================================
-        */
 
         String centreCode =
                 request.getParameter("centreCode");
 
+
         String startDate =
                 request.getParameter("startDate");
+
 
         String duration =
                 request.getParameter("duration");
 
 
-        /*
-        ==============================================
-        VALIDATION
-        ==============================================
-        */
+
+        System.out.println("=== CONFIRM PAYMENT ===");
+        System.out.println("CENTRE : " + centreCode);
+        System.out.println("START  : " + startDate);
+        System.out.println("DURATION : " + duration);
+
+
+
+
 
         if(centreCode == null
-                || centreCode.trim().isEmpty()
-                || startDate == null
-                || startDate.trim().isEmpty()
-                || duration == null
-                || duration.trim().isEmpty()){
+                || centreCode.trim().isEmpty()){
 
-            response.getWriter().print("ERROR");
+
+            response.getWriter()
+                    .print("ERROR: CENTRE_CODE");
+
 
             return;
 
         }
 
 
-        /*
-        ==============================================
-        CONVERT DATA
-        ==============================================
-        */
+
+
+        if(startDate == null
+                || startDate.trim().isEmpty()){
+
+
+            response.getWriter()
+                    .print("ERROR: START_DATE");
+
+
+            return;
+
+        }
+
+
+
+
+        if(duration == null
+                || duration.trim().isEmpty()){
+
+
+            response.getWriter()
+                    .print("ERROR: DURATION");
+
+
+            return;
+
+        }
+
+
+
+
+
 
         java.sql.Date newStartDate =
-                java.sql.Date.valueOf(startDate);
+
+                java.sql.Date.valueOf(
+                        startDate
+                );
+
+
+
 
         int durationMonths =
-                Integer.parseInt(duration);
+
+                Integer.parseInt(
+                        duration
+                );
 
 
-        /*
-        ==============================================
-        CALL DAO
-        ==============================================
-        */
+
+
+
 
         boolean success =
 
@@ -432,31 +477,48 @@ throws ServletException, IOException {
                 );
 
 
-        /*
-        ==============================================
-        RESPONSE
-        ==============================================
-        */
+
+
+
+
 
         if(success){
 
-            response.getWriter().print("SUCCESS");
+
+            response.getWriter()
+                    .print("SUCCESS");
+
 
         }
         else{
 
-            response.getWriter().print("ERROR");
+
+            response.getWriter()
+                    .print("ERROR: DAO_FALSE");
+
 
         }
+
+
+
 
     }
     catch(Exception e){
 
+
         e.printStackTrace();
 
-        response.getWriter().print("ERROR");
+
+        response.getWriter()
+                .print(
+                        "ERROR: "
+                        + e.getMessage()
+                );
+
 
     }
+
+
 
 }
 

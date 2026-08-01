@@ -3,71 +3,45 @@
  * Project     : CENTRIA
  *
  * Description :
- * Generate invoice codes.
+ * Generate unique invoice codes.
  */
 
 package com.centria.utils;
 
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
-
 public class InvoiceCodeGenerator {
-
-
 
     /*
     ======================================================
     GENERATE INVOICE CODE
 
-    Format:
-
-    FAC-YYYYMMDD-000001
-
     Example:
 
-    FAC-20260731-000001
+    FAC-20260801-143512-000002
 
     ======================================================
     */
 
+    public static String generateCode(int sequence) {
 
-    public static String generateCode(
-            int sequence
-    ){
-
-
-        String date =
-
-                LocalDate.now()
-                .format(
-                    DateTimeFormatter.ofPattern(
-                        "yyyyMMdd"
-                    )
-                );
-
-
+        String dateTime =
+                LocalDateTime.now()
+                        .format(
+                                DateTimeFormatter.ofPattern(
+                                        "yyyyMMdd-HHmmss"
+                                )
+                        );
 
         String number =
+                String.format("%06d", sequence);
 
-                String.format(
-                        "%06d",
-                        sequence
-                );
-
-
-
-        return
-
-                "FAC-"
-                + date
+        return "FAC-"
+                + dateTime
                 + "-"
                 + number;
 
-
     }
-
 
 }
