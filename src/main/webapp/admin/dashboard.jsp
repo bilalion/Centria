@@ -106,6 +106,11 @@ src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
 </script>
 
 
+<script defer
+src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
+</script>
+
+
 
 </head>
 

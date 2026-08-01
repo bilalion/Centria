@@ -2,14 +2,19 @@
 ==========================================================
  CENTRIA
  Dashboard JavaScript
- Clean Professional Version
+
+ AJAX CONTENT LOADER
+ MODULE INITIALIZATION
 ==========================================================
 */
 
 
-/* ======================================================
-   01 - LOAD DASHBOARD CONTENT
-   ====================================================== */
+
+/*
+==========================================================
+ LOAD DASHBOARD CONTENT
+==========================================================
+*/
 
 
 function loadContent(
@@ -19,13 +24,14 @@ function loadContent(
 
 
 
-    /* ==================================================
-       ACTIVE MENU HANDLING
-       ================================================== */
+    /*
+    ==============================================
+    ACTIVE MENU
+    ==============================================
+    */
 
 
     if(element){
-
 
 
         document
@@ -35,21 +41,76 @@ function loadContent(
         .forEach(
             function(link){
 
-
                 link.classList.remove(
                     "active"
                 );
-
 
             }
         );
 
 
-
         element.classList.add(
             "active"
         );
+/*
+==================================================
+UPDATE BROWSER URL
+==================================================
+*/
 
+let sectionName = page;
+
+
+/*
+CentreServlet
+*/
+
+if(page.startsWith("CentreServlet")){
+
+    sectionName = "centres";
+
+}
+
+
+/*
+PaymentServlet
+*/
+
+if(page.startsWith("PaymentServlet")){
+
+    sectionName = "payments";
+
+}
+
+
+
+/*
+Normal JSP pages
+*/
+
+if(
+    page.includes("/")
+){
+
+    sectionName =
+    page
+    .replace(".jsp","")
+    .split("/")
+    .pop();
+
+}
+
+
+
+history.pushState(
+    null,
+    "",
+    window.contextPath
+    +
+    "/admin/dashboard.jsp?section="
+    +
+    sectionName
+);
 
     }
 
@@ -57,99 +118,98 @@ function loadContent(
 
 
 
-
-
-    /* ==================================================
-       BUILD REQUEST URL
-       ================================================== */
+    /*
+    ==============================================
+    BUILD URL
+    ==============================================
+    */
 
 
     let url;
 
 
 
-    /*
-       Servlet pages
-       Example:
-       CentreServlet?action=list
-    */
-
-
     if(
         page.startsWith(
             "CentreServlet"
+        )
+        ||
+        page.startsWith(
+            "PaymentServlet"
         )
     ){
 
 
         url =
+
         window.contextPath
+
         +
         "/"
+
         +
         page;
 
 
     }
+
+    else{
+
+
+        url =
+
+        window.contextPath
+
+        +
+        "/admin/pages/"
+
+        +
+        page;
+
+
+    }
+
+
+
+
+
+
+
+
+    console.log(
+        "Loading:",
+        url
+    );
+
+
 
 
 
 
     /*
-       Normal JSP pages
+    ==============================================
+    AJAX LOAD
+    ==============================================
     */
 
 
-    else {
-
-
-        url =
-        window.contextPath
-        +
-        "/admin/pages/"
-        +
-        page;
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ==================================================
-       AJAX LOAD CONTENT
-       ================================================== */
-
-
     fetch(url)
-
 
 
     .then(
         response => {
 
 
-
             if(!response.ok){
 
-
                 throw new Error(
-                    "HTTP ERROR : "
-                    +
                     response.status
                 );
-
 
             }
 
 
-
             return response.text();
-
 
 
         }
@@ -157,14 +217,12 @@ function loadContent(
 
 
 
-
-
     .then(
-        data => {
-
+        html => {
 
 
             let container =
+
             document.getElementById(
                 "content-area"
             );
@@ -174,10 +232,8 @@ function loadContent(
             if(container){
 
 
-
                 container.innerHTML =
-                data;
-
+                html;
 
 
             }
@@ -189,23 +245,78 @@ function loadContent(
 
 
             /*
-             * CENTRES MODULE INITIALIZATION
-             */
+            ==========================================
+            MODULE INITIALIZATION
+            ==========================================
+            */
 
+
+
+
+
+            /*
+            CENTRES
+            */
 
             if(
-                page.includes(
-                    "CentreServlet"
-                )
-                &&
-                typeof initCentresPage === "function"
+
+                typeof initCentresPage
+                ===
+                "function"
+
             ){
 
 
-                initCentresPage();
+                if(
+                    document.getElementById(
+                        "centres-table-container"
+                    )
+                ){
+
+
+                    initCentresPage();
+
+
+                }
+
+            }
+
+
+
+
+
+
+
+            /*
+            PAYMENTS
+            */
+
+            if(
+
+                typeof initPaymentsPage
+                ===
+                "function"
+
+            ){
+
+
+                if(
+                    document.getElementById(
+                        "payments-table-container"
+                    )
+                ){
+
+
+                    initPaymentsPage();
+
+
+                }
 
 
             }
+
+
+
 
 
 
@@ -215,38 +326,14 @@ function loadContent(
 
 
 
-
-
     .catch(
         error => {
 
 
-
-            let container =
-            document.getElementById(
-                "content-area"
+            console.error(
+                "Dashboard loading error:",
+                error
             );
-
-
-
-            if(container){
-
-
-
-                container.innerHTML =
-
-
-                `
-                <div class="card">
-
-                    Error loading content
-
-                </div>
-                `;
-
-
-            }
-
 
 
         }

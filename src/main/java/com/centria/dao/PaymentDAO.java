@@ -10,6 +10,7 @@ package com.centria.dao;
 
 
 import com.centria.config.DatabaseConfig;
+import com.centria.models.Payment;
 import com.centria.utils.InvoiceCodeGenerator;
 
 
@@ -17,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
+import java.util.List;
 
 
 
@@ -364,282 +366,604 @@ public class PaymentDAO {
     */
 
 
-    public boolean renewPayment(
-            String centreCode
-    ){
+    /*
+======================================================
+CONFIRM PAYMENT
+
+Called from Payment Management.
+
+Actions:
+
+1- Generate new invoice
+2- Update payments
+3- Insert history_payment
+4- Update centre subscription
+
+======================================================
+*/
+
+public boolean confirmPayment(
+        String centreCode,
+        Date newStartDate,
+        int durationMonths
+){
+
+    Connection con = null;
+
+    try{
+
+        con = DatabaseConfig.getConnection();
+
+        con.setAutoCommit(false);
 
 
-        Connection con = null;
+
+        /*
+        ==============================================
+        STEP 1
+        GET PAYMENT ID
+        ==============================================
+        */
+
+        String selectPayment =
+
+        "SELECT id "
+        + "FROM payments "
+        + "WHERE centre_code=?";
 
 
+
+        PreparedStatement getPayment =
+
+                con.prepareStatement(
+                        selectPayment
+                );
+
+
+
+        getPayment.setString(
+                1,
+                centreCode
+        );
+
+
+
+        ResultSet rs =
+
+                getPayment.executeQuery();
+
+
+
+        if(!rs.next()){
+
+            con.rollback();
+
+            return false;
+
+        }
+
+
+
+        int paymentId =
+
+                rs.getInt("id");
+
+
+
+        /*
+        ==============================================
+        STEP 2
+        GENERATE NEW INVOICE CODE
+        ==============================================
+        */
+
+        String invoiceCode =
+
+                InvoiceCodeGenerator.generateCode(
+                        paymentId
+                );
+                /*
+        ==============================================
+        STEP 3
+        UPDATE PAYMENTS
+        ==============================================
+        */
+
+        String updatePayment =
+
+        "UPDATE payments SET "
+        + "code_facture=?, "
+        + "status_payment=? "
+        + "WHERE id=?";
+
+
+
+        PreparedStatement payment =
+
+                con.prepareStatement(
+                        updatePayment
+                );
+
+
+
+        payment.setString(
+                1,
+                invoiceCode
+        );
+
+
+        payment.setString(
+                2,
+                "PAID"
+        );
+
+
+        payment.setInt(
+                3,
+                paymentId
+        );
+
+
+
+        payment.executeUpdate();
+
+
+
+
+
+        /*
+        ==============================================
+        STEP 4
+        INSERT PAYMENT HISTORY
+        ==============================================
+        */
+
+        String insertHistory =
+
+        "INSERT INTO history_payment "
+        + "(code_facture, centre_code, date_paiement) "
+        + "VALUES (?, ?, ?)";
+
+
+
+        PreparedStatement history =
+
+                con.prepareStatement(
+                        insertHistory
+                );
+
+
+
+        history.setString(
+                1,
+                invoiceCode
+        );
+
+
+        history.setString(
+                2,
+                centreCode
+        );
+
+
+        history.setDate(
+                3,
+                new Date(
+                        System.currentTimeMillis()
+                )
+        );
+
+
+
+        history.executeUpdate();
+
+
+
+
+
+        /*
+        ==============================================
+        STEP 5
+        CALCULATE SUBSCRIPTION END DATE
+        ==============================================
+        */
+
+        
+        java.util.Calendar calendar =
+
+                java.util.Calendar.getInstance();
+
+
+        calendar.setTime(
+                newStartDate
+        );
+
+
+        calendar.add(
+                java.util.Calendar.MONTH,
+                durationMonths
+        );
+
+
+        Date subscriptionEnd =
+
+                new Date(
+                        calendar.getTimeInMillis()
+                );
+                /*
+        ==============================================
+        STEP 6
+        UPDATE CENTRE SUBSCRIPTION
+        ==============================================
+        */
+
+        String updateCentre =
+
+        "UPDATE centres SET "
+        + "subscription_start=?, "
+        + "subscription_end=?, "
+        + "status=? "
+        + "WHERE centre_code=?";
+
+
+
+        PreparedStatement centre =
+
+                con.prepareStatement(
+                        updateCentre
+                );
+
+
+
+        centre.setDate(
+                1,
+                newStartDate
+        );
+
+
+        centre.setDate(
+                2,
+                subscriptionEnd
+        );
+
+
+        centre.setString(
+                3,
+                "ACTIVE"
+        );
+
+
+        centre.setString(
+                4,
+                centreCode
+        );
+
+
+
+        centre.executeUpdate();
+
+
+
+
+
+        /*
+        ==============================================
+        COMMIT
+        ==============================================
+        */
+
+        con.commit();
+
+        return true;
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
 
         try{
 
-
-            con = DatabaseConfig.getConnection();
-
-
-            con.setAutoCommit(false);
-
-
-
-
-
-
-            /*
-            Generate new invoice
-            */
-
-
-            String tempInvoice = "TEMP";
-
-
-
-
-            String updatePayment =
-
-            "UPDATE payments SET "
-            + "code_facture=? "
-            + "WHERE centre_code=?";
-
-
-
-
-            PreparedStatement ps =
-
-                    con.prepareStatement(
-                            updatePayment
-                    );
-
-
-
-            ps.setString(
-                    1,
-                    tempInvoice
-            );
-
-
-            ps.setString(
-                    2,
-                    centreCode
-            );
-
-
-
-            ps.executeUpdate();
-
-
-
-
-
-
-
-
-            /*
-            Get new payment id
-            */
-
-
-            String select =
-
-            "SELECT id FROM payments "
-            + "WHERE centre_code=?";
-
-
-
-
-            PreparedStatement getId =
-
-                    con.prepareStatement(
-                            select
-                    );
-
-
-
-            getId.setString(
-                    1,
-                    centreCode
-            );
-
-
-
-            ResultSet rs =
-
-                    getId.executeQuery();
-
-
-
-            if(!rs.next()){
-
+            if(con != null){
 
                 con.rollback();
 
-                return false;
+            }
+
+        }
+        catch(Exception rollback){
+
+            rollback.printStackTrace();
+
+        }
+
+    }
+    finally{
+
+        try{
+
+            if(con != null){
+
+                con.close();
 
             }
 
+        }
+        catch(Exception close){
+
+            close.printStackTrace();
+
+        }
+
+    }
+
+    return false;
+
+}
+    
 
 
 
-            int id =
+/* ======================================================
+GET UNPAID PAYMENTS
 
-                    rs.getInt("id");
+Used by TAB1
 
+======================================================
+*/
 
+public List<Payment> getUnpaidPayments(
+        String search,
+        String order,
+        int page,
+        int pageSize
+){
 
+    List<Payment> payments =
 
-            String invoiceCode =
-
-                    InvoiceCodeGenerator.generateCode(
-                            id
-                    );
-
-
-
-
-
-
-
-            /*
-            Update final invoice code
-            */
+            new java.util.ArrayList<>();
 
 
-            PreparedStatement update =
+    Connection con = null;
 
-                    con.prepareStatement(
-                    "UPDATE payments SET code_facture=? WHERE id=?"
-                    );
+
+    try{
+
+
+        con = DatabaseConfig.getConnection();
 
 
 
-            update.setString(
-                    1,
-                    invoiceCode
+        String sql =
+
+        "SELECT "
+        + "p.centre_code, "
+        + "c.name, "
+        + "c.phone, "
+        + "p.code_facture, "
+        + "p.status_payment "
+        + "FROM payments p "
+        + "INNER JOIN centres c "
+        + "ON p.centre_code = c.centre_code "
+        + "WHERE p.status_payment='UNPAID' ";
+
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+           sql +=
+
+"AND ("
+
++ "p.centre_code LIKE ? "
+
++ "OR c.name LIKE ? "
+
++ "OR c.phone LIKE ? "
+
++ "OR p.code_facture LIKE ?"
+
++ ") ";
+
+        }
+
+
+
+if("OLD".equals(order)){
+
+    sql +=
+
+    "ORDER BY p.id ASC ";
+
+}
+else{
+
+    sql +=
+
+    "ORDER BY p.id DESC ";
+
+}
+
+
+        sql +=
+
+        "LIMIT ? OFFSET ?";
+
+
+
+        PreparedStatement ps =
+
+                con.prepareStatement(
+                        sql
+                );
+        
+     /* ==============================================
+        SET PARAMETERS
+        ==============================================
+        */
+
+        int index = 1;
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+            String keyword =
+
+                    "%"
+                    + search.trim()
+                    + "%";
+
+
+            ps.setString(
+                    index++,
+                    keyword
             );
 
 
-            update.setInt(
-                    2,
-                    id
+            ps.setString(
+                    index++,
+                    keyword
             );
 
 
-
-            update.executeUpdate();
-
-
-
-
-
-
-
-
-            /*
-            Add history
-            */
-
-
-            PreparedStatement history =
-
-                    con.prepareStatement(
-                    "INSERT INTO history_payment"
-                    + "(code_facture,centre_code,date_paiement) "
-                    + "VALUES(?,?,?)"
-                    );
-
-
-
-            history.setString(
-                    1,
-                    invoiceCode
+            ps.setString(
+                    index++,
+                    keyword
             );
+            
+            ps.setString(
+        index++,
+        keyword
+);
+
+        }
 
 
-            history.setString(
-                    2,
-                    centreCode
-            );
+
+        ps.setInt(
+                index++,
+                pageSize
+        );
 
 
-            history.setDate(
-                    3,
-                    new Date(
-                        System.currentTimeMillis()
+        ps.setInt(
+                index,
+                (page - 1) * pageSize
+        );
+
+
+
+
+        /*
+        ==============================================
+        EXECUTE QUERY
+        ==============================================
+        */
+
+        ResultSet rs =
+
+                ps.executeQuery();
+
+
+
+
+        /*
+        ==============================================
+        BUILD PAYMENT LIST
+        ==============================================
+        */
+
+        while(rs.next()){
+
+
+            Payment payment =
+
+                    new Payment();
+
+
+
+            payment.setCentreCode(
+                    rs.getString(
+                            "centre_code"
                     )
             );
 
 
 
-            history.executeUpdate();
+            payment.setCentreName(
+                    rs.getString(
+                            "name"
+                    )
+            );
 
 
 
+            payment.setPhone(
+                    rs.getString(
+                            "phone"
+                    )
+            );
 
 
 
-            con.commit();
+            payment.setCodeFacture(
+                    rs.getString(
+                            "code_facture"
+                    )
+            );
 
 
 
-            return true;
+            payment.setStatusPayment(
+                    rs.getString(
+                            "status_payment"
+                    )
+            );
 
 
 
-        }
-        catch(Exception e){
-
-
-            e.printStackTrace();
-
-
-            try{
-
-                if(con != null){
-
-                    con.rollback();
-
-                }
-
-            }
-            catch(Exception rollback){
-
-                rollback.printStackTrace();
-
-            }
-
+            payments.add(
+                    payment
+            );
 
         }
-        finally{
+                /*
+        ==============================================
+        RETURN RESULT
+        ==============================================
+        */
 
+        return payments;
 
-            try{
+    }
+    catch(Exception e){
 
+        e.printStackTrace();
 
-                if(con != null){
+    }
+    finally{
 
-                    con.close();
+        try{
 
-                }
+            if(con != null){
 
+                con.close();
 
             }
-            catch(Exception close){
-
-                close.printStackTrace();
-
-            }
-
 
         }
+        catch(Exception close){
 
+            close.printStackTrace();
 
-
-        return false;
-
+        }
 
     }
 
-
+    return payments;
 
 }
+
+}
+

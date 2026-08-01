@@ -8,25 +8,31 @@
 
 package com.centria.models;
 
+import java.sql.Date;
 
 public class Payment {
-
 
     private int id;
 
     private String centreCode;
 
+    private String centreName;
+
+    private String phone;
+
     private String codeFacture;
+
+    private Date subscriptionStart;
+
+    private Date subscriptionEnd;
+
+    private int durationMonths;
 
     private String statusPayment;
 
-
-
-    public Payment(){
+    public Payment() {
 
     }
-
-
 
     public int getId() {
 
@@ -34,14 +40,11 @@ public class Payment {
 
     }
 
-
     public void setId(int id) {
 
         this.id = id;
 
     }
-
-
 
     public String getCentreCode() {
 
@@ -49,14 +52,35 @@ public class Payment {
 
     }
 
-
     public void setCentreCode(String centreCode) {
 
         this.centreCode = centreCode;
 
     }
 
+    public String getCentreName() {
 
+        return centreName;
+
+    }
+
+    public void setCentreName(String centreName) {
+
+        this.centreName = centreName;
+
+    }
+
+    public String getPhone() {
+
+        return phone;
+
+    }
+
+    public void setPhone(String phone) {
+
+        this.phone = phone;
+
+    }
 
     public String getCodeFacture() {
 
@@ -64,14 +88,47 @@ public class Payment {
 
     }
 
-
     public void setCodeFacture(String codeFacture) {
 
         this.codeFacture = codeFacture;
 
     }
 
+    public Date getSubscriptionStart() {
 
+        return subscriptionStart;
+
+    }
+
+    public void setSubscriptionStart(Date subscriptionStart) {
+
+        this.subscriptionStart = subscriptionStart;
+
+    }
+
+    public Date getSubscriptionEnd() {
+
+        return subscriptionEnd;
+
+    }
+
+    public void setSubscriptionEnd(Date subscriptionEnd) {
+
+        this.subscriptionEnd = subscriptionEnd;
+
+    }
+
+    public int getDurationMonths() {
+
+        return durationMonths;
+
+    }
+
+    public void setDurationMonths(int durationMonths) {
+
+        this.durationMonths = durationMonths;
+
+    }
 
     public String getStatusPayment() {
 
@@ -79,12 +136,10 @@ public class Payment {
 
     }
 
-
     public void setStatusPayment(String statusPayment) {
 
         this.statusPayment = statusPayment;
 
     }
-
 
 }
