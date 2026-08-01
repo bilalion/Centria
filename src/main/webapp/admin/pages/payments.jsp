@@ -298,7 +298,122 @@
 
 
 
+<!-- =================================================
+     SUBSCRIPTION UPDATE MODAL (TAB2)
+     UPGRADE / EXTENSION
+================================================= -->
 
+<div id="subscription-confirm-modal"
+     class="centre-modal">
+
+
+    <div class="centre-modal-content reset-confirm-box">
+
+
+        <button type="button"
+                class="modal-close"
+                onclick="closeSubscriptionConfirm()">
+
+            ✖
+
+        </button>
+
+
+
+        <div class="reset-confirm-content">
+
+
+
+            <div class="confirm-header">
+
+
+                <div class="confirm-icon">
+
+                    🔄
+
+                </div>
+
+
+
+                <h4 class="confirm-title">
+
+                    <%=LanguageManager.get(
+                        "payments.subscription.update",
+                        session
+                    )%>
+
+                </h4>
+
+
+            </div>
+
+
+
+
+            <p>
+
+            <%=LanguageManager.get(
+                    "payments.subscription.update.message",
+                    session
+            )%>
+
+
+            </p>
+
+
+
+
+
+            <div class="reset-confirm-actions">
+
+
+
+                <button
+                        type="button"
+                        class="btn-secondary"
+                        onclick="closeSubscriptionConfirm()">
+
+
+                    <%=LanguageManager.get(
+                            "centers.cancel",
+                            session
+                    )%>
+
+
+                </button>
+
+
+
+
+
+                <button
+                        type="button"
+                        class="btn-primary"
+                        onclick="updateSubscription()">
+
+
+                    <%=LanguageManager.get(
+                            "centers.confirm",
+                            session
+                    )%>
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
 <!-- =================================================
      PAYMENT DETAILS MODAL
      ================================================= -->

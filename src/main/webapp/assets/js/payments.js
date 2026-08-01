@@ -31,6 +31,8 @@ let selectedCentreCode = null;
 
 let paymentSearchTimer = null;
 
+let selectedSubscriptionCentre = null;
+
 
 
 
@@ -45,78 +47,59 @@ let paymentSearchTimer = null;
 function loadPayments(page = 1){
 
 
-
     let container =
-
-    document.getElementById(
-        "payments-table-container"
-    );
-
+        document.getElementById(
+            "payments-table-container"
+        );
 
 
     if(!container){
-
 
         console.log(
             "Payments page not active"
         );
 
-
         return;
-
 
     }
 
 
 
-
-
-
     let searchInput =
-
-    document.getElementById(
-        "paymentSearch"
-    );
+        document.getElementById(
+            "paymentSearch"
+        );
 
 
 
     let orderInput =
-
-    document.getElementById(
-        "paymentOrder"
-    );
-
-
+        document.getElementById(
+            "paymentOrder"
+        );
 
 
 
     let search =
-
-    searchInput
-    ?
-    searchInput.value
-    :
-    "";
-
-
+        searchInput
+        ?
+        searchInput.value
+        :
+        "";
 
 
 
     let order =
-
-    orderInput
-    ?
-    orderInput.value
-    :
-    "NEW";
-
+        orderInput
+        ?
+        orderInput.value
+        :
+        "NEW";
 
 
 
 
 
-
-   let url =
+    let url =
 
         window.contextPath
 
@@ -138,11 +121,23 @@ function loadPayments(page = 1){
 
         +
 
+        "&tab="
+
+        +
+
+        encodeURIComponent(
+            currentPaymentTab
+        )
+
+        +
+
         "&search="
 
         +
 
-        encodeURIComponent(search)
+        encodeURIComponent(
+            search
+        )
 
         +
 
@@ -150,7 +145,18 @@ function loadPayments(page = 1){
 
         +
 
-        encodeURIComponent(order);
+        encodeURIComponent(
+            order
+        );
+
+
+
+
+
+    console.log(
+        "LOAD PAYMENTS:",
+        url
+    );
 
 
 
@@ -176,39 +182,34 @@ function loadPayments(page = 1){
         }
 
 
-
         return response.text();
 
 
-
     })
-
-
 
 
 
     .then(html => {
 
 
-
         container.innerHTML = html;
-
 
 
     })
 
 
 
-
-
     .catch(error => {
-
 
 
         console.error(
             "Payment loading error:",
             error
         );
+
+
+        container.innerHTML =
+        "<p class='error-message'>Unable to load payments</p>";
 
 
     });
@@ -543,20 +544,24 @@ function confirmPayment(){
 
     let formData = new URLSearchParams();
 
+
     formData.append(
         "action",
         "confirm"
     );
+
 
     formData.append(
         "centreCode",
         selectedCentreCode
     );
 
+
     formData.append(
         "startDate",
         startDate
     );
+
 
     formData.append(
         "duration",
@@ -572,7 +577,7 @@ function confirmPayment(){
 
         {
 
-            method: "POST",
+            method:"POST",
 
             headers:{
 
@@ -581,41 +586,58 @@ function confirmPayment(){
 
             },
 
-            body: formData.toString()
+            body:
+            formData.toString()
 
         }
 
     )
 
-    .then(response => response.text())
 
-    .then(result =>{
+    .then(response=>response.text())
+
+
+    .then(result=>{
+
 
         console.log(result);
 
-        if(result.trim() === "SUCCESS"){
+
+
+        if(result.trim()==="SUCCESS"){
+
 
             closePaymentConfirm();
 
-            loadPayments();
+
+            loadPayments(1);
+
 
         }
         else{
 
-            alert("Payment confirmation failed.");
+
+            alert(
+                "Payment confirmation failed."
+            );
+
 
         }
 
+
     })
 
-    .catch(error =>{
+
+    .catch(error=>{
+
 
         console.error(error);
 
+
     });
 
-}
 
+}
 
 
 
@@ -766,3 +788,211 @@ function(){
 
 
 });
+
+/*
+==========================================================
+ TAB2 - PAID SUBSCRIPTION MANAGEMENT
+ UPGRADE / EXTENSION
+==========================================================
+*/
+
+
+function openSubscriptionConfirm(centreCode){
+
+
+    selectedSubscriptionCentre = centreCode;
+
+
+    let modal = document.getElementById(
+        "subscription-confirm-modal"
+    );
+
+
+    if(modal){
+
+        modal.classList.add("show");
+
+    }
+
+}
+
+
+
+
+
+
+function closeSubscriptionConfirm(){
+
+
+    let modal = document.getElementById(
+        "subscription-confirm-modal"
+    );
+
+
+    if(modal){
+
+        modal.classList.remove("show");
+
+    }
+
+}
+
+
+
+
+
+
+function updateSubscription(){
+
+
+
+    if(!selectedSubscriptionCentre){
+
+
+        alert(
+            "Centre not selected"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+    let operation =
+
+    document.querySelector(
+        '.subscription-operation[data-centre="' +
+        selectedSubscriptionCentre +
+        '"]'
+    ).value;
+
+
+
+    let duration =
+
+    document.querySelector(
+        '.subscription-plan[data-centre="' +
+        selectedSubscriptionCentre +
+        '"]'
+    ).value;
+
+
+
+
+
+    let formData = new URLSearchParams();
+
+
+
+    formData.append(
+        "action",
+        "subscriptionUpdate"
+    );
+
+
+
+    formData.append(
+        "centreCode",
+        selectedSubscriptionCentre
+    );
+
+
+
+    formData.append(
+        "operation",
+        operation
+    );
+
+
+
+    formData.append(
+        "duration",
+        duration
+    );
+
+
+
+
+
+
+    fetch(
+
+        window.contextPath +
+        "/PaymentServlet",
+
+        {
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":
+                "application/x-www-form-urlencoded"
+
+            },
+
+            body:
+            formData.toString()
+
+        }
+
+    )
+
+
+    .then(response=>response.text())
+
+
+    .then(result=>{
+
+
+        console.log(result);
+
+
+
+        if(result.trim()==="SUCCESS"){
+
+
+
+            closeSubscriptionConfirm();
+
+
+
+            currentPaymentTab = "PAID";
+
+
+
+            loadPayments(1);
+
+
+
+        }
+        else{
+
+
+            alert(
+                "Subscription update failed"
+            );
+
+
+        }
+
+
+
+    })
+
+
+    .catch(error=>{
+
+
+        console.error(error);
+
+
+    });
+
+
+
+}

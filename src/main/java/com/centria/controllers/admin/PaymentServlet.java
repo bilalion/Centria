@@ -113,13 +113,20 @@ private void listPayments(
 throws ServletException, IOException {
 
 
-    /*
-    ==============================================
-    FORCE TAB1 ONLY
-    ==============================================
-    */
+ /*
+==============================================
+GET CURRENT TAB
+==============================================
+*/
 
-    String tab = "UNPAID";
+String tab = request.getParameter("tab");
+
+
+if(tab == null || tab.isEmpty()){
+
+    tab = "UNPAID";
+
+}
 
 
 
@@ -210,16 +217,45 @@ throws ServletException, IOException {
     */
 
 
-    List<Payment> payments =
+ List<Payment> payments;
 
 
-            paymentDAO.getUnpaidPayments(
-                    search,
-                    order,
-                    page,
-                    pageSize
+switch(tab){
+
+
+    case "PAID":
+
+        payments =
+            paymentDAO.getPaidPayments(
+                search,
+                order,
+                page,
+                pageSize
             );
 
+        break;
+
+
+
+  
+
+
+
+    case "UNPAID":
+
+    default:
+
+        payments =
+            paymentDAO.getUnpaidPayments(
+                search,
+                order,
+                page,
+                pageSize
+            );
+
+        break;
+
+}
 
 
 
@@ -285,23 +321,43 @@ throws ServletException, IOException {
     */
 
 
-    if("true".equals(
-            request.getParameter("ajax")
-    )){
+   if("true".equals(
+        request.getParameter("ajax")
+)){
 
 
-        request.getRequestDispatcher(
+    String fragment;
 
-                "/admin/pages/fragments/payments/unpaid-table.jsp"
 
-        )
-        .forward(
-                request,
-                response
-        );
+    if("PAID".equals(tab)){
+
+
+        fragment =
+        "/admin/pages/fragments/payments/paid-table.jsp";
 
 
     }
+    else{
+
+
+        fragment =
+        "/admin/pages/fragments/payments/unpaid-table.jsp";
+
+
+    }
+
+
+
+    request.getRequestDispatcher(
+            fragment
+    )
+    .forward(
+            request,
+            response
+    );
+
+
+}
     else{
 
 
