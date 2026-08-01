@@ -733,7 +733,7 @@ public List<Payment> getUnpaidPayments(
 
 
 
-     String sql =
+  String sql =
 
 "SELECT "
 + "p.centre_code, "
@@ -745,8 +745,8 @@ public List<Payment> getUnpaidPayments(
 + "FROM payments p "
 + "INNER JOIN centres c "
 + "ON p.centre_code = c.centre_code "
-+ "WHERE p.status_payment='UNPAID' ";
-
++ "WHERE p.status_payment='UNPAID' "
++ "AND c.status <> 'ACTIVE' ";
 
 
         if(search != null

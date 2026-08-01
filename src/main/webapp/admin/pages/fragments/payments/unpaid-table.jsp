@@ -328,21 +328,17 @@ data-centre="<%=payment.getCentreCode()%>"
 
 <button
 type="button"
-class="btn-primary"
+class="btn-primary payment-action-btn"
+title="<%=LanguageManager.get(
+        "payments.register",
+        session
+)%>"
 onclick="openPaymentConfirm('<%=payment.getCentreCode()%>')"
 >
 
-
-✅
-
-<%=LanguageManager.get(
-        "payments.confirm",
-        session
-)%>
-
+💳
 
 </button>
-
 
 </td>
 
