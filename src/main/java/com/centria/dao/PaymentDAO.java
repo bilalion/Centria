@@ -746,7 +746,7 @@ public List<Payment> getUnpaidPayments(
 + "INNER JOIN centres c "
 + "ON p.centre_code = c.centre_code "
 + "WHERE p.status_payment='UNPAID' "
-+ "AND c.status <> 'ACTIVE' ";
++ "AND c.status IN ('SUSPENDED','PENDING') ";
 
 
         if(search != null
@@ -774,14 +774,24 @@ if("OLD".equals(order)){
 
     sql +=
 
-    "ORDER BY p.id ASC ";
+    "ORDER BY "
+    + "CASE "
+    + "WHEN c.status='SUSPENDED' THEN 1 "
+    + "WHEN c.status='PENDING' THEN 2 "
+    + "END, "
+    + "p.id ASC ";
 
 }
 else{
 
     sql +=
 
-    "ORDER BY p.id DESC ";
+    "ORDER BY "
+    + "CASE "
+    + "WHEN c.status='SUSPENDED' THEN 1 "
+    + "WHEN c.status='PENDING' THEN 2 "
+    + "END, "
+    + "p.id DESC ";
 
 }
 

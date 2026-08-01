@@ -354,12 +354,110 @@ else{
     ==============================================
     */
 
-    private void confirmPayment(
-            HttpServletRequest request,
-            HttpServletResponse response
-    )
-    throws ServletException, IOException {
+ /*
+==============================================
+CONFIRM PAYMENT
+==============================================
+*/
+
+private void confirmPayment(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
+
+    try{
+
+        /*
+        ==============================================
+        GET PARAMETERS
+        ==============================================
+        */
+
+        String centreCode =
+                request.getParameter("centreCode");
+
+        String startDate =
+                request.getParameter("startDate");
+
+        String duration =
+                request.getParameter("duration");
+
+
+        /*
+        ==============================================
+        VALIDATION
+        ==============================================
+        */
+
+        if(centreCode == null
+                || centreCode.trim().isEmpty()
+                || startDate == null
+                || startDate.trim().isEmpty()
+                || duration == null
+                || duration.trim().isEmpty()){
+
+            response.getWriter().print("ERROR");
+
+            return;
+
+        }
+
+
+        /*
+        ==============================================
+        CONVERT DATA
+        ==============================================
+        */
+
+        java.sql.Date newStartDate =
+                java.sql.Date.valueOf(startDate);
+
+        int durationMonths =
+                Integer.parseInt(duration);
+
+
+        /*
+        ==============================================
+        CALL DAO
+        ==============================================
+        */
+
+        boolean success =
+
+                paymentDAO.confirmPayment(
+                        centreCode,
+                        newStartDate,
+                        durationMonths
+                );
+
+
+        /*
+        ==============================================
+        RESPONSE
+        ==============================================
+        */
+
+        if(success){
+
+            response.getWriter().print("SUCCESS");
+
+        }
+        else{
+
+            response.getWriter().print("ERROR");
+
+        }
 
     }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+        response.getWriter().print("ERROR");
+
+    }
+
+}
 
 }

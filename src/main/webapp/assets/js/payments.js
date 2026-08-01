@@ -532,26 +532,110 @@ function closePaymentConfirm(){
 
 function confirmPayment(){
 
+    let startDate =
+
+    document.querySelector(
+        '.payment-start-date[data-centre="' +
+        selectedCentreCode +
+        '"]'
+    ).value;
 
 
-    console.log(
-        "CONFIRM PAYMENT",
+
+    let duration =
+
+    document.querySelector(
+        '.payment-duration[data-centre="' +
+        selectedCentreCode +
+        '"]'
+    ).value;
+
+
+
+    if(startDate === ""){
+
+        alert("Please select the subscription start date.");
+
+        return;
+
+    }
+
+
+
+    let formData = new URLSearchParams();
+
+    formData.append(
+        "action",
+        "confirm"
+    );
+
+    formData.append(
+        "centreCode",
         selectedCentreCode
     );
 
+    formData.append(
+        "startDate",
+        startDate
+    );
 
-    /*
-        لاحقا:
-
-        POST
-        PaymentServlet?action=confirm
-
-    */
+    formData.append(
+        "duration",
+        duration
+    );
 
 
+
+    fetch(
+
+        window.contextPath +
+        "/PaymentServlet",
+
+        {
+
+            method: "POST",
+
+            headers:{
+
+                "Content-Type":
+                "application/x-www-form-urlencoded"
+
+            },
+
+            body: formData.toString()
+
+        }
+
+    )
+
+    .then(response => response.text())
+
+    .then(result =>{
+
+        console.log(result);
+
+        if(result.trim() === "SUCCESS"){
+
+            closePaymentConfirm();
+
+            loadPayments();
+
+        }
+        else{
+
+            alert("Payment confirmation failed.");
+
+        }
+
+    })
+
+    .catch(error =>{
+
+        console.error(error);
+
+    });
 
 }
-
 
 
 
