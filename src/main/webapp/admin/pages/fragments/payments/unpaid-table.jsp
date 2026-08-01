@@ -67,6 +67,14 @@ List<Payment> payments =
 
 <th>
 <%=LanguageManager.get(
+        "payments.account.status",
+        session
+)%>
+</th>
+
+
+<th>
+<%=LanguageManager.get(
         "payments.start.date",
         session
 )%>
@@ -131,6 +139,11 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
+
+<!-- =========================
+     PAYMENT STATUS
+========================= -->
+
 <td>
 
 <span class="status unpaid">
@@ -147,6 +160,110 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
+
+
+<!-- =========================
+     ACCOUNT STATUS
+========================= -->
+
+<td>
+
+<%
+
+String accountStatus =
+        payment.getAccountStatus();
+
+
+
+if("ACTIVE".equals(accountStatus)){
+
+%>
+
+<span class="account-status account-active">
+
+🟢
+
+<%=LanguageManager.get(
+        "payments.account.active",
+        session
+)%>
+
+</span>
+
+
+<%
+
+}
+else if("PENDING".equals(accountStatus)){
+
+%>
+
+
+<span class="account-status account-pending">
+
+🟡
+
+<%=LanguageManager.get(
+        "payments.account.pending",
+        session
+)%>
+
+</span>
+
+
+<%
+
+}
+else if("SUSPENDED".equals(accountStatus)){
+
+%>
+
+
+<span class="account-status account-suspended">
+
+🔴
+
+<%=LanguageManager.get(
+        "payments.account.suspended",
+        session
+)%>
+
+</span>
+
+
+<%
+
+}
+else{
+
+%>
+
+
+<span class="account-status">
+
+-
+
+</span>
+
+
+<%
+
+}
+
+%>
+
+
+</td>
+
+
+
+
+
+
+<!-- =========================
+     NEW START DATE
+========================= -->
+
 <td>
 
 <input
@@ -158,6 +275,13 @@ data-centre="<%=payment.getCentreCode()%>"
 </td>
 
 
+
+
+
+<!-- =========================
+     DURATION
+========================= -->
+
 <td>
 
 <select
@@ -165,28 +289,42 @@ class="payment-duration"
 data-centre="<%=payment.getCentreCode()%>"
 >
 
+
 <option value="1">
 1
 </option>
+
 
 <option value="3">
 3
 </option>
 
+
 <option value="6">
 6
 </option>
+
 
 <option value="12">
 12
 </option>
 
+
 </select>
+
 
 </td>
 
 
+
+
+
+<!-- =========================
+     ACTION
+========================= -->
+
 <td>
+
 
 <button
 type="button"
@@ -194,12 +332,14 @@ class="btn-primary"
 onclick="openPaymentConfirm('<%=payment.getCentreCode()%>')"
 >
 
+
 ✅
 
 <%=LanguageManager.get(
         "payments.confirm",
         session
 )%>
+
 
 </button>
 
@@ -220,18 +360,24 @@ else{
 %>
 
 
+
 <tr>
 
-<td colspan="8">
+
+<td colspan="9">
+
 
 <%=LanguageManager.get(
         "payments.empty",
         session
 )%>
 
+
 </td>
 
+
 </tr>
+
 
 
 <%

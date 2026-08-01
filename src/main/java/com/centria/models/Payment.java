@@ -29,6 +29,9 @@ public class Payment {
     private int durationMonths;
 
     private String statusPayment;
+    
+    private String accountStatus;
+    
 
     public Payment() {
 
@@ -141,5 +144,18 @@ public class Payment {
         this.statusPayment = statusPayment;
 
     }
+    
+    public String getAccountStatus() {
+
+    return accountStatus;
+
+}
+
+
+public void setAccountStatus(String accountStatus) {
+
+    this.accountStatus = accountStatus;
+
+}
 
 }

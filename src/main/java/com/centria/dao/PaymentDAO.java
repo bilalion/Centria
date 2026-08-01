@@ -733,18 +733,19 @@ public List<Payment> getUnpaidPayments(
 
 
 
-        String sql =
+     String sql =
 
-        "SELECT "
-        + "p.centre_code, "
-        + "c.name, "
-        + "c.phone, "
-        + "p.code_facture, "
-        + "p.status_payment "
-        + "FROM payments p "
-        + "INNER JOIN centres c "
-        + "ON p.centre_code = c.centre_code "
-        + "WHERE p.status_payment='UNPAID' ";
+"SELECT "
++ "p.centre_code, "
++ "c.name, "
++ "c.phone, "
++ "p.code_facture, "
++ "p.status_payment, "
++ "c.status "
++ "FROM payments p "
++ "INNER JOIN centres c "
++ "ON p.centre_code = c.centre_code "
++ "WHERE p.status_payment='UNPAID' ";
 
 
 
@@ -921,6 +922,9 @@ else{
                     )
             );
 
+            payment.setAccountStatus(
+        rs.getString("status")
+);
 
 
             payments.add(

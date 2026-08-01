@@ -78,8 +78,8 @@ href="<%=request.getContextPath()%>/assets/css/accueil.css?v=1">
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
 
-
-
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/payments.css?v=1">
 
 
 <script>
