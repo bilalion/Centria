@@ -3,18 +3,15 @@
  CENTRIA
  Payments Management Module
 
- Professional UI Style
  Clean Production Version
-
- Compatible with AJAX Dashboard
+ Responsive + RTL + AJAX Tabs
 ==========================================================
 */
 
 
-
 /* ======================================================
-   01 - PAYMENTS HEADER
-   ====================================================== */
+   01 - HEADER
+====================================================== */
 
 
 .dashboard-header{
@@ -22,7 +19,6 @@
     margin-bottom:30px;
 
 }
-
 
 
 .dashboard-header h1{
@@ -53,9 +49,11 @@
 
 
 
+
+
 /* ======================================================
-   02 - PAYMENTS TOOLBAR
-   ====================================================== */
+   02 - TOOLBAR
+====================================================== */
 
 
 .payments-toolbar{
@@ -74,13 +72,11 @@
 
     flex-wrap:wrap;
 
-
     background:var(--surface);
 
-    border-radius:var(--radius-lg);
+    border-radius:20px;
 
-    border:1px solid #e2e8f0;
-
+    border:1px solid var(--border);
 
     box-shadow:
 
@@ -88,13 +84,6 @@
 
 }
 
-
-
-
-
-/* ======================================================
-   03 - FILTER FORM
-   ====================================================== */
 
 
 .payments-filter-form{
@@ -111,19 +100,17 @@
 
 
 
-
-
-/* ======================================================
-   04 - SEARCH BOX
-
-   Shared with centres module
-
-   ====================================================== */
-
-
 .payments-filter-form .search-box{
 
     width:300px;
+
+}
+
+
+
+.payments-filter-form input{
+
+    width:100%;
 
     height:44px;
 
@@ -131,36 +118,14 @@
 
 
 
-
-
-.payments-filter-form .search-box input{
-
-    font-size:14px;
-
-}
-
-
-
-
-
-/* ======================================================
-   05 - PAYMENT SELECTS
-   ====================================================== */
-
-
 .payments-filter-form .centre-select{
 
     width:170px;
 
+    height:44px;
+
 }
 
-
-
-
-
-/* ======================================================
-   06 - SEARCH BUTTON
-   ====================================================== */
 
 
 .payments-filter-form .btn-primary{
@@ -175,26 +140,32 @@
 
 
 
+
+
 /* ======================================================
-   07 - PAYMENT TABS
-   ====================================================== */
+   03 - PAYMENT TABS
+====================================================== */
 
 
 .payment-tabs{
 
+    width:100%;
+
     display:flex;
+
+    justify-content:center;
 
     align-items:center;
 
-    gap:12px;
+    gap:15px;
 
     margin-bottom:25px;
 
-    padding:8px;
+    padding:12px;
 
     background:var(--surface);
 
-    border-radius:16px;
+    border-radius:18px;
 
     border:1px solid var(--border);
 
@@ -206,17 +177,17 @@
 
 
 
-
-
 .payment-tab{
 
-    height:42px;
+    min-width:150px;
 
-    padding:0 28px;
+    height:45px;
+
+    padding:0 30px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:14px;
 
     background:#f1f5f9;
 
@@ -234,8 +205,6 @@
 
 
 
-
-
 .payment-tab:hover{
 
     transform:translateY(-2px);
@@ -244,45 +213,86 @@
 
 
 
-
-
 .payment-tab.active{
+
+    color:white;
+
+}
+
+
+
+.unpaid-tab.active{
 
     background:
 
     linear-gradient(
         135deg,
-        var(--primary),
-        var(--primary-dark)
+        #ef4444,
+        #dc2626
     );
 
-    color:white;
+}
 
-    box-shadow:
 
-    0 8px 18px rgba(37,99,235,.25);
+
+.paid-tab.active{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+}
+
+
+
+.history-tab.active{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #64748b,
+        #334155
+    );
 
 }
 
 
 
 
+
+
+
 /* ======================================================
-   08 - PAYMENT TABLE CONTAINER
-   ====================================================== */
+   04 - TABLE WRAPPER
+
+   Responsive:
+   - Desktop : full width
+   - Mobile  : horizontal scroll
+====================================================== */
 
 
 .payments-table-wrapper{
 
     width:100%;
 
-    overflow:hidden;
+    overflow-x:auto;
 
-    background:white;
+    overflow-y:hidden;
 
-    border-radius:var(--radius-lg);
+    background:var(--surface);
 
-    box-shadow:var(--shadow);
+    border-radius:20px;
+
+    border:1px solid var(--border);
+
+    box-shadow:
+
+    0 12px 30px rgba(15,23,42,.08);
 
 }
 
@@ -290,8 +300,11 @@
 
 
 /* ======================================================
-   09 - PAYMENT TABLE
-   ====================================================== */
+   05 - TABLE BASE
+
+   Dynamic columns
+   Content based width
+====================================================== */
 
 
 .payments-table{
@@ -300,15 +313,14 @@
 
     border-collapse:collapse;
 
+    background:white;
+
     table-layout:auto;
 
 }
 
 
 
-
-
-/* TABLE HEADER */
 
 
 .payments-table thead{
@@ -329,9 +341,9 @@
 
 .payments-table th{
 
-    height:52px;
+    height:56px;
 
-    padding:0 10px;
+    padding:0 12px;
 
     color:white;
 
@@ -349,14 +361,11 @@
 
 
 
-/* TABLE BODY */
-
-
 .payments-table td{
 
-    height:58px;
+    height:64px;
 
-    padding:10px;
+    padding:12px;
 
     text-align:center;
 
@@ -366,187 +375,16 @@
 
     font-size:13px;
 
-    border-bottom:1px solid var(--border);
+    font-weight:600;
 
-    white-space:nowrap;
+    border-bottom:
 
-}
-
-
-
-
-
-
-
-/* ======================================================
-   TAB1 COLUMN CONTROL
-
-   1- Code
-   2- Name
-   3- Subscription End
-   4- Invoice
-   5- Payment Status
-   6- Account Status
-   7- Start Date
-   8- Duration
-   9- Action
-
-   ====================================================== */
-
-
-
-/* Centre Code */
-
-.payments-table th:nth-child(1),
-.payments-table td:nth-child(1){
-
-    width:120px;
+    1px solid #e5e7eb;
 
 }
 
 
 
-
-
-/* Centre Name */
-
-.payments-table th:nth-child(2),
-.payments-table td:nth-child(2){
-
-    width:150px;
-
-    max-width:150px;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-
-
-
-
-/* Subscription End */
-
-.payments-table th:nth-child(3),
-.payments-table td:nth-child(3){
-
-    width:110px;
-
-}
-
-
-
-
-
-/* Invoice */
-
-.payments-table th:nth-child(4),
-.payments-table td:nth-child(4){
-
-    width:230px;
-
-    max-width:230px;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    font-size:12px;
-
-}
-
-
-
-
-
-/* Payment Status */
-
-.payments-table th:nth-child(5),
-.payments-table td:nth-child(5){
-
-    width:120px;
-
-}
-
-
-
-
-
-/* Account Status */
-
-.payments-table th:nth-child(6),
-.payments-table td:nth-child(6){
-
-    width:130px;
-
-}
-
-
-
-
-
-/* New Start Date */
-
-.payments-table th:nth-child(7),
-.payments-table td:nth-child(7){
-
-    width:130px;
-
-}
-
-
-
-
-
-/* Duration */
-
-.payments-table th:nth-child(8),
-.payments-table td:nth-child(8){
-
-    width:80px;
-
-}
-
-
-
-
-
-/* Action */
-
-.payments-table th:nth-child(9),
-.payments-table td:nth-child(9){
-
-    width:90px;
-
-}
-
-
-
-
-
-
-/* LONG TEXT PROTECTION */
-
-
-.payments-table td:nth-child(2),
-.payments-table td:nth-child(4){
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-
-
-
-
-
-/* ROW EFFECT */
 
 
 .payments-table tbody tr{
@@ -561,11 +399,20 @@
 
 .payments-table tbody tr:hover{
 
-    background:#f1f5ff;
+    background:#f8fafc;
 
-    box-shadow:
+}
+/* ======================================================
+   06 - COLUMN CONTROL TAB1 UNPAID
 
-    inset 4px 0 0 var(--primary);
+   Natural content sizing
+====================================================== */
+
+
+.unpaid-table th:nth-child(1),
+.unpaid-table td:nth-child(1){
+
+    width:1%;
 
 }
 
@@ -573,15 +420,274 @@
 
 
 
-.payments-table tbody tr:last-child td{
+.unpaid-table th:nth-child(2),
+.unpaid-table td:nth-child(2){
 
-    border-bottom:none;
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(3),
+.unpaid-table td:nth-child(3){
+
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(4),
+.unpaid-table td:nth-child(4){
+
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(5),
+.unpaid-table td:nth-child(5){
+
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(6),
+.unpaid-table td:nth-child(6){
+
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(7),
+.unpaid-table td:nth-child(7){
+
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(8),
+.unpaid-table td:nth-child(8){
+
+    width:auto;
+
+}
+
+
+
+
+
+.unpaid-table th:nth-child(9),
+.unpaid-table td:nth-child(9){
+
+    width:1%;
+
+}
+/* ======================================================
+   07 - COLUMN CONTROL TAB2 PAID
+
+   Natural content sizing
+====================================================== */
+
+
+.paid-table th:nth-child(1),
+.paid-table td:nth-child(1){
+
+    width:1%;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(2),
+.paid-table td:nth-child(2){
+
+    width:auto;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(3),
+.paid-table td:nth-child(3){
+
+    width:auto;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(4),
+.paid-table td:nth-child(4){
+
+    width:auto;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(5),
+.paid-table td:nth-child(5){
+
+    width:auto;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(6),
+.paid-table td:nth-child(6){
+
+    width:auto;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(7),
+.paid-table td:nth-child(7){
+
+    width:auto;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+.paid-table th:nth-child(8),
+.paid-table td:nth-child(8){
+
+    width:auto;
+
+}
+
+
+
+
+
+.paid-table th:nth-child(9),
+.paid-table td:nth-child(9){
+
+    width:1%;
 
 }
 
 /* ======================================================
-   10 - PAYMENT STATUS BADGES
-   ====================================================== */
+   08 - CELL TEXT CONTROL
+
+   Normal display:
+   - No hover popup
+   - No tooltip
+   - No absolute position
+   - Text stays inside cell
+====================================================== */
+
+
+.cell-text{
+
+    display:block;
+
+    width:100%;
+
+    white-space:normal;
+
+    overflow-wrap:break-word;
+
+    word-break:normal;
+
+    line-height:1.5;
+
+}
+
+
+
+
+
+.payments-table td{
+
+    overflow:visible;
+
+    white-space:normal;
+
+}
+
+
+
+
+
+.payments-table td:nth-child(3),
+.payments-table td:nth-child(4){
+
+    white-space:normal;
+
+    overflow-wrap:break-word;
+
+}
+
+
+
+
+
+/*
+ Long invoice / codes
+ Keep readable without breaking layout
+*/
+
+.invoice-text,
+.code-text{
+
+    display:block;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+}
+/* ======================================================
+   09 - PAYMENT STATUS
+
+   Compact badge
+   Natural content width
+====================================================== */
 
 
 .status{
@@ -594,11 +700,13 @@
 
     gap:6px;
 
-    min-width:100px;
+    width:auto;
+
+    min-width:80px;
 
     height:32px;
 
-    padding:0 16px;
+    padding:0 12px;
 
     border-radius:20px;
 
@@ -606,13 +714,13 @@
 
     font-weight:800;
 
+    white-space:nowrap;
+
 }
 
 
 
 
-
-/* UNPAID */
 
 .status.unpaid{
 
@@ -628,8 +736,6 @@
 
 
 
-/* PAID */
-
 .status.paid{
 
     background:#dcfce7;
@@ -639,20 +745,37 @@
     border:1px solid #86efac;
 
 }
+/* ======================================================
+   10 - ACCOUNT STATUS
+
+   Compact badge
+   Natural content width
+====================================================== */
 
 
+.account-status{
 
+    display:inline-flex;
 
+    align-items:center;
 
-/* PENDING */
+    justify-content:center;
 
-.status.pending{
+    width:auto;
 
-    background:#fef3c7;
+    min-width:90px;
 
-    color:#92400e;
+    height:32px;
 
-    border:1px solid #fcd34d;
+    padding:0 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    white-space:nowrap;
 
 }
 
@@ -660,21 +783,53 @@
 
 
 
+.account-active{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
 
 
+
+
+
+.account-pending{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+
+
+
+
+.account-suspended{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
 
 /* ======================================================
-   11 - PAYMENT DATE INPUT
-   ====================================================== */
+   11 - DATE INPUT
+
+   Compact date field
+   Fits table content
+====================================================== */
 
 
 .payment-start-date{
 
-    width:145px;
+    width:130px;
 
-    height:38px;
+    height:36px;
 
-    padding:0 12px;
+    padding:0 8px;
 
     border-radius:10px;
 
@@ -684,23 +839,11 @@
 
     color:var(--text);
 
-    font-size:13px;
+    font-size:12px;
 
-    font-weight:600;
+    font-weight:700;
 
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-
-
-
-
-.payment-start-date:hover{
-
-    border-color:#93c5fd;
+    text-align:center;
 
 }
 
@@ -721,24 +864,19 @@
 }
 
 
-
-
-
-
-
-
 /* ======================================================
-   12 - PAYMENT DURATION SELECT
-   ====================================================== */
+   12 - SELECT CONTROLS
+
+   Compact selects
+   Natural table sizing
+====================================================== */
 
 
-.payment-duration{
+.payment-duration,
+.subscription-plan,
+.subscription-operation{
 
-    width:90px;
-
-    height:38px;
-
-    padding:0 12px;
+    height:36px;
 
     border-radius:10px;
 
@@ -748,13 +886,15 @@
 
     color:var(--text);
 
-    font-size:13px;
+    padding:0 8px;
+
+    font-size:12px;
 
     font-weight:700;
 
     cursor:pointer;
 
-    transition:.25s;
+    max-width:100%;
 
 }
 
@@ -762,7 +902,39 @@
 
 
 
-.payment-duration:hover{
+.payment-duration{
+
+    width:75px;
+
+}
+
+
+
+
+
+.subscription-plan{
+
+    width:105px;
+
+}
+
+
+
+
+
+.subscription-operation{
+
+    width:130px;
+
+}
+
+
+
+
+
+.payment-duration:hover,
+.subscription-plan:hover,
+.subscription-operation:hover{
 
     border-color:var(--primary);
 
@@ -772,13 +944,41 @@
 
 
 
-.payment-duration:focus{
+.payment-duration:focus,
+.subscription-plan:focus,
+.subscription-operation:focus{
 
     outline:none;
 
+    border-color:var(--primary);
+
     box-shadow:
 
-    0 0 0 4px rgba(37,99,235,.12);
+    0 0 0 4px rgba(37,99,blue,.12);
+
+}
+
+
+
+/* ======================================================
+   13 - ACTION BUTTON
+
+   Compact action buttons
+   Fit table content
+====================================================== */
+
+
+.payment-action{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    white-space:nowrap;
 
 }
 
@@ -786,23 +986,19 @@
 
 
 
-
-
-
-/* ======================================================
-   13 - PAYMENT ACTION BUTTONS
-   ====================================================== */
-
-
 .payments-table .btn-primary{
 
-    height:38px;
+    height:36px;
 
-    padding:0 18px;
+    min-width:auto;
 
-    border-radius:12px;
+    padding:0 12px;
 
-    font-size:13px;
+    border-radius:10px;
+
+    font-size:12px;
+
+    font-weight:800;
 
 }
 
@@ -817,60 +1013,40 @@
 }
 
 
-
-
-
-
-
-
 /* ======================================================
-   14 - EMPTY STATE
-   ====================================================== */
+   14 - MODAL SYSTEM
+
+   Clean responsive modal
+====================================================== */
 
 
-.payments-table .empty-state{
-
-    padding:50px;
-
-    text-align:center;
-
-    color:#64748b;
-
-}
-
-
-
-
-
-.payments-table .empty-state h3{
-
-    font-size:35px;
-
-    margin-bottom:10px;
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   15 - CONFIRM PAYMENT MODAL
-   ====================================================== */
-
-
-#payment-confirm-modal{
+.centre-modal{
 
     display:none;
 
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    rgba(15,23,42,.45);
+
+    z-index:9999;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
 }
 
 
 
-#payment-confirm-modal.show{
+
+
+.centre-modal.show{
 
     display:flex;
 
@@ -880,11 +1056,118 @@
 
 
 
-.reset-confirm-box{
+.centre-modal-content{
 
-    width:430px;
+    position:relative;
+
+    width:700px;
 
     max-width:95%;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:
+
+    0 25px 60px rgba(15,23,42,.25);
+
+    animation:
+
+    modalShow .25s ease;
+
+}
+
+
+
+
+
+@keyframes modalShow{
+
+from{
+
+    opacity:0;
+
+    transform:translateY(-15px) scale(.96);
+
+}
+
+
+to{
+
+    opacity:1;
+
+    transform:translateY(0) scale(1);
+
+}
+
+}
+
+
+
+
+
+.modal-close{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f1f5f9;
+
+    color:#475569;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.25s;
+
+}
+
+
+
+
+
+.modal-close:hover{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+
+
+/* ======================================================
+   15 - CONFIRM PAYMENT MODAL
+
+   Compact confirmation box
+====================================================== */
+
+
+.reset-confirm-box{
+
+    width:420px;
+
+    max-width:100%;
 
 }
 
@@ -902,13 +1185,69 @@
 
 
 
+.confirm-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+
+
+.confirm-icon{
+
+    width:60px;
+
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#eff6ff;
+
+    font-size:28px;
+
+}
+
+
+
+
+
+.confirm-title{
+
+    margin:0;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    color:#0f172a;
+
+}
+
+
+
+
+
 .reset-confirm-content p{
 
-    margin:20px 0;
+    margin:18px 0;
 
-    color:#475569;
+    color:#64748b;
 
-    font-size:15px;
+    font-size:14px;
 
     line-height:1.7;
 
@@ -918,16 +1257,40 @@
 
 
 
+.reset-confirm-actions{
 
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:22px;
+
+}
+
+
+
+
+
+.reset-confirm-actions button{
+
+    min-width:100px;
+
+}
 
 /* ======================================================
    16 - PAYMENT DETAILS MODAL
-   ====================================================== */
+
+   Flexible information layout
+====================================================== */
 
 
 #payment-modal .centre-modal-content{
 
-    width:700px;
+    width:720px;
 
     max-width:95%;
 
@@ -947,32 +1310,25 @@
 
 
 
-/* ======================================================
-   17 - PAYMENT INFORMATION CARD
-   ====================================================== */
-
-
 .payment-info-card{
 
     display:grid;
 
     grid-template-columns:
 
-    repeat(2,minmax(250px,1fr));
+    repeat(2,minmax(220px,1fr));
 
-    gap:15px;
+    gap:12px;
 
-    padding:20px;
+    padding:18px;
 
     background:#f8fafc;
 
-    border-radius:18px;
+    border-radius:16px;
 
     border:1px solid #e2e8f0;
 
 }
-
-
 
 
 
@@ -986,15 +1342,15 @@
 
     align-items:center;
 
-    padding:12px 15px;
+    gap:12px;
+
+    padding:10px 12px;
 
     background:white;
 
-    border-radius:12px;
+    border-radius:10px;
 
     border:1px solid #e5e7eb;
-
-    font-size:13px;
 
 }
 
@@ -1005,6 +1361,8 @@
 .payment-info-row span{
 
     color:#64748b;
+
+    font-size:13px;
 
     font-weight:700;
 
@@ -1018,91 +1376,27 @@
 
     color:#0f172a;
 
-    font-weight:800;
+    font-size:13px;
 
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   18 - RTL SUPPORT
-   ====================================================== */
-
-
-html[dir="rtl"] .payments-filter-form{
-
-    direction:rtl;
-
-}
-
-
-
-
-
-html[dir="rtl"] .payment-tabs{
-
-    direction:rtl;
-
-}
-
-
-
-
-
-html[dir="rtl"] .payments-table{
-
-    direction:rtl;
-
-}
-
-
-
-
-
-html[dir="rtl"] .payment-info-card{
-
-    direction:rtl;
-
-}
-
-
-
-
-
-html[dir="rtl"] .payment-info-row strong{
-
-    text-align:left;
-
-}
-
-
-
-
-
-html[dir="ltr"] .payment-info-row strong{
+    font-weight:900;
 
     text-align:right;
 
+    overflow-wrap:break-word;
+
 }
 
-
-
-
-
-
-
-
 /* ======================================================
-   19 - PAGINATION
-   ====================================================== */
+   17 - PAGINATION
+
+   AJAX ready
+   Compact controls
+====================================================== */
 
 
 .payment-pagination{
+
+    width:100%;
 
     display:flex;
 
@@ -1110,9 +1404,11 @@ html[dir="ltr"] .payment-info-row strong{
 
     align-items:center;
 
-    gap:8px;
+    gap:6px;
 
-    padding:20px;
+    padding:20px 0;
+
+    flex-wrap:wrap;
 
 }
 
@@ -1122,19 +1418,21 @@ html[dir="ltr"] .payment-info-row strong{
 
 .payment-pagination button{
 
-    width:38px;
+    width:34px;
 
-    height:38px;
-
-    border-radius:10px;
+    height:34px;
 
     border:none;
+
+    border-radius:8px;
 
     background:#f1f5f9;
 
     color:#334155;
 
-    font-weight:700;
+    font-size:12px;
+
+    font-weight:800;
 
     cursor:pointer;
 
@@ -1166,9 +1464,27 @@ html[dir="ltr"] .payment-info-row strong{
 
 }
 
+
+
+
+
+.payment-pagination .prev,
+.payment-pagination .next{
+
+    width:auto;
+
+    min-width:70px;
+
+    padding:0 12px;
+
+}
+
+
 /* ======================================================
-   20 - PAYMENT LOADING EFFECT
-   ====================================================== */
+   18 - LOADING
+
+   AJAX table loading state
+====================================================== */
 
 
 .payments-loading{
@@ -1179,11 +1495,13 @@ html[dir="ltr"] .payment-info-row strong{
 
     align-items:center;
 
-    padding:50px;
+    gap:10px;
+
+    padding:35px;
 
     color:#64748b;
 
-    font-size:15px;
+    font-size:13px;
 
     font-weight:700;
 
@@ -1197,11 +1515,9 @@ html[dir="ltr"] .payment-info-row strong{
 
     content:"";
 
-    width:24px;
+    width:22px;
 
-    height:24px;
-
-    margin-right:12px;
+    height:22px;
 
     border-radius:50%;
 
@@ -1221,7 +1537,6 @@ html[dir="ltr"] .payment-info-row strong{
 
 @keyframes paymentSpin{
 
-
 from{
 
     transform:rotate(0deg);
@@ -1235,54 +1550,22 @@ to{
 
 }
 
-
 }
-
-
-
-
-
-
 
 
 
 /* ======================================================
-   21 - ROW ANIMATION
-   ====================================================== */
+   19 - RTL SUPPORT
+
+   Arabic / RTL compatibility
+====================================================== */
 
 
-.payments-table tbody tr{
+html[dir="rtl"] .payments-toolbar,
+html[dir="rtl"] .payments-filter-form,
+html[dir="rtl"] .payment-tabs{
 
-    animation:
-
-    paymentFade .25s ease;
-
-}
-
-
-
-
-
-@keyframes paymentFade{
-
-
-from{
-
-    opacity:0;
-
-    transform:translateY(8px);
-
-}
-
-
-to{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
+    direction:rtl;
 
 }
 
@@ -1290,131 +1573,91 @@ to{
 
 
 
+html[dir="rtl"] .payments-table{
+
+    direction:rtl;
+
+}
 
 
+
+
+
+html[dir="rtl"] .modal-close{
+
+    right:auto;
+
+    left:15px;
+
+}
+
+
+
+
+
+html[dir="rtl"] .payment-info-card{
+
+    direction:rtl;
+
+}
+
+
+
+
+
+html[dir="rtl"] .payment-info-row{
+
+    flex-direction:row-reverse;
+
+}
+
+
+
+
+
+html[dir="rtl"] .payment-info-row span{
+
+    text-align:right;
+
+}
+
+
+
+
+
+html[dir="rtl"] .payment-info-row strong{
+
+    text-align:left;
+
+}
+
+
+
+
+
+html[dir="rtl"] .payment-action{
+
+    direction:rtl;
+
+}
 
 /* ======================================================
-   22 - PAYMENT ACTION AREA
-   ====================================================== */
+   20 - RESPONSIVE
 
-
-.payment-actions{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-
-
-
-.payment-actions button{
-
-    height:36px;
-
-    min-width:36px;
-
-    border-radius:10px;
-
-    border:none;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-
-
-
-
-
-
-.payment-view-btn{
-
-    background:#0ea5e9;
-
-    color:white;
-
-}
-
-
-
-
-
-.payment-view-btn:hover{
-
-    box-shadow:
-
-    0 8px 16px rgba(14,165,233,.3);
-
-    transform:translateY(-2px);
-
-}
-
-
-
-
-
-
-
-.payment-confirm-btn{
-
-    background:#16a34a;
-
-    color:white;
-
-}
-
-
-
-
-
-.payment-confirm-btn:hover{
-
-    box-shadow:
-
-    0 8px 16px rgba(22,163,74,.3);
-
-    transform:translateY(-2px);
-
-}
-
-
-
-
-
-
-
-
-
-/* ======================================================
-   23 - RESPONSIVE DESIGN
-   ====================================================== */
-
+   Mobile / Tablet adaptation
+====================================================== */
 
 
 @media(max-width:1000px){
 
 
-
     .payments-toolbar{
-
 
         flex-direction:column;
 
-
         align-items:stretch;
 
-
     }
-
 
 
 
@@ -1422,16 +1665,11 @@ to{
 
     .payments-filter-form{
 
-
         width:100%;
-
 
         flex-direction:column;
 
-
     }
-
-
 
 
 
@@ -1441,12 +1679,9 @@ to{
     .payments-filter-form .centre-select,
     .payments-filter-form .btn-primary{
 
-
         width:100%;
 
-
     }
-
 
 
 
@@ -1454,16 +1689,12 @@ to{
 
     .payment-info-card{
 
-
         grid-template-columns:1fr;
-
 
     }
 
 
-
 }
-
 
 
 
@@ -1474,18 +1705,11 @@ to{
 @media(max-width:700px){
 
 
-
     .payment-tabs{
-
 
         flex-direction:column;
 
-
-        gap:10px;
-
-
     }
-
 
 
 
@@ -1493,68 +1717,69 @@ to{
 
     .payment-tab{
 
-
         width:100%;
 
-
     }
 
 
 
 
 
+    .payments-table th,
+    .payments-table td{
 
-
-
-
-
-
-
-
-
-    .payment-start-date{
-
-
-        width:130px;
-
-
-    }
-
-
-
-
-
-
-
-    .payment-duration{
-
-
-        width:75px;
-
-
-    }
-
-
-
-
-
-
-
-    .payments-table .btn-primary{
-
-
-        padding:0 12px;
-
+        padding:8px;
 
         font-size:12px;
 
+    }
+
+
+
+
+
+    .centre-modal-content{
+
+        width:100%;
+
+        padding:20px;
+
+        border-radius:16px;
 
     }
 
 
 
-}
 
+
+    #payment-modal .centre-modal-content{
+
+        width:100%;
+
+    }
+
+
+
+
+
+    .reset-confirm-actions{
+
+        flex-direction:column;
+
+    }
+
+
+
+
+
+    .reset-confirm-actions button{
+
+        width:100%;
+
+    }
+
+
+}
 
 
 
@@ -1565,93 +1790,44 @@ to{
 @media(max-width:500px){
 
 
-
-    .payments-toolbar{
-
-
-        padding:18px;
-
-
-    }
-
-
-
-
-
-
-
     .dashboard-header h1{
-
 
         font-size:22px;
 
-
     }
 
 
 
 
 
-
-
-    .reset-confirm-box{
-
-
-        width:100%;
-
-
-    }
-
-
-
-
-
-
-
-    .payment-info-row{
-
-
-        flex-direction:column;
-
-
-        align-items:flex-start;
-
-
-        gap:8px;
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ======================================================
-   24 - DARK COMPATIBILITY
-   ====================================================== */
-
-
-@media(prefers-color-scheme:dark){
-
-
-
-    .payments-table,
     .payments-toolbar{
 
-
-        background:white;
-
+        padding:15px;
 
     }
 
+
+
+
+
+    .payment-pagination button{
+
+        width:32px;
+
+        height:32px;
+
+    }
+
+
+
+
+
+    .payment-pagination .prev,
+    .payment-pagination .next{
+
+        min-width:60px;
+
+    }
 
 
 }
@@ -1660,12 +1836,11 @@ to{
 
 
 
-
-
-
 /* ======================================================
-   25 - PRINT CONTROL
-   ====================================================== */
+   21 - PRINT CONTROL
+
+   Clean print layout
+====================================================== */
 
 
 @media print{
@@ -1673,15 +1848,28 @@ to{
 
     .payments-toolbar,
     .payment-tabs,
-    .payment-actions,
-    button{
-
+    button,
+    .payment-actions{
 
         display:none!important;
 
-
     }
 
+
+
+
+
+    .payments-table-wrapper{
+
+        width:100%;
+
+        box-shadow:none;
+
+        border:none;
+
+        overflow:visible;
+
+    }
 
 
 
@@ -1689,23 +1877,42 @@ to{
 
     .payments-table{
 
+        width:100%;
 
         min-width:100%;
 
+        border-collapse:collapse;
 
     }
 
 
 
+
+
+    .payments-table th{
+
+        color:#000;
+
+        background:#eee;
+
+    }
+
+
+
+
+
+    .payments-table td{
+
+        color:#000;
+
+        border-bottom:1px solid #ccc;
+
+    }
+
+
 }
 
 
-
-
-
-
-
-
 /* ======================================================
-   END PAYMENTS.CSS
-   ====================================================== */
+   END CENTRIA PAYMENTS CSS
+====================================================== */

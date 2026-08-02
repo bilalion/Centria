@@ -15,10 +15,10 @@ List<Payment> payments =
 %>
 
 
-<div class="payments-table-wrapper">
+<div class="payments-table-wrapper unpaid-table-wrapper">
 
 
-<table class="payments-table">
+<table class="payments-table unpaid-table">
 
 
 <thead>

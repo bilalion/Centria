@@ -25,10 +25,10 @@ java.text.SimpleDateFormat sdf =
 
 
 
-<div class="payments-table-wrapper">
+<div class="payments-table-wrapper paid-table-wrapper">
 
 
-<table class="payments-table">
+<table class="payments-table paid-table">
 
 
 

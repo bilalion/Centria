@@ -153,7 +153,7 @@
 
 <button
         id="tab-unpaid"
-        class="payment-tab active"
+        class="payment-tab unpaid-tab active"
         onclick="changePaymentTab('UNPAID')">
 
 <%=LanguageManager.get(
@@ -169,7 +169,7 @@
 
 <button
         id="tab-paid"
-        class="payment-tab"
+        class="payment-tab paid-tab"
         onclick="changePaymentTab('PAID')">
 
 <%=LanguageManager.get(
@@ -185,7 +185,7 @@
 
 <button
         id="tab-history"
-        class="payment-tab"
+        class="payment-tab history-tab"
         onclick="changePaymentTab('HISTORY')">
 
 <%=LanguageManager.get(
