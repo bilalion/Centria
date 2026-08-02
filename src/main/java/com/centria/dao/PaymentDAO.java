@@ -1525,11 +1525,194 @@ public boolean updateSubscription(
         ==========================================
         */
 
-        else if("EXTENDED".equalsIgnoreCase(operation)){
+      else if("EXTENDED".equalsIgnoreCase(operation)){
 
-            // TODO
+    /*
+    ==========================================
+    1 - GET PAYMENT ID + CURRENT END DATE
+    ==========================================
+    */
 
-        }
+    String sql =
+
+    "SELECT p.id, c.subscription_end "
+    + "FROM payments p "
+    + "INNER JOIN centres c "
+    + "ON p.centre_code = c.centre_code "
+    + "WHERE p.centre_code=?";
+
+    PreparedStatement ps =
+            con.prepareStatement(sql);
+
+    ps.setString(1, centreCode);
+
+    ResultSet rs = ps.executeQuery();
+
+    if(!rs.next()){
+
+        con.rollback();
+
+        return false;
+
+    }
+
+    int paymentId =
+            rs.getInt("id");
+
+    Date subscriptionEnd =
+            rs.getDate("subscription_end");
+
+
+
+    /*
+    ==========================================
+    2 - CALCULATE NEW END DATE
+    ==========================================
+    */
+
+    java.util.Calendar calendar =
+            java.util.Calendar.getInstance();
+
+    calendar.setTime(subscriptionEnd);
+
+    calendar.add(
+            java.util.Calendar.MONTH,
+            durationMonths
+    );
+
+    Date newSubscriptionEnd =
+            new Date(
+                    calendar.getTimeInMillis()
+            );
+
+
+
+    /*
+    ==========================================
+    3 - UPDATE CENTRES
+    ==========================================
+    */
+
+    sql =
+
+    "UPDATE centres "
+    + "SET subscription_end=? "
+    + "WHERE centre_code=?";
+
+    ps = con.prepareStatement(sql);
+
+    ps.setDate(
+            1,
+            newSubscriptionEnd
+    );
+
+    ps.setString(
+            2,
+            centreCode
+    );
+
+    if(ps.executeUpdate()==0){
+
+        con.rollback();
+
+        return false;
+
+    }
+
+
+
+    /*
+    ==========================================
+    4 - GENERATE NEW INVOICE
+    ==========================================
+    */
+
+    String newInvoiceCode =
+            InvoiceCodeGenerator.generateCode(
+                    paymentId
+            );
+
+
+
+    /*
+    ==========================================
+    5 - UPDATE PAYMENTS
+    ==========================================
+    */
+
+    sql =
+
+    "UPDATE payments "
+    + "SET code_facture=? "
+    + "WHERE centre_code=?";
+
+    ps = con.prepareStatement(sql);
+
+    ps.setString(
+            1,
+            newInvoiceCode
+    );
+
+    ps.setString(
+            2,
+            centreCode
+    );
+
+    if(ps.executeUpdate()==0){
+
+        con.rollback();
+
+        return false;
+
+    }
+
+
+
+    /*
+    ==========================================
+    6 - INSERT HISTORY
+    ==========================================
+    */
+
+    sql =
+
+    "INSERT INTO history_payment "
+    + "(code_facture, centre_code, date_paiement, operation_type) "
+    + "VALUES (?, ?, ?, ?)";
+
+    ps = con.prepareStatement(sql);
+
+    ps.setString(
+            1,
+            newInvoiceCode
+    );
+
+    ps.setString(
+            2,
+            centreCode
+    );
+
+    ps.setDate(
+            3,
+            new Date(
+                    System.currentTimeMillis()
+            )
+    );
+
+    ps.setString(
+            4,
+            "EXTENDED"
+    );
+
+    if(ps.executeUpdate()==0){
+
+        con.rollback();
+
+        return false;
+
+    }
+
+}
 
         else{
 
