@@ -1083,7 +1083,7 @@ else{
 ======================================================
 GET PAID PAYMENTS
 
-Used by TAB2
+Used by TAB2 (affichage des donnees)
 
 Display centres with active subscriptions
 
@@ -1366,6 +1366,228 @@ public List<Payment> getPaidPayments(
 
 }
 
+
+
+
+/*
+==========================================================
+ TAB2
+ SUBSCRIPTION UPDATE
+==========================================================
+*/
+
+
+public boolean updateSubscription(
+        String centreCode,
+        String codeFacture,
+        String operation,
+        int durationMonths
+){
+
+    Connection con = null;
+
+    try{
+
+        con = DatabaseConfig.getConnection();
+
+        con.setAutoCommit(false);
+
+        /*
+        ==========================================
+        PART 1
+        UPGRADE
+        ==========================================
+        */
+
+        if("UPGRADE".equalsIgnoreCase(operation)){
+
+            /*
+            ==========================================
+            1 - GET SUBSCRIPTION START
+            ==========================================
+            */
+
+            String sql =
+
+            "SELECT subscription_start "
+            + "FROM centres "
+            + "WHERE centre_code=?";
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ps.setString(1, centreCode);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(!rs.next()){
+
+                con.rollback();
+
+                return false;
+
+            }
+
+            Date subscriptionStart =
+                    rs.getDate("subscription_start");
+
+            /*
+            ==========================================
+            2 - CALCULATE NEW END DATE
+            ==========================================
+            */
+
+            java.util.Calendar calendar =
+                    java.util.Calendar.getInstance();
+
+            calendar.setTime(subscriptionStart);
+
+            calendar.add(
+                    java.util.Calendar.MONTH,
+                    durationMonths
+            );
+
+            Date subscriptionEnd =
+                    new Date(
+                            calendar.getTimeInMillis()
+                    );
+
+            /*
+            ==========================================
+            3 - UPDATE CENTRES
+            ==========================================
+            */
+
+            sql =
+
+            "UPDATE centres "
+            + "SET subscription_end=? "
+            + "WHERE centre_code=?";
+
+            ps = con.prepareStatement(sql);
+
+            ps.setDate(
+                    1,
+                    subscriptionEnd
+            );
+
+            ps.setString(
+                    2,
+                    centreCode
+            );
+
+            if(ps.executeUpdate()==0){
+
+                con.rollback();
+
+                return false;
+
+            }
+
+            /*
+            ==========================================
+            4 - UPDATE HISTORY
+            ==========================================
+            */
+
+            sql =
+
+            "UPDATE history_payment "
+            + "SET operation_type=? "
+            + "WHERE code_facture=?";
+
+            ps = con.prepareStatement(sql);
+
+            ps.setString(
+                    1,
+                    "UPGRADE"
+            );
+
+            ps.setString(
+                    2,
+                    codeFacture
+            );
+
+            if(ps.executeUpdate()==0){
+
+                con.rollback();
+
+                return false;
+
+            }
+
+        }
+
+        /*
+        ==========================================
+        PART 2
+        EXTENDED
+        ==========================================
+        */
+
+        else if("EXTENDED".equalsIgnoreCase(operation)){
+
+            // TODO
+
+        }
+
+        else{
+
+            con.rollback();
+
+            return false;
+
+        }
+
+        con.commit();
+
+        return true;
+
+    }
+    catch(Exception ex){
+
+        ex.printStackTrace();
+
+        try{
+
+            if(con != null){
+
+                con.rollback();
+
+            }
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        return false;
+
+    }
+    finally{
+
+        try{
+
+            if(con != null){
+
+                con.setAutoCommit(true);
+
+                con.close();
+
+            }
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+}
 
 }
 

@@ -25,9 +25,7 @@ java.text.SimpleDateFormat sdf =
 
 
 
-
 <div class="payments-table-wrapper">
-
 
 
 <table class="payments-table">
@@ -67,14 +65,12 @@ java.text.SimpleDateFormat sdf =
 
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.status",
         session
 )%>
 </th>
-
 
 
 
@@ -105,7 +101,6 @@ java.text.SimpleDateFormat sdf =
 
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.operation",
@@ -123,13 +118,11 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
+
 </tr>
 
 
 </thead>
-
-
-
 
 
 
@@ -154,14 +147,11 @@ if(payments != null && !payments.isEmpty()){
 
 
 
-
 <td>
 
 <%=payment.getCentreCode()%>
 
 </td>
-
-
 
 
 
@@ -173,8 +163,6 @@ if(payments != null && !payments.isEmpty()){
 
 
 
-
-
 <td>
 
 <%=payment.getCodeFacture()%>
@@ -183,16 +171,11 @@ if(payments != null && !payments.isEmpty()){
 
 
 
-
-
-<!-- =========================
-     STATUS
-========================= -->
-
 <td>
 
 
 <span class="status paid">
+
 
 🟢
 
@@ -206,13 +189,6 @@ if(payments != null && !payments.isEmpty()){
 
 
 </td>
-
-
-
-
-
-
-
 <!-- =========================
      START DATE
 ========================= -->
@@ -248,9 +224,6 @@ else{
 
 
 </td>
-
-
-
 
 
 
@@ -298,12 +271,9 @@ else{
 
 
 
-
-
 <!-- =========================
-     DURATION
+     SUBSCRIPTION PLAN
 ========================= -->
-
 
 <td>
 
@@ -324,6 +294,7 @@ data-centre="<%=payment.getCentreCode()%>"
 </option>
 
 
+
 <option value="3">
 
 3 Months
@@ -331,11 +302,13 @@ data-centre="<%=payment.getCentreCode()%>"
 </option>
 
 
+
 <option value="6">
 
 6 Months
 
 </option>
+
 
 
 <option value="12">
@@ -349,9 +322,6 @@ data-centre="<%=payment.getCentreCode()%>"
 
 
 </td>
-
-
-
 
 
 
@@ -377,7 +347,10 @@ data-centre="<%=payment.getCentreCode()%>"
 
 <option value="UPGRADE">
 
-Upgrade
+<%=LanguageManager.get(
+        "payments.upgrade",
+        session
+)%>
 
 </option>
 
@@ -385,9 +358,13 @@ Upgrade
 
 <option value="EXTENDED">
 
-Extended
+<%=LanguageManager.get(
+        "payments.extended",
+        session
+)%>
 
 </option>
+
 
 
 </select>
@@ -401,10 +378,8 @@ Extended
 
 
 
-
-
 <!-- =========================
-     ACTION
+     SAVE BUTTON
 ========================= -->
 
 
@@ -417,18 +392,20 @@ type="button"
 
 class="btn-primary"
 
+onclick="openSubscriptionConfirm(
+        '<%=payment.getCentreCode()%>',
+        '<%=payment.getCodeFacture()%>'
+)"
+
 title="<%=LanguageManager.get(
         "payments.save",
         session
 )%>"
 
-onclick="openSubscriptionConfirm('<%=payment.getCentreCode()%>')"
-
 >
 
-
+    
 💾
-
 
 </button>
 
@@ -437,9 +414,7 @@ onclick="openSubscriptionConfirm('<%=payment.getCentreCode()%>')"
 
 
 
-
 </tr>
-
 
 
 
@@ -450,9 +425,7 @@ onclick="openSubscriptionConfirm('<%=payment.getCentreCode()%>')"
 }
 else{
 
-
 %>
-
 
 
 <tr>
@@ -473,14 +446,11 @@ else{
 </tr>
 
 
-
 <%
 
 }
 
 %>
-
-
 
 
 </tbody>

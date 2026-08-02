@@ -338,7 +338,7 @@
                 <h4 class="confirm-title">
 
                     <%=LanguageManager.get(
-                        "payments.subscription.update",
+                        "payments.save.confirm.title",
                         session
                     )%>
 
@@ -353,7 +353,7 @@
             <p>
 
             <%=LanguageManager.get(
-                    "payments.subscription.update.message",
+                    "payments.save.confirm.message",
                     session
             )%>
 

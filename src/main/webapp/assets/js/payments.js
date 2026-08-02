@@ -31,8 +31,10 @@ let selectedCentreCode = null;
 
 let paymentSearchTimer = null;
 
-let selectedSubscriptionCentre = null;
 
+let selectedSubscriptionCentre = null
+
+let selectedSubscriptionFacture = null;
 
 
 
@@ -797,25 +799,104 @@ function(){
 */
 
 
-function openSubscriptionConfirm(centreCode){
+function openSubscriptionConfirm(
+        centreCode,
+        codeFacture
+){
 
 
     selectedSubscriptionCentre = centreCode;
+     selectedSubscriptionFacture = codeFacture;
 
 
-    let modal = document.getElementById(
+    let operationElement =
+
+    document.querySelector(
+        '.subscription-operation[data-centre="' +
+        centreCode +
+        '"]'
+    );
+
+
+
+    let operation =
+
+    operationElement
+    ?
+    operationElement.value
+    :
+    "";
+
+
+
+
+    let message =
+
+    document.getElementById(
+        "subscription-confirm-message"
+    );
+
+
+
+
+    if(message){
+
+
+
+        if(operation === "UPGRADE"){
+
+
+            message.innerHTML =
+            window.subscriptionMessages.upgrade;
+
+
+        }
+        else if(operation === "EXTENDED"){
+
+
+            message.innerHTML =
+            window.subscriptionMessages.extended;
+
+
+        }
+        else{
+
+
+            message.innerHTML =
+            window.subscriptionMessages.update;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+    let modal =
+
+    document.getElementById(
         "subscription-confirm-modal"
     );
 
 
+
     if(modal){
 
-        modal.classList.add("show");
+
+        modal.classList.add(
+            "show"
+        );
+
 
     }
 
-}
 
+
+}
 
 
 
@@ -890,7 +971,7 @@ function updateSubscription(){
 
     formData.append(
         "action",
-        "subscriptionUpdate"
+       "updateSubscription"
     );
 
 
@@ -900,7 +981,10 @@ function updateSubscription(){
         selectedSubscriptionCentre
     );
 
-
+formData.append(
+    "codeFacture",
+    selectedSubscriptionFacture
+);
 
     formData.append(
         "operation",

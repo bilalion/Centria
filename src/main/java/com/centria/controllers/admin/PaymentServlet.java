@@ -59,22 +59,26 @@ public class PaymentServlet extends HttpServlet {
         }
 
     }
+protected void doPost(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
 
-    protected void doPost(
-            HttpServletRequest request,
-            HttpServletResponse response
-    )
-    throws ServletException, IOException {
+    String action = request.getParameter("action");
 
-        String action = request.getParameter("action");
+    if("confirm".equals(action)){
 
-        if("confirm".equals(action)){
-
-            confirmPayment(request, response);
-
-        }
+        confirmPayment(request, response);
 
     }
+    else if("updateSubscription".equals(action)){
+
+        updateSubscription(request, response);
+
+    }
+
+}
 
     /*
     ==============================================
@@ -308,19 +312,6 @@ switch(tab){
 
 
 
-
-
-
-    /*
-    ==============================================
-    AJAX RESPONSE
-
-    ONLY unpaid-table.jsp
-
-    ==============================================
-    */
-
-
    if("true".equals(
         request.getParameter("ajax")
 )){
@@ -329,7 +320,7 @@ switch(tab){
     String fragment;
 
 
-    if("PAID".equals(tab)){
+    if("PAID".equals(tab)){//tab2
 
 
         fragment =
@@ -338,7 +329,7 @@ switch(tab){
 
     }
     else{
-
+//tab1
 
         fragment =
         "/admin/pages/fragments/payments/unpaid-table.jsp";
@@ -409,17 +400,11 @@ CONFIRM PAYMENT
 
 TAB1 : UNPAID
 
-Receive:
-- centreCode
-- startDate
-- duration
-
-Call DAO:
-paymentDAO.confirmPayment()
-
 ==============================================
 */
 
+    
+    
 private void confirmPayment(
         HttpServletRequest request,
         HttpServletResponse response
@@ -448,10 +433,7 @@ throws ServletException, IOException {
 
 
 
-        System.out.println("=== CONFIRM PAYMENT ===");
-        System.out.println("CENTRE : " + centreCode);
-        System.out.println("START  : " + startDate);
-        System.out.println("DURATION : " + duration);
+  
 
 
 
@@ -578,4 +560,126 @@ throws ServletException, IOException {
 
 }
 
+
+
+/*
+==============================================
+Fin TAB1 : UNPAID
+==============================================
+*/
+
+
+
+/*
+==============================================
+UPDATE SUBSCRIPTION
+
+TAB2 : PAID
+
+UPGRADE / EXTENDED
+==============================================
+*/
+
+private void updateSubscription(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException{
+
+    response.setContentType(
+            "text/plain;charset=UTF-8"
+    );
+
+    try{
+
+        String centreCode =
+                request.getParameter("centreCode");
+
+        String codeFacture =
+                request.getParameter("codeFacture");
+
+        String operation =
+                request.getParameter("operation");
+
+        String duration =
+                request.getParameter("duration");
+
+        if(centreCode == null
+                || centreCode.trim().isEmpty()){
+
+            response.getWriter().print("ERROR:CENTRE");
+
+            return;
+
+        }
+
+        if(codeFacture == null
+                || codeFacture.trim().isEmpty()){
+
+            response.getWriter().print("ERROR:FACTURE");
+
+            return;
+
+        }
+
+        if(operation == null
+                || operation.trim().isEmpty()){
+
+            response.getWriter().print("ERROR:OPERATION");
+
+            return;
+
+        }
+
+        if(duration == null
+                || duration.trim().isEmpty()){
+
+            response.getWriter().print("ERROR:DURATION");
+
+            return;
+
+        }
+
+        int durationMonths =
+                Integer.parseInt(duration);
+
+        boolean success =
+                paymentDAO.updateSubscription(
+                        centreCode,
+                        codeFacture,
+                        operation,
+                        durationMonths
+                );
+
+        if(success){
+
+            response.getWriter().print("SUCCESS");
+
+        }
+        else{
+
+            response.getWriter().print("ERROR");
+
+        }
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+        response.getWriter().print("ERROR");
+
+    }
+
 }
+
+/*
+==============================================
+Fin TAB2 : PAID
+==============================================
+*/
+
+}
+
+
+
