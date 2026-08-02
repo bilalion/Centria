@@ -33,7 +33,7 @@ Does not contain:
 
     width:100%;
 
-    height:100vh;
+    min-height:100vh;
 
     display:flex;
 
@@ -48,9 +48,6 @@ Does not contain:
 
 /* ======================================================
    02 - MAIN CONTENT AREA
-
-   Takes all remaining space after sidebar.
-
    ====================================================== */
 
 
@@ -68,9 +65,7 @@ Does not contain:
 
     flex-direction:column;
 
-    overflow-y:auto;
-
-    overflow-x:hidden;
+    overflow:hidden;
 
 }
 
@@ -81,26 +76,23 @@ Does not contain:
 
 /* ======================================================
    03 - PAGE CONTENT CONTAINER
-
-   No max-width limitation.
-
-   Allows wide tables.
-
    ====================================================== */
 
 
 #content-area,
 .content-area{
 
-
     width:100%;
-
 
     flex:1;
 
-
     min-width:0;
 
+    min-height:0;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
 
 }
 
@@ -116,12 +108,9 @@ Does not contain:
 
 html[dir="rtl"] .main-content{
 
-
     direction:rtl;
 
-
     text-align:right;
-
 
 }
 
@@ -129,9 +118,7 @@ html[dir="rtl"] .main-content{
 
 html[dir="rtl"] .sidebar{
 
-
     order:2;
-
 
 }
 
@@ -139,9 +126,7 @@ html[dir="rtl"] .sidebar{
 
 html[dir="rtl"] .main-content{
 
-
     order:1;
-
 
 }
 
@@ -157,34 +142,32 @@ html[dir="rtl"] .main-content{
 
 html[dir="ltr"] .sidebar{
 
-
     order:1;
-
 
 }
 
 
 
 html[dir="ltr"] .main-content{
-
 
     order:2;
 
-
 }
 
 
 
 html[dir="ltr"] .main-content{
 
-
     direction:ltr;
-
 
     text-align:left;
 
-
 }
+
+
+
+
+
 
 /* ======================================================
    06 - TABLET RESPONSIVE
@@ -196,9 +179,7 @@ html[dir="ltr"] .main-content{
 
     .main-content{
 
-
         padding:25px;
-
 
     }
 
@@ -220,9 +201,7 @@ html[dir="ltr"] .main-content{
 
     .main-content{
 
-
         padding:20px;
-
 
     }
 
@@ -236,11 +215,6 @@ html[dir="ltr"] .main-content{
 
 /* ======================================================
    08 - MOBILE LAYOUT
-
-   Sidebar becomes bottom navigation.
-
-   Main content uses remaining height.
-
    ====================================================== */
 
 
@@ -248,7 +222,6 @@ html[dir="ltr"] .main-content{
 
 
     .app-layout{
-
 
         width:100%;
 
@@ -260,35 +233,24 @@ html[dir="ltr"] .main-content{
 
         overflow:hidden;
 
-
     }
-
 
 
 
 
     .main-content{
 
-
         width:100%;
-
 
         height:calc(100vh - 72px);
 
-
         min-height:0;
-
 
         padding:20px;
 
-
         padding-bottom:90px;
 
-
-        overflow-y:auto;
-
-        overflow-x:hidden;
-
+        overflow:hidden;
 
     }
 
@@ -297,11 +259,15 @@ html[dir="ltr"] .main-content{
     #content-area,
     .content-area{
 
-
         width:100%;
 
         min-width:0;
 
+        min-height:0;
+
+        overflow-y:auto;
+
+        overflow-x:hidden;
 
     }
 
@@ -323,12 +289,9 @@ html[dir="ltr"] .main-content{
 
     .main-content{
 
-
         padding:15px;
 
-
         padding-bottom:90px;
-
 
     }
 
@@ -342,27 +305,14 @@ html[dir="ltr"] .main-content{
 
 /* ======================================================
    10 - WIDE CONTENT SUPPORT
-
-
-   Important for:
-
-   - Payments tables
-   - History tables
-   - Reports
-
-
-   Pages decide their own width.
-
    ====================================================== */
 
 
 .wide-content{
 
-
     width:100%;
 
     min-width:0;
-
 
 }
 
@@ -372,24 +322,23 @@ html[dir="ltr"] .main-content{
 
 
 /* ======================================================
-   11 - END dashboard.css
+   11 - HIDE HORIZONTAL PAGE SCROLL
+   ====================================================== */
 
 
-   Responsibilities:
+html,
+body{
 
-   ✔ Application structure
-   ✔ Main content sizing
-   ✔ Sidebar relationship
-   ✔ RTL/LTR
-   ✔ Responsive layout
+    overflow-x:hidden;
 
-
-   Removed:
-
-   ✘ Page restrictions
-   ✘ Table width limits
-   ✘ Module styles
+}
 
 
+
+
+
+
+/* ======================================================
+   END dashboard.css
 ==========================================================
 */

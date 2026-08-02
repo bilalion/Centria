@@ -406,7 +406,8 @@
 
 .payments-table td{
 
-    height:64px;
+   min-height:64px;
+height:auto;
 
     padding:12px 10px;
 
@@ -453,13 +454,17 @@
     background:#f8fafc;
 
 }
+
 /* ======================================================
    06 - CELL CONTENT CONTROL
 
-   Flexible text
-   No forced cutting
+   Professional text handling
+   No broken words
+   Automatic row expansion
 ====================================================== */
 
+
+/* General cell text */
 
 .cell-text{
 
@@ -471,16 +476,19 @@
 
     width:100%;
 
-
     white-space:normal;
 
-    overflow-wrap:break-word;
+    word-break:normal;
+
+    overflow-wrap:normal;
+
+    line-height:1.5;
 
 }
 
 
 
-
+/* Centre code */
 
 .code-text{
 
@@ -492,16 +500,19 @@
 
     width:100%;
 
-
     direction:ltr;
 
     white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 
 }
 
 
 
-
+/* Invoice */
 
 .invoice-text{
 
@@ -513,16 +524,19 @@
 
     width:100%;
 
-
     direction:ltr;
 
     white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 
 }
 
 
 
-
+/* Centre name */
 
 .centre-name{
 
@@ -534,16 +548,19 @@
 
     width:100%;
 
-
     white-space:normal;
 
-    overflow-wrap:break-word;
+    word-break:normal;
+
+    overflow-wrap:normal;
+
+    line-height:1.5;
 
 }
 
 
 
-
+/* Dates */
 
 .date-text{
 
@@ -555,6 +572,22 @@
 
     width:100%;
 
+    white-space:nowrap;
+
+}
+
+
+
+/* Status badges */
+
+.payments-table .status,
+.payments-table .account-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     white-space:nowrap;
 
@@ -562,8 +595,28 @@
 
 
 
+/* Inputs and selects */
+
+.payments-table input,
+.payments-table select{
+
+    margin:auto;
+
+}
 
 
+
+/* Action */
+
+.payment-action{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
 
 
 /* ======================================================

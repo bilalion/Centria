@@ -36,6 +36,7 @@ request.getAttribute("totalPages") != null
 
 
 
+
 <%
 
 if(centres == null || centres.isEmpty()){
@@ -68,16 +69,225 @@ if(centres == null || centres.isEmpty()){
 
 
 
+<!-- =================================================
+     PAGINATION TOP
+     ================================================= -->
+
+
+<div class="pagination-container">
+
+
+<%
+
+if(totalPages > 1){
+
+%>
+
+
+<!-- PREVIOUS -->
+
+<button
+class="page-btn"
+onclick="changeCentrePage(<%=currentPage - 1%>)"
+<%=currentPage <= 1 ? "disabled" : ""%>
+>
+◀
+</button>
+
+
+
+
+
+<%
+
+int startPage = Math.max(1, currentPage - 2);
+
+int endPage = Math.min(
+        totalPages,
+        currentPage + 2
+);
+
+
+
+
+
+if(startPage > 1){
+
+%>
+
+
+<button
+class="page-btn"
+onclick="changeCentrePage(1)"
+>
+1
+</button>
+
+
+<%
+
+if(startPage > 2){
+
+%>
+
+<span class="page-dots">
+...
+</span>
+
+<%
+
+}
+
+%>
+
+
+<%
+
+}
+
+
+
+
+
+for(int i = startPage; i <= endPage; i++){
+
+%>
+
+
+<button
+
+class="page-btn <%=i == currentPage ? "active" : ""%>"
+
+onclick="changeCentrePage(<%=i%>)"
+
+>
+
+<%=i%>
+
+</button>
+
+
+<%
+
+}
+
+
+%>
+
+<%
+
+if(endPage < totalPages){
+
+%>
+
+
+<%
+
+if(endPage < totalPages - 1){
+
+%>
+
+
+<span class="page-dots">
+
+...
+
+</span>
+
+
+<%
+
+}
+
+%>
+
+
+
+<button
+
+class="page-btn"
+
+onclick="changeCentrePage(<%=totalPages%>)"
+
+>
+
+<%=totalPages%>
+
+
+</button>
+
+
+
+<%
+
+}
+
+%>
+
+
+
+
+
+<!-- NEXT -->
+
+
+<button
+
+class="page-btn"
+
+onclick="changeCentrePage(<%=currentPage + 1%>)"
+
+<%=currentPage >= totalPages ? "disabled" : ""%>
+
+>
+
+
+▶
+
+
+</button>
+
+
+
+
+
+<%
+
+}
+
+%>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =================================================
+     TABLE CONTAINER
+     ================================================= -->
+
+
 <div class="table-container">
 
 
+
 <table class="centers-table">
+
+
+
 
 
 <thead>
 
 
 <tr>
+
 
 
 <th>
@@ -88,6 +298,7 @@ if(centres == null || centres.isEmpty()){
 )%>
 
 </th>
+
 
 
 
@@ -104,6 +315,7 @@ if(centres == null || centres.isEmpty()){
 
 
 
+
 <th>
 
 <%=LanguageManager.get(
@@ -112,6 +324,7 @@ if(centres == null || centres.isEmpty()){
 )%>
 
 </th>
+
 
 
 
@@ -128,6 +341,7 @@ if(centres == null || centres.isEmpty()){
 
 
 
+
 <th>
 
 <%=LanguageManager.get(
@@ -136,6 +350,7 @@ if(centres == null || centres.isEmpty()){
 )%>
 
 </th>
+
 
 
 
@@ -152,6 +367,7 @@ if(centres == null || centres.isEmpty()){
 
 
 
+
 <th>
 
 <%=LanguageManager.get(
@@ -160,6 +376,7 @@ if(centres == null || centres.isEmpty()){
 )%>
 
 </th>
+
 
 
 
@@ -174,10 +391,13 @@ if(centres == null || centres.isEmpty()){
 </th>
 
 
+
+
 </tr>
 
 
 </thead>
+
 
 
 
@@ -192,8 +412,10 @@ if(centres == null || centres.isEmpty()){
 for(Centre centre : centres){
 
 
+
 String status =
 centre.getStatus();
+
 
 
 if(status == null){
@@ -203,12 +425,13 @@ if(status == null){
 }
 
 
+
 String statusClass =
 "status-" + status.toLowerCase();
 
 
-%>
 
+%>
 
 
 
@@ -219,11 +442,11 @@ String statusClass =
 
 
 
-<!-- CENTRE CODE -->
-
 <td>
 
+
 <strong>
+
 
 <%=centre.getCentreCode()!=null
 ?
@@ -232,7 +455,9 @@ centre.getCentreCode()
 "-"
 %>
 
+
 </strong>
+
 
 </td>
 
@@ -241,11 +466,11 @@ centre.getCentreCode()
 
 
 
-<!-- NAME -->
-
 <td>
 
+
 <strong>
+
 
 <%=centre.getName()!=null
 ?
@@ -254,7 +479,9 @@ centre.getName()
 "-"
 %>
 
+
 </strong>
+
 
 </td>
 
@@ -263,10 +490,8 @@ centre.getName()
 
 
 
-
-<!-- OWNER -->
-
 <td>
+
 
 <%=centre.getOwnerName()!=null
 ?
@@ -275,6 +500,7 @@ centre.getOwnerName()
 "-"
 %>
 
+
 </td>
 
 
@@ -282,10 +508,8 @@ centre.getOwnerName()
 
 
 
-
-<!-- PHONE -->
-
 <td>
+
 
 <%=centre.getPhone()!=null
 ?
@@ -294,6 +518,7 @@ centre.getPhone()
 "-"
 %>
 
+
 </td>
 
 
@@ -301,10 +526,8 @@ centre.getPhone()
 
 
 
-
-<!-- START -->
-
 <td>
+
 
 <%
 
@@ -312,9 +535,11 @@ if(centre.getSubscriptionStart()!=null){
 
 %>
 
+
 <%=sdf.format(
         centre.getSubscriptionStart()
 )%>
+
 
 
 <%
@@ -323,13 +548,16 @@ if(centre.getSubscriptionStart()!=null){
 
 %>
 
+
 -
+
 
 <%
 
 }
 
 %>
+
 
 </td>
 
@@ -338,10 +566,8 @@ if(centre.getSubscriptionStart()!=null){
 
 
 
-
-<!-- END -->
-
 <td>
+
 
 <%
 
@@ -349,9 +575,11 @@ if(centre.getSubscriptionEnd()!=null){
 
 %>
 
+
 <%=sdf.format(
         centre.getSubscriptionEnd()
 )%>
+
 
 
 <%
@@ -360,7 +588,9 @@ if(centre.getSubscriptionEnd()!=null){
 
 %>
 
+
 -
+
 
 <%
 
@@ -368,13 +598,8 @@ if(centre.getSubscriptionEnd()!=null){
 
 %>
 
+
 </td>
-
-
-
-
-
-
 
 <!-- STATUS -->
 
@@ -397,14 +622,17 @@ onchange="updateCentreStatus(this)"
 <option value="PENDING"
 
 <%=
+
 "PENDING".equals(status)
 ?
 "selected"
 :
 ""
+
 %>
 
 >
+
 
 <%=LanguageManager.get(
         "centers.pending",
@@ -421,14 +649,17 @@ onchange="updateCentreStatus(this)"
 <option value="ACTIVE"
 
 <%=
+
 "ACTIVE".equals(status)
 ?
 "selected"
 :
 ""
+
 %>
 
 >
+
 
 <%=LanguageManager.get(
         "centers.active",
@@ -445,14 +676,17 @@ onchange="updateCentreStatus(this)"
 <option value="SUSPENDED"
 
 <%=
+
 "SUSPENDED".equals(status)
 ?
 "selected"
 :
 ""
+
 %>
 
 >
+
 
 <%=LanguageManager.get(
         "centers.suspended",
@@ -469,14 +703,17 @@ onchange="updateCentreStatus(this)"
 <option value="ARCHIVED"
 
 <%=
+
 "ARCHIVED".equals(status)
 ?
 "selected"
 :
 ""
+
 %>
 
 >
+
 
 <%=LanguageManager.get(
         "centers.archived",
@@ -485,6 +722,7 @@ onchange="updateCentreStatus(this)"
 
 
 </option>
+
 
 
 </select>
@@ -508,19 +746,35 @@ onchange="updateCentreStatus(this)"
 
 
 <button
+
 type="button"
+
 class="action-btn action-view"
-onclick="viewCentre(<%=centre.getId()%>)">
+
+onclick="viewCentre(<%=centre.getId()%>)"
+
+>
+
 👁
+
 </button>
 
 
 
+
+
+
 <button
+
 type="button"
+
 class="action-btn action-edit"
+
 title="<%=LanguageManager.get("centers.edit",session)%>"
-onclick="editCentre(<%=centre.getId()%>)">
+
+onclick="editCentre(<%=centre.getId()%>)"
+
+>
 
 ✏️
 
@@ -529,15 +783,26 @@ onclick="editCentre(<%=centre.getId()%>)">
 
 
 
+
+
 <button
+
 type="button"
+
 class="action-btn action-reset"
+
 title="<%=LanguageManager.get("centers.reset.password",session)%>"
-onclick="resetCentrePassword(<%=centre.getId()%>)">
+
+onclick="resetCentrePassword(<%=centre.getId()%>)"
+
+>
 
 🔑
 
 </button>
+
+
+
 
 </div>
 
@@ -549,8 +814,9 @@ onclick="resetCentrePassword(<%=centre.getId()%>)">
 
 
 
-
 </tr>
+
+
 
 
 
@@ -565,110 +831,8 @@ onclick="resetCentrePassword(<%=centre.getId()%>)">
 </tbody>
 
 
+
 </table>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="pagination-container">
-
-
-
-<%
-
-if(totalPages > 1){
-
-%>
-
-
-
-
-<button
-
-class="page-btn"
-
-onclick="changeCentrePage(<%=currentPage - 1%>)"
-
-<%=currentPage <= 1 ? "disabled" : ""%>
-
->
-
-◀
-
-</button>
-
-
-
-
-
-
-
-<%
-
-for(int i=1;i<=totalPages;i++){
-
-%>
-
-
-
-
-<button
-
-class="page-btn <%=i==currentPage ? "active" : ""%>"
-
-onclick="changeCentrePage(<%=i%>)"
-
->
-
-<%=i%>
-
-</button>
-
-
-
-
-
-<%
-
-}
-
-%>
-
-
-
-
-
-
-<button
-
-class="page-btn"
-
-onclick="changeCentrePage(<%=currentPage + 1%>)"
-
-<%=currentPage >= totalPages ? "disabled" : ""%>
-
->
-
-▶
-
-</button>
-
-
-
-
-
-<%
-
-}
-
-%>
 
 
 

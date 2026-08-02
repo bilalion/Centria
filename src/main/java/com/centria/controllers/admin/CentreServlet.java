@@ -491,7 +491,7 @@ public class CentreServlet extends HttpServlet {
 
         int page=1;
 
-        int pageSize=10;
+        int pageSize=5;
 
 
 
