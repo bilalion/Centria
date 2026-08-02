@@ -4,6 +4,7 @@
  Payments Management Module
 
  Clean Production Version
+ Flexible Table Layout
  Responsive + RTL + AJAX Tabs
 ==========================================================
 */
@@ -19,6 +20,7 @@
     margin-bottom:30px;
 
 }
+
 
 
 .dashboard-header h1{
@@ -58,6 +60,8 @@
 
 .payments-toolbar{
 
+    width:100%;
+
     display:flex;
 
     align-items:center;
@@ -72,17 +76,21 @@
 
     flex-wrap:wrap;
 
+
     background:var(--surface);
 
     border-radius:20px;
 
     border:1px solid var(--border);
 
+
     box-shadow:
 
     0 10px 25px rgba(15,23,42,.06);
 
 }
+
+
 
 
 
@@ -100,11 +108,15 @@
 
 
 
+
+
 .payments-filter-form .search-box{
 
     width:300px;
 
 }
+
+
 
 
 
@@ -118,6 +130,8 @@
 
 
 
+
+
 .payments-filter-form .centre-select{
 
     width:170px;
@@ -125,6 +139,8 @@
     height:44px;
 
 }
+
+
 
 
 
@@ -163,17 +179,21 @@
 
     padding:12px;
 
+
     background:var(--surface);
 
     border-radius:18px;
 
     border:1px solid var(--border);
 
+
     box-shadow:
 
     0 8px 20px rgba(15,23,42,.05);
 
 }
+
+
 
 
 
@@ -189,19 +209,24 @@
 
     border-radius:14px;
 
+
     background:#f1f5f9;
 
     color:#475569;
 
+
     font-size:14px;
 
     font-weight:800;
+
 
     cursor:pointer;
 
     transition:.25s;
 
 }
+
+
 
 
 
@@ -213,11 +238,15 @@
 
 
 
+
+
 .payment-tab.active{
 
     color:white;
 
 }
+
+
 
 
 
@@ -235,6 +264,8 @@
 
 
 
+
+
 .paid-tab.active{
 
     background:
@@ -246,6 +277,8 @@
     );
 
 }
+
+
 
 
 
@@ -270,9 +303,8 @@
 /* ======================================================
    04 - TABLE WRAPPER
 
-   Responsive:
-   - Desktop : full width
-   - Mobile  : horizontal scroll
+   Flexible width
+   No forced scrolling on desktop
 ====================================================== */
 
 
@@ -280,15 +312,15 @@
 
     width:100%;
 
-    overflow-x:auto;
+    overflow:hidden;
 
-    overflow-y:hidden;
 
     background:var(--surface);
 
     border-radius:20px;
 
     border:1px solid var(--border);
+
 
     box-shadow:
 
@@ -299,11 +331,13 @@
 
 
 
+
+
+
 /* ======================================================
    05 - TABLE BASE
 
-   Dynamic columns
-   Content based width
+   Natural browser distribution
 ====================================================== */
 
 
@@ -315,9 +349,9 @@
 
     background:white;
 
-    table-layout:auto;
-
 }
+
+
 
 
 
@@ -339,11 +373,14 @@
 
 
 
+
+
 .payments-table th{
 
     height:56px;
 
-    padding:0 12px;
+    padding:12px 10px;
+
 
     color:white;
 
@@ -351,7 +388,11 @@
 
     font-weight:800;
 
+
     text-align:center;
+
+    vertical-align:middle;
+
 
     white-space:nowrap;
 
@@ -361,15 +402,19 @@
 
 
 
+
+
 .payments-table td{
 
     height:64px;
 
-    padding:12px;
+    padding:12px 10px;
+
 
     text-align:center;
 
     vertical-align:middle;
+
 
     color:var(--text);
 
@@ -377,11 +422,15 @@
 
     font-weight:600;
 
+
     border-bottom:
 
     1px solid #e5e7eb;
 
+
 }
+
+
 
 
 
@@ -397,265 +446,31 @@
 
 
 
+
+
 .payments-table tbody tr:hover{
 
     background:#f8fafc;
 
 }
 /* ======================================================
-   06 - COLUMN CONTROL TAB1 UNPAID
+   06 - CELL CONTENT CONTROL
 
-   Natural content sizing
-====================================================== */
-
-
-.unpaid-table th:nth-child(1),
-.unpaid-table td:nth-child(1){
-
-    width:1%;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(2),
-.unpaid-table td:nth-child(2){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(3),
-.unpaid-table td:nth-child(3){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(4),
-.unpaid-table td:nth-child(4){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(5),
-.unpaid-table td:nth-child(5){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(6),
-.unpaid-table td:nth-child(6){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(7),
-.unpaid-table td:nth-child(7){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(8),
-.unpaid-table td:nth-child(8){
-
-    width:auto;
-
-}
-
-
-
-
-
-.unpaid-table th:nth-child(9),
-.unpaid-table td:nth-child(9){
-
-    width:1%;
-
-}
-/* ======================================================
-   07 - COLUMN CONTROL TAB2 PAID
-
-   Natural content sizing
-====================================================== */
-
-
-.paid-table th:nth-child(1),
-.paid-table td:nth-child(1){
-
-    width:1%;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(2),
-.paid-table td:nth-child(2){
-
-    width:auto;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(3),
-.paid-table td:nth-child(3){
-
-    width:auto;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(4),
-.paid-table td:nth-child(4){
-
-    width:auto;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(5),
-.paid-table td:nth-child(5){
-
-    width:auto;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(6),
-.paid-table td:nth-child(6){
-
-    width:auto;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(7),
-.paid-table td:nth-child(7){
-
-    width:auto;
-
-
-
-
-
-
-
-}
-
-
-
-
-
-.paid-table th:nth-child(8),
-.paid-table td:nth-child(8){
-
-    width:auto;
-
-}
-
-
-
-
-
-.paid-table th:nth-child(9),
-.paid-table td:nth-child(9){
-
-    width:1%;
-
-}
-
-/* ======================================================
-   08 - CELL TEXT CONTROL
-
-   Normal display:
-   - No hover popup
-   - No tooltip
-   - No absolute position
-   - Text stays inside cell
+   Flexible text
+   No forced cutting
 ====================================================== */
 
 
 .cell-text{
 
-    display:block;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     width:100%;
 
-    white-space:normal;
-
-    overflow-wrap:break-word;
-
-    word-break:normal;
-
-    line-height:1.5;
-
-}
-
-
-
-
-
-.payments-table td{
-
-    overflow:visible;
-
-    white-space:normal;
-
-}
-
-
-
-
-
-.payments-table td:nth-child(3),
-.payments-table td:nth-child(4){
 
     white-space:normal;
 
@@ -667,30 +482,98 @@
 
 
 
-/*
- Long invoice / codes
- Keep readable without breaking layout
-*/
-
-.invoice-text,
 .code-text{
 
-    display:block;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+
+    direction:ltr;
+
+    white-space:nowrap;
+
+}
+
+
+
+
+
+.invoice-text{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+
+    direction:ltr;
+
+    white-space:nowrap;
+
+}
+
+
+
+
+
+.centre-name{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
 
     white-space:normal;
 
-    overflow-wrap:anywhere;
+    overflow-wrap:break-word;
 
 }
-/* ======================================================
-   09 - PAYMENT STATUS
 
-   Compact badge
-   Natural content width
+
+
+
+
+.date-text{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+
+    white-space:nowrap;
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   07 - STATUS BADGES
 ====================================================== */
 
 
-.status{
+.status,
+.account-status{
+
 
     display:inline-flex;
 
@@ -700,23 +583,25 @@
 
     gap:6px;
 
-    width:auto;
-
-    min-width:80px;
 
     height:32px;
 
     padding:0 12px;
 
+
     border-radius:20px;
+
 
     font-size:12px;
 
     font-weight:800;
 
+
     white-space:nowrap;
 
 }
+
+
 
 
 
@@ -724,13 +609,18 @@
 
 .status.unpaid{
 
+
     background:#fee2e2;
 
     color:#991b1b;
 
-    border:1px solid #fca5a5;
+    border:
+
+    1px solid #fca5a5;
 
 }
+
+
 
 
 
@@ -738,46 +628,18 @@
 
 .status.paid{
 
+
     background:#dcfce7;
 
     color:#166534;
 
-    border:1px solid #86efac;
+    border:
+
+    1px solid #86efac;
 
 }
-/* ======================================================
-   10 - ACCOUNT STATUS
-
-   Compact badge
-   Natural content width
-====================================================== */
 
 
-.account-status{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    width:auto;
-
-    min-width:90px;
-
-    height:32px;
-
-    padding:0 12px;
-
-    border-radius:20px;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    white-space:nowrap;
-
-}
 
 
 
@@ -785,6 +647,7 @@
 
 .account-active{
 
+
     background:#dcfce7;
 
     color:#166534;
@@ -795,7 +658,10 @@
 
 
 
+
+
 .account-pending{
+
 
     background:#fef3c7;
 
@@ -807,7 +673,10 @@
 
 
 
+
+
 .account-suspended{
+
 
     background:#fee2e2;
 
@@ -815,33 +684,46 @@
 
 }
 
-/* ======================================================
-   11 - DATE INPUT
 
-   Compact date field
-   Fits table content
+
+
+
+
+
+/* ======================================================
+   08 - PAYMENT INPUTS
+
+   Compact controls
 ====================================================== */
 
 
 .payment-start-date{
 
+
     width:130px;
 
     height:36px;
 
+
     padding:0 8px;
+
 
     border-radius:10px;
 
+
     border:1px solid var(--border);
+
 
     background:white;
 
+
     color:var(--text);
+
 
     font-size:12px;
 
     font-weight:700;
+
 
     text-align:center;
 
@@ -853,9 +735,12 @@
 
 .payment-start-date:focus{
 
+
     outline:none;
 
+
     border-color:var(--primary);
+
 
     box-shadow:
 
@@ -864,37 +749,41 @@
 }
 
 
-/* ======================================================
-   12 - SELECT CONTROLS
 
-   Compact selects
-   Natural table sizing
-====================================================== */
+
+
 
 
 .payment-duration,
 .subscription-plan,
 .subscription-operation{
 
+
     height:36px;
 
-    border-radius:10px;
-
-    border:1px solid var(--border);
-
-    background:white;
-
-    color:var(--text);
 
     padding:0 8px;
 
+
+    border-radius:10px;
+
+
+    border:1px solid var(--border);
+
+
+    background:white;
+
+
+    color:var(--text);
+
+
     font-size:12px;
+
 
     font-weight:700;
 
-    cursor:pointer;
 
-    max-width:100%;
+    cursor:pointer;
 
 }
 
@@ -903,6 +792,7 @@
 
 
 .payment-duration{
+
 
     width:75px;
 
@@ -914,6 +804,7 @@
 
 .subscription-plan{
 
+
     width:105px;
 
 }
@@ -923,6 +814,7 @@
 
 
 .subscription-operation{
+
 
     width:130px;
 
@@ -936,6 +828,7 @@
 .subscription-plan:hover,
 .subscription-operation:hover{
 
+
     border-color:var(--primary);
 
 }
@@ -943,40 +836,28 @@
 
 
 
-
-.payment-duration:focus,
-.subscription-plan:focus,
-.subscription-operation:focus{
-
-    outline:none;
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 0 4px rgba(37,99,blue,.12);
-
-}
 
 
 
 /* ======================================================
-   13 - ACTION BUTTON
-
-   Compact action buttons
-   Fit table content
+   09 - PAYMENT ACTIONS
 ====================================================== */
 
 
 .payment-action{
 
+
     display:flex;
+
 
     align-items:center;
 
+
     justify-content:center;
 
-    gap:6px;
+
+    gap:8px;
+
 
     white-space:nowrap;
 
@@ -986,17 +867,22 @@
 
 
 
+
+
 .payments-table .btn-primary{
+
 
     height:36px;
 
-    min-width:auto;
 
-    padding:0 12px;
+    padding:0 14px;
+
 
     border-radius:10px;
 
+
     font-size:12px;
+
 
     font-weight:800;
 
@@ -1008,15 +894,226 @@
 
 .payments-table .btn-primary:hover{
 
+
     transform:translateY(-2px);
 
 }
 
 
-/* ======================================================
-   14 - MODAL SYSTEM
 
-   Clean responsive modal
+
+
+
+
+/* ======================================================
+   10 - EMPTY / LOADING STATE
+====================================================== */
+
+
+.payments-loading{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:10px;
+
+
+    padding:35px;
+
+
+    color:#64748b;
+
+
+    font-size:13px;
+
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.payments-loading::before{
+
+
+    content:"";
+
+
+    width:22px;
+
+
+    height:22px;
+
+
+    border-radius:50%;
+
+
+    border:3px solid #cbd5e1;
+
+
+    border-top-color:var(--primary);
+
+
+    animation:
+
+    paymentSpin .8s linear infinite;
+
+}
+
+
+
+
+
+
+
+@keyframes paymentSpin{
+
+
+from{
+
+    transform:rotate(0deg);
+
+}
+
+
+to{
+
+    transform:rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   11 - PAGINATION
+====================================================== */
+
+
+.payment-pagination{
+
+
+    width:100%;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:6px;
+
+
+    padding:20px 0;
+
+
+    flex-wrap:wrap;
+
+}
+
+
+
+
+
+.payment-pagination button{
+
+
+    width:34px;
+
+
+    height:34px;
+
+
+    border:none;
+
+
+    border-radius:8px;
+
+
+    background:#f1f5f9;
+
+
+    color:#334155;
+
+
+    font-size:12px;
+
+
+    font-weight:800;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+.payment-pagination button:hover{
+
+
+    background:var(--primary);
+
+
+    color:white;
+
+}
+
+
+
+
+
+.payment-pagination button.active{
+
+
+    background:var(--primary);
+
+
+    color:white;
+
+}
+
+
+
+
+
+.payment-pagination .prev,
+.payment-pagination .next{
+
+
+    width:auto;
+
+
+    min-width:70px;
+
+
+    padding:0 12px;
+
+}
+
+/* ======================================================
+   12 - MODAL SYSTEM
 ====================================================== */
 
 
@@ -1044,8 +1141,6 @@
 
 
 
-
-
 .centre-modal.show{
 
     display:flex;
@@ -1060,13 +1155,13 @@
 
     position:relative;
 
-    width:700px;
+    width:720px;
 
     max-width:95%;
 
     max-height:90vh;
 
-    overflow:auto;
+    overflow-y:auto;
 
     background:white;
 
@@ -1090,6 +1185,7 @@
 
 @keyframes modalShow{
 
+
 from{
 
     opacity:0;
@@ -1106,6 +1202,7 @@ to{
     transform:translateY(0) scale(1);
 
 }
+
 
 }
 
@@ -1137,8 +1234,6 @@ to{
 
     font-size:16px;
 
-    transition:.25s;
-
 }
 
 
@@ -1156,10 +1251,11 @@ to{
 
 
 
-/* ======================================================
-   15 - CONFIRM PAYMENT MODAL
 
-   Compact confirmation box
+
+
+/* ======================================================
+   13 - CONFIRM PAYMENT MODAL
 ====================================================== */
 
 
@@ -1233,7 +1329,7 @@ to{
 
     font-weight:900;
 
-    color:#0f172a;
+    color:var(--title);
 
 }
 
@@ -1263,8 +1359,6 @@ to{
 
     justify-content:center;
 
-    align-items:center;
-
     gap:12px;
 
     margin-top:22px;
@@ -1281,28 +1375,20 @@ to{
 
 }
 
-/* ======================================================
-   16 - PAYMENT DETAILS MODAL
 
-   Flexible information layout
+
+
+
+
+
+/* ======================================================
+   14 - PAYMENT DETAILS
 ====================================================== */
 
 
 #payment-modal .centre-modal-content{
 
     width:720px;
-
-    max-width:95%;
-
-}
-
-
-
-
-
-#payment-modal-body{
-
-    min-height:100px;
 
 }
 
@@ -1326,7 +1412,7 @@ to{
 
     border-radius:16px;
 
-    border:1px solid #e2e8f0;
+    border:1px solid var(--border);
 
 }
 
@@ -1344,7 +1430,7 @@ to{
 
     gap:12px;
 
-    padding:10px 12px;
+    padding:12px;
 
     background:white;
 
@@ -1374,190 +1460,22 @@ to{
 
 .payment-info-row strong{
 
-    color:#0f172a;
+    color:var(--title);
 
     font-size:13px;
 
     font-weight:900;
 
-    text-align:right;
-
-    overflow-wrap:break-word;
-
-}
-
-/* ======================================================
-   17 - PAGINATION
-
-   AJAX ready
-   Compact controls
-====================================================== */
-
-
-.payment-pagination{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:20px 0;
-
-    flex-wrap:wrap;
-
 }
 
 
 
 
-
-.payment-pagination button{
-
-    width:34px;
-
-    height:34px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#f1f5f9;
-
-    color:#334155;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-
-
-
-
-.payment-pagination button:hover{
-
-    background:var(--primary);
-
-    color:white;
-
-}
-
-
-
-
-
-.payment-pagination button.active{
-
-    background:var(--primary);
-
-    color:white;
-
-}
-
-
-
-
-
-.payment-pagination .prev,
-.payment-pagination .next{
-
-    width:auto;
-
-    min-width:70px;
-
-    padding:0 12px;
-
-}
-
-
-/* ======================================================
-   18 - LOADING
-
-   AJAX table loading state
-====================================================== */
-
-
-.payments-loading{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:35px;
-
-    color:#64748b;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-
-
-
-
-.payments-loading::before{
-
-    content:"";
-
-    width:22px;
-
-    height:22px;
-
-    border-radius:50%;
-
-    border:3px solid #cbd5e1;
-
-    border-top-color:var(--primary);
-
-    animation:
-
-    paymentSpin .8s linear infinite;
-
-}
-
-
-
-
-
-@keyframes paymentSpin{
-
-from{
-
-    transform:rotate(0deg);
-
-}
-
-
-to{
-
-    transform:rotate(360deg);
-
-}
-
-}
 
 
 
 /* ======================================================
-   19 - RTL SUPPORT
-
-   Arabic / RTL compatibility
+   15 - RTL SUPPORT
 ====================================================== */
 
 
@@ -1615,16 +1533,6 @@ html[dir="rtl"] .payment-info-row{
 
 
 
-html[dir="rtl"] .payment-info-row span{
-
-    text-align:right;
-
-}
-
-
-
-
-
 html[dir="rtl"] .payment-info-row strong{
 
     text-align:left;
@@ -1635,16 +1543,22 @@ html[dir="rtl"] .payment-info-row strong{
 
 
 
-html[dir="rtl"] .payment-action{
 
-    direction:rtl;
+
+html[dir="ltr"] .payments-table{
+
+    direction:ltr;
 
 }
 
-/* ======================================================
-   20 - RESPONSIVE
 
-   Mobile / Tablet adaptation
+
+
+
+
+
+/* ======================================================
+   16 - RESPONSIVE
 ====================================================== */
 
 
@@ -1728,9 +1642,9 @@ html[dir="rtl"] .payment-action{
     .payments-table th,
     .payments-table td{
 
-        padding:8px;
-
         font-size:12px;
+
+        padding:8px;
 
     }
 
@@ -1743,18 +1657,6 @@ html[dir="rtl"] .payment-action{
         width:100%;
 
         padding:20px;
-
-        border-radius:16px;
-
-    }
-
-
-
-
-
-    #payment-modal .centre-modal-content{
-
-        width:100%;
 
     }
 
@@ -1807,39 +1709,16 @@ html[dir="rtl"] .payment-action{
     }
 
 
-
-
-
-    .payment-pagination button{
-
-        width:32px;
-
-        height:32px;
-
-    }
-
-
-
-
-
-    .payment-pagination .prev,
-    .payment-pagination .next{
-
-        min-width:60px;
-
-    }
-
-
 }
 
 
 
 
 
-/* ======================================================
-   21 - PRINT CONTROL
 
-   Clean print layout
+
+/* ======================================================
+   17 - PRINT
 ====================================================== */
 
 
@@ -1848,8 +1727,7 @@ html[dir="rtl"] .payment-action{
 
     .payments-toolbar,
     .payment-tabs,
-    button,
-    .payment-actions{
+    button{
 
         display:none!important;
 
@@ -1867,8 +1745,6 @@ html[dir="rtl"] .payment-action{
 
         border:none;
 
-        overflow:visible;
-
     }
 
 
@@ -1878,8 +1754,6 @@ html[dir="rtl"] .payment-action{
     .payments-table{
 
         width:100%;
-
-        min-width:100%;
 
         border-collapse:collapse;
 
@@ -1891,9 +1765,9 @@ html[dir="rtl"] .payment-action{
 
     .payments-table th{
 
-        color:#000;
-
         background:#eee;
+
+        color:#000;
 
     }
 
@@ -1905,7 +1779,9 @@ html[dir="rtl"] .payment-action{
 
         color:#000;
 
-        border-bottom:1px solid #ccc;
+        border-bottom:
+
+        1px solid #ccc;
 
     }
 
@@ -1913,6 +1789,7 @@ html[dir="rtl"] .payment-action{
 }
 
 
+
 /* ======================================================
-   END CENTRIA PAYMENTS CSS
+   END PAYMENTS.CSS
 ====================================================== */

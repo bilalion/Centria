@@ -5,22 +5,29 @@ Project     : CENTRIA
 Module      : Dashboard Layout
 
 Description :
-General dashboard layout only.
+Main application layout foundation.
 
 Contains:
-- App layout
-- Main content
-- Content area
+- Application wrapper
+- Content area sizing
+- Sidebar relationship
 - RTL / LTR layout
-- Mobile scrolling
+- Responsive behavior
+
+Does not contain:
+- Page styles
+- Tables
+- Cards
+- Components
 
 ==========================================================
 */
 
 
 /* ======================================================
-   01 - APP LAYOUT
+   01 - APPLICATION LAYOUT
    ====================================================== */
+
 
 .app-layout{
 
@@ -35,9 +42,17 @@ Contains:
 }
 
 
+
+
+
+
 /* ======================================================
-   02 - MAIN CONTENT
+   02 - MAIN CONTENT AREA
+
+   Takes all remaining space after sidebar.
+
    ====================================================== */
+
 
 .main-content{
 
@@ -47,7 +62,7 @@ Contains:
 
     height:100vh;
 
-    padding:30px;
+    padding:20px;
 
     display:flex;
 
@@ -60,130 +75,321 @@ Contains:
 }
 
 
+
+
+
+
 /* ======================================================
-   03 - CONTENT AREA
+   03 - PAGE CONTENT CONTAINER
+
+   No max-width limitation.
+
+   Allows wide tables.
+
    ====================================================== */
+
 
 #content-area,
 .content-area{
 
+
     width:100%;
+
 
     flex:1;
 
+
+    min-width:0;
+
+
 }
 
 
+
+
+
+
 /* ======================================================
-   04 - RTL LAYOUT
+   04 - RTL FOUNDATION
    ====================================================== */
 
+
 html[dir="rtl"] .main-content{
+
 
     direction:rtl;
 
+
     text-align:right;
 
-}
-
-html[dir="rtl"] .main-content{
-
-    order:1;
 
 }
+
+
 
 html[dir="rtl"] .sidebar{
 
+
     order:2;
 
-}
-
-
-/* ======================================================
-   05 - LTR LAYOUT
-   ====================================================== */
-
-html[dir="ltr"] .main-content{
-
-    direction:ltr;
-
-    text-align:left;
 
 }
 
-html[dir="ltr"] .sidebar{
+
+
+html[dir="rtl"] .main-content{
+
 
     order:1;
 
+
 }
+
+
+
+
+
+
+/* ======================================================
+   05 - LTR FOUNDATION
+   ====================================================== */
+
+
+html[dir="ltr"] .sidebar{
+
+
+    order:1;
+
+
+}
+
+
 
 html[dir="ltr"] .main-content{
 
+
     order:2;
+
 
 }
 
 
+
+html[dir="ltr"] .main-content{
+
+
+    direction:ltr;
+
+
+    text-align:left;
+
+
+}
+
 /* ======================================================
-   06 - TABLET
+   06 - TABLET RESPONSIVE
    ====================================================== */
+
+
+@media(max-width:1100px){
+
+
+    .main-content{
+
+
+        padding:25px;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ======================================================
+   07 - SMALL TABLET
+   ====================================================== */
+
 
 @media(max-width:900px){
 
+
     .main-content{
+
 
         padding:20px;
 
+
     }
+
 
 }
 
 
+
+
+
+
 /* ======================================================
-   07 - MOBILE LAYOUT
+   08 - MOBILE LAYOUT
+
+   Sidebar becomes bottom navigation.
+
+   Main content uses remaining height.
+
    ====================================================== */
+
 
 @media(max-width:700px){
 
+
     .app-layout{
 
-        height:100vh;
-
-        overflow:hidden;
-
-    }
-
-    .main-content{
 
         width:100%;
 
+        height:100vh;
+
+        display:flex;
+
+        flex-direction:column;
+
+        overflow:hidden;
+
+
+    }
+
+
+
+
+
+    .main-content{
+
+
+        width:100%;
+
+
         height:calc(100vh - 72px);
+
 
         min-height:0;
 
+
         padding:20px;
 
+
         padding-bottom:90px;
+
 
         overflow-y:auto;
 
         overflow-x:hidden;
 
+
     }
+
+
 
     #content-area,
     .content-area{
 
+
         width:100%;
 
-        flex:1;
+        min-width:0;
+
 
     }
+
 
 }
 
 
+
+
+
+
 /* ======================================================
-   END dashboard.css
+   09 - VERY SMALL DEVICES
+   ====================================================== */
+
+
+@media(max-width:480px){
+
+
+    .main-content{
+
+
+        padding:15px;
+
+
+        padding-bottom:90px;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ======================================================
+   10 - WIDE CONTENT SUPPORT
+
+
+   Important for:
+
+   - Payments tables
+   - History tables
+   - Reports
+
+
+   Pages decide their own width.
+
+   ====================================================== */
+
+
+.wide-content{
+
+
+    width:100%;
+
+    min-width:0;
+
+
+}
+
+
+
+
+
+
+/* ======================================================
+   11 - END dashboard.css
+
+
+   Responsibilities:
+
+   ✔ Application structure
+   ✔ Main content sizing
+   ✔ Sidebar relationship
+   ✔ RTL/LTR
+   ✔ Responsive layout
+
+
+   Removed:
+
+   ✘ Page restrictions
+   ✘ Table width limits
+   ✘ Module styles
+
+
 ==========================================================
 */

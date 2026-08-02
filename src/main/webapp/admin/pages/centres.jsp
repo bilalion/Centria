@@ -3,24 +3,43 @@
 <%@page import="com.centria.language.LanguageManager"%>
 
 
+<div class="page-section centres-page">
+
+
+
 <!-- =================================================
      HEADER
      ================================================= -->
+
 
 <div class="dashboard-header">
 
 
     <h1>
-        <%= LanguageManager.get("centers.title", session) %>
+
+        <%= LanguageManager.get(
+                "centers.title",
+                session
+        ) %>
+
     </h1>
 
 
+
     <p>
-        <%= LanguageManager.get("centers.description", session) %>
+
+        <%= LanguageManager.get(
+                "centers.description",
+                session
+        ) %>
+
     </p>
 
 
+
 </div>
+
+
 
 
 
@@ -32,7 +51,9 @@
      TOOLBAR
      ================================================= -->
 
+
 <div class="card centres-toolbar">
+
 
 
 <form id="centresFilterForm"
@@ -51,20 +72,20 @@
 
 
 
-<!-- SEARCH -->
-
 <div class="search-box">
+
 
 <input type="text"
        id="centreSearch"
        name="search"
-       value="<%= request.getAttribute("search") != null 
-                ? request.getAttribute("search") 
+       value="<%= request.getAttribute("search") != null
+                ? request.getAttribute("search")
                 : "" %>"
        placeholder="<%=LanguageManager.get(
                     "centers.search.placeholder",
                     session
        )%>">
+
 
 </div>
 
@@ -74,11 +95,10 @@
 
 
 
-<!-- STATUS -->
-
 <select id="centreStatus"
         name="status"
         class="centre-select">
+
 
 
 <option value="ALL">
@@ -135,6 +155,7 @@
 </option>
 
 
+
 </select>
 
 
@@ -143,11 +164,11 @@
 
 
 
-<!-- ORDER -->
 
 <select id="centreOrder"
         name="order"
         class="centre-select">
+
 
 
 <option value="NEW">
@@ -182,8 +203,8 @@
 </option>
 
 
-</select>
 
+</select>
 
 
 
@@ -195,12 +216,15 @@
         onclick="loadCentres(1)"
         class="btn-primary">
 
+
 🔎
+
 
 <%=LanguageManager.get(
         "centers.search",
         session
 )%>
+
 
 </button>
 
@@ -214,13 +238,12 @@
 
 
 
-<!-- ADD CENTRE -->
-
 <a href="<%=request.getContextPath()%>/admin/pages/fragments/centres/add-centre.jsp"
    class="btn-primary btn-no-underline">
 
 
 ➕
+
 
 <%=LanguageManager.get(
         "centers.add",
@@ -237,13 +260,18 @@
 
 
 
+
+
+
+
+
 <!-- =================================================
-     TABLE
-     AJAX LOAD
+     TABLE AJAX AREA
      ================================================= -->
 
 
-<div id="centres-table-container">
+<div id="centres-table-container"
+     class="table-content-area">
 
 
 </div>
@@ -258,7 +286,6 @@
 
 <!-- =================================================
      CENTRE VIEW MODAL
-     JOptionPane STYLE
      ================================================= -->
 
 
@@ -278,19 +305,15 @@
         </button>
 
 
-
         <div id="centre-modal-body">
 
-
         </div>
-
 
 
     </div>
 
 
 </div>
-
 
 
 
@@ -309,253 +332,232 @@
      class="centre-modal">
 
 
-    <div class="centre-modal-content reset-confirm-box">
+<div class="centre-modal-content reset-confirm-box">
 
 
-        <button type="button"
-                class="modal-close"
-                onclick="closeResetConfirm()">
+<button type="button"
+        class="modal-close"
+        onclick="closeResetConfirm()">
 
-            ✖
+✖
 
-        </button>
-
-
+</button>
 
 
-        <div class="reset-confirm-content">
+<div class="reset-confirm-content">
 
 
-            <div class="confirm-header">
+<div class="confirm-header">
 
 
-                <div class="confirm-icon">
+<div class="confirm-icon">
 
-                    🔑
+🔑
 
-                </div>
-
-
-
-                <h4 class="confirm-title">
-
-                    <%=LanguageManager.get(
-                        "centers.reset.title",
-                        session
-                    )%>
-
-                </h4>
-
-
-            </div>
+</div>
 
 
 
+<h4 class="confirm-title">
+
+<%=LanguageManager.get(
+        "centers.reset.title",
+        session
+)%>
 
 
-
-            <p>
-
-            <%=LanguageManager.get(
-                "centers.reset.confirm",
-                session
-            )%>
-
-            </p>
-
-
-
-
-
-
-            <div class="reset-confirm-actions">
-
-
-
-                <button
-                type="button"
-                class="btn-secondary btn-cancel"
-                onclick="closeResetConfirm()">
-
-
-                <%=LanguageManager.get(
-                    "centers.cancel",
-                    session
-                )%>
-
-
-                </button>
-
-
-
-
-
-
-                <button
-                type="button"
-                class="btn-primary btn-confirm"
-                onclick="confirmResetPassword()">
-
-
-                <%=LanguageManager.get(
-                    "centers.confirm",
-                    session
-                )%>
-
-
-                </button>
-
-
-
-            </div>
-
-
-
-        </div>
-
-
-    </div>
+</h4>
 
 
 </div>
-                
-       
-                
-   <!-- =================================================
-     EDIT CENTRE CONFIRM MODAL
+
+
+
+
+<p>
+
+<%=LanguageManager.get(
+        "centers.reset.confirm",
+        session
+)%>
+
+
+</p>
+
+
+
+
+
+<div class="reset-confirm-actions">
+
+
+<button type="button"
+        class="btn-secondary btn-cancel"
+        onclick="closeResetConfirm()">
+
+
+<%=LanguageManager.get(
+        "centers.cancel",
+        session
+)%>
+
+
+</button>
+
+
+
+
+<button type="button"
+        class="btn-primary btn-confirm"
+        onclick="confirmResetPassword()">
+
+
+<%=LanguageManager.get(
+        "centers.confirm",
+        session
+)%>
+
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =================================================
+     EDIT CONFIRM MODAL
      ================================================= -->
+
 
 <div id="edit-confirm-modal"
      class="centre-modal">
 
 
-    <div class="centre-modal-content reset-confirm-box">
+<div class="centre-modal-content reset-confirm-box">
 
 
-        <button type="button"
-                class="modal-close"
-                onclick="closeEditConfirm()">
+<button type="button"
+        class="modal-close"
+        onclick="closeEditConfirm()">
 
-            ✖
+✖
 
-        </button>
+</button>
 
 
 
-        <div class="reset-confirm-content">
+<div class="reset-confirm-content">
 
 
-            <div class="confirm-header">
+<div class="confirm-header">
 
 
-                <span class="confirm-icon">
+<span class="confirm-icon">
 
-                    ⚠️
+⚠️
 
-                </span>
+</span>
 
 
+<h4 class="confirm-title">
 
-                <h4 class="confirm-title">
+<%=LanguageManager.get(
+        "centers.edit.title",
+        session
+)%>
 
-                    <%=LanguageManager.get(
-                        "centers.edit.title",
-                        session
-                    )%>
 
-                </h4>
+</h4>
 
 
-            </div>
+</div>
 
 
 
 
 
-            <p>
+<p>
 
-            <%=LanguageManager.get(
-                "centers.edit.confirm",
-                session
-            )%>
+<%=LanguageManager.get(
+        "centers.edit.confirm",
+        session
+)%>
 
-            </p>
 
+</p>
 
 
 
 
-            <div class="reset-confirm-actions">
 
+<div class="reset-confirm-actions">
 
 
-                <button
-                type="button"
-                class="btn-secondary"
-                onclick="closeEditConfirm()">
+<button type="button"
+        class="btn-secondary"
+        onclick="closeEditConfirm()">
 
 
+<%=LanguageManager.get(
+        "centers.cancel",
+        session
+)%>
 
-                    <%=LanguageManager.get(
-                        "centers.cancel",
-                        session
-                    )%>
 
+</button>
 
 
-                </button>
 
 
 
+<button type="button"
+        class="btn-primary"
+        onclick="confirmEditCentre()">
 
 
+<%=LanguageManager.get(
+        "centers.confirm",
+        session
+)%>
 
 
-                <button
-                type="button"
-                class="btn-primary"
-                onclick="confirmEditCentre()">
+</button>
 
 
 
-                    <%=LanguageManager.get(
-                        "centers.confirm",
-                        session
-                    )%>
+</div>
 
 
 
-                </button>
+</div>
 
 
+</div>
 
-            </div>
 
+</div>
 
 
-        </div>
 
 
-    </div>
 
-
-</div>             
-                
-                
-
-<!-- =================================================
-     JAVASCRIPT
-     ================================================= -->
-                
-<script>
-
-
-window.contextPath =
-"<%=request.getContextPath()%>";
-
-
-</script>
-
-
-<script src="<%=request.getContextPath()%>/assets/js/centres.js"></script>
-
+</div>

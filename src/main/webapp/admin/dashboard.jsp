@@ -17,6 +17,7 @@ String direction =
 
 %>
 
+
 <!DOCTYPE html>
 
 <html lang="<%=lang%>" dir="<%=direction%>">
@@ -29,9 +30,15 @@ String direction =
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>
-<%= LanguageManager.get("dashboard.title", session) %>
+<%= LanguageManager.get(
+        "dashboard.title",
+        session
+) %>
 </title>
+
+
 
 
 
@@ -46,12 +53,18 @@ href="<%=request.getContextPath()%>/assets/css/global.css?v=1">
 
 
 
+
+
 <!-- =================================================
      DASHBOARD LAYOUT
      ================================================= -->
 
+
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/dashboard.css?v=1">
+
+
+
 
 
 
@@ -59,8 +72,10 @@ href="<%=request.getContextPath()%>/assets/css/dashboard.css?v=1">
      COMPONENTS
      ================================================= -->
 
+
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/sidebar.css?v=1">
+
 
 
 <link rel="stylesheet"
@@ -68,18 +83,53 @@ href="<%=request.getContextPath()%>/assets/css/header.css?v=1">
 
 
 
+
+
+
+<!-- =================================================
+     COMMON COMPONENTS
+     ================================================= -->
+
+
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/modals.css?v=1">
+
+
+
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/tables.css?v=1">
+
+
+
+
+
+
 <!-- =================================================
      MODULES
      ================================================= -->
 
+
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/accueil.css?v=1">
+
+
 
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
 
+
+
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/payments.css?v=1">
+
+
+
+
+
+
+<!-- =================================================
+     GLOBAL JAVASCRIPT CONFIG
+     ================================================= -->
 
 
 <script>
@@ -92,18 +142,24 @@ window.contextPath =
 
 
 
+
+
+
 <!-- =================================================
      JAVASCRIPT
      ================================================= -->
 
+
 <script defer
-src="<%=request.getContextPath()%>/assets/js/dashboard.js">
+src="<%=request.getContextPath()%>/assets/js/dashboard.js?v=1">
 </script>
+
 
 
 <script defer
 src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
 </script>
+
 
 
 <script defer
@@ -112,21 +168,41 @@ src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
 
 
 
+
+
 </head>
+
+
+
+
 
 
 <body>
 
 
 
+
+
 <div class="app-layout">
-    
+
+
+
+
+
+
 <!-- =================================================
      SIDEBAR COMPONENT
      ================================================= -->
 
 
 <jsp:include page="components/sidebar.jsp"/>
+
+
+
+
+
+
+
 
 
 <!-- =================================================
@@ -137,30 +213,61 @@ src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
 <div class="main-content">
 
 
+
+
+
+
+
+
 <!-- =================================================
      HEADER COMPONENT
      ================================================= -->
 
+
 <jsp:include page="components/header.jsp"/>
+
+
+
+
+
+
+
+
 
 <!-- =================================================
      DYNAMIC CONTENT AREA
      ================================================= -->
 
-<div id="content-area">
+
+<div id="content-area"
+     class="content-area">
+
+
+
 
 
 <%
 
 String section =
+
         request.getAttribute("section") != null
+
         ?
+
         request.getAttribute("section").toString()
+
         :
+
         request.getParameter("section");
 
-if(section == null 
+
+
+
+
+if(section == null
+
    || section.isEmpty()
+
    || "home".equals(section)){
 
 
@@ -194,8 +301,6 @@ if(section == null
 <jsp:include page="pages/fragments/centres/centre-view.jsp"/>
 
 
-
-
 <%
 
 
@@ -216,6 +321,7 @@ if(section == null
 
 %>
 
+
 <jsp:include page="pages/settings.jsp"/>
 
 
@@ -233,19 +339,31 @@ if(section == null
 
 <%
 
-
 }
 
 
 %>
 
 
-</div>
 
 
 
 </div>
+
+
+
+
+
+
 </div>
+
+
+
+
+
+</div>
+
+
 
 
 
