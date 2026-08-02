@@ -157,9 +157,9 @@
 
 
 
-
 /* ======================================================
    03 - PAYMENT TABS
+   Integrated Header With Table
 ====================================================== */
 
 
@@ -173,27 +173,23 @@
 
     align-items:center;
 
-    gap:15px;
+    gap:10px;
 
-    margin-bottom:25px;
+    margin:0;
 
-    padding:12px;
-
+    padding:12px 15px 0;
 
     background:var(--surface);
 
-    border-radius:18px;
-
     border:1px solid var(--border);
 
+    border-bottom:none;
 
-    box-shadow:
+    border-radius:20px 20px 0 0;
 
-    0 8px 20px rgba(15,23,42,.05);
+    box-shadow:none;
 
 }
-
-
 
 
 
@@ -207,26 +203,21 @@
 
     border:none;
 
-    border-radius:14px;
-
+    border-radius:12px 12px 0 0;
 
     background:#f1f5f9;
 
     color:#475569;
 
-
     font-size:14px;
 
     font-weight:800;
-
 
     cursor:pointer;
 
     transition:.25s;
 
 }
-
-
 
 
 
@@ -238,8 +229,6 @@
 
 
 
-
-
 .payment-tab.active{
 
     color:white;
@@ -248,12 +237,11 @@
 
 
 
-
+/* COLORS */
 
 .unpaid-tab.active{
 
     background:
-
     linear-gradient(
         135deg,
         #ef4444,
@@ -264,12 +252,9 @@
 
 
 
-
-
 .paid-tab.active{
 
     background:
-
     linear-gradient(
         135deg,
         #22c55e,
@@ -280,12 +265,9 @@
 
 
 
-
-
 .history-tab.active{
 
     background:
-
     linear-gradient(
         135deg,
         #64748b,
@@ -296,15 +278,21 @@
 
 
 
+/* RTL */
+
+html[dir="rtl"] .payment-tabs{
+
+    direction:rtl;
+
+}
+
 
 
 
 
 /* ======================================================
    04 - TABLE WRAPPER
-
-   Flexible width
-   No forced scrolling on desktop
+   Connected With Tabs
 ====================================================== */
 
 
@@ -314,13 +302,13 @@
 
     overflow:hidden;
 
+    background:white;
 
-    background:var(--surface);
-
-    border-radius:20px;
+    border-radius:0 0 20px 20px;
 
     border:1px solid var(--border);
 
+    border-top:none;
 
     box-shadow:
 
@@ -328,12 +316,14 @@
 
 }
 
+/* Remove top rounding from table header */
 
+.payments-table thead,
+.payments-table th{
 
+    border-radius:0!important;
 
-
-
-
+}
 /* ======================================================
    05 - TABLE BASE
 
