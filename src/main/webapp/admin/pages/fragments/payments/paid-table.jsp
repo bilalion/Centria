@@ -289,7 +289,10 @@ data-centre="<%=payment.getCentreCode()%>"
 
 <option value="1">
 
-1 Month
+<%=LanguageManager.get(
+        "centers.duration.1",
+        session
+)%>
 
 </option>
 
@@ -297,7 +300,10 @@ data-centre="<%=payment.getCentreCode()%>"
 
 <option value="3">
 
-3 Months
+<%=LanguageManager.get(
+        "centers.duration.3",
+        session
+)%>
 
 </option>
 
@@ -305,7 +311,10 @@ data-centre="<%=payment.getCentreCode()%>"
 
 <option value="6">
 
-6 Months
+<%=LanguageManager.get(
+        "centers.duration.6",
+        session
+)%>
 
 </option>
 
@@ -313,7 +322,10 @@ data-centre="<%=payment.getCentreCode()%>"
 
 <option value="12">
 
-12 Months
+<%=LanguageManager.get(
+        "centers.duration.12",
+        session
+)%>
 
 </option>
 
