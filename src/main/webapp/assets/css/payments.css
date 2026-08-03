@@ -1899,5 +1899,121 @@ html[dir="rtl"]
 }
 
 /* ======================================================
+   TAB NOTIFICATION BADGE
+====================================================== */
+
+.payment-tab span{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:24px;
+
+    height:24px;
+
+    margin-left:6px;
+
+    padding:0 7px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+}
+
+
+
+/* RTL */
+
+html[dir="rtl"] .payment-tab span{
+
+    margin-left:0;
+
+    margin-right:6px;
+
+}
+
+
+
+/* ======================================================
+   TAB COUNTER COLORS
+====================================================== */
+
+
+.unpaid-tab span{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+
+.paid-tab span{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+
+.history-tab span{
+
+    background:#e2e8f0;
+
+    color:#334155;
+
+}
+
+
+
+/* ======================================================
+   ACTIVE TAB
+====================================================== */
+
+
+.payment-tab.active span{
+
+    background:white;
+
+}
+
+
+
+.unpaid-tab.active span{
+
+    color:#dc2626;
+
+}
+
+
+
+.paid-tab.active span{
+
+    color:#16a34a;
+
+}
+
+
+
+.history-tab.active span{
+
+    color:#475569;
+
+}
+
+
+
+
+
+/* ======================================================
    END PAYMENTS.CSS
 ====================================================== */

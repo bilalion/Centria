@@ -1959,5 +1959,690 @@ public boolean updateSubscription(
 
 }
 
+
+
+/*
+======================================================
+COUNT UNPAID PAYMENTS
+
+TAB1 BADGE
+
+======================================================
+*/
+
+
+/*
+======================================================
+COUNT UNPAID PAYMENTS
+
+TAB1 BADGE
+
+======================================================
+*/
+
+public int countUnpaidPayments(
+        String search,
+        Date dateFrom,
+        Date dateTo
+){
+
+    int count = 0;
+
+    Connection con = null;
+
+
+    try{
+
+
+        con = DatabaseConfig.getConnection();
+
+
+
+        String sql =
+
+        "SELECT COUNT(*) "
+        + "FROM payments p "
+        + "INNER JOIN centres c "
+        + "ON p.centre_code=c.centre_code "
+        + "WHERE p.status_payment='UNPAID' "
+        + "AND c.status IN ('PENDING','SUSPENDED') ";
+
+
+
+        /*
+        ======================================
+        DATE FILTER
+        TAB1
+        subscription_end
+        ======================================
+        */
+
+        if(dateFrom != null){
+
+            sql +=
+            "AND c.subscription_end >= ? ";
+
+        }
+
+
+        if(dateTo != null){
+
+            sql +=
+            "AND c.subscription_end <= ? ";
+
+        }
+
+
+
+
+
+        /*
+        ======================================
+        SEARCH
+        ======================================
+        */
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            sql +=
+
+            "AND ("
+            + "p.centre_code LIKE ? "
+            + "OR c.name LIKE ? "
+            + "OR c.phone LIKE ? "
+            + "OR p.code_facture LIKE ? "
+            + ") ";
+
+        }
+
+
+
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+
+
+        int index = 1;
+
+
+
+
+        /*
+        ======================================
+        SET DATE PARAMETERS
+        ======================================
+        */
+
+        if(dateFrom != null){
+
+            ps.setDate(
+                    index++,
+                    dateFrom
+            );
+
+        }
+
+
+
+        if(dateTo != null){
+
+            ps.setDate(
+                    index++,
+                    dateTo
+            );
+
+        }
+
+
+
+
+
+
+        /*
+        ======================================
+        SET SEARCH PARAMETERS
+        ======================================
+        */
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            String keyword =
+                    "%" + search.trim() + "%";
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+        }
+
+
+
+
+        ResultSet rs =
+                ps.executeQuery();
+
+
+
+        if(rs.next()){
+
+            count = rs.getInt(1);
+
+        }
+
+
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
+    finally{
+
+        try{
+
+            if(con != null)
+                con.close();
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+
+    return count;
+
+}
+
+/*
+======================================================
+COUNT PAID PAYMENTS
+
+TAB2 BADGE
+
+======================================================
+*/
+
+public int countPaidPayments(
+        String search,
+        Date dateFrom,
+        Date dateTo
+){
+
+    int count = 0;
+
+    Connection con = null;
+
+
+    try{
+
+
+        con = DatabaseConfig.getConnection();
+
+
+
+        String sql =
+
+        "SELECT COUNT(*) "
+        + "FROM payments p "
+        + "INNER JOIN centres c "
+        + "ON p.centre_code=c.centre_code "
+        + "INNER JOIN history_payment h "
+        + "ON p.code_facture=h.code_facture "
+        + "WHERE p.status_payment='PAID' "
+        + "AND c.status='ACTIVE' ";
+
+
+
+
+        /*
+        ======================================
+        DATE FILTER
+        TAB2
+
+        date_paiement
+        ======================================
+        */
+
+
+        if(dateFrom != null){
+
+            sql +=
+
+            "AND h.date_paiement >= ? ";
+
+        }
+
+
+
+        if(dateTo != null){
+
+            sql +=
+
+            "AND h.date_paiement <= ? ";
+
+        }
+
+
+
+
+
+
+        /*
+        ======================================
+        SEARCH
+        ======================================
+        */
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            sql +=
+
+            "AND ("
+            + "p.centre_code LIKE ? "
+            + "OR c.name LIKE ? "
+            + "OR c.phone LIKE ? "
+            + "OR p.code_facture LIKE ? "
+            + ") ";
+
+        }
+
+
+
+
+
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+
+
+        int index = 1;
+
+
+
+
+
+        /*
+        ======================================
+        SET DATE PARAMETERS
+        ======================================
+        */
+
+
+        if(dateFrom != null){
+
+            ps.setDate(
+                    index++,
+                    dateFrom
+            );
+
+        }
+
+
+
+
+        if(dateTo != null){
+
+            ps.setDate(
+                    index++,
+                    dateTo
+            );
+
+        }
+
+
+
+
+
+
+
+        /*
+        ======================================
+        SET SEARCH PARAMETERS
+        ======================================
+        */
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            String keyword =
+                    "%" + search.trim() + "%";
+
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+        }
+
+
+
+
+
+        ResultSet rs =
+                ps.executeQuery();
+
+
+
+        if(rs.next()){
+
+            count = rs.getInt(1);
+
+        }
+
+
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
+    finally{
+
+
+        try{
+
+
+            if(con != null)
+                con.close();
+
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+
+
+    return count;
+
+}
+/*
+======================================================
+COUNT HISTORY PAYMENTS
+
+TAB3 BADGE
+
+======================================================
+*/
+
+public int countHistoryPayments(
+        String search,
+        Date dateFrom,
+        Date dateTo
+){
+
+    int count = 0;
+
+    Connection con = null;
+
+
+    try{
+
+
+        con = DatabaseConfig.getConnection();
+
+
+
+        String sql =
+
+        "SELECT COUNT(*) "
+        + "FROM history_payment h "
+        + "INNER JOIN centres c "
+        + "ON h.centre_code=c.centre_code "
+        + "WHERE 1=1 ";
+
+
+
+
+        /*
+        ======================================
+        DATE FILTER
+
+        TAB3
+        date_paiement
+        ======================================
+        */
+
+
+        if(dateFrom != null){
+
+            sql +=
+
+            "AND h.date_paiement >= ? ";
+
+        }
+
+
+
+        if(dateTo != null){
+
+            sql +=
+
+            "AND h.date_paiement <= ? ";
+
+        }
+
+
+
+
+
+
+        /*
+        ======================================
+        SEARCH
+        ======================================
+        */
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            sql +=
+
+            "AND ("
+            + "h.centre_code LIKE ? "
+            + "OR c.name LIKE ? "
+            + "OR h.code_facture LIKE ? "
+            + ") ";
+
+        }
+
+
+
+
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+
+
+        int index = 1;
+
+
+
+
+
+
+        /*
+        ======================================
+        SET DATE PARAMETERS
+        ======================================
+        */
+
+
+        if(dateFrom != null){
+
+            ps.setDate(
+                    index++,
+                    dateFrom
+            );
+
+        }
+
+
+
+
+        if(dateTo != null){
+
+            ps.setDate(
+                    index++,
+                    dateTo
+            );
+
+        }
+
+
+
+
+
+
+        /*
+        ======================================
+        SET SEARCH PARAMETERS
+        ======================================
+        */
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            String keyword =
+                    "%" + search.trim() + "%";
+
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+        }
+
+
+
+
+
+        ResultSet rs =
+                ps.executeQuery();
+
+
+
+        if(rs.next()){
+
+            count = rs.getInt(1);
+
+        }
+
+
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
+    finally{
+
+
+        try{
+
+
+            if(con != null)
+                con.close();
+
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+
+
+    return count;
+
+}
+
 }
 

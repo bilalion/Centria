@@ -36,7 +36,11 @@ let selectedSubscriptionCentre = null
 
 let selectedSubscriptionFacture = null;
 
-
+let paymentCounters = {
+    UNPAID: 0,
+    PAID: 0,
+    HISTORY: 0
+};
 
 
 /*
@@ -251,14 +255,27 @@ function loadPayments(page = 1){
 
 
 
-    .then(html => {
+.then(html => {
 
 
-        container.innerHTML = html;
+    container.innerHTML = html;
 
 
-    })
+    let scripts =
+        container.querySelectorAll("script");
 
+
+    scripts.forEach(script => {
+
+        eval(script.innerHTML);
+
+    });
+
+
+    updatePaymentCounters();
+
+
+})
 
 
     .catch(error => {
@@ -1138,5 +1155,41 @@ formData.append(
     });
 
 
+
+}
+
+/*
+==========================================================
+ PAYMENT TAB COUNTERS
+==========================================================
+*/
+
+function updatePaymentCounters(){
+
+
+    if(window.paymentCounters){
+
+
+        document.getElementById(
+            "unpaidCount"
+        ).innerText =
+            window.paymentCounters.UNPAID;
+
+
+
+        document.getElementById(
+            "paidCount"
+        ).innerText =
+            window.paymentCounters.PAID;
+
+
+
+        document.getElementById(
+            "historyCount"
+        ).innerText =
+            window.paymentCounters.HISTORY;
+
+
+    }
 
 }

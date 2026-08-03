@@ -317,9 +317,57 @@ default:
 
 
 
+/*
+==============================================
+TAB COUNTERS
+
+REAL DATABASE COUNTS
+
+==============================================
+*/
+
+
+int unpaidCount =
+        paymentDAO.countUnpaidPayments(
+                search,
+                dateFrom,
+                dateTo
+        );
+
+
+int paidCount =
+        paymentDAO.countPaidPayments(
+                search,
+                dateFrom,
+                dateTo
+        );
+
+
+int historyCount =
+        paymentDAO.countHistoryPayments(
+                search,
+                dateFrom,
+                dateTo
+        );
 
 
 
+request.setAttribute(
+        "unpaidCount",
+        unpaidCount
+);
+
+
+request.setAttribute(
+        "paidCount",
+        paidCount
+);
+
+
+request.setAttribute(
+        "historyCount",
+        historyCount
+);
 
     /*
     ==============================================
@@ -360,12 +408,14 @@ default:
             "currentPage",
             page
     );
+    
+    
 
 
 
 
 
-   if("true".equals(
+if("true".equals(
         request.getParameter("ajax")
 )){
 
@@ -373,7 +423,7 @@ default:
     String fragment;
 
 
-    if("PAID".equals(tab)){//tab2
+    if("PAID".equals(tab)){
 
 
         fragment =
@@ -382,7 +432,7 @@ default:
 
     }
     else{
-//tab1
+
 
         fragment =
         "/admin/pages/fragments/payments/unpaid-table.jsp";
@@ -392,8 +442,14 @@ default:
 
 
 
-    request.getRequestDispatcher(
+    request.setAttribute(
+            "fragment",
             fragment
+    );
+
+
+    request.getRequestDispatcher(
+            "/admin/pages/fragments/payments/payment-response.jsp"
     )
     .forward(
             request,
@@ -402,21 +458,6 @@ default:
 
 
 }
-    else{
-
-
-        request.getRequestDispatcher(
-
-                "/admin/pages/payments.jsp"
-
-        )
-        .forward(
-                request,
-                response
-        );
-
-
-    }
 
 
 }

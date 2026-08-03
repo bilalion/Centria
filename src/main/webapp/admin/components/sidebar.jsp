@@ -69,6 +69,7 @@
         <a href="javascript:void(0)"
            class="menu-link"
            onclick="loadContent('payments.jsp', this)">
+            
 
             <span class="menu-icon">💰</span>
 

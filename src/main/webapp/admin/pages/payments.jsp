@@ -143,10 +143,6 @@
 </div>
 
 
-
-
-
-
 <!-- =================================================
      PAYMENT TABS
 ================================================= -->
@@ -159,10 +155,20 @@
         class="payment-tab unpaid-tab active"
         onclick="changePaymentTab('UNPAID')">
 
-<%=LanguageManager.get(
-        "payments.unpaid",
-        session
-)%>
+    <%=LanguageManager.get(
+            "payments.unpaid",
+            session
+    )%>
+
+    <span class="tab-notification unpaid-count"
+          id="unpaidCount">
+
+        <%= request.getAttribute("unpaidCount") != null
+                ? request.getAttribute("unpaidCount")
+                : 0
+        %>
+
+    </span>
 
 </button>
 
@@ -175,10 +181,20 @@
         class="payment-tab paid-tab"
         onclick="changePaymentTab('PAID')">
 
-<%=LanguageManager.get(
-        "payments.paid",
-        session
-)%>
+    <%=LanguageManager.get(
+            "payments.paid",
+            session
+    )%>
+
+    <span class="tab-notification paid-count"
+          id="paidCount">
+
+        <%= request.getAttribute("paidCount") != null
+                ? request.getAttribute("paidCount")
+                : 0
+        %>
+
+    </span>
 
 </button>
 
@@ -191,18 +207,25 @@
         class="payment-tab history-tab"
         onclick="changePaymentTab('HISTORY')">
 
-<%=LanguageManager.get(
-        "payments.history",
-        session
-)%>
+    <%=LanguageManager.get(
+            "payments.history",
+            session
+    )%>
+
+    <span class="tab-notification history-count"
+          id="historyCount">
+
+        <%= request.getAttribute("historyCount") != null
+                ? request.getAttribute("historyCount")
+                : 0
+        %>
+
+    </span>
 
 </button>
 
+
 </div>
-
-
-
-
 <!-- ==============================================
      AJAX CONTENT
 
