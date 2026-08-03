@@ -73,7 +73,7 @@ String direction =
 
 <link rel="stylesheet"
 
-href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=5">
+href="<%=request.getContextPath()%>/assets/css/standalone/login.css?v=5">
 
 
 </head>

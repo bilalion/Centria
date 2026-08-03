@@ -33,7 +33,7 @@ String direction =
 
 
 <link rel="stylesheet"
-      href="<%=request.getContextPath()%>/assets/css/add-centre.css">
+      href="<%=request.getContextPath()%>/assets/css/standalone/add-centre.css">
 
 
 <link rel="stylesheet"

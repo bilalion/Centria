@@ -42,86 +42,47 @@ String direction =
 
 
 
-<!-- =================================================
-     GLOBAL STYLE
-     ================================================= -->
-
-
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/global.css?v=1">
-
-
-
-
+<
 
 
 <!-- =================================================
-     DASHBOARD LAYOUT
-     ================================================= -->
-
+     CORE
+     Foundation (Variables, Reset, Typography...)
+================================================= -->
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/dashboard.css?v=1">
-
-
-
+href="<%=request.getContextPath()%>/assets/css/core/core.css?v=1">
 
 
 
 <!-- =================================================
-     COMPONENTS
-     ================================================= -->
-
-
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/sidebar.css?v=1">
-
-
+     LAYOUT
+     Application Layout Components
+================================================= -->
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/header.css?v=1">
+href="<%=request.getContextPath()%>/assets/css/layout/app-layout.css?v=1">
 
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/layout/sidebar.css?v=1">
 
-
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/layout/header.css?v=1">
 
 
 
 <!-- =================================================
-     COMMON COMPONENTS
-     ================================================= -->
-
-
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/modals.css?v=1">
-
-
+     PAGE STYLES
+================================================= -->
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/tables.css?v=1">
-
-
-
-
-
-
-<!-- =================================================
-     MODULES
-     ================================================= -->
-
+href="<%=request.getContextPath()%>/assets/css/pages/accueil.css?v=1">
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/accueil.css?v=1">
-
-
+href="<%=request.getContextPath()%>/assets/css/pages/centres.css?v=1">
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
-
-
-
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/payments.css?v=1">
-
+href="<%=request.getContextPath()%>/assets/css/pages/payments.css?v=1">
 
 
 

@@ -97,7 +97,7 @@ session.removeAttribute("password");
 
 
 <link rel="stylesheet"
-      href="<%=request.getContextPath()%>/assets/css/centre-created.css">
+      href="<%=request.getContextPath()%>/assets/css/standalone/success-page.css">
 
 
 </head>
