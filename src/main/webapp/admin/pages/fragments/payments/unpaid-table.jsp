@@ -41,12 +41,6 @@ List<Payment> payments =
 </th>
 
 
-<th>
-<%=LanguageManager.get(
-        "payments.subscription.end",
-        session
-)%>
-</th>
 
 
 <th>
@@ -68,6 +62,13 @@ List<Payment> payments =
 <th>
 <%=LanguageManager.get(
         "payments.account.status",
+        session
+)%>
+</th>
+
+<th>
+<%=LanguageManager.get(
+        "payments.subscription.end",
         session
 )%>
 </th>
@@ -149,35 +150,6 @@ title="<%=payment.getCentreName()%>">
 
 
 
-<td>
-
-<%
-
-if(payment.getSubscriptionEnd() != null){
-
-    java.text.SimpleDateFormat sdf =
-            new java.text.SimpleDateFormat("dd/MM/yyyy");
-
-%>
-
-<%=sdf.format(payment.getSubscriptionEnd())%>
-
-<%
-
-}
-else{
-
-%>
-
--
-
-<%
-
-}
-
-%>
-
-</td>
 
 
 
@@ -321,6 +293,35 @@ else{
 
 
 
+<td>
+
+<%
+
+if(payment.getSubscriptionEnd() != null){
+
+    java.text.SimpleDateFormat sdf =
+            new java.text.SimpleDateFormat("dd/MM/yyyy");
+
+%>
+
+<%=sdf.format(payment.getSubscriptionEnd())%>
+
+<%
+
+}
+else{
+
+%>
+
+-
+
+<%
+
+}
+
+%>
+
+</td>
 
 
 <!-- =========================
@@ -364,22 +365,34 @@ data-centre="<%=payment.getCentreCode()%>"
 
 
 <option value="1">
-1
+    <%=LanguageManager.get(
+        "centers.duration.1",
+        session
+)%>
 </option>
 
 
 <option value="3">
-3
+<%=LanguageManager.get(
+        "centers.duration.3",
+        session
+)%>
 </option>
 
 
 <option value="6">
-6
+<%=LanguageManager.get(
+        "centers.duration.6",
+        session
+)%>
 </option>
 
 
 <option value="12">
-12
+<%=LanguageManager.get(
+        "centers.duration.12",
+        session
+)%>
 </option>
 
 
