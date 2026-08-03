@@ -32,6 +32,8 @@ public class Payment {
     
     private String accountStatus;
     
+    private java.sql.Date datePaiement;
+    
 
     public Payment() {
 
@@ -155,6 +157,21 @@ public class Payment {
 public void setAccountStatus(String accountStatus) {
 
     this.accountStatus = accountStatus;
+
+}
+
+public java.sql.Date getDatePaiement(){
+
+    return datePaiement;
+
+}
+
+
+public void setDatePaiement(
+        java.sql.Date datePaiement
+){
+
+    this.datePaiement = datePaiement;
 
 }
 

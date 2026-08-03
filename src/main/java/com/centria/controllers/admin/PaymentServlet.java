@@ -164,7 +164,60 @@ if(tab == null || tab.isEmpty()){
 
     }
 
+/*
+==============================================
+DATE FILTER
+==============================================
+*/
 
+java.sql.Date dateFrom = null;
+
+java.sql.Date dateTo = null;
+
+
+String dateFromParam =
+        request.getParameter("dateFrom");
+
+
+String dateToParam =
+        request.getParameter("dateTo");
+
+
+
+try{
+
+
+    if(dateFromParam != null
+            && !dateFromParam.isEmpty()){
+
+
+        dateFrom =
+            java.sql.Date.valueOf(
+                dateFromParam
+            );
+
+    }
+
+
+
+    if(dateToParam != null
+            && !dateToParam.isEmpty()){
+
+
+        dateTo =
+            java.sql.Date.valueOf(
+                dateToParam
+            );
+
+    }
+
+
+}
+catch(Exception e){
+
+    e.printStackTrace();
+
+}
 
 
 
@@ -229,35 +282,35 @@ switch(tab){
 
     case "PAID":
 
-        payments =
-            paymentDAO.getPaidPayments(
-                search,
-                order,
-                page,
-                pageSize
-            );
+    payments =
+        paymentDAO.getPaidPayments(
+            search,
+            order,
+            dateFrom,
+            dateTo,
+            page,
+            pageSize
+        );
 
-        break;
-
-
-
-  
+    break;
 
 
 
-    case "UNPAID":
+case "UNPAID":
 
-    default:
+default:
 
-        payments =
-            paymentDAO.getUnpaidPayments(
-                search,
-                order,
-                page,
-                pageSize
-            );
+    payments =
+        paymentDAO.getUnpaidPayments(
+            search,
+            order,
+            dateFrom,
+            dateTo,
+            page,
+            pageSize
+        );
 
-        break;
+    break;
 
 }
 

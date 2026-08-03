@@ -50,41 +50,44 @@
 
 
 
-<!-- STATUS -->
 
-<select id="paymentStatus"
-        class="centre-select">
 
-<option value="ALL">
+<!-- DATE FROM -->
 
+<div class="date-filter">
+
+<label>
 <%=LanguageManager.get(
-        "payments.all",
+        "payments.date.from",
         session
 )%>
+</label>
 
-</option>
+<input
+        type="date"
+        id="paymentDateFrom"  name="dateFrom">
 
-<option value="UNPAID">
 
+</div>
+
+
+
+<!-- DATE TO -->
+
+<div class="date-filter">
+
+<label>
 <%=LanguageManager.get(
-        "payments.unpaid",
+        "payments.date.to",
         session
 )%>
+</label>
 
-</option>
+<input
+        type="date"
+        id="paymentDateTo"  name="dateTo">
 
-<option value="PAID">
-
-<%=LanguageManager.get(
-        "payments.paid",
-        session
-)%>
-
-</option>
-
-</select>
-
-
+</div>
 
 
 

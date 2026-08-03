@@ -67,6 +67,7 @@ function loadPayments(page = 1){
 
 
 
+
     let searchInput =
         document.getElementById(
             "paymentSearch"
@@ -78,6 +79,22 @@ function loadPayments(page = 1){
         document.getElementById(
             "paymentOrder"
         );
+
+
+
+    let dateFromInput =
+        document.getElementById(
+            "paymentDateFrom"
+        );
+
+
+
+    let dateToInput =
+        document.getElementById(
+            "paymentDateTo"
+        );
+
+
 
 
 
@@ -96,6 +113,26 @@ function loadPayments(page = 1){
         orderInput.value
         :
         "NEW";
+
+
+
+    let dateFrom =
+        dateFromInput
+        ?
+        dateFromInput.value
+        :
+        "";
+
+
+
+    let dateTo =
+        dateToInput
+        ?
+        dateToInput.value
+        :
+        "";
+
+
 
 
 
@@ -149,7 +186,29 @@ function loadPayments(page = 1){
 
         encodeURIComponent(
             order
+        )
+
+        +
+
+        "&dateFrom="
+
+        +
+
+        encodeURIComponent(
+            dateFrom
+        )
+
+        +
+
+        "&dateTo="
+
+        +
+
+        encodeURIComponent(
+            dateTo
         );
+
+
 
 
 
@@ -159,6 +218,7 @@ function loadPayments(page = 1){
         "LOAD PAYMENTS:",
         url
     );
+
 
 
 

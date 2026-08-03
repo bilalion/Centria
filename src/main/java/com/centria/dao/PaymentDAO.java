@@ -816,291 +816,14 @@ Used by TAB1
 public List<Payment> getUnpaidPayments(
         String search,
         String order,
+        Date dateFrom,
+        Date dateTo,
         int page,
         int pageSize
 ){
 
     List<Payment> payments =
-
             new java.util.ArrayList<>();
-
-
-    Connection con = null;
-
-
-    try{
-
-
-        con = DatabaseConfig.getConnection();
-
-
-
-  String sql =
-
-"SELECT "
-+ "p.centre_code, "
-+ "c.name, "
-+ "c.subscription_end, "
-+ "p.code_facture, "
-+ "p.status_payment, "
-+ "c.status "
-+ "FROM payments p "
-+ "INNER JOIN centres c "
-+ "ON p.centre_code = c.centre_code "
-+ "WHERE p.status_payment='UNPAID' "
-+ "AND c.status IN ('SUSPENDED','PENDING') ";
-
-
-        if(search != null
-                && !search.trim().isEmpty()){
-
-           sql +=
-
-"AND ("
-
-+ "p.centre_code LIKE ? "
-
-+ "OR c.name LIKE ? "
-
-+ "OR c.phone LIKE ? "
-
-+ "OR p.code_facture LIKE ?"
-
-+ ") ";
-
-        }
-
-
-
-if("OLD".equals(order)){
-
-    sql +=
-
-    "ORDER BY "
-    + "CASE "
-    + "WHEN c.status='SUSPENDED' THEN 1 "
-    + "WHEN c.status='PENDING' THEN 2 "
-    + "END, "
-    + "p.id ASC ";
-
-}
-else{
-
-    sql +=
-
-    "ORDER BY "
-    + "CASE "
-    + "WHEN c.status='SUSPENDED' THEN 1 "
-    + "WHEN c.status='PENDING' THEN 2 "
-    + "END, "
-    + "p.id DESC ";
-
-}
-
-
-        sql +=
-
-        "LIMIT ? OFFSET ?";
-
-
-
-        PreparedStatement ps =
-
-                con.prepareStatement(
-                        sql
-                );
-        
-     /* ==============================================
-        SET PARAMETERS
-        ==============================================
-        */
-
-        int index = 1;
-
-
-        if(search != null
-                && !search.trim().isEmpty()){
-
-            String keyword =
-
-                    "%"
-                    + search.trim()
-                    + "%";
-
-
-            ps.setString(
-                    index++,
-                    keyword
-            );
-
-
-            ps.setString(
-                    index++,
-                    keyword
-            );
-
-
-            ps.setString(
-                    index++,
-                    keyword
-            );
-            
-            ps.setString(
-        index++,
-        keyword
-);
-
-        }
-
-
-
-        ps.setInt(
-                index++,
-                pageSize
-        );
-
-
-        ps.setInt(
-                index,
-                (page - 1) * pageSize
-        );
-
-
-
-
-        /*
-        ==============================================
-        EXECUTE QUERY
-        ==============================================
-        */
-
-        ResultSet rs =
-
-                ps.executeQuery();
-
-
-
-
-        /*
-        ==============================================
-        BUILD PAYMENT LIST
-        ==============================================
-        */
-
-        while(rs.next()){
-
-
-            Payment payment =
-
-                    new Payment();
-
-
-
-            payment.setCentreCode(
-                    rs.getString(
-                            "centre_code"
-                    )
-            );
-
-
-
-            payment.setCentreName(
-                    rs.getString(
-                            "name"
-                    )
-            );
-
-
-
-         payment.setSubscriptionEnd(
-                   rs.getDate("subscription_end")
-         );
-
-
-
-            payment.setCodeFacture(
-                    rs.getString(
-                            "code_facture"
-                    )
-            );
-
-
-
-            payment.setStatusPayment(
-                    rs.getString(
-                            "status_payment"
-                    )
-            );
-
-            payment.setAccountStatus(
-        rs.getString("status")
-);
-
-
-            payments.add(
-                    payment
-            );
-
-        }
-                /*
-        ==============================================
-        RETURN RESULT
-        ==============================================
-        */
-
-        return payments;
-
-    }
-    catch(Exception e){
-
-        e.printStackTrace();
-
-    }
-    finally{
-
-        try{
-
-            if(con != null){
-
-                con.close();
-
-            }
-
-        }
-        catch(Exception close){
-
-            close.printStackTrace();
-
-        }
-
-    }
-
-    return payments;
-
-}
-
-/*
-======================================================
-GET PAID PAYMENTS
-
-Used by TAB2 (affichage des donnees)
-
-Display centres with active subscriptions
-
-======================================================
-*/
-
-public List<Payment> getPaidPayments(
-        String search,
-        String order,
-        int page,
-        int pageSize
-){
-
-    List<Payment> payments =
-
-            new java.util.ArrayList<>();
-
 
     Connection con = null;
 
@@ -1117,6 +840,7 @@ public List<Payment> getPaidPayments(
         "SELECT "
         + "p.centre_code, "
         + "c.name, "
+        + "c.phone, "
         + "c.subscription_start, "
         + "c.subscription_end, "
         + "p.code_facture, "
@@ -1125,9 +849,52 @@ public List<Payment> getPaidPayments(
         + "FROM payments p "
         + "INNER JOIN centres c "
         + "ON p.centre_code = c.centre_code "
-        + "WHERE p.status_payment='PAID' "
-        + "AND c.status='ACTIVE' ";
+        + "INNER JOIN history_payment h "
+        + "ON p.code_facture = h.code_facture "
+        + "WHERE p.status_payment='UNPAID' "
+        + "AND c.status IN ('PENDING','SUSPENDED') ";
 
+
+
+        /*
+        ======================================
+        DATE FILTER
+        date_paiement
+        ======================================
+        */
+
+
+/*
+======================================
+DATE FILTER TAB1
+subscription_end
+======================================
+*/
+
+if(dateFrom != null){
+
+    sql +=
+    "AND c.subscription_end >= ? ";
+
+}
+
+
+if(dateTo != null){
+
+    sql +=
+    "AND c.subscription_end <= ? ";
+
+}
+
+
+
+
+
+        /*
+        ======================================
+        TEXT SEARCH
+        ======================================
+        */
 
 
         if(search != null
@@ -1139,8 +906,10 @@ public List<Payment> getPaidPayments(
             "AND ("
             + "p.centre_code LIKE ? "
             + "OR c.name LIKE ? "
-            + "OR p.code_facture LIKE ?"
+            + "OR c.phone LIKE ? "
+            + "OR p.code_facture LIKE ? "
             + ") ";
+
 
         }
 
@@ -1148,12 +917,19 @@ public List<Payment> getPaidPayments(
 
 
 
-        if("OLD".equals(order)){
+        /*
+        ======================================
+        ORDER
+        ======================================
+        */
+
+
+        if("OLD".equalsIgnoreCase(order)){
 
 
             sql +=
 
-            "ORDER BY p.id ASC ";
+            "ORDER BY c.subscription_end DESC ";
 
 
         }
@@ -1162,7 +938,7 @@ public List<Payment> getPaidPayments(
 
             sql +=
 
-            "ORDER BY p.id DESC ";
+            "ORDER BY c.subscription_end ASC ";
 
 
         }
@@ -1177,15 +953,45 @@ public List<Payment> getPaidPayments(
 
 
 
+
         PreparedStatement ps =
 
-                con.prepareStatement(
-                        sql
-                );
+                con.prepareStatement(sql);
+
 
 
 
         int index = 1;
+
+
+
+
+        if(dateFrom != null){
+
+
+            ps.setDate(
+                    index++,
+                    dateFrom
+            );
+
+
+        }
+
+
+
+        if(dateTo != null){
+
+
+            ps.setDate(
+                    index++,
+                    dateTo
+            );
+
+
+        }
+
+
+
 
 
 
@@ -1195,10 +1001,16 @@ public List<Payment> getPaidPayments(
 
             String keyword =
 
-                    "%"
+                    "%" 
                     + search.trim()
                     + "%";
 
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
 
 
             ps.setString(
@@ -1240,9 +1052,11 @@ public List<Payment> getPaidPayments(
 
 
 
+
         ResultSet rs =
 
                 ps.executeQuery();
+
 
 
 
@@ -1258,6 +1072,373 @@ public List<Payment> getPaidPayments(
 
 
             payment.setCentreCode(
+                    rs.getString("centre_code")
+            );
+
+
+            payment.setCentreName(
+                    rs.getString("name")
+            );
+
+
+            payment.setSubscriptionStart(
+                    rs.getDate("subscription_start")
+            );
+
+
+            payment.setSubscriptionEnd(
+                    rs.getDate("subscription_end")
+            );
+
+
+            payment.setCodeFacture(
+                    rs.getString("code_facture")
+            );
+
+
+            payment.setStatusPayment(
+                    rs.getString("status_payment")
+            );
+
+
+            payment.setAccountStatus(
+                    rs.getString("status")
+            );
+
+
+
+            payments.add(payment);
+
+
+        }
+
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+    }
+    finally{
+
+
+        try{
+
+
+            if(con != null){
+
+                con.close();
+
+            }
+
+
+        }
+        catch(Exception e){
+
+
+            e.printStackTrace();
+
+
+        }
+
+
+    }
+
+
+
+    return payments;
+
+}
+
+
+/*
+======================================================
+GET PAID PAYMENTS
+
+Used by TAB2 (affichage des donnees)
+
+Display centres with active subscriptions
+
+======================================================
+*/
+
+public List<Payment> getPaidPayments(
+        String search,
+        String order,
+        Date dateFrom,
+        Date dateTo,
+        int page,
+        int pageSize
+){
+
+    List<Payment> payments =
+            new java.util.ArrayList<>();
+
+
+    Connection con = null;
+
+
+    try{
+
+
+        con = DatabaseConfig.getConnection();
+
+
+
+        String sql =
+
+
+        "SELECT "
+        + "p.centre_code, "
+        + "c.name, "
+        + "c.phone, "
+        + "c.subscription_start, "
+        + "c.subscription_end, "
+        + "p.code_facture, "
+        + "p.status_payment, "
+        + "c.status, "
+        + "h.date_paiement "
+        + "FROM payments p "
+
+        + "INNER JOIN centres c "
+        + "ON p.centre_code=c.centre_code "
+
+        + "INNER JOIN history_payment h "
+        + "ON p.code_facture=h.code_facture "
+
+        + "WHERE p.status_payment='PAID' "
+        + "AND c.status='ACTIVE' ";
+
+
+
+
+
+        /*
+        ======================================
+        DATE FILTER
+        TAB2
+        date_paiement
+        ======================================
+        */
+
+
+        if(dateFrom != null){
+
+            sql +=
+
+            "AND h.date_paiement >= ? ";
+
+        }
+
+
+
+        if(dateTo != null){
+
+            sql +=
+
+            "AND h.date_paiement <= ? ";
+
+        }
+
+
+
+
+
+
+        /*
+        ======================================
+        SEARCH
+        ======================================
+        */
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            sql +=
+
+
+            "AND ("
+            + "p.centre_code LIKE ? "
+            + "OR c.name LIKE ? "
+            + "OR c.phone LIKE ? "
+            + "OR p.code_facture LIKE ? "
+            + ") ";
+
+
+        }
+
+
+
+
+
+
+
+        /*
+        ======================================
+        ORDER
+        ======================================
+        */
+
+
+        if("OLD".equalsIgnoreCase(order)){
+
+
+            sql +=
+
+            "ORDER BY h.date_paiement ASC ";
+
+
+        }
+        else{
+
+
+            sql +=
+
+            "ORDER BY h.date_paiement DESC ";
+
+
+        }
+
+
+
+
+
+
+        sql +=
+
+        "LIMIT ? OFFSET ?";
+
+
+
+
+
+
+        PreparedStatement ps =
+
+                con.prepareStatement(sql);
+
+
+
+
+        int index = 1;
+
+
+
+
+
+        if(dateFrom != null){
+
+            ps.setDate(
+                    index++,
+                    dateFrom
+            );
+
+        }
+
+
+
+
+        if(dateTo != null){
+
+            ps.setDate(
+                    index++,
+                    dateTo
+            );
+
+        }
+
+
+
+
+
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            String keyword =
+
+                    "%"
+                    +
+                    search.trim()
+                    +
+                    "%";
+
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+        }
+
+
+
+
+
+
+        ps.setInt(
+                index++,
+                pageSize
+        );
+
+
+
+        ps.setInt(
+                index,
+                (page-1)*pageSize
+        );
+
+
+
+
+
+
+        ResultSet rs =
+
+                ps.executeQuery();
+
+
+
+
+
+
+
+        while(rs.next()){
+
+
+            Payment payment =
+                    new Payment();
+
+
+
+
+            payment.setCentreCode(
                     rs.getString(
                             "centre_code"
                     )
@@ -1268,6 +1449,14 @@ public List<Payment> getPaidPayments(
             payment.setCentreName(
                     rs.getString(
                             "name"
+                    )
+            );
+
+
+
+            payment.setPhone(
+                    rs.getString(
+                            "phone"
                     )
             );
 
@@ -1313,6 +1502,14 @@ public List<Payment> getPaidPayments(
 
 
 
+            payment.setDatePaiement(
+                    rs.getDate(
+                            "date_paiement"
+                    )
+            );
+
+
+
             payments.add(
                     payment
             );
@@ -1322,17 +1519,10 @@ public List<Payment> getPaidPayments(
 
 
 
-
-        return payments;
-
-
-
     }
     catch(Exception e){
 
-
         e.printStackTrace();
-
 
     }
     finally{
@@ -1349,11 +1539,9 @@ public List<Payment> getPaidPayments(
 
 
         }
-        catch(Exception close){
+        catch(Exception e){
 
-
-            close.printStackTrace();
-
+            e.printStackTrace();
 
         }
 
@@ -1365,7 +1553,6 @@ public List<Payment> getPaidPayments(
     return payments;
 
 }
-
 
 
 
