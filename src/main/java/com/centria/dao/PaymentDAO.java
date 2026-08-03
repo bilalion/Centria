@@ -3126,14 +3126,14 @@ Search one payment history record
 ======================================================
 */
 
+
+
+
 /*
 ======================================================
 GET INVOICE BY CODE
 
-TEMPORARY DISABLED
-
-Printing flow disabled for now.
-Method kept because PaymentServlet depends on it.
+Used by Print Invoice
 
 ======================================================
 */
@@ -3141,6 +3141,96 @@ Method kept because PaymentServlet depends on it.
 public Payment getInvoiceByCode(
         String codeFacture
 ){
+
+    String sql =
+
+        "SELECT "
+      + "h.code_facture, "
+      + "h.centre_code, "
+      + "h.date_paiement, "
+      + "h.date_start, "
+      + "h.date_end, "
+      + "h.duration_months, "
+      + "h.operation_type, "
+      + "c.name, "
+      + "c.phone "
+      + "FROM history_payment h "
+      + "INNER JOIN centres c "
+      + "ON h.centre_code = c.centre_code "
+      + "WHERE h.code_facture=? "
+      + "LIMIT 1";
+
+
+
+    try(
+
+        Connection con =
+                DatabaseConfig.getConnection();
+
+        PreparedStatement ps =
+                con.prepareStatement(sql)
+
+    ){
+
+        ps.setString(
+                1,
+                codeFacture
+        );
+
+        ResultSet rs =
+                ps.executeQuery();
+
+        if(rs.next()){
+
+            Payment payment =
+                    new Payment();
+
+            payment.setCodeFacture(
+                    rs.getString("code_facture")
+            );
+
+            payment.setCentreCode(
+                    rs.getString("centre_code")
+            );
+
+            payment.setCentreName(
+                    rs.getString("name")
+            );
+
+            payment.setPhone(
+                    rs.getString("phone")
+            );
+
+            payment.setDatePaiement(
+                    rs.getDate("date_paiement")
+            );
+
+            payment.setSubscriptionStart(
+                    rs.getDate("date_start")
+            );
+
+            payment.setSubscriptionEnd(
+                    rs.getDate("date_end")
+            );
+
+            payment.setDurationMonths(
+                    rs.getInt("duration_months")
+            );
+
+            payment.setOperationType(
+                    rs.getString("operation_type")
+            );
+
+            return payment;
+
+        }
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
 
     return null;
 

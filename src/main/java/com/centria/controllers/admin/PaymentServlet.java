@@ -517,11 +517,12 @@ else{
 
 
 
+
+
 /*
 ======================================================
 PRINT INVOICE
 
-TAB3
 Print invoice by code_facture
 
 ======================================================
@@ -531,14 +532,42 @@ private void printInvoice(
         HttpServletRequest request,
         HttpServletResponse response
 )
-throws ServletException, IOException {
-
+throws ServletException, IOException{
 
     String invoice =
             request.getParameter("invoice");
 
+    Payment payment =
+            paymentDAO.getInvoiceByCode(
+                    invoice
+            );
+
+    if(payment == null){
+
+        response.sendError(
+                HttpServletResponse.SC_NOT_FOUND
+        );
+
+        return;
+
+    }
+
+    request.setAttribute(
+            "payment",
+            payment
+    );
+
+    request.getRequestDispatcher(
+            "/admin/pages/fragments/payments/invoice.jsp"
+    ).forward(
+            request,
+            response
+    );
 
 }
+
+
+
 
     /*
     ==============================================
