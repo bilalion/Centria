@@ -1054,9 +1054,15 @@ html[dir="rtl"] .info-box{
 
 html[dir="rtl"] .modal-close{
 
+    left:12px;
     right:auto;
 
-    left:12px;
+}
+
+html[dir="ltr"] .modal-close{
+
+    right:12px;
+    left:auto;
 
 }
 
