@@ -560,6 +560,38 @@ public class CentreServlet extends HttpServlet {
                 );
 
 
+        /*
+==================================================
+PAGE CORRECTION
+
+If filters reduce the number of pages,
+move automatically to the last valid page.
+
+Example:
+Current page = 3
+Filtered result = 1 page
+
+→ return page 1 instead of empty table.
+==================================================
+*/
+
+if (totalPages == 0) {
+    totalPages = 1;
+}
+
+if (page > totalPages) {
+
+    page = totalPages;
+
+    centres = centreDAO.searchCentres(
+            search,
+            status,
+            order,
+            page,
+            pageSize
+    );
+
+}
 
 
 
