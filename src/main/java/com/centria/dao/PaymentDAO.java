@@ -2644,5 +2644,359 @@ public int countHistoryPayments(
 
 }
 
+/*
+======================================================
+GET HISTORY PAYMENTS
+
+Used by TAB3
+
+Display all payment history records
+
+Example:
+Centre A paid 3 times = 3 rows
+
+======================================================
+*/
+
+public List<Payment> getHistoryPayments(
+        String search,
+        String order,
+        Date dateFrom,
+        Date dateTo,
+        int page,
+        int pageSize
+){
+
+    List<Payment> payments =
+            new java.util.ArrayList<>();
+
+
+    Connection con = null;
+
+
+    try{
+
+
+        con = DatabaseConfig.getConnection();
+
+
+
+        String sql =
+
+        "SELECT "
+        + "h.centre_code, "
+        + "c.name, "
+        + "h.code_facture, "
+        + "h.date_paiement, "
+        + "h.operation_type "
+        + "FROM history_payment h "
+        + "INNER JOIN centres c "
+        + "ON h.centre_code=c.centre_code "
+        + "WHERE 1=1 ";
+
+
+
+
+        /*
+        ======================================
+        DATE FILTER
+
+        history date_paiement
+
+        ======================================
+        */
+
+
+        if(dateFrom != null){
+
+            sql +=
+
+            "AND h.date_paiement >= ? ";
+
+        }
+
+
+        if(dateTo != null){
+
+            sql +=
+
+            "AND h.date_paiement <= ? ";
+
+        }
+
+
+
+
+        /*
+        ======================================
+        SEARCH
+
+        centre
+        name
+        invoice
+
+        ======================================
+        */
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            sql +=
+
+            "AND ("
+            + "h.centre_code LIKE ? "
+            + "OR c.name LIKE ? "
+            + "OR h.code_facture LIKE ? "
+            + ") ";
+
+        }
+
+
+
+
+
+        /*
+        ======================================
+        ORDER
+
+        NEW = latest payment first
+
+        ======================================
+        */
+
+
+        if("OLD".equalsIgnoreCase(order)){
+
+
+            sql +=
+
+            "ORDER BY h.date_paiement ASC ";
+
+
+        }
+        else{
+
+
+            sql +=
+
+            "ORDER BY h.date_paiement DESC ";
+
+        }
+
+
+
+
+
+
+        /*
+        ======================================
+        PAGINATION
+        ======================================
+        */
+
+
+        sql +=
+
+        "LIMIT ? OFFSET ?";
+
+
+
+
+
+        PreparedStatement ps =
+
+                con.prepareStatement(sql);
+
+
+
+        int index = 1;
+
+
+
+
+
+        if(dateFrom != null){
+
+            ps.setDate(
+                    index++,
+                    dateFrom
+            );
+
+        }
+
+
+
+        if(dateTo != null){
+
+            ps.setDate(
+                    index++,
+                    dateTo
+            );
+
+        }
+
+
+
+
+
+        if(search != null
+                && !search.trim().isEmpty()){
+
+
+            String keyword =
+
+                    "%"
+                    + search.trim()
+                    + "%";
+
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+            ps.setString(
+                    index++,
+                    keyword
+            );
+
+
+        }
+
+
+
+
+
+
+        ps.setInt(
+                index++,
+                pageSize
+        );
+
+
+
+        ps.setInt(
+                index,
+                (page - 1) * pageSize
+        );
+
+
+
+
+
+
+
+        ResultSet rs =
+
+                ps.executeQuery();
+
+
+
+
+
+
+        while(rs.next()){
+
+
+            Payment payment =
+
+                    new Payment();
+
+
+
+
+            payment.setCentreCode(
+                    rs.getString(
+                            "centre_code"
+                    )
+            );
+
+
+
+            payment.setCentreName(
+                    rs.getString(
+                            "name"
+                    )
+            );
+
+
+
+            payment.setCodeFacture(
+                    rs.getString(
+                            "code_facture"
+                    )
+            );
+
+
+
+            payment.setDatePaiement(
+                    rs.getDate(
+                            "date_paiement"
+                    )
+            );
+
+
+
+            payment.setOperationType(
+                    rs.getString(
+                            "operation_type"
+                    )
+            );
+
+
+
+            payments.add(
+                    payment
+            );
+
+
+        }
+
+
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
+    finally{
+
+
+        try{
+
+
+            if(con != null){
+
+                con.close();
+
+            }
+
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+
+
+    return payments;
+
+}
+
 }
 

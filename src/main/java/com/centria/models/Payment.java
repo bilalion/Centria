@@ -33,6 +33,8 @@ public class Payment {
     private String accountStatus;
     
     private java.sql.Date datePaiement;
+    private String operationType;
+    
     
 
     public Payment() {
@@ -172,6 +174,19 @@ public void setDatePaiement(
 ){
 
     this.datePaiement = datePaiement;
+
+}
+
+public String getOperationType(){
+
+    return operationType;
+
+}
+
+
+public void setOperationType(String operationType){
+
+    this.operationType = operationType;
 
 }
 

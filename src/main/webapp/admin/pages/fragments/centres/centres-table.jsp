@@ -36,7 +36,6 @@ request.getAttribute("totalPages") != null
 
 
 
-
 <%
 
 if(centres == null || centres.isEmpty()){
@@ -71,7 +70,8 @@ if(centres == null || centres.isEmpty()){
 
 <!-- =================================================
      PAGINATION TOP
-     ================================================= -->
+     3 NUMBERS CENTER
+================================================= -->
 
 
 <div class="pagination-container">
@@ -81,17 +81,67 @@ if(centres == null || centres.isEmpty()){
 
 if(totalPages > 1){
 
+
+
+int startPage =
+        Math.max(1, currentPage - 1);
+
+
+
+int endPage =
+        Math.min(
+            totalPages,
+            startPage + 2
+        );
+
+
+
+if(endPage - startPage < 2){
+
+    startPage =
+        Math.max(
+            1,
+            endPage - 2
+        );
+
+}
+
 %>
+
+<!-- FIRST PAGE -->
+
+<button
+
+class="page-btn"
+
+onclick="changeCentrePage(1)"
+
+<%=currentPage <= 1 ? "disabled" : ""%>
+
+>
+
+&lt;&lt;
+
+</button>
+
+
+
 
 
 <!-- PREVIOUS -->
 
 <button
+
 class="page-btn"
+
 onclick="changeCentrePage(<%=currentPage - 1%>)"
+
 <%=currentPage <= 1 ? "disabled" : ""%>
+
 >
-◀
+
+&lt;
+
 </button>
 
 
@@ -99,55 +149,6 @@ onclick="changeCentrePage(<%=currentPage - 1%>)"
 
 
 <%
-
-int startPage = Math.max(1, currentPage - 2);
-
-int endPage = Math.min(
-        totalPages,
-        currentPage + 2
-);
-
-
-
-
-
-if(startPage > 1){
-
-%>
-
-
-<button
-class="page-btn"
-onclick="changeCentrePage(1)"
->
-1
-</button>
-
-
-<%
-
-if(startPage > 2){
-
-%>
-
-<span class="page-dots">
-...
-</span>
-
-<%
-
-}
-
-%>
-
-
-<%
-
-}
-
-
-
-
 
 for(int i = startPage; i <= endPage; i++){
 
@@ -163,56 +164,6 @@ onclick="changeCentrePage(<%=i%>)"
 >
 
 <%=i%>
-
-</button>
-
-
-<%
-
-}
-
-
-%>
-
-<%
-
-if(endPage < totalPages){
-
-%>
-
-
-<%
-
-if(endPage < totalPages - 1){
-
-%>
-
-
-<span class="page-dots">
-
-...
-
-</span>
-
-
-<%
-
-}
-
-%>
-
-
-
-<button
-
-class="page-btn"
-
-onclick="changeCentrePage(<%=totalPages%>)"
-
->
-
-<%=totalPages%>
-
 
 </button>
 
@@ -241,9 +192,27 @@ onclick="changeCentrePage(<%=currentPage + 1%>)"
 
 >
 
+&gt;
 
-▶
+</button>
 
+
+
+
+
+<!-- LAST PAGE -->
+
+<button
+
+class="page-btn"
+
+onclick="changeCentrePage(<%=totalPages%>)"
+
+<%=currentPage >= totalPages ? "disabled" : ""%>
+
+>
+
+&gt;&gt;
 
 </button>
 
@@ -270,7 +239,7 @@ onclick="changeCentrePage(<%=currentPage + 1%>)"
 
 <!-- =================================================
      TABLE CONTAINER
-     ================================================= -->
+================================================= -->
 
 
 <div class="table-container">
@@ -600,7 +569,6 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 </td>
-
 <!-- STATUS -->
 
 <td>
@@ -622,23 +590,19 @@ onchange="updateCentreStatus(this)"
 <option value="PENDING"
 
 <%=
-
 "PENDING".equals(status)
 ?
 "selected"
 :
 ""
-
 %>
 
 >
-
 
 <%=LanguageManager.get(
         "centers.pending",
         session
 )%>
-
 
 </option>
 
@@ -649,23 +613,19 @@ onchange="updateCentreStatus(this)"
 <option value="ACTIVE"
 
 <%=
-
 "ACTIVE".equals(status)
 ?
 "selected"
 :
 ""
-
 %>
 
 >
-
 
 <%=LanguageManager.get(
         "centers.active",
         session
 )%>
-
 
 </option>
 
@@ -676,23 +636,19 @@ onchange="updateCentreStatus(this)"
 <option value="SUSPENDED"
 
 <%=
-
 "SUSPENDED".equals(status)
 ?
 "selected"
 :
 ""
-
 %>
 
 >
-
 
 <%=LanguageManager.get(
         "centers.suspended",
         session
 )%>
-
 
 </option>
 
@@ -703,23 +659,19 @@ onchange="updateCentreStatus(this)"
 <option value="ARCHIVED"
 
 <%=
-
 "ARCHIVED".equals(status)
 ?
 "selected"
 :
 ""
-
 %>
 
 >
-
 
 <%=LanguageManager.get(
         "centers.archived",
         session
 )%>
-
 
 </option>
 
@@ -770,7 +722,10 @@ type="button"
 
 class="action-btn action-edit"
 
-title="<%=LanguageManager.get("centers.edit",session)%>"
+title="<%=LanguageManager.get(
+"centers.edit",
+session
+)%>"
 
 onclick="editCentre(<%=centre.getId()%>)"
 
@@ -791,7 +746,10 @@ type="button"
 
 class="action-btn action-reset"
 
-title="<%=LanguageManager.get("centers.reset.password",session)%>"
+title="<%=LanguageManager.get(
+"centers.reset.password",
+session
+)%>"
 
 onclick="resetCentrePassword(<%=centre.getId()%>)"
 

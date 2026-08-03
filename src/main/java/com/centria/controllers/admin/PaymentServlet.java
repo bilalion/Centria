@@ -256,7 +256,7 @@ catch(Exception e){
 
 
 
-    int pageSize = 10;
+    int pageSize = 4;
 
 
 
@@ -311,6 +311,21 @@ default:
         );
 
     break;
+    
+    case "HISTORY":
+
+    payments =
+        paymentDAO.getHistoryPayments(
+            search,
+            order,
+            dateFrom,
+            dateTo,
+            page,
+            pageSize
+        );
+
+    break;
+    
 
 }
 
@@ -410,7 +425,38 @@ request.setAttribute(
     );
     
     
+int totalRecords;
 
+
+if("UNPAID".equals(tab)){
+
+    totalRecords = unpaidCount;
+
+}
+else if("PAID".equals(tab)){
+
+    totalRecords = paidCount;
+
+}
+else{
+
+    totalRecords = historyCount;
+
+}
+
+
+
+int totalPages =
+
+        (int)Math.ceil(
+            (double)totalRecords / pageSize
+        );
+
+
+request.setAttribute(
+        "totalPages",
+        totalPages
+);
 
 
 
@@ -423,22 +469,24 @@ if("true".equals(
     String fragment;
 
 
-    if("PAID".equals(tab)){
+  if("PAID".equals(tab)){
 
+    fragment =
+    "/admin/pages/fragments/payments/paid-table.jsp";
 
-        fragment =
-        "/admin/pages/fragments/payments/paid-table.jsp";
+}
+else if("HISTORY".equals(tab)){
 
+    fragment =
+    "/admin/pages/fragments/payments/history-table.jsp";
 
-    }
-    else{
+}
+else{
 
+    fragment =
+    "/admin/pages/fragments/payments/unpaid-table.jsp";
 
-        fragment =
-        "/admin/pages/fragments/payments/unpaid-table.jsp";
-
-
-    }
+}
 
 
 

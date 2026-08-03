@@ -258,11 +258,82 @@ function loadPayments(page = 1){
 .then(html => {
 
 
-    container.innerHTML = html;
+    let temp = document.createElement("div");
 
+    temp.innerHTML = html;
+
+
+
+    /*
+    ===============================
+    TABLE
+    ===============================
+    */
+
+    let fragment =
+        temp.querySelector(
+            "#payment-fragment"
+        );
+
+
+    if(fragment){
+
+        container.innerHTML =
+            fragment.innerHTML;
+
+    }
+
+
+
+
+    /*
+    ===============================
+    PAGINATION
+    ===============================
+    */
+
+    let pagination =
+        temp.querySelector(
+            ".payments-pagination"
+        );
+
+
+
+    let paginationContainer =
+        document.getElementById(
+            "payments-pagination-container"
+        );
+
+
+
+    if(paginationContainer){
+
+
+        if(pagination){
+
+            paginationContainer.innerHTML =
+                pagination.innerHTML;
+
+        }
+        else{
+
+            paginationContainer.innerHTML = "";
+
+        }
+
+    }
+
+
+
+
+    /*
+    ===============================
+    SCRIPTS
+    ===============================
+    */
 
     let scripts =
-        container.querySelectorAll("script");
+        temp.querySelectorAll("script");
 
 
     scripts.forEach(script => {
@@ -272,11 +343,11 @@ function loadPayments(page = 1){
     });
 
 
+
     updatePaymentCounters();
 
 
 })
-
 
     .catch(error => {
 
@@ -1191,5 +1262,36 @@ function updatePaymentCounters(){
 
 
     }
+    
+    
+    function openPaymentView(){
+
+    document.getElementById(
+        "paymentViewDialog"
+    ).style.display = "flex";
+
+}
+
+
+
+function closePaymentView(){
+
+    document.getElementById(
+        "paymentViewDialog"
+    ).style.display = "none";
+
+}
+
+}
+
+/*
+==========================================================
+ PAGINATION
+==========================================================
+*/
+
+function changePaymentPage(page){
+
+    loadPayments(page);
 
 }
