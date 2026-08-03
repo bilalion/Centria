@@ -44,8 +44,11 @@ public class PaymentDAO {
 
 
     public boolean createInitialPayment(
-            String centreCode
-    ){
+    String centreCode,
+    Date dateStart,
+    Date dateEnd,
+    int durationMonths
+){
 
 
         Connection con = null;
@@ -225,11 +228,11 @@ public class PaymentDAO {
             */
 
 
-            String insertHistory =
+          String insertHistory =
 
-            "INSERT INTO history_payment"
-            + "(code_facture, centre_code, date_paiement) "
-            + "VALUES (?, ?, ?)";
+"INSERT INTO history_payment"
++ "(code_facture, centre_code, date_paiement, date_start, date_end, duration_months, operation_type) "
++ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 
 
@@ -255,14 +258,15 @@ public class PaymentDAO {
             );
 
 
-            history.setDate(
-                    3,
-                    new Date(
-                        System.currentTimeMillis()
-                    )
-            );
+            history.setDate(3,new Date(System.currentTimeMillis()));
+            
+            history.setDate(4, dateStart);
 
+            history.setDate(5, dateEnd);
 
+            history.setInt(6, durationMonths);
+
+            history.setString(7, "INITIAL");
 
             history.executeUpdate();
 
@@ -672,12 +676,11 @@ public boolean confirmPayment(
         */
 
 
-        String insertHistory =
+    String insertHistory =
 
-        "INSERT INTO history_payment "
-        + "(code_facture, centre_code, date_paiement) "
-        + "VALUES (?, ?, ?)";
-
+"INSERT INTO history_payment "
++ "(code_facture, centre_code, date_paiement, date_start, date_end, duration_months) "
++ "VALUES (?, ?, ?, ?, ?, ?)";
 
 
         PreparedStatement psHistory =
@@ -688,24 +691,18 @@ public boolean confirmPayment(
 
 
 
-        psHistory.setString(
-                1,
-                newInvoiceCode
-        );
+        
+
+psHistory.setString(1,newInvoiceCode);
+        psHistory.setString(2,centreCode);
+        psHistory.setDate(3,new Date(System.currentTimeMillis()));
+        psHistory.setDate(4,newStartDate);
+        psHistory.setDate(5,subscriptionEnd);
+        psHistory.setInt(6,durationMonths);
 
 
-        psHistory.setString(
-                2,
-                centreCode
-        );
+     
 
-
-        psHistory.setDate(
-                3,
-                new Date(
-                    System.currentTimeMillis()
-                )
-        );
 
 
 
@@ -1677,31 +1674,44 @@ public boolean updateSubscription(
             ==========================================
             */
 
-            sql =
+        sql =
 
-            "UPDATE history_payment "
-            + "SET operation_type=? "
-            + "WHERE code_facture=?";
+"UPDATE history_payment SET "
++ "date_start=?, "
++ "date_end=?, "
++ "duration_months=?, "
++ "operation_type=? "
++ "WHERE code_facture=?";
 
-            ps = con.prepareStatement(sql);
 
-            ps.setString(
-                    1,
-                    "UPGRADE"
-            );
+ps = con.prepareStatement(sql);
 
-            ps.setString(
-                    2,
-                    codeFacture
-            );
+        ps.setDate(1,subscriptionStart);
+        ps.setDate(2,subscriptionEnd);
+        ps.setInt(3,durationMonths);
+        ps.setString(4,"UPGRADE");
+        ps.setString(5,codeFacture);
 
-            if(ps.executeUpdate()==0){
 
-                con.rollback();
 
-                return false;
 
-            }
+
+
+
+        
+
+
+
+
+
+
+if(ps.executeUpdate()==0){
+
+    con.rollback();
+
+    return false;
+
+}
 
         }
 
@@ -1712,28 +1722,35 @@ public boolean updateSubscription(
         ==========================================
         */
 
-      else if("EXTENDED".equalsIgnoreCase(operation)){
+    else if("EXTENDED".equalsIgnoreCase(operation)){
+
 
     /*
     ==========================================
-    1 - GET PAYMENT ID + CURRENT END DATE
+    1 - GET PAYMENT ID
     ==========================================
     */
 
     String sql =
 
-    "SELECT p.id, c.subscription_end "
+    "SELECT p.id "
     + "FROM payments p "
-    + "INNER JOIN centres c "
-    + "ON p.centre_code = c.centre_code "
     + "WHERE p.centre_code=?";
+
 
     PreparedStatement ps =
             con.prepareStatement(sql);
 
-    ps.setString(1, centreCode);
 
-    ResultSet rs = ps.executeQuery();
+    ps.setString(
+            1,
+            centreCode
+    );
+
+
+    ResultSet rs =
+            ps.executeQuery();
+
 
     if(!rs.next()){
 
@@ -1743,60 +1760,103 @@ public boolean updateSubscription(
 
     }
 
+
     int paymentId =
             rs.getInt("id");
 
-    Date subscriptionEnd =
-            rs.getDate("subscription_end");
+
 
 
 
     /*
     ==========================================
     2 - CALCULATE NEW END DATE
+
+    Start date comes from Servlet
+    End date calculated here
+
     ==========================================
     */
+/*
+==========================================
+2 - GET CURRENT END DATE
 
-    java.util.Calendar calendar =
-            java.util.Calendar.getInstance();
+EXTENDED:
+newStartDate = current subscription_end
 
-    calendar.setTime(subscriptionEnd);
+==========================================
+*/
 
-    calendar.add(
-            java.util.Calendar.MONTH,
-            durationMonths
-    );
 
-    Date newSubscriptionEnd =
-            new Date(
-                    calendar.getTimeInMillis()
-            );
+sql =
+
+"SELECT subscription_end "
++ "FROM centres "
++ "WHERE centre_code=?";
+
+
+ps = con.prepareStatement(sql);
+
+
+ps.setString(1,centreCode);
+rs = ps.executeQuery();
+if(!rs.next()){
+
+    con.rollback();
+
+    return false;
+
+}
+
+
+      Date newStartDate = rs.getDate("subscription_end");
+      java.util.Calendar calendar = java.util.Calendar.getInstance();
+      calendar.setTime(newStartDate);
+      calendar.add(java.util.Calendar.MONTH,durationMonths);
+      Date newEndDate =new Date(calendar.getTimeInMillis());
+
+
 
 
 
     /*
     ==========================================
     3 - UPDATE CENTRES
+
+    New subscription period
+
     ==========================================
     */
+
 
     sql =
 
     "UPDATE centres "
-    + "SET subscription_end=? "
+    + "SET subscription_start=?, "
+    + "subscription_end=? "
     + "WHERE centre_code=?";
+
 
     ps = con.prepareStatement(sql);
 
+
     ps.setDate(
             1,
-            newSubscriptionEnd
+            newStartDate
     );
 
-    ps.setString(
+
+    ps.setDate(
             2,
+            newEndDate
+    );
+
+
+    ps.setString(
+            3,
             centreCode
     );
+
 
     if(ps.executeUpdate()==0){
 
@@ -1808,24 +1868,41 @@ public boolean updateSubscription(
 
 
 
+
+
+
+
     /*
     ==========================================
     4 - GENERATE NEW INVOICE
+
+    EXTENDED = new payment record
+
     ==========================================
     */
 
+
     String newInvoiceCode =
+
             InvoiceCodeGenerator.generateCode(
                     paymentId
             );
 
 
 
+
+
+
+
     /*
     ==========================================
     5 - UPDATE PAYMENTS
+
+    Replace current invoice
+
     ==========================================
     */
+
 
     sql =
 
@@ -1833,17 +1910,21 @@ public boolean updateSubscription(
     + "SET code_facture=? "
     + "WHERE centre_code=?";
 
+
     ps = con.prepareStatement(sql);
+
 
     ps.setString(
             1,
             newInvoiceCode
     );
 
+
     ps.setString(
             2,
             centreCode
     );
+
 
     if(ps.executeUpdate()==0){
 
@@ -1855,41 +1936,75 @@ public boolean updateSubscription(
 
 
 
+
+
+
+
+
     /*
     ==========================================
-    6 - INSERT HISTORY
+    6 - INSERT HISTORY PAYMENT
+
+    New history row
+
     ==========================================
     */
+
 
     sql =
 
     "INSERT INTO history_payment "
-    + "(code_facture, centre_code, date_paiement, operation_type) "
-    + "VALUES (?, ?, ?, ?)";
+    + "(code_facture, centre_code, date_paiement, "
+    + "date_start, date_end, duration_months, operation_type) "
+    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
 
     ps = con.prepareStatement(sql);
+
+
 
     ps.setString(
             1,
             newInvoiceCode
     );
 
+
     ps.setString(
             2,
             centreCode
     );
 
+
     ps.setDate(
             3,
-            new Date(
-                    System.currentTimeMillis()
-            )
+            new Date(System.currentTimeMillis())
     );
 
-    ps.setString(
+
+    ps.setDate(
             4,
+            newStartDate
+    );
+
+
+    ps.setDate(
+            5,
+            newEndDate
+    );
+
+
+    ps.setInt(
+            6,
+            durationMonths
+    );
+
+
+    ps.setString(
+            7,
             "EXTENDED"
     );
+
+
 
     if(ps.executeUpdate()==0){
 
@@ -2995,6 +3110,39 @@ public List<Payment> getHistoryPayments(
 
 
     return payments;
+
+}
+
+
+
+/*
+======================================================
+GET INVOICE BY CODE
+
+Used for printing invoice
+
+Search one payment history record
+
+======================================================
+*/
+
+/*
+======================================================
+GET INVOICE BY CODE
+
+TEMPORARY DISABLED
+
+Printing flow disabled for now.
+Method kept because PaymentServlet depends on it.
+
+======================================================
+*/
+
+public Payment getInvoiceByCode(
+        String codeFacture
+){
+
+    return null;
 
 }
 

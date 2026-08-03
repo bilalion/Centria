@@ -1295,3 +1295,15 @@ function changePaymentPage(page){
     loadPayments(page);
 
 }
+
+
+function printInvoice(codeFacture){
+
+    window.open(
+        window.contextPath
+        + "/PaymentServlet?action=print&invoice="
+        + encodeURIComponent(codeFacture),
+        "_blank"
+    );
+
+}

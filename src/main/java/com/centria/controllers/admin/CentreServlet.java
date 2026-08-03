@@ -1056,10 +1056,12 @@ throws ServletException, IOException {
 
         boolean paymentCreated =
 
-                paymentDAO.createInitialPayment(
-                        centre.getCentreCode()
-                );
-
+             paymentDAO.createInitialPayment(
+        centre.getCentreCode(),
+        centre.getSubscriptionStart(),
+        centre.getSubscriptionEnd(),
+        months
+           );
 
 
 

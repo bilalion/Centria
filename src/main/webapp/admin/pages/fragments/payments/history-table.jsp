@@ -200,41 +200,47 @@ else{
 
 
 
-
 <!-- =========================
      OPERATION
 ========================= -->
 
 <td>
 
-
 <%
+
+String operationKey = "payments.normal";
+
 
 if(payment.getOperationType()!=null
         && !payment.getOperationType().isEmpty()){
 
-%>
+
+    if(payment.getOperationType().equals("EXTENDED")){
 
 
-<%=payment.getOperationType()%>
+        operationKey = "payments.extended";
 
 
-<%
-
-}
-else{
-
-%>
+    }
+    else if(payment.getOperationType().equals("UPGRADE")){
 
 
-INITIAL
+        operationKey = "payments.upgrade";
 
 
-<%
+    }
+
 
 }
 
+
 %>
+
+
+<%=LanguageManager.get(
+        operationKey,
+        session
+)%>
 
 
 </td>
@@ -255,21 +261,20 @@ INITIAL
 
 type="button"
 
-class="btn-view"
+class="btn-print"
 
-onclick="openPaymentView(
+onclick="printInvoice(
         '<%=payment.getCodeFacture()%>'
 )"
 
-
 title="<%=LanguageManager.get(
-        "payments.view",
+        "payments.print",
         session
 )%>"
 
 >
 
-👁
+🖨
 
 </button>
 

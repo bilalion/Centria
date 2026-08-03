@@ -47,10 +47,12 @@ public class PaymentServlet extends HttpServlet {
                 listPayments(request, response);
                 break;
 
-            case "view":
+                
+                case "print":
 
-                viewPayment(request, response);
-                break;
+    printInvoice(request,response);
+
+break;
 
             default:
 
@@ -510,19 +512,33 @@ else{
 
 }
 
-    /*
-    ==============================================
-    VIEW PAYMENT
-    ==============================================
-    */
 
-    private void viewPayment(
-            HttpServletRequest request,
-            HttpServletResponse response
-    )
-    throws ServletException, IOException {
 
-    }
+
+
+
+/*
+======================================================
+PRINT INVOICE
+
+TAB3
+Print invoice by code_facture
+
+======================================================
+*/
+
+private void printInvoice(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
+
+
+    String invoice =
+            request.getParameter("invoice");
+
+
+}
 
     /*
     ==============================================
@@ -785,6 +801,8 @@ throws ServletException, IOException{
         int durationMonths =
                 Integer.parseInt(duration);
 
+        
+        
         boolean success =
                 paymentDAO.updateSubscription(
                         centreCode,
@@ -792,6 +810,8 @@ throws ServletException, IOException{
                         operation,
                         durationMonths
                 );
+        
+        
 
         if(success){
 
