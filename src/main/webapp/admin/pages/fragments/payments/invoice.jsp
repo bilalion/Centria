@@ -1,6 +1,12 @@
+<%@page import="java.lang.String"%>
 <%@page import="com.centria.language.LanguageManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.centria.models.Payment"%>
+<%
+java.util.Calendar calendar = java.util.Calendar.getInstance();
+
+int currentYear = calendar.get(java.util.Calendar.YEAR);
+%>
 
 <%
 Payment payment = (Payment) request.getAttribute("payment");
@@ -32,77 +38,112 @@ String dir = lang.equals("ar") ? "rtl" : "ltr";
     box-sizing:border-box;
 }
 
+
 body{
 
-    font-family:Arial,sans-serif;
-    background:#eceff3;
+    font-family:Arial,"Segoe UI",sans-serif;
+
+    background:#eef2f7;
+
     padding:40px;
 
 }
 
+
+/* ==========================
+   INVOICE CONTAINER
+========================== */
+
+
 .invoice{
 
     position:relative;
+
     overflow:hidden;
 
     width:850px;
+
     margin:auto;
 
-    background:#fff;
+    background:#ffffff;
 
-    border-radius:10px;
+    border-radius:16px;
 
-    box-shadow:0 4px 20px rgba(0,0,0,.15);
+    box-shadow:
+    0 10px 30px rgba(15,35,70,.15);
 
-    padding:60px 40px 40px;
+    padding:60px 45px 40px;
 
 }
+
+
+/* ==========================
+   STATUS RIBBON
+========================== */
+
 
 .invoice-status{
 
     position:absolute;
 
-    top:18px;
+    top:20px;
+
     right:-60px;
 
-    width:210px;
+    width:220px;
 
-    padding:10px 0;
+    padding:11px 0;
 
-    background:#2e7d32;
 
-    color:#fff;
+    background:#16a34a;
+
+    color:white;
+
 
     text-align:center;
 
     font-size:18px;
 
-    font-weight:bold;
+    font-weight:700;
 
     letter-spacing:2px;
 
     text-transform:uppercase;
 
+
     transform:rotate(45deg);
 
-    box-shadow:0 3px 10px rgba(0,0,0,.25);
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.25);
+
 
     z-index:10;
 
 }
+
 
 /* RTL Ribbon */
 
 html[dir="rtl"] .invoice-status{
 
     right:auto;
+
     left:-60px;
 
     transform:rotate(-45deg);
 
 }
 
+
+
+/* ==========================
+   HEADER
+========================== */
+
+
 .header{
+
 
     display:flex;
 
@@ -110,187 +151,408 @@ html[dir="rtl"] .invoice-status{
 
     justify-content:space-between;
 
-    border-bottom:2px solid #1976d2;
 
-    padding-bottom:20px;
+    padding-bottom:25px;
 
     margin-bottom:35px;
 
+
+    border-bottom:
+
+    3px solid #2563eb;
+
+
 }
+
+
 
 .logo{
 
-    width:90px;
-    height:90px;
+
+    width:105px;
+
+    height:105px;
+
 
     object-fit:contain;
+
     flex-shrink:0;
+
 
 }
 
+
+
 .title{
+
 
     flex:1;
 
     text-align:center;
 
+
 }
+
+
 
 .title h1{
 
-    color:#1976d2;
 
-    font-size:34px;
+    color:#1e40af;
 
-    margin-bottom:5px;
+
+    font-size:40px;
+
+    font-weight:800;
+
+
+    letter-spacing:1px;
+
+
+    margin-bottom:8px;
+
 
 }
+
+
 
 .title p{
 
-    color:#777;
 
-    font-size:15px;
+    color:#64748b;
 
-}
-
-.section-title{
-
-    font-size:18px;
-
-    color:#1976d2;
-
-    margin-top:20px;
-
-    margin-bottom:15px;
-
-    border-left:4px solid #1976d2;
-
-    padding-left:10px;
-
-    text-align:left;
-
-}
-
-/* RTL Section */
-
-html[dir="rtl"] .section-title{
-
-    border-left:none;
-    border-right:4px solid #1976d2;
-
-    padding-left:0;
-    padding-right:10px;
-
-    text-align:right;
-
-}
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-td{
-
-    padding:12px;
-
-    border-bottom:1px solid #e5e5e5;
-
-    text-align:left;
-
-}
-
-td:first-child{
-
-    width:240px;
-
-    font-weight:bold;
-
-    background:#fafafa;
-
-}
-
-/* RTL Table */
-
-html[dir="rtl"] td{
-
-    text-align:right;
-
-}
-
-.footer{
-
-    margin-top:40px;
-
-    text-align:center;
-
-    color:#666;
-
-    font-size:14px;
-
-}
-
-.print-btn{
-
-    display:block;
-
-    margin:35px auto 0;
-
-    padding:12px 35px;
-
-    border:none;
-
-    border-radius:6px;
-
-    background:#1976d2;
-
-    color:#fff;
 
     font-size:16px;
 
-    cursor:pointer;
+    font-weight:500;
+
 
 }
+
+
+
+/* ==========================
+   SECTIONS
+========================== */
+
+
+.section-title{
+
+
+    font-size:19px;
+
+
+    color:#1e40af;
+
+
+    margin-top:25px;
+
+    margin-bottom:15px;
+
+
+    border-left:
+
+    5px solid #2563eb;
+
+
+    padding-left:12px;
+
+
+    font-weight:700;
+
+
+    text-align:left;
+
+
+}
+
+
+
+/* RTL */
+
+html[dir="rtl"] .section-title{
+
+
+    border-left:none;
+
+    border-right:
+
+    5px solid #2563eb;
+
+
+    padding-left:0;
+
+    padding-right:12px;
+
+
+    text-align:right;
+
+
+}
+
+
+
+/* ==========================
+   TABLE
+========================== */
+
+
+table{
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
+    overflow:hidden;
+
+
+    border-radius:8px;
+
+
+}
+
+
+
+td{
+
+
+    padding:13px;
+
+
+    border-bottom:
+
+    1px solid #e2e8f0;
+
+
+    text-align:left;
+
+
+    color:#334155;
+
+
+}
+
+
+
+td:first-child{
+
+
+    width:240px;
+
+
+    font-weight:700;
+
+
+    color:#1e293b;
+
+
+    background:#f8fafc;
+
+
+}
+
+
+
+/* RTL TABLE */
+
+html[dir="rtl"] td{
+
+
+    text-align:right;
+
+
+}
+
+
+
+
+/* ==========================
+   FOOTER
+========================== */
+
+
+.footer{
+
+
+    margin-top:45px;
+
+
+    padding-top:20px;
+
+
+    border-top:
+
+    2px solid #e2e8f0;
+
+
+    text-align:center;
+
+
+    color:#64748b;
+
+
+    font-size:14px;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+.footer strong{
+
+
+    display:block;
+
+
+    color:#2563eb;
+
+
+    font-size:17px;
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+.footer hr{
+
+
+    width:60%;
+
+
+    margin:15px auto;
+
+
+    border:none;
+
+
+    border-top:
+
+    1px solid #cbd5e1;
+
+
+}
+
+
+
+/* ==========================
+   PRINT BUTTON
+========================== */
+
+
+.print-btn{
+
+
+    display:block;
+
+
+    margin:35px auto 0;
+
+
+    padding:13px 40px;
+
+
+    border:none;
+
+
+    border-radius:8px;
+
+
+    background:#2563eb;
+
+
+    color:white;
+
+
+    font-size:16px;
+
+
+    font-weight:600;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
 
 .print-btn:hover{
 
-    background:#1565c0;
+
+    background:#1d4ed8;
+
+
+    transform:translateY(-2px);
+
 
 }
+
+
+
+/* ==========================
+   PRINT MODE
+========================== */
+
 
 @media print{
 
+
     body{
 
-        background:#fff;
+
+        background:white;
 
         padding:0;
 
+
     }
+
+
 
     .invoice{
 
+
         width:100%;
+
 
         box-shadow:none;
 
+
         border:none;
 
-        padding:50px 25px 25px;
+
+        padding:45px 25px 25px;
+
 
     }
+
+
 
     .print-btn{
 
+
         display:none;
+
 
     }
 
+
 }
+
+
 
 </style>
 
@@ -366,35 +628,50 @@ if(payment!=null){
 <%
 String operation = payment.getOperationType();
 
-String operationText = operation;
+String operationText = "-";
 
-if("EXTENDED".equalsIgnoreCase(operation)){
 
-    operationText =
-    LanguageManager.get(
-        "payments.extended",
-        session
-    );
+if(operation != null){
+
+    if("EXTENDED".equalsIgnoreCase(operation)){
+
+        operationText =
+        LanguageManager.get(
+            "payments.extended",
+            session
+        );
+
+    }
+    else if("UPGRADE".equalsIgnoreCase(operation)){
+
+        operationText =
+        LanguageManager.get(
+            "payments.upgrade",
+            session
+        );
+
+    }
+    else if("NEW".equalsIgnoreCase(operation)){
+
+        operationText =
+        LanguageManager.get(
+            "payments.operation.new",
+            session
+        );
+
+    }
+    else if("INITIAL".equalsIgnoreCase(operation)){
+
+        operationText =
+        LanguageManager.get(
+            "payments.operation.initial",
+            session
+        );
+
+    }
 
 }
-else if("UPGRADE".equalsIgnoreCase(operation)){
 
-    operationText =
-    LanguageManager.get(
-        "payments.upgrade",
-        session
-    );
-
-}
-else if("NEW".equalsIgnoreCase(operation)){
-
-    operationText =
-    LanguageManager.get(
-        "payments.operation.new",
-        session
-    );
-
-}
 
 %>
 
@@ -489,11 +766,27 @@ else if("NEW".equalsIgnoreCase(operation)){
 
 </p>
 
+
 <p>
 
 <%=LanguageManager.get("invoice.footer", session)%>
 
 </p>
+
+
+<hr>
+
+
+<p>
+
+CENTRIA © <%=currentYear%> |
+
++212 600 000 000 |
+
+contact@centria.com
+
+</p>
+
 
 </div>
 
