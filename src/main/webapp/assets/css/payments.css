@@ -480,6 +480,7 @@ height:auto;
 
 /* Centre code */
 
+
 .code-text{
 
     display:flex;
@@ -491,6 +492,7 @@ height:auto;
     width:100%;
 
     direction:ltr;
+    unicode-bidi:isolate;
 
     white-space:nowrap;
 
@@ -498,8 +500,9 @@ height:auto;
 
     text-overflow:ellipsis;
 
-}
+    font-family:Consolas, Monaco, monospace;
 
+}
 
 
 /* Invoice */
@@ -515,6 +518,7 @@ height:auto;
     width:100%;
 
     direction:ltr;
+    unicode-bidi:isolate;
 
     white-space:nowrap;
 
@@ -522,9 +526,9 @@ height:auto;
 
     text-overflow:ellipsis;
 
+    font-family:Consolas, Monaco, monospace;
+
 }
-
-
 
 /* Centre name */
 
@@ -547,7 +551,6 @@ height:auto;
     line-height:1.5;
 
 }
-
 
 
 /* Dates */

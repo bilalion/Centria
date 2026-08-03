@@ -121,7 +121,7 @@ if(payments != null && !payments.isEmpty()){
 
 <td>
 
-<span class="cell-text"
+<span class="code-text"
 title="<%=payment.getCentreCode()%>">
 
 <%=payment.getCentreCode()%>
@@ -185,7 +185,7 @@ else{
 
 <td>
 
-<span class="cell-text"
+<span class="invoice-text"
 title="<%=payment.getCodeFacture()%>">
 
 <%=payment.getCodeFacture()%>
