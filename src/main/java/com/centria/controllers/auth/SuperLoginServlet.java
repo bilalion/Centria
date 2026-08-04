@@ -234,28 +234,21 @@ public class SuperLoginServlet extends HttpServlet {
 
         }
 
-        catch(Exception e){
+    catch(Exception e){
 
 
-            e.printStackTrace();
+    e.printStackTrace();
 
 
+    response.sendRedirect(
 
-            /*
-             =====================================
-             خطأ في قاعدة البيانات
-             =====================================
-             */
+            request.getContextPath()
+            + "/admin/superlogin.jsp?error=system_error"
 
-            response.sendRedirect(
-
-                    request.getContextPath()
-                    + "/admin/superlogin.jsp?error=db_error"
-
-            );
+    );
 
 
-        }
+}
 
         finally{
 

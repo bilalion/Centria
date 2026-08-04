@@ -1,69 +1,91 @@
 /*
 ==========================================================
-File        : dashboard.css
+File        : app-layout.css
 Project     : CENTRIA
-Module      : Dashboard Layout
+Layer       : Layout
+Component   : Application Shell
 
 Description :
-Main application layout foundation.
+Main application structure.
 
-Contains:
-- Application wrapper
-- Content area sizing
-- Sidebar relationship
-- RTL / LTR layout
-- Responsive behavior
+Responsibilities :
+- Application shell
+- Top sections layout
+- Body layout
+- Content container
+- Footer support
+- RTL / LTR Support
 
-Does not contain:
-- Page styles
-- Tables
-- Cards
-- Components
+Dependencies :
+core.css
 
+Version :
+2.1
+
+Status :
+Development
 ==========================================================
 */
 
 
+
+
+
 /* ======================================================
-   01 - APPLICATION LAYOUT
-   ====================================================== */
+   SECTION 01 - APPLICATION SHELL
+====================================================== */
 
 
-.app-layout{
+.app-shell{
+
 
     width:100%;
 
-    min-height:100vh;
-
-    display:flex;
-
-    overflow:hidden;
-
-}
-
-
-
-
-
-
-/* ======================================================
-   02 - MAIN CONTENT AREA
-   ====================================================== */
-
-
-.main-content{
-
-    flex:1;
-
-    min-width:0;
 
     height:100vh;
 
-    padding:20px;
+
+    min-height:100vh;
+
 
     display:flex;
 
+
     flex-direction:column;
+
+
+    background:var(--background);
+
+
+    overflow:hidden;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 02 - APPLICATION BODY
+   Sidebar + Content
+====================================================== */
+
+
+.app-body{
+
+    display:flex;
+
+    flex-direction:row;
+
+    flex:1;
+
+    width:100%;
+
+    min-height:0;
 
     overflow:hidden;
 
@@ -74,26 +96,41 @@ Does not contain:
 
 
 
+
 /* ======================================================
-   03 - PAGE CONTENT CONTAINER
-   ====================================================== */
+   SECTION 03 - CONTENT AREA
+====================================================== */
 
 
 #content-area,
 .content-area{
 
-    width:100%;
 
     flex:1;
 
+
+    width:100%;
+
+
     min-width:0;
+
 
     min-height:0;
 
+
     overflow-y:auto;
+
 
     overflow-x:hidden;
 
+
+    padding:var(--space-lg);
+
+
+    background:var(--background);
+
+
+
 }
 
 
@@ -101,34 +138,47 @@ Does not contain:
 
 
 
+
+
 /* ======================================================
-   04 - RTL FOUNDATION
-   ====================================================== */
+   SECTION 04 - RTL SUPPORT
+====================================================== */
 
 
-html[dir="rtl"] .main-content{
+html[dir="rtl"] .app-shell{
+
 
     direction:rtl;
 
-    text-align:right;
+
 
 }
 
 
 
-html[dir="rtl"] .sidebar{
 
-    order:2;
+html[dir="rtl"] .app-body{
+
+
+    direction:rtl;
+
+
+
+}
+
+
+
+
+html[dir="rtl"] .content-area{
+
+
+    direction:rtl;
+
+
 
 }
 
 
-
-html[dir="rtl"] .main-content{
-
-    order:1;
-
-}
 
 
 
@@ -136,31 +186,40 @@ html[dir="rtl"] .main-content{
 
 
 /* ======================================================
-   05 - LTR FOUNDATION
-   ====================================================== */
+   SECTION 05 - LTR SUPPORT
+====================================================== */
 
 
-html[dir="ltr"] .sidebar{
+html[dir="ltr"] .app-shell{
 
-    order:1;
-
-}
-
-
-
-html[dir="ltr"] .main-content{
-
-    order:2;
-
-}
-
-
-
-html[dir="ltr"] .main-content{
 
     direction:ltr;
 
-    text-align:left;
+
+
+}
+
+
+
+
+html[dir="ltr"] .app-body{
+
+
+    direction:ltr;
+
+
+
+}
+
+
+
+
+html[dir="ltr"] .content-area{
+
+
+    direction:ltr;
+
+
 
 }
 
@@ -169,107 +228,78 @@ html[dir="ltr"] .main-content{
 
 
 
+
+
 /* ======================================================
-   06 - TABLET RESPONSIVE
-   ====================================================== */
+   SECTION 06 - SCROLL MANAGEMENT
+====================================================== */
+
+
+body{
+
+
+    overflow:hidden;
+
+
+
+}
+
+
+
+
+
+
+#content-area::-webkit-scrollbar,
+.content-area::-webkit-scrollbar{
+
+
+    width:8px;
+
+
+
+}
+
+
+
+#content-area::-webkit-scrollbar-thumb,
+.content-area::-webkit-scrollbar-thumb{
+
+
+    background:#cbd5e1;
+
+
+    border-radius:20px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 07 - TABLET
+====================================================== */
 
 
 @media(max-width:1100px){
-
-
-    .main-content{
-
-        padding:25px;
-
-    }
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   07 - SMALL TABLET
-   ====================================================== */
-
-
-@media(max-width:900px){
-
-
-    .main-content{
-
-        padding:20px;
-
-    }
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   08 - MOBILE LAYOUT
-   ====================================================== */
-
-
-@media(max-width:700px){
-
-
-    .app-layout{
-
-        width:100%;
-
-        height:100vh;
-
-        display:flex;
-
-        flex-direction:column;
-
-        overflow:hidden;
-
-    }
-
-
-
-
-    .main-content{
-
-        width:100%;
-
-        height:calc(100vh - 72px);
-
-        min-height:0;
-
-        padding:20px;
-
-        padding-bottom:90px;
-
-        overflow:hidden;
-
-    }
 
 
 
     #content-area,
     .content-area{
 
-        width:100%;
 
-        min-width:0;
+        padding:var(--space-md);
 
-        min-height:0;
 
-        overflow-y:auto;
-
-        overflow-x:hidden;
 
     }
+
 
 
 }
@@ -279,21 +309,39 @@ html[dir="ltr"] .main-content{
 
 
 
+
+
 /* ======================================================
-   09 - VERY SMALL DEVICES
-   ====================================================== */
+   SECTION 08 - MOBILE
+====================================================== */
 
 
-@media(max-width:480px){
+@media(max-width:700px){
 
 
-    .main-content{
 
-        padding:15px;
+    .app-body{
 
-        padding-bottom:90px;
+
+        flex-direction:column;
+
+
 
     }
+
+
+
+
+    #content-area,
+    .content-area{
+
+
+        padding:var(--space-sm);
+
+
+
+    }
+
 
 
 }
@@ -303,16 +351,94 @@ html[dir="ltr"] .main-content{
 
 
 
+
+
 /* ======================================================
-   10 - WIDE CONTENT SUPPORT
-   ====================================================== */
+   SECTION 09 - ACCESSIBILITY
+====================================================== */
 
 
-.wide-content{
+*{
+
+
+    scrollbar-width:thin;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   END OF FILE
+======================================================
+*//*
+==========================================================
+File        : app-layout.css
+Project     : CENTRIA
+Layer       : Layout
+Component   : Application Shell
+
+Description :
+Main application structure.
+
+Responsibilities :
+- Application shell
+- Top sections layout
+- Body layout
+- Content container
+- Footer support
+- RTL / LTR Support
+
+Dependencies :
+core.css
+
+Version :
+2.1
+
+Status :
+Development
+==========================================================
+*/
+
+
+
+
+
+/* ======================================================
+   SECTION 01 - APPLICATION SHELL
+====================================================== */
+
+
+.app-shell{
+
 
     width:100%;
 
-    min-width:0;
+
+    height:100vh;
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    background:var(--background);
+
+
+    overflow:hidden;
+
+
 
 }
 
@@ -321,16 +447,69 @@ html[dir="ltr"] .main-content{
 
 
 
+
 /* ======================================================
-   11 - HIDE HORIZONTAL PAGE SCROLL
-   ====================================================== */
+   SECTION 02 - APPLICATION BODY
+   Sidebar + Content
+====================================================== */
 
 
-html,
-body{
+.app-body{
+
+    display:flex;
+
+    flex-direction:row;
+
+    flex:1;
+
+    width:100%;
+
+    min-height:0;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 03 - CONTENT AREA
+====================================================== */
+
+
+#content-area,
+.content-area{
+
+
+    flex:1;
+
+
+    width:100%;
+
+
+    min-width:0;
+
+
+    min-height:0;
+
+
+    overflow-y:auto;
+
 
     overflow-x:hidden;
 
+
+    padding:var(--space-lg);
+
+
+    background:var(--background);
+
+
+
 }
 
 
@@ -338,7 +517,243 @@ body{
 
 
 
+
+
 /* ======================================================
-   END dashboard.css
-==========================================================
+   SECTION 04 - RTL SUPPORT
+====================================================== */
+
+
+html[dir="rtl"] .app-shell{
+
+
+    direction:rtl;
+
+
+
+}
+
+
+
+
+html[dir="rtl"] .app-body{
+
+
+    direction:rtl;
+
+
+
+}
+
+
+
+
+html[dir="rtl"] .content-area{
+
+
+    direction:rtl;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 05 - LTR SUPPORT
+====================================================== */
+
+
+html[dir="ltr"] .app-shell{
+
+
+    direction:ltr;
+
+
+
+}
+
+
+
+
+html[dir="ltr"] .app-body{
+
+
+    direction:ltr;
+
+
+
+}
+
+
+
+
+html[dir="ltr"] .content-area{
+
+
+    direction:ltr;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 06 - SCROLL MANAGEMENT
+====================================================== */
+
+
+body{
+
+
+    overflow:hidden;
+
+
+
+}
+
+
+
+
+
+
+#content-area::-webkit-scrollbar,
+.content-area::-webkit-scrollbar{
+
+
+    width:8px;
+
+
+
+}
+
+
+
+#content-area::-webkit-scrollbar-thumb,
+.content-area::-webkit-scrollbar-thumb{
+
+
+    background:#cbd5e1;
+
+
+    border-radius:20px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 07 - TABLET
+====================================================== */
+
+
+@media(max-width:1100px){
+
+
+
+    #content-area,
+    .content-area{
+
+
+        padding:var(--space-md);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 08 - MOBILE
+====================================================== */
+
+
+@media(max-width:700px){
+
+
+
+    .app-body{
+
+
+        flex-direction:column;
+
+
+
+    }
+
+
+
+
+    #content-area,
+    .content-area{
+
+
+        padding:var(--space-sm);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 09 - ACCESSIBILITY
+====================================================== */
+
+
+*{
+
+
+    scrollbar-width:thin;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   END OF FILE
+======================================================
 */

@@ -1,0 +1,276 @@
+/*
+==========================================================
+File        : platform-banner.css
+Project     : CENTRIA
+Module      : Platform Banner
+
+Description :
+Top identity banner for Centria Platform.
+
+Responsibilities:
+- Platform identity
+- Version display
+- RTL / LTR support
+- Responsive behavior
+
+Version :
+2.0
+
+Status :
+Development
+
+==========================================================
+*/
+
+
+
+
+
+/* ======================================================
+   SECTION 01 - PLATFORM BANNER
+====================================================== */
+
+
+.platform-banner{
+
+
+    width:100%;
+
+
+    height:36px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    padding:0 20px;
+
+
+    background:
+
+
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+
+    color:#ffffff;
+
+
+    border-radius:0;
+
+
+    box-shadow:
+
+
+        0 2px 8px rgba(37,99,235,.18);
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 02 - PLATFORM BRAND
+====================================================== */
+
+
+.platform-brand{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+
+}
+
+
+
+
+
+.platform-title{
+
+
+    font-size:.9rem;
+
+
+    font-weight:700;
+
+
+    letter-spacing:.5px;
+
+
+    color:#ffffff;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 03 - PLATFORM INFORMATION
+====================================================== */
+
+
+.platform-information{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 04 - PLATFORM VERSION
+====================================================== */
+
+
+.platform-version{
+
+
+    font-size:.75rem;
+
+
+    font-weight:600;
+
+
+    color:rgba(255,255,255,.85);
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 05 - RTL SUPPORT
+====================================================== */
+
+
+html[dir="rtl"] .platform-banner{
+
+
+    direction:rtl;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 06 - LTR SUPPORT
+====================================================== */
+
+
+html[dir="ltr"] .platform-banner{
+
+
+    direction:ltr;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 07 - RESPONSIVE
+====================================================== */
+
+
+@media(max-width:700px){
+
+
+
+    .platform-banner{
+
+
+        height:34px;
+
+
+        padding:0 12px;
+
+
+
+    }
+
+
+
+
+    .platform-title{
+
+
+        font-size:.8rem;
+
+
+
+    }
+
+
+
+
+    .platform-version{
+
+
+        font-size:.7rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+/* ======================================================
+   END OF FILE
+======================================================
+*/

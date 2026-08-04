@@ -17,6 +17,17 @@
 */
 
 
+/*
+==========================================================
+ CENTRIA
+ Dashboard JavaScript
+
+ AJAX CONTENT LOADER
+ MODULE INITIALIZATION
+==========================================================
+*/
+
+
 function loadContent(
     page,
     element
@@ -34,9 +45,13 @@ function loadContent(
     if(element){
 
 
+        /*
+        Remove active from all sidebar links
+        */
+
         document
         .querySelectorAll(
-            ".menu-link"
+            ".sidebar-link"
         )
         .forEach(
             function(link){
@@ -49,70 +64,99 @@ function loadContent(
         );
 
 
+
+        /*
+        Add active to clicked link
+        */
+
         element.classList.add(
             "active"
         );
-/*
-==================================================
-UPDATE BROWSER URL
-==================================================
-*/
-
-let sectionName = page;
-
-
-/*
-CentreServlet
-*/
-
-if(page.startsWith("CentreServlet")){
-
-    sectionName = "centres";
-
-}
-
-
-/*
-PaymentServlet
-*/
-
-if(page.startsWith("PaymentServlet")){
-
-    sectionName = "payments";
-
-}
 
 
 
-/*
-Normal JSP pages
-*/
 
-if(
-    page.includes("/")
-){
 
-    sectionName =
-    page
-    .replace(".jsp","")
-    .split("/")
-    .pop();
+        /*
+        ==============================================
+        UPDATE BROWSER URL
+        ==============================================
+        */
 
-}
+
+        let sectionName = page;
 
 
 
-history.pushState(
-    null,
-    "",
-    window.contextPath
-    +
-    "/admin/dashboard.jsp?section="
-    +
-    sectionName
-);
+        /*
+        CentreServlet
+        */
+
+        if(
+            page.startsWith(
+                "CentreServlet"
+            )
+        ){
+
+            sectionName = "centres";
+
+        }
+
+
+
+
+        /*
+        PaymentServlet
+        */
+
+        if(
+            page.startsWith(
+                "PaymentServlet"
+            )
+        ){
+
+            sectionName = "payments";
+
+        }
+
+
+
+
+
+        /*
+        Normal JSP pages
+        */
+
+        if(
+            page.includes("/")
+        ){
+
+            sectionName =
+
+            page
+            .replace(".jsp","")
+            .split("/")
+            .pop();
+
+        }
+
+
+
+
+        history.pushState(
+            null,
+            "",
+            window.contextPath
+            +
+            "/admin/dashboard.jsp?section="
+            +
+            sectionName
+        );
+
 
     }
+
+
 
 
 
@@ -143,10 +187,8 @@ history.pushState(
         url =
 
         window.contextPath
-
         +
         "/"
-
         +
         page;
 
@@ -159,10 +201,8 @@ history.pushState(
         url =
 
         window.contextPath
-
         +
         "/admin/pages/"
-
         +
         page;
 
@@ -186,6 +226,7 @@ history.pushState(
 
 
 
+
     /*
     ==============================================
     AJAX LOAD
@@ -200,7 +241,9 @@ history.pushState(
         response => {
 
 
-            if(!response.ok){
+            if(
+                !response.ok
+            ){
 
                 throw new Error(
                     response.status
@@ -259,11 +302,9 @@ history.pushState(
             */
 
             if(
-
                 typeof initCentresPage
                 ===
                 "function"
-
             ){
 
 
@@ -279,7 +320,9 @@ history.pushState(
 
                 }
 
+
             }
+
 
 
 
@@ -292,11 +335,9 @@ history.pushState(
             */
 
             if(
-
                 typeof initPaymentsPage
                 ===
                 "function"
-
             ){
 
 
@@ -318,11 +359,8 @@ history.pushState(
 
 
 
-
-
         }
     )
-
 
 
 
@@ -342,3 +380,153 @@ history.pushState(
 
 
 }
+
+
+/*
+==========================================================
+ SIDEBAR TOGGLE
+==========================================================
+*/
+
+
+function toggleSidebar(){
+
+
+    let sidebar =
+
+    document.querySelector(
+        ".sidebar"
+    );
+
+
+
+    let appBody =
+
+    document.querySelector(
+        ".app-body"
+    );
+
+
+
+    if(!sidebar){
+
+        return;
+
+    }
+
+
+
+
+
+    sidebar.classList.toggle(
+        "collapsed"
+    );
+
+
+
+
+
+    if(appBody){
+
+
+        appBody.classList.toggle(
+            "sidebar-collapsed"
+        );
+
+
+    }
+
+
+
+
+
+    /*
+    Save user preference
+    */
+
+
+    let state =
+
+    sidebar.classList.contains(
+        "collapsed"
+    )
+    ?
+    "collapsed"
+    :
+    "expanded";
+
+
+
+    localStorage.setItem(
+        "centria-sidebar",
+        state
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+/*
+==========================================================
+ RESTORE SIDEBAR STATE
+==========================================================
+*/
+
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+
+    let sidebar =
+
+    document.querySelector(
+        ".sidebar"
+    );
+
+
+
+    if(!sidebar){
+
+        return;
+
+    }
+
+
+
+
+
+    let state =
+
+    localStorage.getItem(
+        "centria-sidebar"
+    );
+
+
+
+
+
+    if(
+        state === "collapsed"
+    ){
+
+
+        sidebar.classList.add(
+            "collapsed"
+        );
+
+
+
+    }
+
+
+
+});

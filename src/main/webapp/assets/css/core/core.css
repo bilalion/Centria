@@ -1,139 +1,50 @@
 /*
 ==========================================================
-File        : global.css
+File        : core.css
 Project     : CENTRIA
-Module      : Global Foundation
+Layer       : Core
+Module      : Design System
 
-Purpose:
-Global CSS only.
+Description :
+Global design foundation for the Centria Platform.
 
-Contains:
-- Variables
-- Reset
+Responsibilities :
+- CSS Reset
+- Design Tokens
 - Typography
-- Base elements
-- RTL/LTR foundation
+- Global Elements
+- Utilities
+- Accessibility
 
-Does NOT contain:
-- Sidebar layout
-- Header styles
-- Tables
-- Pages
-- Modules
+Dependencies :
+None
+
+Used By :
+- layout/
+- components/
+- patterns/
+- pages/
+- standalone/
+
+Author :
+CHENTOUF Bilal
+
+Version :
+1.0
+
+Status :
+Development
 
 ==========================================================
 */
 
 
-/* ======================================================
-   01 - DESIGN TOKENS
-   ====================================================== */
-
-
-:root{
-
-
-    /* Colors */
-
-    --primary:#2563eb;
-
-    --primary-dark:#1d4ed8;
-
-
-    --success:#059669;
-
-    --warning:#f59e0b;
-
-    --danger:#dc2626;
-
-    --purple:#7c3aed;
-
-
-
-    --white:#ffffff;
-
-    --background:#f8fafc;
-
-    --surface:#ffffff;
-
-
-
-    --title:#0f172a;
-
-    --text:#475569;
-
-    --muted:#94a3b8;
-
-
-
-    --border:#e2e8f0;
-
-
-
-    /* Sidebar */
-
-    --sidebar-start:#1e293b;
-
-    --sidebar-end:#0f172a;
-
-
-
-    /* Radius */
-
-    --radius-sm:10px;
-
-    --radius:14px;
-
-    --radius-lg:18px;
-
-    --radius-xl:24px;
-
-
-
-    /* Shadows */
-
-    --shadow-sm:
-    0 4px 10px rgba(15,23,42,.06);
-
-
-
-    --shadow:
-    0 10px 25px rgba(15,23,42,.08);
-
-
-
-    --shadow-lg:
-    0 20px 45px rgba(15,23,42,.12);
-
-
-
-    /* Animation */
-
-    --transition:.25s ease;
-
-
-
-    /* Layout variable only */
-
-    --sidebar-width:290px;
-
-
-}
-
-
-
-
-
 
 /* ======================================================
-   02 - GLOBAL RESET
-   ====================================================== */
+   SECTION 01 - CSS RESET
+====================================================== */
 
-
-*,
-*::before,
-*::after{
-
+*{
 
     margin:0;
 
@@ -141,117 +52,180 @@ Does NOT contain:
 
     box-sizing:border-box;
 
-
 }
 
-
-
-
-
-
-/* ======================================================
-   03 - HTML FOUNDATION
-   ====================================================== */
 
 
 html{
 
-
-    width:100%;
-
-    min-height:100%;
-
     scroll-behavior:smooth;
-
 
 }
 
-
-
-
-
-
-/* ======================================================
-   04 - BODY FOUNDATION
-   ====================================================== */
 
 
 body{
 
-
-    width:100%;
-
     min-height:100vh;
 
-
     font-family:
-    "Segoe UI",
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
 
+    background:#f5f7fb;
 
-    background:var(--background);
+    color:#1f2937;
 
-    color:var(--text);
-
-
-    line-height:1.6;
-
+    line-height:1.5;
 
 }
-
-
 
 
 
 
 /* ======================================================
-   05 - DIRECTION FOUNDATION
-   ====================================================== */
+   SECTION 02 - DESIGN TOKENS
+====================================================== */
+
+:root{
 
 
-html[dir="rtl"]{
+    /* =====================================
+       Brand Colors
+    ===================================== */
+
+    --primary:#2563eb;
+
+    --primary-dark:#1d4ed8;
+
+    --primary-light:#dbeafe;
 
 
-    direction:rtl;
+    /* =====================================
+       Status Colors
+    ===================================== */
 
+    --success:#16a34a;
+
+    --warning:#f59e0b;
+
+    --danger:#dc2626;
+
+    --info:#0891b2;
+
+
+    /* =====================================
+       Neutral Colors
+    ===================================== */
+
+    --white:#ffffff;
+
+    --black:#000000;
+
+    --text:#1f2937;
+
+    --text-light:#6b7280;
+
+    --border:#e5e7eb;
+
+    --background:#f5f7fb;
+
+
+    /* =====================================
+       Sidebar
+    ===================================== */
+
+    --sidebar-bg:#1e293b;
+
+    --sidebar-hover:#334155;
+
+
+    /* =====================================
+       Radius
+    ===================================== */
+
+    --radius-sm:8px;
+
+    --radius-md:14px;
+
+    --radius-lg:20px;
+
+    --radius-xl:28px;
+
+
+    /* =====================================
+       Shadows
+    ===================================== */
+
+    --shadow-sm:
+        0 2px 8px rgba(0,0,0,.05);
+
+    --shadow-md:
+        0 8px 24px rgba(0,0,0,.08);
+
+    --shadow-lg:
+        0 12px 32px rgba(0,0,0,.12);
+
+
+    /* =====================================
+       Spacing
+    ===================================== */
+
+    --space-xs:5px;
+
+    --space-sm:10px;
+
+    --space-md:20px;
+
+    --space-lg:30px;
+
+    --space-xl:40px;
+
+
+    /* =====================================
+       Transition
+    ===================================== */
+
+    --transition:
+        .25s ease;
 
 }
-
-
-
-html[dir="ltr"]{
-
-
-    direction:ltr;
-
-
-}
-
-
 
 
 
 
 /* ======================================================
-   06 - TYPOGRAPHY
-   ====================================================== */
+   SECTION 03 - TYPOGRAPHY
+====================================================== */
 
+h1{
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6{
-
-
-    color:var(--title);
+    font-size:2rem;
 
     font-weight:700;
 
+}
+
+
+
+h2{
+
+    font-size:1.6rem;
+
+    font-weight:700;
+
+}
+
+
+
+h3{
+
+    font-size:1.3rem;
+
+    font-weight:600;
 
 }
 
@@ -259,292 +233,73 @@ h6{
 
 p{
 
-
-    color:var(--text);
-
+    color:var(--text-light);
 
 }
 
-
-
-small{
-
-
-    color:var(--muted);
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   07 - LINKS
-   ====================================================== */
 
 
 a{
-
 
     color:inherit;
 
     text-decoration:none;
 
-
 }
 
 
 
 
-
-
 /* ======================================================
-   08 - BUTTONS
-   ====================================================== */
+   SECTION 04 - GLOBAL ELEMENTS
+====================================================== */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
 
 
 button{
 
-
-    font-family:inherit;
+    font:inherit;
 
     cursor:pointer;
 
     border:none;
 
+    outline:none;
+
+    transition:var(--transition);
 
 }
 
-
-
-
-
-
-/* ======================================================
-   09 - FORM ELEMENTS
-   ====================================================== */
 
 
 input,
 select,
 textarea{
 
-
-    font-family:inherit;
+    font:inherit;
 
     outline:none;
 
-
 }
-/* ======================================================
-   10 - MEDIA ELEMENTS
-   ====================================================== */
-
-
-img{
-
-    max-width:100%;
-
-    height:auto;
-
-    display:block;
-
-}
-
-
-
-
-svg{
-
-    display:block;
-
-}
-
-
 
 
 
 
 /* ======================================================
-   11 - TABLE FOUNDATION
-   ====================================================== */
-
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    border-spacing:0;
-
-}
-
-
-
-
-
-
-/* ======================================================
-   12 - LIST RESET
-   ====================================================== */
-
-
-ul,
-ol{
-
-
-    list-style:none;
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   13 - TEXT UTILITIES
-   ====================================================== */
-
-
-.text-center{
-
-
-    text-align:center;
-
-
-}
-
-
-
-.text-left{
-
-
-    text-align:left;
-
-
-}
-
-
-
-.text-right{
-
-
-    text-align:right;
-
-
-}
-
-
-
-
-.hidden{
-
-
-    display:none!important;
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   14 - RTL TEXT HELPERS
-   ====================================================== */
-
-
-html[dir="rtl"] .text-start{
-
-
-    text-align:right;
-
-
-}
-
-
-
-html[dir="ltr"] .text-start{
-
-
-    text-align:left;
-
-
-}
-
-
-
-
-
-
-html[dir="rtl"] .text-end{
-
-
-    text-align:left;
-
-
-}
-
-
-
-html[dir="ltr"] .text-end{
-
-
-    text-align:right;
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   15 - SCROLLBAR
-   ====================================================== */
-
-
-*{
-
-
-    scrollbar-width:thin;
-
-
-    scrollbar-color:
-
-    #94a3b8
-
-    #e2e8f0;
-
-
-}
-
-
+   SECTION 05 - SCROLLBAR
+====================================================== */
 
 ::-webkit-scrollbar{
 
-
-    width:10px;
-
-    height:10px;
-
-
-}
-
-
-
-::-webkit-scrollbar-track{
-
-
-    background:#e2e8f0;
-
+    width:8px;
 
 }
 
@@ -552,11 +307,9 @@ html[dir="ltr"] .text-end{
 
 ::-webkit-scrollbar-thumb{
 
-
-    background:#94a3b8;
+    background:#cbd5e1;
 
     border-radius:20px;
-
 
 }
 
@@ -564,80 +317,34 @@ html[dir="ltr"] .text-end{
 
 ::-webkit-scrollbar-thumb:hover{
 
-
-    background:#64748b;
-
+    background:#94a3b8;
 
 }
 
 
 
 
-
-
 /* ======================================================
-   16 - ACCESSIBILITY
-   ====================================================== */
+   SECTION 06 - GLOBAL UTILITIES
+====================================================== */
 
+.hidden{
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible{
-
-
-    outline:
-
-    3px solid rgba(37,99,235,.35);
-
-
-
-    outline-offset:3px;
-
+    display:none !important;
 
 }
 
 
 
+.text-center{
 
-
-
-/* ======================================================
-   17 - DISABLED ELEMENTS
-   ====================================================== */
-
-
-button:disabled,
-input:disabled,
-select:disabled,
-textarea:disabled{
-
-
-    cursor:not-allowed;
-
-    opacity:.6;
-
+    text-align:center;
 
 }
 
 
 
-
-
-
-/* ======================================================
-   18 - GLOBAL CONTAINER
-
-   No width limitation.
-
-   Pages control their own size.
-
-   ====================================================== */
-
-
-.global-container{
-
+.w-100{
 
     width:100%;
 
@@ -646,305 +353,21 @@ textarea:disabled{
 
 
 
-
-
 /* ======================================================
-   19 - BASIC FLEX UTILITIES
-   ====================================================== */
+   SECTION 07 - ACCESSIBILITY
+====================================================== */
 
+:focus-visible{
 
-.flex{
+    outline:2px solid var(--primary);
 
-
-    display:flex;
-
-
-}
-
-
-
-.flex-center{
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
+    outline-offset:2px;
 
 }
-
-
-
-.flex-between{
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-
-}
-
-
 
 
 
 
 /* ======================================================
-   20 - BASIC ANIMATION
-   ====================================================== */
-
-
-@keyframes fadeIn{
-
-
-    from{
-
-
-        opacity:0;
-
-
-    }
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-    }
-
-
-}
-
-
-
-
-@keyframes fadeInUp{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:
-
-        translateY(18px);
-
-
-    }
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:
-
-        translateY(0);
-
-
-    }
-
-
-}
-/* ======================================================
-   21 - TRANSITION HELPERS
-   ====================================================== */
-
-
-.transition{
-
-
-    transition:
-
-    all var(--transition);
-
-
-}
-
-
-
-.transition-fast{
-
-
-    transition:
-
-    all .15s ease;
-
-
-}
-
-
-
-.transition-slow{
-
-
-    transition:
-
-    all .4s ease;
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   22 - HOVER LIFT EFFECT
-
-   Used by components when needed.
-
-   ====================================================== */
-
-
-.hover-lift{
-
-
-    transition:
-
-    transform var(--transition),
-
-    box-shadow var(--transition);
-
-
-}
-
-
-
-.hover-lift:hover{
-
-
-    transform:
-
-    translateY(-3px);
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   23 - PRINT FOUNDATION
-   ====================================================== */
-
-
-@media print{
-
-
-    *{
-
-
-        box-shadow:none!important;
-
-        text-shadow:none!important;
-
-
-    }
-
-
-
-    body{
-
-
-        background:white;
-
-
-        color:black;
-
-
-    }
-
-
-
-    a{
-
-
-        text-decoration:none;
-
-
-    }
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   24 - REDUCED MOTION ACCESSIBILITY
-   ====================================================== */
-
-
-@media(prefers-reduced-motion:reduce){
-
-
-    *,
-    *::before,
-    *::after{
-
-
-        animation-duration:.01ms!important;
-
-        animation-iteration-count:1!important;
-
-        transition-duration:.01ms!important;
-
-        scroll-behavior:auto!important;
-
-
-    }
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   25 - END GLOBAL CSS
-
-
-   Responsibilities:
-
-   ✔ Variables
-   ✔ Reset
-   ✔ Typography
-   ✔ Base elements
-   ✔ RTL/LTR foundation
-   ✔ Accessibility
-   ✔ Scrollbar
-
-
-   Does NOT control:
-
-   ✘ Sidebar
-   ✘ Header
-   ✘ Dashboard
-   ✘ Tables
-   ✘ Payments
-   ✘ Centres
-
-
-==========================================================
-*/
+   END OF FILE
+====================================================== */

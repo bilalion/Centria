@@ -1,0 +1,318 @@
+/*
+==========================================================
+File        : app-layout.css
+Project     : CENTRIA
+Module      : Application Layout
+
+Description :
+Main application layout foundation.
+
+Responsibilities:
+- Application wrapper
+- Main content area
+- Content container
+- RTL / LTR layout
+- Desktop layout
+- Responsive foundation
+
+Architecture
+
+app-layout
+│
+├── sidebar
+│
+└── main-content
+      │
+      ├── platform-banner
+      ├── header
+      └── content-area
+
+Desktop Status :
+✔ Complete
+
+Tablet Status :
+✔ Supported
+
+Mobile Status :
+✔ Basic Support
+
+Last Refactoring :
+2026-08-04
+
+==========================================================
+*/
+
+
+/* ======================================================
+   SECTION 01 - APPLICATION LAYOUT
+====================================================== */
+
+.app-layout{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    overflow:hidden;
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 02 - MAIN CONTENT
+====================================================== */
+
+.main-content{
+
+    flex:1;
+
+    min-width:0;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:20px;
+
+    overflow:hidden;
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 03 - CONTENT AREA
+====================================================== */
+
+#content-area,
+.content-area{
+
+    flex:1;
+
+    width:100%;
+
+    min-width:0;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 04 - RTL LAYOUT
+====================================================== */
+
+html[dir="rtl"] .sidebar{
+
+    order:2;
+
+}
+
+
+html[dir="rtl"] .main-content{
+
+    order:1;
+
+    direction:rtl;
+
+    text-align:right;
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 05 - LTR LAYOUT
+====================================================== */
+
+html[dir="ltr"] .sidebar{
+
+    order:1;
+
+}
+
+
+html[dir="ltr"] .main-content{
+
+    order:2;
+
+    direction:ltr;
+
+    text-align:left;
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 06 - DESKTOP LAYOUT
+====================================================== */
+
+/*
+
+Desktop First
+
+Desktop is the primary
+design target.
+
+No extra rules required.
+
+*/
+
+/* ======================================================
+   SECTION 07 - TABLET LAYOUT
+====================================================== */
+
+@media(max-width:1100px){
+
+    .main-content{
+
+        padding:25px;
+
+    }
+
+}
+
+
+
+@media(max-width:900px){
+
+    .main-content{
+
+        padding:20px;
+
+    }
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 08 - MOBILE LAYOUT
+====================================================== */
+
+@media(max-width:700px){
+
+    .app-layout{
+
+        width:100%;
+
+        height:100vh;
+
+        display:flex;
+
+        flex-direction:column;
+
+        overflow:hidden;
+
+    }
+
+
+
+    .main-content{
+
+        width:100%;
+
+        flex:1;
+
+        min-height:0;
+
+        padding:20px;
+
+        padding-bottom:90px;
+
+        overflow:hidden;
+
+    }
+
+
+
+    #content-area,
+    .content-area{
+
+        flex:1;
+
+        width:100%;
+
+        min-width:0;
+
+        min-height:0;
+
+        overflow-y:auto;
+
+        overflow-x:hidden;
+
+    }
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 09 - SMALL MOBILE
+====================================================== */
+
+@media(max-width:480px){
+
+    .main-content{
+
+        padding:15px;
+
+        padding-bottom:90px;
+
+    }
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 10 - UTILITIES
+====================================================== */
+
+.wide-content{
+
+    width:100%;
+
+    min-width:0;
+
+}
+
+
+
+
+/* ======================================================
+   SECTION 11 - ACCESSIBILITY
+====================================================== */
+
+html,
+body{
+
+    overflow-x:hidden;
+
+}
+
+
+
+
+/* ======================================================
+   END OF FILE
+====================================================== */

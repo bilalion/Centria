@@ -1,39 +1,102 @@
 /*
 ==========================================================
- CENTRIA
- Super Admin Login JavaScript
- Clean Professional Version
+File        : superlogin.js
+Project     : CENTRIA
+
+Description :
+Super Admin Login Controller
+
+Responsibilities :
+- Password visibility
+- Database status
+- Login button state
+- Form behaviour
+- Multi Language Support
+
+Version :
+2.1
+
+Status :
+Development
 ==========================================================
 */
 
 
+
+
+
 /* ======================================================
-   01 - PASSWORD VISIBILITY
-   ====================================================== */
+   01 - PAGE ELEMENTS
+====================================================== */
+
+
+const passwordInput =
+
+document.getElementById(
+    "password"
+);
+
+
+
+
+const databaseStatus =
+
+document.getElementById(
+    "dbStatus"
+);
+
+
+
+
+const loginButton =
+
+document.getElementById(
+    "loginBtn"
+);
+
+
+
+
+const loginForm =
+
+document.querySelector(
+    "form[action*='SuperLoginServlet']"
+);
+
+
+
+
+
+
+
+/* ======================================================
+   02 - PASSWORD VISIBILITY
+====================================================== */
 
 
 function togglePassword(){
 
 
-    let pass =
-    document.getElementById(
-        "password"
-    );
+    if(!passwordInput){
+
+        return;
+
+    }
 
 
-    if(pass.type === "password"){
+
+    if(passwordInput.type === "password"){
 
 
-        pass.type =
-        "text";
+        passwordInput.type = "text";
 
 
     }
+
     else{
 
 
-        pass.type =
-        "password";
+        passwordInput.type = "password";
 
 
     }
@@ -47,127 +110,201 @@ function togglePassword(){
 
 
 
+
+
 /* ======================================================
-   02 - DATABASE STATUS CHECK
-   ====================================================== */
+   03 - DATABASE STATUS
+====================================================== */
+
+
+function updateDatabaseStatus(
+    connected,
+    message
+){
+
+
+    if(!databaseStatus){
+
+        return;
+
+    }
+
+
+
+    if(connected){
+
+
+
+        databaseStatus.className =
+
+        "db-status connected";
+
+
+
+        databaseStatus.innerHTML = "";
+
+
+
+        if(loginButton){
+
+
+            loginButton.disabled = false;
+
+
+        }
+
+
+
+
+    }
+
+    else{
+
+
+
+        databaseStatus.className =
+
+        "db-status failed";
+
+
+
+        databaseStatus.innerHTML = "";
+
+
+
+        if(loginButton){
+
+
+            loginButton.disabled = true;
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   04 - DATABASE CONNECTION CHECK
+====================================================== */
 
 
 function checkDatabaseStatus(){
 
 
 
-    let status =
-    document.getElementById(
-        "dbStatus"
-    );
+    if(!databaseStatus){
+
+        return;
+
+    }
 
 
 
-    let btn =
-    document.getElementById(
-        "loginBtn"
-    );
+
+    databaseStatus.className =
+
+    "db-status checking";
+
+
+
+    databaseStatus.innerHTML = "";
+
+
+
+
 
 
 
     fetch(
+
         contextPath
+
         +
+
         "/DatabaseStatusServlet"
+
     )
 
 
 
-    .then(
-        response => {
+    .then(function(response){
 
 
-            return response.json();
+        return response.json();
 
 
-        }
-    )
-
-
-
-    .then(
-        data => {
+    })
 
 
 
-            if(data.status === "connected"){
+    .then(function(data){
 
 
 
-                status.innerHTML =
-                "🟢";
+
+
+        if(data.status === "connected"){
 
 
 
-                status.className =
-                "db-status connected";
+            updateDatabaseStatus(
 
+                true
 
-
-                btn.disabled =
-                false;
-
-
-
-            }
-
-            else {
-
-
-
-                status.innerHTML =
-                "🔴 "
-                +
-                (data.message || "");
-
-
-
-                status.className =
-                "db-status failed";
-
-
-
-                btn.disabled =
-                true;
-
-
-
-            }
-
+            );
 
 
         }
-    )
 
 
 
-    .catch(
-        error => {
+        else{
 
 
 
-            status.innerHTML =
-            "🟠";
+            updateDatabaseStatus(
 
+                false
 
-
-            status.className =
-            "db-status failed";
-
-
-
-            btn.disabled =
-            true;
-
+            );
 
 
         }
-    );
+
+
+
+
+    })
+
+
+
+    .catch(function(){
+
+
+
+        updateDatabaseStatus(
+
+            false
+
+        );
+
+
+
+    });
+
 
 
 }
@@ -178,17 +315,169 @@ function checkDatabaseStatus(){
 
 
 
+
+
+
+
+
+
+
+
+
 /* ======================================================
-   03 - PAGE INITIALIZATION
-   ====================================================== */
+   05 - LOGIN SUBMIT
+====================================================== */
+
+
+function initializeLoginForm(){
+
+
+
+    if(!loginForm){
+
+        return;
+
+    }
+
+
+
+
+
+
+    loginForm.addEventListener(
+
+        "submit",
+
+        function(){
+
+
+
+
+
+            if(loginButton){
+
+
+
+
+
+                loginButton.disabled = true;
+
+
+
+
+
+                loginButton.innerHTML =
+
+                loginLanguage.signingIn;
+
+
+
+
+
+            }
+
+
+
+
+
+        }
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   06 - PAGE INITIALIZATION
+====================================================== */
 
 
 document.addEventListener(
+
 "DOMContentLoaded",
+
 function(){
+
 
 
     checkDatabaseStatus();
 
 
+
+    initializeLoginForm();
+
+
+
+    resetLoginError();
+
+
+
 });
+
+
+/* ======================================================
+   07 - LOGIN ERROR RESET
+====================================================== */
+
+function resetLoginError(){
+
+    const errorMessage =
+    document.querySelector(".error-message");
+
+
+    if(errorMessage){
+
+
+        setTimeout(function(){
+
+
+            errorMessage.style.display =
+            "none";
+
+
+        },3000);
+
+
+    }
+
+
+
+    if(loginButton){
+
+
+        setTimeout(function(){
+
+
+            loginButton.classList.remove(
+                "login-error-state"
+            );
+
+
+            loginButton.disabled = false;
+
+
+
+        },3000);
+
+
+    }
+
+
+}
+
+
+
+
+/* ======================================================
+   END OF FILE
+======================================================
+*/

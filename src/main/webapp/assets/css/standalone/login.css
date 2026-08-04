@@ -1,76 +1,123 @@
-/*
-==========================================================
-File        : superlogin.css
-Project     : CENTRIA
-Module      : Super Admin Authentication
-
-Description :
-Professional Glass Login Interface.
-
-Contains:
-01. CSS Variables
-02. Reset
-03. Body Layout
-04. Language Selector
-05. Login Card
-
-RTL / LTR Support.
-Responsive Design.
-
-Standalone file.
-Loads before global.css.
-==========================================================
-*/
-
-
 /* ======================================================
-   01. CSS VARIABLES
-   ====================================================== */
+01 : ROOT VARIABLES
+Centria Design System
+Premium Dark Blue Theme
+====================================================== */
+
 
 :root{
 
 
-    --primary:#2563eb;
-
-    --primary-dark:#1d4ed8;
-
-
-    --success:#16a34a;
-
-    --danger:#dc2626;
-
-    --warning:#f97316;
+    --primary:
+    #062B63;
 
 
+    --primary-light:
+    #0B4FA8;
 
-    --surface:#ffffff;
+
+    --primary-deep:
+    #031936;
 
 
-    --title:#1e293b;
-
-    --text:#334155;
-
-    --muted:#64748b;
+    --primary-soft:
+    #EAF2FF;
 
 
 
-    --border:#cbd5e1;
+    --accent:
+    #E6B84F;
+
+
+    --accent-light:
+    #F5D77A;
+
+
+    --accent-glow:
+    rgba(230,184,79,.35);
 
 
 
-    --radius:14px;
-
-    --radius-lg:26px;
-
+    --success:
+    #16A34A;
 
 
-    --shadow:
-
-        0 20px 45px rgba(15,23,42,.20);
-
+    --danger:
+    #DC2626;
 
 
-    --transition:.30s ease;
+    --warning:
+    #D97706;
+
+
+
+    --background:
+    #020F24;
+
+
+    --surface:
+    #FFFFFF;
+
+
+    --surface-soft:
+    #F5F7FB;
+
+
+
+    --text:
+    #10233F;
+
+
+    --text-light:
+    #FFFFFF;
+
+
+    --muted:
+    #667085;
+
+
+
+    --glass-bg:
+    rgba(255,255,255,.06);
+
+
+    --glass-border:
+    rgba(255,255,255,.18);
+
+
+
+    --radius-xl:
+    32px;
+
+
+    --radius-lg:
+    22px;
+
+
+    --radius-md:
+    16px;
+
+
+
+    --shadow-xl:
+
+    0 50px 120px
+
+    rgba(0,0,0,.65);
+
+
+
+    --shadow-md:
+
+    0 20px 45px
+
+    rgba(0,0,0,.18);
+
+
+
+    --transition:
+
+    .35s ease;
 
 
 }
@@ -78,15 +125,14 @@ Loads before global.css.
 
 
 
+
+
 /* ======================================================
-   02. RESET
-   ====================================================== */
+02 : RESET
+====================================================== */
 
 
-*,
-*::before,
-*::after{
-
+*{
 
     margin:0;
 
@@ -94,6 +140,27 @@ Loads before global.css.
 
     box-sizing:border-box;
 
+}
+
+
+
+html,
+body{
+
+    width:100%;
+
+    height:100%;
+
+
+    font-family:
+
+    Inter,
+
+    "Segoe UI",
+
+    Arial,
+
+    sans-serif;
 
 }
 
@@ -101,15 +168,14 @@ Loads before global.css.
 
 
 
+
 /* ======================================================
-   03. BODY LAYOUT
-   ====================================================== */
+03 : PAGE BACKGROUND
+Premium Dark Blue Atmosphere
+====================================================== */
 
 
 body{
-
-
-    min-height:100vh;
 
 
     display:flex;
@@ -122,7 +188,14 @@ body{
 
 
 
-    flex-direction:column;
+    min-height:100vh;
+
+
+
+    padding:
+
+
+    30px;
 
 
 
@@ -130,33 +203,46 @@ body{
 
 
 
-    font-family:
-
-
-        "Segoe UI",
-
-        Tahoma,
-
-        Geneva,
-
-        Verdana,
-
-        sans-serif;
-
 
 
     background:
 
 
-        radial-gradient(
+    radial-gradient(
 
-            circle at top,
+        circle at 85% 10%,
 
-            #3b82f6,
+        rgba(11,79,168,.22),
 
-            #0f172a 55%
+        transparent 40%
 
-        );
+    ),
+
+
+
+    radial-gradient(
+
+        circle at 15% 90%,
+
+        rgba(255,255,255,.035),
+
+        transparent 30%
+
+    ),
+
+
+
+    linear-gradient(
+
+        135deg,
+
+        #010817 0%,
+
+        #020F24 50%,
+
+        #03152F 100%
+
+    );
 
 
 }
@@ -167,8 +253,1719 @@ body{
 
 
 /* ======================================================
-   04. LANGUAGE SELECTOR
-   ====================================================== */
+03.1 : BACKGROUND BLUE GLOW
+Premium Card Atmosphere
+====================================================== */
+
+
+body::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:
+
+
+    1000px;
+
+
+
+    height:
+
+
+    800px;
+
+
+
+
+
+    top:
+
+
+    50%;
+
+
+
+    left:
+
+
+    50%;
+
+
+
+
+
+    transform:
+
+
+    translate(-50%,-50%);
+
+
+
+
+
+    border-radius:
+
+
+    50%;
+
+
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        ellipse,
+
+        rgba(11,79,168,.28),
+
+        rgba(11,79,168,.10),
+
+        transparent 70%
+
+    );
+
+
+
+
+
+    filter:
+
+
+    blur(90px);
+
+
+
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+/* ======================================================
+03.2 : BACKGROUND SOFT LIGHT
+====================================================== */
+
+
+body::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:
+
+
+    550px;
+
+
+
+    height:
+
+
+    550px;
+
+
+
+    left:
+
+
+    -220px;
+
+
+
+    bottom:
+
+
+    -220px;
+
+
+
+    border-radius:
+
+
+    50%;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        rgba(230,184,79,.08),
+
+        transparent 70%
+
+    );
+
+
+
+    filter:
+
+
+    blur(90px);
+
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+04 : BIG LOGIN CARD
+Premium Floating Glass Card
+====================================================== */
+
+
+.login-layout{
+
+
+    position:relative;
+
+
+    z-index:5;
+
+
+    display:grid;
+
+
+
+    grid-template-columns:
+
+    56%
+
+    44%;
+
+
+
+    width:
+
+
+    min(1120px,78vw);
+
+
+
+    height:
+
+
+    min(650px,75vh);
+
+
+
+    margin:20px;
+
+
+
+    overflow:hidden;
+
+
+
+    border-radius:
+
+
+    var(--radius-xl);
+
+
+
+
+
+    background:
+
+
+    rgba(255,255,255,.04);
+
+
+
+
+
+    backdrop-filter:
+
+
+    blur(35px);
+
+
+
+    -webkit-backdrop-filter:
+
+
+    blur(35px);
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    rgba(255,255,255,.28);
+
+
+
+
+
+    box-shadow:
+
+
+    0 35px 90px
+
+    rgba(0,0,0,.55),
+
+
+
+    0 0 70px
+
+    rgba(11,79,168,.22),
+
+
+
+    inset 0 0 0 1px
+
+    rgba(255,255,255,.10);
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+04.1 : PANEL DIVIDER
+====================================================== */
+
+
+.login-layout::after{
+
+
+    content:"";
+
+
+
+    position:absolute;
+
+
+
+    top:0;
+
+
+
+    bottom:0;
+
+
+
+    left:56%;
+
+
+
+    width:1px;
+
+
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        to bottom,
+
+        transparent,
+
+        rgba(255,255,255,.30),
+
+        transparent
+
+    );
+
+
+
+
+
+    z-index:4;
+
+
+}
+
+
+
+/* ======================================================
+   LOGIN BUTTON ERROR STATE
+====================================================== */
+
+
+.login-error-state{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #EF4444,
+
+        #B91C1C
+
+    ) !important;
+
+
+
+    box-shadow:
+
+
+    0 15px 35px
+
+    rgba(220,38,38,.35),
+
+
+    0 0 25px
+
+    rgba(220,38,38,.25);
+
+
+
+    transition:
+
+    .35s ease;
+
+
+}
+
+
+
+.login-error-state:hover{
+
+
+    transform:
+
+    translateY(-2px);
+
+
+
+    box-shadow:
+
+
+    0 20px 45px
+
+    rgba(220,38,38,.45);
+
+
+}
+
+/* ======================================================
+05 : LEFT BRANDING PANEL
+Premium Dark Blue Panel
+====================================================== */
+
+
+.branding-panel{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+
+    justify-content:space-between;
+
+
+
+    padding:
+
+
+    30px
+
+    38px
+
+    22px
+
+    38px;
+
+
+
+
+
+    overflow:hidden;
+
+
+
+    color:
+
+
+    var(--text-light);
+
+
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        #020F24 0%,
+
+        #031936 40%,
+
+        #062B63 100%
+
+    );
+
+
+
+
+
+    isolation:isolate;
+
+
+}
+
+
+
+
+
+/* ======================================================
+05.1 : LEFT PANEL CLOUD DECORATIONS
+Premium White Light Rings
+====================================================== */
+
+
+.branding-panel::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:
+
+
+    520px;
+
+
+
+    height:
+
+
+    520px;
+
+
+
+
+
+    top:
+
+
+    -190px;
+
+
+
+    right:
+
+
+    -160px;
+
+
+
+
+
+    border-radius:
+
+
+    50%;
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    rgba(255,255,255,.20);
+
+
+
+
+
+    box-shadow:
+
+
+    0 0 45px
+
+    rgba(255,255,255,.12),
+
+
+    inset 0 0 60px
+
+    rgba(255,255,255,.05);
+
+
+
+
+
+    pointer-events:none;
+
+
+
+}
+
+
+
+
+
+
+
+
+.branding-panel::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:
+
+
+    380px;
+
+
+
+    height:
+
+
+    380px;
+
+
+
+
+
+    left:
+
+
+    -150px;
+
+
+
+    bottom:
+
+
+    -150px;
+
+
+
+
+
+    border-radius:
+
+
+    50%;
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    rgba(255,255,255,.14);
+
+
+
+
+
+    box-shadow:
+
+
+    0 0 55px
+
+    rgba(255,255,255,.10);
+
+
+
+    pointer-events:none;
+
+
+
+}
+/* ======================================================
+05.1.1 : LEFT PANEL LIGHT CIRCLES
+Soft Enterprise Light Rings
+====================================================== */
+
+
+.branding-shapes{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    overflow:hidden;
+
+
+    pointer-events:none;
+
+
+    z-index:1;
+
+
+}
+
+
+
+
+
+.branding-shapes::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:
+
+
+    560px;
+
+
+
+    height:
+
+
+    560px;
+
+
+
+    top:
+
+
+    -260px;
+
+
+
+    right:
+
+
+    -220px;
+
+
+
+
+
+    border-radius:
+
+
+    50%;
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    rgba(255,255,255,.10);
+
+
+
+
+
+    box-shadow:
+
+
+    0 0 60px
+
+    rgba(255,255,255,.06);
+
+
+
+}
+
+
+
+
+
+
+
+
+.branding-shapes::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:
+
+
+    360px;
+
+
+
+    height:
+
+
+    360px;
+
+
+
+    bottom:
+
+
+    -180px;
+
+
+
+    left:
+
+
+    -120px;
+
+
+
+
+
+    border-radius:
+
+
+    50%;
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    rgba(255,255,255,.08);
+
+
+
+
+
+    box-shadow:
+
+
+    0 0 50px
+
+    rgba(255,255,255,.05);
+
+
+
+}
+
+/* ======================================================
+05.2 : BRAND HEADER
+====================================================== */
+
+
+.branding-top{
+
+
+    position:relative;
+
+
+    z-index:3;
+
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+    gap:
+
+
+    12px;
+
+
+}
+
+
+
+
+
+
+
+.platform-logo{
+
+
+    width:
+
+
+    58px;
+
+
+
+    height:
+
+
+    58px;
+
+
+
+
+
+    object-fit:
+
+
+    contain;
+
+
+
+
+
+    padding:
+
+
+    7px;
+
+
+
+
+
+    background:
+
+
+    rgba(255,255,255,.96);
+
+
+
+
+
+    border-radius:
+
+
+    18px;
+
+
+
+
+
+    box-shadow:
+
+
+    0 15px 30px
+
+    rgba(0,0,0,.30);
+
+
+}
+
+
+
+
+
+
+.platform-tag{
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+
+
+    height:
+
+
+    38px;
+
+
+
+
+
+    padding:
+
+
+    0 24px;
+
+
+
+
+
+    border-radius:
+
+
+    999px;
+
+
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        var(--accent),
+
+        var(--accent-light)
+
+    );
+
+
+
+
+
+    color:
+
+
+    #062B63;
+
+
+
+
+
+    font-size:
+
+
+    .78rem;
+
+
+
+
+
+    font-weight:
+
+
+    900;
+
+
+
+
+
+    letter-spacing:
+
+
+    1.2px;
+
+
+
+    box-shadow:
+
+
+    0 10px 30px
+
+    rgba(230,184,79,.35);
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+05.3 : BRANDING MAIN
+====================================================== */
+
+
+.branding-main{
+
+
+    position:relative;
+
+
+    z-index:3;
+
+
+
+    flex:1;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    justify-content:center;
+
+
+
+    gap:
+
+
+    22px;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+05.4 : HERO CONTENT
+====================================================== */
+
+
+.branding-content{
+
+
+    position:relative;
+
+
+    z-index:3;
+
+
+
+    max-width:
+
+
+    380px;
+
+
+}
+
+
+
+
+
+
+
+.branding-content h1{
+
+
+    color:
+
+
+    var(--text-light);
+
+
+
+
+
+    font-size:
+
+
+    2.15rem;
+
+
+
+
+
+    font-weight:
+
+
+    800;
+
+
+
+
+
+    line-height:
+
+
+    1.12;
+
+
+
+
+
+    letter-spacing:
+
+
+    -1px;
+
+
+
+
+
+    margin-bottom:
+
+
+    14px;
+
+
+}
+
+
+
+
+
+
+
+.branding-content p{
+
+
+    max-width:
+
+
+    360px;
+
+
+
+
+
+    color:
+
+
+    rgba(255,255,255,.68);
+
+
+
+
+
+    font-size:
+
+
+    .82rem;
+
+
+
+
+
+    line-height:
+
+
+    1.7;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+05.5 : FEATURE CARDS
+====================================================== */
+
+
+.branding-features{
+
+
+    position:relative;
+
+
+    z-index:3;
+
+
+
+    display:flex;
+
+
+
+    gap:
+
+
+    10px;
+
+
+}
+
+
+
+
+
+
+
+.feature-card{
+
+
+    flex:1;
+
+
+
+    min-height:
+
+
+    105px;
+
+
+
+
+
+    padding:
+
+
+    12px;
+
+
+
+
+
+    border-radius:
+
+
+    18px;
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    rgba(255,255,255,.14);
+
+
+
+
+
+    background:
+
+
+    rgba(255,255,255,.08);
+
+
+
+
+
+    backdrop-filter:
+
+
+    blur(15px);
+
+
+
+
+
+    transition:
+
+
+    var(--transition);
+
+
+
+}
+
+
+
+
+
+
+
+.feature-card:hover{
+
+
+    transform:
+
+
+    translateY(-4px);
+
+
+}
+
+
+
+
+
+
+
+.feature-card.centres{
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(11,79,168,.42),
+
+        rgba(255,255,255,.08)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+.feature-card.payments{
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(230,184,79,.25),
+
+        rgba(255,255,255,.08)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+.feature-card.analytics{
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(22,163,74,.25),
+
+        rgba(255,255,255,.08)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+.feature-icon{
+
+
+    width:
+
+
+    38px;
+
+
+
+    height:
+
+
+    38px;
+
+
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+
+
+    margin-bottom:
+
+
+    8px;
+
+
+
+
+
+    border-radius:
+
+
+    12px;
+
+
+
+
+
+    background:
+
+
+    rgba(255,255,255,.12);
+
+
+
+
+
+    font-size:
+
+
+    1rem;
+
+
+}
+
+
+
+
+
+
+
+.feature-body h3{
+
+
+    color:
+
+
+    var(--text-light);
+
+
+
+
+
+    font-size:
+
+
+    .82rem;
+
+
+
+
+
+    margin-bottom:
+
+
+    4px;
+
+
+}
+
+
+
+
+
+
+
+.feature-body p{
+
+
+    color:
+
+
+    rgba(255,255,255,.60);
+
+
+
+
+
+    font-size:
+
+
+    .70rem;
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+05.6 : BRANDING FOOTER
+====================================================== */
+
+
+.branding-footer{
+
+
+    position:relative;
+
+
+    z-index:4;
+
+
+
+    padding-top:
+
+
+    12px;
+
+
+
+
+
+    border-top:
+
+
+    1px solid
+
+    rgba(255,255,255,.16);
+
+
+
+
+
+    color:
+
+
+    rgba(255,255,255,.60);
+
+
+
+
+
+    font-size:
+
+
+    .72rem;
+
+
+
+}
+
+/* ======================================================
+06 : RIGHT AUTH PANEL
+====================================================== */
+
+
+.auth-panel{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+
+    justify-content:center;
+
+
+
+
+
+    padding:
+
+
+    45px
+
+    48px;
+
+
+
+
+
+    background:
+
+
+    #FFFFFF;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+06.1 : LANGUAGE SELECTOR
+====================================================== */
 
 
 .language-selector{
@@ -178,60 +1975,39 @@ body{
 
 
 
-    top:25px;
+    top:
+
+
+    24px;
 
 
 
-    z-index:100;
+    right:
+
+
+    26px;
+
 
 
 }
 
-
-
-
-
-/* LTR POSITION */
-
-
-html[dir="ltr"] .language-selector{
-
-
-    right:30px;
-
-
-}
-
-
-
-
-
-/* RTL POSITION */
 
 
 html[dir="rtl"] .language-selector{
 
 
-    left:30px;
+    right:auto;
+
+
+
+    left:
+
+
+    26px;
 
 
 }
 
-
-
-
-
-
-.language-selector form{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-}
 
 
 
@@ -241,20 +2017,239 @@ html[dir="rtl"] .language-selector{
 .language-selector select{
 
 
-    appearance:none;
+    width:
 
 
-    -webkit-appearance:none;
+    145px;
 
 
 
-    min-width:170px;
+    height:
+
+
+    40px;
+
+
+
+
+
+    border:none;
+
+
+
+
+
+    border-radius:
+
+
+    999px;
+
+
+
+
+
+    background:
+
+
+    var(--surface-soft);
+
+
+
+
+
+    color:
+
+
+    var(--text);
+
+
 
 
 
     padding:
 
-        12px 45px 12px 18px;
+
+    0 15px;
+
+
+
+
+
+    font-size:
+
+
+    .80rem;
+
+
+
+
+
+    font-weight:
+
+
+    600;
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+06.2 : LOGIN HEADER
+====================================================== */
+
+
+.login-header{
+
+
+    margin-bottom:
+
+
+    22px;
+
+
+}
+
+
+
+
+
+
+
+
+.login-header h2{
+
+
+    color:
+
+
+    var(--text);
+
+
+
+
+
+    font-size:
+
+
+    1.85rem;
+
+
+
+
+
+    font-weight:
+
+
+    800;
+
+
+
+
+
+    line-height:
+
+
+    1.2;
+
+
+
+
+
+    letter-spacing:
+
+
+    -.8px;
+
+
+
+
+
+    margin-bottom:
+
+
+    8px;
+
+
+
+}
+
+
+
+
+
+
+
+
+.login-header p{
+
+
+    color:
+
+
+    var(--muted);
+
+
+
+
+
+    font-size:
+
+
+    .85rem;
+
+
+
+
+
+    line-height:
+
+
+    1.6;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======================================================
+06.3 : ERROR MESSAGE
+Below Login Button
+====================================================== */
+
+
+.error-message{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    width:100%;
+
+
+
+    min-height:40px;
+
+
+
+    margin-top:14px;
 
 
 
@@ -262,25 +2257,27 @@ html[dir="rtl"] .language-selector{
 
 
 
+    background:
+
+    rgba(220,38,38,.08);
+
+
+
     border:
 
-        1px solid rgba(255,255,255,.25);
+    1px solid
+
+    rgba(220,38,38,.15);
 
 
 
-    outline:none;
+    color:
+
+    var(--danger);
 
 
 
-    cursor:pointer;
-
-
-
-    color:#fff;
-
-
-
-    font-size:14px;
+    font-size:.82rem;
 
 
 
@@ -288,418 +2285,79 @@ html[dir="rtl"] .language-selector{
 
 
 
-    background:
-
-
-        rgba(255,255,255,.15);
-
-
-
-    backdrop-filter:
-
-        blur(15px);
-
-
-
-    transition:
-
-
-        transform var(--transition),
-
-
-        background var(--transition),
-
-
-        box-shadow var(--transition);
-
-
-
-
-
-    background-image:
-
-
-        linear-gradient(
-
-            45deg,
-
-            transparent 50%,
-
-            #fff 50%
-
-        ),
-
-
-
-        linear-gradient(
-
-            135deg,
-
-            #fff 50%,
-
-            transparent 50%
-
-        );
-
-
-
-
-
-    background-repeat:no-repeat;
-
-
-
-    background-size:
-
-
-        6px 6px,
-
-        6px 6px;
-
-
-
-
-
-    background-position:
-
-
-        calc(100% - 18px) 50%,
-
-
-        calc(100% - 12px) 50%;
-
-
 }
-
-
-
-
-
-
-.language-selector select:hover{
-
-
-    background:
-
-        rgba(255,255,255,.25);
-
-
-
-    transform:
-
-        translateY(-3px);
-
-
-
-    box-shadow:
-
-
-        0 8px 20px rgba(0,0,0,.20);
-
-
-}
-
-
-
-
-
-
-/* RTL SELECT ARROW */
-
-
-html[dir="rtl"] .language-selector select{
-
-
-    padding:
-
-        12px 18px 12px 45px;
-
-
-
-    background-position:
-
-
-        18px 50%,
-
-
-        24px 50%;
-
-
-}
-
 
 
 
 
 /* ======================================================
-   05. LOGIN CARD
-   ====================================================== */
-
-
-.login-card{
-
-
-    position:relative;
-
-
-
-    width:430px;
-
-
-
-    max-width:92%;
-
-
-
-    padding:42px;
-
-
-
-    border-radius:
-
-        var(--radius-lg);
-
-
-
-
-    background:
-
-
-        rgba(255,255,255,.95);
-
-
-
-    backdrop-filter:
-
-        blur(18px);
-
-
-
-
-    text-align:center;
-
-
-
-    box-shadow:
-
-        var(--shadow);
-
-
-
-
-    animation:
-
-        showCard .6s ease;
-
-
-}
-
-
-
-
-
-@keyframes showCard{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:
-
-            translateY(35px);
-
-
-    }
-
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:
-
-            translateY(0);
-
-
-    }
-
-
-}
-
-/* ======================================================
-   06. BRAND SECTION
-   ====================================================== */
-
-
-.login-brand{
-
-
-    margin-bottom:24px;
-
-
-}
-
-
-
-
-
-.login-logo{
-
-
-    width:90px;
-
-
-    height:90px;
-
-
-
-    object-fit:contain;
-
-
-
-    filter:
-
-
-        drop-shadow(
-
-            0 10px 18px rgba(0,0,0,.20)
-
-        );
-
-
-}
-
-
-
-
-
-.login-brand h1{
-
-
-    margin-top:12px;
-
-
-
-    font-size:32px;
-
-
-
-    color:var(--title);
-
-
-
-}
-
-
-
-
-
-.login-brand span{
-
-
-    color:var(--muted);
-
-
-
-    font-size:14px;
-
-
-
-    font-weight:600;
-
-
-}
-
-
-
-
-
-
-/* ======================================================
-   07. LOGIN TITLE
-   ====================================================== */
-
-
-.login-card h2{
-
-
-    margin-bottom:24px;
-
-
-
-    color:var(--title);
-
-
-
-    font-size:25px;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   08. DATABASE STATUS
-   ====================================================== */
+06.4 : DATABASE STATUS
+System Indicator Dot
+====================================================== */
 
 
 .db-status{
 
-
-    position:absolute;
-
-
-
-    top:20px;
+    width:
+    12px;
 
 
-
-    right:20px;
-
-
-
-    width:38px;
+    height:
+    12px;
 
 
-
-    height:38px;
-
-
-
-    display:flex;
+    min-width:
+    12px;
 
 
-
-    justify-content:center;
-
-
-
-    align-items:center;
+    min-height:
+    12px;
 
 
-
-    border-radius:50%;
-
-
-
-    background:#f8fafc;
+    border-radius:
+    50%;
 
 
+    padding:
+    0;
 
-    font-size:18px;
+
+    margin:
+    0;
+
+
+    font-size:
+    0;
+
+
+    display:block;
+
+
+    background:
+    transparent;
+
+}
+
+
+
+
+
+.db-status.checking{
+
+
+    background:
+    #D97706;
+
+
+}
+
+
+
+.db-status.connected{
+
+
+    background:
+    #16A34A;
 
 
 }
@@ -708,165 +2366,67 @@ html[dir="rtl"] .language-selector select{
 
 
 
-html[dir="rtl"] .db-status{
+.db-status.failed{
 
 
-    right:auto;
-
-
-
-    left:20px;
+    background:
+    #DC2626;
 
 
 }
-
-
-
-
-
-
-.connected{
-
-
-    color:var(--success);
-
-
-}
-
-
-
-
-.failed{
-
-
-    color:var(--danger);
-
-
-}
-
-
-
-
-.checking{
-
-
-    color:var(--warning);
-
-
-}
-
-
-
-
-
 
 
 
 /* ======================================================
-   09. ERROR MESSAGE
-   Validation / Login Errors
-   ====================================================== */
+   LOGIN ERROR BUTTON STATE
+====================================================== */
+
+.login-error-state{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #b91c1c
+    ) !important;
 
 
-.error-message{
+    box-shadow:
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:8px;
+    0 15px 35px
+    rgba(239,68,68,.35);
 
 
-    width:100%;
-
-
-    margin-bottom:16px;
-
-
-    padding:10px 14px;
-
-
-    border-radius:10px;
-
-
-    background:#fef2f2;
-
-
-    border:
-
-        1px solid #fecaca;
-
-
-    color:var(--danger);
-
-
-    font-size:14px;
-
-
-    font-weight:600;
-
-
-    line-height:1.5;
-
-
-    animation:
-
-        fadeError .3s ease;
+    transition:
+    all .3s ease;
 
 }
-
-
-
-
-@keyframes fadeError{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:
-
-            translateY(-5px);
-
-
-    }
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:
-
-            translateY(0);
-
-
-    }
-
-
-}
-
-
-
-
-
 
 
 /* ======================================================
-   10. INPUT COMPONENTS
-   ====================================================== */
+06.5 : FORM INPUTS
+====================================================== */
+
+
+form{
+
+
+    width:
+
+
+    100%;
+
+
+}
+
+
+
+
+
+
 
 
 .input-group,
-
 .password-wrapper{
 
 
@@ -874,7 +2434,38 @@ html[dir="rtl"] .db-status{
 
 
 
-    margin-bottom:16px;
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+
+
+    width:
+
+
+    100%;
+
+
+
+
+
+    height:
+
+
+    48px;
+
+
+
+
+
+    margin-bottom:
+
+
+    14px;
 
 
 }
@@ -884,90 +2475,6 @@ html[dir="rtl"] .db-status{
 
 
 
-.input-group input,
-
-.password-wrapper input{
-
-
-    width:100%;
-
-
-
-    padding:15px 46px;
-
-
-
-    border:
-
-        1px solid var(--border);
-
-
-
-    border-radius:
-
-        var(--radius);
-
-
-
-    font-size:15px;
-
-
-
-    color:var(--text);
-
-
-
-    background:var(--surface);
-
-
-
-    outline:none;
-
-
-
-    transition:
-
-
-        border-color var(--transition),
-
-
-        box-shadow var(--transition);
-
-
-}
-
-
-
-
-
-
-.input-group input:focus,
-
-.password-wrapper input:focus{
-
-
-    border-color:var(--primary);
-
-
-
-    box-shadow:
-
-
-        0 0 0 4px rgba(37,99,blue,.12);
-
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   INPUT ICON
-   ====================================================== */
 
 
 .input-icon{
@@ -977,35 +2484,39 @@ html[dir="rtl"] .db-status{
 
 
 
-    top:50%;
+    left:
+
+
+    15px;
 
 
 
-    transform:
-
-        translateY(-50%);
+    z-index:2;
 
 
 
-    font-size:20px;
+    font-size:
 
 
+    .95rem;
 
-    color:var(--muted);
 
 
 }
-
-
-
-
 
 
 
 html[dir="rtl"] .input-icon{
 
 
-    right:15px;
+    left:auto;
+
+
+
+    right:
+
+
+    15px;
 
 
 }
@@ -1015,10 +2526,71 @@ html[dir="rtl"] .input-icon{
 
 
 
-html[dir="ltr"] .input-icon{
 
 
-    left:15px;
+.input-group input,
+.password-wrapper input{
+
+
+    width:
+
+
+    100%;
+
+
+
+    height:
+
+
+    100%;
+
+
+
+
+
+    border:
+
+
+    1px solid
+
+    #E4E7EC;
+
+
+
+
+
+    border-radius:
+
+
+    14px;
+
+
+
+
+
+    padding:
+
+
+    0 42px;
+
+
+
+
+
+    font-size:
+
+
+    .85rem;
+
+
+
+
+
+    color:
+
+
+    var(--text);
+
 
 
 }
@@ -1028,11 +2600,6 @@ html[dir="ltr"] .input-icon{
 
 
 
-
-
-/* ======================================================
-   11. PASSWORD TOGGLE
-   ====================================================== */
 
 
 .toggle-btn{
@@ -1042,37 +2609,10 @@ html[dir="ltr"] .input-icon{
 
 
 
-    top:50%;
+    right:
 
 
-
-    transform:
-
-        translateY(-50%);
-
-
-
-    width:36px;
-
-
-
-    height:36px;
-
-
-
-    display:flex;
-
-
-
-    justify-content:center;
-
-
-
-    align-items:center;
-
-
-
-    border-radius:50%;
+    15px;
 
 
 
@@ -1080,39 +2620,7 @@ html[dir="ltr"] .input-icon{
 
 
 
-    color:var(--muted);
-
-
-
-    transition:
-
-
-        background var(--transition),
-
-
-        color var(--transition);
-
-
 }
-
-
-
-
-
-
-.toggle-btn:hover{
-
-
-    background:#eff6ff;
-
-
-
-    color:var(--primary);
-
-
-}
-
-
 
 
 
@@ -1121,29 +2629,14 @@ html[dir="ltr"] .input-icon{
 html[dir="rtl"] .toggle-btn{
 
 
-    left:12px;
-
-
-
     right:auto;
 
 
-}
+
+    left:
 
 
-
-
-
-
-
-html[dir="ltr"] .toggle-btn{
-
-
-    right:12px;
-
-
-
-    left:auto;
+    15px;
 
 
 }
@@ -1156,43 +2649,8 @@ html[dir="ltr"] .toggle-btn{
 
 
 /* ======================================================
-   PASSWORD INPUT SPACING
-   ====================================================== */
-
-
-html[dir="rtl"] .password-wrapper input{
-
-
-    padding-right:45px;
-
-
-
-    padding-left:45px;
-
-
-}
-
-
-
-
-
-
-
-html[dir="ltr"] .password-wrapper input{
-
-
-    padding-left:45px;
-
-
-
-    padding-right:45px;
-
-
-}
-
-/* ======================================================
-   12. REMEMBER ME
-   ====================================================== */
+06.6 : REMEMBER ME
+====================================================== */
 
 
 .remember-me{
@@ -1206,28 +2664,37 @@ html[dir="ltr"] .password-wrapper input{
 
 
 
-    gap:8px;
+    gap:
 
 
-
-    margin:18px 0;
-
-
-
-    color:#475569;
-
-
-}
+    8px;
 
 
 
 
 
+    margin-bottom:
 
-html[dir="rtl"] .remember-me{
+
+    18px;
 
 
-    flex-direction:row-reverse;
+
+
+
+    color:
+
+
+    var(--muted);
+
+
+
+
+
+    font-size:
+
+
+    .80rem;
 
 
 }
@@ -1240,18 +2707,28 @@ html[dir="rtl"] .remember-me{
 
 
 /* ======================================================
-   13. LOGIN BUTTON
-   ====================================================== */
+06.7 : LOGIN BUTTON
+====================================================== */
 
 
 button{
 
 
-    width:100%;
+    width:
+
+
+    100%;
 
 
 
-    padding:15px;
+
+
+    height:
+
+
+    48px;
+
+
 
 
 
@@ -1259,9 +2736,58 @@ button{
 
 
 
+
+
     border-radius:
 
-        var(--radius);
+
+    14px;
+
+
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        var(--primary-light),
+
+        var(--primary)
+
+    );
+
+
+
+
+
+    color:
+
+
+    #FFFFFF;
+
+
+
+
+
+    font-size:
+
+
+    .90rem;
+
+
+
+
+
+    font-weight:
+
+
+    700;
+
+
 
 
 
@@ -1269,43 +2795,28 @@ button{
 
 
 
-    font-size:17px;
 
 
-
-    font-weight:700;
-
+    box-shadow:
 
 
-    color:#fff;
+    0 12px 30px
+
+    rgba(11,79,168,.35);
 
 
-
-    background:
-
-
-        linear-gradient(
-
-            135deg,
-
-            var(--primary),
-
-            var(--primary-dark)
-
-        );
 
 
 
     transition:
 
 
-        transform var(--transition),
+    var(--transition);
 
-
-        box-shadow var(--transition);
 
 
 }
+
 
 
 
@@ -1318,17 +2829,23 @@ button:hover{
 
     transform:
 
-        translateY(-3px);
+
+    translateY(-2px);
+
+
 
 
 
     box-shadow:
 
 
-        0 12px 25px rgba(37,99,235,.30);
+    0 18px 35px
+
+    rgba(11,79,168,.45);
 
 
 }
+
 
 
 
@@ -1339,51 +2856,17 @@ button:hover{
 button:disabled{
 
 
-    background:#94a3b8;
+    opacity:
+
+
+    .55;
 
 
 
-    cursor:not-allowed;
+    cursor:
 
 
-
-    box-shadow:none;
-
-
-}
-
-
-
-
-
-
-
-button.login-error{
-
-
-    background:
-
-        var(--danger)!important;
-
-
-}
-
-
-
-
-
-
-
-button.login-error:disabled{
-
-
-    background:
-
-        var(--danger)!important;
-
-
-
-    color:#fff;
+    not-allowed;
 
 
 }
@@ -1396,24 +2879,69 @@ button.login-error:disabled{
 
 
 /* ======================================================
-   14. ACCESSIBILITY
-   ====================================================== */
+06.8 : AUTH FOOTER
+====================================================== */
 
 
-button:focus-visible,
-
-input:focus-visible,
-
-select:focus-visible{
+.login-footer{
 
 
-    outline:
-
-        3px solid rgba(37,99,235,.25);
+    display:flex;
 
 
 
-    outline-offset:3px;
+    justify-content:space-between;
+
+
+
+    align-items:center;
+
+
+
+
+
+    margin-top:
+
+
+    25px;
+
+
+
+
+
+    padding-top:
+
+
+    15px;
+
+
+
+
+
+    border-top:
+
+
+    1px solid
+
+    #EAECF0;
+
+
+
+
+
+    color:
+
+
+    var(--muted);
+
+
+
+
+
+    font-size:
+
+
+    .72rem;
 
 
 }
@@ -1426,33 +2954,11 @@ select:focus-visible{
 
 
 /* ======================================================
-   15. RTL / LTR SUPPORT
-   ====================================================== */
+07 : RTL ADJUSTMENTS
+====================================================== */
 
 
-html[dir="rtl"]{
-
-
-    direction:rtl;
-
-
-}
-
-
-
-html[dir="ltr"]{
-
-
-    direction:ltr;
-
-
-}
-
-
-
-
-
-html[dir="rtl"] input{
+html[dir="rtl"] .login-header{
 
 
     text-align:right;
@@ -1462,21 +2968,7 @@ html[dir="rtl"] input{
 
 
 
-
-
-html[dir="ltr"] input{
-
-
-    text-align:left;
-
-
-}
-
-
-
-
-
-html[dir="rtl"] .language-selector select{
+html[dir="rtl"] .branding-content{
 
 
     text-align:right;
@@ -1486,9 +2978,7 @@ html[dir="rtl"] .language-selector select{
 
 
 
-
-
-html[dir="ltr"] .language-selector select{
+html[dir="ltr"] .login-header{
 
 
     text-align:left;
@@ -1504,18 +2994,14 @@ html[dir="ltr"] .language-selector select{
 
 
 /* ======================================================
-   16. RESPONSIVE DESIGN
-   ====================================================== */
+08 : RESPONSIVE
+====================================================== */
 
 
-@media(max-width:700px){
+@media(max-width:1000px){
 
 
     body{
-
-
-        padding:20px;
-
 
 
         overflow:auto;
@@ -1526,36 +3012,24 @@ html[dir="ltr"] .language-selector select{
 
 
 
-
-    .language-selector{
-
-
-        top:15px;
+    .login-layout{
 
 
-    }
+        grid-template-columns:
 
+
+        1fr;
 
 
 
-
-    html[dir="ltr"] .language-selector{
-
-
-        right:15px;
+        width:
 
 
-    }
+        92vw;
 
 
 
-
-
-
-    html[dir="rtl"] .language-selector{
-
-
-        left:15px;
+        height:auto;
 
 
     }
@@ -1563,17 +3037,13 @@ html[dir="ltr"] .language-selector select{
 
 
 
+    .branding-panel{
 
 
-
-    .language-selector select{
-
-
-        min-width:140px;
+        min-height:
 
 
-
-        font-size:13px;
+        560px;
 
 
     }
@@ -1581,180 +3051,13 @@ html[dir="ltr"] .language-selector select{
 
 
 
+    .auth-panel{
 
 
+        min-height:
 
-    .login-card{
 
-
-        width:100%;
-
-
-
-        max-width:95%;
-
-
-
-        padding:30px 22px;
-
-
-
-        margin-top:60px;
-
-
-    }
-
-
-
-
-
-
-
-    .login-brand h1{
-
-
-        font-size:27px;
-
-
-    }
-
-
-
-
-
-
-
-    .login-logo{
-
-
-        width:75px;
-
-
-
-        height:75px;
-
-
-    }
-
-
-
-
-
-
-
-    .login-card h2{
-
-
-        font-size:22px;
-
-
-    }
-
-
-
-
-
-
-
-    .db-status{
-
-
-        width:34px;
-
-
-
-        height:34px;
-
-
-
-        top:15px;
-
-
-
-        right:15px;
-
-
-    }
-
-
-
-
-
-
-    html[dir="rtl"] .db-status{
-
-
-        right:auto;
-
-
-
-        left:15px;
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-@media(max-width:420px){
-
-
-    .language-selector select{
-
-
-        min-width:120px;
-
-
-
-        padding:10px;
-
-
-    }
-
-
-
-
-
-
-
-    .login-card{
-
-
-        padding:25px 18px;
-
-
-    }
-
-
-
-
-
-
-
-    .login-brand h1{
-
-
-        font-size:24px;
-
-
-    }
-
-
-
-
-
-
-
-    button{
-
-
-        font-size:15px;
+        560px;
 
 
     }
@@ -1769,44 +3072,23 @@ html[dir="ltr"] .language-selector select{
 
 
 
-/* ======================================================
-   17. ANIMATIONS
-   ====================================================== */
+@media(max-width:600px){
 
 
-.input-group,
-
-.password-wrapper,
-
-button{
+    .login-layout{
 
 
-    animation:
+        width:
 
 
-        fadeInput .5s ease;
-
-
-}
+        100%;
 
 
 
+        border-radius:
 
 
-
-@keyframes fadeInput{
-
-
-    from{
-
-
-        opacity:0;
-
-
-
-        transform:
-
-            translateY(10px);
+        24px;
 
 
     }
@@ -1814,17 +3096,28 @@ button{
 
 
 
-
-    to{
-
-
-        opacity:1;
+    .branding-panel,
+    .auth-panel{
 
 
+        padding:
 
-        transform:
 
-            translateY(0);
+        25px;
+
+
+    }
+
+
+
+
+    .branding-features{
+
+
+        flex-direction:
+
+
+        column;
 
 
     }
@@ -1832,47 +3125,3 @@ button{
 
 }
 
-
-
-
-
-
-
-
-/* ======================================================
-   18. DISABLED BUTTON EFFECT
-   ====================================================== */
-
-
-button:disabled:hover{
-
-
-    transform:none;
-
-
-
-    box-shadow:none;
-
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   END OF FILE
-
-   superlogin.css
-
-   Optimized:
-   ✔ Section numbering added
-   ✔ Duplicate rules removed
-   ✔ Standalone authentication design preserved
-   ✔ RTL / LTR preserved
-   ✔ No dependency on global.css
-
-====================================================== */

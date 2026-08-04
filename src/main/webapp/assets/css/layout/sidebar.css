@@ -2,81 +2,84 @@
 ==========================================================
 File        : sidebar.css
 Project     : CENTRIA
-Module      : Sidebar Component
+Layer       : Layout
+Component   : Sidebar
 
 Description :
-Professional SaaS sidebar.
+Main application navigation.
 
-Contains:
-- Sidebar layout
-- Branding
-- Navigation
+Responsibilities :
+- Navigation Menu
+- Collapsed Sidebar
+- Active State
 - Logout
-- RTL/LTR
+- RTL / LTR Support
+
+Version :
+3.1
+
+Status :
+Development
 
 ==========================================================
 */
 
 
 
+
+
 /* ======================================================
-   01 - SIDEBAR CONTAINER
-   ====================================================== */
+   SECTION 01 - SIDEBAR CONTAINER
+====================================================== */
 
 
 .sidebar{
 
 
-    width:var(--sidebar-width);
+    flex:0 0 230px;
 
 
-    min-width:var(--sidebar-width);
+    width:230px;
 
 
-    height:100vh;
+    min-width:230px;
 
 
-    flex-shrink:0;
+    height:100%;
+
+
+    min-height:0;
 
 
     display:flex;
 
 
     flex-direction:column;
+
+
+    background:var(--sidebar-bg);
+
+
+    color:var(--white);
 
 
     padding:20px;
 
 
-    color:white;
+    border-inline-end:
 
+    1px solid rgba(255,255,255,.08);
 
-    background:
-
-    linear-gradient(
-
-        180deg,
-
-        var(--sidebar-start),
-
-        var(--sidebar-end)
-
-    );
-
-
-    box-shadow:
-
-    0 0 30px rgba(15,23,42,.18);
-
-
-    overflow:hidden;
 
 
     transition:
 
-    width var(--transition),
+    width .25s ease,
 
-    min-width var(--transition);
+    min-width .25s ease,
+
+    flex-basis .25s ease;
+
 
 
 }
@@ -88,468 +91,110 @@ Contains:
 
 
 /* ======================================================
-   02 - BRAND SECTION
-   ====================================================== */
+   SECTION 02 - COLLAPSED SIDEBAR
+====================================================== */
 
 
-.brand-section{
+.sidebar.collapsed{
 
 
-    width:100%;
+    flex:0 0 72px;
+
+
+    width:72px;
+
+
+    min-width:72px;
+
+
+    padding:20px 10px;
+
+
+
+}
+
+
+
+
+
+
+
+.sidebar.collapsed .sidebar-text{
+
+
+    display:none;
+
+
+
+}
+
+
+
+
+
+
+
+.sidebar.collapsed .sidebar-link,
+
+.sidebar.collapsed .sidebar-logout{
+
+
+    justify-content:center;
+
+
+    gap:0;
+
+
+    padding-left:0;
+
+
+    padding-right:0;
+
+
+
+}
+
+
+
+
+
+
+
+.sidebar.collapsed .sidebar-icon{
+
+
+    margin:auto;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 03 - NAVIGATION MENU
+====================================================== */
+
+
+.sidebar-menu{
 
 
     display:flex;
 
 
     flex-direction:column;
-
-
-    align-items:center;
-
-
-    text-align:center;
-
-
-    flex-shrink:0;
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   03 - LOGO
-   ====================================================== */
-
-
-.logo{
-
-
-    width:82px;
-
-
-    height:82px;
-
-
-    object-fit:cover;
-
-
-    border-radius:50%;
-
-
-    background:white;
-
-
-    padding:7px;
-
-
-    margin-bottom:12px;
-
-
-    border:
-
-    3px solid rgba(255,255,255,.35);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(0,0,0,.30);
-
-
-    transition:transform var(--transition);
-
-
-}
-
-
-
-
-.logo:hover{
-
-
-    transform:scale(1.05);
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   04 - BRAND TEXT
-   ====================================================== */
-
-
-.brand-name{
-
-
-    color:white;
-
-
-    font-size:30px;
-
-
-    font-weight:900;
-
-
-    letter-spacing:1px;
-
-
-}
-
-
-
-
-
-.brand-subtitle{
-
-
-    margin-top:6px;
-
-
-    color:#cbd5e1;
-
-
-    font-size:13px;
-
-
-    line-height:1.5;
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   05 - DIVIDER
-   ====================================================== */
-
-
-.sidebar hr{
-
-
-    width:100%;
-
-
-    height:1px;
-
-
-    margin:22px 0;
-
-
-    border:none;
-
-
-    background:
-
-    rgba(255,255,255,.15);
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   06 - WELCOME TEXT
-   ====================================================== */
-
-
-.welcome-text{
-
-
-    margin-bottom:20px;
-
-
-    text-align:center;
-
-
-    color:#e2e8f0;
-
-
-    font-size:14px;
-
-
-    line-height:1.6;
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   07 - MENU SECTION
-   ====================================================== */
-
-
-.menu-section{
-
-
-    flex:1;
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:12px;
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   08 - MENU ITEM
-   ====================================================== */
-
-
-.menu-section a{
-
-
-    min-height:58px;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    gap:12px;
-
-
-    padding:12px;
-
-
-    border-radius:14px;
-
-
-    color:white;
-
-
-    background:
-
-    rgba(255,255,255,.07);
-
-
-    box-shadow:
-
-    inset 0 0 0 1px rgba(255,255,255,.05);
-
-
-
-    transition:
-
-    background var(--transition),
-
-    transform var(--transition),
-
-    box-shadow var(--transition);
-
-
-}
-
-
-
-
-
-.menu-section a:hover{
-
-
-    background:
-
-    rgba(255,255,255,.15);
-
-
-    transform:translateY(-2px);
-
-
-    box-shadow:
-
-    0 8px 20px rgba(0,0,0,.18);
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   09 - ACTIVE MENU
-   ====================================================== */
-
-
-.menu-section a.active{
-
-
-    background:
-
-    linear-gradient(
-
-        135deg,
-
-        var(--primary),
-
-        var(--primary-dark)
-
-    );
-
-
-    transform:translateY(-2px);
-
-
-    box-shadow:
-
-    0 12px 25px rgba(37,99,235,.35);
-
-
-}
-
-
-
-
-
-/* ======================================================
-   10 - MENU ICON
-   ====================================================== */
-
-
-.menu-icon{
-
-
-    width:38px;
-
-
-    height:38px;
-
-
-    flex-shrink:0;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    border-radius:12px;
-
-
-    background:
-
-    rgba(255,255,255,.12);
-
-
-    font-size:20px;
-
-
-}
-
-
-
-
-
-.menu-text{
-
-
-    flex:1;
-
-
-}
-
-/* ======================================================
-   11 - LOGOUT BUTTON
-   ====================================================== */
-
-
-.logout-btn{
-
-
-    width:100%;
-
-
-    flex-shrink:0;
-
-
-    margin-top:20px;
-
-
-    padding:13px;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
 
 
     gap:10px;
 
 
-    border-radius:var(--radius);
+    width:100%;
 
-
-    color:white;
-
-
-    font-weight:800;
-
-
-    background:
-
-    linear-gradient(
-
-        135deg,
-
-        #ef4444,
-
-        #dc2626
-
-    );
-
-
-    transition:
-
-    transform var(--transition),
-
-    box-shadow var(--transition);
 
 
 }
@@ -558,29 +203,63 @@ Contains:
 
 
 
-.logout-btn:hover{
 
 
-    transform:translateY(-3px);
+
+/* ======================================================
+   SECTION 04 - NAVIGATION LINK
+====================================================== */
 
 
-    box-shadow:
+.sidebar-link{
 
-    0 12px 25px rgba(239,68,68,.35);
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:14px;
+
+
+    width:100%;
+
+
+    padding:13px 14px;
+
+
+    border-radius:8px;
+
+
+    color:rgba(255,255,255,.88);
+
+
+    text-decoration:none;
+
+
+    position:relative;
+
+
+    transition:all .25s ease;
+
 
 
 }
 
 
 
+.sidebar-link:hover{
 
 
-.logout-btn .menu-icon{
+    background:rgba(255,255,255,.08);
 
 
-    background:
+    color:var(--white);
 
-    rgba(255,255,255,.15);
+
+    transform:translateX(3px);
+
 
 
 }
@@ -592,8 +271,258 @@ Contains:
 
 
 /* ======================================================
-   12 - RTL SUPPORT
-   ====================================================== */
+   SECTION 05 - ICON
+====================================================== */
+
+
+.sidebar-icon{
+
+
+    width:28px;
+
+
+    min-width:28px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:1.15rem;
+
+
+}
+
+
+/* ======================================================
+   SECTION 06 - TEXT
+====================================================== */
+
+
+.sidebar-text{
+
+
+    flex:1;
+
+
+    font-size:.98rem;
+
+
+    font-weight:500;
+
+
+    white-space:nowrap;
+
+
+}
+
+
+/* ======================================================
+   SECTION 07 - ACTIVE LINK
+====================================================== */
+
+
+.sidebar-link.active{
+
+
+    background:var(--primary);
+
+
+    color:var(--white);
+
+
+    box-shadow:
+
+    0 6px 18px rgba(37,99,235,.35);
+
+
+
+}
+
+
+
+.sidebar-link.active::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:20%;
+
+
+    width:4px;
+
+
+    height:60%;
+
+
+    background:white;
+
+
+    border-radius:4px;
+
+
+
+}
+
+
+
+/*
+RTL ACTIVE INDICATOR
+*/
+
+html[dir="rtl"] .sidebar-link.active::before{
+
+
+    right:0;
+
+
+}
+
+
+
+/*
+LTR ACTIVE INDICATOR
+*/
+
+html[dir="ltr"] .sidebar-link.active::before{
+
+
+    left:0;
+
+
+}
+
+
+
+.sidebar-link.active .sidebar-icon,
+
+.sidebar-link.active .sidebar-text{
+
+
+    color:var(--white);
+
+
+
+}
+
+
+
+/* ======================================================
+   SECTION 08 - FOOTER
+====================================================== */
+
+
+.sidebar-footer{
+
+
+    margin-top:auto;
+
+
+    padding-top:var(--space-lg);
+
+
+    border-top:
+
+    1px solid rgba(255,255,255,.10);
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 09 - LOGOUT
+====================================================== */
+
+.sidebar-logout{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:14px;
+
+
+    width:100%;
+
+
+    padding:13px 14px;
+
+
+    border-radius:8px;
+
+
+    background:#ef2929;
+
+
+    color:white;
+
+
+    font-weight:600;
+
+
+    text-decoration:none;
+
+
+    transition:all .25s ease;
+
+
+
+}
+
+
+
+
+.sidebar-logout .sidebar-icon,
+
+.sidebar-logout .sidebar-text{
+
+
+    color:white;
+
+
+
+}
+
+
+
+.sidebar-logout:hover{
+
+
+    background:#dc2626;
+
+
+    transform:translateY(-2px);
+
+
+
+}
+
+
+
+
+
+/* ======================================================
+   SECTION 10 - RTL SUPPORT
+====================================================== */
 
 
 html[dir="rtl"] .sidebar{
@@ -602,29 +531,6 @@ html[dir="rtl"] .sidebar{
     direction:rtl;
 
 
-}
-
-
-
-
-
-html[dir="rtl"] .menu-section a{
-
-
-    flex-direction:row-reverse;
-
-
-}
-
-
-
-
-
-html[dir="rtl"] .menu-text{
-
-
-    text-align:right;
-
 
 }
 
@@ -635,8 +541,8 @@ html[dir="rtl"] .menu-text{
 
 
 /* ======================================================
-   13 - LTR SUPPORT
-   ====================================================== */
+   SECTION 11 - LTR SUPPORT
+====================================================== */
 
 
 html[dir="ltr"] .sidebar{
@@ -645,31 +551,9 @@ html[dir="ltr"] .sidebar{
     direction:ltr;
 
 
-}
-
-
-
-
-
-html[dir="ltr"] .menu-section a{
-
-
-    flex-direction:row;
-
 
 }
 
-
-
-
-
-html[dir="ltr"] .menu-text{
-
-
-    text-align:left;
-
-
-}
 
 
 
@@ -678,10 +562,8 @@ html[dir="ltr"] .menu-text{
 
 
 /* ======================================================
-   14 - TABLET MODE
-   Sidebar becomes icons only
-
-   ====================================================== */
+   SECTION 12 - TABLET
+====================================================== */
 
 
 @media(max-width:1100px){
@@ -691,100 +573,18 @@ html[dir="ltr"] .menu-text{
     .sidebar{
 
 
-        width:90px;
+        flex-basis:220px;
 
 
-        min-width:90px;
+        width:220px;
 
 
-        padding:20px 10px;
+        min-width:220px;
+
 
 
     }
 
-
-
-
-
-    .brand-name,
-    .brand-subtitle,
-    .welcome-text,
-    .menu-text{
-
-
-        display:none;
-
-
-    }
-
-
-
-
-
-    .logo{
-
-
-        width:58px;
-
-
-        height:58px;
-
-
-    }
-
-
-
-
-
-    .sidebar hr{
-
-
-        margin:15px 0;
-
-
-    }
-
-
-
-
-
-    .menu-section a{
-
-
-        min-height:50px;
-
-
-        padding:10px;
-
-
-    }
-
-
-
-
-
-    .menu-icon{
-
-
-        width:40px;
-
-
-        height:40px;
-
-
-    }
-
-
-
-
-
-    .logout-btn{
-
-
-        padding:10px;
-
-
-    }
 
 
 }
@@ -795,11 +595,10 @@ html[dir="ltr"] .menu-text{
 
 
 
-/* ======================================================
-   15 - MOBILE MODE
-   Bottom navigation
 
-   ====================================================== */
+/* ======================================================
+   SECTION 13 - MOBILE
+====================================================== */
 
 
 @media(max-width:700px){
@@ -809,19 +608,22 @@ html[dir="ltr"] .menu-text{
     .sidebar{
 
 
-        position:fixed;
+        width:100%;
 
 
-        left:0;
+        min-width:100%;
 
 
-        right:0;
+        height:auto;
 
 
-        bottom:0;
+
+    }
 
 
-        top:auto;
+
+
+    .sidebar.collapsed{
 
 
         width:100%;
@@ -830,150 +632,13 @@ html[dir="ltr"] .menu-text{
         min-width:100%;
 
 
-        height:70px;
-
-
-        padding:8px 12px;
-
-
-        flex-direction:row;
-
-
-        align-items:center;
-
-
-        border-radius:22px 22px 0 0;
-
-
-        z-index:1000;
-
 
     }
 
-
-
-
-
-    .brand-section,
-    .sidebar hr,
-    .welcome-text{
-
-
-        display:none;
-
-
-    }
-
-
-
-
-
-    .menu-section{
-
-
-        width:100%;
-
-
-        flex-direction:row;
-
-
-        align-items:center;
-
-
-        justify-content:space-around;
-
-
-        gap:5px;
-
-
-    }
-
-
-
-
-
-    .menu-section a{
-
-
-        width:48px;
-
-
-        height:48px;
-
-
-        min-height:48px;
-
-
-        padding:0;
-
-
-    }
-
-
-
-
-
-    .menu-text{
-
-
-        display:none;
-
-
-    }
-
-
-
-
-
-    .menu-icon{
-
-
-        width:34px;
-
-
-        height:34px;
-
-
-        font-size:18px;
-
-
-    }
-
-
-
-
-
-    .logout-btn{
-
-
-        width:48px;
-
-
-        height:48px;
-
-
-        padding:0;
-
-
-        margin:0;
-
-
-    }
-
-
-
-
-
-    .main-content{
-
-
-        padding-bottom:90px;
-
-
-    }
 
 
 }
+
 
 
 
@@ -982,64 +647,6 @@ html[dir="ltr"] .menu-text{
 
 
 /* ======================================================
-   16 - COLLAPSED STATE
-   ====================================================== */
-
-
-.sidebar.collapsed{
-
-
-    width:90px;
-
-
-    min-width:90px;
-
-
-}
-
-
-
-
-
-.sidebar.collapsed .brand-name,
-.sidebar.collapsed .brand-subtitle,
-.sidebar.collapsed .welcome-text,
-.sidebar.collapsed .menu-text{
-
-
-    display:none;
-
-
-}
-
-
-
-
-
-.sidebar.collapsed .menu-section a{
-
-
-    justify-content:center;
-
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   END sidebar.css
-
-   Goals:
-
-   ✔ Smaller sidebar
-   ✔ More space for tables
-   ✔ Cleaner layout
-   ✔ RTL/LTR support
-   ✔ Responsive
-
+   END OF FILE
 ======================================================
 */

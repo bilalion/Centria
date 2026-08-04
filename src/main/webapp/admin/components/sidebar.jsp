@@ -1,125 +1,277 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.centria.language.LanguageManager"%>
 
-<div class="sidebar">
 
-    <!-- ==========================
-         BRAND
-         ========================== -->
+<!-- =================================================
+     SECTION 01 - SIDEBAR
+================================================= -->
 
-    <div class="brand-section">
 
-        <img
-            src="<%=request.getContextPath()%>/assets/images/centria-logo.png"
-            alt="Centria Logo"
-            class="logo">
+<aside class="sidebar">
 
-        <h2 class="brand-name">
-            Centria
-        </h2>
 
-        <span class="brand-subtitle">
-            <%= LanguageManager.get("dashboard.subtitle", session) %>
-        </span>
 
-    </div>
 
-    <hr>
 
-    <!-- ==========================
-         WELCOME
-         ========================== -->
+    <!-- =============================================
+         SECTION 02 - NAVIGATION MENU
+    ============================================== -->
 
-    <p class="welcome-text">
-        <%= LanguageManager.get("dashboard.welcome", session) %>
-    </p>
 
-    <!-- ==========================
-         MENU
-         ========================== -->
+    <nav class="sidebar-menu">
 
-    <div class="menu-section">
+
+
+
+
 
         <!-- HOME -->
+
+
         <a href="javascript:void(0)"
-           class="menu-link"
+
+           class="sidebar-link"
+
            onclick="loadContent('accueil.jsp', this)">
 
-            <span class="menu-icon">🏠</span>
 
-            <span class="menu-text">
-                <%= LanguageManager.get("dashboard.home", session) %>
+
+            <span class="sidebar-icon"
+                  title="Home">
+
+
+                <i class="fa-solid fa-house"></i>
+
+
             </span>
+
+
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.home",
+                        session
+                ) %>
+
+
+            </span>
+
+
 
         </a>
 
-        <!-- CENTERS -->
+
+
+
+
+
+
+
+
+        <!-- CENTRES -->
+
+
         <a href="javascript:void(0)"
-           class="menu-link"
+
+           class="sidebar-link"
+
            onclick="loadContent('CentreServlet?action=list', this)">
 
-            <span class="menu-icon">🏢</span>
 
-            <span class="menu-text">
-                <%= LanguageManager.get("dashboard.centers", session) %>
+
+            <span class="sidebar-icon"
+                  title="Centres">
+
+
+                <i class="fa-solid fa-building"></i>
+
+
             </span>
 
+
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.centers",
+                        session
+                ) %>
+
+
+            </span>
+
+
+
         </a>
-                    <!-- PAYMENTS -->
+
+
+
+
+
+
+
+
+
+        <!-- PAYMENTS -->
+
+
         <a href="javascript:void(0)"
-           class="menu-link"
+
+           class="sidebar-link"
+
            onclick="loadContent('payments.jsp', this)">
-            
 
-            <span class="menu-icon">💰</span>
 
-            <span class="menu-text">
-                <%= LanguageManager.get("dashboard.payments", session) %>
+
+            <span class="sidebar-icon"
+                  title="Payments">
+
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+
             </span>
 
+
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.payments",
+                        session
+                ) %>
+
+
+            </span>
+
+
+
         </a>
+
+
+
+
+
+
+
+
 
         <!-- ARCHIVE -->
+
+
         <a href="javascript:void(0)"
-           class="menu-link"
+
+           class="sidebar-link"
+
            onclick="loadContent('archive.jsp', this)">
 
-            <span class="menu-icon">🗄️</span>
 
-            <span class="menu-text">
-                <%= LanguageManager.get("dashboard.archive", session) %>
+
+            <span class="sidebar-icon"
+                  title="Archive">
+
+
+                <i class="fa-solid fa-box-archive"></i>
+
+
             </span>
+
+
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.archive",
+                        session
+                ) %>
+
+
+            </span>
+
+
 
         </a>
 
-        <!-- SETTINGS -->
-        <a href="javascript:void(0)"
-           class="menu-link"
-           onclick="loadContent('settings.jsp', this)">
 
-            <span class="menu-icon">⚙️</span>
 
-            <span class="menu-text">
-                <%= LanguageManager.get("dashboard.settings", session) %>
+
+
+
+    </nav>
+
+
+
+
+
+
+
+
+
+    <!-- =============================================
+         SECTION 03 - SIDEBAR FOOTER
+    ============================================== -->
+
+
+    <div class="sidebar-footer">
+
+
+
+
+
+
+        <!-- LOGOUT -->
+
+
+        <a href="<%=request.getContextPath()%>/LogoutServlet"
+
+           class="sidebar-logout">
+
+
+
+            <span class="sidebar-icon"
+                  title="Logout">
+
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+
             </span>
 
+
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.logout",
+                        session
+                ) %>
+
+
+            </span>
+
+
+
         </a>
+
+
+
+
 
     </div>
 
-    <!-- ==========================
-         LOGOUT
-         ========================== -->
 
-    <a href="<%=request.getContextPath()%>/LogoutServlet"
-       class="logout-btn">
 
-        <span class="menu-icon">🚪</span>
 
-        <span class="menu-text">
-            <%= LanguageManager.get("dashboard.logout", session) %>
-        </span>
 
-    </a>
-
-</div>
+</aside>
