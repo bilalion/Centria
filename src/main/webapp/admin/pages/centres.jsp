@@ -209,109 +209,6 @@
 
             </a>
 
-
-            <!-- QUICK STATUS FILTERS -->
-
-            <div class="centres-status-filters"
-                 aria-label="Centre status filters">
-
-                <button type="button"
-                        class="centre-status-filter is-active"
-                        data-centre-status-filter="ALL"
-                        aria-pressed="true">
-
-                    <span class="centre-status-dot is-all"></span>
-
-                    <span>
-                        <%= LanguageManager.get(
-                                "centers.all",
-                                session
-                        ) %>
-                    </span>
-
-                    <span class="centre-filter-count"
-                          data-centre-status-count="ALL"></span>
-
-                </button>
-
-                <button type="button"
-                        class="centre-status-filter"
-                        data-centre-status-filter="ACTIVE"
-                        aria-pressed="false">
-
-                    <span class="centre-status-dot is-active"></span>
-
-                    <span>
-                        <%= LanguageManager.get(
-                                "centers.active",
-                                session
-                        ) %>
-                    </span>
-
-                    <span class="centre-filter-count"
-                          data-centre-status-count="ACTIVE"></span>
-
-                </button>
-
-                <button type="button"
-                        class="centre-status-filter"
-                        data-centre-status-filter="PENDING"
-                        aria-pressed="false">
-
-                    <span class="centre-status-dot is-pending"></span>
-
-                    <span>
-                        <%= LanguageManager.get(
-                                "centers.pending",
-                                session
-                        ) %>
-                    </span>
-
-                    <span class="centre-filter-count"
-                          data-centre-status-count="PENDING"></span>
-
-                </button>
-
-                <button type="button"
-                        class="centre-status-filter"
-                        data-centre-status-filter="SUSPENDED"
-                        aria-pressed="false">
-
-                    <span class="centre-status-dot is-suspended"></span>
-
-                    <span>
-                        <%= LanguageManager.get(
-                                "centers.suspended",
-                                session
-                        ) %>
-                    </span>
-
-                    <span class="centre-filter-count"
-                          data-centre-status-count="SUSPENDED"></span>
-
-                </button>
-
-                <button type="button"
-                        class="centre-status-filter"
-                        data-centre-status-filter="ARCHIVED"
-                        aria-pressed="false">
-
-                    <span class="centre-status-dot is-archived"></span>
-
-                    <span>
-                        <%= LanguageManager.get(
-                                "centers.archived",
-                                session
-                        ) %>
-                    </span>
-
-                    <span class="centre-filter-count"
-                          data-centre-status-count="ARCHIVED"></span>
-
-                </button>
-
-            </div>
-
         </div>
 
 
@@ -321,6 +218,8 @@
                  aria-labelledby="centres-register-title">
 
             <header class="centres-register-header">
+
+                <!-- TITLE + TOTAL -->
 
                 <div class="centres-register-title-wrap">
 
@@ -350,8 +249,123 @@
 
                 </div>
 
+
+                <!-- QUICK STATUS FILTERS -->
+
+                <div class="centres-register-status">
+
+                    <div class="centres-status-filters"
+                         aria-label="Centre status filters">
+
+                        <button type="button"
+                                class="centre-status-filter is-active"
+                                data-centre-status-filter="ALL"
+                                aria-pressed="true">
+
+                            <span class="centre-status-dot is-all"></span>
+
+                            <span>
+                                <%= LanguageManager.get(
+                                        "centers.all",
+                                        session
+                                ) %>
+                            </span>
+
+                            <span class="centre-filter-count"
+                                  data-centre-status-count="ALL"></span>
+
+                        </button>
+
+                        <button type="button"
+                                class="centre-status-filter"
+                                data-centre-status-filter="ACTIVE"
+                                aria-pressed="false">
+
+                            <span class="centre-status-dot is-active"></span>
+
+                            <span>
+                                <%= LanguageManager.get(
+                                        "centers.active",
+                                        session
+                                ) %>
+                            </span>
+
+                            <span class="centre-filter-count"
+                                  data-centre-status-count="ACTIVE"></span>
+
+                        </button>
+
+                        <button type="button"
+                                class="centre-status-filter"
+                                data-centre-status-filter="PENDING"
+                                aria-pressed="false">
+
+                            <span class="centre-status-dot is-pending"></span>
+
+                            <span>
+                                <%= LanguageManager.get(
+                                        "centers.pending",
+                                        session
+                                ) %>
+                            </span>
+
+                            <span class="centre-filter-count"
+                                  data-centre-status-count="PENDING"></span>
+
+                        </button>
+
+                        <button type="button"
+                                class="centre-status-filter"
+                                data-centre-status-filter="SUSPENDED"
+                                aria-pressed="false">
+
+                            <span class="centre-status-dot is-suspended"></span>
+
+                            <span>
+                                <%= LanguageManager.get(
+                                        "centers.suspended",
+                                        session
+                                ) %>
+                            </span>
+
+                            <span class="centre-filter-count"
+                                  data-centre-status-count="SUSPENDED"></span>
+
+                        </button>
+
+                        <button type="button"
+                                class="centre-status-filter"
+                                data-centre-status-filter="ARCHIVED"
+                                aria-pressed="false">
+
+                            <span class="centre-status-dot is-archived"></span>
+
+                            <span>
+                                <%= LanguageManager.get(
+                                        "centers.archived",
+                                        session
+                                ) %>
+                            </span>
+
+                            <span class="centre-filter-count"
+                                  data-centre-status-count="ARCHIVED"></span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BALANCE FOR CENTER ALIGNMENT -->
+
+                <span class="centres-register-balance"
+                      aria-hidden="true"></span>
+
             </header>
 
+
+            <!-- TABLE -->
 
             <div class="centres-table-stage">
 

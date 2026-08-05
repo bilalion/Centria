@@ -1,15 +1,20 @@
+
 /*
 ==========================================================
 File        : centres.css
 Project     : CENTRIA
 Layer       : Pages
-Component   : Centres Management
+Module      : Centres Management
+
+Description :
+Centres workspace, controls, table and modals.
+
 ==========================================================
 */
 
 
 /* ======================================================
-   PAGE FOUNDATION
+   القسم 01 - صفحة المراكز
 ====================================================== */
 
 .centres-page{
@@ -18,7 +23,7 @@ Component   : Centres Management
 
     display:grid;
 
-    gap:16px;
+    gap:12px;
 
     color:var(--text);
 
@@ -40,7 +45,7 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   CENTRE BANNER
+   القسم 02 - شريط تعريف الصفحة
 ====================================================== */
 
 .centre-banner{
@@ -59,7 +64,7 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid #dbeafe;
 
-    border-radius:var(--radius-sm);
+    border-radius:8px;
 
 }
 
@@ -117,14 +122,14 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   WORKSPACE
+   القسم 03 - مساحة العمل
 ====================================================== */
 
 .centres-workspace{
 
     display:grid;
 
-    gap:18px;
+    gap:12px;
 
     min-width:0;
 
@@ -132,7 +137,7 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   CONTROL DECK
+   القسم 04 - لوحة البحث والفلاتر
 ====================================================== */
 
 .centres-control-deck{
@@ -143,15 +148,15 @@ html[dir="ltr"] .centres-page{
 
     align-items:center;
 
-    gap:16px;
+    gap:12px;
 
-    padding:22px;
+    padding:14px 18px;
 
     background:var(--white);
 
     border:1px solid var(--border);
 
-    border-radius:14px;
+    border-radius:10px;
 
     box-shadow:var(--shadow-sm);
 
@@ -168,8 +173,8 @@ html[dir="ltr"] .centres-page{
 
     grid-template-columns:
         minmax(230px, 1fr)
-        minmax(150px, .42fr)
-        minmax(150px, .42fr)
+        minmax(145px, .42fr)
+        minmax(145px, .42fr)
         auto;
 
     align-items:center;
@@ -180,7 +185,7 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   SEARCH FIELD
+   القسم 05 - حقل البحث
 ====================================================== */
 
 .centres-search-field{
@@ -217,7 +222,7 @@ html[dir="ltr"] .centres-page{
 
     width:100%;
 
-    height:48px;
+    height:44px;
 
     padding-inline-start:42px;
 
@@ -229,9 +234,9 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid #dfe5ee;
 
-    border-radius:10px;
+    border-radius:8px;
 
-    font-size:.88rem;
+    font-size:.86rem;
 
     transition:
         border-color var(--transition),
@@ -257,7 +262,7 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   SELECT FIELDS
+   القسم 06 - حقول الاختيار
 ====================================================== */
 
 .centres-select-field{
@@ -294,7 +299,7 @@ html[dir="ltr"] .centres-page{
 
     width:100%;
 
-    height:48px;
+    height:44px;
 
     padding-inline-start:38px;
 
@@ -306,9 +311,9 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid #dfe5ee;
 
-    border-radius:10px;
+    border-radius:8px;
 
-    font-size:.86rem;
+    font-size:.84rem;
 
     font-weight:600;
 
@@ -331,12 +336,12 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   BUTTONS
+   القسم 07 - الأزرار الرئيسية
 ====================================================== */
 
 .centres-page .btn-primary{
 
-    min-height:46px;
+    min-height:44px;
 
     display:inline-flex;
 
@@ -344,9 +349,9 @@ html[dir="ltr"] .centres-page{
 
     justify-content:center;
 
-    gap:9px;
+    gap:8px;
 
-    padding:0 18px;
+    padding:0 17px;
 
     color:var(--white);
 
@@ -354,9 +359,9 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid var(--primary);
 
-    border-radius:10px;
+    border-radius:8px;
 
-    font-size:.88rem;
+    font-size:.86rem;
 
     font-weight:700;
 
@@ -366,7 +371,7 @@ html[dir="ltr"] .centres-page{
 
     cursor:pointer;
 
-    box-shadow:0 8px 18px rgba(37,99,235,.18);
+    box-shadow:0 6px 15px rgba(37,99,235,.16);
 
     transition:
         background var(--transition),
@@ -385,25 +390,16 @@ html[dir="ltr"] .centres-page{
 
     border-color:var(--primary-dark);
 
-    box-shadow:0 10px 22px rgba(29,78,216,.24);
+    box-shadow:0 8px 18px rgba(29,78,216,.22);
 
     transform:translateY(-1px);
 
 }
 
 
-.centres-page .btn-primary:focus-visible{
-
-    outline:2px solid var(--primary);
-
-    outline-offset:3px;
-
-}
-
-
 .centres-search-button{
 
-    min-width:112px;
+    min-width:108px;
 
 }
 
@@ -412,14 +408,14 @@ html[dir="ltr"] .centres-page{
 
     flex:0 0 auto;
 
-    min-width:145px;
+    min-width:142px;
 
 }
 
 
 .centres-page .btn-secondary{
 
-    min-height:42px;
+    min-height:40px;
 
     display:inline-flex;
 
@@ -429,7 +425,7 @@ html[dir="ltr"] .centres-page{
 
     gap:8px;
 
-    padding:0 16px;
+    padding:0 15px;
 
     color:#475569;
 
@@ -437,18 +433,13 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid #dbe2ea;
 
-    border-radius:9px;
+    border-radius:8px;
 
-    font-size:.85rem;
+    font-size:.84rem;
 
     font-weight:700;
 
     cursor:pointer;
-
-    transition:
-        color var(--transition),
-        background var(--transition),
-        border-color var(--transition);
 
 }
 
@@ -465,7 +456,7 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   QUICK STATUS FILTERS
+   القسم 08 - أزرار حالات المراكز
 ====================================================== */
 
 .centres-status-filters{
@@ -478,9 +469,11 @@ html[dir="ltr"] .centres-page{
 
     align-items:center;
 
-    gap:10px;
+    justify-content:center;
 
-    padding-top:16px;
+    gap:8px;
+
+    padding-top:12px;
 
     border-top:1px solid #eef1f5;
 
@@ -489,15 +482,15 @@ html[dir="ltr"] .centres-page{
 
 .centre-status-filter{
 
-    min-height:36px;
+    min-height:32px;
 
     display:inline-flex;
 
     align-items:center;
 
-    gap:8px;
+    gap:7px;
 
-    padding:0 12px;
+    padding:0 10px;
 
     color:#64748b;
 
@@ -505,9 +498,9 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid #e2e8f0;
 
-    border-radius:9px;
+    border-radius:8px;
 
-    font-size:.8rem;
+    font-size:.78rem;
 
     font-weight:700;
 
@@ -541,7 +534,7 @@ html[dir="ltr"] .centres-page{
 
     border-color:#93c5fd;
 
-    box-shadow:0 3px 8px rgba(37,99,235,.08);
+    box-shadow:0 2px 6px rgba(37,99,235,.08);
 
 }
 
@@ -596,9 +589,9 @@ html[dir="ltr"] .centres-page{
 
 .centre-filter-count{
 
-    min-width:20px;
+    min-width:19px;
 
-    height:20px;
+    height:19px;
 
     display:inline-flex;
 
@@ -614,7 +607,7 @@ html[dir="ltr"] .centres-page{
 
     border-radius:999px;
 
-    font-size:.72rem;
+    font-size:.7rem;
 
     font-weight:800;
 
@@ -631,7 +624,7 @@ html[dir="ltr"] .centres-page{
 
 
 /* ======================================================
-   CENTRES REGISTER
+   القسم 09 - بطاقة سجل المراكز
 ====================================================== */
 
 .centres-register{
@@ -644,7 +637,7 @@ html[dir="ltr"] .centres-page{
 
     border:1px solid var(--border);
 
-    border-radius:14px;
+    border-radius:10px;
 
     box-shadow:var(--shadow-sm);
 
@@ -653,7 +646,9 @@ html[dir="ltr"] .centres-page{
 
 .centres-register-header{
 
-    min-height:72px;
+    height:58px;
+
+    min-height:58px;
 
     display:flex;
 
@@ -663,7 +658,9 @@ html[dir="ltr"] .centres-page{
 
     gap:16px;
 
-    padding:0 20px;
+    padding:0 16px;
+
+    background:var(--white);
 
     border-bottom:1px solid #eef1f5;
 
@@ -676,16 +673,27 @@ html[dir="ltr"] .centres-page{
 
     align-items:center;
 
-    gap:11px;
+    gap:9px;
+
+}
+
+
+.centres-register-title-wrap > div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
 
 }
 
 
 .centres-register-icon{
 
-    width:36px;
+    width:34px;
 
-    height:36px;
+    height:34px;
 
     display:flex;
 
@@ -697,9 +705,9 @@ html[dir="ltr"] .centres-page{
 
     background:#eff6ff;
 
-    border-radius:10px;
+    border-radius:8px;
 
-    font-size:.92rem;
+    font-size:.88rem;
 
 }
 
@@ -710,9 +718,11 @@ html[dir="ltr"] .centres-page{
 
     color:var(--text);
 
-    font-size:1rem;
+    font-size:.96rem;
 
     font-weight:800;
+
+    white-space:nowrap;
 
 }
 
@@ -721,7 +731,7 @@ html[dir="ltr"] .centres-page{
 
     min-width:22px;
 
-    min-height:22px;
+    height:22px;
 
     display:inline-flex;
 
@@ -729,7 +739,7 @@ html[dir="ltr"] .centres-page{
 
     justify-content:center;
 
-    margin-top:3px;
+    margin:0;
 
     color:#64748b;
 
@@ -751,9 +761,15 @@ html[dir="ltr"] .centres-page{
 }
 
 
+/* ======================================================
+   القسم 10 - حاوية الجدول
+====================================================== */
+
 .centres-table-stage{
 
     width:100%;
+
+    padding:0 10px 10px;
 
     overflow-x:auto;
 
@@ -767,8 +783,19 @@ html[dir="ltr"] .centres-page{
 }
 
 
+.table-container{
+
+    overflow:hidden;
+
+    border:1px solid #e7edf4;
+
+    border-radius:8px;
+
+}
+
+
 /* ======================================================
-   TABLE FOUNDATION
+   القسم 11 - رأس الجدول
 ====================================================== */
 
 .table-content-area table{
@@ -788,20 +815,15 @@ html[dir="ltr"] .centres-page{
 
 .table-content-area thead th{
 
-    padding:16px 14px;
+    padding:12px 14px;
 
-    color:var(--white);
+    color:#475569;
 
-    background:
-        linear-gradient(
-            135deg,
-            #061a3d 0%,
-            #0c2b72 100%
-        );
+    background:#f8fafc;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid #dfe7f0;
 
-    font-size:.82rem;
+    font-size:.78rem;
 
     font-weight:800;
 
@@ -812,31 +834,23 @@ html[dir="ltr"] .centres-page{
 }
 
 
-.table-content-area thead th:first-child{
-
-    border-start-start-radius:10px;
-
-}
-
-
-.table-content-area thead th:last-child{
-
-    border-start-end-radius:10px;
-
-}
-
+/* ======================================================
+   القسم 12 - صفوف الجدول
+====================================================== */
 
 .table-content-area tbody td{
 
-    padding:15px 14px;
+    padding:8px 14px;
 
     color:#334155;
 
     background:var(--white);
 
-    border-bottom:1px solid #eef1f5;
+    border-bottom:1px solid #edf1f5;
 
-    font-size:.84rem;
+    font-size:.82rem;
+
+    line-height:1.3;
 
     text-align:start;
 
@@ -856,7 +870,7 @@ html[dir="ltr"] .centres-page{
 
 .table-content-area tbody tr:hover td{
 
-    background:#fbfdff;
+    background:#f8fbff;
 
 }
 
@@ -922,8 +936,7 @@ html[dir="ltr"]
 
 
 /* ======================================================
-   CENTRE IDENTITY
-   Used in the table fragment
+   القسم 13 - هوية المركز
 ====================================================== */
 
 .centre-identity{
@@ -932,7 +945,7 @@ html[dir="ltr"]
 
     align-items:center;
 
-    gap:11px;
+    gap:8px;
 
     min-width:190px;
 
@@ -941,11 +954,11 @@ html[dir="ltr"]
 
 .centre-avatar{
 
-    width:42px;
+    width:36px;
 
-    height:42px;
+    height:36px;
 
-    flex:0 0 42px;
+    flex:0 0 36px;
 
     display:flex;
 
@@ -957,9 +970,9 @@ html[dir="ltr"]
 
     background:#eff6ff;
 
-    border-radius:10px;
+    border-radius:8px;
 
-    font-size:1rem;
+    font-size:.86rem;
 
 }
 
@@ -972,7 +985,7 @@ html[dir="ltr"]
 
     flex-direction:column;
 
-    gap:3px;
+    gap:2px;
 
 }
 
@@ -983,7 +996,7 @@ html[dir="ltr"]
 
     color:var(--text);
 
-    font-size:.88rem;
+    font-size:.84rem;
 
     font-weight:800;
 
@@ -998,7 +1011,7 @@ html[dir="ltr"]
 
     color:#94a3b8;
 
-    font-size:.73rem;
+    font-size:.7rem;
 
     font-weight:700;
 
@@ -1010,7 +1023,7 @@ html[dir="ltr"]
 
 
 /* ======================================================
-   OWNER / CONTACT
+   القسم 14 - المالك وبيانات الاتصال
 ====================================================== */
 
 .centre-contact{
@@ -1019,7 +1032,7 @@ html[dir="ltr"]
 
     flex-direction:column;
 
-    gap:5px;
+    gap:3px;
 
     min-width:155px;
 
@@ -1045,6 +1058,8 @@ html[dir="ltr"]
 
     color:#334155;
 
+    font-size:.8rem;
+
     font-weight:700;
 
 }
@@ -1054,7 +1069,7 @@ html[dir="ltr"]
 
     color:#64748b;
 
-    font-size:.77rem;
+    font-size:.74rem;
 
     direction:ltr;
 
@@ -1069,26 +1084,30 @@ html[dir="ltr"]
 
     color:#94a3b8;
 
-    font-size:.75rem;
+    font-size:.7rem;
 
 }
 
 
 /* ======================================================
-   SUBSCRIPTION TIMELINE
+   القسم 15 - الخط الزمني للاشتراك
 ====================================================== */
 
 .centre-subscription-timeline{
 
-    min-width:130px;
+    width:max-content;
+
+    min-width:0;
 
     display:grid;
 
-    grid-template-columns:14px 1fr;
+    grid-template-columns:10px max-content;
 
-    gap:8px;
+    gap:6px;
 
     align-items:center;
+
+    margin-inline:auto;
 
 }
 
@@ -1099,7 +1118,7 @@ html[dir="ltr"]
 
     width:2px;
 
-    height:42px;
+    height:32px;
 
     justify-self:center;
 
@@ -1118,9 +1137,9 @@ html[dir="ltr"]
 
     inset-inline-start:50%;
 
-    width:9px;
+    width:8px;
 
-    height:9px;
+    height:8px;
 
     border-radius:50%;
 
@@ -1153,7 +1172,7 @@ html[dir="ltr"]
 
     flex-direction:column;
 
-    gap:4px;
+    gap:2px;
 
 }
 
@@ -1162,9 +1181,11 @@ html[dir="ltr"]
 
     color:#94a3b8;
 
-    font-size:.68rem;
+    font-size:.61rem;
 
     font-weight:700;
+
+    line-height:1.1;
 
 }
 
@@ -1173,9 +1194,11 @@ html[dir="ltr"]
 
     color:#475569;
 
-    font-size:.78rem;
+    font-size:.72rem;
 
     font-weight:700;
+
+    line-height:1.2;
 
     direction:ltr;
 
@@ -1184,36 +1207,44 @@ html[dir="ltr"]
 }
 
 
-.centre-row.is-active .centre-timeline-line::before,
+.centre-row[data-status="ACTIVE"]
+.centre-timeline-line::before,
 
-.centre-row.is-active .centre-timeline-line::after{
+.centre-row[data-status="ACTIVE"]
+.centre-timeline-line::after{
 
     background:var(--success);
 
 }
 
 
-.centre-row.is-pending .centre-timeline-line::before,
+.centre-row[data-status="PENDING"]
+.centre-timeline-line::before,
 
-.centre-row.is-pending .centre-timeline-line::after{
+.centre-row[data-status="PENDING"]
+.centre-timeline-line::after{
 
     background:var(--warning);
 
 }
 
 
-.centre-row.is-suspended .centre-timeline-line::before,
+.centre-row[data-status="SUSPENDED"]
+.centre-timeline-line::before,
 
-.centre-row.is-suspended .centre-timeline-line::after{
+.centre-row[data-status="SUSPENDED"]
+.centre-timeline-line::after{
 
     background:var(--danger);
 
 }
 
 
-.centre-row.is-archived .centre-timeline-line::before,
+.centre-row[data-status="ARCHIVED"]
+.centre-timeline-line::before,
 
-.centre-row.is-archived .centre-timeline-line::after{
+.centre-row[data-status="ARCHIVED"]
+.centre-timeline-line::after{
 
     background:#94a3b8;
 
@@ -1221,135 +1252,123 @@ html[dir="ltr"]
 
 
 /* ======================================================
-   STATUS BADGES
+   القسم 16 - حالة المركز
 ====================================================== */
 
-.centre-status-badge{
+.centre-status-select{
 
-    min-height:31px;
+    min-width:108px;
 
-    display:inline-flex;
+    min-height:29px;
 
-    align-items:center;
+    padding-inline-start:28px;
 
-    justify-content:center;
-
-    gap:7px;
-
-    padding:0 12px;
+    padding-inline-end:12px;
 
     border:1px solid transparent;
 
     border-radius:999px;
 
-    font-size:.78rem;
+    font-size:.73rem;
 
     font-weight:800;
 
-    white-space:nowrap;
+    appearance:none;
+
+    background-repeat:no-repeat;
+
+    background-size:8px 8px;
+
+    cursor:pointer;
 
 }
 
 
-.centre-status-badge::before{
+html[dir="rtl"] .centre-status-select{
 
-    content:"";
-
-    width:7px;
-
-    height:7px;
-
-    border-radius:50%;
-
-    background:currentColor;
+    background-position:right 12px center;
 
 }
 
 
-.centre-status-badge.is-active{
+html[dir="ltr"] .centre-status-select{
+
+    background-position:left 12px center;
+
+}
+
+
+.centre-status-select:focus{
+
+    outline:none;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+
+.centre-status-select.status-active{
 
     color:#15803d;
 
-    background:#ecfdf3;
+    background-color:#ecfdf3;
+
+    background-image:radial-gradient(
+        circle,
+        #15803d 0 3px,
+        transparent 4px
+    );
 
     border-color:#86efac;
 
 }
 
 
-.centre-status-badge.is-pending{
+.centre-status-select.status-pending{
 
     color:#b45309;
 
-    background:#fff7e6;
+    background-color:#fff7e6;
+
+    background-image:radial-gradient(
+        circle,
+        #b45309 0 3px,
+        transparent 4px
+    );
 
     border-color:#fcd34d;
 
 }
 
 
-.centre-status-badge.is-suspended{
+.centre-status-select.status-suspended{
 
     color:#b91c1c;
 
-    background:#fef2f2;
+    background-color:#fef2f2;
+
+    background-image:radial-gradient(
+        circle,
+        #b91c1c 0 3px,
+        transparent 4px
+    );
 
     border-color:#fca5a5;
 
 }
 
 
-.centre-status-badge.is-archived{
+.centre-status-select.status-archived{
 
     color:#64748b;
 
-    background:#f1f5f9;
+    background-color:#f1f5f9;
 
-    border-color:#cbd5e1;
-
-}
-
-
-/* Legacy status selectors */
-
-.table-content-area .status-active{
-
-    color:#15803d;
-
-    background:#ecfdf3;
-
-    border-color:#86efac;
-
-}
-
-
-.table-content-area .status-pending{
-
-    color:#b45309;
-
-    background:#fff7e6;
-
-    border-color:#fcd34d;
-
-}
-
-
-.table-content-area .status-suspended{
-
-    color:#b91c1c;
-
-    background:#fef2f2;
-
-    border-color:#fca5a5;
-
-}
-
-
-.table-content-area .status-archived{
-
-    color:#64748b;
-
-    background:#f1f5f9;
+    background-image:radial-gradient(
+        circle,
+        #64748b 0 3px,
+        transparent 4px
+    );
 
     border-color:#cbd5e1;
 
@@ -1357,7 +1376,7 @@ html[dir="ltr"]
 
 
 /* ======================================================
-   TABLE ACTIONS
+   القسم 17 - أزرار الإجراءات
 ====================================================== */
 
 .table-actions{
@@ -1366,7 +1385,7 @@ html[dir="ltr"]
 
     align-items:center;
 
-    gap:8px;
+    gap:7px;
 
     white-space:nowrap;
 
@@ -1375,9 +1394,9 @@ html[dir="ltr"]
 
 .action-button{
 
-    width:36px;
+    width:32px;
 
-    height:36px;
+    height:32px;
 
     display:inline-flex;
 
@@ -1391,9 +1410,9 @@ html[dir="ltr"]
 
     border:1px solid #dbe2ea;
 
-    border-radius:9px;
+    border-radius:8px;
 
-    font-size:.86rem;
+    font-size:.76rem;
 
     cursor:pointer;
 
@@ -1422,19 +1441,8 @@ html[dir="ltr"]
 }
 
 
-.action-button.is-danger:hover{
-
-    color:#b91c1c;
-
-    background:#fef2f2;
-
-    border-color:#fca5a5;
-
-}
-
-
 /* ======================================================
-   AJAX STATES
+   القسم 18 - التحميل والنتائج الفارغة
 ====================================================== */
 
 .centres-table-loading,
@@ -1443,7 +1451,7 @@ html[dir="ltr"]
 
 .empty-state{
 
-    min-height:230px;
+    min-height:160px;
 
     display:flex;
 
@@ -1455,7 +1463,7 @@ html[dir="ltr"]
 
     gap:12px;
 
-    padding:30px;
+    padding:24px;
 
     color:#94a3b8;
 
@@ -1468,7 +1476,7 @@ html[dir="ltr"]
 
     color:var(--primary);
 
-    font-size:1.35rem;
+    font-size:1.3rem;
 
 }
 
@@ -1480,26 +1488,8 @@ html[dir="ltr"]
 }
 
 
-.centres-table-error i,
-
-.centre-action-error i{
-
-    font-size:1.3rem;
-
-}
-
-
-.empty-state h3,
-
-.empty-state p{
-
-    margin:0;
-
-}
-
-
 /* ======================================================
-   PAGINATION
+   القسم 19 - التنقل بين الصفحات
 ====================================================== */
 
 .pagination,
@@ -1516,7 +1506,7 @@ html[dir="ltr"]
 
     gap:7px;
 
-    padding:18px;
+    padding:10px 0 0;
 
 }
 
@@ -1525,9 +1515,9 @@ html[dir="ltr"]
 
 .centres-pagination button{
 
-    min-width:34px;
+    min-width:32px;
 
-    height:34px;
+    height:32px;
 
     display:inline-flex;
 
@@ -1535,7 +1525,7 @@ html[dir="ltr"]
 
     justify-content:center;
 
-    padding:0 10px;
+    padding:0 9px;
 
     color:#64748b;
 
@@ -1545,7 +1535,7 @@ html[dir="ltr"]
 
     border-radius:8px;
 
-    font-size:.78rem;
+    font-size:.75rem;
 
     font-weight:700;
 
@@ -1572,7 +1562,7 @@ html[dir="ltr"]
 
 
 /* ======================================================
-   MODALS
+   القسم 20 - النوافذ المنبثقة
 ====================================================== */
 
 .centre-modal{
@@ -1591,7 +1581,7 @@ html[dir="ltr"]
 
     padding:24px;
 
-    background:rgba(2,15,36,.52);
+    background:rgba(2,15,36,.48);
 
     opacity:0;
 
@@ -1627,13 +1617,13 @@ html[dir="ltr"]
 
     overflow:auto;
 
-    padding:28px;
+    padding:24px;
 
     background:var(--white);
 
-    border:1px solid rgba(255,255,255,.5);
+    border:1px solid #e2e8f0;
 
-    border-radius:16px;
+    border-radius:12px;
 
     box-shadow:0 24px 60px rgba(2,15,36,.25);
 
@@ -1651,6 +1641,13 @@ html[dir="ltr"]
 }
 
 
+.centre-modal-content #centre-modal-body{
+
+    max-width:100%;
+
+}
+
+
 .reset-confirm-box{
 
     width:min(455px, 100%);
@@ -1662,13 +1659,13 @@ html[dir="ltr"]
 
     position:absolute;
 
-    inset-inline-end:15px;
+    inset-inline-end:14px;
 
-    top:15px;
+    top:14px;
 
-    width:34px;
+    width:32px;
 
-    height:34px;
+    height:32px;
 
     display:inline-flex;
 
@@ -1682,14 +1679,9 @@ html[dir="ltr"]
 
     border:1px solid #e2e8f0;
 
-    border-radius:9px;
+    border-radius:8px;
 
     cursor:pointer;
-
-    transition:
-        color var(--transition),
-        background var(--transition),
-        border-color var(--transition);
 
 }
 
@@ -1745,7 +1737,7 @@ html[dir="ltr"]
 
     background:#eff6ff;
 
-    border-radius:11px;
+    border-radius:10px;
 
     font-size:1rem;
 
@@ -1810,69 +1802,7 @@ html[dir="ltr"]
 
 
 /* ======================================================
-   MODAL FORMS
-====================================================== */
-
-.centre-modal-content form{
-
-    display:grid;
-
-    gap:15px;
-
-}
-
-
-.centre-modal-content input,
-
-.centre-modal-content select,
-
-.centre-modal-content textarea{
-
-    width:100%;
-
-    min-height:44px;
-
-    padding:0 13px;
-
-    color:var(--text);
-
-    background:var(--white);
-
-    border:1px solid #dfe5ee;
-
-    border-radius:9px;
-
-    font:inherit;
-
-}
-
-
-.centre-modal-content textarea{
-
-    min-height:96px;
-
-    padding-top:12px;
-
-    resize:vertical;
-
-}
-
-
-.centre-modal-content input:focus,
-
-.centre-modal-content select:focus,
-
-.centre-modal-content textarea:focus{
-
-    border-color:var(--primary);
-
-    box-shadow:0 0 0 3px rgba(37,99,235,.10);
-
-}
-
-
-/* ======================================================
-   TABLET
+   القسم 21 - الشاشات المتوسطة
 ====================================================== */
 
 @media(max-width:1200px){
@@ -1918,18 +1848,11 @@ html[dir="ltr"]
 
     }
 
-
-    .centres-status-filters{
-
-        justify-content:flex-start;
-
-    }
-
 }
 
 
 /* ======================================================
-   MOBILE
+   القسم 22 - الهاتف
 ====================================================== */
 
 @media(max-width:650px){
@@ -1958,7 +1881,7 @@ html[dir="ltr"]
 
         padding:14px;
 
-        gap:12px;
+        gap:10px;
 
     }
 
@@ -1983,9 +1906,9 @@ html[dir="ltr"]
 
     .centres-status-filters{
 
-        gap:8px;
+        justify-content:flex-start;
 
-        padding-top:12px;
+        gap:8px;
 
     }
 
@@ -2001,9 +1924,18 @@ html[dir="ltr"]
 
     .centres-register-header{
 
-        min-height:62px;
+        height:56px;
+
+        min-height:56px;
 
         padding:0 14px;
+
+    }
+
+
+    .centres-table-stage{
+
+        padding:0 8px 8px;
 
     }
 
@@ -2023,7 +1955,7 @@ html[dir="ltr"]
 
         padding:22px 18px;
 
-        border-radius:16px 16px 10px 10px;
+        border-radius:12px 12px 8px 8px;
 
     }
 
