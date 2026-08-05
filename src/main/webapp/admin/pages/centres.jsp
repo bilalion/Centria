@@ -1,563 +1,581 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@page import="com.centria.language.LanguageManager"%>
-
 
 <div class="page-section centres-page">
 
+    <!-- CENTRES BANNER -->
 
+    <section class="centre-banner"
+             aria-labelledby="centres-page-title">
 
-<!-- =================================================
-     HEADER
-     ================================================= -->
+        <span class="centre-banner-icon"
+              aria-hidden="true">
 
+            <i class="fa-solid fa-building"></i>
 
-<div class="dashboard-header">
+        </span>
 
+        <h1 id="centres-page-title"
+            class="centre-banner-title">
 
-    <h1>
-
-        <%= LanguageManager.get(
-                "centers.title",
-                session
-        ) %>
-
-    </h1>
-
-
-
-    <p>
-
-        <%= LanguageManager.get(
-                "centers.description",
-                session
-        ) %>
-
-    </p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =================================================
-     TOOLBAR
-     ================================================= -->
-
-
-<div class="card centres-toolbar">
-
-
-
-<form id="centresFilterForm"
-      method="get"
-      action="<%=request.getContextPath()%>/CentreServlet"
-      class="centres-filter-form">
-
-
-<input type="hidden"
-       name="action"
-       value="list">
-
-
-
-
-
-
-
-<div class="search-box">
-
-
-<input type="text"
-       id="centreSearch"
-       name="search"
-       value="<%= request.getAttribute("search") != null
-                ? request.getAttribute("search")
-                : "" %>"
-       placeholder="<%=LanguageManager.get(
-                    "centers.search.placeholder",
+            <%= LanguageManager.get(
+                    "centers.title",
                     session
-       )%>">
+            ) %>
 
+        </h1>
 
-</div>
+        <span class="centre-banner-separator"
+              aria-hidden="true">
 
+            |
 
+        </span>
 
+        <p class="centre-banner-description">
 
+            <%= LanguageManager.get(
+                    "centers.description",
+                    session
+            ) %>
 
+        </p>
 
+    </section>
 
-<select id="centreStatus"
-        name="status"
-        class="centre-select">
 
+    <!-- CENTRES WORKSPACE -->
 
+    <section class="centres-workspace">
 
-<option value="ALL">
+        <!-- CONTROL DECK -->
 
-<%=LanguageManager.get(
-        "centers.all",
-        session
-)%>
+        <div class="centres-control-deck">
 
-</option>
+            <form id="centresFilterForm"
+                  method="get"
+                  action="<%=request.getContextPath()%>/CentreServlet"
+                  class="centres-filter-form">
 
+                <input type="hidden"
+                       name="action"
+                       value="list">
 
 
-<option value="PENDING">
+                <!-- SEARCH -->
 
-<%=LanguageManager.get(
-        "centers.pending",
-        session
-)%>
+                <div class="centres-search-field">
 
-</option>
+                    <i class="fa-solid fa-magnifying-glass"
+                       aria-hidden="true"></i>
 
+                    <input type="text"
+                           id="centreSearch"
+                           name="search"
+                           value="<%= request.getAttribute("search") != null
+                                    ? request.getAttribute("search")
+                                    : "" %>"
+                           placeholder="<%= LanguageManager.get(
+                                   "centers.search.placeholder",
+                                   session
+                           ) %>">
 
+                </div>
 
-<option value="ACTIVE">
 
-<%=LanguageManager.get(
-        "centers.active",
-        session
-)%>
+                <!-- STATUS -->
 
-</option>
+                <div class="centres-select-field">
 
+                    <i class="fa-solid fa-filter"
+                       aria-hidden="true"></i>
 
+                    <select id="centreStatus"
+                            name="status"
+                            class="centre-select">
 
-<option value="SUSPENDED">
+                        <option value="ALL">
+                            <%= LanguageManager.get(
+                                    "centers.all",
+                                    session
+                            ) %>
+                        </option>
 
-<%=LanguageManager.get(
-        "centers.suspended",
-        session
-)%>
+                        <option value="PENDING">
+                            <%= LanguageManager.get(
+                                    "centers.pending",
+                                    session
+                            ) %>
+                        </option>
 
-</option>
+                        <option value="ACTIVE">
+                            <%= LanguageManager.get(
+                                    "centers.active",
+                                    session
+                            ) %>
+                        </option>
 
+                        <option value="SUSPENDED">
+                            <%= LanguageManager.get(
+                                    "centers.suspended",
+                                    session
+                            ) %>
+                        </option>
 
+                        <option value="ARCHIVED">
+                            <%= LanguageManager.get(
+                                    "centers.archived",
+                                    session
+                            ) %>
+                        </option>
 
-<option value="ARCHIVED">
+                    </select>
 
-<%=LanguageManager.get(
-        "centers.archived",
-        session
-)%>
+                </div>
 
-</option>
 
+                <!-- ORDER -->
 
+                <div class="centres-select-field">
 
-</select>
+                    <i class="fa-solid fa-arrow-down-wide-short"
+                       aria-hidden="true"></i>
 
+                    <select id="centreOrder"
+                            name="order"
+                            class="centre-select">
 
+                        <option value="NEW">
+                            <%= LanguageManager.get(
+                                    "centers.newest",
+                                    session
+                            ) %>
+                        </option>
 
+                        <option value="OLD">
+                            <%= LanguageManager.get(
+                                    "centers.oldest",
+                                    session
+                            ) %>
+                        </option>
 
+                        <option value="NAME">
+                            <%= LanguageManager.get(
+                                    "centers.name.asc",
+                                    session
+                            ) %>
+                        </option>
 
+                    </select>
 
+                </div>
 
 
-<select id="centreOrder"
-        name="order"
-        class="centre-select">
+                <!-- SEARCH ACTION -->
 
+                <button type="button"
+                        onclick="loadCentres(1)"
+                        class="btn-primary centres-search-button">
 
+                    <i class="fa-solid fa-magnifying-glass"
+                       aria-hidden="true"></i>
 
-<option value="NEW">
+                    <span>
+                        <%= LanguageManager.get(
+                                "centers.search",
+                                session
+                        ) %>
+                    </span>
 
-<%=LanguageManager.get(
-        "centers.newest",
-        session
-)%>
+                </button>
 
-</option>
+            </form>
 
 
+            <!-- ADD CENTRE -->
 
-<option value="OLD">
+            <a href="<%=request.getContextPath()%>/admin/pages/fragments/centres/add-centre.jsp"
+               class="btn-primary btn-no-underline centres-add-action">
 
-<%=LanguageManager.get(
-        "centers.oldest",
-        session
-)%>
+                <i class="fa-solid fa-plus"
+                   aria-hidden="true"></i>
 
-</option>
+                <span>
+                    <%= LanguageManager.get(
+                            "centers.add",
+                            session
+                    ) %>
+                </span>
 
+            </a>
 
 
-<option value="NAME">
+            <!-- QUICK STATUS FILTERS -->
 
-<%=LanguageManager.get(
-        "centers.name.asc",
-        session
-)%>
+            <div class="centres-status-filters"
+                 aria-label="Centre status filters">
 
-</option>
+                <button type="button"
+                        class="centre-status-filter is-active"
+                        data-centre-status-filter="ALL"
+                        aria-pressed="true">
 
+                    <span class="centre-status-dot is-all"></span>
 
+                    <span>
+                        <%= LanguageManager.get(
+                                "centers.all",
+                                session
+                        ) %>
+                    </span>
 
-</select>
+                    <span class="centre-filter-count"
+                          data-centre-status-count="ALL"></span>
 
+                </button>
 
+                <button type="button"
+                        class="centre-status-filter"
+                        data-centre-status-filter="ACTIVE"
+                        aria-pressed="false">
 
+                    <span class="centre-status-dot is-active"></span>
 
+                    <span>
+                        <%= LanguageManager.get(
+                                "centers.active",
+                                session
+                        ) %>
+                    </span>
 
+                    <span class="centre-filter-count"
+                          data-centre-status-count="ACTIVE"></span>
 
+                </button>
 
-<button type="button"
-        onclick="loadCentres(1)"
-        class="btn-primary">
+                <button type="button"
+                        class="centre-status-filter"
+                        data-centre-status-filter="PENDING"
+                        aria-pressed="false">
 
+                    <span class="centre-status-dot is-pending"></span>
 
-🔎
+                    <span>
+                        <%= LanguageManager.get(
+                                "centers.pending",
+                                session
+                        ) %>
+                    </span>
 
+                    <span class="centre-filter-count"
+                          data-centre-status-count="PENDING"></span>
 
-<%=LanguageManager.get(
-        "centers.search",
-        session
-)%>
+                </button>
 
+                <button type="button"
+                        class="centre-status-filter"
+                        data-centre-status-filter="SUSPENDED"
+                        aria-pressed="false">
 
-</button>
+                    <span class="centre-status-dot is-suspended"></span>
 
+                    <span>
+                        <%= LanguageManager.get(
+                                "centers.suspended",
+                                session
+                        ) %>
+                    </span>
 
+                    <span class="centre-filter-count"
+                          data-centre-status-count="SUSPENDED"></span>
 
-</form>
+                </button>
 
+                <button type="button"
+                        class="centre-status-filter"
+                        data-centre-status-filter="ARCHIVED"
+                        aria-pressed="false">
 
+                    <span class="centre-status-dot is-archived"></span>
 
+                    <span>
+                        <%= LanguageManager.get(
+                                "centers.archived",
+                                session
+                        ) %>
+                    </span>
 
+                    <span class="centre-filter-count"
+                          data-centre-status-count="ARCHIVED"></span>
 
+                </button>
 
-
-<a href="<%=request.getContextPath()%>/admin/pages/fragments/centres/add-centre.jsp"
-   class="btn-primary btn-no-underline">
-
-
-➕
-
-
-<%=LanguageManager.get(
-        "centers.add",
-        session
-)%>
-
-
-</a>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =================================================
-     TABLE AJAX AREA
-     ================================================= -->
-
-
-<div id="centres-table-container"
-     class="table-content-area">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =================================================
-     CENTRE VIEW MODAL
-     ================================================= -->
-
-
-<div id="centre-modal"
-     class="centre-modal">
-
-
-    <div class="centre-modal-content">
-
-
-        <button type="button"
-                class="modal-close"
-                onclick="closeCentreModal()">
-
-            ✖
-
-        </button>
-
-
-        <div id="centre-modal-body">
+            </div>
 
         </div>
 
 
+        <!-- CENTRES REGISTER -->
+
+        <section class="centres-register"
+                 aria-labelledby="centres-register-title">
+
+            <header class="centres-register-header">
+
+                <div class="centres-register-title-wrap">
+
+                    <span class="centres-register-icon"
+                          aria-hidden="true">
+
+                        <i class="fa-solid fa-table-list"></i>
+
+                    </span>
+
+                    <div>
+
+                        <h2 id="centres-register-title">
+
+                            <%= LanguageManager.get(
+                                    "centers.title",
+                                    session
+                            ) %>
+
+                        </h2>
+
+                        <span class="centres-total"
+                              data-centres-total
+                              aria-live="polite"></span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <div class="centres-table-stage">
+
+                <div id="centres-table-container"
+                     class="table-content-area">
+
+                    <div class="centres-table-loading"
+                         aria-live="polite">
+
+                        <i class="fa-solid fa-spinner fa-spin"
+                           aria-hidden="true"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <!-- CENTRE VIEW MODAL -->
+
+    <div id="centre-modal"
+         class="centre-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true">
+
+        <div class="centre-modal-content">
+
+            <button type="button"
+                    class="modal-close"
+                    onclick="closeCentreModal()"
+                    aria-label="<%= LanguageManager.get(
+                            "centers.cancel",
+                            session
+                    ) %>">
+
+                <i class="fa-solid fa-xmark"
+                   aria-hidden="true"></i>
+
+            </button>
+
+            <div id="centre-modal-body"></div>
+
+        </div>
+
     </div>
 
 
-</div>
+    <!-- RESET PASSWORD CONFIRM MODAL -->
 
+    <div id="reset-confirm-modal"
+         class="centre-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true">
 
+        <div class="centre-modal-content reset-confirm-box">
 
+            <button type="button"
+                    class="modal-close"
+                    onclick="closeResetConfirm()"
+                    aria-label="<%= LanguageManager.get(
+                            "centers.cancel",
+                            session
+                    ) %>">
 
+                <i class="fa-solid fa-xmark"
+                   aria-hidden="true"></i>
 
+            </button>
 
+            <div class="reset-confirm-content">
 
+                <div class="confirm-header">
 
+                    <span class="confirm-icon"
+                          aria-hidden="true">
 
-<!-- =================================================
-     RESET PASSWORD CONFIRM MODAL
-     ================================================= -->
+                        <i class="fa-solid fa-key"></i>
 
+                    </span>
 
-<div id="reset-confirm-modal"
-     class="centre-modal">
+                    <h4 class="confirm-title">
 
+                        <%= LanguageManager.get(
+                                "centers.reset.title",
+                                session
+                        ) %>
 
-<div class="centre-modal-content reset-confirm-box">
+                    </h4>
 
+                </div>
 
-<button type="button"
-        class="modal-close"
-        onclick="closeResetConfirm()">
+                <p>
 
-✖
+                    <%= LanguageManager.get(
+                            "centers.reset.confirm",
+                            session
+                    ) %>
 
-</button>
+                </p>
 
+                <div class="reset-confirm-actions">
 
-<div class="reset-confirm-content">
+                    <button type="button"
+                            class="btn-secondary btn-cancel"
+                            onclick="closeResetConfirm()">
 
+                        <%= LanguageManager.get(
+                                "centers.cancel",
+                                session
+                        ) %>
 
-<div class="confirm-header">
+                    </button>
 
+                    <button type="button"
+                            class="btn-primary btn-confirm"
+                            onclick="confirmResetPassword()">
 
-<div class="confirm-icon">
+                        <%= LanguageManager.get(
+                                "centers.confirm",
+                                session
+                        ) %>
 
-🔑
+                    </button>
 
-</div>
+                </div>
 
+            </div>
 
+        </div>
 
-<h4 class="confirm-title">
+    </div>
 
-<%=LanguageManager.get(
-        "centers.reset.title",
-        session
-)%>
 
+    <!-- EDIT CONFIRM MODAL -->
 
-</h4>
+    <div id="edit-confirm-modal"
+         class="centre-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true">
 
+        <div class="centre-modal-content reset-confirm-box">
 
-</div>
+            <button type="button"
+                    class="modal-close"
+                    onclick="closeEditConfirm()"
+                    aria-label="<%= LanguageManager.get(
+                            "centers.cancel",
+                            session
+                    ) %>">
 
+                <i class="fa-solid fa-xmark"
+                   aria-hidden="true"></i>
 
+            </button>
 
+            <div class="reset-confirm-content">
 
-<p>
+                <div class="confirm-header">
 
-<%=LanguageManager.get(
-        "centers.reset.confirm",
-        session
-)%>
+                    <span class="confirm-icon is-warning"
+                          aria-hidden="true">
 
+                        <i class="fa-solid fa-triangle-exclamation"></i>
 
-</p>
+                    </span>
 
+                    <h4 class="confirm-title">
 
+                        <%= LanguageManager.get(
+                                "centers.edit.title",
+                                session
+                        ) %>
 
+                    </h4>
 
+                </div>
 
-<div class="reset-confirm-actions">
+                <p>
 
+                    <%= LanguageManager.get(
+                            "centers.edit.confirm",
+                            session
+                    ) %>
 
-<button type="button"
-        class="btn-secondary btn-cancel"
-        onclick="closeResetConfirm()">
+                </p>
 
+                <div class="reset-confirm-actions">
 
-<%=LanguageManager.get(
-        "centers.cancel",
-        session
-)%>
+                    <button type="button"
+                            class="btn-secondary"
+                            onclick="closeEditConfirm()">
 
+                        <%= LanguageManager.get(
+                                "centers.cancel",
+                                session
+                        ) %>
 
-</button>
+                    </button>
 
+                    <button type="button"
+                            class="btn-primary"
+                            onclick="confirmEditCentre()">
 
+                        <%= LanguageManager.get(
+                                "centers.confirm",
+                                session
+                        ) %>
 
+                    </button>
 
-<button type="button"
-        class="btn-primary btn-confirm"
-        onclick="confirmResetPassword()">
+                </div>
 
+            </div>
 
-<%=LanguageManager.get(
-        "centers.confirm",
-        session
-)%>
+        </div>
 
-
-</button>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =================================================
-     EDIT CONFIRM MODAL
-     ================================================= -->
-
-
-<div id="edit-confirm-modal"
-     class="centre-modal">
-
-
-<div class="centre-modal-content reset-confirm-box">
-
-
-<button type="button"
-        class="modal-close"
-        onclick="closeEditConfirm()">
-
-✖
-
-</button>
-
-
-
-<div class="reset-confirm-content">
-
-
-<div class="confirm-header">
-
-
-<span class="confirm-icon">
-
-⚠️
-
-</span>
-
-
-<h4 class="confirm-title">
-
-<%=LanguageManager.get(
-        "centers.edit.title",
-        session
-)%>
-
-
-</h4>
-
-
-</div>
-
-
-
-
-
-<p>
-
-<%=LanguageManager.get(
-        "centers.edit.confirm",
-        session
-)%>
-
-
-</p>
-
-
-
-
-
-<div class="reset-confirm-actions">
-
-
-<button type="button"
-        class="btn-secondary"
-        onclick="closeEditConfirm()">
-
-
-<%=LanguageManager.get(
-        "centers.cancel",
-        session
-)%>
-
-
-</button>
-
-
-
-
-
-<button type="button"
-        class="btn-primary"
-        onclick="confirmEditCentre()">
-
-
-<%=LanguageManager.get(
-        "centers.confirm",
-        session
-)%>
-
-
-</button>
-
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
+    </div>
 
 </div>

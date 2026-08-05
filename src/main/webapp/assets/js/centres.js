@@ -3,1895 +3,1168 @@
  * CENTRIA
  * Centres Management JavaScript
  *
- * AJAX Search / Filter / Sort / Pagination
+ * AJAX Search / Filter / Sort / Pagination / Modals
  *
- * Clean Production Version
+ * No Java or Servlet logic is modified.
  * ==========================================================
  */
 
+"use strict";
 
 
 /* ======================================================
-   01 - LOAD CENTRES
-   ====================================================== */
+   PAGE STATE
+====================================================== */
+
+let centreSearchTimer;
+let resetCentreId = null;
+let editCentreId = null;
+let activeCentrePage = 1;
+let centresAbortController = null;
+let centresModalEventsBound = false;
 
 
-function loadCentres(page){
+/* ======================================================
+   HELPERS
+====================================================== */
+
+function getCentresContextPath() {
+
+    return typeof window.contextPath === "string"
+        ? window.contextPath
+        : "";
+
+}
 
 
+function getCentresElement(id) {
 
-    if(!page){
+    return document.getElementById(id);
 
-        page = 1;
+}
 
+
+function getCentreFilterValue(id, fallback) {
+
+    const element = getCentresElement(id);
+
+    return element
+        ? element.value
+        : fallback;
+
+}
+
+
+function openCentreModal(modal) {
+
+    if (!modal) {
+        return;
     }
 
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+
+}
 
 
+function closeCentreModalElement(modal) {
 
-    let searchElement =
-    document.getElementById(
-        "centreSearch"
+    if (!modal) {
+        return;
+    }
+
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+
+}
+
+
+function normaliseCentreStatus(status) {
+
+    const value = String(status || "")
+        .trim()
+        .toUpperCase();
+
+    const allowedStatuses = [
+        "ACTIVE",
+        "PENDING",
+        "SUSPENDED",
+        "ARCHIVED"
+    ];
+
+    return allowedStatuses.includes(value)
+        ? value
+        : "";
+
+}
+
+
+function escapeCentreHtml(value) {
+
+    const container = document.createElement("div");
+
+    container.textContent = value || "";
+
+    return container.innerHTML;
+
+}
+
+
+/* ======================================================
+   TABLE STATES
+====================================================== */
+
+function showCentresLoading() {
+
+    const container = getCentresElement(
+        "centres-table-container"
     );
 
+    if (!container) {
+        return;
+    }
+
+    container.setAttribute("aria-busy", "true");
+
+    container.innerHTML = `
+        <div class="centres-table-loading" aria-live="polite">
+            <i class="fa-solid fa-spinner fa-spin"
+               aria-hidden="true"></i>
+        </div>
+    `;
+
+}
 
 
-    let statusElement =
-    document.getElementById(
-        "centreStatus"
+function showCentresLoadError() {
+
+    const container = getCentresElement(
+        "centres-table-container"
     );
 
+    if (!container) {
+        return;
+    }
+
+    container.setAttribute("aria-busy", "false");
+
+    container.innerHTML = `
+        <div class="centres-table-error" role="alert">
+            <i class="fa-solid fa-circle-exclamation"
+               aria-hidden="true"></i>
+        </div>
+    `;
+
+}
 
 
-    let orderElement =
-    document.getElementById(
-        "centreOrder"
+/* ======================================================
+   LOAD CENTRES
+====================================================== */
+
+function loadCentres(page) {
+
+    const currentPage = Number(page) || 1;
+
+    activeCentrePage = currentPage;
+
+    const search = getCentreFilterValue(
+        "centreSearch",
+        ""
     );
 
+    const status = getCentreFilterValue(
+        "centreStatus",
+        "ALL"
+    );
 
+    const order = getCentreFilterValue(
+        "centreOrder",
+        "NEW"
+    );
 
+    const parameters = new URLSearchParams();
 
+    parameters.append("action", "list");
+    parameters.append("ajax", "true");
+    parameters.append("page", currentPage);
+    parameters.append("search", search);
+    parameters.append("status", status);
+    parameters.append("order", order);
 
-    let search =
-    searchElement
-    ?
-    searchElement.value
-    :
-    "";
+    const url =
+        getCentresContextPath()
+        + "/CentreServlet?"
+        + parameters.toString();
 
+    if (centresAbortController) {
+        centresAbortController.abort();
+    }
 
+    centresAbortController = window.AbortController
+        ? new AbortController()
+        : null;
 
-    let status =
-    statusElement
-    ?
-    statusElement.value
-    :
-    "ALL";
+    const options = centresAbortController
+        ? { signal: centresAbortController.signal }
+        : {};
 
+    showCentresLoading();
 
+    fetch(url, options)
 
-    let order =
-    orderElement
-    ?
-    orderElement.value
-    :
-    "NEW";
+        .then(response => {
 
-
-
-
-
-
-
-    let url =
-
-        window.contextPath
-
-        +
-
-        "/CentreServlet?action=list"
-
-        +
-
-        "&ajax=true"
-
-        +
-
-        "&page="
-
-        +
-
-        page
-
-        +
-
-        "&search="
-
-        +
-
-        encodeURIComponent(search)
-
-        +
-
-        "&status="
-
-        +
-
-        encodeURIComponent(status)
-
-        +
-
-        "&order="
-
-        +
-
-        encodeURIComponent(order);
-
-
-
-
-
-
-
-
-    fetch(url)
-
-
-
-    .then(
-        response => {
-
-
-            if(!response.ok){
-
-
+            if (!response.ok) {
                 throw new Error(
-                    "HTTP ERROR "
-                    +
-                    response.status
+                    "HTTP ERROR " + response.status
                 );
-
-
             }
-
-
 
             return response.text();
 
+        })
 
-        }
-    )
+        .then(html => {
 
-
-
-
-
-
-    .then(
-        html => {
-
-
-            let container =
-
-            document.getElementById(
+            const container = getCentresElement(
                 "centres-table-container"
             );
 
-
-
-
-
-            if(container){
-
-
-                container.innerHTML =
-                html;
-
-
-
-                activateCentreEvents();
-
-
-
+            if (!container) {
+                return;
             }
 
+            container.innerHTML = html;
+            container.setAttribute("aria-busy", "false");
 
+            activateCentreEvents();
+            refreshCentresSummary();
 
-        }
-    )
+        })
 
+        .catch(error => {
 
+            if (error.name === "AbortError") {
+                return;
+            }
 
+            showCentresLoadError();
 
-
-
-    .catch(
-        () => {
-
-        }
-    );
-
-
+        });
 
 }
 
 
-
-
-
-
-
 /* ======================================================
-   02 - SEARCH BUTTON
-   ====================================================== */
+   SEARCH / FILTER / PAGINATION
+====================================================== */
 
+function searchCentres(event) {
 
-function searchCentres(event){
-
-
-    if(event){
-
+    if (event) {
         event.preventDefault();
-
     }
 
-
     loadCentres(1);
-
 
     return false;
 
-
 }
 
 
+function filterCentres() {
 
-
-
-
-
-
-/* ======================================================
-   03 - FILTER CHANGE
-   ====================================================== */
-
-
-function filterCentres(){
-
+    syncCentreStatusFilters(
+        getCentreFilterValue("centreStatus", "ALL")
+    );
 
     loadCentres(1);
 
-
 }
 
 
-
-
-
-
-
-
-/* ======================================================
-   04 - PAGINATION
-   ====================================================== */
-
-
-function changeCentrePage(page){
-
+function changeCentrePage(page) {
 
     loadCentres(page);
 
+}
+
+
+/* ======================================================
+   QUICK STATUS FILTERS
+====================================================== */
+
+function activateCentreStatusFilters() {
+
+    const filters = document.querySelectorAll(
+        "[data-centre-status-filter]"
+    );
+
+    filters.forEach(filter => {
+
+        if (filter.dataset.centresBound === "true") {
+            return;
+        }
+
+        filter.dataset.centresBound = "true";
+
+        filter.addEventListener("click", function () {
+
+            const status =
+                this.dataset.centreStatusFilter;
+
+            const statusSelect = getCentresElement(
+                "centreStatus"
+            );
+
+            if (!statusSelect || !status) {
+                return;
+            }
+
+            statusSelect.value = status;
+
+            syncCentreStatusFilters(status);
+
+            loadCentres(1);
+
+        });
+
+    });
 
 }
 
 
+function syncCentreStatusFilters(status) {
 
+    const activeStatus =
+        normaliseCentreStatus(status) || "ALL";
 
+    const filters = document.querySelectorAll(
+        "[data-centre-status-filter]"
+    );
 
+    filters.forEach(filter => {
 
+        const filterStatus =
+            filter.dataset.centreStatusFilter;
+
+        const isActive =
+            filterStatus === activeStatus;
+
+        filter.classList.toggle(
+            "is-active",
+            isActive
+        );
+
+        filter.setAttribute(
+            "aria-pressed",
+            isActive ? "true" : "false"
+        );
+
+    });
+
+}
 
 
 /* ======================================================
-   05 - UPDATE CENTRE STATUS
-   ====================================================== */
+   STATUS COUNTS
+====================================================== */
 
+function getCentreRowStatus(row) {
 
-function updateCentreStatus(select){
+    if (!row) {
+        return "";
+    }
 
+    const rowStatus =
+        row.dataset.status
+        || row.dataset.centreStatus;
 
+    if (rowStatus) {
+        return normaliseCentreStatus(rowStatus);
+    }
 
-    let id =
-
-    select.getAttribute(
-        "data-id"
+    const statusElement = row.querySelector(
+        "[data-centre-status], [data-status]"
     );
 
+    if (statusElement) {
+
+        const elementStatus =
+            statusElement.dataset.centreStatus
+            || statusElement.dataset.status;
+
+        if (elementStatus) {
+            return normaliseCentreStatus(
+                elementStatus
+            );
+        }
+
+    }
+
+    const statusSelect = row.querySelector(
+        "select[data-id], "
+        + "select.status-active, "
+        + "select.status-pending, "
+        + "select.status-suspended, "
+        + "select.status-archived"
+    );
+
+    if (statusSelect) {
+        return normaliseCentreStatus(
+            statusSelect.value
+        );
+    }
+
+    return "";
+
+}
 
 
+function refreshCentresSummary() {
 
-    let status =
+    const container = getCentresElement(
+        "centres-table-container"
+    );
 
-    select.value;
+    if (!container) {
+        return;
+    }
+
+    const counts = {
+        ALL: 0,
+        ACTIVE: 0,
+        PENDING: 0,
+        SUSPENDED: 0,
+        ARCHIVED: 0
+    };
+
+    const rows = Array.from(
+        container.querySelectorAll("table tr")
+    ).filter(row => {
+
+        return row.querySelector("td")
+            && !row.querySelector("td[colspan]");
+
+    });
+
+    rows.forEach(row => {
+
+        counts.ALL += 1;
+
+        const status = getCentreRowStatus(row);
+
+        if (status && counts[status] !== undefined) {
+            counts[status] += 1;
+        }
+
+    });
+
+    document.querySelectorAll(
+        "[data-centre-status-count]"
+    ).forEach(countElement => {
+
+        const status =
+            countElement.dataset.centreStatusCount;
+
+        countElement.textContent =
+            counts[status] || 0;
+
+    });
+
+    const totalElement = document.querySelector(
+        "[data-centres-total]"
+    );
+
+    if (totalElement) {
+        totalElement.textContent = counts.ALL || "";
+    }
+
+}
 
 
+/* ======================================================
+   UPDATE CENTRE STATUS
+====================================================== */
 
+function updateCentreStatus(select) {
 
+    if (!select) {
+        return;
+    }
 
-    let url =
+    const id = select.getAttribute("data-id");
+    const status = select.value;
 
-        window.contextPath
+    if (!id || !status) {
+        return;
+    }
 
-        +
+    const parameters = new URLSearchParams();
 
-        "/CentreServlet?action=status"
+    parameters.append("action", "status");
+    parameters.append("id", id);
+    parameters.append("status", status);
 
-        +
-
-        "&id="
-
-        +
-
-        id
-
-        +
-
-        "&status="
-
-        +
-
-        encodeURIComponent(status);
-
-
-
-
-
-
+    const url =
+        getCentresContextPath()
+        + "/CentreServlet?"
+        + parameters.toString();
 
     fetch(url)
 
+        .then(response => {
 
-
-    .then(
-        response =>
-
-        response.json()
-
-    )
-
-
-
-
-
-    .then(
-        data => {
-
-
-
-            if(data.success){
-
-
-
-                select.classList.remove(
-
-                    "status-pending",
-
-                    "status-active",
-
-                    "status-suspended",
-
-                    "status-archived"
-
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP ERROR " + response.status
                 );
-
-
-
-
-                select.classList.add(
-
-                    "status-"
-
-                    +
-
-                    status.toLowerCase()
-
-                );
-
-
-
             }
 
+            return response.json();
 
-            else{
+        })
 
+        .then(data => {
 
-                alert(
-                    "Erreur modification statut"
-                );
+            if (!data.success) {
 
+                alert("Erreur modification statut");
 
+                return;
             }
 
-
-
-        }
-    )
-
-
-
-
-
-
-    .catch(
-        () => {
-
-
-            alert(
-                "Erreur serveur"
+            select.classList.remove(
+                "status-pending",
+                "status-active",
+                "status-suspended",
+                "status-archived"
             );
 
+            select.classList.add(
+                "status-"
+                + String(status).toLowerCase()
+            );
 
-        }
-    );
+            const row = select.closest("tr");
 
+            if (row) {
+                row.dataset.status = status;
+            }
 
+            refreshCentresSummary();
+
+        })
+
+        .catch(() => {
+
+            alert("Erreur serveur");
+
+        });
 
 }
 
 
-
-
-
-
-
-
 /* ======================================================
-   06 - ACTIVATE EVENTS
-   ====================================================== */
+   EVENTS
+====================================================== */
 
+function activateCentreEvents() {
 
-function activateCentreEvents(){
-
-
-
-    let form =
-
-    document.getElementById(
+    const form = getCentresElement(
         "centresFilterForm"
     );
 
-
-
-    if(form){
-
-
-        form.onsubmit =
-
-        searchCentres;
-
-
+    if (form) {
+        form.onsubmit = searchCentres;
     }
 
-
-
-
-
-
-
-    let status =
-
-    document.getElementById(
+    const status = getCentresElement(
         "centreStatus"
     );
 
-
-
-    if(status){
-
-
-        status.onchange =
-
-        filterCentres;
-
-
+    if (status) {
+        status.onchange = filterCentres;
     }
 
-
-
-
-
-
-
-    let order =
-
-    document.getElementById(
+    const order = getCentresElement(
         "centreOrder"
     );
 
-
-
-    if(order){
-
-
-        order.onchange =
-
-        filterCentres;
-
-
+    if (order) {
+        order.onchange = filterCentres;
     }
 
+    activateSearch();
+    activateCentreStatusFilters();
 
+    syncCentreStatusFilters(
+        getCentreFilterValue("centreStatus", "ALL")
+    );
 
 }
 
 
+function activateSearch() {
 
-
-
-
-
-
-/* ======================================================
-   07 - LIVE SEARCH
-   ====================================================== */
-
-
-let centreSearchTimer;
-
-
-
-
-
-function activateSearch(){
-
-
-
-    let search =
-
-    document.getElementById(
+    const search = getCentresElement(
         "centreSearch"
     );
 
-
-
-
-    if(!search){
-
-
+    if (!search) {
         return;
-
-
     }
 
+    search.oninput = function () {
 
+        clearTimeout(centreSearchTimer);
 
-
-
-
-
-    search.oninput =
-
-    function(){
-
-
-
-        clearTimeout(
-            centreSearchTimer
-        );
-
-
-
-
-
-        centreSearchTimer =
-
-        setTimeout(
-
-            function(){
-
+        centreSearchTimer = setTimeout(
+            function () {
 
                 loadCentres(1);
 
-
             },
-
             400
-
         );
-
-
 
     };
 
-
-
 }
 
 
-
-
-
-
-
-
 /* ======================================================
-   08 - PAGE INITIALIZATION
-   ====================================================== */
+   VIEW CENTRE MODAL
+====================================================== */
 
+function viewCentre(id) {
 
-function initCentresPage(){
+    if (!id) {
+        return;
+    }
 
-
-
-    activateCentreEvents();
-
-
-    activateSearch();
-
-
-    loadCentres(1);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   09 - INIT
-   ====================================================== */
-
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-function(){
-
-
-    initCentresPage();
-
-
-
-}
-
-);
-
-/* ======================================================
-   10 - VIEW CENTRE MODAL
-   ====================================================== */
-
-
-function viewCentre(id){
-
-
-
-    let url =
-
-        window.contextPath
-
-        +
-
-        "/CentreServlet?action=view&id="
-
-        +
-
-        id;
-
-
-
-
-
-
+    const url =
+        getCentresContextPath()
+        + "/CentreServlet?action=view&id="
+        + encodeURIComponent(id);
 
     fetch(url)
 
+        .then(response => {
 
-
-    .then(
-        response => {
-
-
-            if(!response.ok){
-
-
+            if (!response.ok) {
                 throw new Error(
-                    "HTTP ERROR "
-                    +
-                    response.status
+                    "HTTP ERROR " + response.status
                 );
-
-
             }
-
-
 
             return response.text();
 
+        })
 
-        }
-    )
+        .then(html => {
 
-
-
-
-
-
-
-    .then(
-        html => {
-
-
-
-            let modalBody =
-
-            document.getElementById(
+            const modalBody = getCentresElement(
                 "centre-modal-body"
             );
 
-
-
-
-
-            let modal =
-
-            document.getElementById(
+            const modal = getCentresElement(
                 "centre-modal"
             );
 
-
-
-
-
-
-            if(modalBody && modal){
-
-
-
-                modalBody.innerHTML =
-
-                html;
-
-
-
-
-                modal.classList.add(
-                    "show"
-                );
-
-
-
+            if (!modalBody || !modal) {
+                return;
             }
 
+            modalBody.innerHTML = html;
 
+            openCentreModal(modal);
 
-        }
-    )
+        })
 
+        .catch(() => {
 
+            showCentreActionError(
+                "Unable to load centre details."
+            );
 
-
-
-
-
-    .catch(
-        () => {
-
-        }
-    );
-
-
+        });
 
 }
 
 
+function closeCentreModal() {
 
-
-
-
-
-
-
-/* ======================================================
-   11 - CLOSE CENTRE MODAL
-   ====================================================== */
-
-
-function closeCentreModal(){
-
-
-
-    let modal =
-
-    document.getElementById(
+    const modal = getCentresElement(
         "centre-modal"
     );
 
+    const modalBody = getCentresElement(
+        "centre-modal-body"
+    );
 
+    closeCentreModalElement(modal);
 
-
-
-    if(modal){
-
-
-
-        modal.classList.remove(
-            "show"
-        );
-
-
-
-
-        let body =
-
-        document.getElementById(
-            "centre-modal-body"
-        );
-
-
-
-
-        if(body){
-
-
-            body.innerHTML = "";
-
-
-        }
-
-
-
+    if (modalBody) {
+        modalBody.innerHTML = "";
     }
-
-
 
 }
 
 
-
-
-
-
-
-
-
 /* ======================================================
-   12 - RESET PASSWORD
-   ====================================================== */
+   RESET PASSWORD
+====================================================== */
 
+function resetCentrePassword(id) {
 
-let resetCentreId = null;
-
-
-
-
-
-
-function resetCentrePassword(id){
-
-
+    if (!id) {
+        return;
+    }
 
     resetCentreId = id;
 
-
-
-
-
-    let modal =
-
-    document.getElementById(
-        "reset-confirm-modal"
+    openCentreModal(
+        getCentresElement("reset-confirm-modal")
     );
-
-
-
-
-
-
-    if(modal){
-
-
-
-        modal.classList.add(
-            "show"
-        );
-
-
-
-    }
-
-
 
 }
 
 
+function closeResetConfirm() {
 
-
-
-
-
-
-/* ======================================================
-   13 - CLOSE RESET CONFIRM
-   ====================================================== */
-
-
-function closeResetConfirm(){
-
-
-
-    let modal =
-
-    document.getElementById(
-        "reset-confirm-modal"
+    closeCentreModalElement(
+        getCentresElement("reset-confirm-modal")
     );
-
-
-
-
-
-    if(modal){
-
-
-
-        modal.classList.remove(
-            "show"
-        );
-
-
-
-    }
-
-
 
 }
 
 
+function confirmResetPassword() {
 
+    if (!resetCentreId) {
+        return;
+    }
 
+    const centreId = resetCentreId;
 
-
-
-
-
-/* ======================================================
-   14 - CONFIRM RESET PASSWORD
-   ====================================================== */
-
-
-function confirmResetPassword(){
-
-
+    resetCentreId = null;
 
     closeResetConfirm();
 
-
-
-
-
-    let url =
-
-
-        window.contextPath
-
-        +
-
-        "/CentreServlet?action=resetPassword&id="
-
-        +
-
-        resetCentreId;
-
-
-
-
-
-
-
-
+    const url =
+        getCentresContextPath()
+        + "/CentreServlet?action=resetPassword&id="
+        + encodeURIComponent(centreId);
 
     fetch(url)
 
+        .then(response => {
 
-
-
-
-    .then(
-        response => {
-
-
-
-            if(!response.ok){
-
-
-
+            if (!response.ok) {
                 throw new Error(
-                    "HTTP ERROR "
-                    +
-                    response.status
+                    "HTTP ERROR " + response.status
                 );
-
-
-
             }
-
-
-
-
 
             return response.text();
 
+        })
 
+        .then(html => {
 
-        }
-    )
-
-
-
-
-
-
-
-    .then(
-        html => {
-
-
-
-            let modalBody =
-
-
-            document.getElementById(
+            const modalBody = getCentresElement(
                 "centre-modal-body"
             );
 
-
-
-
-
-
-            let modal =
-
-
-            document.getElementById(
+            const modal = getCentresElement(
                 "centre-modal"
             );
 
-
-
-
-
-
-
-
-            if(modalBody && modal){
-
-
-
-                modalBody.innerHTML =
-
-                html;
-
-
-
-
-
-                modal.classList.add(
-                    "show"
-                );
-
-
-
+            if (!modalBody || !modal) {
+                return;
             }
 
+            modalBody.innerHTML = html;
 
+            openCentreModal(modal);
 
-        }
-    )
+        })
 
+        .catch(() => {
 
-
-
-
-
-
-    .catch(
-        () => {
-
-
-
-            let modalBody =
-
-
-            document.getElementById(
-                "centre-modal-body"
+            showCentreActionError(
+                "Error resetting password."
             );
 
-
-
-
-
-
-            let modal =
-
-
-            document.getElementById(
-                "centre-modal"
-            );
-
-
-
-
-
-
-
-            if(modalBody && modal){
-
-
-
-                modalBody.innerHTML =
-
-
-
-                `
-                <div class="empty-state">
-
-                    <h3>⚠️</h3>
-
-                    <p>
-                        Error resetting password
-                    </p>
-
-                </div>
-                `;
-
-
-
-
-
-                modal.classList.add(
-                    "show"
-                );
-
-
-
-            }
-
-
-
-        }
-    );
-
-
+        });
 
 }
 
 
-
-
-
-
-
-
-
 /* ======================================================
-   15 - COPY LOGIN INFORMATION
-   ====================================================== */
+   COPY LOGIN INFORMATION
+====================================================== */
 
+function copyLoginInfo() {
 
-function copyLoginInfo(){
-
-
-
-    let text =
-
-    document.getElementById(
+    const text = getCentresElement(
         "loginInfoText"
     );
 
-
-
-
-
-    if(!text){
-
-
+    if (!text) {
         return;
-
-
     }
 
+    const value = text.value || text.textContent || "";
 
+    if (
+        navigator.clipboard
+        && navigator.clipboard.writeText
+    ) {
 
+        navigator.clipboard
+            .writeText(value)
+            .then(showCopyMessage)
+            .catch(() => {});
 
+        return;
+    }
 
+    text.select();
 
+    document.execCommand("copy");
 
-    navigator.clipboard.writeText(
-        text.value
-    )
-
-
-
-    .then(
-        ()=> {
-
-
-
-            let btn =
-
-            document.querySelector(
-                ".copy-password-btn"
-            );
-
-
-
-
-
-            if(btn){
-
-
-
-                let old =
-
-                btn.innerHTML;
-
-
-
-
-                btn.innerHTML =
-
-                "✅ " + old;
-
-
-
-
-
-                setTimeout(
-                    ()=>{
-
-
-                        btn.innerHTML =
-                        old;
-
-
-                    },
-
-                    1500
-                );
-
-
-
-            }
-
-
-
-        }
-    )
-
-
-
-
-
-
-    .catch(
-        ()=> {
-
-        }
-    );
-
-
+    showCopyMessage();
 
 }
 
 
+function showCopyMessage() {
 
-
-
-
-
-
-
-/* ======================================================
-   16 - COPY SUCCESS FEEDBACK
-   ====================================================== */
-
-
-function showCopyMessage(){
-
-
-
-    let button =
-
-    document.querySelector(
+    const button = document.querySelector(
         ".copy-password-btn"
     );
 
-
-
-
-
-    if(!button){
-
-
+    if (!button) {
         return;
-
-
     }
 
+    const originalContent =
+        button.dataset.originalContent
+        || button.innerHTML;
 
+    button.dataset.originalContent =
+        originalContent;
 
+    button.classList.add("copied");
 
+    setTimeout(() => {
 
+        button.innerHTML = originalContent;
 
+        button.classList.remove("copied");
 
-    let oldText =
-
-    button.innerHTML;
-
-
-
-
-
-
-
-    button.innerHTML =
-
-    "✅ " + oldText;
-
-
-
-
-
-
-
-    button.classList.add(
-        "copied"
-    );
-
-
-
-
-
-
-
-
-    setTimeout(
-        ()=>{
-
-
-            button.innerHTML =
-            oldText;
-
-
-
-
-            button.classList.remove(
-                "copied"
-            );
-
-
-
-        },
-
-        2000
-    );
-
-
+    }, 2000);
 
 }
 
- /* ======================================================
-   17 - EDIT CENTRE CONFIRM
-   ====================================================== */
 
+/* ======================================================
+   EDIT CENTRE
+====================================================== */
 
-let editCentreId = null;
+function editCentre(id) {
 
-
-
-
-
-
-function editCentre(id){
-
-
+    if (!id) {
+        return;
+    }
 
     editCentreId = id;
 
-
-
-
-
-    let modal =
-
-    document.getElementById(
-        "edit-confirm-modal"
+    openCentreModal(
+        getCentresElement("edit-confirm-modal")
     );
-
-
-
-
-
-
-    if(modal){
-
-
-
-        modal.classList.add(
-            "show"
-        );
-
-
-
-    }
-
-
 
 }
 
 
+function closeEditConfirm() {
 
-
-
-
-
-
-
-/* ======================================================
-   18 - CLOSE EDIT CONFIRM
-   ====================================================== */
-
-
-function closeEditConfirm(){
-
-
-
-    let modal =
-
-    document.getElementById(
-        "edit-confirm-modal"
+    closeCentreModalElement(
+        getCentresElement("edit-confirm-modal")
     );
-
-
-
-
-
-    if(modal){
-
-
-
-        modal.classList.remove(
-            "show"
-        );
-
-
-
-    }
-
-
 
 }
 
 
+function confirmEditCentre() {
 
+    if (!editCentreId) {
+        return;
+    }
 
+    const centreId = editCentreId;
 
-
-
-
-
-/* ======================================================
-   19 - OPEN EDIT FORM
-   ====================================================== */
-
-
-function confirmEditCentre(){
-
-
+    editCentreId = null;
 
     closeEditConfirm();
 
-
-
-
-
-    let url =
-
-
-        window.contextPath
-
-        +
-
-        "/CentreServlet?action=edit&id="
-
-        +
-
-        editCentreId;
-
-
-
-
-
-
-
-
+    const url =
+        getCentresContextPath()
+        + "/CentreServlet?action=edit&id="
+        + encodeURIComponent(centreId);
 
     fetch(url)
 
+        .then(response => {
 
-
-
-
-    .then(
-        response => {
-
-
-
-            if(!response.ok){
-
-
+            if (!response.ok) {
                 throw new Error(
-                    "HTTP ERROR "
-                    +
-                    response.status
+                    "HTTP ERROR " + response.status
                 );
-
-
             }
-
-
-
 
             return response.text();
 
+        })
 
+        .then(html => {
 
-        }
-    )
-
-
-
-
-
-
-
-
-    .then(
-        html => {
-
-
-
-            let modalBody =
-
-            document.getElementById(
+            const modalBody = getCentresElement(
                 "centre-modal-body"
             );
 
-
-
-
-
-            let modal =
-
-            document.getElementById(
+            const modal = getCentresElement(
                 "centre-modal"
             );
 
-
-
-
-
-
-
-
-            if(!modalBody || !modal){
-
-
+            if (!modalBody || !modal) {
                 return;
-
-
             }
 
+            modalBody.innerHTML = html;
 
+            openCentreModal(modal);
 
+        })
 
+        .catch(() => {
 
-
-
-
-            modalBody.innerHTML =
-
-            html;
-
-
-
-
-
-
-            modal.classList.add(
-                "show"
+            showCentreActionError(
+                "Unable to load the edit form."
             );
 
-
-
-        }
-    )
-
-
-
-
-
-
-
-
-    .catch(
-        ()=>{
-
-        }
-    );
-
-
+        });
 
 }
-
-
-
-
-
-
-
 
 
 /* ======================================================
-   20 - SAVE EDIT CENTRE PROFILE
-   ====================================================== */
+   SAVE EDIT CENTRE PROFILE
+====================================================== */
+
+function getEditCentreFieldValue(form, name) {
+
+    const field = form.querySelector(
+        "[name='" + name + "']"
+    );
+
+    return field
+        ? field.value
+        : "";
+
+}
 
 
-function saveEditCentre(){
+function saveEditCentre() {
 
-
-
-    let form =
-
-    document.getElementById(
+    const form = getCentresElement(
         "editCentreForm"
     );
 
-
-
-
-
-
-    if(!form){
-
-
-
+    if (!form) {
         return;
-
-
     }
 
-
-
-
-
-
-
-
-    let data =
-
-    new URLSearchParams();
-
-
-
-
-
-
-
-
-    data.append(
-
-        "action",
-
-        "updateProfile"
-
+    const id = getEditCentreFieldValue(
+        form,
+        "id"
     );
 
+    if (!id) {
+        return;
+    }
 
+    const data = new URLSearchParams();
 
-
-
-
-
-    data.append(
-
-        "id",
-
-        form.querySelector(
-            "[name='id']"
-        ).value
-
-    );
-
-
-
-
-
-
+    data.append("action", "updateProfile");
+    data.append("id", id);
 
     data.append(
-
         "name",
-
-        form.querySelector(
-            "[name='name']"
-        ).value
-
+        getEditCentreFieldValue(form, "name")
     );
 
-
-
-
-
-
-
     data.append(
-
         "owner_name",
-
-        form.querySelector(
-            "[name='owner_name']"
-        ).value
-
+        getEditCentreFieldValue(form, "owner_name")
     );
-
-
-
-
-
-
 
     data.append(
-
         "phone",
-
-        form.querySelector(
-            "[name='phone']"
-        ).value
-
+        getEditCentreFieldValue(form, "phone")
     );
-
-
-
-
-
-
-
-
 
     fetch(
-
-        window.contextPath
-
-        +
-
-        "/CentreServlet",
-
+        getCentresContextPath()
+        + "/CentreServlet",
         {
+            method: "POST",
 
-
-
-            method:"POST",
-
-
-
-            headers:{
-
-
-
+            headers: {
                 "Content-Type":
-
-                "application/x-www-form-urlencoded;charset=UTF-8"
-
-
-
+                    "application/x-www-form-urlencoded;charset=UTF-8"
             },
 
-
-
-
-
-            body:data.toString()
-
-
-
+            body: data.toString()
         }
-
     )
 
+        .then(response => {
 
-
-
-
-
-
-
-
-
-    .then(
-
-        response =>
-
-        response.json()
-
-    )
-
-
-
-
-
-
-
-
-
-    .then(
-
-        json => {
-
-
-
-            if(json.success){
-
-
-
-                closeCentreModal();
-
-
-
-                loadCentres(1);
-
-
-
-            }
-
-            else{
-
-
-
-                alert(
-                    json.error
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP ERROR " + response.status
                 );
-
-
-
             }
 
+            return response.json();
 
+        })
 
-        }
+        .then(json => {
 
-    )
+            if (!json.success) {
 
+                alert(json.error);
 
+                return;
+            }
 
+            closeCentreModal();
 
+            loadCentres(1);
 
+        })
 
-
-
-    .catch(
-
-        ()=>{
-
-
-        }
-
-    );
-
-
+        .catch(() => {});
 
 }
+
+
+/* ======================================================
+   MODAL ERROR / CLOSE EVENTS
+====================================================== */
+
+function showCentreActionError(message) {
+
+    const modalBody = getCentresElement(
+        "centre-modal-body"
+    );
+
+    const modal = getCentresElement(
+        "centre-modal"
+    );
+
+    if (!modalBody || !modal) {
+        return;
+    }
+
+    modalBody.innerHTML = `
+        <div class="empty-state centre-action-error">
+            <i class="fa-solid fa-circle-exclamation"
+               aria-hidden="true"></i>
+            <p>${escapeCentreHtml(message)}</p>
+        </div>
+    `;
+
+    openCentreModal(modal);
+
+}
+
+
+function bindCentresModalEvents() {
+
+    if (centresModalEventsBound) {
+        return;
+    }
+
+    centresModalEventsBound = true;
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            !event.target.classList
+            || !event.target.classList.contains(
+                "centre-modal"
+            )
+        ) {
+            return;
+        }
+
+        closeCentreModalElement(event.target);
+
+    });
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key !== "Escape") {
+            return;
+        }
+
+        document.querySelectorAll(
+            ".centre-modal.show"
+        ).forEach(modal => {
+
+            closeCentreModalElement(modal);
+
+        });
+
+    });
+
+}
+
+
+/* ======================================================
+   PAGE INITIALIZATION
+====================================================== */
+
+function initCentresPage() {
+
+    const centresPage = document.querySelector(
+        ".centres-page"
+    );
+
+    if (!centresPage) {
+        return;
+    }
+
+    activateCentreEvents();
+    bindCentresModalEvents();
+    loadCentres(1);
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initCentresPage
+);
+
+
+document.addEventListener(
+    "centria:centres-ready",
+    initCentresPage
+);

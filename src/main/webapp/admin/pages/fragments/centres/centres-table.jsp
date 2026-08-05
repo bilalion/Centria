@@ -5,7 +5,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 
-
 <%
 
 List<Centre> centres =
@@ -34,29 +33,27 @@ request.getAttribute("totalPages") != null
 %>
 
 
-
-
 <%
 
 if(centres == null || centres.isEmpty()){
 
 %>
 
-
 <div class="empty-state">
 
-<p>
+    <i class="fa-solid fa-building-circle-xmark"
+       aria-hidden="true"></i>
 
-<%=LanguageManager.get(
-        "centers.empty",
-        session
-)%>
+    <p>
 
-</p>
+        <%=LanguageManager.get(
+                "centers.empty",
+                session
+        )%>
+
+    </p>
 
 </div>
-
-
 
 <%
 
@@ -65,740 +62,555 @@ if(centres == null || centres.isEmpty()){
 %>
 
 
+<!-- =================================================
+     CENTRES REGISTER TABLE
+================================================= -->
 
+<div class="table-container">
+
+    <table class="centers-table">
+
+        <thead>
+
+            <tr>
+
+                <!-- CENTRE -->
+
+                <th>
+
+                    <%=LanguageManager.get(
+                            "centers.name",
+                            session
+                    )%>
+
+                </th>
+
+
+                <!-- OWNER + PHONE -->
+
+                <th>
+
+                    <%=LanguageManager.get(
+                            "centers.owner",
+                            session
+                    )%>
+
+                    /
+
+                    <%=LanguageManager.get(
+                            "centers.phone",
+                            session
+                    )%>
+
+                </th>
+
+
+                <!-- SUBSCRIPTION PERIOD -->
+
+                <th>
+
+                    <%=LanguageManager.get(
+                            "centers.subscription.start",
+                            session
+                    )%>
+
+                    /
+
+                    <%=LanguageManager.get(
+                            "centers.subscription.end",
+                            session
+                    )%>
+
+                </th>
+
+
+                <!-- STATUS -->
+
+                <th>
+
+                    <%=LanguageManager.get(
+                            "centers.status",
+                            session
+                    )%>
+
+                </th>
+
+
+                <!-- ACTIONS -->
+
+                <th>
+
+                    <%=LanguageManager.get(
+                            "centers.actions",
+                            session
+                    )%>
+
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <%
+
+            for(Centre centre : centres){
+
+                String status =
+                centre.getStatus();
+
+                if(status == null || status.trim().isEmpty()){
+
+                    status = "PENDING";
+
+                }
+
+                status = status.toUpperCase();
+
+                String statusClass =
+                "status-" + status.toLowerCase();
+
+                String rowStatusClass =
+                "is-pending";
+
+                String statusLabel =
+                LanguageManager.get(
+                        "centers.pending",
+                        session
+                );
+
+                if("ACTIVE".equals(status)){
+
+                    rowStatusClass = "is-active";
+
+                    statusLabel =
+                    LanguageManager.get(
+                            "centers.active",
+                            session
+                    );
+
+                }
+                else if("SUSPENDED".equals(status)){
+
+                    rowStatusClass = "is-suspended";
+
+                    statusLabel =
+                    LanguageManager.get(
+                            "centers.suspended",
+                            session
+                    );
+
+                }
+                else if("ARCHIVED".equals(status)){
+
+                    rowStatusClass = "is-archived";
+
+                    statusLabel =
+                    LanguageManager.get(
+                            "centers.archived",
+                            session
+                    );
+
+                }
+
+                String startDate =
+                centre.getSubscriptionStart() != null
+                ?
+                sdf.format(
+                        centre.getSubscriptionStart()
+                )
+                :
+                "-";
+
+                String endDate =
+                centre.getSubscriptionEnd() != null
+                ?
+                sdf.format(
+                        centre.getSubscriptionEnd()
+                )
+                :
+                "-";
+
+            %>
+
+            <tr class="centre-row <%=rowStatusClass%>"
+                data-status="<%=status%>">
+
+
+                <!-- CENTRE IDENTITY -->
+
+                <td>
+
+                    <div class="centre-identity">
+
+                        <span class="centre-avatar"
+                              aria-hidden="true">
+
+                            <i class="fa-solid fa-building"></i>
+
+                        </span>
+
+                        <div class="centre-identity-copy">
+
+                            <strong class="centre-name">
+
+                                <%=centre.getName() != null
+                                ?
+                                centre.getName()
+                                :
+                                "-"
+                                %>
+
+                            </strong>
+
+                            <span class="centre-code">
+
+                                <%=centre.getCentreCode() != null
+                                ?
+                                centre.getCentreCode()
+                                :
+                                "-"
+                                %>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <!-- OWNER + CONTACT -->
+
+                <td>
+
+                    <div class="centre-contact">
+
+                        <span class="centre-owner">
+
+                            <i class="fa-regular fa-user"
+                               aria-hidden="true"></i>
+
+                            <%=centre.getOwnerName() != null
+                            ?
+                            centre.getOwnerName()
+                            :
+                            "-"
+                            %>
+
+                        </span>
+
+                        <span class="centre-phone">
+
+                            <i class="fa-solid fa-phone"
+                               aria-hidden="true"></i>
+
+                            <%=centre.getPhone() != null
+                            ?
+                            centre.getPhone()
+                            :
+                            "-"
+                            %>
+
+                        </span>
+
+                    </div>
+
+                </td>
+
+
+                <!-- SUBSCRIPTION TIMELINE -->
+
+                <td>
+
+                    <div class="centre-subscription-timeline">
+
+                        <span class="centre-timeline-line"
+                              aria-hidden="true"></span>
+
+                        <div class="centre-timeline-copy">
+
+                            <span class="centre-timeline-label">
+
+                                <%=LanguageManager.get(
+                                        "centers.subscription.start",
+                                        session
+                                )%>
+
+                            </span>
+
+                            <span class="centre-timeline-date">
+
+                                <%=startDate%>
+
+                            </span>
+
+                            <span class="centre-timeline-label">
+
+                                <%=LanguageManager.get(
+                                        "centers.subscription.end",
+                                        session
+                                )%>
+
+                            </span>
+
+                            <span class="centre-timeline-date">
+
+                                <%=endDate%>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+                    <select class="centre-status-select <%=statusClass%>"
+                            data-id="<%=centre.getId()%>"
+                            onchange="updateCentreStatus(this)">
+
+                        <option value="PENDING"
+                        <%=
+                        "PENDING".equals(status)
+                        ?
+                        "selected"
+                        :
+                        ""
+                        %>>
+
+                            <%=LanguageManager.get(
+                                    "centers.pending",
+                                    session
+                            )%>
+
+                        </option>
+
+                        <option value="ACTIVE"
+                        <%=
+                        "ACTIVE".equals(status)
+                        ?
+                        "selected"
+                        :
+                        ""
+                        %>>
+
+                            <%=LanguageManager.get(
+                                    "centers.active",
+                                    session
+                            )%>
+
+                        </option>
+
+                        <option value="SUSPENDED"
+                        <%=
+                        "SUSPENDED".equals(status)
+                        ?
+                        "selected"
+                        :
+                        ""
+                        %>>
+
+                            <%=LanguageManager.get(
+                                    "centers.suspended",
+                                    session
+                            )%>
+
+                        </option>
+
+                        <option value="ARCHIVED"
+                        <%=
+                        "ARCHIVED".equals(status)
+                        ?
+                        "selected"
+                        :
+                        ""
+                        %>>
+
+                            <%=LanguageManager.get(
+                                    "centers.archived",
+                                    session
+                            )%>
+
+                        </option>
+
+                    </select>
+
+                </td>
+
+
+                <!-- ACTIONS -->
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <button type="button"
+                                class="action-button action-view"
+                                title="<%=LanguageManager.get(
+                                        "centers.actions",
+                                        session
+                                )%>"
+                                onclick="viewCentre(<%=centre.getId()%>)">
+
+                            <i class="fa-regular fa-eye"
+                               aria-hidden="true"></i>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="action-button action-edit"
+                                title="<%=LanguageManager.get(
+                                        "centers.edit",
+                                        session
+                                )%>"
+                                onclick="editCentre(<%=centre.getId()%>)">
+
+                            <i class="fa-solid fa-pen"
+                               aria-hidden="true"></i>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="action-button action-reset"
+                                title="<%=LanguageManager.get(
+                                        "centers.reset.password",
+                                        session
+                                )%>"
+                                onclick="resetCentrePassword(<%=centre.getId()%>)">
+
+                            <i class="fa-solid fa-key"
+                               aria-hidden="true"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            <%
+
+            }
+
+            %>
+
+        </tbody>
+
+    </table>
+
+</div>
 
 
 <!-- =================================================
-     PAGINATION TOP
-     3 NUMBERS CENTER
+     PAGINATION
 ================================================= -->
-
-
-<div class="pagination-container">
-
 
 <%
 
 if(totalPages > 1){
 
+    int startPage =
+            Math.max(1, currentPage - 1);
 
+    int endPage =
+            Math.min(
+                totalPages,
+                startPage + 2
+            );
 
-int startPage =
-        Math.max(1, currentPage - 1);
+    if(endPage - startPage < 2){
 
+        startPage =
+                Math.max(
+                    1,
+                    endPage - 2
+                );
 
-
-int endPage =
-        Math.min(
-            totalPages,
-            startPage + 2
-        );
-
-
-
-if(endPage - startPage < 2){
-
-    startPage =
-        Math.max(
-            1,
-            endPage - 2
-        );
-
-}
+    }
 
 %>
 
-<!-- FIRST PAGE -->
+<nav class="centres-pagination">
 
-<button
+    <button class="page-btn"
+            type="button"
+            onclick="changeCentrePage(1)"
+            <%=currentPage <= 1 ? "disabled" : ""%>>
 
-class="page-btn"
+        <i class="fa-solid fa-angles-right"
+           aria-hidden="true"></i>
 
-onclick="changeCentrePage(1)"
+    </button>
 
-<%=currentPage <= 1 ? "disabled" : ""%>
+    <button class="page-btn"
+            type="button"
+            onclick="changeCentrePage(<%=currentPage - 1%>)"
+            <%=currentPage <= 1 ? "disabled" : ""%>>
 
->
+        <i class="fa-solid fa-chevron-right"
+           aria-hidden="true"></i>
 
-&lt;&lt;
+    </button>
 
-</button>
+    <%
 
+    for(int i = startPage; i <= endPage; i++){
 
+    %>
 
+    <button class="page-btn <%=i == currentPage ? "active" : ""%>"
+            type="button"
+            onclick="changeCentrePage(<%=i%>)">
 
+        <%=i%>
 
-<!-- PREVIOUS -->
+    </button>
 
-<button
+    <%
 
-class="page-btn"
+    }
 
-onclick="changeCentrePage(<%=currentPage - 1%>)"
+    %>
 
-<%=currentPage <= 1 ? "disabled" : ""%>
+    <button class="page-btn"
+            type="button"
+            onclick="changeCentrePage(<%=currentPage + 1%>)"
+            <%=currentPage >= totalPages ? "disabled" : ""%>>
 
->
+        <i class="fa-solid fa-chevron-left"
+           aria-hidden="true"></i>
 
-&lt;
+    </button>
 
-</button>
+    <button class="page-btn"
+            type="button"
+            onclick="changeCentrePage(<%=totalPages%>)"
+            <%=currentPage >= totalPages ? "disabled" : ""%>>
 
+        <i class="fa-solid fa-angles-left"
+           aria-hidden="true"></i>
 
+    </button>
 
-
-
-<%
-
-for(int i = startPage; i <= endPage; i++){
-
-%>
-
-
-<button
-
-class="page-btn <%=i == currentPage ? "active" : ""%>"
-
-onclick="changeCentrePage(<%=i%>)"
-
->
-
-<%=i%>
-
-</button>
-
-
+</nav>
 
 <%
 
 }
 
 %>
-
-
-
-
-
-<!-- NEXT -->
-
-
-<button
-
-class="page-btn"
-
-onclick="changeCentrePage(<%=currentPage + 1%>)"
-
-<%=currentPage >= totalPages ? "disabled" : ""%>
-
->
-
-&gt;
-
-</button>
-
-
-
-
-
-<!-- LAST PAGE -->
-
-<button
-
-class="page-btn"
-
-onclick="changeCentrePage(<%=totalPages%>)"
-
-<%=currentPage >= totalPages ? "disabled" : ""%>
-
->
-
-&gt;&gt;
-
-</button>
-
-
-
-
-
-<%
-
-}
-
-%>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =================================================
-     TABLE CONTAINER
-================================================= -->
-
-
-<div class="table-container">
-
-
-
-<table class="centers-table">
-
-
-
-
-
-<thead>
-
-
-<tr>
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.code",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.name",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.owner",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.phone",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.subscription.start",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.subscription.end",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.status",
-        session
-)%>
-
-</th>
-
-
-
-
-
-<th>
-
-<%=LanguageManager.get(
-        "centers.actions",
-        session
-)%>
-
-</th>
-
-
-
-
-</tr>
-
-
-</thead>
-
-
-
-
-
-
-<tbody>
-
-
-
-<%
-
-for(Centre centre : centres){
-
-
-
-String status =
-centre.getStatus();
-
-
-
-if(status == null){
-
-    status="PENDING";
-
-}
-
-
-
-String statusClass =
-"status-" + status.toLowerCase();
-
-
-
-%>
-
-
-
-
-<tr>
-
-
-
-
-
-<td>
-
-
-<strong>
-
-
-<%=centre.getCentreCode()!=null
-?
-centre.getCentreCode()
-:
-"-"
-%>
-
-
-</strong>
-
-
-</td>
-
-
-
-
-
-
-<td>
-
-
-<strong>
-
-
-<%=centre.getName()!=null
-?
-centre.getName()
-:
-"-"
-%>
-
-
-</strong>
-
-
-</td>
-
-
-
-
-
-
-<td>
-
-
-<%=centre.getOwnerName()!=null
-?
-centre.getOwnerName()
-:
-"-"
-%>
-
-
-</td>
-
-
-
-
-
-
-<td>
-
-
-<%=centre.getPhone()!=null
-?
-centre.getPhone()
-:
-"-"
-%>
-
-
-</td>
-
-
-
-
-
-
-<td>
-
-
-<%
-
-if(centre.getSubscriptionStart()!=null){
-
-%>
-
-
-<%=sdf.format(
-        centre.getSubscriptionStart()
-)%>
-
-
-
-<%
-
-}else{
-
-%>
-
-
--
-
-
-<%
-
-}
-
-%>
-
-
-</td>
-
-
-
-
-
-
-<td>
-
-
-<%
-
-if(centre.getSubscriptionEnd()!=null){
-
-%>
-
-
-<%=sdf.format(
-        centre.getSubscriptionEnd()
-)%>
-
-
-
-<%
-
-}else{
-
-%>
-
-
--
-
-
-<%
-
-}
-
-%>
-
-
-</td>
-<!-- STATUS -->
-
-<td>
-
-
-<select
-
-class="status-select <%=statusClass%>"
-
-data-id="<%=centre.getId()%>"
-
-onchange="updateCentreStatus(this)"
-
-
->
-
-
-
-<option value="PENDING"
-
-<%=
-"PENDING".equals(status)
-?
-"selected"
-:
-""
-%>
-
->
-
-<%=LanguageManager.get(
-        "centers.pending",
-        session
-)%>
-
-</option>
-
-
-
-
-
-<option value="ACTIVE"
-
-<%=
-"ACTIVE".equals(status)
-?
-"selected"
-:
-""
-%>
-
->
-
-<%=LanguageManager.get(
-        "centers.active",
-        session
-)%>
-
-</option>
-
-
-
-
-
-<option value="SUSPENDED"
-
-<%=
-"SUSPENDED".equals(status)
-?
-"selected"
-:
-""
-%>
-
->
-
-<%=LanguageManager.get(
-        "centers.suspended",
-        session
-)%>
-
-</option>
-
-
-
-
-
-<option value="ARCHIVED"
-
-<%=
-"ARCHIVED".equals(status)
-?
-"selected"
-:
-""
-%>
-
->
-
-<%=LanguageManager.get(
-        "centers.archived",
-        session
-)%>
-
-</option>
-
-
-
-</select>
-
-
-</td>
-
-
-
-
-
-
-
-<!-- ACTIONS -->
-
-<td>
-
-
-<div class="actions">
-
-
-
-<button
-
-type="button"
-
-class="action-btn action-view"
-
-onclick="viewCentre(<%=centre.getId()%>)"
-
->
-
-👁
-
-</button>
-
-
-
-
-
-
-<button
-
-type="button"
-
-class="action-btn action-edit"
-
-title="<%=LanguageManager.get(
-"centers.edit",
-session
-)%>"
-
-onclick="editCentre(<%=centre.getId()%>)"
-
->
-
-✏️
-
-</button>
-
-
-
-
-
-
-<button
-
-type="button"
-
-class="action-btn action-reset"
-
-title="<%=LanguageManager.get(
-"centers.reset.password",
-session
-)%>"
-
-onclick="resetCentrePassword(<%=centre.getId()%>)"
-
->
-
-🔑
-
-</button>
-
-
-
-
-</div>
-
-
-</td>
-
-
-
-
-
-
-</tr>
-
-
-
-
-
-<%
-
-}
-
-%>
-
-
-
-</tbody>
-
-
-
-</table>
-
-
-
-</div>
-
-
-
-
 
 <%
 

@@ -1,209 +1,425 @@
 /*
 ==========================================================
- CENTRIA
- Centres Management Module
- Professional UI Style
- Clean Version
+File        : centres.css
+Project     : CENTRIA
+Layer       : Pages
+Component   : Centres Management
 ==========================================================
 */
 
 
 /* ======================================================
-   01 - CENTRES TOOLBAR
-   ====================================================== */
+   PAGE FOUNDATION
+====================================================== */
 
-
-.centres-toolbar{
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    gap:20px;
-    padding:22px 25px;
-    margin-bottom:35px;
-
-    flex-wrap:wrap;
-
-    background:var(--surface);
-
-    border-radius:var(--radius-lg);
-
-    border:1px solid #e2e8f0;
-
-    box-shadow:
-    0 10px 25px rgba(15,23,42,.06);
-
-}
-
-
-
-
-/* ======================================================
-   02 - FILTER FORM
-   ====================================================== */
-
-
-.centres-filter-form{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    flex-wrap:wrap;
-
-}
-
-
-
-
-
-/* ======================================================
-   03 - SEARCH BOX
-   ====================================================== */
-
-
-.search-box{
-
-    display:flex;
-
-    align-items:center;
-
-    width:300px;
-
-    height:44px;
-
-    padding:0 15px;
-
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:12px;
-
-    transition:.25s;
-
-    box-shadow:
-
-    inset 0 1px 2px rgba(0,0,0,.04);
-
-}
-
-
-
-.search-box:focus-within{
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 0 4px rgba(37,99,235,.12);
-
-}
-
-
-
-.search-box input{
+.centres-page{
 
     width:100%;
 
-    height:100%;
+    display:grid;
 
-    border:none;
-
-    outline:none;
-
-    background:transparent;
+    gap:16px;
 
     color:var(--text);
+
+}
+
+
+html[dir="rtl"] .centres-page{
+
+    direction:rtl;
+
+}
+
+
+html[dir="ltr"] .centres-page{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   CENTRE BANNER
+====================================================== */
+
+.centre-banner{
+
+    min-height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 16px;
+
+    background:#eef5ff;
+
+    border:1px solid #dbeafe;
+
+    border-radius:var(--radius-sm);
+
+}
+
+
+.centre-banner-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--primary);
 
     font-size:15px;
 
 }
 
 
+.centre-banner-title{
 
-.search-box input::placeholder{
+    margin:0;
+
+    color:var(--text);
+
+    font-size:15px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+.centre-banner-separator{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+
+.centre-banner-description{
+
+    margin:0;
+
+    color:var(--text-light);
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+   WORKSPACE
+====================================================== */
+
+.centres-workspace{
+
+    display:grid;
+
+    gap:18px;
+
+    min-width:0;
+
+}
+
+
+/* ======================================================
+   CONTROL DECK
+====================================================== */
+
+.centres-control-deck{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:22px;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+.centres-filter-form{
+
+    flex:1 1 760px;
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(230px, 1fr)
+        minmax(150px, .42fr)
+        minmax(150px, .42fr)
+        auto;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+/* ======================================================
+   SEARCH FIELD
+====================================================== */
+
+.centres-search-field{
+
+    position:relative;
+
+    min-width:0;
+
+}
+
+
+.centres-search-field > i{
+
+    position:absolute;
+
+    inset-inline-start:15px;
+
+    top:50%;
+
+    z-index:1;
+
+    color:#94a3b8;
+
+    font-size:.9rem;
+
+    transform:translateY(-50%);
+
+    pointer-events:none;
+
+}
+
+
+.centres-search-field input{
+
+    width:100%;
+
+    height:48px;
+
+    padding-inline-start:42px;
+
+    padding-inline-end:16px;
+
+    color:var(--text);
+
+    background:var(--white);
+
+    border:1px solid #dfe5ee;
+
+    border-radius:10px;
+
+    font-size:.88rem;
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+.centres-search-field input::placeholder{
 
     color:#94a3b8;
 
 }
 
 
+.centres-search-field input:focus{
 
+    border-color:var(--primary);
 
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
+
+}
 
 
 /* ======================================================
-   04 - SELECT FILTER
-   ====================================================== */
+   SELECT FIELDS
+====================================================== */
+
+.centres-select-field{
+
+    position:relative;
+
+    min-width:0;
+
+}
+
+
+.centres-select-field > i{
+
+    position:absolute;
+
+    inset-inline-start:14px;
+
+    top:50%;
+
+    z-index:1;
+
+    color:#64748b;
+
+    font-size:.82rem;
+
+    transform:translateY(-50%);
+
+    pointer-events:none;
+
+}
 
 
 .centre-select{
 
-    width:165px;
+    width:100%;
 
-    height:44px;
+    height:48px;
 
-    padding:0 16px;
+    padding-inline-start:38px;
 
-    border-radius:12px;
-
-    border:1px solid #cbd5e1;
-
-    background:white;
+    padding-inline-end:14px;
 
     color:var(--text);
 
-    font-size:14px;
+    background:var(--white);
+
+    border:1px solid #dfe5ee;
+
+    border-radius:10px;
+
+    font-size:.86rem;
 
     font-weight:600;
 
     cursor:pointer;
 
-    outline:none;
-
-    transition:.25s;
-
-}
-
-
-
-.centre-select:hover{
-
-    border-color:var(--primary);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
 
 }
-
 
 
 .centre-select:focus{
 
     border-color:var(--primary);
 
-    box-shadow:
-
-    0 0 0 4px rgba(37,99,235,.12);
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
 
 }
 
 
-
-
-
-
 /* ======================================================
-   05 - PRIMARY BUTTON
-   ====================================================== */
+   BUTTONS
+====================================================== */
+
+.centres-page .btn-primary{
+
+    min-height:46px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    padding:0 18px;
+
+    color:var(--white);
+
+    background:var(--primary);
+
+    border:1px solid var(--primary);
+
+    border-radius:10px;
+
+    font-size:.88rem;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 18px rgba(37,99,235,.18);
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
+
+}
 
 
-.btn-primary{
+.centres-page .btn-primary:hover{
 
-    height:44px;
+    color:var(--white);
 
-    padding:0 24px;
+    background:var(--primary-dark);
+
+    border-color:var(--primary-dark);
+
+    box-shadow:0 10px 22px rgba(29,78,216,.24);
+
+    transform:translateY(-1px);
+
+}
+
+
+.centres-page .btn-primary:focus-visible{
+
+    outline:2px solid var(--primary);
+
+    outline-offset:3px;
+
+}
+
+
+.centres-search-button{
+
+    min-width:112px;
+
+}
+
+
+.centres-add-action{
+
+    flex:0 0 auto;
+
+    min-width:145px;
+
+}
+
+
+.centres-page .btn-secondary{
+
+    min-height:42px;
 
     display:inline-flex;
 
@@ -213,364 +429,940 @@
 
     gap:8px;
 
-    border:none;
+    padding:0 16px;
 
-    border-radius:12px;
+    color:#475569;
 
+    background:var(--white);
 
-    background:
+    border:1px solid #dbe2ea;
 
-    linear-gradient(
-        135deg,
-        var(--primary),
-        var(--primary-dark)
-    );
+    border-radius:9px;
 
-
-    color:white;
-
-    font-size:14px;
+    font-size:.85rem;
 
     font-weight:700;
 
     cursor:pointer;
 
-    text-decoration:none;
-
-    white-space:nowrap;
-
-    transition:.25s;
-
-}
-
-
-
-.btn-primary:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-
-    0 12px 25px rgba(37,99,235,.30);
+    transition:
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition);
 
 }
 
 
+.centres-page .btn-secondary:hover{
 
-.btn-primary:active{
+    color:var(--text);
 
-    transform:scale(.97);
+    background:#f8fafc;
 
-}
-
-
-
-.btn-no-underline{
-
-    text-decoration:none;
+    border-color:#cbd5e1;
 
 }
-
-
-
-.centres-toolbar a{
-
-    text-decoration:none;
-
-}
-
-
-
-
-
 
 
 /* ======================================================
-   06 - TABLE CONTAINER
-   ====================================================== */
+   QUICK STATUS FILTERS
+====================================================== */
+
+.centres-status-filters{
+
+    flex:0 0 100%;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding-top:16px;
+
+    border-top:1px solid #eef1f5;
+
+}
 
 
-.table-container{
+.centre-status-filter{
+
+    min-height:36px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:0 12px;
+
+    color:#64748b;
+
+    background:#fff;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:9px;
+
+    font-size:.8rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+.centre-status-filter:hover{
+
+    color:var(--text);
+
+    background:#f8fafc;
+
+    border-color:#cbd5e1;
+
+}
+
+
+.centre-status-filter.is-active{
+
+    color:var(--primary);
+
+    background:#eff6ff;
+
+    border-color:#93c5fd;
+
+    box-shadow:0 3px 8px rgba(37,99,235,.08);
+
+}
+
+
+.centre-status-dot{
+
+    width:8px;
+
+    height:8px;
+
+    flex:0 0 8px;
+
+    border-radius:50%;
+
+}
+
+
+.centre-status-dot.is-all{
+
+    background:var(--primary);
+
+}
+
+
+.centre-status-dot.is-active{
+
+    background:var(--success);
+
+}
+
+
+.centre-status-dot.is-pending{
+
+    background:var(--warning);
+
+}
+
+
+.centre-status-dot.is-suspended{
+
+    background:var(--danger);
+
+}
+
+
+.centre-status-dot.is-archived{
+
+    background:#94a3b8;
+
+}
+
+
+.centre-filter-count{
+
+    min-width:20px;
+
+    height:20px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0 5px;
+
+    color:#475569;
+
+    background:#f1f5f9;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:800;
+
+}
+
+
+.centre-status-filter.is-active .centre-filter-count{
+
+    color:var(--primary-dark);
+
+    background:#dbeafe;
+
+}
+
+
+/* ======================================================
+   CENTRES REGISTER
+====================================================== */
+
+.centres-register{
+
+    min-width:0;
+
+    overflow:hidden;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+.centres-register-header{
+
+    min-height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:16px;
+
+    padding:0 20px;
+
+    border-bottom:1px solid #eef1f5;
+
+}
+
+
+.centres-register-title-wrap{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+}
+
+
+.centres-register-icon{
+
+    width:36px;
+
+    height:36px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--primary);
+
+    background:#eff6ff;
+
+    border-radius:10px;
+
+    font-size:.92rem;
+
+}
+
+
+.centres-register-header h2{
+
+    margin:0;
+
+    color:var(--text);
+
+    font-size:1rem;
+
+    font-weight:800;
+
+}
+
+
+.centres-total{
+
+    min-width:22px;
+
+    min-height:22px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:3px;
+
+    color:#64748b;
+
+    background:#f1f5f9;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:800;
+
+}
+
+
+.centres-total:empty{
+
+    display:none;
+
+}
+
+
+.centres-table-stage{
 
     width:100%;
 
     overflow-x:auto;
 
-    background:white;
-
-    border-radius:
-
-    0
-
-    0
-
-    var(--radius-lg)
-
-    var(--radius-lg);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(15,23,42,.06);
-
-    border:1px solid #e2e8f0;
-
 }
 
 
+.table-content-area{
 
+    min-width:0;
 
-
+}
 
 
 /* ======================================================
-   07 - CENTRES TABLE
-   ====================================================== */
+   TABLE FOUNDATION
+====================================================== */
 
-
-.centers-table{
+.table-content-area table{
 
     width:100%;
 
-    min-width:950px;
+    min-width:980px;
 
-    border-collapse:collapse;
+    border-collapse:separate;
 
-    background:white;
+    border-spacing:0;
+
+    color:var(--text);
 
 }
 
 
+.table-content-area thead th{
 
+    padding:16px 14px;
 
-
-/* TABLE HEADER */
-
-
-.centers-table thead{
+    color:var(--white);
 
     background:
+        linear-gradient(
+            135deg,
+            #061a3d 0%,
+            #0c2b72 100%
+        );
 
-    linear-gradient(
-        135deg,
-        #0f172a,
-        #1e40af
-    );
+    border-bottom:1px solid rgba(255,255,255,.08);
 
-}
+    font-size:.82rem;
 
+    font-weight:800;
 
-
-.centers-table th{
-
-    height:52px;
-
-    padding:0 12px;
-
-    color:white;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    text-align:center;
+    text-align:start;
 
     white-space:nowrap;
 
 }
 
 
+.table-content-area thead th:first-child{
+
+    border-start-start-radius:10px;
+
+}
 
 
+.table-content-area thead th:last-child{
 
-/* TABLE BODY */
+    border-start-end-radius:10px;
+
+}
 
 
-.centers-table td{
+.table-content-area tbody td{
 
-    height:55px;
+    padding:15px 14px;
 
-    padding:10px 12px;
+    color:#334155;
 
-    text-align:center;
+    background:var(--white);
+
+    border-bottom:1px solid #eef1f5;
+
+    font-size:.84rem;
+
+    text-align:start;
 
     vertical-align:middle;
 
-    color:var(--text);
-
-    font-size:13px;
-
-    border-bottom:
-
-    1px solid var(--border);
+    transition:background var(--transition);
 
 }
 
 
-
-.centers-table tbody tr{
-
-    transition:.2s;
-
-}
-
-
-
-.centers-table tbody tr:hover{
-
-    background:#f1f5ff;
-
-    box-shadow:
-
-    inset 4px 0 0 var(--primary);
-
-}
-
-
-
-.centers-table tbody tr:last-child td{
+.table-content-area tbody tr:last-child td{
 
     border-bottom:none;
 
 }
 
 
+.table-content-area tbody tr:hover td{
 
-.centers-table td strong{
+    background:#fbfdff;
 
-    color:var(--title);
+}
+
+
+.table-content-area tbody tr[data-status="ACTIVE"] td:first-child{
+
+    box-shadow:inset -4px 0 0 var(--success);
+
+}
+
+
+.table-content-area tbody tr[data-status="PENDING"] td:first-child{
+
+    box-shadow:inset -4px 0 0 var(--warning);
+
+}
+
+
+.table-content-area tbody tr[data-status="SUSPENDED"] td:first-child{
+
+    box-shadow:inset -4px 0 0 var(--danger);
+
+}
+
+
+.table-content-area tbody tr[data-status="ARCHIVED"] td:first-child{
+
+    box-shadow:inset -4px 0 0 #94a3b8;
+
+}
+
+
+html[dir="ltr"]
+.table-content-area tbody tr[data-status="ACTIVE"] td:first-child{
+
+    box-shadow:inset 4px 0 0 var(--success);
+
+}
+
+
+html[dir="ltr"]
+.table-content-area tbody tr[data-status="PENDING"] td:first-child{
+
+    box-shadow:inset 4px 0 0 var(--warning);
+
+}
+
+
+html[dir="ltr"]
+.table-content-area tbody tr[data-status="SUSPENDED"] td:first-child{
+
+    box-shadow:inset 4px 0 0 var(--danger);
+
+}
+
+
+html[dir="ltr"]
+.table-content-area tbody tr[data-status="ARCHIVED"] td:first-child{
+
+    box-shadow:inset 4px 0 0 #94a3b8;
+
+}
+
+
+/* ======================================================
+   CENTRE IDENTITY
+   Used in the table fragment
+====================================================== */
+
+.centre-identity{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    min-width:190px;
+
+}
+
+
+.centre-avatar{
+
+    width:42px;
+
+    height:42px;
+
+    flex:0 0 42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--primary);
+
+    background:#eff6ff;
+
+    border-radius:10px;
+
+    font-size:1rem;
+
+}
+
+
+.centre-identity-copy{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:3px;
+
+}
+
+
+.centre-name{
+
+    overflow:hidden;
+
+    color:var(--text);
+
+    font-size:.88rem;
+
+    font-weight:800;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+
+.centre-code{
+
+    color:#94a3b8;
+
+    font-size:.73rem;
+
+    font-weight:700;
+
+    direction:ltr;
+
+    text-align:start;
+
+}
+
+
+/* ======================================================
+   OWNER / CONTACT
+====================================================== */
+
+.centre-contact{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    min-width:155px;
+
+}
+
+
+.centre-owner,
+
+.centre-phone{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    white-space:nowrap;
+
+}
+
+
+.centre-owner{
+
+    color:#334155;
 
     font-weight:700;
 
 }
 
 
+.centre-phone{
+
+    color:#64748b;
+
+    font-size:.77rem;
+
+    direction:ltr;
+
+    text-align:start;
+
+}
 
 
+.centre-owner i,
+
+.centre-phone i{
+
+    color:#94a3b8;
+
+    font-size:.75rem;
+
+}
 
 
 /* ======================================================
-   08 - STATUS SELECT
-   ====================================================== */
+   SUBSCRIPTION TIMELINE
+====================================================== */
+
+.centre-subscription-timeline{
+
+    min-width:130px;
+
+    display:grid;
+
+    grid-template-columns:14px 1fr;
+
+    gap:8px;
+
+    align-items:center;
+
+}
 
 
-.status-select{
+.centre-timeline-line{
 
-    width:135px;
+    position:relative;
 
-    height:36px;
+    width:2px;
 
-    padding:0 15px;
+    height:42px;
 
-    border-radius:20px;
+    justify-self:center;
+
+    background:#cbd5e1;
+
+}
+
+
+.centre-timeline-line::before,
+
+.centre-timeline-line::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset-inline-start:50%;
+
+    width:9px;
+
+    height:9px;
+
+    border-radius:50%;
+
+    transform:translateX(-50%);
+
+}
+
+
+.centre-timeline-line::before{
+
+    top:0;
+
+    background:var(--primary);
+
+}
+
+
+.centre-timeline-line::after{
+
+    bottom:0;
+
+    background:#94a3b8;
+
+}
+
+
+.centre-timeline-copy{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+
+.centre-timeline-label{
+
+    color:#94a3b8;
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+}
+
+
+.centre-timeline-date{
+
+    color:#475569;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    direction:ltr;
+
+    text-align:start;
+
+}
+
+
+.centre-row.is-active .centre-timeline-line::before,
+
+.centre-row.is-active .centre-timeline-line::after{
+
+    background:var(--success);
+
+}
+
+
+.centre-row.is-pending .centre-timeline-line::before,
+
+.centre-row.is-pending .centre-timeline-line::after{
+
+    background:var(--warning);
+
+}
+
+
+.centre-row.is-suspended .centre-timeline-line::before,
+
+.centre-row.is-suspended .centre-timeline-line::after{
+
+    background:var(--danger);
+
+}
+
+
+.centre-row.is-archived .centre-timeline-line::before,
+
+.centre-row.is-archived .centre-timeline-line::after{
+
+    background:#94a3b8;
+
+}
+
+
+/* ======================================================
+   STATUS BADGES
+====================================================== */
+
+.centre-status-badge{
+
+    min-height:31px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    padding:0 12px;
 
     border:1px solid transparent;
 
-    font-size:12px;
+    border-radius:999px;
 
-    font-weight:700;
+    font-size:.78rem;
 
-    text-align:center;
+    font-weight:800;
 
-    cursor:pointer;
-
-    outline:none;
-
-    transition:.25s;
+    white-space:nowrap;
 
 }
 
 
+.centre-status-badge::before{
 
-.status-select:hover{
+    content:"";
 
-    transform:translateY(-1px);
+    width:7px;
 
-    box-shadow:
+    height:7px;
 
-    0 5px 12px rgba(15,23,42,.12);
+    border-radius:50%;
 
-}
-
-
-
-.status-select:focus{
-
-    box-shadow:
-
-    0 0 0 3px rgba(37,99,235,.18);
+    background:currentColor;
 
 }
 
 
+.centre-status-badge.is-active{
 
+    color:#15803d;
 
-
-
-/* ======================================================
-   09 - STATUS COLORS
-   ====================================================== */
-
-
-.status-active{
-
-    background:#dcfce7;
-
-    color:#166534;
+    background:#ecfdf3;
 
     border-color:#86efac;
 
 }
 
 
+.centre-status-badge.is-pending{
 
-.status-pending{
+    color:#b45309;
 
-    background:#fef3c7;
-
-    color:#92400e;
+    background:#fff7e6;
 
     border-color:#fcd34d;
 
 }
 
 
+.centre-status-badge.is-suspended{
 
-.status-suspended{
+    color:#b91c1c;
 
-    background:#fee2e2;
-
-    color:#991b1b;
+    background:#fef2f2;
 
     border-color:#fca5a5;
 
 }
 
 
+.centre-status-badge.is-archived{
 
-.status-archived{
+    color:#64748b;
 
-    background:#dbeafe;
+    background:#f1f5f9;
 
-    color:#1e40af;
+    border-color:#cbd5e1;
 
 }
 
 
+/* Legacy status selectors */
+
+.table-content-area .status-active{
+
+    color:#15803d;
+
+    background:#ecfdf3;
+
+    border-color:#86efac;
+
+}
 
 
+.table-content-area .status-pending{
+
+    color:#b45309;
+
+    background:#fff7e6;
+
+    border-color:#fcd34d;
+
+}
+
+
+.table-content-area .status-suspended{
+
+    color:#b91c1c;
+
+    background:#fef2f2;
+
+    border-color:#fca5a5;
+
+}
+
+
+.table-content-area .status-archived{
+
+    color:#64748b;
+
+    background:#f1f5f9;
+
+    border-color:#cbd5e1;
+
+}
 
 
 /* ======================================================
-   10 - TABLE ACTIONS
-   ====================================================== */
+   TABLE ACTIONS
+====================================================== */
 
-
-.actions{
+.table-actions{
 
     display:flex;
-
-    justify-content:center;
 
     align-items:center;
 
@@ -581,8 +1373,7 @@
 }
 
 
-
-.action-btn{
+.action-button{
 
     width:36px;
 
@@ -594,1053 +1385,335 @@
 
     justify-content:center;
 
-    border-radius:10px;
+    color:#475569;
 
-    color:white;
+    background:var(--white);
 
-    text-decoration:none;
+    border:1px solid #dbe2ea;
 
-    font-size:15px;
+    border-radius:9px;
 
-    transition:.25s;
-
-    box-shadow:
-
-    0 4px 10px rgba(15,23,42,.12);
-
-}
-
-
-
-.action-btn:hover{
-
-    transform:translateY(-2px);
-
-}
-
-
-
-.action-view{
-
-    background:#0ea5e9;
-
-}
-
-
-
-.action-edit{
-
-    background:var(--primary);
-
-}
-
-
-
-.action-renew{
-
-    background:var(--success);
-
-}
-
-
-
-.action-view:hover{
-
-    box-shadow:
-
-    0 8px 16px rgba(14,165,233,.3);
-
-}
-
-
-
-.action-edit:hover{
-
-    box-shadow:
-
-    0 8px 16px rgba(37,99,235,.3);
-
-}
-
-
-
-.action-renew:hover{
-
-    box-shadow:
-
-    0 8px 16px rgba(22,163,74,.3);
-
-}
-
-
-
-
-
-
-/* ======================================================
-   11 - EMPTY STATE
-   ====================================================== */
-
-
-.empty-state{
-
-    padding:45px;
-
-    text-align:center;
-
-    background:white;
-
-    border-radius:var(--radius-lg);
-
-    box-shadow:var(--shadow);
-
-    color:#64748b;
-
-}
-
-
-
-.empty-state p{
-
-    margin:0;
-
-    font-size:15px;
-
-}
-
-/* ======================================================
-   12 - ADD CENTRE FORM
-   ====================================================== */
-
-
-.container{
-
-    width:100%;
-
-    max-width:720px;
-
-    margin:40px auto;
-
-    padding:35px 40px;
-
-    background:var(--surface);
-
-    border-radius:22px;
-
-    border:1px solid var(--border);
-
-    box-shadow:
-
-    0 15px 35px rgba(15,23,42,.08);
-
-}
-
-
-
-.container h1{
-
-    text-align:center;
-
-    margin-bottom:30px;
-
-    color:var(--title);
-
-    font-size:26px;
-
-    font-weight:800;
-
-}
-
-
-
-.container .form-group{
-
-    margin-bottom:22px;
-
-}
-
-
-
-.container .form-group label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#334155;
-
-    font-size:14px;
-
-    font-weight:700;
-
-}
-
-
-
-.container .form-group input,
-.container .form-group select{
-
-    width:100%;
-
-    height:46px;
-
-    padding:0 15px;
-
-    border-radius:12px;
-
-    border:1px solid var(--border);
-
-    background:white;
-
-    color:var(--text);
-
-    font-size:15px;
-
-    transition:.25s;
-
-}
-
-
-
-.container .form-group input:focus,
-.container .form-group select:focus{
-
-    outline:none;
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 0 4px rgba(37,99,235,.12);
-
-}
-
-
-
-
-
-/* INFO BOX */
-
-
-.info-box{
-
-    padding:18px;
-
-    margin-bottom:25px;
-
-    border-radius:14px;
-
-    background:#eff6ff;
-
-    border-left:5px solid var(--primary);
-
-    color:#1e40af;
-
-    font-weight:600;
-
-}
-
-
-
-html[dir="rtl"] .info-box{
-
-    border-left:none;
-
-    border-right:5px solid var(--primary);
-
-}
-
-
-
-
-
-
-
-/* FORM BUTTONS */
-
-
-.container .buttons{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-top:30px;
-
-}
-
-
-
-.container .btn-back{
-
-    padding:12px 28px;
-
-    border-radius:12px;
-
-    background:#64748b;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-
-
-.container .btn-back:hover{
-
-    background:#475569;
-
-}
-
-
-
-.container button{
-
-    padding:12px 28px;
-
-    border-radius:12px;
-
-    border:none;
-
-    background:var(--primary);
-
-    color:white;
-
-    font-weight:700;
+    font-size:.86rem;
 
     cursor:pointer;
 
-    transition:.25s;
+    transition:
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
 
 }
 
 
+.action-button:hover{
 
-.container button:hover{
+    color:var(--primary);
 
-    transform:translateY(-2px);
+    background:#eff6ff;
 
-    box-shadow:
+    border-color:#93c5fd;
 
-    0 10px 20px rgba(37,99,235,.25);
+    box-shadow:0 4px 10px rgba(37,99,235,.10);
+
+    transform:translateY(-1px);
 
 }
 
 
+.action-button.is-danger:hover{
 
+    color:#b91c1c;
 
+    background:#fef2f2;
 
+    border-color:#fca5a5;
+
+}
 
 
 /* ======================================================
-   13 - CENTRE MODAL GLOBAL
-   ====================================================== */
+   AJAX STATES
+====================================================== */
 
+.centres-table-loading,
 
-.centre-modal{
+.centres-table-error,
 
-    display:none;
+.empty-state{
 
-    position:fixed;
+    min-height:230px;
 
-    inset:0;
+    display:flex;
 
-    background:
-
-    rgba(15,23,42,.45);
-
-    z-index:9999;
+    flex-direction:column;
 
     align-items:center;
 
     justify-content:center;
 
-    padding:20px;
+    gap:12px;
+
+    padding:30px;
+
+    color:#94a3b8;
+
+    text-align:center;
 
 }
 
+
+.centres-table-loading i{
+
+    color:var(--primary);
+
+    font-size:1.35rem;
+
+}
+
+
+.centres-table-error{
+
+    color:var(--danger);
+
+}
+
+
+.centres-table-error i,
+
+.centre-action-error i{
+
+    font-size:1.3rem;
+
+}
+
+
+.empty-state h3,
+
+.empty-state p{
+
+    margin:0;
+
+}
+
+
+/* ======================================================
+   PAGINATION
+====================================================== */
+
+.pagination,
+
+.centres-pagination,
+
+#centres-pagination-container{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    padding:18px;
+
+}
+
+
+.pagination button,
+
+.centres-pagination button{
+
+    min-width:34px;
+
+    height:34px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0 10px;
+
+    color:#64748b;
+
+    background:var(--white);
+
+    border:1px solid #dbe2ea;
+
+    border-radius:8px;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+
+.pagination button:hover,
+
+.centres-pagination button:hover,
+
+.pagination button.active,
+
+.centres-pagination button.active{
+
+    color:var(--white);
+
+    background:var(--primary);
+
+    border-color:var(--primary);
+
+}
+
+
+/* ======================================================
+   MODALS
+====================================================== */
+
+.centre-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1200;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:24px;
+
+    background:rgba(2,15,36,.52);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:
+        opacity var(--transition),
+        visibility var(--transition);
+
+}
 
 
 .centre-modal.show{
 
-    display:flex;
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
 
 }
-
-
-
 
 
 .centre-modal-content{
 
-    width:680px;
-
-    max-width:95%;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:24px;
-
     position:relative;
 
-    box-shadow:
+    width:min(680px, 100%);
 
-    0 20px 50px rgba(0,0,0,.25);
+    max-height:calc(100vh - 48px);
 
-    animation:modalShow .25s ease;
+    overflow:auto;
+
+    padding:28px;
+
+    background:var(--white);
+
+    border:1px solid rgba(255,255,255,.5);
+
+    border-radius:16px;
+
+    box-shadow:0 24px 60px rgba(2,15,36,.25);
+
+    transform:translateY(10px) scale(.98);
+
+    transition:transform var(--transition);
 
 }
 
 
+.centre-modal.show .centre-modal-content{
 
+    transform:translateY(0) scale(1);
+
+}
+
+
+.reset-confirm-box{
+
+    width:min(455px, 100%);
+
+}
 
 
 .modal-close{
 
     position:absolute;
 
-    top:12px;
+    inset-inline-end:15px;
 
-    right:12px;
+    top:15px;
 
     width:34px;
 
     height:34px;
 
-    border:none;
-
-    border-radius:50%;
-
-    background:#fee2e2;
-
-    color:#b91c1c;
-
-    cursor:pointer;
-
-    font-size:15px;
-
-    display:flex;
+    display:inline-flex;
 
     align-items:center;
 
     justify-content:center;
 
-    transition:.25s;
+    color:#64748b;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    transition:
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition);
 
 }
-
 
 
 .modal-close:hover{
 
-    transform:rotate(90deg);
+    color:#b91c1c;
 
-    background:#fecaca;
+    background:#fef2f2;
 
-}
-
-
-
-html[dir="rtl"] .modal-close{
-
-    left:12px;
-    right:auto;
-
-}
-
-html[dir="ltr"] .modal-close{
-
-    right:12px;
-    left:auto;
+    border-color:#fecaca;
 
 }
 
 
-
-
-@keyframes modalShow{
-
-
-from{
-
-    opacity:0;
-
-    transform:scale(.92);
-
-}
-
-
-to{
-
-    opacity:1;
-
-    transform:scale(1);
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   14 - VIEW CENTRE
-   ====================================================== */
-
-
-.centre-view-container{
-
-    width:100%;
-
-    max-width:100%;
-
-    overflow:hidden;
-
-}
-
-
-
-
-
-.centre-view-header{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:18px;
-
-    padding-bottom:12px;
-
-    border-bottom:1px solid #e2e8f0;
-
-}
-
-
-
-.centre-view-header h2{
-
-    margin:0;
-
-    color:var(--title);
-
-    font-size:20px;
-
-    font-weight:800;
-
-}
-
-
-
-.centre-view-header p{
-
-    margin:5px 0 0;
-
-    color:#64748b;
-
-    font-size:13px;
-
-}
-
-
-
-
-
-
-
-/* DETAILS GRID */
-
-
-.centre-card{
+.reset-confirm-content{
 
     display:grid;
 
-    grid-template-columns:
+    gap:18px;
 
-    repeat(2,minmax(300px,1fr));
-
-    gap:12px;
-
-    padding:12px;
-
-    background:#f8fafc;
-
-    border-radius:16px;
-
-    border:1px solid #e2e8f0;
+    padding-top:10px;
 
 }
-
-
-
-
-
-
-
-/* INFO ROW */
-
-
-.info-row{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:12px 15px;
-
-    background:white;
-
-    border-radius:12px;
-
-    border:1px solid #e5e7eb;
-
-    min-height:55px;
-
-    width:100%;
-
-    box-sizing:border-box;
-
-    transition:.25s;
-
-}
-
-
-
-.info-row:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-
-    0 8px 18px rgba(15,23,42,.08);
-
-}
-
-
-
-
-
-.info-row span{
-
-    flex:0 0 auto;
-
-    color:#64748b;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    white-space:nowrap;
-
-}
-
-
-
-.info-row span::after{
-
-    content:":";
-
-    margin-left:5px;
-
-    color:#94a3b8;
-
-}
-
-
-
-
-
-.info-row strong{
-
-    flex:1;
-
-    min-width:0;
-
-    color:#0f172a;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    text-align:right;
-
-    white-space:normal;
-
-}
-
-
-
-
-
-
-
-/* VIEW RTL */
-
-
-html[dir="rtl"] .centre-card{
-
-    direction:rtl;
-
-}
-
-
-
-html[dir="rtl"] .info-row strong{
-
-    text-align:left;
-
-}
-
-
-
-html[dir="rtl"] .info-row span::after{
-
-    margin-left:0;
-
-    margin-right:5px;
-
-}
-
-
-
-
-
-
-
-/* STATUS BADGE */
-
-
-.status-badge{
-
-    padding:5px 14px;
-
-    border-radius:20px;
-
-    font-size:12px;
-
-    font-weight:800;
-
-}
-
-
-
-.status-badge.status-active{
-
-    background:#dcfce7;
-
-    color:#166534;
-
-}
-
-
-
-.status-badge.status-pending{
-
-    background:#fef3c7;
-
-    color:#92400e;
-
-}
-
-
-
-.status-badge.status-suspended{
-
-    background:#fee2e2;
-
-    color:#991b1b;
-
-}
-
-
-
-.status-badge.status-archived{
-
-    background:#dbeafe;
-
-    color:#1e40af;
-
-}
-
-
-
-
-
-
-
-/* VIEW ACTIONS */
-
-
-.centre-view-actions{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:10px;
-
-    margin-top:20px;
-
-}
-
-
-
-.centre-view-actions .action-btn{
-
-    width:auto;
-
-    height:38px;
-
-    padding:0 16px;
-
-    border-radius:12px;
-
-    font-size:13px;
-
-}
-
-/* ======================================================
-   15 - RESET PASSWORD BUTTON
-   ====================================================== */
-
-
-.action-reset{
-
-    background:#7c3aed;
-
-    color:white;
-
-}
-
-
-
-.action-reset:hover{
-
-    box-shadow:
-
-    0 8px 16px rgba(124,58,237,.30);
-
-}
-
-
-
-
-
-
-
-/* ======================================================
-   16 - RESET PASSWORD DIALOG
-   ====================================================== */
-
-
-.reset-success{
-
-    text-align:center;
-
-    padding:25px;
-
-    background:#faf5ff;
-
-    border-radius:18px;
-
-}
-
-
-
-.reset-success h3{
-
-    font-size:32px;
-
-    margin-bottom:10px;
-
-}
-
-
-
-.reset-success h4{
-
-    color:#16a34a;
-
-    font-size:18px;
-
-    margin-bottom:25px;
-
-}
-
-
-
-
-
-
-/* RESET INFORMATION */
-
-
-.reset-info{
-
-    background:#f8fafc;
-
-    border:1px solid #e2e8f0;
-
-    border-radius:14px;
-
-    padding:18px;
-
-    text-align:left;
-
-}
-
-
-
-.reset-info p{
-
-    margin:10px 0;
-
-    color:#334155;
-
-    font-size:14px;
-
-}
-
-
-
-.reset-info strong{
-
-    color:#0f172a;
-
-}
-
-
-
-html[dir="rtl"] .reset-info{
-
-    text-align:right;
-
-}
-
-
-
-
-
-
-/* TEMP PASSWORD */
-
-
-.temporary-password{
-
-    margin-top:15px;
-
-    font-size:26px;
-
-    font-weight:900;
-
-    color:#2563eb;
-
-    background:#eff6ff;
-
-    border:2px dashed #93c5fd;
-
-    padding:14px 30px;
-
-    border-radius:14px;
-
-    display:inline-block;
-
-    letter-spacing:4px;
-
-}
-
-
-
-
-
-/* WARNING */
-
-
-.reset-warning{
-
-    margin-top:20px;
-
-    padding:12px;
-
-    background:#fffbeb;
-
-    border-radius:10px;
-
-    color:#b45309;
-
-    font-weight:700;
-
-    font-size:14px;
-
-}
-
-
-
-
-
-/* COPY MESSAGE */
-
-
-.copy-message{
-
-    position:fixed;
-
-    top:50%;
-
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    background:#16a34a;
-
-    color:white;
-
-    padding:15px 30px;
-
-    border-radius:12px;
-
-    font-size:18px;
-
-    font-weight:700;
-
-    z-index:9999;
-
-    box-shadow:
-
-    0 10px 25px rgba(0,0,0,.2);
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   17 - CONFIRM HEADER
-   ====================================================== */
 
 
 .confirm-header{
@@ -1649,629 +1722,18 @@ html[dir="rtl"] .reset-info{
 
     align-items:center;
 
-    justify-content:center;
+    gap:11px;
 
-    gap:10px;
-
-    margin-bottom:15px;
+    padding-inline-end:38px;
 
 }
-
 
 
 .confirm-icon{
 
-    font-size:24px;
+    width:42px;
 
-}
-
-
-
-.confirm-title{
-
-    margin:0;
-
-    font-size:18px;
-
-    font-weight:800;
-
-    color:var(--title);
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   18 - DIALOG ACTIONS
-   ====================================================== */
-
-
-.reset-confirm-actions{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-top:20px;
-
-}
-
-
-
-.reset-confirm-actions .btn-secondary,
-.reset-confirm-actions .btn-primary{
-
-    padding:10px 26px;
-
-    border-radius:12px;
-
-    border:none;
-
-    color:white;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-
-
-
-
-.reset-confirm-actions .btn-secondary{
-
-    background:#dc2626;
-
-}
-
-
-
-.reset-confirm-actions .btn-secondary:hover{
-
-    background:#b91c1c;
-
-    transform:translateY(-2px);
-
-}
-
-
-
-
-
-.reset-confirm-actions .btn-primary{
-
-    background:#16a34a;
-
-}
-
-
-
-.reset-confirm-actions .btn-primary:hover{
-
-    background:#15803d;
-
-    transform:translateY(-2px);
-
-}
-
-
-
-
-
-
-
-
-
-/* ======================================================
-   19 - EDIT CENTRE DIALOG
-   Compact Grid Design
-   ====================================================== */
-
-
-
-#centre-modal .centre-view-container{
-
-    width:100%;
-
-}
-
-
-
-
-#editCentreForm{
-
-    margin-top:10px;
-
-}
-
-
-
-#editCentreForm .edit-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(2,1fr);
-
-    gap:12px;
-
-    margin-top:10px;
-
-}
-
-
-
-#editCentreForm .form-group{
-
-    margin-bottom:0;
-
-}
-
-
-
-
-
-#editCentreForm .form-group label{
-
-    display:block;
-
-    margin-bottom:5px;
-
-    color:#64748b;
-
-    font-size:12px;
-
-    font-weight:800;
-
-}
-
-
-
-#editCentreForm .form-group input{
-
-    width:100%;
-
-    height:38px;
-
-    padding:0 15px;
-
-    border-radius:10px;
-
-    border:1px solid #e2e8f0;
-
-    background:white;
-
-    color:#0f172a;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    box-sizing:border-box;
-
-    transition:.25s;
-
-}
-
-
-
-#editCentreForm .form-group input:hover{
-
-    border-color:#93c5fd;
-
-}
-
-
-
-#editCentreForm .form-group input:focus{
-
-    outline:none;
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 0 4px rgba(37,99,235,.12);
-
-}
-
-
-
-
-
-/* READ ONLY CODE */
-
-
-#editCentreForm .readonly-field{
-
-    background:#f1f5f9;
-
-    color:#64748b;
-
-    cursor:not-allowed;
-
-    border-style:dashed;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-}
-
-
-
-
-
-
-
-/* SUBSCRIPTION INFO COMPACT */
-
-
-#editCentreForm .subscription-info{
-
-    margin-top:12px;
-
-    padding:12px;
-
-    background:#f8fafc;
-
-    border-radius:14px;
-
-    border:1px solid #e2e8f0;
-
-}
-
-
-
-#editCentreForm .subscription-info h5{
-
-    margin:0 0 8px;
-
-    padding-bottom:6px;
-
-    border-bottom:1px solid #e2e8f0;
-
-    font-size:14px;
-
-    font-weight:900;
-
-}
-
-
-
-#editCentreForm .subscription-info p{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin:6px 0;
-
-    padding:8px 12px;
-
-    background:white;
-
-    border-radius:10px;
-
-    border:1px solid #e5e7eb;
-
-    font-size:12px;
-
-    font-weight:700;
-
-}
-
-
-
-
-
-
-
-/* EDIT RTL */
-
-
-html[dir="rtl"] #editCentreForm .edit-grid{
-
-    direction:rtl;
-
-}
-
-
-
-html[dir="rtl"] #editCentreForm label{
-
-    text-align:right;
-
-}
-
-
-
-html[dir="rtl"] #editCentreForm input{
-
-    text-align:right;
-
-}
-
-
-
-html[dir="ltr"] #editCentreForm input{
-
-    text-align:left;
-
-}
-
-
-
-html[dir="rtl"] #editCentreForm .subscription-info p{
-
-    direction:rtl;
-
-}
-
-
-
-
-
-
-
-
-/* ======================================================
-   20 - GLOBAL RESPONSIVE
-   ====================================================== */
-
-
-@media(max-width:900px){
-
-
-    .centres-toolbar{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-    }
-
-
-
-    .centres-filter-form{
-
-        width:100%;
-
-        flex-direction:column;
-
-    }
-
-
-
-    .search-box,
-    .centre-select,
-    .btn-primary{
-
-        width:100%;
-
-    }
-
-
-
-    .centre-card{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-
-
-
-
-@media(max-width:600px){
-
-
-    .container{
-
-        padding:25px 20px;
-
-    }
-
-
-
-    .container .buttons{
-
-        flex-direction:column;
-
-    }
-
-
-
-    .container button,
-    .container .btn-back{
-
-        width:100%;
-
-        text-align:center;
-
-    }
-
-
-
-    .action-btn{
-
-        width:32px;
-
-        height:32px;
-
-    }
-
-
-
-    .centre-view-header h2{
-
-        font-size:18px;
-
-    }
-
-
-
-    .centre-view-actions{
-
-        flex-direction:column;
-
-    }
-
-
-
-    .centre-view-actions .action-btn{
-
-        width:100%;
-
-    }
-
-
-
-    .info-row{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
-
-
-
-    #editCentreForm .edit-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-
-
-    #editCentreForm .form-group input{
-
-        height:36px;
-
-    }
-
-
-
-    .subscription-info p{
-
-        font-size:12px;
-
-    }
-
-}
-
-
-
-
-
-
-
-@media(max-width:600px){
-
-
-    .page-btn{
-
-        width:34px;
-
-        height:34px;
-
-        font-size:12px;
-
-    }
-
-}
-
-
-/* ======================================================
-   21 - PAGINATION
-   Integrated with table
-====================================================== */
-
-
-.pagination-container{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:8px;
-
-    padding:12px 15px;
-
-    margin:0;
-
-    flex-wrap:wrap;
-
-
-    background:white;
-
-    border:1px solid #e2e8f0;
-
-    border-bottom:none;
-
-    border-radius:
-
-    var(--radius-lg)
-
-    var(--radius-lg)
-
-    0
-
-    0;
-
-
-    box-shadow:
-
-    0 -2px 8px rgba(15,23,42,.04);
-
-}
-
-
-
-
-.page-btn{
-
-    min-width:38px;
-
-    height:36px;
-
-    padding:0 12px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#f1f5f9;
-
-    color:#334155;
-
-    font-size:13px;
-
-    font-weight:800;
-
-    cursor:pointer;
+    height:42px;
 
     display:inline-flex;
 
@@ -2279,87 +1741,311 @@ html[dir="rtl"] #editCentreForm .subscription-info p{
 
     justify-content:center;
 
-    transition:.25s;
+    color:var(--primary);
+
+    background:#eff6ff;
+
+    border-radius:11px;
+
+    font-size:1rem;
 
 }
 
 
+.confirm-icon.is-warning{
 
+    color:#b45309;
 
-
-.page-btn:hover{
-
-    background:var(--primary);
-
-    color:white;
-
-    transform:translateY(-2px);
+    background:#fff7e6;
 
 }
 
 
+.confirm-title{
 
+    margin:0;
 
+    color:var(--text);
 
-.page-btn.active{
-
-    background:
-
-    linear-gradient(
-        135deg,
-        var(--primary),
-        var(--primary-dark)
-    );
-
-    color:white;
-
-    box-shadow:
-
-    0 6px 15px rgba(37,99,235,.25);
-
-}
-
-
-
-
-
-.page-btn:disabled{
-
-    opacity:.45;
-
-    cursor:not-allowed;
-
-    transform:none;
-
-}
-
-
-
-
-.page-dots{
-
-    color:#94a3b8;
+    font-size:1rem;
 
     font-weight:800;
 
 }
 
 
+.reset-confirm-content > p{
 
+    margin:0;
 
+    color:var(--text-light);
 
-html[dir="rtl"] .pagination-container{
+    font-size:.88rem;
 
-    direction:rtl;
+    line-height:1.7;
 
 }
 
 
+.reset-confirm-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    padding-top:4px;
+
+}
 
 
+.reset-confirm-actions .btn-primary,
 
+.reset-confirm-actions .btn-secondary{
+
+    min-width:106px;
+
+}
 
 
 /* ======================================================
-   END CENTRES.CSS
-   ====================================================== */
+   MODAL FORMS
+====================================================== */
+
+.centre-modal-content form{
+
+    display:grid;
+
+    gap:15px;
+
+}
+
+
+.centre-modal-content input,
+
+.centre-modal-content select,
+
+.centre-modal-content textarea{
+
+    width:100%;
+
+    min-height:44px;
+
+    padding:0 13px;
+
+    color:var(--text);
+
+    background:var(--white);
+
+    border:1px solid #dfe5ee;
+
+    border-radius:9px;
+
+    font:inherit;
+
+}
+
+
+.centre-modal-content textarea{
+
+    min-height:96px;
+
+    padding-top:12px;
+
+    resize:vertical;
+
+}
+
+
+.centre-modal-content input:focus,
+
+.centre-modal-content select:focus,
+
+.centre-modal-content textarea:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
+
+}
+
+
+/* ======================================================
+   TABLET
+====================================================== */
+
+@media(max-width:1200px){
+
+    .centres-filter-form{
+
+        grid-template-columns:
+            minmax(230px, 1fr)
+            minmax(150px, .5fr)
+            minmax(150px, .5fr);
+
+    }
+
+
+    .centres-search-button{
+
+        grid-column:span 3;
+
+    }
+
+}
+
+
+@media(max-width:900px){
+
+    .centres-control-deck{
+
+        align-items:stretch;
+
+    }
+
+
+    .centres-filter-form{
+
+        flex-basis:100%;
+
+    }
+
+
+    .centres-add-action{
+
+        width:100%;
+
+    }
+
+
+    .centres-status-filters{
+
+        justify-content:flex-start;
+
+    }
+
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:650px){
+
+    .centre-banner{
+
+        align-items:flex-start;
+
+        flex-wrap:wrap;
+
+        padding:11px 14px;
+
+    }
+
+
+    .centre-banner-description{
+
+        flex:1 1 100%;
+
+        white-space:normal;
+
+    }
+
+
+    .centres-control-deck{
+
+        padding:14px;
+
+        gap:12px;
+
+    }
+
+
+    .centres-filter-form{
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+
+    }
+
+
+    .centres-search-button{
+
+        grid-column:auto;
+
+        width:100%;
+
+    }
+
+
+    .centres-status-filters{
+
+        gap:8px;
+
+        padding-top:12px;
+
+    }
+
+
+    .centre-status-filter{
+
+        flex:1 1 calc(50% - 8px);
+
+        justify-content:center;
+
+    }
+
+
+    .centres-register-header{
+
+        min-height:62px;
+
+        padding:0 14px;
+
+    }
+
+
+    .centre-modal{
+
+        align-items:flex-end;
+
+        padding:10px;
+
+    }
+
+
+    .centre-modal-content{
+
+        max-height:calc(100vh - 20px);
+
+        padding:22px 18px;
+
+        border-radius:16px 16px 10px 10px;
+
+    }
+
+
+    .reset-confirm-actions{
+
+        flex-direction:column-reverse;
+
+    }
+
+
+    .reset-confirm-actions .btn-primary,
+
+    .reset-confirm-actions .btn-secondary{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* ======================================================
+   END OF FILE
+====================================================== */
