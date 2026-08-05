@@ -321,7 +321,9 @@ html[dir="rtl"] .payment-tabs{
 .payments-table thead,
 .payments-table th{
 
-    border-radius:0!important;
+  border-radius:0!important;
+    
+    
 
 }
 /* ======================================================
@@ -333,6 +335,7 @@ html[dir="rtl"] .payment-tabs{
 
 .payments-table{
 
+   
     width:100%;
 
     border-collapse:collapse;
@@ -348,6 +351,8 @@ html[dir="rtl"] .payment-tabs{
 
 
 .payments-table thead{
+    
+    
 
     background:
 

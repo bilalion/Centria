@@ -66,6 +66,8 @@ Development
     );
 
 
+
+
     color:var(--white);
 
 
@@ -332,21 +334,19 @@ Development
    SECTION 07 - ACTIVE LINK
 ====================================================== */
 
-
 .sidebar-link.active{
 
+    background:#3B82F6;
 
-    background:var(--primary);
+    color:#ffffff;
 
+    border:1px solid transparent;
 
-    color:var(--white);
-
+    border-radius:14px;
 
     box-shadow:
-
-    0 6px 18px rgba(37,99,235,.35);
-
-
+    0 0 12px rgba(59,130,246,.8),
+    0 0 25px rgba(59,130,246,.45);
 
 }
 

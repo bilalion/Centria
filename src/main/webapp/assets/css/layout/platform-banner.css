@@ -2,22 +2,16 @@
 ==========================================================
 File        : platform-banner.css
 Project     : CENTRIA
-Module      : Platform Banner
+Component   : Platform Banner
 
 Description :
-Top identity banner for Centria Platform.
+Global platform identity banner.
 
-Responsibilities:
-- Platform identity
-- Version display
+Contains:
+- Centria logo
+- Platform title
+- Welcome message
 - RTL / LTR support
-- Responsive behavior
-
-Version :
-2.0
-
-Status :
-Development
 
 ==========================================================
 */
@@ -37,7 +31,7 @@ Development
     width:100%;
 
 
-    height:36px;
+    height:45px;
 
 
     display:flex;
@@ -46,36 +40,31 @@ Development
     align-items:center;
 
 
-    justify-content:space-between;
+    justify-content:center;
 
 
-    padding:0 20px;
+    gap:12px;
 
 
-    background:
+    padding:0 18px;
 
 
-        linear-gradient(
-            90deg,
-            #2563eb,
-            #1d4ed8
-        );
+    /*background:#eaf2ff;*/
+    
+    background:#2563EB;
 
 
-   color:#ffffff;
-
-
-    border-radius:0;
+    border-radius:0px;
 
 
     box-shadow:
 
-
-        0 2px 8px rgba(37,99,235,.18);
+    0 3px 10px rgba(15,23,42,.06);
 
 
 
 }
+
 
 
 
@@ -97,30 +86,12 @@ Development
     align-items:center;
 
 
-
-}
-
-
-
-
-
-.platform-title{
-
-
-    font-size:.9rem;
-
-
-    font-weight:700;
-
-
-    letter-spacing:.5px;
-
-
-    color:#ffffff;
+    gap:8px;
 
 
 
 }
+
 
 
 
@@ -129,7 +100,93 @@ Development
 
 
 /* ======================================================
-   SECTION 03 - PLATFORM INFORMATION
+   SECTION 03 - PLATFORM LOGO
+====================================================== */
+
+
+.platform-logo{
+
+
+    width:30px;
+
+
+    height:30px;
+
+
+    object-fit:contain;
+    
+    border-radius: 5px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 04 - PLATFORM TITLE
+====================================================== */
+
+
+.platform-title{
+
+
+    font-size:15px;
+
+
+    font-weight:800;
+
+
+   /* color:#1e293b;*/
+   
+   color: #fff;
+
+
+    white-space:nowrap;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 05 - SEPARATOR
+====================================================== */
+
+
+.platform-separator{
+
+
+    /*color:#94a3b8;*/
+     color: #fff;
+
+
+    font-size:15px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 06 - PLATFORM INFORMATION
 ====================================================== */
 
 
@@ -142,30 +199,25 @@ Development
     align-items:center;
 
 
-
 }
 
 
 
+.platform-message{
 
 
+    font-size:13px;
 
 
-/* ======================================================
-   SECTION 04 - PLATFORM VERSION
-====================================================== */
+    font-weight:500;
 
 
-.platform-version{
+   /* color:#64748b;*/
+   
+    color: #fff;
 
 
-    font-size:.75rem;
-
-
-    font-weight:600;
-
-
-    color:rgba(255,255,255,.85);
+    white-space:nowrap;
 
 
 
@@ -179,7 +231,7 @@ Development
 
 
 /* ======================================================
-   SECTION 05 - RTL SUPPORT
+   SECTION 07 - RTL SUPPORT
 ====================================================== */
 
 
@@ -193,13 +245,6 @@ html[dir="rtl"] .platform-banner{
 
 
 
-
-
-
-
-/* ======================================================
-   SECTION 06 - LTR SUPPORT
-====================================================== */
 
 
 html[dir="ltr"] .platform-banner{
@@ -216,34 +261,22 @@ html[dir="ltr"] .platform-banner{
 
 
 
+
 /* ======================================================
-   SECTION 07 - RESPONSIVE
+   SECTION 08 - RESPONSIVE
 ====================================================== */
 
 
-@media(max-width:700px){
-
+@media(max-width:900px){
 
 
     .platform-banner{
 
 
-        height:34px;
+        justify-content:flex-start;
 
 
-        padding:0 12px;
-
-
-
-    }
-
-
-
-
-    .platform-title{
-
-
-        font-size:.8rem;
+        overflow:hidden;
 
 
 
@@ -251,11 +284,13 @@ html[dir="ltr"] .platform-banner{
 
 
 
+    .platform-message{
 
-    .platform-version{
+
+        text-overflow:ellipsis;
 
 
-        font-size:.7rem;
+        overflow:hidden;
 
 
 
@@ -270,7 +305,58 @@ html[dir="ltr"] .platform-banner{
 
 
 
-/* ======================================================
-   END OF FILE
-======================================================
-*/
+
+
+@media(max-width:600px){
+
+
+    .platform-banner{
+
+
+        height:auto;
+
+
+        min-height:45px;
+
+
+        padding:8px 12px;
+
+
+    }
+
+
+
+    .platform-logo{
+
+
+        width:26px;
+
+
+        height:26px;
+
+
+    }
+
+
+
+    .platform-title{
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+    .platform-message{
+
+
+        font-size:12px;
+
+
+    }
+
+
+
+}

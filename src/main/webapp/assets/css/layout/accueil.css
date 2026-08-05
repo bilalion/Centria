@@ -31,6 +31,7 @@ Version :
 
 
 
+
 /* ======================================================
    SECTION 02 - HOME BANNER
 ====================================================== */
@@ -204,7 +205,7 @@ Version :
 .stat-card{
 
 
-    min-height:115px;
+    min-height:135px; /*115*/
 
 
     display:flex;
@@ -246,10 +247,10 @@ Version :
 .stat-icon{
 
 
-    width:48px;
+    width:56px; /*48 */
 
 
-    height:48px;
+    height:56px;/*48 */
 
 
     display:flex;
@@ -438,6 +439,8 @@ Version :
 
 .dashboard-widget{
 
+    
+    
 
     background:#ffffff;
 
@@ -507,7 +510,7 @@ Version :
 .widget-body{
 
 
-    height:190px;
+    height:190px; /*190*/
 
 
     display:flex;
@@ -564,6 +567,8 @@ Version :
     box-shadow:
 
     0 2px 8px rgba(0,0,0,.04);
+    
+    margin-top:auto;/* none */
 
 
 

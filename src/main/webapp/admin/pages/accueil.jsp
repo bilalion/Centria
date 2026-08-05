@@ -31,7 +31,7 @@
 
 
         <%= LanguageManager.get(
-                "dashboard.main.title",
+                "pages.home.title",
                 session
         ) %>
 
@@ -130,9 +130,12 @@
 
             <span class="stat-description">
 
-                Registered centers
+    <%= LanguageManager.get(
+            "dashboard.registered.centres",
+            session
+    ) %>
 
-            </span>
+</span>
 
 
         </div>
@@ -188,11 +191,14 @@
 
 
 
-            <span class="stat-description">
+          <span class="stat-description">
 
-                Active subscriptions
+    <%= LanguageManager.get(
+            "dashboard.active.subscriptions",
+            session
+    ) %>
 
-            </span>
+</span>
 
 
         </div>
@@ -250,9 +256,12 @@
 
             <span class="stat-description">
 
-                Waiting approval
+    <%= LanguageManager.get(
+            "dashboard.waiting.approval",
+            session
+    ) %>
 
-            </span>
+</span>
 
 
         </div>
@@ -308,11 +317,14 @@
 
 
 
-            <span class="stat-description">
+          <span class="stat-description">
 
-                Payment required
+    <%= LanguageManager.get(
+            "dashboard.payment.required",
+            session
+    ) %>
 
-            </span>
+</span>
 
 
         </div>
@@ -344,54 +356,66 @@
     ========================== -->
 
 
-    <div class="dashboard-widget overview-widget">
+<div class="dashboard-widget overview-widget">
 
 
-        <div class="widget-header">
+    <div class="widget-header">
 
 
-            <h2>
+        <h2>
 
-                Centres Overview
+            <%= LanguageManager.get(
+                    "dashboard.centres.overview",
+                    session
+            ) %>
 
-            </h2>
-
-
-            <button class="widget-filter">
-
-
-                This Year
-
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-
-            </button>
-
-
-        </div>
+        </h2>
 
 
 
 
-
-        <div class="widget-body">
-
-
-            <div class="chart-placeholder">
+        <button class="widget-filter">
 
 
-                Chart Area
+            <%= LanguageManager.get(
+                    "dashboard.this.year",
+                    session
+            ) %>
 
 
-            </div>
+
+            <i class="fa-solid fa-chevron-down"></i>
 
 
-        </div>
-
+        </button>
 
 
     </div>
+
+
+
+
+
+    <div class="widget-body">
+
+
+        <div class="chart-placeholder">
+
+
+            <%= LanguageManager.get(
+                    "dashboard.chart.area",
+                    session
+            ) %>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
 
 
 
@@ -412,21 +436,24 @@
         <div class="widget-header">
 
 
-            <h2>
+           <h2>
 
-                Recent Centres
+    <%= LanguageManager.get(
+            "dashboard.recent.centres",
+            session
+    ) %>
 
-            </h2>
-
-
-            <button class="widget-link">
-
-
-                View All
+</h2>
 
 
-            </button>
+<button class="widget-link">
 
+    <%= LanguageManager.get(
+            "dashboard.view.all",
+            session
+    ) %>
+
+</button>
 
         </div>
 
@@ -438,13 +465,14 @@
 
 
 
-            <div class="recent-empty">
+           <div class="recent-empty">
 
+    <%= LanguageManager.get(
+            "dashboard.no.recent.centres",
+            session
+    ) %>
 
-                No recent centres
-
-
-            </div>
+</div>
 
 
 
@@ -494,19 +522,25 @@
     <div class="notification-content">
 
 
-        <h3>
+       <h3>
 
-            System Notifications
+    <%= LanguageManager.get(
+            "dashboard.system.notifications",
+            session
+    ) %>
 
-        </h3>
+</h3>
 
 
 
-        <p>
+       <p>
 
-            3 centres have pending payments
+    <%= LanguageManager.get(
+            "dashboard.pending.payments.message",
+            session
+    ) %>
 
-        </p>
+</p>
 
 
     </div>
@@ -515,13 +549,14 @@
 
 
 
-    <a class="notification-action">
+  <a class="notification-action">
 
+    <%= LanguageManager.get(
+            "dashboard.view.payments",
+            session
+    ) %>
 
-        View payments
-
-
-    </a>
+</a>
 
 
 
