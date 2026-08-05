@@ -30,7 +30,6 @@ Development
    SECTION 01 - FOOTER CONTAINER
 ====================================================== */
 
-
 .footer{
 
 
@@ -52,13 +51,22 @@ Development
     padding:0 var(--space-lg);
 
 
-    background:var(--white);
+   background:
+    linear-gradient(
+        325deg,
+        #020F24,
+        #031936
+    );
 
 
-    border-top:1px solid var(--border);
+    border-top:0px solid rgba(255,255,255,.08);
+    
+    box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+    
+   
 
 
-    color:var(--text-light);
+     color:rgba(255,255,255,.85);
 
 
     font-size:.85rem;
@@ -66,7 +74,6 @@ Development
 
 
 }
-
 
 
 

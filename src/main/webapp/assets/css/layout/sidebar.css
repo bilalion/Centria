@@ -57,7 +57,13 @@ Development
     flex-direction:column;
 
 
-    background:var(--sidebar-bg);
+       background:
+    linear-gradient(
+        145deg,
+        #020F24 0%,
+        #031936 45%,
+        #062B63 100%
+    );
 
 
     color:var(--white);

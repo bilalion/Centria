@@ -1,0 +1,738 @@
+/*
+==========================================================
+File        : home.css
+Project     : CENTRIA
+Component   : Home Dashboard
+
+Version :
+5.0
+
+==========================================================
+*/
+
+
+/* ======================================================
+   SECTION 01 - HOME PAGE
+====================================================== */
+
+
+.home-page{
+
+
+    width:100%;
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 02 - HOME BANNER
+====================================================== */
+
+
+.home-banner{
+
+
+    height:42px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:10px;
+
+
+    padding:0 16px;
+
+
+    margin-bottom:16px;
+
+
+    background:#eef5ff;
+
+
+    border-radius:8px;
+
+
+    color:var(--text);
+
+
+
+}
+
+
+
+
+
+
+.home-banner-icon{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    color:var(--primary);
+
+
+    font-size:15px;
+
+
+
+}
+
+
+
+
+.home-banner-title{
+
+
+    margin:0;
+
+
+    font-size:15px;
+
+
+    font-weight:700;
+
+
+    color:var(--title);
+
+
+    white-space:nowrap;
+
+
+
+}
+
+
+
+
+
+.home-banner-separator{
+
+
+    color:var(--text-light);
+
+
+    font-size:14px;
+
+
+
+}
+
+
+
+
+
+.home-banner-description{
+
+
+    margin:0;
+
+
+    font-size:13px;
+
+
+    color:var(--text-light);
+
+
+    white-space:nowrap;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 03 - STATISTICS GRID
+====================================================== */
+
+
+.stats-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(4,1fr);
+
+
+    gap:16px;
+
+
+    margin-bottom:18px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 04 - STAT CARD
+====================================================== */
+
+
+.stat-card{
+
+
+    min-height:115px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:14px;
+
+
+    padding:16px;
+
+
+    background:#ffffff;
+
+
+    border:1px solid #e5e7eb;
+
+
+    border-radius:10px;
+
+
+    box-shadow:
+
+    0 2px 8px rgba(0,0,0,.04);
+
+
+
+}
+
+
+
+
+
+
+
+
+.stat-icon{
+
+
+    width:48px;
+
+
+    height:48px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    font-size:20px;
+
+
+    flex-shrink:0;
+
+
+
+}
+
+
+
+
+
+
+
+
+.stat-content{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+
+}
+
+
+
+
+.stat-title{
+
+
+    font-size:14px;
+
+
+    font-weight:600;
+
+
+    color:var(--text);
+
+
+
+}
+
+
+
+
+.stat-value{
+
+
+    font-size:30px;
+
+
+    font-weight:800;
+
+
+    line-height:1.1;
+
+
+    margin-top:4px;
+
+
+
+}
+
+
+
+
+
+.stat-description{
+
+
+    margin-top:5px;
+
+
+    font-size:12px;
+
+
+    color:var(--text-light);
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 05 - COLORS
+====================================================== */
+
+
+.stat-blue .stat-icon{
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+}
+
+
+.stat-green .stat-icon{
+
+    background:#ecfdf5;
+
+    color:#16a34a;
+
+}
+
+
+.stat-orange .stat-icon{
+
+    background:#fff7ed;
+
+    color:#f97316;
+
+}
+
+
+.stat-red .stat-icon{
+
+    background:#fef2f2;
+
+    color:#ef4444;
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 06 - DASHBOARD GRID
+====================================================== */
+
+
+.dashboard-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    2fr 1fr;
+
+
+    gap:16px;
+
+
+    margin-bottom:16px;
+
+
+
+}
+
+
+
+
+
+
+
+
+.dashboard-widget{
+
+
+    background:#ffffff;
+
+
+    border:1px solid #e5e7eb;
+
+
+    border-radius:10px;
+
+
+    box-shadow:
+
+    0 2px 8px rgba(0,0,0,.04);
+
+
+}
+
+
+
+
+
+
+
+
+.widget-header{
+
+
+    height:50px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    padding:0 16px;
+
+
+    border-bottom:1px solid #eef0f3;
+
+
+
+}
+
+
+
+.widget-header h2{
+
+
+    margin:0;
+
+
+    font-size:16px;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+.widget-body{
+
+
+    height:190px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   SECTION 07 - SYSTEM NOTIFICATION
+====================================================== */
+
+
+.system-notification{
+
+
+    height:65px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:14px;
+
+
+    padding:0 16px;
+
+
+    background:#ffffff;
+
+
+    border:1px solid #e5e7eb;
+
+
+    border-radius:10px;
+
+
+    box-shadow:
+
+    0 2px 8px rgba(0,0,0,.04);
+
+
+
+}
+
+
+
+.notification-icon{
+
+
+    width:40px;
+
+
+    height:40px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    background:#fff7ed;
+
+
+    color:#f59e0b;
+
+
+
+}
+
+
+
+.notification-content{
+
+
+    flex:1;
+
+
+}
+
+
+
+.notification-content h3{
+
+
+    margin:0;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+.notification-content p{
+
+
+    margin:2px 0 0;
+
+
+    font-size:12px;
+
+
+    color:var(--text-light);
+
+
+
+}
+
+
+
+.notification-action{
+
+
+    color:var(--primary);
+
+
+    font-size:13px;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   RTL
+====================================================== */
+
+
+html[dir="rtl"] .home-page{
+
+
+    direction:rtl;
+
+
+}
+
+
+
+
+
+
+
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+
+@media(max-width:1200px){
+
+
+    .stats-grid{
+
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+
+    }
+
+
+}
+
+
+
+@media(max-width:900px){
+
+
+    .dashboard-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+    .stats-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+}

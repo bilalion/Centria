@@ -42,7 +42,7 @@
         <span>
 
 
-            CENTRIA PLATFORM
+            CENTRIA PLATFORM | 
 
 
         </span>

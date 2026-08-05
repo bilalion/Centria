@@ -2,39 +2,73 @@
 <%@page import="com.centria.language.LanguageManager"%>
 
 
-<div class="page-section accueil-page">
+<div class="page-section home-page">
 
 
 
 <!-- =================================================
-     HOME HEADER
-     ================================================= -->
+     SECTION 01 - HOME BANNER
+================================================= -->
 
 
-<div class="dashboard-header">
+<section class="home-banner">
 
 
-    <h1>
+
+    <div class="home-banner-icon">
+
+
+        <i class="fa-solid fa-house"></i>
+
+
+    </div>
+
+
+
+
+
+    <h1 class="home-banner-title">
+
 
         <%= LanguageManager.get(
                 "dashboard.main.title",
                 session
         ) %>
 
+
     </h1>
 
 
-    <p>
+
+
+
+    <span class="home-banner-separator">
+
+
+        |
+
+
+    </span>
+
+
+
+
+
+    <p class="home-banner-description">
+
 
         <%= LanguageManager.get(
                 "dashboard.card.text",
                 session
         ) %>
 
+
     </p>
 
 
-</div>
+
+</section>
+
 
 
 
@@ -44,42 +78,61 @@
 
 
 <!-- =================================================
-     STATISTICS
-     ================================================= -->
+     SECTION 02 - STATISTICS CARDS
+================================================= -->
 
 
-<div class="stats-container">
+<section class="stats-grid">
 
 
 
-    <div class="card dashboard-card blue-card">
 
 
-        <div class="card-icon">
+    <!-- TOTAL CENTERS -->
 
-            🏢
+
+    <div class="stat-card stat-blue">
+
+
+        <div class="stat-icon">
+
+
+            <i class="fa-solid fa-building"></i>
+
 
         </div>
 
 
-        <div class="card-info">
+
+        <div class="stat-content">
 
 
-            <h3>
+            <span class="stat-title">
+
 
                 <%= LanguageManager.get(
                         "dashboard.total.centers",
                         session
                 ) %>
 
-            </h3>
+
+            </span>
 
 
-            <strong>
+
+            <strong class="stat-value">
 
                 0
 
             </strong>
+
+
+
+            <span class="stat-description">
+
+                Registered centers
+
+            </span>
 
 
         </div>
@@ -93,34 +146,53 @@
 
 
 
-    <div class="card dashboard-card green-card">
 
 
-        <div class="card-icon">
+    <!-- ACTIVE CENTERS -->
 
-            ✅
+
+    <div class="stat-card stat-green">
+
+
+        <div class="stat-icon">
+
+
+            <i class="fa-solid fa-circle-check"></i>
+
 
         </div>
 
 
-        <div class="card-info">
+
+        <div class="stat-content">
 
 
-            <h3>
+            <span class="stat-title">
+
 
                 <%= LanguageManager.get(
                         "dashboard.active.centers",
                         session
                 ) %>
 
-            </h3>
+
+            </span>
 
 
-            <strong>
+
+            <strong class="stat-value">
 
                 0
 
             </strong>
+
+
+
+            <span class="stat-description">
+
+                Active subscriptions
+
+            </span>
 
 
         </div>
@@ -135,34 +207,52 @@
 
 
 
-    <div class="card dashboard-card orange-card">
+
+    <!-- PENDING CENTERS -->
 
 
-        <div class="card-icon">
+    <div class="stat-card stat-orange">
 
-            ⏳
+
+        <div class="stat-icon">
+
+
+            <i class="fa-solid fa-hourglass-half"></i>
+
 
         </div>
 
 
-        <div class="card-info">
+
+        <div class="stat-content">
 
 
-            <h3>
+            <span class="stat-title">
+
 
                 <%= LanguageManager.get(
                         "dashboard.pending.centers",
                         session
                 ) %>
 
-            </h3>
+
+            </span>
 
 
-            <strong>
+
+            <strong class="stat-value">
 
                 0
 
             </strong>
+
+
+
+            <span class="stat-description">
+
+                Waiting approval
+
+            </span>
 
 
         </div>
@@ -177,34 +267,52 @@
 
 
 
-    <div class="card dashboard-card red-card">
+
+    <!-- UNPAID CENTERS -->
 
 
-        <div class="card-icon">
+    <div class="stat-card stat-red">
 
-            💰
+
+        <div class="stat-icon">
+
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
 
         </div>
 
 
-        <div class="card-info">
+
+        <div class="stat-content">
 
 
-            <h3>
+            <span class="stat-title">
+
 
                 <%= LanguageManager.get(
                         "dashboard.unpaid.centers",
                         session
                 ) %>
 
-            </h3>
+
+            </span>
 
 
-            <strong>
+
+            <strong class="stat-value">
 
                 0
 
             </strong>
+
+
+
+            <span class="stat-description">
+
+                Payment required
+
+            </span>
 
 
         </div>
@@ -215,7 +323,144 @@
 
 
 
-</div>
+
+
+</section>
+                
+                <!-- =================================================
+     SECTION 03 - MAIN DASHBOARD GRID
+================================================= -->
+
+
+<section class="dashboard-grid">
+
+
+
+
+
+
+    <!-- =========================
+         OVERVIEW CHART
+    ========================== -->
+
+
+    <div class="dashboard-widget overview-widget">
+
+
+        <div class="widget-header">
+
+
+            <h2>
+
+                Centres Overview
+
+            </h2>
+
+
+            <button class="widget-filter">
+
+
+                This Year
+
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+
+            </button>
+
+
+        </div>
+
+
+
+
+
+        <div class="widget-body">
+
+
+            <div class="chart-placeholder">
+
+
+                Chart Area
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- =========================
+         RECENT CENTERS
+    ========================== -->
+
+
+    <div class="dashboard-widget recent-widget">
+
+
+        <div class="widget-header">
+
+
+            <h2>
+
+                Recent Centres
+
+            </h2>
+
+
+            <button class="widget-link">
+
+
+                View All
+
+
+            </button>
+
+
+        </div>
+
+
+
+
+
+        <div class="widget-body">
+
+
+
+            <div class="recent-empty">
+
+
+                No recent centres
+
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+</section>
 
 
 
@@ -226,17 +471,19 @@
 
 
 <!-- =================================================
-     WELCOME CARD
-     ================================================= -->
+     SECTION 04 - SYSTEM NOTIFICATION
+================================================= -->
 
 
-<div class="card welcome-card">
+<section class="system-notification">
 
 
 
-    <div class="welcome-icon">
+    <div class="notification-icon">
 
-        🚀
+
+        <i class="fa-solid fa-bell"></i>
+
 
     </div>
 
@@ -244,33 +491,22 @@
 
 
 
-    <div class="welcome-content">
+    <div class="notification-content">
 
 
+        <h3>
 
-        <h2>
+            System Notifications
 
-            <%= LanguageManager.get(
-                    "dashboard.card.title",
-                    session
-            ) %>
-
-        </h2>
-
-
+        </h3>
 
 
 
         <p>
 
-            <%= LanguageManager.get(
-                    "dashboard.card.text",
-                    session
-            ) %>
+            3 centres have pending payments
 
         </p>
-
-
 
 
     </div>
@@ -278,7 +514,23 @@
 
 
 
-</div>
+
+    <a class="notification-action">
+
+
+        View payments
+
+
+    </a>
+
+
+
+
+
+
+</section>
+
+
 
 
 
