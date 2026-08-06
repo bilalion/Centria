@@ -60,11 +60,11 @@ Version :
 
     background:#eef5ff;
 
-
+ color:var(--text);
     border-radius:8px;
 
 
-    color:var(--text);
+   
 
 
 

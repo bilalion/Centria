@@ -14,6 +14,20 @@ List<Centre> centres =
 SimpleDateFormat sdf =
 new SimpleDateFormat("dd/MM/yyyy");
 
+String lang =
+(String) session.getAttribute("lang");
+
+if(lang == null){
+
+    lang = "ar";
+
+}
+
+boolean rtl =
+!"fr".equalsIgnoreCase(lang)
+&&
+!"en".equalsIgnoreCase(lang);
+
 
 int currentPage =
 request.getAttribute("currentPage") != null
@@ -540,20 +554,24 @@ if(totalPages > 1){
 
 <nav class="centres-pagination">
 
+    <!-- LAST -->
+
     <button class="page-btn"
             type="button"
-            onclick="changeCentrePage(1)"
-            <%=currentPage <= 1 ? "disabled" : ""%>>
+            onclick="changeCentrePage(<%=totalPages%>)"
+            <%=currentPage >= totalPages ? "disabled" : ""%>>
 
         <i class="fa-solid fa-angles-right"
            aria-hidden="true"></i>
 
     </button>
 
+    <!-- NEXT -->
+
     <button class="page-btn"
             type="button"
-            onclick="changeCentrePage(<%=currentPage - 1%>)"
-            <%=currentPage <= 1 ? "disabled" : ""%>>
+            onclick="changeCentrePage(<%=currentPage + 1%>)"
+            <%=currentPage >= totalPages ? "disabled" : ""%>>
 
         <i class="fa-solid fa-chevron-right"
            aria-hidden="true"></i>
@@ -580,20 +598,24 @@ if(totalPages > 1){
 
     %>
 
+    <!-- PREVIOUS -->
+
     <button class="page-btn"
             type="button"
-            onclick="changeCentrePage(<%=currentPage + 1%>)"
-            <%=currentPage >= totalPages ? "disabled" : ""%>>
+            onclick="changeCentrePage(<%=currentPage - 1%>)"
+            <%=currentPage <= 1 ? "disabled" : ""%>>
 
         <i class="fa-solid fa-chevron-left"
            aria-hidden="true"></i>
 
     </button>
 
+    <!-- FIRST -->
+
     <button class="page-btn"
             type="button"
-            onclick="changeCentrePage(<%=totalPages%>)"
-            <%=currentPage >= totalPages ? "disabled" : ""%>>
+            onclick="changeCentrePage(1)"
+            <%=currentPage <= 1 ? "disabled" : ""%>>
 
         <i class="fa-solid fa-angles-left"
            aria-hidden="true"></i>
