@@ -50,6 +50,7 @@ Development
 
     display:flex;
 
+    
 
     flex-direction:column;
 
@@ -124,8 +125,11 @@ Development
     overflow-x:hidden;
 
 
-    padding:var(--space-lg);
-
+  padding:
+    var(--space-lg)
+    var(--space-lg)
+    8px
+    var(--space-lg);
 
     background:var(--background);
 

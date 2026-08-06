@@ -67,50 +67,24 @@ LanguageManager.get(
 
 <div class="centre-view-container">
 
+<!-- =================================================
+     DIALOG STRIPE
+================================================= -->
 
+<div class="dialog-stripe dialog-view">
 
+    <i class="fa-solid fa-building"></i>
 
+    <span class="dialog-divider">|</span>
 
-<!-- =========================
-     HEADER
-     ========================= -->
+    <span class="dialog-title">
 
+        <%= LanguageManager.get(
+            "centers.details.title",
+            session
+        ) %>
 
-<div class="centre-view-header">
-
-
-<div>
-
-
-<h2>
-
-🏢
-
-<%=centre.getName()!=null
-?
-centre.getName()
-:
-"-"
-%>
-
-
-</h2>
-
-
-
-<p>
-
-<%=LanguageManager.get(
-"centers.details.title",
-session
-)%>
-
-</p>
-
-
-</div>
-
-
+    </span>
 
 </div>
 
@@ -122,9 +96,11 @@ session
 
 
 
-<!-- =========================
-     INFORMATION CARD
-     ========================= -->
+
+
+<!-- =================================================
+     INFORMATION GRID
+================================================= -->
 
 
 <div class="centre-card">
@@ -373,7 +349,6 @@ centre.getSubscriptionEnd()
 
 
 
-
 <!-- CREATED AT -->
 
 <div class="info-row">
@@ -387,12 +362,11 @@ session
 
 </span>
 
-
 <strong>
 
 <%=centre.getCreatedAt()!=null
 ?
-sdfDateTime.format(
+sdf.format(
 centre.getCreatedAt()
 )
 :
@@ -401,10 +375,7 @@ centre.getCreatedAt()
 
 </strong>
 
-
 </div>
-
-
 
 <!-- PASSWORD CHANGE -->
 

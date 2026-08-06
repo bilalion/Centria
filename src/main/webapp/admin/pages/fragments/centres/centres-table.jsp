@@ -322,52 +322,48 @@ if(centres == null || centres.isEmpty()){
                 </td>
 
 
-                <!-- SUBSCRIPTION TIMELINE -->
+        <!-- SUBSCRIPTION TIMELINE -->
 
-                <td>
+<td>
 
-                    <div class="centre-subscription-timeline">
+    <div class="centre-subscription-timeline">
 
-                        <span class="centre-timeline-line"
-                              aria-hidden="true"></span>
+        <span class="centre-timeline-line"
+              aria-hidden="true"></span>
 
-                        <div class="centre-timeline-copy">
+       <div class="centre-timeline-copy">
 
-                            <span class="centre-timeline-label">
+    <span class="centre-timeline-date">
 
-                                <%=LanguageManager.get(
-                                        "centers.subscription.start",
-                                        session
-                                )%>
+        <strong>
+            <%=LanguageManager.get(
+                    "centers.subscription.start",
+                    session
+            )%> :
+        </strong>
 
-                            </span>
+        <%=startDate%>
 
-                            <span class="centre-timeline-date">
+    </span>
 
-                                <%=startDate%>
+    <span class="centre-timeline-date">
 
-                            </span>
+        <strong>
+            <%=LanguageManager.get(
+                    "centers.subscription.end",
+                    session
+            )%> :
+        </strong>
 
-                            <span class="centre-timeline-label">
+        <%=endDate%>
 
-                                <%=LanguageManager.get(
-                                        "centers.subscription.end",
-                                        session
-                                )%>
+    </span>
 
-                            </span>
+</div>
 
-                            <span class="centre-timeline-date">
+    </div>
 
-                                <%=endDate%>
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </td>
+</td>
 
 
                 <!-- STATUS -->
