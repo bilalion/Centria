@@ -1253,147 +1253,99 @@ throws ServletException, IOException {
 
 
 
+/*
+==================================================
+RESET PASSWORD
+==================================================
+*/
 
-    /*
-    ==================================================
-    RESET PASSWORD
-    ==================================================
-    */
-
-
-    private void resetPassword(
-            HttpServletRequest request,
-            HttpServletResponse response
-    )
-    throws IOException {
+private void resetPassword(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws IOException, ServletException {
 
 
+    try {
 
-        response.setContentType(
-                "text/html;charset=UTF-8"
+        int id = Integer.parseInt(
+                request.getParameter("id")
         );
 
 
+        Centre centre =
+                centreDAO.getCentreById(id);
 
-        try{
 
+        if (centre == null) {
 
-            int id =
-
-            Integer.parseInt(
-                    request.getParameter("id")
+            response.sendError(
+                    HttpServletResponse.SC_NOT_FOUND,
+                    "Centre not found"
             );
 
-
-
-            Centre centre =
-
-                    centreDAO.getCentreById(id);
-
-
-
-
-
-            if(centre == null){
-
-
-                response.getWriter().println(
-                        "<p>Centre introuvable</p>"
-                );
-
-
-                return;
-
-            }
-
-
-
-
-
-
-            String newPassword =
-
-                    PasswordGenerator.generatePassword();
-
-
-
-
-
-
-            boolean updated =
-
-                    centreDAO.resetPassword(
-                            id,
-                            newPassword
-                    );
-
-
-
-
-
-            if(updated){
-
-
-
-                response.getWriter().println(
-
-                        "<div class='reset-success'>"
-
-                        + "<h4>🔑 Password Reset</h4>"
-
-                        + "<p>Code : "
-                        + centre.getCentreCode()
-                        + "</p>"
-
-                        + "<p>Username : "
-                        + centre.getUsername()
-                        + "</p>"
-
-                        + "<p>Password :</p>"
-
-                        + "<div class='temporary-password'>"
-                        + newPassword
-                        + "</div>"
-
-                        + "</div>"
-
-                );
-
-
-            }
-            else{
-
-
-                response.getWriter().println(
-                        "<p>Error resetting password</p>"
-                );
-
-
-            }
-
-
-
-        }
-        catch(Exception e){
-
-
-            e.printStackTrace();
-
-
-            response.getWriter().println(
-                    "<p>Server error</p>"
-            );
-
-
+            return;
         }
 
 
+        String newPassword =
+                PasswordGenerator.generatePassword();
+
+
+        boolean updated =
+                centreDAO.resetPassword(
+                        id,
+                        newPassword
+                );
+
+
+        if (!updated) {
+
+            response.sendError(
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Unable to reset password."
+            );
+
+            return;
+        }
+
+
+        request.setAttribute(
+                "centreCode",
+                centre.getCentreCode()
+        );
+
+        request.setAttribute(
+                "username",
+                centre.getUsername()
+        );
+
+        request.setAttribute(
+                "password",
+                newPassword
+        );
+
+
+        request.getRequestDispatcher(
+                "/admin/pages/fragments/centres/reset-password.jsp"
+        ).forward(
+                request,
+                response
+        );
+
+    }
+    catch (Exception e) {
+
+        e.printStackTrace();
+
+        response.sendError(
+                HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                "Server error"
+        );
 
     }
 
-
-
-
+}
 
 
 

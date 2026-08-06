@@ -437,15 +437,13 @@ window.contextPath =
 
 
 
-
-
 <!-- =================================================
      JAVASCRIPT
 ================================================= -->
 
 
 <script defer
-src="<%=request.getContextPath()%>/assets/js/dashboard.js?v=1">
+src="<%=request.getContextPath()%>/assets/js/dashboard.js?v=2">
 </script>
 
 

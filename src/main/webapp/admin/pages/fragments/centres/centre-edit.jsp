@@ -3,425 +3,353 @@
 <%@page import="com.centria.language.LanguageManager"%>
 <%@page import="com.centria.models.Centre"%>
 
-
 <%
 Centre centre =
 (Centre) request.getAttribute("centre");
 %>
+<div class="edit-dialog">
 
+    <!-- =================================================
+         TOP BAR
+    ================================================= -->
 
+    <div class="edit-dialog-top">
 
+      
 
-<div class="centre-view-container">
+            <i class="fa-solid fa-xmark"></i>
 
+        </button>
 
+        <div class="edit-dialog-header">
 
-<!-- =================================================
-     HEADER
-     ================================================= -->
+            <div class="edit-dialog-icon">
 
+                <i class="fa-solid fa-pen-to-square"></i>
 
-<div class="confirm-header">
+            </div>
 
+            <div class="edit-dialog-divider"></div>
 
-    <div class="confirm-icon">
+            <h2 class="edit-dialog-title">
 
-        ✏️
+                <%=LanguageManager.get(
+                        "centers.edit.title",
+                        session
+                )%>
+
+            </h2>
+
+        </div>
 
     </div>
 
 
 
-    <h4 class="confirm-title">
+    <!-- =================================================
+         FORM
+    ================================================= -->
 
-        <%=LanguageManager.get(
-            "centers.edit.title",
-            session
-        )%>
+    <form id="editCentreForm">
 
-    </h4>
+        <input type="hidden"
+               name="id"
+               value="<%=centre.getId()%>">
 
 
-</div>
 
+        <!-- =================================================
+             GENERAL INFORMATION
+        ================================================= -->
 
+        <div class="edit-dialog-section">
 
+            <div class="edit-dialog-section-title">
 
+                🏢
 
+                <%=LanguageManager.get(
+                        "centers.dialog.information",
+                        session
+                )%>
 
+            </div>
 
 
 
-<!-- =================================================
-     FORM
-     ================================================= -->
+            <div class="edit-dialog-grid">
 
 
-<form id="editCentreForm">
+                <!-- Centre Code -->
 
+                <div class="edit-dialog-row">
 
+                    <div class="edit-dialog-label">
 
+                        🔑
 
+                        <%=LanguageManager.get(
+                                "centers.edit.code",
+                                session
+                        )%>
 
+                    </div>
 
-<input type="hidden"
-       name="id"
-       value="<%=centre.getId()%>">
+                    <div class="edit-dialog-value">
 
+                        <input
+                            type="text"
+                            class="edit-dialog-input edit-dialog-readonly"
+                            value="<%=centre.getCentreCode()%>"
+                            readonly>
 
+                    </div>
 
+                </div>
 
 
 
+                <!-- Centre Name -->
 
-<!-- =================================================
-     CENTRE INFORMATION GRID
-     ================================================= -->
+                <div class="edit-dialog-row">
 
+                    <div class="edit-dialog-label">
 
-<div class="edit-grid">
+                        🏢
 
+                        <%=LanguageManager.get(
+                                "centers.name",
+                                session
+                        )%>
 
+                    </div>
 
+                    <div class="edit-dialog-value">
 
+                        <input
+                            type="text"
+                            name="name"
+                            class="edit-dialog-input"
+                            value="<%=centre.getName()%>"
+                            required>
 
-<!-- CODE CENTRE -->
+                    </div>
 
-<div class="form-group">
+                </div>
 
 
-<label>
 
-🔑
+                <!-- Owner -->
 
-<%=LanguageManager.get(
-        "centers.edit.code",
-        session
-)%>
+                <div class="edit-dialog-row">
 
-</label>
+                    <div class="edit-dialog-label">
 
+                        👤
 
+                        <%=LanguageManager.get(
+                                "centers.owner.name",
+                                session
+                        )%>
 
-<input type="text"
-       value="<%=centre.getCentreCode()%>"
-       readonly
-       class="readonly-field">
+                    </div>
 
+                    <div class="edit-dialog-value">
 
-</div>
+                        <input
+                            type="text"
+                            name="owner_name"
+                            class="edit-dialog-input"
+                            value="<%=centre.getOwnerName()%>"
+                            required>
 
+                    </div>
 
+                </div>
 
 
 
+                <!-- Phone -->
 
+                <div class="edit-dialog-row">
 
+                    <div class="edit-dialog-label">
 
-<!-- CENTRE NAME -->
+                        📞
 
-<div class="form-group">
+                        <%=LanguageManager.get(
+                                "centers.phone",
+                                session
+                        )%>
 
+                    </div>
 
-<label>
+                    <div class="edit-dialog-value">
 
-🏢
+                        <input
+                            type="text"
+                            name="phone"
+                            class="edit-dialog-input"
+                            value="<%=centre.getPhone()%>">
 
-<%=LanguageManager.get(
-        "centers.name",
-        session
-)%>
+                    </div>
 
-</label>
+                </div>
 
+            </div>
 
+        </div>
+                            
+                                    <!-- =================================================
+             SUBSCRIPTION INFORMATION
+        ================================================= -->
 
-<input type="text"
-       name="name"
-       value="<%=centre.getName()%>"
-       required>
+        <div class="edit-dialog-section">
 
+            <div class="edit-dialog-section-title">
 
-</div>
+                🔒
 
+                <%=LanguageManager.get(
+                        "centers.edit.subscription.title",
+                        session
+                )%>
 
+            </div>
 
 
+            <div class="edit-dialog-grid">
 
 
+                <!-- Subscription Start -->
 
+                <div class="edit-dialog-row">
 
+                    <div class="edit-dialog-label">
 
-<!-- OWNER -->
+                        📅
 
-<div class="form-group">
+                        <%=LanguageManager.get(
+                                "centers.subscription.start",
+                                session
+                        )%>
 
+                    </div>
 
-<label>
+                    <div class="edit-dialog-value">
 
-👤
+                        <strong>
 
-<%=LanguageManager.get(
-        "centers.owner.name",
-        session
-)%>
+                            <%=centre.getSubscriptionStart()%>
 
-</label>
+                        </strong>
 
+                    </div>
 
+                </div>
 
-<input type="text"
-       name="owner_name"
-       value="<%=centre.getOwnerName()%>"
-       required>
 
 
-</div>
+                <!-- Subscription End -->
 
+                <div class="edit-dialog-row">
 
+                    <div class="edit-dialog-label">
 
+                        📅
 
+                        <%=LanguageManager.get(
+                                "centers.subscription.end",
+                                session
+                        )%>
 
+                    </div>
 
+                    <div class="edit-dialog-value">
 
+                        <strong>
 
+                            <%=centre.getSubscriptionEnd()%>
 
-<!-- PHONE -->
+                        </strong>
 
-<div class="form-group">
+                    </div>
 
+                </div>
 
-<label>
 
-📞
 
-<%=LanguageManager.get(
-        "centers.phone",
-        session
-)%>
+                <!-- Status -->
 
-</label>
+                <div class="edit-dialog-row">
 
+                    <div class="edit-dialog-label">
 
+                        ⚙️
 
-<input type="text"
-       name="phone"
-       value="<%=centre.getPhone()%>">
+                        <%=LanguageManager.get(
+                                "centers.status",
+                                session
+                        )%>
 
+                    </div>
 
-</div>
+                    <div class="edit-dialog-value">
 
+                        <span class="status-badge
+                            <%= "ACTIVE".equalsIgnoreCase(centre.getStatus()) ? "status-active"
+                              : "PENDING".equalsIgnoreCase(centre.getStatus()) ? "status-pending"
+                              : "SUSPENDED".equalsIgnoreCase(centre.getStatus()) ? "status-suspended"
+                              : "status-archived" %>">
 
+                            <%=centre.getStatus()%>
 
+                        </span>
 
+                    </div>
 
-</div>
+                </div>
 
+            </div>
 
+        </div>
 
 
 
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
 
+        <div class="edit-dialog-footer">
 
+            <button type="button"
+                    class="btn-secondary"
+                    onclick="closeCentreModal()">
 
+                <%=LanguageManager.get(
+                        "centers.cancel",
+                        session
+                )%>
 
-<!-- =================================================
-     SUBSCRIPTION INFORMATION
-     READ ONLY
-     ================================================= -->
+            </button>
 
 
-<div class="subscription-info">
 
+            <button type="button"
+                    class="btn-primary"
+                    onclick="saveEditCentre()">
 
+                💾
 
-<h5>
+                <%=LanguageManager.get(
+                        "centers.save",
+                        session
+                )%>
 
+            </button>
 
-🔒
+        </div>
 
-
-<%=LanguageManager.get(
-        "centers.edit.subscription.title",
-        session
-)%>
-
-
-</h5>
-
-
-
-
-
-<div class="subscription-grid">
-
-
-
-<p>
-
-<span>
-
-📅
-
-<%=LanguageManager.get(
-        "centers.subscription.start",
-        session
-)%>
-
-</span>
-
-
-<strong>
-
-<%=centre.getSubscriptionStart()%>
-
-</strong>
-
-
-</p>
-
-
-
-
-
-
-
-<p>
-
-<span>
-
-📅
-
-<%=LanguageManager.get(
-        "centers.subscription.end",
-        session
-)%>
-
-</span>
-
-
-<strong>
-
-<%=centre.getSubscriptionEnd()%>
-
-</strong>
-
-
-</p>
-
-
-
-
-
-
-
-
-<p>
-
-<span>
-
-⚙️
-
-<%=LanguageManager.get(
-        "centers.status",
-        session
-)%>
-
-</span>
-
-
-<strong>
-
-<%=centre.getStatus()%>
-
-</strong>
-
-
-</p>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =================================================
-     ACTIONS
-     ================================================= -->
-
-
-<div class="reset-confirm-actions">
-
-
-
-
-
-<button type="button"
-        class="btn-secondary"
-        onclick="closeCentreModal()">
-
-
-
-<%=LanguageManager.get(
-        "centers.cancel",
-        session
-)%>
-
-
-
-</button>
-
-
-
-
-
-
-
-
-
-<button type="button"
-        class="btn-primary"
-        onclick="saveEditCentre()">
-
-
-
-💾
-
-
-<%=LanguageManager.get(
-        "centers.save",
-        session
-)%>
-
-
-
-</button>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-</form>
-
-
-
-
+    </form>
 
 </div>

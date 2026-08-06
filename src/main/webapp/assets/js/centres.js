@@ -61,6 +61,23 @@ function openCentreModal(modal) {
         return;
     }
 
+    const modalClose = modal.querySelector(".modal-close");
+    const resetDialog = modal.querySelector(".reset-dialog");
+
+    if (modalClose) {
+
+        if (resetDialog) {
+
+            modalClose.style.display = "none";
+
+        } else {
+
+            modalClose.style.display = "flex";
+
+        }
+
+    }
+
     modal.classList.add("show");
     modal.setAttribute("aria-hidden", "false");
 
@@ -71,6 +88,12 @@ function closeCentreModalElement(modal) {
 
     if (!modal) {
         return;
+    }
+
+    const modalClose = modal.querySelector(".modal-close");
+
+    if (modalClose) {
+        modalClose.style.display = "flex";
     }
 
     modal.classList.remove("show");
@@ -1168,3 +1191,90 @@ document.addEventListener(
     "centria:centres-ready",
     initCentresPage
 );
+
+
+/* ======================================================
+   COPY GENERATED PASSWORD
+====================================================== */
+
+function copyGeneratedPassword() {
+
+    const password =
+        document.getElementById(
+            "generatedPassword"
+        );
+
+    if (!password) {
+        return;
+    }
+
+    const value =
+        password.textContent.trim();
+
+    const copyButton =
+        document.getElementById(
+            "copyPasswordButton"
+        );
+
+    function showCopiedState() {
+
+        if (!copyButton) {
+            return;
+        }
+
+        copyButton.innerHTML =
+            '<i class="fa-solid fa-check"></i>';
+
+        copyButton.classList.add(
+            "copied"
+        );
+
+        setTimeout(function () {
+
+            copyButton.innerHTML =
+                '<i class="fa-solid fa-copy"></i>';
+
+            copyButton.classList.remove(
+                "copied"
+            );
+
+        }, 1500);
+
+    }
+
+    if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ) {
+
+        navigator.clipboard
+            .writeText(value)
+            .then(function () {
+
+                showCopiedState();
+
+            });
+
+        return;
+
+    }
+
+    const range =
+        document.createRange();
+
+    range.selectNodeContents(password);
+
+    const selection =
+        window.getSelection();
+
+    selection.removeAllRanges();
+
+    selection.addRange(range);
+
+    document.execCommand("copy");
+
+    selection.removeAllRanges();
+
+    showCopiedState();
+
+}
