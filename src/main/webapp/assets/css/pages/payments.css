@@ -1,0 +1,1791 @@
+/* ======================================================
+   01. PAYMENTS — PAGE HEADER
+====================================================== */
+
+
+/* ======================================================
+   01.1 HEADER CONTAINER
+====================================================== */
+
+.payments-header{
+
+    min-height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 16px;
+
+    background:#eef5ff;
+
+    border:1px solid #dbeafe;
+
+    border-radius:4px;
+
+}
+
+
+/* ======================================================
+   01.2 HEADER CONTENT
+====================================================== */
+
+.payments-header-content{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-width:0;
+
+}
+
+
+/* ======================================================
+   01.3 HEADER ICON
+====================================================== */
+
+.payments-header-icon{
+
+    width:38px;
+
+    height:38px;
+
+    flex:0 0 38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#e5f0ff;
+
+    border:1px solid #d1e2f8;
+
+    border-radius:5px;
+
+    color:#2864e8;
+
+    font-size:18px;
+
+}
+
+
+/* ======================================================
+   01.4 HEADER TEXT
+====================================================== */
+
+.payments-header-text{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-width:0;
+
+}
+
+
+/* ======================================================
+   01.5 TITLE
+====================================================== */
+
+.payments-header h1{
+
+    margin:0;
+
+    color:var(--text);
+
+    font-size:15px;
+
+    font-weight:700;
+
+    line-height:1.3;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+   01.6 SEPARATOR
+====================================================== */
+
+.payments-header-separator{
+
+    width:1px;
+
+    height:20px;
+
+    flex:0 0 1px;
+
+    background:#cbd8e8;
+
+}
+
+
+/* ======================================================
+   01.7 DESCRIPTION
+====================================================== */
+
+.payments-header p{
+
+    margin:0;
+
+    color:var(--text-light);
+
+    font-size:13px;
+
+    font-weight:400;
+
+    line-height:1.3;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+   01.8 RTL / LTR
+====================================================== */
+
+html[dir="rtl"] .payments-header{
+
+    direction:rtl;
+
+}
+
+
+html[dir="ltr"] .payments-header{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   01.9 RESPONSIVE
+====================================================== */
+
+@media(max-width:650px){
+
+    .payments-header{
+
+        padding:8px 12px;
+
+    }
+
+
+    .payments-header-text{
+
+        flex-wrap:wrap;
+
+        gap:6px;
+
+    }
+
+
+    .payments-header p{
+
+        white-space:normal;
+
+    }
+
+}
+
+/* ======================================================
+   02. PAYMENTS — CONTROL AREA
+====================================================== */
+
+
+/* ======================================================
+   02.1 CONTROL CONTAINER
+====================================================== */
+
+.payments-controls{
+
+    width:100%;
+
+    min-height:62px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 12px;
+
+    background:#ffffff;
+
+    border:1px solid #e1e7ef;
+
+    border-radius:4px;
+
+}
+
+
+/* ======================================================
+   02.2 SEARCH FIELD
+====================================================== */
+
+.payments-search{
+
+    flex:1;
+
+    min-width:220px;
+
+}
+
+
+.payments-search input{
+
+    width:100%;
+
+    height:44px;
+
+    box-sizing:border-box;
+
+    padding:0 14px;
+
+    border:1px solid #d8e2ef;
+
+    border-radius:4px;
+
+    background:#ffffff;
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+
+.payments-search input::placeholder{
+
+    color:#91a2b8;
+
+}
+
+
+.payments-search input:focus{
+
+    border-color:#6fa3ff;
+
+    box-shadow:0 0 0 2px rgba(40,100,232,.08);
+
+}
+
+
+/* ======================================================
+   02.3 DATE FIELDS
+====================================================== */
+
+.payments-date{
+
+    width:180px;
+
+    flex:0 0 180px;
+
+}
+
+
+.payments-date input{
+
+    width:100%;
+
+    height:44px;
+
+    box-sizing:border-box;
+
+    padding:0 12px;
+
+    border:1px solid #d8e2ef;
+
+    border-radius:4px;
+
+    background:#ffffff;
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+
+.payments-date input:focus{
+
+    border-color:#6fa3ff;
+
+    box-shadow:0 0 0 2px rgba(40,100,232,.08);
+
+}
+
+
+/* ======================================================
+   02.4 ORDER SELECT
+====================================================== */
+
+.payments-order{
+
+    width:180px;
+
+    flex:0 0 180px;
+
+}
+
+
+.payments-order select{
+
+    width:100%;
+
+    height:44px;
+
+    box-sizing:border-box;
+
+    padding:0 12px;
+
+    border:1px solid #d8e2ef;
+
+    border-radius:4px;
+
+    background:#ffffff;
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    outline:none;
+
+    cursor:pointer;
+
+}
+
+
+.payments-order select:focus{
+
+    border-color:#6fa3ff;
+
+    box-shadow:0 0 0 2px rgba(40,100,232,.08);
+
+}
+
+
+/* ======================================================
+   02.5 SEARCH BUTTON
+====================================================== */
+
+.payments-controls > button{
+
+    height:44px;
+
+    min-width:120px;
+
+    flex:0 0 auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    padding:0 20px;
+
+    border:1px solid #2864e8;
+
+    border-radius:4px;
+
+    background:#2864e8;
+
+    color:#ffffff;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease;
+
+}
+
+
+.payments-controls > button:hover{
+
+    background:#1f5bd8;
+
+    border-color:#1f5bd8;
+
+}
+
+
+.payments-controls > button:active{
+
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.15);
+
+}
+
+
+/* ======================================================
+   02.6 RTL
+====================================================== */
+
+html[dir="rtl"] .payments-controls{
+
+    direction:rtl;
+
+}
+
+
+html[dir="ltr"] .payments-controls{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   02.7 RESPONSIVE
+====================================================== */
+
+@media(max-width:900px){
+
+    .payments-controls{
+
+        flex-wrap:wrap;
+
+    }
+
+
+    .payments-search{
+
+        flex:1 1 100%;
+
+    }
+
+
+    .payments-date,
+    .payments-order{
+
+        flex:1;
+
+        width:auto;
+
+    }
+
+
+    .payments-controls > button{
+
+        flex:0 0 auto;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .payments-date,
+    .payments-order{
+
+        flex:1 1 100%;
+
+        width:100%;
+
+    }
+
+
+    .payments-controls > button{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* ======================================================
+   03. PAYMENTS — WORKSPACE
+====================================================== */
+
+
+/* ======================================================
+   03.1 WORKSPACE CONTAINER
+====================================================== */
+
+.payments-workspace{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:#ffffff;
+
+    border:1px solid #e1e7ef;
+
+    border-radius:4px;
+
+    overflow:hidden;
+
+}
+
+
+/* ======================================================
+   03.2 WORKSPACE HEADER AREA
+====================================================== */
+
+.payments-workspace-header{
+
+    width:100%;
+
+    min-height:54px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    padding:0 14px;
+
+    border-bottom:1px solid #e5ebf3;
+
+    background:#ffffff;
+
+}
+
+
+/* ======================================================
+   03.3 WORKSPACE TITLE
+====================================================== */
+
+.payments-workspace-title{
+
+    margin:0;
+
+    color:var(--text);
+
+    font-size:16px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+   03.4 DYNAMIC CONTENT AREA
+====================================================== */
+
+#payments-table-container{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    min-width:0;
+
+    background:#ffffff;
+
+}
+
+
+/* ======================================================
+   03.5 PAGINATION AREA
+====================================================== */
+
+#payments-pagination-container{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    min-height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:8px 14px;
+
+    border-top:1px solid #e5ebf3;
+
+    background:#ffffff;
+
+}
+
+
+/* ======================================================
+   03.6 RTL
+====================================================== */
+
+html[dir="rtl"] .payments-workspace{
+
+    direction:rtl;
+
+}
+
+
+html[dir="ltr"] .payments-workspace{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   03.7 RESPONSIVE
+====================================================== */
+
+@media(max-width:650px){
+
+    .payments-workspace{
+
+        border-radius:3px;
+
+    }
+
+
+    .payments-workspace-header{
+
+        min-height:48px;
+
+        padding:0 12px;
+
+    }
+
+
+    .payments-workspace-title{
+
+        font-size:15px;
+
+    }
+
+
+    #payments-pagination-container{
+
+        padding:8px 10px;
+
+    }
+
+}
+
+
+/* ======================================================
+   04. PAYMENTS — TABS
+====================================================== */
+
+
+/* ======================================================
+   04.1 TABS CONTAINER
+====================================================== */
+
+.payments-tabs{
+
+    width:100%;
+
+    min-height:58px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    align-items:stretch;
+
+    justify-content:center;
+
+    gap:0;
+
+    padding:0;
+
+    background:#ffffff;
+
+    border-bottom:1px solid #dfe6ef;
+
+}
+
+
+/* ======================================================
+   04.2 TAB BUTTON
+====================================================== */
+
+.payment-tab{
+
+    width:33.333333%;
+
+    flex:1 1 33.333333%;
+
+    height:58px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    padding:0 12px;
+
+    border:0;
+
+    border-bottom:3px solid transparent;
+
+    border-radius:0;
+
+    background:#ffffff;
+
+    color:#718096;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:
+        background .15s ease,
+        color .15s ease,
+        border-color .15s ease;
+
+}
+
+
+/* ======================================================
+   04.3 TAB HOVER
+====================================================== */
+
+.payment-tab:hover{
+
+    background:#f7f9fc;
+
+    color:#3d4d63;
+
+}
+
+
+/* ======================================================
+   04.4 ACTIVE TAB
+====================================================== */
+
+.payment-tab.active{
+
+    background:#ffffff;
+
+    color:#2864e8;
+
+    border-bottom-color:#2864e8;
+
+}
+
+
+/* ======================================================
+   04.5 UNPAID TAB
+====================================================== */
+
+#tab-unpaid.active{
+
+    color:#d62828;
+
+    border-bottom-color:#ef4444;
+
+}
+
+
+/* ======================================================
+   04.6 PAID TAB
+====================================================== */
+
+#tab-paid.active{
+
+    color:#16834b;
+
+    border-bottom-color:#20a464;
+
+}
+
+
+/* ======================================================
+   04.7 HISTORY TAB
+====================================================== */
+
+#tab-history.active{
+
+    color:#526174;
+
+    border-bottom-color:#94a3b8;
+
+}
+
+
+/* ======================================================
+   04.8 TAB NOTIFICATION
+====================================================== */
+
+.tab-notification{
+
+    min-width:26px;
+
+    height:26px;
+
+    padding:0 7px;
+
+    box-sizing:border-box;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    line-height:1;
+
+}
+
+
+/* ======================================================
+   04.9 UNPAID COUNT
+====================================================== */
+
+.unpaid-count{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+/* ======================================================
+   04.10 PAID COUNT
+====================================================== */
+
+.paid-count{
+
+    background:#dcfce7;
+
+    color:#16834b;
+
+}
+
+
+/* ======================================================
+   04.11 HISTORY COUNT
+====================================================== */
+
+.history-count{
+
+    background:#e8eef5;
+
+    color:#526174;
+
+}
+
+
+/* ======================================================
+   04.12 RTL / LTR
+====================================================== */
+
+html[dir="rtl"] .payments-tabs{
+
+    direction:rtl;
+
+}
+
+
+html[dir="ltr"] .payments-tabs{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   04.13 RESPONSIVE
+====================================================== */
+
+@media(max-width:600px){
+
+    .payments-tab{
+
+        font-size:13px;
+
+        gap:6px;
+
+        padding:0 6px;
+
+    }
+
+
+    .tab-notification{
+
+        min-width:22px;
+
+        height:22px;
+
+        font-size:11px;
+
+    }
+
+}
+
+/* ======================================================
+   04.14 TAB BACKGROUND COLORS
+====================================================== */
+
+
+/* ======================================================
+   04.14.1 UNPAID
+====================================================== */
+
+#tab-unpaid{
+
+    background:#fff5f5;
+
+    color:#b42323;
+
+}
+
+
+#tab-unpaid:hover{
+
+    background:#ffeded;
+
+}
+
+
+#tab-unpaid.active{
+
+    background:#fff0f0;
+
+    color:#c62828;
+
+    border-bottom-color:#ef4444;
+
+}
+
+
+/* ======================================================
+   04.14.2 PAID
+====================================================== */
+
+#tab-paid{
+
+    background:#f2fbf6;
+
+    color:#16834b;
+
+}
+
+
+#tab-paid:hover{
+
+    background:#e9f8ef;
+
+}
+
+
+#tab-paid.active{
+
+    background:#ecfaf2;
+
+    color:#16834b;
+
+    border-bottom-color:#20a464;
+
+}
+
+
+/* ======================================================
+   04.14.3 HISTORY
+====================================================== */
+
+#tab-history{
+
+    background:#f5f7fa;
+
+    color:#526174;
+
+}
+
+
+#tab-history:hover{
+
+    background:#eef2f6;
+
+}
+
+
+#tab-history.active{
+
+    background:#eef3f8;
+
+    color:#526174;
+
+    border-bottom-color:#94a3b8;
+
+}
+
+/* ======================================================
+05. PAYMENTS — UNPAID
+====================================================== */
+
+
+/* ======================================================
+05.1 UNPAID TABLE CONTAINER
+====================================================== */
+
+.unpaid-table{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    background:#ffffff;
+
+    overflow-x:auto;
+
+}
+
+
+/* ======================================================
+05.2 TABLE
+====================================================== */
+
+.payments-table{
+
+    width:100%;
+
+    min-width:1100px;
+
+    border-collapse:separate;
+
+    border-spacing:0;
+
+    direction:rtl;
+
+}
+
+
+/* ======================================================
+05.3 TABLE HEADER
+====================================================== */
+
+.payments-table thead{
+
+    background:#eef5ff;
+
+}
+
+
+/* ======================================================
+05.4 TABLE HEADER CELLS
+====================================================== */
+
+.payments-table th{
+
+    height:54px;
+
+    padding:10px 12px;
+
+    box-sizing:border-box;
+
+    background:#eef5ff;
+
+    color:#26364d;
+
+    border-bottom:1px solid #dbe4f0;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    text-align:center;
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+05.5 TABLE BODY
+====================================================== */
+
+.payments-table tbody tr{
+
+    height:72px;
+
+    background:#ffffff;
+
+    transition:
+        background .15s ease;
+
+}
+
+
+/* ======================================================
+05.6 TABLE BODY HOVER
+====================================================== */
+
+.payments-table tbody tr:hover{
+
+    background:#fbfdff;
+
+}
+
+
+/* ======================================================
+05.7 TABLE BODY CELLS
+====================================================== */
+
+.payments-table tbody td{
+
+    height:72px;
+
+    padding:10px 12px;
+
+    box-sizing:border-box;
+
+    color:#334155;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    vertical-align:middle;
+
+    border-bottom:1px solid #e5ebf3;
+
+}
+
+
+/* ======================================================
+05.8 LAST ROW
+====================================================== */
+
+.payments-table tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+/* ======================================================
+05.9 CENTER ALL CELL CONTENT
+====================================================== */
+
+.payments-table td > input,
+.payments-table td > select,
+.payments-table td > button,
+.payments-table td > span{
+
+    display:block;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+
+/* ======================================================
+05.10 CENTRE CODE
+====================================================== */
+
+.unpaid-table .payment-centre-code{
+
+    text-align:center;
+
+}
+
+
+.unpaid-table .payment-code{
+
+    color:#51657e;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+05.11 CENTRE NAME
+====================================================== */
+
+.unpaid-table .payment-centre-name{
+
+    text-align:center;
+
+}
+
+
+.unpaid-table .payment-centre-name-text{
+
+    display:block;
+
+    width:100%;
+
+    color:#27364a;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+/* ======================================================
+05.12 INVOICE
+====================================================== */
+
+.unpaid-table .payment-invoice{
+
+    text-align:center;
+
+}
+
+
+.unpaid-table .payment-invoice-code{
+
+    color:#53657a;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+05.13 PAYMENT STATUS
+====================================================== */
+
+.unpaid-table .status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    min-width:110px;
+
+    min-height:32px;
+
+    padding:0 11px;
+
+    box-sizing:border-box;
+
+    border-radius:6px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+05.14 UNPAID STATUS
+====================================================== */
+
+.unpaid-table .status.unpaid{
+
+    background:#fef2f2;
+
+    color:#b91c1c;
+
+    border:1px solid #fecaca;
+
+}
+
+
+/* ======================================================
+05.15 ACCOUNT STATUS
+====================================================== */
+
+.unpaid-table .account-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    min-width:100px;
+
+    min-height:32px;
+
+    padding:0 11px;
+
+    box-sizing:border-box;
+
+    border-radius:6px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+05.16 ACCOUNT ACTIVE
+====================================================== */
+
+.unpaid-table .account-active{
+
+    background:#f0fdf4;
+
+    color:#15803d;
+
+    border:1px solid #bbf7d0;
+
+}
+
+
+/* ======================================================
+05.17 ACCOUNT PENDING
+====================================================== */
+
+.unpaid-table .account-pending{
+
+    background:#fffbeb;
+
+    color:#a16207;
+
+    border:1px solid #fde68a;
+
+}
+
+
+/* ======================================================
+05.18 ACCOUNT SUSPENDED
+====================================================== */
+
+.unpaid-table .account-suspended{
+
+    background:#fef2f2;
+
+    color:#b91c1c;
+
+    border:1px solid #fecaca;
+
+}
+
+
+/* ======================================================
+05.19 SUBSCRIPTION END
+====================================================== */
+
+.unpaid-table .payment-subscription-end{
+
+    text-align:center;
+
+}
+
+
+.unpaid-table .payment-date-text{
+
+    color:#34465c;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+.unpaid-table .payment-empty-value{
+
+    color:#9aa7b7;
+
+}
+
+
+/* ======================================================
+05.20 NEW START DATE
+====================================================== */
+
+.unpaid-table .payment-start-date{
+
+    width:130px;
+
+    height:40px;
+
+    display:block;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+    padding:0 10px;
+
+    box-sizing:border-box;
+
+    border:1px solid #d5dfeb;
+
+    border-radius:6px;
+
+    background:#ffffff;
+
+    color:#334155;
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    outline:none;
+
+    cursor:pointer;
+
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+
+}
+
+
+/* ======================================================
+05.21 NEW START DATE — HOVER
+====================================================== */
+
+.unpaid-table .payment-start-date:hover{
+
+    border-color:#b8cbe3;
+
+    background:#fbfdff;
+
+}
+
+
+/* ======================================================
+05.22 NEW START DATE — FOCUS
+====================================================== */
+
+.unpaid-table .payment-start-date:focus{
+
+    border-color:#6fa3ff;
+
+    box-shadow:
+        0 0 0 2px rgba(40,100,232,.08);
+
+}
+
+
+/* ======================================================
+05.23 DURATION — COMBOBOX
+====================================================== */
+
+.unpaid-table .payment-duration{
+
+    width:105px;
+
+    height:40px;
+
+    display:block;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+    padding:0 10px;
+
+    box-sizing:border-box;
+
+    border:1px solid #d5dfeb;
+
+    border-radius:6px;
+
+    background:#ffffff;
+
+    color:#334155;
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    outline:none;
+
+    cursor:pointer;
+
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+
+}
+
+
+/* ======================================================
+05.24 DURATION — HOVER
+====================================================== */
+
+.unpaid-table .payment-duration:hover{
+
+    border-color:#b8cbe3;
+
+    background:#fbfdff;
+
+}
+
+
+/* ======================================================
+05.25 DURATION — FOCUS
+====================================================== */
+
+.unpaid-table .payment-duration:focus{
+
+    border-color:#6fa3ff;
+
+    box-shadow:
+        0 0 0 2px rgba(40,100,232,.08);
+
+}
+
+
+/* ======================================================
+05.26 ACTION
+====================================================== */
+
+.unpaid-table .payment-action{
+
+    text-align:center;
+
+}
+
+
+.unpaid-table .payment-action-btn{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    border:1px solid #cfe0fb;
+
+    border-radius:6px;
+
+    background:#eef5ff;
+
+    color:#2864e8;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        transform .15s ease;
+
+}
+
+
+/* ======================================================
+05.27 ACTION — HOVER
+====================================================== */
+
+.unpaid-table .payment-action-btn:hover{
+
+    background:#dceaff;
+
+    border-color:#a9c8f7;
+
+    transform:translateY(-1px);
+
+}
+
+
+/* ======================================================
+05.28 ACTION — ACTIVE
+====================================================== */
+
+.unpaid-table .payment-action-btn:active{
+
+    transform:translateY(0);
+
+}
+
+
+/* ======================================================
+05.29 UNPAID ROW COLOR LINE
+====================================================== */
+
+.payments-table tbody tr td:first-child{
+
+    border-right:4px solid #ef4444;
+
+}
+
+
+/* ======================================================
+05.30 EMPTY STATE
+====================================================== */
+
+.payments-empty-state{
+
+    width:100%;
+
+    min-height:170px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:30px;
+
+    background:#ffffff;
+
+    color:#7b8a9e;
+
+}
+
+
+/* ======================================================
+05.31 EMPTY ICON
+====================================================== */
+
+.payments-empty-icon{
+
+    font-size:28px;
+
+    opacity:.7;
+
+}
+
+
+/* ======================================================
+05.32 EMPTY TEXT
+====================================================== */
+
+.payments-empty-text{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+/* ======================================================
+05.33 RESPONSIVE
+====================================================== */
+
+@media(max-width:1200px){
+
+    .payments-table{
+
+        min-width:1100px;
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .payments-table{
+
+        min-width:1050px;
+
+    }
+
+}

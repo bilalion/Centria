@@ -904,9 +904,7 @@ function initPaymentsPage(){
 
 
 
-
-/*
-==========================================================
+/* ==========================================================
  08 - AUTO INIT WHEN PAGE EXISTS
 
  Useful when payments.jsp loaded directly
@@ -920,7 +918,6 @@ document.addEventListener(
 function(){
 
 
-
     if(
         document.getElementById(
             "payments-table-container"
@@ -928,13 +925,10 @@ function(){
     ){
 
 
-
         initPaymentsPage();
 
 
-
     }
-
 
 
 });
