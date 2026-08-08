@@ -2,60 +2,69 @@
 <%@page import="com.centria.language.LanguageManager"%>
 
 
-<!-- ==================================================
-     01. PAGE HEADER
-================================================== -->
-
-<section class="payments-header">
-
-    <div class="payments-header-content">
+<!-- ======================================================
+     CENTRIA — PAYMENTS
+====================================================== -->
 
 
-        <!-- ==============================================
-             01.1 HEADER ICON
-        =============================================== -->
+<section class="payments-page">
 
-        <div class="payments-header-icon">
-
-            <i class="fa-solid fa-credit-card"></i>
-
-        </div>
-
-
-
-        <!-- ==============================================
-             01.2 HEADER TEXT
-        =============================================== -->
-
-        <div class="payments-header-text">
-
-            <h1>
-                <%=LanguageManager.get(
-                        "payments.title",
-                        session
-                )%>
-            </h1>
-
-
-            <span class="payments-header-separator"></span>
-
-
-            <p>
-                <%=LanguageManager.get(
-                        "payments.description",
-                        session
-                )%>
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
 
     <!-- ==================================================
-         CONTROL AREA
+         01. PAGE HEADER
+    ================================================== -->
+
+    <section class="payments-header">
+
+
+        <div class="payments-header-content">
+
+
+            <div class="payments-header-icon">
+
+                💳
+
+            </div>
+
+
+            <div class="payments-header-text">
+
+
+                <h1>
+
+                    <%=LanguageManager.get(
+                        "payments.title",
+                        session
+                    )%>
+
+                </h1>
+
+
+                <span class="payments-header-separator"></span>
+
+
+                <p>
+
+                    <%=LanguageManager.get(
+                        "payments.description",
+                        session
+                    )%>
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         02. FILTER / CONTROL AREA
     ================================================== -->
 
     <section class="payments-controls">
@@ -64,6 +73,7 @@
         <!-- SEARCH -->
 
         <div class="payments-search">
+
 
             <input
                 type="text"
@@ -74,6 +84,7 @@
                 )%>"
             >
 
+
         </div>
 
 
@@ -82,10 +93,13 @@
 
         <div class="payments-date">
 
+
             <input
                 type="date"
                 id="paymentDateFrom"
+                aria-label="Date from"
             >
+
 
         </div>
 
@@ -95,10 +109,13 @@
 
         <div class="payments-date">
 
+
             <input
                 type="date"
                 id="paymentDateTo"
+                aria-label="Date to"
             >
+
 
         </div>
 
@@ -108,41 +125,53 @@
 
         <div class="payments-order">
 
+
             <select id="paymentOrder">
 
+
                 <option value="NEW">
+
                     <%=LanguageManager.get(
                         "payments.newest",
                         session
                     )%>
+
                 </option>
 
+
                 <option value="OLD">
+
                     <%=LanguageManager.get(
                         "payments.oldest",
                         session
                     )%>
+
                 </option>
 
+
             </select>
+
 
         </div>
 
 
 
-        <!-- SEARCH ACTION -->
+        <!-- SEARCH BUTTON -->
 
         <button
             type="button"
             onclick="loadPayments(1)"
         >
 
+
             🔎
+
 
             <%=LanguageManager.get(
                 "payments.search",
                 session
             )%>
+
 
         </button>
 
@@ -152,25 +181,22 @@
 
 
     <!-- ==================================================
-         PAYMENT WORKSPACE
+         03. PAYMENTS WORKSPACE
     ================================================== -->
 
     <section class="payments-workspace">
 
 
-        <!-- ==============================================
-             TABS
-             
-             IMPORTANT:
-             Functional classes / IDs preserved.
-             No visual redesign here yet.
-        =============================================== -->
-
+        <!-- ==================================================
+             03.1 TABS
+        ================================================== -->
 
         <div class="payments-tabs">
 
 
-            <!-- UNPAID -->
+            <!-- ==============================================
+                 UNPAID
+            =============================================== -->
 
             <button
                 type="button"
@@ -179,7 +205,8 @@
                 onclick="changePaymentTab('UNPAID')"
             >
 
-                <span>
+
+                <span class="payment-tab-label">
 
                     <%=LanguageManager.get(
                         "payments.unpaid",
@@ -187,6 +214,7 @@
                     )%>
 
                 </span>
+
 
                 <span
                     class="tab-notification unpaid-count"
@@ -202,11 +230,14 @@
 
                 </span>
 
+
             </button>
 
 
 
-            <!-- PAID -->
+            <!-- ==============================================
+                 PAID
+            =============================================== -->
 
             <button
                 type="button"
@@ -215,7 +246,8 @@
                 onclick="changePaymentTab('PAID')"
             >
 
-                <span>
+
+                <span class="payment-tab-label">
 
                     <%=LanguageManager.get(
                         "payments.paid",
@@ -223,6 +255,7 @@
                     )%>
 
                 </span>
+
 
                 <span
                     class="tab-notification paid-count"
@@ -238,11 +271,14 @@
 
                 </span>
 
+
             </button>
 
 
 
-            <!-- HISTORY -->
+            <!-- ==============================================
+                 HISTORY
+            =============================================== -->
 
             <button
                 type="button"
@@ -251,7 +287,8 @@
                 onclick="changePaymentTab('HISTORY')"
             >
 
-                <span>
+
+                <span class="payment-tab-label">
 
                     <%=LanguageManager.get(
                         "payments.history",
@@ -259,6 +296,7 @@
                     )%>
 
                 </span>
+
 
                 <span
                     class="tab-notification history-count"
@@ -274,6 +312,7 @@
 
                 </span>
 
+
             </button>
 
 
@@ -281,9 +320,9 @@
 
 
 
-        <!-- ==============================================
-             CURRENT TAB
-        =============================================== -->
+        <!-- ==================================================
+             03.2 CURRENT TAB
+        ================================================== -->
 
         <input
             type="hidden"
@@ -293,265 +332,296 @@
 
 
 
-        <!-- ==============================================
-             DYNAMIC TABLE
-             
-             DO NOT CHANGE ID
-        =============================================== -->
+        <!-- ==================================================
+             03.3 TABLE
+        ================================================== -->
 
         <div
             id="payments-table-container"
             class="payments-table-container"
         >
+
         </div>
 
 
 
-        <!-- ==============================================
-             PAGINATION
-             
-             DO NOT CHANGE ID
-        =============================================== -->
+        <!-- ==================================================
+             03.4 PAGINATION
+        ================================================== -->
 
         <div
             id="payments-pagination-container"
             class="payments-pagination-container"
         >
+
         </div>
 
 
     </section>
 
 
-
-    <!-- ==================================================
-         PAYMENT CONFIRM MODAL
-         
-         Functional ID preserved
-    ================================================== -->
-
-    <div
-        id="payment-confirm-modal"
-        class="centre-modal"
-    >
-
-        <div class="centre-modal-content reset-confirm-box">
+</section>
 
 
-            <button
-                type="button"
-                class="modal-close"
-                onclick="closePaymentConfirm()"
-            >
 
-                ✖
+<!-- ======================================================
+     04. PAYMENT CONFIRM MODAL
+====================================================== -->
 
-            </button>
-
-
-            <div class="reset-confirm-content">
+<div
+    id="payment-confirm-modal"
+    class="centre-modal"
+>
 
 
-                <div class="confirm-header">
-
-                    <div class="confirm-icon">
-
-                        💳
-
-                    </div>
+    <div class="centre-modal-content reset-confirm-box">
 
 
-                    <h4 class="confirm-title">
+        <!-- CLOSE -->
 
-                        <%=LanguageManager.get(
-                            "payments.confirm",
-                            session
-                        )%>
+        <button
+            type="button"
+            class="modal-close"
+            onclick="closePaymentConfirm()"
+        >
 
-                    </h4>
+            ✖
+
+        </button>
+
+
+
+        <div class="reset-confirm-content">
+
+
+            <!-- HEADER -->
+
+            <div class="confirm-header">
+
+
+                <div class="confirm-icon">
+
+                    💳
 
                 </div>
 
 
-                <p>
+                <h4 class="confirm-title">
 
                     <%=LanguageManager.get(
-                        "payments.confirm.message",
+                        "payments.confirm",
                         session
                     )%>
 
-                </p>
-
-
-                <div class="reset-confirm-actions">
-
-
-                    <button
-                        type="button"
-                        class="btn-secondary"
-                        onclick="closePaymentConfirm()"
-                    >
-
-                        <%=LanguageManager.get(
-                            "centers.cancel",
-                            session
-                        )%>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn-primary"
-                        onclick="confirmPayment()"
-                    >
-
-                        <%=LanguageManager.get(
-                            "centers.confirm",
-                            session
-                        )%>
-
-                    </button>
-
-
-                </div>
+                </h4>
 
 
             </div>
 
+
+
+            <!-- MESSAGE -->
+
+            <p>
+
+                <%=LanguageManager.get(
+                    "payments.confirm.message",
+                    session
+                )%>
+
+            </p>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="reset-confirm-actions">
+
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    onclick="closePaymentConfirm()"
+                >
+
+                    <%=LanguageManager.get(
+                        "centers.cancel",
+                        session
+                    )%>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="confirmPayment()"
+                >
+
+                    <%=LanguageManager.get(
+                        "centers.confirm",
+                        session
+                    )%>
+
+                </button>
+
+
+            </div>
+
+
         </div>
+
 
     </div>
 
 
-
-    <!-- ==================================================
-         SUBSCRIPTION CONFIRM MODAL
-    ================================================== -->
-
-    <div
-        id="subscription-confirm-modal"
-        class="centre-modal"
-    >
-
-        <div class="centre-modal-content reset-confirm-box">
+</div>
 
 
-            <button
-                type="button"
-                class="modal-close"
-                onclick="closeSubscriptionConfirm()"
-            >
 
-                ✖
+<!-- ======================================================
+     05. SUBSCRIPTION CONFIRM MODAL
+====================================================== -->
 
-            </button>
-
-
-            <div class="reset-confirm-content">
+<div
+    id="subscription-confirm-modal"
+    class="centre-modal"
+>
 
 
-                <div class="confirm-header">
-
-                    <div class="confirm-icon">
-
-                        🔄
-
-                    </div>
+    <div class="centre-modal-content reset-confirm-box">
 
 
-                    <h4 class="confirm-title">
+        <!-- CLOSE -->
 
-                        <%=LanguageManager.get(
-                            "payments.save.confirm.title",
-                            session
-                        )%>
+        <button
+            type="button"
+            class="modal-close"
+            onclick="closeSubscriptionConfirm()"
+        >
 
-                    </h4>
+            ✖
+
+        </button>
+
+
+
+        <div class="reset-confirm-content">
+
+
+            <!-- HEADER -->
+
+            <div class="confirm-header">
+
+
+                <div class="confirm-icon">
+
+                    🔄
 
                 </div>
 
 
-                <p id="subscription-confirm-message">
+                <h4 class="confirm-title">
 
                     <%=LanguageManager.get(
-                        "payments.save.confirm.message",
+                        "payments.save.confirm.title",
                         session
                     )%>
 
-                </p>
-
-
-                <div class="reset-confirm-actions">
-
-
-                    <button
-                        type="button"
-                        class="btn-secondary"
-                        onclick="closeSubscriptionConfirm()"
-                    >
-
-                        <%=LanguageManager.get(
-                            "centers.cancel",
-                            session
-                        )%>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn-primary"
-                        onclick="updateSubscription()"
-                    >
-
-                        <%=LanguageManager.get(
-                            "centers.confirm",
-                            session
-                        )%>
-
-                    </button>
-
-
-                </div>
+                </h4>
 
 
             </div>
 
+
+
+            <!-- MESSAGE -->
+
+            <p id="subscription-confirm-message">
+
+                <%=LanguageManager.get(
+                    "payments.save.confirm.message",
+                    session
+                )%>
+
+            </p>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="reset-confirm-actions">
+
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    onclick="closeSubscriptionConfirm()"
+                >
+
+                    <%=LanguageManager.get(
+                        "centers.cancel",
+                        session
+                    )%>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="updateSubscription()"
+                >
+
+                    <%=LanguageManager.get(
+                        "centers.confirm",
+                        session
+                    )%>
+
+                </button>
+
+
+            </div>
+
+
         </div>
+
 
     </div>
 
 
-
-    <!-- ==================================================
-         PAYMENT DETAILS MODAL
-    ================================================== -->
-
-    <div
-        id="payment-modal"
-        class="centre-modal"
-    >
-
-        <div class="centre-modal-content">
+</div>
 
 
-            <button
-                type="button"
-                class="modal-close"
-                onclick="closePaymentModal()"
-            >
 
-                ✖
+<!-- ======================================================
+     06. PAYMENT DETAILS MODAL
+====================================================== -->
 
-            </button>
+<div
+    id="payment-modal"
+    class="centre-modal"
+>
 
 
-            <div id="payment-modal-body">
-            </div>
+    <div class="centre-modal-content">
 
+
+        <button
+            type="button"
+            class="modal-close"
+            onclick="closePaymentModal()"
+        >
+
+            ✖
+
+        </button>
+
+
+        <div id="payment-modal-body">
 
         </div>
+
 
     </div>
 

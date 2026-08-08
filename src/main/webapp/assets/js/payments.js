@@ -904,7 +904,9 @@ function initPaymentsPage(){
 
 
 
-/* ==========================================================
+
+/*
+==========================================================
  08 - AUTO INIT WHEN PAGE EXISTS
 
  Useful when payments.jsp loaded directly
@@ -918,6 +920,7 @@ document.addEventListener(
 function(){
 
 
+
     if(
         document.getElementById(
             "payments-table-container"
@@ -925,10 +928,13 @@ function(){
     ){
 
 
+
         initPaymentsPage();
 
 
+
     }
+
 
 
 });
@@ -942,104 +948,49 @@ function(){
 
 
 function openSubscriptionConfirm(
-        centreCode,
-        codeFacture
+    centreCode,
+    codeFacture
 ){
 
+    selectedSubscriptionCentre =
+        centreCode;
 
-    selectedSubscriptionCentre = centreCode;
-     selectedSubscriptionFacture = codeFacture;
+
+    selectedSubscriptionFacture =
+        codeFacture;
+
 
 
     let operationElement =
-
-    document.querySelector(
-        '.subscription-operation[data-centre="' +
-        centreCode +
-        '"]'
-    );
-
+        document.querySelector(
+            '.subscription-operation[data-centre="' +
+            centreCode +
+            '"]'
+        );
 
 
     let operation =
-
-    operationElement
-    ?
-    operationElement.value
-    :
-    "";
-
-
-
-
-    let message =
-
-    document.getElementById(
-        "subscription-confirm-message"
-    );
-
-
-
-
-    if(message){
-
-
-
-        if(operation === "UPGRADE"){
-
-
-            message.innerHTML =
-            window.subscriptionMessages.upgrade;
-
-
-        }
-        else if(operation === "EXTENDED"){
-
-
-            message.innerHTML =
-            window.subscriptionMessages.extended;
-
-
-        }
-        else{
-
-
-            message.innerHTML =
-            window.subscriptionMessages.update;
-
-
-        }
-
-
-    }
-
-
-
+        operationElement
+        ? operationElement.value
+        : "";
 
 
 
     let modal =
-
-    document.getElementById(
-        "subscription-confirm-modal"
-    );
-
+        document.getElementById(
+            "subscription-confirm-modal"
+        );
 
 
     if(modal){
-
 
         modal.classList.add(
             "show"
         );
 
-
     }
 
-
-
 }
-
 
 
 
