@@ -1683,6 +1683,22 @@ td:first-child{
 }
 
 
+
+
+
+/* ======================================================
+   07.3 HISTORY — GRAY ROW LINE
+====================================================== */
+
+#payments-table-container
+.payments-table.history-table
+tbody tr
+td:first-child{
+
+    border-right:4px solid #94a3b8;
+
+}
+
 /* ======================================================
    08. PAYMENTS — PAGINATION
 ====================================================== */
