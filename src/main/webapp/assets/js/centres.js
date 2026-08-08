@@ -737,6 +737,158 @@ function closeCentreModal() {
 
 
 /* ======================================================
+   ADD CENTRE
+====================================================== */
+
+function openAddCentre() {
+
+    const modal =
+        getCentresElement("centre-modal");
+
+    const modalBody =
+        getCentresElement("centre-modal-body");
+
+    if (!modal || !modalBody) {
+
+        console.error(
+            "Centre modal not found."
+        );
+
+        return;
+
+    }
+
+    fetch(
+        getCentresContextPath()
+        + "/CentreServlet?action=add"
+    )
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " + response.status
+            );
+
+        }
+
+        return response.text();
+
+    })
+
+    .then(html => {
+
+        modalBody.innerHTML = html;
+
+        const form =
+            document.getElementById("addCentreForm");
+
+        if (form) {
+
+            form.addEventListener(
+                "submit",
+                submitAddCentre
+            );
+
+        }
+
+        openCentreModal(modal);
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Open Add Centre:",
+            error
+        );
+
+    });
+
+}
+
+
+
+/* ======================================================
+   SUBMIT ADD CENTRE
+====================================================== */
+
+function submitAddCentre(event) {
+
+    event.preventDefault();
+
+    const form =
+        document.getElementById("addCentreForm");
+
+    if (!form) {
+        return;
+    }
+
+   const data =
+    new URLSearchParams(
+        new FormData(form)
+    );
+
+  const actionUrl =
+    form.getAttribute("action");
+
+fetch(
+    actionUrl,
+    {
+        method: "POST",
+        body: data
+    }
+)
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP ERROR " + response.status
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(json => {
+
+        if (!json.success) {
+
+            alert(
+                json.error ||
+                "Error creating centre."
+            );
+
+            return;
+
+        }
+
+        closeCentreModal();
+
+        openCreatedCentre();
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Create Centre:",
+            error
+        );
+
+    });
+
+}
+
+
+
+
+/* ======================================================
    RESET PASSWORD
 ====================================================== */
 
@@ -1276,5 +1428,64 @@ function copyGeneratedPassword() {
     selection.removeAllRanges();
 
     showCopiedState();
+
+}
+
+/* ======================================================
+   CREATED CENTRE
+====================================================== */
+function openCreatedCentre() {
+
+    const modal =
+        getCentresElement("centre-modal");
+
+    const modalBody =
+        getCentresElement("centre-modal-body");
+
+    if (!modal || !modalBody) {
+
+        console.error(
+            "Centre modal not found."
+        );
+
+        return;
+
+    }
+
+    fetch(
+        getCentresContextPath()
+        + "/CentreServlet?action=created"
+    )
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " + response.status
+            );
+
+        }
+
+        return response.text();
+
+    })
+
+    .then(html => {
+
+        modalBody.innerHTML = html;
+
+        openCentreModal(modal);
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Open Created Centre:",
+            error
+        );
+
+    });
 
 }

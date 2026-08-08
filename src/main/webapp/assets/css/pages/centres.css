@@ -1586,6 +1586,7 @@ html[dir="ltr"] .centre-status-select{
 .centre-modal-content #centre-modal-body{
 
     max-width:100%;
+    padding-inline-start:40px;
 
 }
 
@@ -2468,7 +2469,7 @@ html[dir="ltr"] .info-row strong{
 
     border-radius:4px;
 
-    margin:0 20px 0 0;
+  
 
 }
 
@@ -2485,10 +2486,6 @@ html[dir="ltr"] .info-row strong{
     font-size:20px;
 
 }
-
-
-
-
 
 .edit-dialog-divider{
 
@@ -2526,7 +2523,6 @@ html[dir="ltr"] .info-row strong{
     gap:20px;
 
 }
-
 
 /* ======================================================
    SECTION
@@ -2575,7 +2571,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
 /* ======================================================
    ROW
 ====================================================== */
@@ -2601,7 +2596,6 @@ html[dir="ltr"] .info-row strong{
     border-radius:4px;
 
 }
-
 
 /* ======================================================
    LABEL
@@ -2664,7 +2658,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
 /* ======================================================
    INPUT
 ====================================================== */
@@ -2715,7 +2708,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
 /* ======================================================
    FOOTER
 ====================================================== */
@@ -2733,7 +2725,6 @@ html[dir="ltr"] .info-row strong{
     border-top:1px solid #edf2f7;
 
 }
-
 
 /* ======================================================
    RTL / LTR
@@ -2762,7 +2753,6 @@ html[dir="ltr"] .edit-dialog-value strong{
     text-align:left;
 
 }
-
 
 /* ======================================================
    RESPONSIVE
@@ -2798,8 +2788,6 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
-
-
 /* ======================================================
               Section 25 : RESET DIALOG
 ====================================================== */
@@ -2819,8 +2807,6 @@ html[dir="ltr"] .edit-dialog-value strong{
     margin-bottom: 20px; 
 
 }
-
-
 
 
 /* ======================================================
@@ -2845,7 +2831,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     border-radius:4px;
 
-    margin:0 20px 0 0;
+ 
 
 }
 
@@ -2949,10 +2935,6 @@ html[dir="ltr"] .edit-dialog-value strong{
     display:none;
 
 }
-
-
-
-
 
 /* ======================================================
    SECTION
@@ -3388,6 +3370,760 @@ html[dir="ltr"] .reset-dialog .modal-close{
         width:100%;
 
     }
+
+}
+
+
+/* ======================================================
+              Section 26 : ADD DIALOG
+====================================================== */
+
+/* ======================================================
+   CONTAINER
+====================================================== */
+
+.add-dialog{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+/* ======================================================
+   TOP BAR
+====================================================== */
+
+.add-dialog-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+
+/* ======================================================
+   CLOSE BUTTON
+====================================================== */
+
+
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.add-dialog-header{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    height:40px;
+
+    padding:0 18px;
+
+    background:#eef5ff;
+
+    border-radius:4px;
+
+    margin:0 20px 0 0;
+
+}
+
+.add-dialog-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#334155;
+
+    font-size:20px;
+
+}
+
+.add-dialog-divider{
+
+    width:1px;
+
+    height:24px;
+
+    background:#cbd5e1;
+
+}
+
+.add-dialog-title{
+
+    margin:0;
+
+    color:#1e293b;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+/* ======================================================
+   FORM
+====================================================== */
+
+.add-dialog form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+/* ======================================================
+   SECTION
+====================================================== */
+
+.add-dialog-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.add-dialog-section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:0 2px;
+
+    color:#475569;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+
+/* ======================================================
+   GRID
+====================================================== */
+
+.add-dialog-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,minmax(280px,1fr));
+
+    gap:10px;
+
+}
+
+/* ======================================================
+   ROW
+====================================================== */
+
+.add-dialog-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    min-height:58px;
+
+    padding:8px 10px;
+
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:4px;
+
+}
+
+.add-dialog-row-full{
+
+    grid-column:1 / -1;
+
+}
+
+/* ======================================================
+   LABEL
+====================================================== */
+
+.add-dialog-label{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    min-width:130px;
+
+    padding:6px 12px;
+
+    background:#f8fafc;
+
+    border:1px solid #dbe4f0;
+
+    border-radius:4px;
+
+    color:#64748b;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+/* ======================================================
+   INPUT
+====================================================== */
+
+.add-dialog-input-box{
+
+    flex:1;
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.add-dialog-input,
+.add-dialog-select{
+
+    width:100%;
+    
+    min-width:0;
+
+    height:40px;
+
+    padding:0 12px;
+
+    border:1px solid #dbe4f0;
+
+    border-radius:4px;
+
+    background:#ffffff;
+
+    color:#0f172a;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    box-sizing:border-box;
+
+}
+
+.add-dialog-input:focus,
+.add-dialog-select:focus{
+
+    border-color:#3b82f6;
+
+    box-shadow:0 0 0 3px rgba(59,130,246,.12);
+
+}
+
+
+/* ======================================================
+   DATE INPUT
+====================================================== */
+
+.add-dialog-input[type="date"]{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    padding-inline:12px 40px;
+
+}
+
+/* ======================================================
+   NOTE
+====================================================== */
+
+.add-dialog-note{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    border:1px solid #d7e5fb;
+
+    border-radius:8px;
+
+    background:#eef5ff;
+
+    color:#475569;
+
+    font-size:15px;
+
+}
+
+.add-dialog-note i{
+
+    color:#2563eb;
+
+    font-size:18px;
+
+}
+
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.add-dialog-footer{
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    gap:12px;
+
+    padding-top:16px;
+
+    border-top:1px solid #e5e7eb;
+
+}
+
+.add-dialog ~ .modal-close{
+
+    display:none;
+
+}
+
+
+/* ======================================================
+              Section 27 : CREATED DIALOG
+====================================================== */
+
+/* ======================================================
+   27.1 CONTAINER
+====================================================== */
+
+.created-dialog{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+/* ======================================================
+  27.2 TOP BAR
+====================================================== */
+
+.created-dialog-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+
+/* ======================================================
+   27.3.1 HEADER
+====================================================== */
+
+.created-dialog-header{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    height:40px;
+
+    padding:0 18px;
+
+    background:#eef5ff;
+
+    border-radius:4px;
+
+}
+
+/* ======================================================
+   27.3.2 - ICON
+====================================================== */
+
+.created-dialog-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#16a34a;
+
+    font-size:20px;
+
+}
+
+
+/* ======================================================
+   27.3.3 - DIVIDER
+====================================================== */
+
+.created-dialog-divider{
+
+    width:1px;
+
+    height:24px;
+
+    background:#cbd5e1;
+
+}
+
+
+/* ======================================================
+   27.3.4 -  TITLE
+====================================================== */
+
+.created-dialog-title{
+
+    margin:0;
+
+    color:#1e293b;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+/* ======================================================
+   27.4 - SECTION
+====================================================== */
+
+.created-dialog-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+.created-dialog-section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:0 2px;
+
+    color:#475569;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+/* ======================================================
+  27.5 - GRID
+====================================================== */
+
+.created-dialog-grid{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+/* ======================================================
+  27.6 - ROW
+====================================================== */
+
+.created-dialog-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:14px;
+
+    border:1px solid #dbe4f0;
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+}
+
+
+.created-dialog-row-full{
+
+    width:100%;
+
+}
+
+/* ======================================================
+   27.7 - LABEL
+====================================================== */
+
+.created-dialog-label{
+
+    flex:0 0 260px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    padding:0 18px;
+
+    border:1px solid #cfdcf0;
+
+    border-radius:8px;
+
+    background:#f8fbff;
+
+    color:#64748b;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+/* ======================================================
+   27.8 - VALUE
+====================================================== */
+
+.created-dialog-value{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    min-height:44px;
+
+    padding:0 16px;
+
+    border:1px solid #cfdcf0;
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+    color:#1e293b;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* ======================================================
+   27.9 - PASSWORD
+====================================================== */
+
+.created-dialog-password-box{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.created-dialog-password-value{
+
+    flex:1;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 16px;
+
+    border:1px solid #cfdcf0;
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+    color:#1e293b;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* ======================================================
+   27.10 - COPY BUTTON
+====================================================== */
+
+.created-copy-button{
+
+    width:44px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:1px solid #cfdcf0;
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+    color:#64748b;
+
+    cursor:pointer;
+
+    transition:
+        background .25s,
+        color .25s,
+        border-color .25s;
+
+}
+
+
+.created-copy-button:hover{
+
+    background:#2563eb;
+
+    border-color:#2563eb;
+
+    color:#ffffff;
+
+}
+
+
+.created-copy-button.copied{
+
+    background:#16a34a;
+
+    border-color:#16a34a;
+
+    color:#ffffff;
+
+}
+
+/* ======================================================
+   27.11 - NOTE
+====================================================== */
+
+.created-dialog-note{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    border:1px solid #d7e5fb;
+
+    border-radius:8px;
+
+    background:#eef5ff;
+
+    color:#475569;
+
+    font-size:15px;
+
+}
+
+
+.created-dialog-note i{
+
+    color:#2563eb;
+
+    font-size:18px;
+
+}
+
+/* ======================================================
+   27.12 - FOOTER
+====================================================== */
+
+.created-dialog-footer{
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    gap:12px;
+
+    padding-top:16px;
+
+    border-top:1px solid #e5e7eb;
 
 }
 

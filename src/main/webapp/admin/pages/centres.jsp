@@ -192,22 +192,24 @@
             </form>
 
 
-            <!-- ADD CENTRE -->
+          
+<!-- ADD CENTRE -->
 
-            <a href="<%=request.getContextPath()%>/admin/pages/fragments/centres/add-centre.jsp"
-               class="btn-primary btn-no-underline centres-add-action">
+<button type="button"
+        class="btn-primary centres-add-action"
+        onclick="openAddCentre()">
 
-                <i class="fa-solid fa-plus"
-                   aria-hidden="true"></i>
+    <i class="fa-solid fa-plus"
+       aria-hidden="true"></i>
 
-                <span>
-                    <%= LanguageManager.get(
-                            "centers.add",
-                            session
-                    ) %>
-                </span>
+    <span>
+        <%= LanguageManager.get(
+                "centers.add",
+                session
+        ) %>
+    </span>
 
-            </a>
+</button>
 
         </div>
 

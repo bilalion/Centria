@@ -220,21 +220,21 @@ public class CentreServlet extends HttpServlet {
 
 
 
-            case "resetPassword":
+             case "resetPassword":
+             resetPassword(request,response);
+             break;
 
 
-                resetPassword(
-                        request,
-                        response
-                );
+            case "add":
+            showAddCentre(request, response);
+            break;
 
 
-                break;
-
-
-
-
-
+            case "created":
+            showCreatedCentre(request, response);
+            break;
+            
+            
             default:
 
 
@@ -1032,135 +1032,92 @@ throws ServletException, IOException {
 
 
 
-    if(saved && centre.getCentreCode()!=null){
+ if(saved && centre.getCentreCode()!=null){
+
+    /*
+    ==========================================
+    CREATE INITIAL PAYMENT
+
+    Creates:
+
+    payments
+    +
+    payment_history
+
+    ==========================================
+    */
+
+    boolean paymentCreated =
+
+         paymentDAO.createInitialPayment(
+                centre.getCentreCode(),
+                centre.getSubscriptionStart(),
+                centre.getSubscriptionEnd(),
+                months
+         );
 
 
 
+    if(!paymentCreated){
 
-
-
-
-        /*
-        ==========================================
-        CREATE INITIAL PAYMENT
-
-        Creates:
-
-        payments
-        +
-        payment_history
-
-        ==========================================
-        */
-
-
-        boolean paymentCreated =
-
-             paymentDAO.createInitialPayment(
-        centre.getCentreCode(),
-        centre.getSubscriptionStart(),
-        centre.getSubscriptionEnd(),
-        months
-           );
-
-
-
-
-
-
-        if(!paymentCreated){
-
-
-            System.out.println(
-                    "WARNING : Initial payment not created"
-            );
-
-
-        }
-
-
-
-
-
-
-
-
-
-        /*
-        ==========================================
-        SAVE LOGIN INFORMATION TEMPORARILY
-
-        Display once after creation
-
-        ==========================================
-        */
-
-
-        request.getSession().setAttribute(
-                "centreCode",
-                centre.getCentreCode()
+        System.out.println(
+                "WARNING : Initial payment not created"
         );
-
-
-
-        request.getSession().setAttribute(
-                "username",
-                centre.getUsername()
-        );
-
-
-
-        request.getSession().setAttribute(
-                "password",
-                temporaryPassword
-        );
-
-
-
-
-
-
-
-
-        response.sendRedirect(
-
-                request.getContextPath()
-                +
-                "/admin/pages/fragments/centres/centre-created.jsp"
-
-        );
-
-
-
-
-
-
-    }
-    else {
-
-
-
-
-        request.setAttribute(
-                "error",
-                "Erreur création centre"
-        );
-
-
-
-
-        request.getRequestDispatcher(
-                "/admin/pages/add-centre.jsp"
-        )
-        .forward(
-                request,
-                response
-        );
-
-
 
     }
 
+
+
+    /*
+    ==========================================
+    SAVE LOGIN INFORMATION TEMPORARILY
+
+    Display once after creation
+
+    ==========================================
+    */
+
+    request.getSession().setAttribute(
+            "centreCode",
+            centre.getCentreCode()
+    );
+
+    request.getSession().setAttribute(
+            "username",
+            centre.getUsername()
+    );
+
+    request.getSession().setAttribute(
+            "password",
+            temporaryPassword
+    );
+
+
+
+    response.setContentType(
+            "application/json;charset=UTF-8"
+    );
+
+    response.getWriter().write(
+            "{\"success\":true}"
+    );
+
+    return;
+
+}
+else{
+
+    response.setContentType(
+            "application/json;charset=UTF-8"
+    );
+
+    response.getWriter().write(
+            "{\"success\":false,\"error\":\"Erreur création centre\"}"
+    );
+
+    return;
+
+}
 
 
 }
@@ -1532,7 +1489,29 @@ throws IOException, ServletException {
 
     }
 
-    
+private void showAddCentre(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
 
+    request.getRequestDispatcher(
+        "/admin/pages/fragments/centres/dialog-add-centre.jsp"
+    ).forward(request, response);
+
+}
+
+
+private void showCreatedCentre(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws ServletException, IOException {
+
+    request.getRequestDispatcher(
+            "/admin/pages/fragments/centres/dialog-created.jsp"
+    ).forward(request, response);
+
+}
 
 }
