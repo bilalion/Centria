@@ -727,10 +727,20 @@ function closeCentreModal() {
         "centre-modal-body"
     );
 
+    const reloadTable =
+        modalBody &&
+        modalBody.querySelector(
+            ".created-dialog"
+        );
+
     closeCentreModalElement(modal);
 
     if (modalBody) {
         modalBody.innerHTML = "";
+    }
+
+    if (reloadTable) {
+        loadCentres(activeCentrePage);
     }
 
 }
@@ -1073,7 +1083,6 @@ function closeEditConfirm() {
 
 }
 
-
 function confirmEditCentre() {
 
     if (!editCentreId) {
@@ -1135,7 +1144,6 @@ function confirmEditCentre() {
 
 }
 
-
 /* ======================================================
    SAVE EDIT CENTRE PROFILE
 ====================================================== */
@@ -1151,7 +1159,6 @@ function getEditCentreFieldValue(form, name) {
         : "";
 
 }
-
 
 function saveEditCentre() {
 
@@ -1238,7 +1245,6 @@ function saveEditCentre() {
 
 }
 
-
 /* ======================================================
    MODAL ERROR / CLOSE EVENTS
 ====================================================== */
@@ -1268,7 +1274,6 @@ function showCentreActionError(message) {
     openCentreModal(modal);
 
 }
-
 
 function bindCentresModalEvents() {
 
@@ -1311,7 +1316,6 @@ function bindCentresModalEvents() {
 
 }
 
-
 /* ======================================================
    PAGE INITIALIZATION
 ====================================================== */
@@ -1344,11 +1348,9 @@ document.addEventListener(
     initCentresPage
 );
 
-
 /* ======================================================
    COPY GENERATED PASSWORD
 ====================================================== */
-
 function copyGeneratedPassword() {
 
     const password =
@@ -1430,7 +1432,6 @@ function copyGeneratedPassword() {
     showCopiedState();
 
 }
-
 /* ======================================================
    CREATED CENTRE
 ====================================================== */
@@ -1487,5 +1488,130 @@ function openCreatedCentre() {
         );
 
     });
+
+}
+/* ======================================================
+   COPY CREATED CREDENTIALS
+====================================================== */
+function copyCreatedCredentials() {
+
+    const centreCode =
+        document.getElementById(
+            "createdCentreCode"
+        );
+
+    const username =
+        document.getElementById(
+            "createdUsername"
+        );
+
+    const password =
+        document.getElementById(
+            "createdPassword"
+        );
+
+    if (
+        !centreCode ||
+        !username ||
+        !password
+    ) {
+        return;
+    }
+
+const value =
+    "CENTRIA"
+    + "\n"
+    + "------------------------"
+    + "\n"
+    + "Centre Code : "
+    + centreCode.textContent.trim()
+    + "\n"
+    + "Username : "
+    + username.textContent.trim()
+    + "\n"
+    + "Password : "
+    + password.textContent.trim();
+    
+    const copyButton =
+        document.getElementById(
+            "createdCopyButton"
+        );
+
+    const copyIcon =
+        document.getElementById(
+            "createdCopyIcon"
+        );
+
+    function showCopiedState() {
+
+        if (!copyButton || !copyIcon) {
+            return;
+        }
+
+        copyIcon.className =
+            "fa-solid fa-check";
+
+        copyButton.classList.add(
+            "copied"
+        );
+
+        setTimeout(function () {
+
+            copyIcon.className =
+                "fa-solid fa-copy";
+
+            copyButton.classList.remove(
+                "copied"
+            );
+
+        }, 1500);
+
+    }
+
+    if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ) {
+
+        navigator.clipboard
+            .writeText(value)
+            .then(showCopiedState);
+
+        return;
+
+    }
+
+    const textarea =
+        document.createElement(
+            "textarea"
+        );
+
+    textarea.value = value;
+
+    document.body.appendChild(
+        textarea
+    );
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    document.body.removeChild(
+        textarea
+    );
+
+    showCopiedState();
+
+}
+
+/* ======================================================
+   CLOSE CREATED CENTRE
+====================================================== */
+
+function closeCreatedCentre() {
+
+    closeCentreModal();
+
+    loadCentres(activeCentrePage);
 
 }

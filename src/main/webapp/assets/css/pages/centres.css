@@ -2612,6 +2612,7 @@ html[dir="ltr"] .info-row strong{
     gap:6px;
 
     min-width:130px;
+    height: 44px;
 
     padding:6px 12px;
 
@@ -2643,6 +2644,8 @@ html[dir="ltr"] .info-row strong{
     display:flex;
 
     align-items:center;
+    
+    height: 44px;
 
 }
 
@@ -2714,15 +2717,24 @@ html[dir="ltr"] .info-row strong{
 
 .edit-dialog-footer{
 
+    margin-top: 10px; 
     display:flex;
 
-    justify-content:flex-end;
+    justify-content:center;
 
-    gap:12px;
+    align-items:center;
+
+    gap:16px;
 
     padding-top:18px;
 
     border-top:1px solid #edf2f7;
+
+}
+.edit-dialog-footer .btn-primary,
+.edit-dialog-footer .btn-secondary{
+
+    min-width:120px;
 
 }
 
@@ -3583,11 +3595,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     justify-content:center;
 
-    gap:6px;
+    gap:8px;
 
     min-width:130px;
 
-    padding:6px 12px;
+    height:44px;
+
+    padding:0 12px;
 
     background:#f8fafc;
 
@@ -3597,11 +3611,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     color:#64748b;
 
-    font-size:12px;
+    font-size:13px;
 
     font-weight:700;
 
     white-space:nowrap;
+
+    box-sizing:border-box;
 
 }
 
@@ -3618,6 +3634,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     display:flex;
 
     align-items:center;
+    height:44px;
 
 }
 
@@ -3715,7 +3732,9 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     display:flex;
 
-    justify-content:flex-start;
+    justify-content:center;
+
+    align-items:center;
 
     gap:12px;
 

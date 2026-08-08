@@ -17,7 +17,7 @@ Centre centre =
 
       
 
-            <i class="fa-solid fa-xmark"></i>
+            
 
         </button>
 

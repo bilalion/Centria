@@ -241,7 +241,7 @@ if(centreCode == null ||
         <button
                 type="button"
                 class="btn-primary"
-                onclick="closeCentreModal()">
+               onclick="closeCreatedCentre()">
 
             <i class="fa-solid fa-arrow-left"></i>
 
