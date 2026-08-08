@@ -544,7 +544,6 @@ html[dir="ltr"] .payments-workspace{
 
 }
 
-
 .payment-tab{
 
     width:33.333333%;
@@ -592,7 +591,6 @@ html[dir="ltr"] .payments-workspace{
 
 }
 
-
 .payment-tab:hover{
 
     background:#f7f9fc;
@@ -600,7 +598,6 @@ html[dir="ltr"] .payments-workspace{
     color:#3d4d63;
 
 }
-
 
 .payment-tab.active{
 
@@ -671,6 +668,43 @@ html[dir="ltr"] .payments-workspace{
     color:#16834b;
 
     border-bottom-color:#20a464;
+
+}
+
+/* ======================================================
+  04.2.1 PAID STATUS
+====================================================== */
+
+#payments-table-container
+.status.paid{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    min-width:120px;
+
+    height:42px;
+
+    padding:0 18px;
+
+    border:1px solid #a7f3c7;
+
+    border-radius:10px;
+
+    background:#effcf5;
+
+    color:#15803d;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    box-sizing:border-box;
 
 }
 
@@ -2119,6 +2153,618 @@ html[dir="ltr"] #payments-table-container{
 
 }
 
+/* ======================================================
+   CONFIRM DIALOG — FINAL POLISH
+====================================================== */
+
+
+/* ------------------------------------------------------
+   01. MODAL OVERLAY
+------------------------------------------------------ */
+
+#payment-confirm-modal,
+#subscription-confirm-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:24px;
+
+    background:rgba(
+        15,
+        23,
+        42,
+        0.46
+    );
+
+    backdrop-filter:blur(4px);
+
+    -webkit-backdrop-filter:blur(4px);
+
+    z-index:9999;
+
+}
+
+
+/* ------------------------------------------------------
+   02. CONFIRM BOX
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-box,
+
+#subscription-confirm-modal
+.reset-confirm-box{
+
+    position:relative;
+
+    width:min(
+        520px,
+        calc(100vw - 48px)
+    );
+
+    min-height:0;
+
+    padding:32px 34px 28px;
+
+    background:#ffffff;
+
+    border:1px solid #e3eaf4;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 24px 60px rgba(
+            15,
+            23,
+            42,
+            0.18
+        ),
+        0 4px 14px rgba(
+            15,
+            23,
+            42,
+            0.06
+        );
+
+    direction:rtl;
+
+}
+
+
+/* ------------------------------------------------------
+   03. CLOSE BUTTON
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.modal-close,
+
+#subscription-confirm-modal
+.modal-close{
+
+    position:absolute;
+
+    top:18px;
+
+    left:18px;
+
+    width:38px;
+
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0;
+
+    border:1px solid #dbe4f0;
+
+    border-radius:10px;
+
+    background:#f8fafc;
+
+    color:#64748b;
+
+    font-size:18px;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+#payment-confirm-modal
+.modal-close:hover,
+
+#subscription-confirm-modal
+.modal-close:hover{
+
+    background:#eef4ff;
+
+    border-color:#b9d2ff;
+
+    color:#2563eb;
+
+    transform:translateY(-1px);
+
+}
+
+
+/* ------------------------------------------------------
+   04. CONTENT
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-content,
+
+#subscription-confirm-modal
+.reset-confirm-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:0;
+
+}
+
+
+/* ------------------------------------------------------
+   05. HEADER
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.confirm-header,
+
+#subscription-confirm-modal
+.confirm-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:22px;
+
+    padding-left:48px;
+
+}
+
+
+/* ------------------------------------------------------
+   06. ICON
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.confirm-icon,
+
+#subscription-confirm-modal
+.confirm-icon{
+
+    width:48px;
+
+    height:48px;
+
+    flex:0 0 48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:#eef4ff;
+
+    border:1px solid #d7e5ff;
+
+    color:#2563eb;
+
+    font-size:22px;
+
+}
+
+
+/* Subscription icon */
+
+#subscription-confirm-modal
+.confirm-icon{
+
+    background:#eef4ff;
+
+    border-color:#d7e5ff;
+
+}
+
+
+/* ------------------------------------------------------
+   07. TITLE
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.confirm-title,
+
+#subscription-confirm-modal
+.confirm-title{
+
+    margin:0;
+
+    color:#1e293b;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    line-height:1.4;
+
+}
+
+
+/* ------------------------------------------------------
+   08. MESSAGE
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-content > p,
+
+#subscription-confirm-modal
+.reset-confirm-content > p{
+
+    margin:0 0 28px;
+
+    color:#64748b;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    line-height:1.8;
+
+    text-align:right;
+
+}
+
+
+/* ------------------------------------------------------
+   09. ACTIONS
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-actions,
+
+#subscription-confirm-modal
+.reset-confirm-actions{
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:center;
+
+   justify-content:center;
+
+    gap:12px;
+
+    margin-top:4px;
+
+}
+
+
+/* ------------------------------------------------------
+   10. BUTTONS
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-actions button,
+
+#subscription-confirm-modal
+.reset-confirm-actions button{
+
+    min-width:120px;
+
+    height:44px;
+
+    padding:0 24px;
+
+    border-radius:10px;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+
+}
+
+
+/* ------------------------------------------------------
+   11. CANCEL
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-actions
+.btn-secondary,
+
+#subscription-confirm-modal
+.reset-confirm-actions
+.btn-secondary{
+
+    background:#ffffff;
+
+    border:1px solid #d8e1ed;
+
+    color:#475569;
+
+}
+
+
+#payment-confirm-modal
+.reset-confirm-actions
+.btn-secondary:hover,
+
+#subscription-confirm-modal
+.reset-confirm-actions
+.btn-secondary:hover{
+
+    background:#f8fafc;
+
+    border-color:#c5d2e2;
+
+    transform:translateY(-1px);
+
+}
+
+
+/* ------------------------------------------------------
+   12. CONFIRM
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-actions
+.btn-primary,
+
+#subscription-confirm-modal
+.reset-confirm-actions
+.btn-primary{
+
+    background:#2563eb;
+
+    border:1px solid #2563eb;
+
+    color:#ffffff;
+
+    box-shadow:
+        0 6px 14px rgba(
+            37,
+            99,
+            235,
+            0.20
+        );
+
+}
+
+
+#payment-confirm-modal
+.reset-confirm-actions
+.btn-primary:hover,
+
+#subscription-confirm-modal
+.reset-confirm-actions
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+    border-color:#1d4ed8;
+
+    box-shadow:
+        0 8px 18px rgba(
+            37,
+            99,
+            235,
+            0.26
+        );
+
+    transform:translateY(-1px);
+
+}
+
+
+/* ------------------------------------------------------
+   13. ACTIVE
+------------------------------------------------------ */
+
+#payment-confirm-modal
+.reset-confirm-actions button:active,
+
+#subscription-confirm-modal
+.reset-confirm-actions button:active{
+
+    transform:translateY(0);
+
+}
+
+
+/* ------------------------------------------------------
+   14. MOBILE
+------------------------------------------------------ */
+
+@media (max-width:600px){
+
+    #payment-confirm-modal,
+    #subscription-confirm-modal{
+
+        padding:16px;
+
+    }
+
+
+    #payment-confirm-modal
+    .reset-confirm-box,
+
+    #subscription-confirm-modal
+    .reset-confirm-box{
+
+        width:100%;
+
+        padding:28px 22px 22px;
+
+        border-radius:16px;
+
+    }
+
+
+    #payment-confirm-modal
+    .confirm-header,
+
+    #subscription-confirm-modal
+    .confirm-header{
+
+        padding-left:42px;
+
+    }
+
+
+    #payment-confirm-modal
+    .confirm-title,
+
+    #subscription-confirm-modal
+    .confirm-title{
+
+        font-size:19px;
+
+    }
+
+
+    #payment-confirm-modal
+    .reset-confirm-actions,
+
+    #subscription-confirm-modal
+    .reset-confirm-actions{
+
+        width:100%;
+
+    }
+
+
+    #payment-confirm-modal
+    .reset-confirm-actions button,
+
+    #subscription-confirm-modal
+    .reset-confirm-actions button{
+
+        flex:1;
+
+        min-width:0;
+
+    }
+
+}
+
+/* ======================================================
+   CONFIRM DIALOG
+   CLOSE BUTTON — LEFT SIDE
+====================================================== */
+
+#payment-confirm-modal .modal-close,
+#subscription-confirm-modal .modal-close{
+
+    position:absolute;
+
+    top:18px;
+
+    left:18px !important;
+
+    right:auto !important;
+
+    width:58px;
+
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0;
+
+    border:1px solid #d8e3f1;
+
+    border-radius:12px;
+
+    background:#ffffff;
+
+    color:#64748b;
+
+    font-size:25px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    box-sizing:border-box;
+
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease,
+        transform .35s ease,
+        box-shadow .25s ease;
+
+}
+
+
+#payment-confirm-modal .modal-close:hover,
+#subscription-confirm-modal .modal-close:hover{
+
+    background:#ef4444;
+
+    border-color:#ef4444;
+
+    color:#ffffff;
+
+    transform:rotate(90deg);
+
+    box-shadow:
+        0 6px 16px rgba(
+            239,
+            68,
+            68,
+            0.25
+        );
+
+}
 
 /* ======================================================
    END — PAYMENTS CSS
