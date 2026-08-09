@@ -1361,4 +1361,93 @@ public boolean activateCentreAfterPayment(
 
 
 }
+
+
+
+/*
+======================================================
+ACCOUNT STATUS MONITOR
+======================================================
+*/
+
+public int monitorExpiredActiveCentres(){
+
+    String sql =
+        "UPDATE centres SET status='PENDING' " +
+        "WHERE status='ACTIVE' " +
+        "AND subscription_end < CURRENT_DATE";
+
+    try(
+        Connection con =
+                DatabaseConfig.getConnection();
+
+        PreparedStatement ps =
+                con.prepareStatement(sql)
+    ){
+
+        return ps.executeUpdate();
+
+    }
+    catch(Exception e){
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+}
+
+public int monitorPendingCentres(int graceDays) {
+
+    String sql =
+            "UPDATE centres " +
+            "SET status = 'SUSPENDED' " +
+            "WHERE status = 'PENDING' " +
+            "AND subscription_end < DATE_SUB(CURRENT_DATE, INTERVAL ? DAY)";
+
+    try (
+            Connection con = DatabaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)
+    ) {
+
+        ps.setInt(1, graceDays);
+
+        return ps.executeUpdate();
+
+    }
+    catch (Exception e) {
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+}
+
+public int monitorSuspendedCentres(int archiveDays) {
+
+    String sql =
+            "UPDATE centres " +
+            "SET status = 'ARCHIVED' " +
+            "WHERE status = 'SUSPENDED' " +
+            "AND subscription_end < DATE_SUB(CURRENT_DATE, INTERVAL ? DAY)";
+
+    try (
+            Connection con = DatabaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)
+    ) {
+
+        ps.setInt(1, archiveDays);
+
+        return ps.executeUpdate();
+
+    }
+    catch (Exception e) {
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+}
 }
