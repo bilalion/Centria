@@ -119,7 +119,19 @@ function loadContent(
 
         }
 
+/*
+ArchiveServlet
+*/
 
+if(
+    page.startsWith(
+        "ArchiveServlet"
+    )
+){
+
+    sectionName = "archive";
+
+}
 
 
 
@@ -173,27 +185,29 @@ function loadContent(
 
 
 
-    if(
-        page.startsWith(
-            "CentreServlet"
-        )
-        ||
-        page.startsWith(
-            "PaymentServlet"
-        )
-    ){
+ if(
+    page.startsWith(
+        "CentreServlet"
+    )
+    ||
+    page.startsWith(
+        "PaymentServlet"
+    )
+    ||
+    page.startsWith(
+        "ArchiveServlet"
+    )
+){
 
+    url =
 
-        url =
+    window.contextPath
+    +
+    "/"
+    +
+    page;
 
-        window.contextPath
-        +
-        "/"
-        +
-        page;
-
-
-    }
+}
 
     else{
 

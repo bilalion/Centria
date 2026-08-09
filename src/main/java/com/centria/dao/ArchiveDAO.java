@@ -1,30 +1,306 @@
 package com.centria.dao;
 
 import com.centria.config.DatabaseConfig;
+import com.centria.models.Archive;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArchiveDAO {
 
+
+    
     /*
-    ==========================================================
-    ARCHIVE CENTRE
-    ==========================================================
-    Creates or updates the archive record for a centre.
+==========================================================
+01- GET ARCHIVED CENTRES
+==========================================================
 
-    First archive:
-        INSERT
+*/
 
-    Re-archive:
-        UPDATE
 
-    The centre appears only once in centres_archive.
-    ==========================================================
-    */
+public List<Archive> getArchivedCentres() {
+
+    String sql =
+            "SELECT " +
+            "    ca.id, " +
+            "    ca.centre_code, " +
+            "    c.name AS centre_name, " +
+            "    ca.archive_status, " +
+            "    ca.archived_at, " +
+            "    ca.retention_until, " +
+            "    ca.restored_at, " +
+            "    ca.deleted_at " +
+            "FROM centres_archive ca " +
+            "INNER JOIN centres c " +
+            "    ON c.centre_code = ca.centre_code " +
+            "WHERE ca.archive_status IN " +
+            "    ('ARCHIVED', 'PENDING_DELETE') " +
+            "ORDER BY ca.archived_at DESC";
+
+
+    List<Archive> archives =
+            new ArrayList<>();
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ResultSet rs =
+                    ps.executeQuery()
+    ) {
+
+
+        while (rs.next()) {
+
+            Archive archive =
+                    new Archive();
+
+
+            archive.setId(
+                    rs.getInt("id")
+            );
+
+
+            archive.setCentreCode(
+                    rs.getString("centre_code")
+            );
+
+
+            archive.setCentreName(
+                    rs.getString("centre_name")
+            );
+
+
+            archive.setArchiveStatus(
+                    rs.getString("archive_status")
+            );
+
+
+            archive.setArchivedAt(
+                    rs.getTimestamp("archived_at")
+            );
+
+
+            archive.setRetentionUntil(
+                    rs.getTimestamp("retention_until")
+            );
+
+
+            archive.setRestoredAt(
+                    rs.getTimestamp("restored_at")
+            );
+
+
+            archive.setDeletedAt(
+                    rs.getTimestamp("deleted_at")
+            );
+
+
+            archives.add(archive);
+        }
+
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] " +
+                "Error while loading archived centres."
+        );
+
+        e.printStackTrace();
+    }
+
+
+    return archives;
+}
+     
+    /*
+==========================================================
+02- BUTTON RESTORE CENTRE
+==========================================================
+*/
+
+public boolean restoreCentre(String centreCode) {
+
+    String updateCentreSql =
+            "UPDATE centres " +
+            "SET status = 'PENDING', " +
+            "    subscription_end = DATE_SUB(CURDATE(), INTERVAL 1 DAY) " +
+            "WHERE centre_code = ?";
+
+    String updateArchiveSql =
+            "UPDATE centres_archive " +
+            "SET archive_status = 'RESTORED', " +
+            "    restored_at = NOW() " +
+            "WHERE centre_code = ? " +
+            "AND archive_status IN ('ARCHIVED', 'PENDING_DELETE')";
+
+    try (
+            Connection con = DatabaseConfig.getConnection()
+    ) {
+
+        /*
+        --------------------------------------------------
+        Start transaction
+        --------------------------------------------------
+        */
+
+        con.setAutoCommit(false);
+
+
+        try {
+
+            /*
+            --------------------------------------------------
+            Update CENTRES
+            --------------------------------------------------
+            */
+
+            int centreUpdated;
+
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(updateCentreSql)
+            ) {
+
+                ps.setString(1, centreCode);
+
+                centreUpdated =
+                        ps.executeUpdate();
+            }
+
+
+            /*
+            --------------------------------------------------
+            Centre must exist
+            --------------------------------------------------
+            */
+
+            if (centreUpdated == 0) {
+
+                con.rollback();
+
+                System.err.println(
+                        "[CENTRIA ARCHIVE] "
+                        + "Restore failed. Centre not found: "
+                        + centreCode
+                );
+
+                return false;
+            }
+
+
+            /*
+            --------------------------------------------------
+            Update CENTRES_ARCHIVE
+            --------------------------------------------------
+            */
+
+            int archiveUpdated;
+
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(updateArchiveSql)
+            ) {
+
+                ps.setString(1, centreCode);
+
+                archiveUpdated =
+                        ps.executeUpdate();
+            }
+
+
+            /*
+            --------------------------------------------------
+            Archive record must be ARCHIVED or PENDING_DELETE
+            --------------------------------------------------
+            */
+
+            if (archiveUpdated == 0) {
+
+                con.rollback();
+
+                System.err.println(
+                        "[CENTRIA ARCHIVE] "
+                        + "Restore failed. "
+                        + "No restorable archive record found: "
+                        + centreCode
+                );
+
+                return false;
+            }
+
+
+            /*
+            --------------------------------------------------
+            Commit
+            --------------------------------------------------
+            */
+
+            con.commit();
+
+
+            System.out.println(
+                    "[CENTRIA ARCHIVE] "
+                    + "Centre restored successfully: "
+                    + centreCode
+            );
+
+            return true;
+
+
+        }
+        catch (Exception e) {
+
+            /*
+            --------------------------------------------------
+            Rollback
+            --------------------------------------------------
+            */
+
+            try {
+                con.rollback();
+            }
+            catch (Exception rollbackException) {
+
+                rollbackException.printStackTrace();
+            }
+
+
+            throw e;
+        }
+
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] "
+                + "Error while restoring centre: "
+                + centreCode
+        );
+
+        e.printStackTrace();
+
+        return false;
+    }
+}
+
+/*
+==========================================================
+ 03-  function for Monitor Only
+==========================================================
+*/
 
     public boolean archiveCentre(String centreCode) {
 
@@ -110,7 +386,6 @@ public class ArchiveDAO {
             return false;
         }
     }
-    
     
     public boolean archiveCentre(
         Connection con,

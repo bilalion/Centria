@@ -170,7 +170,7 @@
 
            class="sidebar-link"
 
-           onclick="loadContent('archive.jsp', this)">
+           onclick="loadContent('ArchiveServlet?action=list', this)" >
 
 
 

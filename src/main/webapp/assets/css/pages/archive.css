@@ -1,0 +1,1359 @@
+/*
+==========================================================
+File        : archive.css
+Project     : CENTRIA
+Layer       : Page
+Module      : Archive
+
+Description :
+Page-specific styles for the Centria Archive module.
+
+Dependencies :
+core.css
+==========================================================
+*/
+
+
+/* ======================================================
+   SECTION 01 - ARCHIVE PAGE
+====================================================== */
+
+.archive-page{
+
+    width:100%;
+
+    color:var(--text);
+
+}
+
+
+/* ======================================================
+   SECTION 02 - ARCHIVE BANNER
+====================================================== */
+
+.archive-banner{
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 16px;
+
+    margin-bottom:16px;
+
+    background:#eef5ff;
+
+    color:var(--text);
+
+    border-radius:4px;
+
+}
+
+
+.archive-banner-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--primary);
+
+    font-size:15px;
+
+}
+
+
+.archive-banner-title{
+
+    margin:0;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+    white-space:nowrap;
+
+}
+
+
+.archive-banner-separator{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+
+.archive-banner-description{
+
+    margin:0;
+
+    font-size:13px;
+
+    color:var(--text-light);
+
+    white-space:nowrap;
+
+}
+
+
+
+/* ======================================================
+   SECTION 03 - ARCHIVE STATISTICS
+====================================================== */
+
+.archive-statistics{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:16px;
+
+    width:100%;
+
+    margin-bottom:18px;
+
+}
+
+
+.archive-stat-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    min-height:118px;
+
+    padding:18px;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:  4px; /* var(--radius-md); */
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+.archive-stat-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:58px;
+
+    height:58px;
+
+    flex:0 0 58px;
+
+    border-radius:50%;
+
+    font-size:21px;
+
+}
+
+
+/* ------------------------------------------------------
+   TOTAL ARCHIVED
+   إجمالي المراكز المؤرشفة
+------------------------------------------------------ */
+
+.archive-stat-total .archive-stat-icon{
+
+    background:#f1f5f9;
+
+    color:#475569;
+
+}
+
+
+/* ------------------------------------------------------
+   ARCHIVED / RESTORABLE
+   مؤرشف — قابل للاسترجاع
+------------------------------------------------------ */
+
+.archive-stat-restorable .archive-stat-icon{
+
+    background:#f1f5f9;
+
+    color:#64748b;
+
+}
+
+
+/* ------------------------------------------------------
+   PENDING DELETE
+   بانتظار الحذف
+------------------------------------------------------ */
+
+.archive-stat-pending .archive-stat-icon{
+
+    background:#fef2f2;
+
+    color:#ef4444;
+
+}
+
+
+/* ------------------------------------------------------
+   DELETED
+   محذوف نهائياً
+------------------------------------------------------ */
+
+.archive-stat-deleted .archive-stat-icon{
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+}
+
+
+.archive-stat-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+}
+
+
+.archive-stat-label{
+
+    color:var(--text);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    line-height:1.5;
+
+}
+
+
+.archive-stat-value{
+
+    margin-top:3px;
+
+    color:var(--text);
+
+    font-size:28px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+}
+
+
+.archive-stat-description{
+
+    margin-top:3px;
+
+    color:var(--text-light);
+
+    font-size:12px;
+
+    font-weight:500;
+
+}
+
+
+
+/* ======================================================
+   SECTION 04 - WORKSPACE
+====================================================== */
+
+.archive-workspace{
+
+    width:100%;
+
+}
+
+
+/* ======================================================
+   SECTION 05 - CONTROL DECK
+====================================================== */
+
+.archive-control-deck{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    margin-bottom:14px;
+
+}
+
+
+
+/* ======================================================
+   SEARCH
+====================================================== */
+
+.archive-search-field{
+
+    position:relative;
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.archive-search-field > i{
+
+    position:absolute;
+
+    inset-inline-start:15px;
+
+    top:50%;
+
+    z-index:1;
+
+    color:#94a3b8;
+
+    font-size:.9rem;
+
+    transform:translateY(-50%);
+
+    pointer-events:none;
+
+}
+
+
+.archive-search-field input{
+
+    width:100%;
+
+    height:44px;
+
+    padding-inline-start:42px;
+
+    padding-inline-end:16px;
+
+    color:var(--text);
+
+    background:var(--white);
+
+    border:1px solid #dfe5ee;
+
+    border-radius:4px;
+
+    font-family:inherit;
+
+    font-size:.86rem;
+
+    outline:none;
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+.archive-search-field input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+.archive-search-field input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37,99,235,.10);
+
+}
+
+
+
+/* ======================================================
+   FILTER
+====================================================== */
+
+.archive-select-field{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    width:190px;
+
+    height:44px;
+
+    padding:0 13px;
+
+    background:var(--white);
+
+    border:1px solid #dfe5ee;
+
+    border-radius:4px;
+
+}
+
+
+.archive-select-field > i{
+
+    color:#94a3b8;
+
+    font-size:.9rem;
+
+}
+
+
+.archive-select{
+
+    width:100%;
+
+    height:100%;
+
+    padding:0;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:.86rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+
+/* ======================================================
+   SEARCH / EXPORT BUTTONS
+====================================================== */
+
+.archive-search-button,
+.archive-export-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    height:44px;
+
+    padding:0 18px;
+
+    border-radius:4px;
+
+    font-family:inherit;
+
+    font-size:.86rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+
+
+/* ======================================================
+   PRIMARY SEARCH BUTTON
+====================================================== */
+
+.archive-search-button{
+
+    background:var(--primary);
+
+    color:var(--white);
+
+}
+
+
+.archive-search-button:hover{
+
+    background:var(--primary-dark);
+
+}
+
+
+
+/* ======================================================
+   EXPORT BUTTON
+====================================================== */
+
+.archive-export-button{
+
+    background:var(--white);
+
+    color:var(--text);
+
+    border:1px solid #dfe5ee;
+
+}
+
+
+.archive-export-button:hover{
+
+    background:#f8fafc;
+
+    border-color:#cbd5e1;
+
+}
+
+/* ======================================================
+   SECTION 06 - REGISTER
+====================================================== */
+
+.archive-register{
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:var(--white);
+
+    border:1px solid #bfdbfe;
+
+    border-radius:4px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+
+/* ======================================================
+   REGISTER HEADER
+====================================================== */
+
+.archive-register-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    min-height:72px;
+
+    padding:0 20px;
+
+    background:var(--primary-light);
+
+    border-bottom:1px solid #bfdbfe;
+
+    border-radius:4px ;
+
+}
+
+
+.archive-register-title-wrap{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    min-width:0;
+
+}
+
+
+.archive-register-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:34px;
+
+    height:34px;
+
+    flex:0 0 34px;
+
+    border-radius:4px;
+
+    background:var(--primary);
+
+    color:var(--white);
+
+    font-size:15px;
+
+}
+
+
+.archive-register-title-wrap > div{
+
+    min-width:0;
+
+}
+
+
+.archive-register-title-wrap h2{
+
+    margin:0;
+
+    padding:0;
+
+    color:var(--text);
+
+    font-size:16px;
+
+    font-weight:700;
+
+    line-height:1.4;
+
+}
+
+
+.archive-total{
+
+    display:block;
+
+    min-height:18px;
+
+    margin-top:2px;
+
+    color:var(--text-light);
+
+    font-size:13px;
+
+    font-weight:500;
+
+}
+
+
+
+/* ======================================================
+   SECTION 07 - BULK OPERATIONS
+====================================================== */
+
+.archive-bulk-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.archive-operation-label{
+
+    color:var(--text-light);
+
+    font-size:13px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+
+.archive-operation-select{
+
+    height:42px;
+
+    min-width:150px;
+
+    padding:0 12px;
+
+    border:1px solid var(--border);
+
+    border-radius: 4px; /* var(--radius-sm); */
+
+    outline:none;
+
+    background:var(--white);
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+.archive-operation-select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37,99,235,.10);
+
+}
+
+
+.archive-operation-select:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+}
+
+
+.archive-apply-button{
+
+    height:42px;
+
+    padding:0 16px;
+
+    background:var(--primary);
+
+    color:var(--white);
+
+    border-radius: 4px; /* var(--radius-sm); */
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+.archive-apply-button:hover:not(:disabled){
+
+    background:var(--primary-dark);
+
+}
+
+
+.archive-apply-button:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+}
+
+
+
+/* ======================================================
+SECTION 08 - TABLE
+====================================================== */
+
+.archive-table-stage{
+
+    width:100%;
+
+    padding:4px 8px;
+
+    overflow-x:auto;
+
+     background:var(--white);
+
+    color:var(--text);
+
+    border-radius:4px;
+
+}
+
+
+.archive-table-stage .table-content-area{
+
+    min-width:0;
+ 
+}
+
+
+.archive-table-stage .table-container{
+
+    overflow:hidden;
+
+    border:0;
+
+    border-radius:4px;
+
+  
+
+}
+
+
+/* ======================================================
+TABLE
+====================================================== */
+
+.archive-table-stage table{
+
+    width:100%;
+
+    min-width:980px;
+
+    border-collapse:separate;
+
+    border-spacing:0;
+
+    border-radius:4px;
+    
+   
+}
+
+
+/* ======================================================
+TABLE HEADER
+====================================================== */
+
+.archive-table-stage thead th{
+
+    padding:10px 12px;
+
+    color:#0f172a;
+    
+ 
+   
+    border-bottom:1px solid #eef5ff;
+
+    font-size:.78rem;
+
+    font-weight:800;
+
+    text-align:start;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+TABLE ROWS
+====================================================== */
+
+.archive-table-stage tbody td{
+
+    padding:12px 12px;
+
+    color:#334155;
+
+    background:var(--white);
+
+    border-bottom:1px solid #edf1f5;
+
+    font-size:.82rem;
+
+    line-height:1.45;
+
+    text-align:start;
+
+    vertical-align:middle;
+
+    transition:background var(--transition);
+
+}
+
+
+.archive-table-stage tbody tr:last-child td{
+
+    border-bottom:none;
+    
+
+}
+
+
+.archive-table-stage tbody tr:hover td{
+
+    background:#f8fbff;
+
+}
+
+
+/* ======================================================
+LOADING
+====================================================== */
+
+.archive-table-loading{
+
+    min-height:160px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--primary);
+
+    font-size:18px;
+
+}
+
+
+.archive-table-loading i{
+
+    font-size:18px;
+
+}
+
+
+/* ======================================================
+PAGINATION
+====================================================== */
+
+.archive-pagination{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    min-height:64px;
+
+    padding:10px 18px;
+
+    border-top:1px solid var(--border);
+
+}
+
+/* ======================================================
+   SECTION 09 - LAST ARCHIVE ACTIVITY
+   ====================================================== */
+
+.archive-notification {
+
+    width: 100%;
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 14px;
+
+    padding: 0 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.04);
+}
+
+
+/* ======================================================
+   ICON
+   ====================================================== */
+
+.archive-notification-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    font-size: 17px;
+}
+
+
+/* ======================================================
+   CONTENT
+   ====================================================== */
+
+.archive-notification-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* ======================================================
+   TITLE
+   ====================================================== */
+
+.archive-notification-content h4 {
+
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+}
+
+
+/* ======================================================
+   MESSAGE
+   ====================================================== */
+
+.archive-notification-content p {
+
+    margin: 2px 0 0;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    min-width: 0;
+}
+/* ======================================================
+   SECTION 10 - RESPONSIVE
+====================================================== */
+
+@media (max-width:1200px){
+
+    .archive-statistics{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    .archive-register-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        padding-top:16px;
+
+        padding-bottom:16px;
+
+    }
+
+
+    .archive-bulk-actions{
+
+        width:100%;
+
+    }
+
+}
+
+
+@media (max-width:950px){
+
+    .archive-control-deck{
+
+        flex-wrap:wrap;
+
+    }
+
+
+    .archive-search-field{
+
+        flex:1 1 100%;
+
+    }
+
+
+    .archive-select-field{
+
+        flex:1;
+
+        width:auto;
+
+    }
+
+
+    .archive-search-button,
+    .archive-export-button{
+
+        flex:0 0 auto;
+
+    }
+
+
+    .archive-status-legend-items{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+
+    }
+
+
+    .archive-status-legend-item{
+
+        padding:0 0 16px;
+
+        border-inline-end:none;
+
+        border-bottom:1px solid var(--border);
+
+    }
+
+
+    .archive-status-legend-item:last-child{
+
+        padding-bottom:0;
+
+        border-bottom:none;
+
+    }
+
+}
+
+
+@media (max-width:700px){
+
+    .archive-banner{
+
+        align-items:flex-start;
+
+        flex-wrap:wrap;
+
+        padding:14px 16px;
+
+    }
+
+
+    .archive-banner-title{
+
+        font-size:19px;
+
+    }
+
+
+    .archive-banner-separator{
+
+        display:none;
+
+    }
+
+
+    .archive-banner-description{
+
+        width:100%;
+
+        font-size:13px;
+
+    }
+
+
+    .archive-statistics{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .archive-stat-card{
+
+        min-height:100px;
+
+    }
+
+
+    .archive-control-deck{
+
+        gap:9px;
+
+    }
+
+
+    .archive-select-field{
+
+        flex:1 1 100%;
+
+    }
+
+
+    .archive-search-button,
+    .archive-export-button{
+
+        flex:0 0 auto;
+
+    }
+
+
+    .archive-register-header{
+
+        padding:14px;
+
+    }
+
+
+    .archive-bulk-actions{
+
+        align-items:stretch;
+
+        flex-wrap:wrap;
+
+    }
+
+
+    .archive-operation-label{
+
+        width:100%;
+
+    }
+
+
+    .archive-operation-select{
+
+        flex:1;
+
+    }
+
+
+    .archive-apply-button{
+
+        flex:0 0 auto;
+
+    }
+
+}
+
+
+@media (max-width:480px){
+
+    .archive-banner-title{
+
+        font-size:18px;
+
+    }
+
+
+    .archive-stat-card{
+
+        gap:12px;
+
+        padding:14px;
+
+    }
+
+
+    .archive-stat-icon{
+
+        width:50px;
+
+        height:50px;
+
+        flex-basis:50px;
+
+    }
+
+
+    .archive-stat-value{
+
+        font-size:24px;
+
+    }
+
+
+    .archive-search-button,
+    .archive-export-button{
+
+        width:100%;
+
+        flex:1 1 100%;
+
+    }
+
+
+    .archive-bulk-actions{
+
+        width:100%;
+
+    }
+
+
+    .archive-operation-select{
+
+        width:100%;
+
+        flex:1 1 100%;
+
+    }
+
+
+    .archive-apply-button{
+
+        width:100%;
+
+    }
+
+}

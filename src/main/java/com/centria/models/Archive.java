@@ -17,6 +17,8 @@ public class Archive {
     private Date restoredAt;
 
     private Date deletedAt;
+    
+    private String centreName;
 
     public Archive() {
     }
@@ -76,5 +78,13 @@ public class Archive {
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
     }
+    
+    public String getCentreName() {
+    return centreName;
+}
+
+public void setCentreName(String centreName) {
+    this.centreName = centreName;
+}
 }
    

@@ -138,7 +138,8 @@ href="<%=request.getContextPath()%>/assets/css/pages/payments.css?v=1">
 
 
 
-
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/pages/archive.css?v=1">
 
 
 
@@ -352,15 +353,24 @@ window.contextPath =
 
         }
 
+
+else if("archive".equals(section)){
+
+%>
+
+    <jsp:include page="pages/archive.jsp"/>
+
+<%
+
+}
+
         else if("settings".equals(section)){
 
 
         %>
 
 
-
             <jsp:include page="pages/settings.jsp"/>
-
 
 
 
