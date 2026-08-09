@@ -214,6 +214,7 @@ function loadCentres(page) {
     parameters.append("search", search);
     parameters.append("status", status);
     parameters.append("order", order);
+    parameters.append("_refresh", Date.now());
 
     const url =
         getCentresContextPath()
@@ -1331,8 +1332,12 @@ function initCentresPage() {
     }
 
     activateCentreEvents();
+
     bindCentresModalEvents();
+
     loadCentres(1);
+
+    startCentresAutoRefresh();
 
 }
 
@@ -1613,5 +1618,75 @@ function closeCreatedCentre() {
     closeCentreModal();
 
     loadCentres(activeCentrePage);
+
+}
+
+/* ======================================================
+   CENTRES AUTO REFRESH
+   Refresh centres table every 60 seconds
+   ====================================================== */
+
+let centresAutoRefreshTimer = null;
+
+
+function startCentresAutoRefresh() {
+
+    /*
+    --------------------------------------------------
+    Prevent duplicate timers
+    --------------------------------------------------
+    */
+
+    if (centresAutoRefreshTimer !== null) {
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    Start timer
+    --------------------------------------------------
+    */
+
+    centresAutoRefreshTimer = setInterval(
+        function () {
+
+            /*
+            --------------------------------------------------
+            Make sure Centres page is still visible
+            --------------------------------------------------
+            */
+
+            const centresPage =
+                    document.querySelector(
+                            ".centres-page"
+                    );
+
+
+            if (!centresPage) {
+
+                return;
+
+            }
+
+  console.log(
+            "[CENTRIA] Auto refreshing centres page:",
+            activeCentrePage
+        );
+            /*
+            --------------------------------------------------
+            Refresh current page
+            --------------------------------------------------
+            */
+
+            loadCentres(
+                    activeCentrePage
+            );
+
+        },
+        60000
+    );
 
 }

@@ -604,9 +604,11 @@ public Centre getCentreById(int id){
 
 
 
-        sql.append(
-                "SELECT COUNT(*) FROM centres WHERE 1=1 "
-        );
+      sql.append(
+        "SELECT COUNT(*) " +
+        "FROM centres " +
+        "WHERE status NOT IN ('ARCHIVED', 'DELETED') "
+);
 
 
 
