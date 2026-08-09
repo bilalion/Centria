@@ -100,7 +100,8 @@ public class CentreDAO {
 
 
         sql.append(
-                "SELECT * FROM centres WHERE 1=1 "
+               "SELECT * FROM centres " +
+        "WHERE status NOT IN ('ARCHIVED', 'DELETED') "
         );
 
 
@@ -1056,82 +1057,318 @@ public Centre getCentreById(int id){
 
 
 
+/*
+======================================================
+UPDATE STATUS
+======================================================
+*/
+
+public boolean updateStatus(
+        int centreId,
+        String status
+){
+
     /*
-    ======================================================
-    UPDATE STATUS
-    ======================================================
+    ==================================================
+    01- GET CENTRE CODE
+    ==================================================
     */
 
+    String getCentreCodeSql =
 
-    public boolean updateStatus(
-            int centreId,
-            String status
+            "SELECT centre_code " +
+            "FROM centres " +
+            "WHERE id=?";
+
+
+    /*
+    ==================================================
+    02- UPDATE STATUS
+    ==================================================
+    */
+
+    String updateStatusSql =
+
+            "UPDATE centres " +
+            "SET status=? " +
+            "WHERE id=?";
+
+
+    /*
+    ==================================================
+    03- ARCHIVE DAO
+    ==================================================
+    */
+
+    ArchiveDAO archiveDAO =
+            new ArchiveDAO();
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection()
     ){
 
+        /*
+        ==================================================
+        04- START TRANSACTION
+        ==================================================
+        */
 
-        String sql =
-
-        "UPDATE centres SET status=? WHERE id=?";
-
-
-
-
-
-        try(
-
-            Connection con =
-                    DatabaseConfig.getConnection();
+        con.setAutoCommit(false);
 
 
-            PreparedStatement ps =
-                    con.prepareStatement(sql)
+        try {
 
-        ){
+            /*
+            ==================================================
+            05- GET CENTRE CODE
+            ==================================================
+            */
+
+            String centreCode = null;
 
 
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(
+                                    getCentreCodeSql
+                            )
+            ){
 
-            ps.setString(
-                    1,
+                ps.setInt(
+                        1,
+                        centreId
+                );
+
+
+                try (
+                        ResultSet rs =
+                                ps.executeQuery()
+                ){
+
+                    if(rs.next()){
+
+                        centreCode =
+                                rs.getString(
+                                        "centre_code"
+                                );
+
+                    }
+
+                }
+
+            }
+
+
+            /*
+            --------------------------------------------------
+            Centre must exist
+            --------------------------------------------------
+            */
+
+            if(
+                    centreCode == null ||
+                    centreCode.trim().isEmpty()
+            ){
+
+                con.rollback();
+
+
+                System.err.println(
+                        "[CENTRIA CENTRE] " +
+                        "Status update failed. " +
+                        "Centre not found: " +
+                        centreId
+                );
+
+
+                return false;
+
+            }
+
+
+            /*
+            ==================================================
+            06- UPDATE CENTRE STATUS
+            ==================================================
+            */
+
+            int updated;
+
+
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(
+                                    updateStatusSql
+                            )
+            ){
+
+                ps.setString(
+                        1,
+                        status
+                );
+
+
+                ps.setInt(
+                        2,
+                        centreId
+                );
+
+
+                updated =
+                        ps.executeUpdate();
+
+            }
+
+
+            /*
+            --------------------------------------------------
+            Update must succeed
+            --------------------------------------------------
+            */
+
+            if(updated == 0){
+
+                con.rollback();
+
+
+                System.err.println(
+                        "[CENTRIA CENTRE] " +
+                        "Status update failed: " +
+                        centreCode
+                );
+
+
+                return false;
+
+            }
+
+
+            /*
+            ==================================================
+            07- ARCHIVE TRANSITION
+            ==================================================
+            */
+
+            /*
+            --------------------------------------------------
+            IMPORTANT:
+            Archive transition happens ONLY when
+            selected status is ARCHIVED.
+            --------------------------------------------------
+            */
+
+            if(
+                    "ARCHIVED".equalsIgnoreCase(
+                            status
+                    )
+            ){
+
+                boolean archived =
+                        archiveDAO.archiveCentre(
+                                con,
+                                centreCode
+                        );
+
+
+                /*
+                --------------------------------------------------
+                Archive operation must succeed
+                --------------------------------------------------
+                */
+
+                if(!archived){
+
+                    con.rollback();
+
+
+                    System.err.println(
+                            "[CENTRIA ARCHIVE] " +
+                            "Manual archive failed: " +
+                            centreCode
+                    );
+
+
+                    return false;
+
+                }
+
+            }
+
+
+            /*
+            ==================================================
+            08- COMMIT
+            ==================================================
+            */
+
+            con.commit();
+
+
+            System.out.println(
+                    "[CENTRIA CENTRE] " +
+                    "Status updated successfully: " +
+                    centreCode +
+                    " -> " +
                     status
             );
 
 
-
-            ps.setInt(
-                    2,
-                    centreId
-            );
-
-
-
-            return ps.executeUpdate() > 0;
-
+            return true;
 
 
         }
-
-
         catch(Exception e){
 
+            /*
+            ==================================================
+            09- ROLLBACK
+            ==================================================
+            */
 
-            e.printStackTrace();
+            try {
 
+                con.rollback();
+
+            }
+            catch(Exception rollbackException){
+
+                rollbackException.printStackTrace();
+
+            }
+
+
+            throw e;
 
         }
 
 
+    }
+    catch(Exception e){
 
+        /*
+        ==================================================
+        10- ERROR
+        ==================================================
+        */
+
+        System.err.println(
+                "[CENTRIA CENTRE] " +
+                "Error while updating status. " +
+                "Centre ID: " +
+                centreId
+        );
+
+
+        e.printStackTrace();
 
 
         return false;
 
-
     }
 
-
-
-
-
+}
 
 
 

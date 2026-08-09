@@ -1,38 +1,21 @@
 /*
-==========================================================
- CENTRIA
- Dashboard JavaScript
-
- AJAX CONTENT LOADER
- MODULE INITIALIZATION
-==========================================================
-*/
-
+ * ==================================================
+ * CENTRIA
+ * Dashboard JavaScript
+ * ==================================================
+ */
 
 
 /*
-==========================================================
- LOAD DASHBOARD CONTENT
-==========================================================
-*/
-
-
-/*
-==========================================================
- CENTRIA
- Dashboard JavaScript
-
- AJAX CONTENT LOADER
- MODULE INITIALIZATION
-==========================================================
-*/
-
+ * ==================================================
+ * LOAD DASHBOARD CONTENT
+ * ==================================================
+ */
 
 function loadContent(
     page,
     element
-){
-
+) {
 
 
     /*
@@ -41,8 +24,7 @@ function loadContent(
     ==============================================
     */
 
-
-    if(element){
+    if (element) {
 
 
         /*
@@ -50,19 +32,18 @@ function loadContent(
         */
 
         document
-        .querySelectorAll(
-            ".sidebar-link"
-        )
-        .forEach(
-            function(link){
+            .querySelectorAll(
+                ".sidebar-link"
+            )
+            .forEach(
+                function (link) {
 
-                link.classList.remove(
-                    "active"
-                );
+                    link.classList.remove(
+                        "active"
+                    );
 
-            }
-        );
-
+                }
+            );
 
 
         /*
@@ -74,85 +55,76 @@ function loadContent(
         );
 
 
-
-
-
         /*
         ==============================================
         UPDATE BROWSER URL
         ==============================================
         */
 
-
         let sectionName = page;
-
 
 
         /*
         CentreServlet
         */
 
-        if(
+        if (
             page.startsWith(
                 "CentreServlet"
             )
-        ){
+        ) {
 
             sectionName = "centres";
 
         }
 
 
-
-
         /*
         PaymentServlet
         */
 
-        if(
+        if (
             page.startsWith(
                 "PaymentServlet"
             )
-        ){
+        ) {
 
             sectionName = "payments";
 
         }
 
-/*
-ArchiveServlet
-*/
 
-if(
-    page.startsWith(
-        "ArchiveServlet"
-    )
-){
+        /*
+        ArchiveServlet
+        */
 
-    sectionName = "archive";
+        if (
+            page.startsWith(
+                "ArchiveServlet"
+            )
+        ) {
 
-}
+            sectionName = "archive";
 
+        }
 
 
         /*
         Normal JSP pages
         */
 
-        if(
+        if (
             page.includes("/")
-        ){
+        ) {
 
             sectionName =
 
-            page
-            .replace(".jsp","")
-            .split("/")
-            .pop();
+                page
+                    .replace(".jsp", "")
+                    .split("/")
+                    .pop();
 
         }
-
-
 
 
         history.pushState(
@@ -165,13 +137,7 @@ if(
             sectionName
         );
 
-
     }
-
-
-
-
-
 
 
     /*
@@ -180,54 +146,46 @@ if(
     ==============================================
     */
 
-
     let url;
 
 
-
- if(
-    page.startsWith(
-        "CentreServlet"
-    )
-    ||
-    page.startsWith(
-        "PaymentServlet"
-    )
-    ||
-    page.startsWith(
-        "ArchiveServlet"
-    )
-){
-
-    url =
-
-    window.contextPath
-    +
-    "/"
-    +
-    page;
-
-}
-
-    else{
+    if (
+        page.startsWith(
+            "CentreServlet"
+        )
+        ||
+        page.startsWith(
+            "PaymentServlet"
+        )
+        ||
+        page.startsWith(
+            "ArchiveServlet"
+        )
+    ) {
 
 
         url =
 
-        window.contextPath
-        +
-        "/admin/pages/"
-        +
-        page;
-
+            window.contextPath
+            +
+            "/"
+            +
+            page;
 
     }
 
+    else {
 
 
+        url =
 
+            window.contextPath
+            +
+            "/admin/pages/"
+            +
+            page;
 
-
+    }
 
 
     console.log(
@@ -236,200 +194,186 @@ if(
     );
 
 
-
-
-
-
-
     /*
     ==============================================
     AJAX LOAD
     ==============================================
     */
 
-
     fetch(url)
 
 
-    .then(
-        response => {
+        .then(
+            response => {
 
 
-            if(
-                !response.ok
-            ){
+                if (
+                    !response.ok
+                ) {
 
-                throw new Error(
-                    response.status
+                    throw new Error(
+                        response.status
+                    );
+
+                }
+
+
+                return response.text();
+
+            }
+        )
+
+
+        .then(
+            html => {
+
+
+                let container =
+
+                    document.getElementById(
+                        "content-area"
+                    );
+
+
+                if (container) {
+
+
+                    container.innerHTML =
+                        html;
+
+                }
+
+
+                /*
+                ==========================================
+                MODULE INITIALIZATION
+                ==========================================
+                */
+
+
+                /*
+                CENTRES
+                */
+
+                if (
+                    typeof initCentresPage
+                    ===
+                    "function"
+                ) {
+
+
+                    if (
+                        document.getElementById(
+                            "centres-table-container"
+                        )
+                    ) {
+
+
+                        initCentresPage();
+
+                    }
+
+                }
+
+
+                /*
+                PAYMENTS
+                */
+
+                if (
+                    typeof initPaymentsPage
+                    ===
+                    "function"
+                ) {
+
+
+                    if (
+                        document.getElementById(
+                            "payments-table-container"
+                        )
+                    ) {
+
+
+                        initPaymentsPage();
+
+                    }
+
+                }
+
+
+                /*
+                ARCHIVE
+                */
+
+                if (
+                    typeof initArchivePage
+                    ===
+                    "function"
+                ) {
+
+
+                    if (
+                        document.getElementById(
+                            "archive-table-container"
+                        )
+                    ) {
+
+
+                        initArchivePage();
+
+                    }
+
+                }
+
+
+            }
+        )
+
+
+        .catch(
+            error => {
+
+
+                console.error(
+                    "Dashboard loading error:",
+                    error
                 );
 
-            }
-
-
-            return response.text();
-
-
-        }
-    )
-
-
-
-    .then(
-        html => {
-
-
-            let container =
-
-            document.getElementById(
-                "content-area"
-            );
-
-
-
-            if(container){
-
-
-                container.innerHTML =
-                html;
-
 
             }
-
-
-
-
-
-
-
-            /*
-            ==========================================
-            MODULE INITIALIZATION
-            ==========================================
-            */
-
-
-
-
-
-            /*
-            CENTRES
-            */
-
-            if(
-                typeof initCentresPage
-                ===
-                "function"
-            ){
-
-
-                if(
-                    document.getElementById(
-                        "centres-table-container"
-                    )
-                ){
-
-
-                    initCentresPage();
-
-
-                }
-
-
-            }
-
-
-
-
-
-
-
-
-            /*
-            PAYMENTS
-            */
-
-            if(
-                typeof initPaymentsPage
-                ===
-                "function"
-            ){
-
-
-                if(
-                    document.getElementById(
-                        "payments-table-container"
-                    )
-                ){
-
-
-                    initPaymentsPage();
-
-
-                }
-
-
-            }
-
-
-
-
-        }
-    )
-
-
-
-    .catch(
-        error => {
-
-
-            console.error(
-                "Dashboard loading error:",
-                error
-            );
-
-
-        }
-    );
-
-
+        );
 
 }
 
 
 /*
-==========================================================
- SIDEBAR TOGGLE
-==========================================================
-*/
+ * ==================================================
+ * SIDEBAR TOGGLE
+ * ==================================================
+ */
 
-
-function toggleSidebar(){
+function toggleSidebar() {
 
 
     let sidebar =
 
-    document.querySelector(
-        ".sidebar"
-    );
-
+        document.querySelector(
+            ".sidebar"
+        );
 
 
     let appBody =
 
-    document.querySelector(
-        ".app-body"
-    );
+        document.querySelector(
+            ".app-body"
+        );
 
 
-
-    if(!sidebar){
+    if (!sidebar) {
 
         return;
 
     }
-
-
-
 
 
     sidebar.classList.toggle(
@@ -437,38 +381,29 @@ function toggleSidebar(){
     );
 
 
-
-
-
-    if(appBody){
+    if (appBody) {
 
 
         appBody.classList.toggle(
             "sidebar-collapsed"
         );
 
-
     }
-
-
-
 
 
     /*
     Save user preference
     */
 
-
     let state =
 
-    sidebar.classList.contains(
+        sidebar.classList.contains(
+            "collapsed"
+        )
+        ?
         "collapsed"
-    )
-    ?
-    "collapsed"
-    :
-    "expanded";
-
+        :
+        "expanded";
 
 
     localStorage.setItem(
@@ -476,72 +411,51 @@ function toggleSidebar(){
         state
     );
 
-
-
 }
 
 
-
-
-
-
-
-
 /*
-==========================================================
- RESTORE SIDEBAR STATE
-==========================================================
-*/
-
+ * ==================================================
+ * RESTORE SIDEBAR STATE
+ * ==================================================
+ */
 
 document.addEventListener(
-"DOMContentLoaded",
-function(){
+    "DOMContentLoaded",
+    function () {
 
 
+        let sidebar =
 
-    let sidebar =
-
-    document.querySelector(
-        ".sidebar"
-    );
-
+            document.querySelector(
+                ".sidebar"
+            );
 
 
-    if(!sidebar){
+        if (!sidebar) {
 
-        return;
+            return;
 
-    }
-
-
+        }
 
 
+        let state =
 
-    let state =
-
-    localStorage.getItem(
-        "centria-sidebar"
-    );
-
+            localStorage.getItem(
+                "centria-sidebar"
+            );
 
 
+        if (
+            state === "collapsed"
+        ) {
 
 
-    if(
-        state === "collapsed"
-    ){
+            sidebar.classList.add(
+                "collapsed"
+            );
 
-
-        sidebar.classList.add(
-            "collapsed"
-        );
-
-
+        }
 
     }
-
-
-
-});
-
+);

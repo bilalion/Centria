@@ -26,8 +26,11 @@ import java.util.List;
 /**
  * Archive Servlet
  *
- * Responsible for loading and displaying
- * archived centres.
+ * Responsible for:
+ *
+ * - Loading archived centres.
+ * - Displaying archived centres.
+ * - Handling bulk archive operations.
  */
 @WebServlet("/ArchiveServlet")
 public class ArchiveServlet extends HttpServlet {
@@ -44,7 +47,7 @@ public class ArchiveServlet extends HttpServlet {
 
     /*
     ==================================================
-    INIT
+    01 - INIT
     ==================================================
     */
 
@@ -61,7 +64,7 @@ public class ArchiveServlet extends HttpServlet {
 
     /*
     ==================================================
-    GET
+    02 - GET ARCHIVED CENTRES
     ==================================================
     */
 
@@ -105,6 +108,222 @@ public class ArchiveServlet extends HttpServlet {
         ).forward(
                 request,
                 response
+        );
+
+    }
+
+
+    /*
+    ==================================================
+    03 - APPLY BULK OPERATION
+    ==================================================
+    */
+
+    @Override
+    protected void doPost(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+
+
+        /*
+        --------------------------------------------------
+        Read action
+        --------------------------------------------------
+        */
+
+        String action =
+                request.getParameter(
+                        "action"
+                );
+
+
+        /*
+        --------------------------------------------------
+        Only APPLY is supported here
+        --------------------------------------------------
+        */
+
+        if (
+                action == null
+                ||
+                !"apply".equalsIgnoreCase(action)
+        ) {
+
+            response.setStatus(
+                    HttpServletResponse.SC_BAD_REQUEST
+            );
+
+            response.getWriter().write(
+                    "INVALID_ACTION"
+            );
+
+            return;
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        Read selected operation
+        --------------------------------------------------
+        */
+
+        String operation =
+                request.getParameter(
+                        "operation"
+                );
+
+
+        /*
+        --------------------------------------------------
+        Only RESTORE is handled for now
+        --------------------------------------------------
+        */
+
+        if (
+                operation == null
+                ||
+                !"RESTORE".equalsIgnoreCase(operation)
+        ) {
+
+            response.setStatus(
+                    HttpServletResponse.SC_BAD_REQUEST
+            );
+
+            response.getWriter().write(
+                    "INVALID_OPERATION"
+            );
+
+            return;
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        Read selected centre codes
+        --------------------------------------------------
+        */
+
+        String[] centreCodes =
+                request.getParameterValues(
+                        "centreCodes"
+                );
+
+
+        /*
+        --------------------------------------------------
+        At least one centre must be selected
+        --------------------------------------------------
+        */
+
+        if (
+                centreCodes == null
+                ||
+                centreCodes.length == 0
+        ) {
+
+            response.setStatus(
+                    HttpServletResponse.SC_BAD_REQUEST
+            );
+
+            response.getWriter().write(
+                    "NO_CENTRES_SELECTED"
+            );
+
+            return;
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        Restore selected centres
+        --------------------------------------------------
+        */
+
+        int successCount = 0;
+
+        int failedCount = 0;
+
+
+        for (
+                String centreCode :
+                centreCodes
+        ) {
+
+
+            /*
+            --------------------------------------------------
+            Ignore empty values
+            --------------------------------------------------
+            */
+
+            if (
+                    centreCode == null
+                    ||
+                    centreCode.trim().isEmpty()
+            ) {
+
+                failedCount++;
+
+                continue;
+
+            }
+
+
+            /*
+            --------------------------------------------------
+            Restore one centre
+            --------------------------------------------------
+            */
+
+            boolean restored =
+                    archiveDAO.restoreCentre(
+                            centreCode.trim()
+                    );
+
+
+            /*
+            --------------------------------------------------
+            Result
+            --------------------------------------------------
+            */
+
+            if (restored) {
+
+                successCount++;
+
+            }
+            else {
+
+                failedCount++;
+
+            }
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        Send operation result
+        --------------------------------------------------
+        */
+
+        response.setContentType(
+                "text/plain;charset=UTF-8"
+        );
+
+
+        response.getWriter().write(
+                "SUCCESS="
+                +
+                successCount
+                +
+                ";FAILED="
+                +
+                failedCount
         );
 
     }

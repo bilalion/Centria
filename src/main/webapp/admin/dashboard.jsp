@@ -470,6 +470,9 @@ src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
 
 
 
+<script defer
+src="<%=request.getContextPath()%>/assets/js/archive.js?v=1">
+</script>
 
 
 
