@@ -1370,31 +1370,87 @@ ACCOUNT STATUS MONITOR
 ======================================================
 */
 
-public int monitorExpiredActiveCentres(){
+public int monitorExpiredActiveCentres() {
 
-    String sql =
-        "UPDATE centres SET status='PENDING' " +
-        "WHERE status='ACTIVE' " +
-        "AND subscription_end < CURRENT_DATE";
+    String selectSql =
+            "SELECT centre_code " +
+            "FROM centres " +
+            "WHERE status = 'ACTIVE' " +
+            "AND subscription_end < CURRENT_DATE";
 
-    try(
-        Connection con =
-                DatabaseConfig.getConnection();
+    String updateCentreSql =
+            "UPDATE centres " +
+            "SET status = 'PENDING' " +
+            "WHERE centre_code = ? " +
+            "AND status = 'ACTIVE'";
 
-        PreparedStatement ps =
-                con.prepareStatement(sql)
-    ){
+    String updatePaymentSql =
+            "UPDATE payments " +
+            "SET status_payment = 'UNPAID' " +
+            "WHERE centre_code = ? " +
+            "AND status_payment = 'PAID'";
 
-        return ps.executeUpdate();
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement selectPs =
+                    con.prepareStatement(selectSql)
+    ) {
+
+        con.setAutoCommit(false);
+
+        try (ResultSet rs = selectPs.executeQuery()) {
+
+            int updatedCount = 0;
+
+            while (rs.next()) {
+
+                String centreCode =
+                        rs.getString("centre_code");
+
+                try (
+                        PreparedStatement centrePs =
+                                con.prepareStatement(updateCentreSql);
+
+                        PreparedStatement paymentPs =
+                                con.prepareStatement(updatePaymentSql)
+                ) {
+
+                    /*
+                     * ACTIVE → PENDING
+                     */
+                    centrePs.setString(1, centreCode);
+
+                    int centreUpdated =
+                            centrePs.executeUpdate();
+
+                    if (centreUpdated > 0) {
+
+                        /*
+                         * PAID → UNPAID
+                         */
+                        paymentPs.setString(1, centreCode);
+
+                        paymentPs.executeUpdate();
+
+                        updatedCount++;
+                    }
+                }
+            }
+
+            con.commit();
+
+            return updatedCount;
+        }
 
     }
-    catch(Exception e){
+    catch (Exception e) {
 
         e.printStackTrace();
 
+        return 0;
     }
-
-    return 0;
 }
 
 public int monitorPendingCentres(int graceDays) {
@@ -1426,28 +1482,80 @@ public int monitorPendingCentres(int graceDays) {
 
 public int monitorSuspendedCentres(int archiveDays) {
 
-    String sql =
-            "UPDATE centres " +
-            "SET status = 'ARCHIVED' " +
+    String selectSql =
+            "SELECT centre_code " +
+            "FROM centres " +
             "WHERE status = 'SUSPENDED' " +
             "AND subscription_end < DATE_SUB(CURRENT_DATE, INTERVAL ? DAY)";
 
+    String updateSql =
+            "UPDATE centres " +
+            "SET status = 'ARCHIVED' " +
+            "WHERE centre_code = ? " +
+            "AND status = 'SUSPENDED'";
+
+    ArchiveDAO archiveDAO = new ArchiveDAO();
+
     try (
             Connection con = DatabaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql)
+            PreparedStatement selectPs =
+                    con.prepareStatement(selectSql)
     ) {
 
-        ps.setInt(1, archiveDays);
+        con.setAutoCommit(false);
 
-        return ps.executeUpdate();
+        selectPs.setInt(1, archiveDays);
+
+        try (ResultSet rs = selectPs.executeQuery()) {
+
+            int archivedCount = 0;
+
+            while (rs.next()) {
+
+                String centreCode =
+                        rs.getString("centre_code");
+
+                try (
+                        PreparedStatement updatePs =
+                                con.prepareStatement(updateSql)
+                ) {
+
+                    updatePs.setString(1, centreCode);
+
+                    int updated =
+                            updatePs.executeUpdate();
+
+                    if (updated > 0) {
+
+                        boolean archived =
+                                archiveDAO.archiveCentre(
+                                        con,
+                                        centreCode
+                                );
+
+                        if (!archived) {
+
+                            con.rollback();
+
+                            return 0;
+                        }
+
+                        archivedCount++;
+                    }
+                }
+            }
+
+            con.commit();
+
+            return archivedCount;
+        }
 
     }
     catch (Exception e) {
 
         e.printStackTrace();
 
+        return 0;
     }
-
-    return 0;
 }
 }
