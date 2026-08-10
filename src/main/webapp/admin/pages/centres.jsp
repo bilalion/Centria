@@ -128,6 +128,11 @@
                                     session
                             ) %>
                         </option>
+                        <option value="INACTIVE">
+                            <%= LanguageManager.get(
+                                    "centers.inactive",
+                                    session) %>
+                        </option>
 
                     </select>
 
@@ -296,6 +301,19 @@
                                   data-centre-status-count="ACTIVE"></span>
 
                         </button>
+                            <button type="button"
+                                    class="centre-status-filter"
+                                    data-centre-status-filter="INACTIVE"
+                                    aria-pressed="false">
+                                <span class="centre-status-dot is-inactive"></span>
+                                <span>
+                                    <%= LanguageManager.get(
+                                            "centers.inactive",
+                                            session) %>
+                                </span>
+                                <span class="centre-filter-count"
+                                      data-centre-status-count="INACTIVE"></span>
+                            </button>
 
                         <button type="button"
                                 class="centre-status-filter"

@@ -206,6 +206,18 @@ if(centres == null || centres.isEmpty()){
                     );
 
                 }
+                
+                else if("INACTIVE".equals(status)){
+
+    rowStatusClass = "is-inactive";
+
+    statusLabel =
+    LanguageManager.get(
+            "centers.inactive",
+            session
+    );
+
+}
                 else if("SUSPENDED".equals(status)){
 
                     rowStatusClass = "is-suspended";
@@ -420,6 +432,20 @@ if(centres == null || centres.isEmpty()){
 
                         </option>
 
+                        
+                        <option value="INACTIVE"
+                                <%=
+                                    "INACTIVE".equals(status)
+                                            ?
+                                            "selected"
+                                            :
+                                            ""
+                                %>>
+                            <%=LanguageManager.get(
+                                    "centers.inactive",
+                                    session)%>
+                        </option>
+                        
                         <option value="SUSPENDED"
                         <%=
                         "SUSPENDED".equals(status)

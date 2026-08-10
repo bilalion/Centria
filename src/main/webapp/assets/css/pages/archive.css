@@ -538,6 +538,7 @@ core.css
 
 }
 
+
 /* ======================================================
    SECTION 06 - REGISTER
 ====================================================== */
@@ -550,7 +551,7 @@ core.css
 
     background:var(--white);
 
-    border:1px solid #bfdbfe;
+    border:1px solid var(--border);
 
     border-radius:4px;
 
@@ -559,12 +560,16 @@ core.css
 }
 
 
-
 /* ======================================================
    REGISTER HEADER
+   Same visual language as Centres
 ====================================================== */
 
 .archive-register-header{
+
+    height:52px;
+
+    min-height:52px;
 
     display:flex;
 
@@ -572,20 +577,20 @@ core.css
 
     justify-content:space-between;
 
-    gap:20px;
+    gap:12px;
 
-    min-height:72px;
+    padding:0 14px;
 
-    padding:0 20px;
+       background:#eef5ff;
 
-    background:var(--primary-light);
-
-    border-bottom:1px solid #bfdbfe;
-
-    border-radius:4px ;
+    border-bottom:1px solid #eef1f5;
 
 }
 
+
+/* ======================================================
+   TITLE WRAPPER
+====================================================== */
 
 .archive-register-title-wrap{
 
@@ -593,14 +598,35 @@ core.css
 
     align-items:center;
 
-    gap:12px;
-
-    min-width:0;
+    gap:9px;
 
 }
 
 
+/* ======================================================
+   TITLE INNER WRAPPER
+====================================================== */
+
+.archive-register-title-wrap > div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+/* ======================================================
+   REGISTER ICON
+====================================================== */
+
 .archive-register-icon{
+
+    width:34px;
+
+    height:34px;
 
     display:flex;
 
@@ -608,29 +634,20 @@ core.css
 
     justify-content:center;
 
-    width:34px;
+    color:var(--primary);
 
-    height:34px;
-
-    flex:0 0 34px;
+    background:#eff6ff;
 
     border-radius:4px;
 
-    background:var(--primary);
-
-    color:var(--white);
-
-    font-size:15px;
+    font-size:.88rem;
 
 }
 
 
-.archive-register-title-wrap > div{
-
-    min-width:0;
-
-}
-
+/* ======================================================
+   TITLE
+====================================================== */
 
 .archive-register-title-wrap h2{
 
@@ -640,32 +657,53 @@ core.css
 
     color:var(--text);
 
-    font-size:16px;
+    font-size:.96rem;
 
-    font-weight:700;
+    font-weight:800;
 
-    line-height:1.4;
+    white-space:nowrap;
 
 }
 
+
+/* ======================================================
+   TOTAL
+====================================================== */
 
 .archive-total{
 
-    display:block;
+    min-width:22px;
 
-    min-height:18px;
+    height:22px;
 
-    margin-top:2px;
+    display:inline-flex;
 
-    color:var(--text-light);
+    align-items:center;
 
-    font-size:13px;
+    justify-content:center;
 
-    font-weight:500;
+    margin:0;
+
+    color:#64748b;
+
+    background:#f1f5f9;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:800;
 
 }
 
 
+/* Hide count when empty */
+
+.archive-total:empty{
+
+    display:none;
+
+}
 
 /* ======================================================
    SECTION 07 - BULK OPERATIONS

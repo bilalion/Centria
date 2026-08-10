@@ -15,23 +15,19 @@ IMPORTS
 ======================================================
 */
 
-import com.centria.config.DatabaseConfig;
 import com.centria.dao.CentreDAO;
 import com.centria.dao.PaymentDAO;
 
 import com.centria.models.Centre;
 
-import com.centria.language.LanguageManager;
 
 import com.centria.utils.PasswordGenerator;
 import com.centria.utils.PasswordUtil;
 
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
 
 import java.time.LocalDate;
 
@@ -990,20 +986,40 @@ throws ServletException, IOException {
 
 
 
-    /*
-    ==============================================
-    FIRST SUBSCRIPTION IS ALREADY PAID
+  /*
+==================================================
+INITIAL CENTRE STATUS
+==================================================
 
-    New centre starts ACTIVE
+If subscription starts in the future:
+INACTIVE
 
-    ==============================================
-    */
+If subscription starts today or has already started:
+ACTIVE
+==================================================
+*/
 
+LocalDate today =
+        LocalDate.now();
+
+LocalDate subscriptionStart =
+        LocalDate.parse(start);
+
+
+if (subscriptionStart.isAfter(today)) {
+
+    centre.setStatus(
+            "INACTIVE"
+    );
+
+}
+else {
 
     centre.setStatus(
             "ACTIVE"
     );
 
+}
 
 
 

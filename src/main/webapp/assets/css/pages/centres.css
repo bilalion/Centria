@@ -902,6 +902,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
+.table-content-area tbody tr[data-status="INACTIVE"] td:first-child{
+
+    box-shadow:inset -4px 0 0 #2563eb;
+
+}
 
 .table-content-area tbody tr[data-status="PENDING"] td:first-child{
 
@@ -931,6 +936,12 @@ html[dir="ltr"]
 
 }
 
+html[dir="ltr"]
+.table-content-area tbody tr[data-status="INACTIVE"] td:first-child{
+
+    box-shadow:inset 4px 0 0 #2563eb;
+
+}
 
 html[dir="ltr"]
 .table-content-area tbody tr[data-status="PENDING"] td:first-child{
@@ -1257,6 +1268,18 @@ html[dir="ltr"] .centre-status-select{
     border-color:#86efac;
 
 }
+
+
+.centre-status-select.status-inactive {
+
+    color: #2563eb;
+
+    background-color: #eff6ff;
+
+    border-color: #93c5fd;
+
+}
+
 
 
 .centre-status-select.status-pending{

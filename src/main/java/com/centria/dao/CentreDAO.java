@@ -868,11 +868,10 @@ public Centre getCentreById(int id){
         );
 
 
-        ps.setString(
-                8,
-                "ACTIVE"
-        );
-
+    ps.setString(
+        8,
+        centre.getStatus()
+);
 
 
         int result =
@@ -1797,4 +1796,96 @@ public int monitorSuspendedCentres(int archiveDays) {
         return 0;
     }
 }
+
+/*
+======================================================
+MONITOR INACTIVE CENTRES
+======================================================
+
+Rules:
+
+1. ACTIVE → INACTIVE
+   when today < subscription_start
+
+2. INACTIVE → ACTIVE
+   when subscription_start <= today
+   AND today <= subscription_end
+
+The subscription period is inclusive.
+======================================================
+*/
+
+public int monitorInactiveCentres() {
+
+    String sql =
+            "UPDATE centres " +
+            "SET status = CASE " +
+
+            /*
+            ------------------------------------------
+            ACTIVE → INACTIVE
+            Subscription has not started yet.
+            ------------------------------------------
+            */
+            "WHEN status = 'ACTIVE' " +
+            "AND subscription_start > CURRENT_DATE " +
+            "THEN 'INACTIVE' " +
+
+            /*
+            ------------------------------------------
+            INACTIVE → ACTIVE
+            Today is inside the subscription period.
+            ------------------------------------------
+            */
+            "WHEN status = 'INACTIVE' " +
+            "AND subscription_start <= CURRENT_DATE " +
+            "AND subscription_end >= CURRENT_DATE " +
+            "THEN 'ACTIVE' " +
+
+            "ELSE status " +
+            "END " +
+
+            /*
+            ------------------------------------------
+            Only update centres that actually need
+            a status transition.
+            ------------------------------------------
+            */
+            "WHERE " +
+
+            "(status = 'ACTIVE' " +
+            "AND subscription_start > CURRENT_DATE) " +
+
+            "OR " +
+
+            "(status = 'INACTIVE' " +
+            "AND subscription_start <= CURRENT_DATE " +
+            "AND subscription_end >= CURRENT_DATE)";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql)
+    ) {
+
+        return ps.executeUpdate();
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA MONITOR] " +
+                "Error while monitoring INACTIVE centres."
+        );
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+}
+
 }

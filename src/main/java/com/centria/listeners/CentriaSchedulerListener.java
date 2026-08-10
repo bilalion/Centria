@@ -11,7 +11,6 @@
 
 package com.centria.listeners;
 
-
 import com.centria.services.AccountStatusMonitor;
 
 import javax.servlet.ServletContextEvent;
@@ -94,26 +93,56 @@ public class CentriaSchedulerListener
         --------------------------------------------------
         */
 
-      scheduler.scheduleAtFixedRate(
+        scheduler.scheduleAtFixedRate(
 
-        () -> {
+                () -> {
 
-          monitor.checkExpiredActiveCentres();
 
-monitor.checkPendingCentres();
+                    /*
+                    ======================================
+                    CHECK INACTIVE / ACTIVE
+                    ======================================
+                    */
 
-monitor.checkSuspendedCentres();
-         
+                    monitor.checkInactiveCentres();
 
-        },
 
-        0,
+                    /*
+                    ======================================
+                    CHECK EXPIRED ACTIVE CENTRES
+                    ======================================
+                    */
 
-        1,
+                    monitor.checkExpiredActiveCentres();
 
-        TimeUnit.MINUTES
 
-);
+                    /*
+                    ======================================
+                    CHECK PENDING CENTRES
+                    ======================================
+                    */
+
+                    monitor.checkPendingCentres();
+
+
+                    /*
+                    ======================================
+                    CHECK SUSPENDED CENTRES
+                    ======================================
+                    */
+
+                    monitor.checkSuspendedCentres();
+
+
+                },
+
+                0,
+
+                1,
+
+                TimeUnit.MINUTES
+
+        );
 
 
         System.out.println(

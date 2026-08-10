@@ -112,7 +112,8 @@ function normaliseCentreStatus(status) {
         "ACTIVE",
         "PENDING",
         "SUSPENDED",
-        "ARCHIVED"
+        "ARCHIVED",
+        "INACTIVE"
     ];
 
     return allowedStatuses.includes(value)
@@ -427,13 +428,14 @@ function getCentreRowStatus(row) {
 
     }
 
-    const statusSelect = row.querySelector(
-        "select[data-id], "
-        + "select.status-active, "
-        + "select.status-pending, "
-        + "select.status-suspended, "
-        + "select.status-archived"
-    );
+  const statusSelect = row.querySelector(
+    "select[data-id], "
+    + "select.status-active, "
+    + "select.status-inactive, "
+    + "select.status-pending, "
+    + "select.status-suspended, "
+    + "select.status-archived"
+);
 
     if (statusSelect) {
         return normaliseCentreStatus(
@@ -456,13 +458,14 @@ function refreshCentresSummary() {
         return;
     }
 
-    const counts = {
-        ALL: 0,
-        ACTIVE: 0,
-        PENDING: 0,
-        SUSPENDED: 0,
-        ARCHIVED: 0
-    };
+const counts = {
+    ALL: 0,
+    ACTIVE: 0,
+    INACTIVE: 0,
+    PENDING: 0,
+    SUSPENDED: 0,
+    ARCHIVED: 0
+};
 
     const rows = Array.from(
         container.querySelectorAll("table tr")
@@ -559,12 +562,13 @@ function updateCentreStatus(select) {
                 return;
             }
 
-            select.classList.remove(
-                "status-pending",
-                "status-active",
-                "status-suspended",
-                "status-archived"
-            );
+        select.classList.remove(
+    "status-pending",
+    "status-active",
+    "status-inactive",
+    "status-suspended",
+    "status-archived"
+);
 
             select.classList.add(
                 "status-"
