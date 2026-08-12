@@ -130,12 +130,12 @@
 
             <span class="stat-description">
 
-    <%= LanguageManager.get(
-            "dashboard.registered.centres",
-            session
-    ) %>
+                <%= LanguageManager.get(
+                        "dashboard.registered.centres",
+                        session
+                ) %>
 
-</span>
+            </span>
 
 
         </div>
@@ -191,14 +191,14 @@
 
 
 
-          <span class="stat-description">
+            <span class="stat-description">
 
-    <%= LanguageManager.get(
-            "dashboard.active.subscriptions",
-            session
-    ) %>
+                <%= LanguageManager.get(
+                        "dashboard.active.subscriptions",
+                        session
+                ) %>
 
-</span>
+            </span>
 
 
         </div>
@@ -214,7 +214,7 @@
 
 
 
-    <!-- PENDING CENTERS -->
+    <!-- CENTERS REQUIRING ATTENTION -->
 
 
     <div class="stat-card stat-orange">
@@ -237,7 +237,7 @@
 
 
                 <%= LanguageManager.get(
-                        "dashboard.pending.centers",
+                        "dashboard.attention.centers",
                         session
                 ) %>
 
@@ -256,12 +256,12 @@
 
             <span class="stat-description">
 
-    <%= LanguageManager.get(
-            "dashboard.waiting.approval",
-            session
-    ) %>
+                <%= LanguageManager.get(
+                        "dashboard.attention.centers.description",
+                        session
+                ) %>
 
-</span>
+            </span>
 
 
         </div>
@@ -277,7 +277,7 @@
 
 
 
-    <!-- UNPAID CENTERS -->
+    <!-- MONTHLY REVENUE -->
 
 
     <div class="stat-card stat-red">
@@ -300,7 +300,7 @@
 
 
                 <%= LanguageManager.get(
-                        "dashboard.unpaid.centers",
+                        "dashboard.monthly.revenue",
                         session
                 ) %>
 
@@ -311,20 +311,20 @@
 
             <strong class="stat-value">
 
-                0
+                0.00 DH
 
             </strong>
 
 
 
-          <span class="stat-description">
+            <span class="stat-description">
 
-    <%= LanguageManager.get(
-            "dashboard.payment.required",
-            session
-    ) %>
+                <%= LanguageManager.get(
+                        "dashboard.monthly.revenue.description",
+                        session
+                ) %>
 
-</span>
+            </span>
 
 
         </div>

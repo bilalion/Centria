@@ -850,9 +850,6 @@ function initPaymentsPage(){
 
 
 
-    console.log(
-        "INIT PAYMENTS PAGE"
-    );
 
 
 
@@ -889,7 +886,7 @@ function initPaymentsPage(){
 
     activatePaymentSearch();
 
-
+loadPaymentStats();
 
     loadPayments(1);
 
@@ -1250,5 +1247,67 @@ function printInvoice(codeFacture){
         + encodeURIComponent(codeFacture),
         "_blank"
     );
+
+}
+
+function loadPaymentStats(){
+
+    const paidCard =
+        document.querySelector(
+            ".payments-stats-grid .stat-green .stat-value"
+        );
+
+    const unpaidCard =
+        document.querySelector(
+            ".payments-stats-grid .stat-red .stat-value"
+        );
+
+
+    fetch(
+        window.contextPath +
+        "/PaymentServlet?action=stats"
+    )
+
+    .then(response => {
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " + response.status
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        if(paidCard){
+
+            paidCard.textContent =
+                data.paid ?? 0;
+
+        }
+
+
+        if(unpaidCard){
+
+            unpaidCard.textContent =
+                data.unpaid ?? 0;
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Payment statistics error:",
+            error
+        );
+
+    });
 
 }

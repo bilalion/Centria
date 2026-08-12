@@ -1187,27 +1187,26 @@ public List<Payment> getPaidPayments(
 
         String sql =
 
+"SELECT "
+    + "p.centre_code, "
+    + "c.name, "
+    + "c.phone, "
+    + "c.subscription_start, "
+    + "c.subscription_end, "
+    + "p.code_facture, "
+    + "p.status_payment, "
+    + "c.status, "
+    + "h.date_paiement "
+    + "FROM payments p "
 
-        "SELECT "
-        + "p.centre_code, "
-        + "c.name, "
-        + "c.phone, "
-        + "c.subscription_start, "
-        + "c.subscription_end, "
-        + "p.code_facture, "
-        + "p.status_payment, "
-        + "c.status, "
-        + "h.date_paiement "
-        + "FROM payments p "
+    + "INNER JOIN centres c "
+    + "ON p.centre_code=c.centre_code "
 
-        + "INNER JOIN centres c "
-        + "ON p.centre_code=c.centre_code "
+    + "INNER JOIN history_payment h "
+    + "ON p.code_facture=h.code_facture "
 
-        + "INNER JOIN history_payment h "
-        + "ON p.code_facture=h.code_facture "
-
-        + "WHERE p.status_payment='PAID' "
-        + "AND c.status='ACTIVE' ";
+    + "WHERE p.status_payment='PAID' "
+    + "AND c.status IN ('ACTIVE', 'INACTIVE') ";
 
 
 
@@ -2335,7 +2334,7 @@ public int countPaidPayments(
         + "INNER JOIN history_payment h "
         + "ON p.code_facture=h.code_facture "
         + "WHERE p.status_payment='PAID' "
-        + "AND c.status='ACTIVE' ";
+       + "AND c.status IN ('ACTIVE', 'INACTIVE') ";
 
 
 
@@ -3235,6 +3234,164 @@ public Payment getInvoiceByCode(
     return null;
 
 }
+
+
+/*
+======================================================
+COUNT PAID PAYMENTS
+
+Source:
+payments.status_payment
+
+Used by:
+PAYMENTS CARD - PAID
+======================================================
+*/
+
+public int countPaidPayments() {
+
+    int count = 0;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+
+        con = DatabaseConfig.getConnection();
+
+        String sql =
+                "SELECT COUNT(*) " +
+                "FROM payments " +
+                "WHERE status_payment = 'PAID'";
+
+        ps = con.prepareStatement(sql);
+
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+
+            count = rs.getInt(1);
+
+        }
+
+    }
+    catch(Exception e) {
+
+        e.printStackTrace();
+
+    }
+    finally {
+
+        try {
+            if(rs != null) rs.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if(ps != null) ps.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if(con != null) con.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    return count;
+}
+
+
+/*
+==================================================
+COUNT UNPAID PAYMENTS
+==================================================
+
+Source:
+payments.status_payment
+
+Exclude:
+centres.status = ARCHIVED
+
+Used by:
+PAYMENTS CARD - UNPAID
+==================================================
+*/
+
+public int countUnpaidPayments() {
+
+    int count = 0;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+
+        con = DatabaseConfig.getConnection();
+
+        String sql =
+                "SELECT COUNT(*) " +
+                "FROM payments p " +
+                "INNER JOIN centres c " +
+                "ON p.centre_code = c.centre_code " +
+                "WHERE p.status_payment = 'UNPAID' " +
+                "AND c.status <> 'ARCHIVED'";
+
+        ps = con.prepareStatement(sql);
+
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+
+            count = rs.getInt(1);
+
+        }
+
+    }
+    catch(Exception e) {
+
+        e.printStackTrace();
+
+    }
+    finally {
+
+        try {
+            if(rs != null)
+                rs.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if(ps != null)
+                ps.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if(con != null)
+                con.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    return count;
+}
+
 
 }
 

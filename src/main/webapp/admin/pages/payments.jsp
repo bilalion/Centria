@@ -62,9 +62,90 @@
     </section>
 
 
+    <!-- ==================================================
+         02. PAYMENT STATISTICS CARDS
+    ================================================== -->
+
+    <section class="stats-grid payments-stats-grid">
+
+        <!-- PAID -->
+
+        <div class="stat-card stat-green">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-title">
+
+                    <%=LanguageManager.get(
+                        "payments.paid",
+                        session
+                    )%>
+
+                </span>
+
+   <strong class="stat-value">0</strong>
+
+                <span class="stat-description">
+
+                    <%=LanguageManager.get(
+                        "payments.paid.description",
+                        session
+                    )%>
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- UNPAID -->
+
+        <div class="stat-card stat-red">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-title">
+
+                    <%=LanguageManager.get(
+                        "payments.unpaid",
+                        session
+                    )%>
+
+                </span>
+
+       <strong class="stat-value">0</strong>
+
+                <span class="stat-description">
+
+                    <%=LanguageManager.get(
+                        "payments.unpaid.description",
+                        session
+                    )%>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
 
     <!-- ==================================================
-         02. FILTER / CONTROL AREA
+         03. FILTER / CONTROL AREA
     ================================================== -->
 
     <section class="payments-controls">
@@ -181,14 +262,14 @@
 
 
     <!-- ==================================================
-         03. PAYMENTS WORKSPACE
+         04. PAYMENTS WORKSPACE
     ================================================== -->
 
     <section class="payments-workspace">
 
 
         <!-- ==================================================
-             03.1 TABS
+             04.1 TABS
         ================================================== -->
 
         <div class="payments-tabs">
@@ -321,7 +402,7 @@
 
 
         <!-- ==================================================
-             03.2 CURRENT TAB
+             04.2 CURRENT TAB
         ================================================== -->
 
         <input
@@ -333,7 +414,7 @@
 
 
         <!-- ==================================================
-             03.3 TABLE
+             04.3 TABLE
         ================================================== -->
 
         <div
@@ -346,7 +427,7 @@
 
 
         <!-- ==================================================
-             03.4 PAGINATION
+             04.4 PAGINATION
         ================================================== -->
 
         <div
@@ -365,7 +446,7 @@
 
 
 <!-- ======================================================
-     04. PAYMENT CONFIRM MODAL
+     05. PAYMENT CONFIRM MODAL
 ====================================================== -->
 
 <div
@@ -480,7 +561,7 @@
 
 
 <!-- ======================================================
-     05. SUBSCRIPTION CONFIRM MODAL
+     06. SUBSCRIPTION CONFIRM MODAL
 ====================================================== -->
 
 <div
@@ -595,7 +676,7 @@
 
 
 <!-- ======================================================
-     06. PAYMENT DETAILS MODAL
+     07. PAYMENT DETAILS MODAL
 ====================================================== -->
 
 <div
