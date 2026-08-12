@@ -7,15 +7,33 @@
 
 <%
 
-List<Payment> payments =
+/* ==================================================
+   LANGUAGE / DIRECTION
+   ================================================== */
 
+String lang =
+        session.getAttribute("lang") != null
+        ? session.getAttribute("lang").toString()
+        : "ar";
+
+
+String direction =
+        lang.equals("fr") || lang.equals("en")
+        ? "ltr"
+        : "rtl";
+
+
+/* ==================================================
+   PAYMENTS DATA
+   ================================================== */
+
+List<Payment> payments =
         (List<Payment>) request.getAttribute(
                 "payments"
         );
 
 
 java.text.SimpleDateFormat sdf =
-
         new java.text.SimpleDateFormat(
                 "dd/MM/yyyy"
         );
@@ -23,20 +41,17 @@ java.text.SimpleDateFormat sdf =
 %>
 
 
+<div class="payments-table-wrapper paid-table-wrapper"
+     dir="<%=direction%>">
 
 
-<div class="payments-table-wrapper paid-table-wrapper">
-
-
-<table class="payments-table paid-table">
-
-
+<table class="payments-table paid-table"
+       dir="<%=direction%>"
+       style="direction:<%=direction%>;">
 
 <thead>
 
-
 <tr>
-
 
 <th>
 <%=LanguageManager.get(
@@ -44,7 +59,6 @@ java.text.SimpleDateFormat sdf =
         session
 )%>
 </th>
-
 
 
 <th>
@@ -55,14 +69,12 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.invoice",
         session
 )%>
 </th>
-
 
 
 <th>
@@ -73,14 +85,12 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.start.date",
         session
 )%>
 </th>
-
 
 
 <th>
@@ -91,14 +101,12 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.duration",
         session
 )%>
 </th>
-
 
 
 <th>
@@ -109,7 +117,6 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.action",
@@ -117,35 +124,27 @@ java.text.SimpleDateFormat sdf =
 )%>
 </th>
 
-
-
 </tr>
-
 
 </thead>
 
 
-
-
 <tbody>
-
 
 
 <%
 
 if(payments != null && !payments.isEmpty()){
 
-
     for(Payment payment : payments){
 
-
 %>
-
 
 
 <tr>
 
 
+<!-- CENTRE CODE -->
 
 <td>
 
@@ -154,6 +153,7 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
+<!-- CENTRE NAME -->
 
 <td>
 
@@ -162,6 +162,7 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
+<!-- INVOICE -->
 
 <td>
 
@@ -170,12 +171,11 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
+<!-- PAYMENT STATUS -->
 
 <td>
 
-
 <span class="status paid">
-
 
 🟢
 
@@ -184,21 +184,18 @@ if(payments != null && !payments.isEmpty()){
         session
 )%>
 
-
 </span>
 
-
 </td>
-<!-- =========================
-     START DATE
-========================= -->
+
+
+<!-- START DATE -->
 
 <td>
 
-
 <%
 
-if(payment.getSubscriptionStart()!=null){
+if(payment.getSubscriptionStart() != null){
 
 %>
 
@@ -206,7 +203,6 @@ if(payment.getSubscriptionStart()!=null){
         payment.getSubscriptionStart()
 )%>
 
-
 <%
 
 }
@@ -222,23 +218,16 @@ else{
 
 %>
 
-
 </td>
 
 
-
-
-
-<!-- =========================
-     END DATE
-========================= -->
+<!-- END DATE -->
 
 <td>
 
-
 <%
 
-if(payment.getSubscriptionEnd()!=null){
+if(payment.getSubscriptionEnd() != null){
 
 %>
 
@@ -246,7 +235,6 @@ if(payment.getSubscriptionEnd()!=null){
         payment.getSubscriptionEnd()
 )%>
 
-
 <%
 
 }
@@ -262,30 +250,17 @@ else{
 
 %>
 
-
 </td>
 
 
-
-
-
-
-
-<!-- =========================
-     SUBSCRIPTION PLAN
-========================= -->
+<!-- SUBSCRIPTION PLAN -->
 
 <td>
 
-
 <select
-
-class="subscription-plan"
-
-data-centre="<%=payment.getCentreCode()%>"
-
+    class="subscription-plan"
+    data-centre="<%=payment.getCentreCode()%>"
 >
-
 
 <option value="1">
 
@@ -295,7 +270,6 @@ data-centre="<%=payment.getCentreCode()%>"
 )%>
 
 </option>
-
 
 
 <option value="3">
@@ -308,7 +282,6 @@ data-centre="<%=payment.getCentreCode()%>"
 </option>
 
 
-
 <option value="6">
 
 <%=LanguageManager.get(
@@ -317,7 +290,6 @@ data-centre="<%=payment.getCentreCode()%>"
 )%>
 
 </option>
-
 
 
 <option value="12">
@@ -329,33 +301,19 @@ data-centre="<%=payment.getCentreCode()%>"
 
 </option>
 
-
 </select>
-
 
 </td>
 
 
-
-
-
-
-<!-- =========================
-     OPERATION
-========================= -->
-
+<!-- OPERATION -->
 
 <td>
 
-
 <select
-
-class="subscription-operation"
-
-data-centre="<%=payment.getCentreCode()%>"
-
+    class="subscription-operation"
+    data-centre="<%=payment.getCentreCode()%>"
 >
-
 
 <option value="UPGRADE">
 
@@ -367,7 +325,6 @@ data-centre="<%=payment.getCentreCode()%>"
 </option>
 
 
-
 <option value="EXTENDED">
 
 <%=LanguageManager.get(
@@ -377,57 +334,36 @@ data-centre="<%=payment.getCentreCode()%>"
 
 </option>
 
-
-
 </select>
-
 
 </td>
 
 
-
-
-
-
-
-<!-- =========================
-     SAVE BUTTON
-========================= -->
-
+<!-- ACTION -->
 
 <td>
 
-
 <button
-
-type="button"
-
-class="btn-primary"
-
-onclick="openSubscriptionConfirm(
-        '<%=payment.getCentreCode()%>',
-        '<%=payment.getCodeFacture()%>'
-)"
-
-title="<%=LanguageManager.get(
-        "payments.save",
-        session
-)%>"
-
+    type="button"
+    class="btn-primary"
+    onclick="openSubscriptionConfirm(
+            '<%=payment.getCentreCode()%>',
+            '<%=payment.getCodeFacture()%>'
+    )"
+    title="<%=LanguageManager.get(
+            "payments.save",
+            session
+    )%>"
 >
 
-    
 💾
 
 </button>
 
-
 </td>
 
 
-
 </tr>
-
 
 
 <%
@@ -439,24 +375,18 @@ else{
 
 %>
 
-
 <tr>
 
-
 <td colspan="9">
-
 
 <%=LanguageManager.get(
         "payments.empty",
         session
 )%>
 
-
 </td>
 
-
 </tr>
-
 
 <%
 
@@ -467,8 +397,6 @@ else{
 
 </tbody>
 
-
 </table>
-
 
 </div>

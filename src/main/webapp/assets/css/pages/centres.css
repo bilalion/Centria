@@ -1,4 +1,3 @@
-
 /*
 ==========================================================
 File        : centres.css
@@ -7,11 +6,15 @@ Layer       : Pages
 Module      : Centres Management
 
 Description :
-Centres workspace, controls, table and modals.
+Centres workspace, controls, table and dialogs.
 
+Notes:
+- Existing visual design and cascade are preserved.
+- Responsive overrides remain in their original scope.
+- RTL / LTR behavior is preserved.
+- Duplicate formatting noise and accidental whitespace are removed.
 ==========================================================
 */
-
 
 /* ======================================================
    القسم 01 - صفحة المراكز
@@ -29,20 +32,17 @@ Centres workspace, controls, table and modals.
 
 }
 
-
 html[dir="rtl"] .centres-page{
 
     direction:rtl;
 
 }
 
-
 html[dir="ltr"] .centres-page{
 
     direction:ltr;
 
 }
-
 
 /* ======================================================
    القسم 02 - شريط تعريف الصفحة
@@ -68,7 +68,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-banner-icon{
 
     display:flex;
@@ -82,7 +81,6 @@ html[dir="ltr"] .centres-page{
     font-size:15px;
 
 }
-
 
 .centre-banner-title{
 
@@ -98,7 +96,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-banner-separator{
 
     color:var(--text-light);
@@ -106,7 +103,6 @@ html[dir="ltr"] .centres-page{
     font-size:14px;
 
 }
-
 
 .centre-banner-description{
 
@@ -119,7 +115,6 @@ html[dir="ltr"] .centres-page{
     white-space:nowrap;
 
 }
-
 
 /* ======================================================
    القسم 03 - مساحة العمل
@@ -134,7 +129,6 @@ html[dir="ltr"] .centres-page{
     min-width:0;
 
 }
-
 
 /* ======================================================
    القسم 04 - لوحة البحث والفلاتر
@@ -162,7 +156,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-filter-form{
 
     flex:1 1 760px;
@@ -183,7 +176,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 /* ======================================================
    القسم 05 - حقل البحث
 ====================================================== */
@@ -195,7 +187,6 @@ html[dir="ltr"] .centres-page{
     min-width:0;
 
 }
-
 
 .centres-search-field > i{
 
@@ -216,7 +207,6 @@ html[dir="ltr"] .centres-page{
     pointer-events:none;
 
 }
-
 
 .centres-search-field input{
 
@@ -244,13 +234,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-search-field input::placeholder{
 
     color:#94a3b8;
 
 }
-
 
 .centres-search-field input:focus{
 
@@ -259,7 +247,6 @@ html[dir="ltr"] .centres-page{
     box-shadow:0 0 0 3px rgba(37,99,235,.10);
 
 }
-
 
 /* ======================================================
    القسم 06 - حقول الاختيار
@@ -272,7 +259,6 @@ html[dir="ltr"] .centres-page{
     min-width:0;
 
 }
-
 
 .centres-select-field > i{
 
@@ -293,7 +279,6 @@ html[dir="ltr"] .centres-page{
     pointer-events:none;
 
 }
-
 
 .centre-select{
 
@@ -325,7 +310,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-select:focus{
 
     border-color:var(--primary);
@@ -333,7 +317,6 @@ html[dir="ltr"] .centres-page{
     box-shadow:0 0 0 3px rgba(37,99,235,.10);
 
 }
-
 
 /* ======================================================
    القسم 07 - الأزرار الرئيسية
@@ -381,7 +364,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-page .btn-primary:hover{
 
     color:var(--white);
@@ -396,13 +378,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-search-button{
 
     min-width:108px;
 
 }
-
 
 .centres-add-action{
 
@@ -411,7 +391,6 @@ html[dir="ltr"] .centres-page{
     min-width:142px;
 
 }
-
 
 .centres-page .btn-secondary{
 
@@ -443,7 +422,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-page .btn-secondary:hover{
 
     color:var(--text);
@@ -453,7 +431,6 @@ html[dir="ltr"] .centres-page{
     border-color:#cbd5e1;
 
 }
-
 
 /* ======================================================
    القسم 08 - أزرار حالات المراكز
@@ -478,7 +455,6 @@ html[dir="ltr"] .centres-page{
     border-top:1px solid #eef1f5;
 
 }
-
 
 .centre-status-filter{
 
@@ -514,7 +490,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-status-filter:hover{
 
     color:var(--text);
@@ -524,7 +499,6 @@ html[dir="ltr"] .centres-page{
     border-color:#cbd5e1;
 
 }
-
 
 .centre-status-filter.is-active{
 
@@ -538,7 +512,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-status-dot{
 
     width:8px;
@@ -551,13 +524,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-status-dot.is-all{
 
     background:var(--primary);
 
 }
-
 
 .centre-status-dot.is-active{
 
@@ -565,13 +536,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-status-dot.is-pending{
 
     background:var(--warning);
 
 }
-
 
 .centre-status-dot.is-suspended{
 
@@ -579,13 +548,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-status-dot.is-archived{
 
     background:#94a3b8;
 
 }
-
 
 .centre-filter-count{
 
@@ -613,7 +580,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centre-status-filter.is-active .centre-filter-count{
 
     color:var(--primary-dark);
@@ -621,7 +587,6 @@ html[dir="ltr"] .centres-page{
     background:#dbeafe;
 
 }
-
 
 /* ======================================================
    القسم 09 - بطاقة سجل المراكز
@@ -642,7 +607,6 @@ html[dir="ltr"] .centres-page{
     box-shadow:var(--shadow-sm);
 
 }
-
 
 .centres-register-header{
 
@@ -666,7 +630,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-register-title-wrap{
 
     display:flex;
@@ -677,7 +640,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-register-title-wrap > div{
 
     display:flex;
@@ -687,7 +649,6 @@ html[dir="ltr"] .centres-page{
     gap:8px;
 
 }
-
 
 .centres-register-icon{
 
@@ -711,7 +672,6 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-register-header h2{
 
     margin:0;
@@ -725,7 +685,6 @@ html[dir="ltr"] .centres-page{
     white-space:nowrap;
 
 }
-
 
 .centres-total{
 
@@ -753,13 +712,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .centres-total:empty{
 
     display:none;
 
 }
-
 
 /* ======================================================
    القسم 10 - حاوية الجدول
@@ -769,37 +726,33 @@ html[dir="ltr"] .centres-page{
 
     width:100%;
 
-    padding:4px 8px ;
+    padding:4px 8px;
 
     overflow-x:auto;
      background:#eef5ff;
 
  color:var(--text);
-    
-     border-radius: 4px ;
+
+     border-radius:4px;
 
 }
-
 
 .table-content-area{
 
     min-width:0;
-   
 
 }
-
 
 .table-container{
 
     overflow:hidden;
 
-    border:0px solid #e7edf4;
-    border-radius: 4px ;
+    border:0;
+    border-radius:4px;
 
-   /* border-radius:4px;*/
+/* border-radius:4px;*/
 
 }
-
 
 /* ======================================================
    القسم 11 - رأس الجدول
@@ -814,13 +767,10 @@ html[dir="ltr"] .centres-page{
     border-collapse:separate;
 
     border-spacing:0;
-  
-  border-radius: 4px ;
-   
-   
+
+  border-radius:4px;
 
 }
-
 
 .table-content-area thead th{
 
@@ -828,11 +778,7 @@ html[dir="ltr"] .centres-page{
 
    color:#0f172a;
 
-  /*  background:#f8fafc;*/
-
-         
- 
-
+/*  background:#f8fafc;*/
 
     border-bottom:1px solid #dfe7f0;
 
@@ -845,7 +791,6 @@ html[dir="ltr"] .centres-page{
     white-space:nowrap;
 
 }
-
 
 /* ======================================================
    القسم 12 - صفوف الجدول
@@ -860,7 +805,7 @@ html[dir="ltr"] .centres-page{
     background:var(--white);
 
     border-bottom:1px solid #edf1f5;
-   
+
     font-size:.82rem;
 
     line-height:1.45;
@@ -873,14 +818,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .table-content-area tbody th:first-child td{
 
    border-radius: 8px;
 
 }
-
-
 
 .table-content-area tbody tr:last-child td{
 
@@ -888,13 +830,11 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .table-content-area tbody tr:hover td{
 
     background:#f8fbff;
 
 }
-
 
 .table-content-area tbody tr[data-status="ACTIVE"] td:first-child{
 
@@ -914,20 +854,17 @@ html[dir="ltr"] .centres-page{
 
 }
 
-
 .table-content-area tbody tr[data-status="SUSPENDED"] td:first-child{
 
     box-shadow:inset -4px 0 0 var(--danger);
 
 }
 
-
 .table-content-area tbody tr[data-status="ARCHIVED"] td:first-child{
 
     box-shadow:inset -4px 0 0 #94a3b8;
 
 }
-
 
 html[dir="ltr"]
 .table-content-area tbody tr[data-status="ACTIVE"] td:first-child{
@@ -950,7 +887,6 @@ html[dir="ltr"]
 
 }
 
-
 html[dir="ltr"]
 .table-content-area tbody tr[data-status="SUSPENDED"] td:first-child{
 
@@ -958,14 +894,12 @@ html[dir="ltr"]
 
 }
 
-
 html[dir="ltr"]
 .table-content-area tbody tr[data-status="ARCHIVED"] td:first-child{
 
     box-shadow:inset 4px 0 0 #94a3b8;
 
 }
-
 
 /* ======================================================
    القسم 13 - هوية المركز
@@ -982,7 +916,6 @@ html[dir="ltr"]
     min-width:190px;
 
 }
-
 
 .centre-avatar{
 
@@ -1008,7 +941,6 @@ html[dir="ltr"]
 
 }
 
-
 .centre-identity-copy{
 
     min-width:0;
@@ -1020,7 +952,6 @@ html[dir="ltr"]
     gap:2px;
 
 }
-
 
 .centre-name{
 
@@ -1038,7 +969,6 @@ html[dir="ltr"]
 
 }
 
-
 .centre-code{
 
     color:#94a3b8;
@@ -1052,7 +982,6 @@ html[dir="ltr"]
     text-align:start;
 
 }
-
 
 /* ======================================================
    القسم 14 - المالك وبيانات الاتصال
@@ -1070,7 +999,6 @@ html[dir="ltr"]
 
 }
 
-
 .centre-owner,
 
 .centre-phone{
@@ -1085,7 +1013,6 @@ html[dir="ltr"]
 
 }
 
-
 .centre-owner{
 
     color:#334155;
@@ -1095,7 +1022,6 @@ html[dir="ltr"]
     font-weight:700;
 
 }
-
 
 .centre-phone{
 
@@ -1108,7 +1034,6 @@ html[dir="ltr"]
     text-align:start;
 
 }
-
 
 .centre-owner i,
 
@@ -1135,7 +1060,7 @@ html[dir="ltr"]
 }
 
 .centre-timeline-line{
-    
+
     align-self:stretch;
 
     position:relative;
@@ -1195,9 +1120,8 @@ html[dir="ltr"]
     justify-content:space-between;
 
     gap:8px;
-    
+
     line-height:1.6;
-    
 
 }
 
@@ -1229,20 +1153,17 @@ html[dir="ltr"]
 
 }
 
-
 html[dir="rtl"] .centre-status-select{
 
     background-position:right 30px center;
 
 }
 
-
 html[dir="ltr"] .centre-status-select{
 
     background-position:left 30px center;
 
 }
-
 
 .centre-status-select:focus{
 
@@ -1251,7 +1172,6 @@ html[dir="ltr"] .centre-status-select{
     box-shadow:0 0 0 3px rgba(37,99,235,.12);
 
 }
-
 
 .centre-status-select.status-active{
 
@@ -1269,7 +1189,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .centre-status-select.status-inactive {
 
     color: #2563eb;
@@ -1279,8 +1198,6 @@ html[dir="ltr"] .centre-status-select{
     border-color: #93c5fd;
 
 }
-
-
 
 .centre-status-select.status-pending{
 
@@ -1298,7 +1215,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .centre-status-select.status-suspended{
 
     color:#b91c1c;
@@ -1314,7 +1230,6 @@ html[dir="ltr"] .centre-status-select{
     border-color:#fca5a5;
 
 }
-
 
 .centre-status-select.status-archived{
 
@@ -1332,7 +1247,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 /* ======================================================
    القسم 17 - أزرار الإجراءات
 ====================================================== */
@@ -1348,7 +1262,6 @@ html[dir="ltr"] .centre-status-select{
     white-space:nowrap;
 
 }
-
 
 .action-button{
 
@@ -1383,7 +1296,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .action-button:hover{
 
     color:var(--primary);
@@ -1397,7 +1309,6 @@ html[dir="ltr"] .centre-status-select{
     transform:translateY(-1px);
 
 }
-
 
 /* ======================================================
    القسم 18 - التحميل والنتائج الفارغة
@@ -1429,7 +1340,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .centres-table-loading i{
 
     color:var(--primary);
@@ -1438,13 +1348,11 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .centres-table-error{
 
     color:var(--danger);
 
 }
-
 
 /* ======================================================
    القسم 19 - التنقل بين الصفحات
@@ -1468,7 +1376,6 @@ html[dir="ltr"] .centre-status-select{
      color:#0f172a;
 
 }
-
 
 .pagination button,
 
@@ -1502,7 +1409,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .pagination button:hover,
 
 .centres-pagination button:hover,
@@ -1513,8 +1419,6 @@ html[dir="ltr"] .centre-status-select{
 
   color:var(--black);
 
-  
-    
      background:#eff6ff;
 
     border-color:#93c5fd;
@@ -1524,7 +1428,6 @@ html[dir="ltr"] .centre-status-select{
     transform:translateY(-1px);
 
 }
-
 
 /* ======================================================
    القسم 20 - النوافذ المنبثقة
@@ -1560,7 +1463,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .centre-modal.show{
 
     opacity:1;
@@ -1570,7 +1472,6 @@ html[dir="ltr"] .centre-status-select{
     pointer-events:auto;
 
 }
-
 
 .centre-modal-content{
 
@@ -1598,13 +1499,11 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .centre-modal.show .centre-modal-content{
 
     transform:translateY(0) scale(1);
 
 }
-
 
 .centre-modal-content #centre-modal-body{
 
@@ -1613,13 +1512,11 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .reset-confirm-box{
 
     width:min(455px, 100%);
 
 }
-
 
 .modal-close{
 
@@ -1671,7 +1568,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .reset-confirm-content{
 
     display:grid;
@@ -1681,7 +1577,6 @@ html[dir="ltr"] .centre-status-select{
     padding-top:10px;
 
 }
-
 
 .confirm-header{
 
@@ -1694,7 +1589,6 @@ html[dir="ltr"] .centre-status-select{
     padding-inline-end:38px;
 
 }
-
 
 .confirm-icon{
 
@@ -1710,7 +1604,7 @@ html[dir="ltr"] .centre-status-select{
 
     color:var(--primary);
 
-  /*  background:#eff6ff; */
+/*  background:#eff6ff; */
 
     border-radius:4px;
 
@@ -1718,15 +1612,13 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .confirm-icon.is-warning{
 
    color:#b45309;
 
-    /* background:transparent; */
+/* background:transparent; */
 
 }
-
 
 .confirm-title{
 
@@ -1740,7 +1632,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .reset-confirm-content > p{
 
     margin:0;
@@ -1752,7 +1643,6 @@ html[dir="ltr"] .centre-status-select{
     line-height:1.7;
 
 }
-
 
 .reset-confirm-actions{
 
@@ -1766,7 +1656,6 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
-
 .reset-confirm-actions .btn-primary,
 
 .reset-confirm-actions .btn-secondary{
@@ -1774,7 +1663,6 @@ html[dir="ltr"] .centre-status-select{
     min-width:106px;
 
 }
-
 
 /* ======================================================
    القسم 21 - الشاشات المتوسطة
@@ -1791,7 +1679,6 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centres-search-button{
 
         grid-column:span 3;
@@ -1799,7 +1686,6 @@ html[dir="ltr"] .centre-status-select{
     }
 
 }
-
 
 @media(max-width:900px){
 
@@ -1809,13 +1695,11 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centres-filter-form{
 
         flex-basis:100%;
 
     }
-
 
     .centres-add-action{
 
@@ -1824,7 +1708,6 @@ html[dir="ltr"] .centre-status-select{
     }
 
 }
-
 
 /* ======================================================
    القسم 22 - الهاتف
@@ -1842,7 +1725,6 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centre-banner-description{
 
         flex:1 1 100%;
@@ -1850,7 +1732,6 @@ html[dir="ltr"] .centre-status-select{
         white-space:normal;
 
     }
-
 
     .centres-control-deck{
 
@@ -1860,7 +1741,6 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centres-filter-form{
 
         grid-template-columns:1fr;
@@ -1868,7 +1748,6 @@ html[dir="ltr"] .centre-status-select{
         gap:10px;
 
     }
-
 
     .centres-search-button{
 
@@ -1878,7 +1757,6 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centres-status-filters{
 
         justify-content:flex-start;
@@ -1887,7 +1765,6 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centre-status-filter{
 
         flex:1 1 calc(50% - 8px);
@@ -1895,7 +1772,6 @@ html[dir="ltr"] .centre-status-select{
         justify-content:center;
 
     }
-
 
     .centres-register-header{
 
@@ -1907,13 +1783,11 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .centres-table-stage{
 
         padding:0 8px 8px;
 
     }
-
 
     .centre-modal{
 
@@ -1922,7 +1796,6 @@ html[dir="ltr"] .centre-status-select{
         padding:10px;
 
     }
-
 
     .centre-modal-content{
 
@@ -1934,13 +1807,11 @@ html[dir="ltr"] .centre-status-select{
 
     }
 
-
     .reset-confirm-actions{
 
         flex-direction:column-reverse;
 
     }
-
 
     .reset-confirm-actions .btn-primary,
 
@@ -1951,7 +1822,6 @@ html[dir="ltr"] .centre-status-select{
     }
 
 }
-
 
 /* ======================================================
    SECTION 23 - VIEW DIALOG
@@ -1981,8 +1851,6 @@ html[dir="ltr"] .centre-status-select{
 
     align-items:center;
 
-
-
     margin-inline-start:54px;
 
     border-radius:4px;
@@ -2002,35 +1870,29 @@ html[dir="ltr"] .centre-status-select{
 }
 
 html[dir="rtl"] .dialog-stripe{
-    
+
      justify-content:flex-start;
-    
+
 }
 html[dir="ltr"] .dialog-stripe{
-    
+
      justify-content:flex-start;
-    
+
 }
 
 .dialog-view{
 
       height:42px;
 
-
     gap:10px;
-
 
     padding:0 16px;
 
-
     margin-bottom:12px;
-
 
     background:#eef5ff;
 
-
     border-radius:4px;
-
 
     color:var(--text);
 
@@ -2043,7 +1905,7 @@ html[dir="ltr"] .dialog-stripe{
     align-items:center;
 
     gap:8px;
-    
+
     margin-inline:4px;
 
 }
@@ -2144,8 +2006,6 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
-
-
 /* ======================================================
    VALUE
 ====================================================== */
@@ -2165,8 +2025,6 @@ html[dir="ltr"] .dialog-stripe-content{
     white-space:nowrap;
 
 }
-
-
 
 /* ======================================================
    STATUS
@@ -2234,8 +2092,6 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
-
-
 /* ======================================================
    CLOSE BUTTON
 ====================================================== */
@@ -2243,9 +2099,9 @@ html[dir="ltr"] .dialog-stripe-content{
 .modal-close{
 
     position:absolute;
-    
+
     height:40px;
-    width: 40px;
+    width:40px;
 
     top:25px;
     margin-bottom:12px;
@@ -2308,8 +2164,6 @@ html[dir="ltr"] .modal-close{
 
 }
 
-
-
 /* ======================================================
    RTL / LTR
 ====================================================== */
@@ -2325,8 +2179,6 @@ html[dir="ltr"] .info-row strong{
     text-align:left;
 
 }
-
-
 
 /* ======================================================
    RESPONSIVE
@@ -2384,9 +2236,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
-
-
 /* ======================================================
               Section 24 : EDIT DIALOG
 ====================================================== */
@@ -2405,7 +2254,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
 /* ======================================================
    TOP BAR
 ====================================================== */
@@ -2419,7 +2267,6 @@ html[dir="ltr"] .info-row strong{
     gap:16px;
 
 }
-
 
 /* ======================================================
    CLOSE BUTTON
@@ -2469,7 +2316,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
 /* ======================================================
    HEADER
 ====================================================== */
@@ -2491,8 +2337,6 @@ html[dir="ltr"] .info-row strong{
     background:#eef5ff;
 
     border-radius:4px;
-
-  
 
 }
 
@@ -2531,7 +2375,6 @@ html[dir="ltr"] .info-row strong{
     font-weight:700;
 
 }
-
 
 /* ======================================================
    FORM
@@ -2578,7 +2421,6 @@ html[dir="ltr"] .info-row strong{
     font-weight:700;
 
 }
-
 
 /* ======================================================
    GRID
@@ -2655,7 +2497,6 @@ html[dir="ltr"] .info-row strong{
 
 }
 
-
 /* ======================================================
    VALUE
 ====================================================== */
@@ -2667,7 +2508,7 @@ html[dir="ltr"] .info-row strong{
     display:flex;
 
     align-items:center;
-    
+
     height: 44px;
 
 }
@@ -2740,7 +2581,7 @@ html[dir="ltr"] .info-row strong{
 
 .edit-dialog-footer{
 
-    margin-top: 10px; 
+    margin-top:10px;
     display:flex;
 
     justify-content:center;
@@ -2823,9 +2664,11 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 /* ======================================================
-              Section 25 : RESET DIALOG
+   Section 25 : RESET DIALOG
 ====================================================== */
+
 
 /* ======================================================
    TOP BAR
@@ -2838,8 +2681,8 @@ html[dir="ltr"] .edit-dialog-value strong{
     align-items:center;
 
     gap:16px;
-    
-    margin-bottom: 20px; 
+
+    margin-bottom:20px;
 
 }
 
@@ -2851,6 +2694,8 @@ html[dir="ltr"] .edit-dialog-value strong{
 .reset-header{
 
     flex:1;
+
+    min-width:0;
 
     display:flex;
 
@@ -2866,11 +2711,11 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     border-radius:4px;
 
- 
-
 }
 
 .reset-icon{
+
+    flex:0 0 auto;
 
     display:flex;
 
@@ -2890,11 +2735,15 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     height:24px;
 
+    flex:0 0 1px;
+
     background:#cbd5e1;
 
 }
 
 .reset-title{
+
+    min-width:0;
 
     margin:0;
 
@@ -2904,6 +2753,12 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     font-weight:700;
 
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
 }
 
 
@@ -2911,22 +2766,26 @@ html[dir="ltr"] .edit-dialog-value strong{
    CLOSE BUTTON
 ====================================================== */
 
-
-
 .reset-dialog-close{
 
-    flex:none;
+    flex:0 0 40px;
 
     width:40px;
+
     min-width:40px;
+
     max-width:40px;
 
     height:40px;
+
     min-height:40px;
+
     max-height:40px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     box-sizing:border-box;
@@ -2934,9 +2793,10 @@ html[dir="ltr"] .edit-dialog-value strong{
     padding:0;
 
     border:1px solid #dbe4f0;
+
     border-radius:4px;
 
-    background:#fff;
+    background:#ffffff;
 
     color:#64748b;
 
@@ -2947,6 +2807,7 @@ html[dir="ltr"] .edit-dialog-value strong{
         border-color .25s,
         color .25s,
         transform .25s;
+
 }
 
 .reset-dialog-close:hover{
@@ -2961,6 +2822,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 /* ======================================================
    HIDE GLOBAL MODAL CLOSE BUTTON
 ====================================================== */
@@ -2970,6 +2832,7 @@ html[dir="ltr"] .edit-dialog-value strong{
     display:none;
 
 }
+
 
 /* ======================================================
    SECTION
@@ -3003,6 +2866,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 /* ======================================================
    GRID
 ====================================================== */
@@ -3011,11 +2875,16 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     display:grid;
 
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr);
 
     gap:10px;
 
+    width:100%;
+
 }
+
 
 /* ======================================================
    ROW
@@ -3025,11 +2894,9 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
 
-    gap:8px;
+    gap:10px;
 
     min-width:0;
 
@@ -3045,6 +2912,8 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     box-shadow:0 2px 6px rgba(15,23,42,.04);
 
+    box-sizing:border-box;
+
 }
 
 .reset-row-full{
@@ -3053,25 +2922,30 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 /* ======================================================
    LABEL
 ====================================================== */
 
 .reset-label{
 
+    flex:0 0 130px;
+
+    width:130px;
+    min-width:130px;
+    max-width:130px;
+
+    height:40px;
+
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:6px;
 
-    min-width:160px;
+    padding:0 8px;
 
-    height:40px;
-
-    padding:0 12px;
+    box-sizing:border-box;
 
     background:#f8fafc;
 
@@ -3089,15 +2963,18 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 /* ======================================================
    VALUE
 ====================================================== */
 
 .reset-value{
 
-    flex:1;
+    flex:1 1 auto;
 
     min-width:0;
+
+    height:40px;
 
     display:flex;
 
@@ -3105,9 +2982,9 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     justify-content:flex-start;
 
-    height:40px;
-
     padding:0 10px;
+
+    box-sizing:border-box;
 
     background:#ffffff;
 
@@ -3115,7 +2992,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     border-radius:4px;
 
-    overflow:hidden;
+    overflow:visible;
 
 }
 
@@ -3123,11 +3000,17 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     display:block;
 
-    width:100%;
+    width:auto;
 
-    direction:ltr;
+    min-width:0;
 
-    text-align:left;
+    color:#0f172a;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    line-height:1.2;
 
     white-space:nowrap;
 
@@ -3135,13 +3018,8 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     text-overflow:clip;
 
-    color:#0f172a;
-
-    font-size:12px;
-
-    font-weight:700;
-
 }
+
 
 /* ======================================================
    PASSWORD
@@ -3149,7 +3027,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 .reset-password-box{
 
-    flex:1;
+    flex:1 1 auto;
 
     min-width:0;
 
@@ -3161,12 +3039,13 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
-
 .reset-password-value{
 
-    flex:1;
+    flex:1 1 auto;
 
     min-width:0;
+
+    height:40px;
 
     display:flex;
 
@@ -3174,17 +3053,17 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     justify-content:center;
 
-    height:40px;
-
     padding:0 10px;
 
-    background: #2563eb;
+    box-sizing:border-box;
+
+    background:#2563eb;
 
     border:1px solid #dbe4f0;
 
     border-radius:4px;
 
-    color: #FFF;
+    color:#ffffff;
 
     font-family:
         Consolas,
@@ -3201,22 +3080,27 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     overflow:hidden;
 
+    text-overflow:ellipsis;
+
 }
 
-
 .reset-copy-button{
+
+    flex:0 0 40px;
 
     width:40px;
 
     height:40px;
-
-    flex-shrink:0;
 
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+
+    box-sizing:border-box;
+
+    padding:0;
 
     border:1px solid #dbe4f0;
 
@@ -3228,10 +3112,12 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     cursor:pointer;
 
-    transition:all .25s;
+    transition:
+        background .25s,
+        color .25s,
+        border-color .25s;
 
 }
-
 
 .reset-copy-button:hover{
 
@@ -3252,9 +3138,13 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     display:flex;
 
-    align-items:center;
+    align-items:flex-start;
 
     gap:8px;
+
+    width:100%;
+
+    box-sizing:border-box;
 
     padding:10px;
 
@@ -3270,8 +3160,9 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
-
 .reset-note i{
+
+    flex:0 0 auto;
 
     color:#2563eb;
 
@@ -3291,7 +3182,6 @@ html[dir="ltr"] .edit-dialog-value strong{
     visibility:hidden;
 
     transform:translateY(6px);
-    
 
     transition:
         opacity .25s,
@@ -3305,11 +3195,14 @@ html[dir="ltr"] .edit-dialog-value strong{
     opacity:1;
 
     visibility:visible;
+
     color:#16a34a;
 
     transform:translateY(0);
 
 }
+
+
 /* ======================================================
    FOOTER
 ====================================================== */
@@ -3319,6 +3212,8 @@ html[dir="ltr"] .edit-dialog-value strong{
     display:flex;
 
     justify-content:flex-end;
+
+    align-items:center;
 
     gap:12px;
 
@@ -3339,15 +3234,27 @@ html[dir="rtl"] .reset-password-box{
 
 }
 
+html[dir="rtl"] .reset-value{
 
-html[dir="rtl"] .reset-value strong{
+    justify-content:flex-start;
+    direction:ltr;
 
-    text-align:right;
+    text-align:left;
+
+    white-space:nowrap;
+
 
 }
 
+html[dir="ltr"] .reset-value{
+
+    justify-content:flex-start;
+
+}
 
 html[dir="ltr"] .reset-value strong{
+
+    direction:ltr;
 
     text-align:left;
 
@@ -3374,9 +3281,33 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    RESPONSIVE
 ====================================================== */
+
+@media (max-width:1100px){
+
+    .reset-label{
+
+        flex-basis:135px;
+
+        width:135px;
+
+        min-width:135px;
+
+        max-width:135px;
+
+    }
+
+    .reset-value strong{
+
+        font-size:12px;
+
+    }
+
+}
+
 
 @media (max-width:992px){
 
@@ -3394,14 +3325,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     .reset-row{
 
-        flex-direction:column;
-
-        align-items:stretch;
-
-    }
-
-    .reset-label{
-
         width:100%;
 
     }
@@ -3409,6 +3332,90 @@ html[dir="ltr"] .reset-dialog .modal-close{
 }
 
 
+@media (max-width:650px){
+
+    .reset-top{
+
+        gap:10px;
+
+    }
+
+    .reset-header{
+
+        padding:0 12px;
+
+        gap:10px;
+
+    }
+
+    .reset-title{
+
+        font-size:16px;
+
+    }
+
+    .reset-grid{
+
+        gap:8px;
+
+    }
+
+    .reset-row{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:8px;
+
+        padding:8px;
+
+    }
+
+    .reset-label{
+
+        flex:0 0 auto;
+
+        width:100%;
+
+        min-width:0;
+
+        max-width:none;
+
+    }
+
+    .reset-value{
+
+        width:100%;
+
+    }
+
+    .reset-password-box{
+
+        width:100%;
+
+    }
+
+    .reset-password-value{
+
+        font-size:17px;
+
+    }
+
+    .reset-actions{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+}
+
+
+/* ======================================================
+   END : RESET DIALOG
+====================================================== */
 /* ======================================================
               Section 26 : ADD DIALOG
 ====================================================== */
@@ -3427,7 +3434,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 /* ======================================================
    TOP BAR
 ====================================================== */
@@ -3442,12 +3448,9 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 /* ======================================================
    CLOSE BUTTON
 ====================================================== */
-
-
 
 /* ======================================================
    HEADER
@@ -3511,7 +3514,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 /* ======================================================
    FORM
 ====================================================== */
@@ -3525,7 +3527,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:20px;
 
 }
-
 
 /* ======================================================
    SECTION
@@ -3558,7 +3559,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-weight:700;
 
 }
-
 
 /* ======================================================
    GRID
@@ -3665,7 +3665,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 .add-dialog-select{
 
     width:100%;
-    
+
     min-width:0;
 
     height:40px;
@@ -3696,7 +3696,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     box-shadow:0 0 0 3px rgba(59,130,246,.12);
 
 }
-
 
 /* ======================================================
    DATE INPUT
@@ -3746,7 +3745,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 /* ======================================================
    FOOTER
 ====================================================== */
@@ -3772,7 +3770,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     display:none;
 
 }
-
 
 /* ======================================================
               Section 27 : CREATED DIALOG
@@ -3804,7 +3801,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:16px;
 
 }
-
 
 /* ======================================================
    27.3.1 HEADER
@@ -3848,7 +3844,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 /* ======================================================
    27.3.3 - DIVIDER
 ====================================================== */
@@ -3862,7 +3857,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     background:#cbd5e1;
 
 }
-
 
 /* ======================================================
    27.3.4 -  TITLE
@@ -3892,7 +3886,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:10px;
 
 }
-
 
 .created-dialog-section-title{
 
@@ -3947,7 +3940,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     background:#ffffff;
 
 }
-
 
 .created-dialog-row-full{
 
@@ -4034,7 +4026,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 .created-dialog-password-value{
 
     flex:1;
@@ -4094,7 +4085,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
-
 .created-copy-button:hover{
 
     background:#2563eb;
@@ -4104,7 +4094,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     color:#ffffff;
 
 }
-
 
 .created-copy-button.copied{
 
@@ -4141,7 +4130,6 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-size:15px;
 
 }
-
 
 .created-dialog-note i{
 

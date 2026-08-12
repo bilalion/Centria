@@ -353,24 +353,7 @@
 
                         </button>
 
-                        <button type="button"
-                                class="centre-status-filter"
-                                data-centre-status-filter="ARCHIVED"
-                                aria-pressed="false">
-
-                            <span class="centre-status-dot is-archived"></span>
-
-                            <span>
-                                <%= LanguageManager.get(
-                                        "centers.archived",
-                                        session
-                                ) %>
-                            </span>
-
-                            <span class="centre-filter-count"
-                                  data-centre-status-count="ARCHIVED"></span>
-
-                        </button>
+                  
 
                     </div>
 

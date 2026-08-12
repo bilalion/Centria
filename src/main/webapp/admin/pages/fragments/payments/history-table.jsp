@@ -7,15 +7,33 @@
 
 <%
 
-List<Payment> payments =
+/* ==================================================
+   LANGUAGE / DIRECTION
+   ================================================== */
 
+String lang =
+        session.getAttribute("lang") != null
+        ? session.getAttribute("lang").toString()
+        : "ar";
+
+
+String direction =
+        lang.equals("fr") || lang.equals("en")
+        ? "ltr"
+        : "rtl";
+
+
+/* ==================================================
+   PAYMENTS DATA
+   ================================================== */
+
+List<Payment> payments =
         (List<Payment>) request.getAttribute(
                 "payments"
         );
 
 
 java.text.SimpleDateFormat sdf =
-
         new java.text.SimpleDateFormat(
                 "dd/MM/yyyy"
         );
@@ -23,18 +41,17 @@ java.text.SimpleDateFormat sdf =
 %>
 
 
+<div class="payments-table-wrapper history-table-wrapper"
+     dir="<%=direction%>">
 
-<div class="payments-table-wrapper history-table-wrapper">
 
-
-<table class="payments-table history-table">
-
+<table class="payments-table history-table"
+       dir="<%=direction%>"
+       style="direction:<%=direction%>;">
 
 <thead>
 
-
 <tr>
-
 
 <th>
 <%=LanguageManager.get(
@@ -42,7 +59,6 @@ java.text.SimpleDateFormat sdf =
         session
 )%>
 </th>
-
 
 
 <th>
@@ -53,14 +69,12 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.invoice",
         session
 )%>
 </th>
-
 
 
 <th>
@@ -71,14 +85,12 @@ java.text.SimpleDateFormat sdf =
 </th>
 
 
-
 <th>
 <%=LanguageManager.get(
         "payments.operation",
         session
 )%>
 </th>
-
 
 
 <th>
@@ -88,39 +100,27 @@ java.text.SimpleDateFormat sdf =
 )%>
 </th>
 
-
-
 </tr>
-
 
 </thead>
 
 
-
-
 <tbody>
-
 
 
 <%
 
 if(payments != null && !payments.isEmpty()){
 
-
     for(Payment payment : payments){
 
-
 %>
-
 
 
 <tr>
 
 
-
-<!-- =========================
-     CENTRE CODE
-========================= -->
+<!-- CENTRE CODE -->
 
 <td>
 
@@ -129,12 +129,7 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
-
-
-
-<!-- =========================
-     CENTRE NAME
-========================= -->
+<!-- CENTRE NAME -->
 
 <td>
 
@@ -143,12 +138,7 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
-
-
-
-<!-- =========================
-     INVOICE
-========================= -->
+<!-- INVOICE -->
 
 <td>
 
@@ -157,27 +147,19 @@ if(payments != null && !payments.isEmpty()){
 </td>
 
 
-
-
-
-<!-- =========================
-     PAYMENT DATE
-========================= -->
+<!-- PAYMENT DATE -->
 
 <td>
 
-
 <%
 
-if(payment.getDatePaiement()!=null){
+if(payment.getDatePaiement() != null){
 
 %>
-
 
 <%=sdf.format(
         payment.getDatePaiement()
 )%>
-
 
 <%
 
@@ -194,45 +176,37 @@ else{
 
 %>
 
-
 </td>
 
 
-
-
-<!-- =========================
-     OPERATION
-========================= -->
+<!-- OPERATION -->
 
 <td>
 
 <%
 
-String operationKey = "payments.normal";
+String operationKey =
+        "payments.normal";
 
 
-if(payment.getOperationType()!=null
+if(payment.getOperationType() != null
         && !payment.getOperationType().isEmpty()){
 
 
     if(payment.getOperationType().equals("EXTENDED")){
 
-
-        operationKey = "payments.extended";
-
+        operationKey =
+                "payments.extended";
 
     }
     else if(payment.getOperationType().equals("UPGRADE")){
 
-
-        operationKey = "payments.upgrade";
-
+        operationKey =
+                "payments.upgrade";
 
     }
 
-
 }
-
 
 %>
 
@@ -242,50 +216,33 @@ if(payment.getOperationType()!=null
         session
 )%>
 
-
 </td>
 
 
-
-
-
-<!-- =========================
-     ACTION
-========================= -->
-
+<!-- ACTION -->
 
 <td>
 
-
 <button
-
-type="button"
-
-class="btn-print"
-
-onclick="printInvoice(
-        '<%=payment.getCodeFacture()%>'
-)"
-
-title="<%=LanguageManager.get(
-        "payments.print",
-        session
-)%>"
-
+    type="button"
+    class="btn-print"
+    onclick="printInvoice(
+            '<%=payment.getCodeFacture()%>'
+    )"
+    title="<%=LanguageManager.get(
+            "payments.print",
+            session
+    )%>"
 >
 
 🖨
 
 </button>
 
-
 </td>
 
 
-
-
 </tr>
-
 
 
 <%
@@ -297,26 +254,18 @@ else{
 
 %>
 
-
-
 <tr>
 
-
 <td colspan="6">
-
 
 <%=LanguageManager.get(
         "payments.empty",
         session
 )%>
 
-
 </td>
 
-
 </tr>
-
-
 
 <%
 
@@ -325,11 +274,8 @@ else{
 %>
 
 
-
 </tbody>
 
-
 </table>
-
 
 </div>

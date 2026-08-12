@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@page import="java.util.List"%>
 <%@page import="com.centria.models.Payment"%>
 <%@page import="com.centria.language.LanguageManager"%>
@@ -6,8 +7,27 @@
 
 <%
 
-List<Payment> payments =
+/* ==================================================
+   LANGUAGE / DIRECTION
+   ================================================== */
 
+String lang =
+        session.getAttribute("lang") != null
+        ? session.getAttribute("lang").toString()
+        : "ar";
+
+
+String direction =
+        lang.equals("fr") || lang.equals("en")
+        ? "ltr"
+        : "rtl";
+
+
+/* ==================================================
+   PAYMENTS DATA
+   ================================================== */
+
+List<Payment> payments =
         (List<Payment>) request.getAttribute(
                 "payments"
         );
@@ -15,11 +35,13 @@ List<Payment> payments =
 %>
 
 
-<div class="payments-table-wrapper unpaid-table-wrapper">
+<div class="payments-table-wrapper unpaid-table-wrapper"
+     dir="<%=direction%>">
 
 
-<table class="payments-table unpaid-table">
-
+<table class="payments-table unpaid-table"
+       dir="<%=direction%>"
+       style="direction:<%=direction%>;">
 
 <thead>
 
@@ -39,8 +61,6 @@ List<Payment> payments =
         session
 )%>
 </th>
-
-
 
 
 <th>
@@ -65,6 +85,7 @@ List<Payment> payments =
         session
 )%>
 </th>
+
 
 <th>
 <%=LanguageManager.get(
@@ -97,11 +118,9 @@ List<Payment> payments =
 )%>
 </th>
 
-
 </tr>
 
 </thead>
-
 
 
 <tbody>
@@ -111,7 +130,6 @@ List<Payment> payments =
 
 if(payments != null && !payments.isEmpty()){
 
-
     for(Payment payment : payments){
 
 %>
@@ -120,10 +138,12 @@ if(payments != null && !payments.isEmpty()){
 <tr>
 
 
+<!-- CENTRE CODE -->
+
 <td>
 
 <span class="code-text"
-title="<%=payment.getCentreCode()%>">
+      title="<%=payment.getCentreCode()%>">
 
 <%=payment.getCentreCode()%>
 
@@ -132,13 +152,12 @@ title="<%=payment.getCentreCode()%>">
 </td>
 
 
-
-
+<!-- CENTRE NAME -->
 
 <td>
 
 <span class="cell-text"
-title="<%=payment.getCentreName()%>">
+      title="<%=payment.getCentreName()%>">
 
 <%=payment.getCentreName()%>
 
@@ -147,18 +166,12 @@ title="<%=payment.getCentreName()%>">
 </td>
 
 
-
-
-
-
-
-
-
+<!-- INVOICE -->
 
 <td>
 
 <span class="invoice-text"
-title="<%=payment.getCodeFacture()%>">
+      title="<%=payment.getCodeFacture()%>">
 
 <%=payment.getCodeFacture()%>
 
@@ -167,13 +180,7 @@ title="<%=payment.getCodeFacture()%>">
 </td>
 
 
-
-
-
-
-<!-- =========================
-     PAYMENT STATUS
-========================= -->
+<!-- PAYMENT STATUS -->
 
 <td>
 
@@ -191,14 +198,7 @@ title="<%=payment.getCodeFacture()%>">
 </td>
 
 
-
-
-
-
-<!-- =========================
-     ACCOUNT STATUS
-========================= -->
-
+<!-- ACCOUNT STATUS -->
 
 <td>
 
@@ -208,11 +208,9 @@ String accountStatus =
         payment.getAccountStatus();
 
 
-
 if("ACTIVE".equals(accountStatus)){
 
 %>
-
 
 <span class="account-status account-active">
 
@@ -225,14 +223,12 @@ if("ACTIVE".equals(accountStatus)){
 
 </span>
 
-
 <%
 
 }
 else if("PENDING".equals(accountStatus)){
 
 %>
-
 
 <span class="account-status account-pending">
 
@@ -245,14 +241,12 @@ else if("PENDING".equals(accountStatus)){
 
 </span>
 
-
 <%
 
 }
 else if("SUSPENDED".equals(accountStatus)){
 
 %>
-
 
 <span class="account-status account-suspended">
 
@@ -265,7 +259,6 @@ else if("SUSPENDED".equals(accountStatus)){
 
 </span>
 
-
 <%
 
 }
@@ -273,13 +266,11 @@ else{
 
 %>
 
-
 <span class="account-status">
 
 -
 
 </span>
-
 
 <%
 
@@ -287,11 +278,10 @@ else{
 
 %>
 
-
 </td>
 
 
-
+<!-- SUBSCRIPTION END -->
 
 <td>
 
@@ -300,11 +290,15 @@ else{
 if(payment.getSubscriptionEnd() != null){
 
     java.text.SimpleDateFormat sdf =
-            new java.text.SimpleDateFormat("dd/MM/yyyy");
+            new java.text.SimpleDateFormat(
+                    "dd/MM/yyyy"
+            );
 
 %>
 
-<%=sdf.format(payment.getSubscriptionEnd())%>
+<%=sdf.format(
+        payment.getSubscriptionEnd()
+)%>
 
 <%
 
@@ -324,53 +318,34 @@ else{
 </td>
 
 
-<!-- =========================
-     NEW START DATE
-========================= -->
-
+<!-- NEW START DATE -->
 
 <td>
 
 <input
-
-type="date"
-
-class="payment-start-date"
-
-data-centre="<%=payment.getCentreCode()%>"
-
+    type="date"
+    class="payment-start-date"
+    data-centre="<%=payment.getCentreCode()%>"
 >
 
 </td>
 
 
-
-
-
-
-<!-- =========================
-     DURATION
-========================= -->
-
+<!-- DURATION -->
 
 <td>
 
 <select
-
-class="payment-duration"
-
-data-centre="<%=payment.getCentreCode()%>"
-
+    class="payment-duration"
+    data-centre="<%=payment.getCentreCode()%>"
 >
 
-
 <option value="1">
-    <%=LanguageManager.get(
+<%=LanguageManager.get(
         "centers.duration.1",
         session
 )%>
 </option>
-
 
 <option value="3">
 <%=LanguageManager.get(
@@ -379,14 +354,12 @@ data-centre="<%=payment.getCentreCode()%>"
 )%>
 </option>
 
-
 <option value="6">
 <%=LanguageManager.get(
         "centers.duration.6",
         session
 )%>
 </option>
-
 
 <option value="12">
 <%=LanguageManager.get(
@@ -395,44 +368,30 @@ data-centre="<%=payment.getCentreCode()%>"
 )%>
 </option>
 
-
 </select>
-
 
 </td>
 
 
-
-
-
-
-<!-- =========================
-     ACTION
-========================= -->
-
+<!-- ACTION -->
 
 <td>
 
-
 <button
-
-type="button"
-
-class="btn-primary payment-action-btn"
-
-title="<%=LanguageManager.get(
-        "payments.register",
-        session
-)%>"
-
-onclick="openPaymentConfirm('<%=payment.getCentreCode()%>')"
-
+    type="button"
+    class="btn-primary payment-action-btn"
+    title="<%=LanguageManager.get(
+            "payments.register",
+            session
+    )%>"
+    onclick="openPaymentConfirm(
+            '<%=payment.getCentreCode()%>'
+    )"
 >
 
 💳
 
 </button>
-
 
 </td>
 
@@ -449,26 +408,18 @@ else{
 
 %>
 
-
-
 <tr>
 
-
 <td colspan="9">
-
 
 <%=LanguageManager.get(
         "payments.empty",
         session
 )%>
 
-
 </td>
 
-
 </tr>
-
-
 
 <%
 
@@ -479,8 +430,6 @@ else{
 
 </tbody>
 
-
 </table>
-
 
 </div>

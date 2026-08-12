@@ -1,2827 +1,1013 @@
 /* ======================================================
-   CENTRIA — PAYMENTS CSS
-   Project : CENTRIA
-   Module  : Payments
+   CENTRIA â€” PAYMENTS CSS
+   Cleaned / consolidated version
+   Goals:
+   - Keep the existing visual design.
+   - Fit the payment tables on desktop without horizontal scrolling.
+   - Keep invoice numbers fully visible.
+   - Support RTL Arabic and LTR French/English correctly.
+   - Make 5 visible rows the normal desktop presentation.
 ====================================================== */
-
 
 /* ======================================================
-   01. PAYMENTS — PAGE HEADER
+   01. PAGE HEADER
 ====================================================== */
-
 .payments-header{
-
     width:100%;
-
     min-height:42px;
-
     box-sizing:border-box;
-
     display:flex;
-
     align-items:center;
-
     padding:0 16px;
-
     background:#eef5ff;
-
     border:1px solid #dbeafe;
-
     border-radius:4px;
-
 }
-
 
 .payments-header-content{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     min-width:0;
-
 }
-
 
 .payments-header-icon{
-
     width:38px;
-
     height:38px;
-
     flex:0 0 38px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     box-sizing:border-box;
-
     background:#e5f0ff;
-
     border:1px solid #d1e2f8;
-
     border-radius:5px;
-
     color:#2864e8;
-
     font-size:18px;
-
 }
-
 
 .payments-header-text{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     min-width:0;
-
 }
-
 
 .payments-header h1{
-
     margin:0;
-
     color:var(--text);
-
     font-size:15px;
-
     font-weight:700;
-
     line-height:1.3;
-
     white-space:nowrap;
-
 }
-
 
 .payments-header-separator{
-
     width:1px;
-
     height:20px;
-
     flex:0 0 1px;
-
     background:#cbd8e8;
-
 }
-
 
 .payments-header p{
-
     margin:0;
-
     color:var(--text-light);
-
     font-size:13px;
-
     font-weight:400;
-
     line-height:1.3;
-
     white-space:nowrap;
-
 }
 
-
-html[dir="rtl"] .payments-header{
-
-    direction:rtl;
-
+/* ======================================================
+   02. STATISTICS
+====================================================== */
+.payments-stats-grid{
+    width:100%;
+    display:flex;
+    gap:24px;
+    margin:12px 0 18px;
 }
 
-
-html[dir="ltr"] .payments-header{
-
-    direction:ltr;
-
+.payments-stats-grid .stat-card{
+    flex:1 1 0;
+    width:auto;
+    height:70px;
+    min-height:70px;
+    padding:10px 20px;
+    box-sizing:border-box;
 }
 
-
-
-
-/* ==================================================
-   PAYMENT STATISTICS CARDS
-   ================================================== */
-
-.payments-stats-grid {
-    width: 100%;
-    display: flex;
-    gap: 24px;
-    margin: 12px 0 18px;
-}
-
-.payments-stats-grid .stat-card {
-    flex: 1 1 0;
-    width: auto;
-    height: 70px;
-    min-height: 70px;
-    padding: 10px 20px;
-    box-sizing: border-box;
-}
-
-.payments-stats-grid .stat-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    width: 100%;
+.payments-stats-grid .stat-content{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:20px;
+    width:100%;
 }
 
 .payments-stats-grid .stat-title,
 .payments-stats-grid .stat-description,
-.payments-stats-grid .stat-value {
-    margin: 0;
-    white-space: nowrap;
+.payments-stats-grid .stat-value{
+    margin:0;
+    white-space:nowrap;
 }
 
-.payments-stats-grid .stat-title {
-    font-size: 18px;
+.payments-stats-grid .stat-title{font-size:18px;}
+.payments-stats-grid .stat-description{font-size:14px;}
+.payments-stats-grid .stat-value{font-size:28px;line-height:1;}
+.payments-stats-grid .stat-icon{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
 }
 
-.payments-stats-grid .stat-description {
-    font-size: 14px;
-}
-
-.payments-stats-grid .stat-value {
-    font-size: 28px;
-    line-height: 1;
-}
-
-.payments-stats-grid .stat-icon {
-    width: 48px;
-    height: 48px;
-    flex: 0 0 48px;
-}
 /* ======================================================
-   02. PAYMENTS — CONTROL AREA
+   03. SEARCH / FILTER CONTROLS
 ====================================================== */
-
 .payments-controls{
-
     width:100%;
-
     min-height:62px;
-
     box-sizing:border-box;
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     padding:10px 12px;
-
-    background:#ffffff;
-
+    background:#fff;
     border:1px solid #e1e7ef;
-
     border-radius:4px;
-
 }
-
 
 .payments-search{
-
     flex:1 1 auto;
-
     min-width:220px;
-
 }
 
-
-.payments-search input{
-
+.payments-search input,
+.payments-date input,
+.payments-order select{
     width:100%;
-
     height:44px;
-
     box-sizing:border-box;
-
     padding:0 14px;
-
     border:1px solid #d8e2ef;
-
     border-radius:4px;
-
-    background:#ffffff;
-
+    background:#fff;
     color:var(--text);
-
     font-family:inherit;
-
     font-size:14px;
-
     outline:none;
-
 }
 
+.payments-search input::placeholder{color:#91a2b8;}
 
-.payments-search input::placeholder{
-
-    color:#91a2b8;
-
-}
-
-
-.payments-search input:focus{
-
+.payments-search input:focus,
+.payments-date input:focus,
+.payments-order select:focus{
     border-color:#6fa3ff;
-
-    box-shadow:
-        0 0 0 2px rgba(40,100,232,.08);
-
+    box-shadow:0 0 0 2px rgba(40,100,232,.08);
 }
 
-
-.payments-date{
-
-    width:180px;
-
-    flex:0 0 180px;
-
-}
-
-
-.payments-date input{
-
-    width:100%;
-
-    height:44px;
-
-    box-sizing:border-box;
-
-    padding:0 12px;
-
-    border:1px solid #d8e2ef;
-
-    border-radius:4px;
-
-    background:#ffffff;
-
-    color:var(--text);
-
-    font-family:inherit;
-
-    font-size:14px;
-
-    outline:none;
-
-}
-
-
-.payments-date input:focus{
-
-    border-color:#6fa3ff;
-
-    box-shadow:
-        0 0 0 2px rgba(40,100,232,.08);
-
-}
-
-
+.payments-date,
 .payments-order{
-
     width:180px;
-
     flex:0 0 180px;
-
 }
-
 
 .payments-order select{
-
-    width:100%;
-
-    height:44px;
-
-    box-sizing:border-box;
-
     padding:0 12px;
-
-    border:1px solid #d8e2ef;
-
-    border-radius:4px;
-
-    background:#ffffff;
-
-    color:var(--text);
-
-    font-family:inherit;
-
-    font-size:14px;
-
     font-weight:600;
-
-    outline:none;
-
     cursor:pointer;
-
 }
-
-
-.payments-order select:focus{
-
-    border-color:#6fa3ff;
-
-    box-shadow:
-        0 0 0 2px rgba(40,100,232,.08);
-
-}
-
 
 .payments-controls > button{
-
     height:44px;
-
     min-width:120px;
-
     flex:0 0 auto;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:7px;
-
     padding:0 20px;
-
     box-sizing:border-box;
-
     border:1px solid #2864e8;
-
     border-radius:4px;
-
     background:#2864e8;
-
-    color:#ffffff;
-
+    color:#fff;
     font-family:inherit;
-
     font-size:14px;
-
     font-weight:700;
-
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        border-color .15s ease,
-        box-shadow .15s ease;
-
+    transition:.15s ease;
 }
-
 
 .payments-controls > button:hover{
-
     background:#1f5bd8;
-
     border-color:#1f5bd8;
-
 }
-
 
 .payments-controls > button:active{
-
-    box-shadow:
-        inset 0 1px 3px rgba(0,0,0,.15);
-
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.15);
 }
-
-
-html[dir="rtl"] .payments-controls{
-
-    direction:rtl;
-
-}
-
-
-html[dir="ltr"] .payments-controls{
-
-    direction:ltr;
-
-}
-
 
 /* ======================================================
-   03. PAYMENTS — WORKSPACE
+   04. WORKSPACE
 ====================================================== */
-
 .payments-workspace{
-
     width:100%;
-
     box-sizing:border-box;
-
     display:flex;
-
     flex-direction:column;
-
-    background:#ffffff;
-
+    background:#fff;
     border:1px solid #e1e7ef;
-
     border-radius:4px;
-
     overflow:hidden;
-
 }
-
 
 .payments-workspace-header{
-
     width:100%;
-
     min-height:54px;
-
     box-sizing:border-box;
-
     display:flex;
-
     align-items:center;
-
     justify-content:flex-end;
-
     padding:0 14px;
-
-    background:#ffffff;
-
+    background:#fff;
     border-bottom:1px solid #e5ebf3;
-
 }
-
 
 .payments-workspace-title{
-
     margin:0;
-
     color:var(--text);
-
     font-size:16px;
-
     font-weight:700;
-
     white-space:nowrap;
-
 }
 
-
+/* Desktop: table must fit the available workspace. */
 #payments-table-container{
-
     width:100%;
-
     min-width:0;
-
     box-sizing:border-box;
-
-    background:#ffffff;
-
-    overflow-x:auto;
-
+    background:#fff;
+    overflow-x:hidden;
 }
-
 
 #payments-pagination-container{
-
     width:100%;
-
     min-height:52px;
-
     box-sizing:border-box;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
+    gap:6px;
     padding:8px 14px;
-
-    background:#ffffff;
-
+    background:#fff;
     border-top:1px solid #e5ebf3;
-
 }
-
-
-html[dir="rtl"] .payments-workspace{
-
-    direction:rtl;
-
-}
-
-
-html[dir="ltr"] .payments-workspace{
-
-    direction:ltr;
-
-}
-
 
 /* ======================================================
-   04. PAYMENTS — TABS
+   05. TABS
 ====================================================== */
-
 .payments-tabs{
-
     width:100%;
-
     min-height:58px;
-
     box-sizing:border-box;
-
     display:flex;
-
     align-items:stretch;
-
-    justify-content:center;
-
     gap:0;
-
     padding:0;
-
-    background:#ffffff;
-
+    background:#fff;
     border-bottom:1px solid #dfe6ef;
-
 }
 
 .payment-tab{
-
     width:33.333333%;
-
     flex:1 1 33.333333%;
-
     height:58px;
-
     box-sizing:border-box;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:9px;
-
     padding:0 12px;
-
     border:0;
-
     border-bottom:3px solid transparent;
-
     border-radius:0;
-
-    background:#ffffff;
-
+    background:#fff;
     color:#718096;
-
     font-family:inherit;
-
     font-size:15px;
-
     font-weight:700;
-
     white-space:nowrap;
-
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        color .15s ease,
-        border-color .15s ease;
-
+    transition:.15s ease;
 }
 
-.payment-tab:hover{
-
-    background:#f7f9fc;
-
-    color:#3d4d63;
-
-}
-
-.payment-tab.active{
-
-    background:#ffffff;
-
-    color:#2864e8;
-
-    border-bottom-color:#2864e8;
-
-}
-
-
-/* ======================================================
-   04.1 UNPAID TAB
-====================================================== */
-
-#tab-unpaid{
-
-    background:#fff5f5;
-
-    color:#b42323;
-
-}
-
-
-#tab-unpaid:hover{
-
-    background:#ffeded;
-
-}
-
-
-#tab-unpaid.active{
-
-    background:#fff0f0;
-
-    color:#c62828;
-
-    border-bottom-color:#ef4444;
-
-}
-
-
-/* ======================================================
-   04.2 PAID TAB
-====================================================== */
-
-#tab-paid{
-
-    background:#f2fbf6;
-
-    color:#16834b;
-
-}
-
-
-#tab-paid:hover{
-
-    background:#e9f8ef;
-
-}
-
-
-#tab-paid.active{
-
-    background:#ecfaf2;
-
-    color:#16834b;
-
-    border-bottom-color:#20a464;
-
-}
-
-/* ======================================================
-  04.2.1 PAID STATUS
-====================================================== */
-
-#payments-table-container
-.status.paid{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    min-width:120px;
-
-    height:42px;
-
-    padding:0 18px;
-
-    border:1px solid #a7f3c7;
-
-    border-radius:10px;
-
-    background:#effcf5;
-
-    color:#15803d;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    box-sizing:border-box;
-
-}
-
-
-/* ======================================================
-   04.3 HISTORY TAB
-====================================================== */
-
-#tab-history{
-
-    background:#f5f7fa;
-
-    color:#526174;
-
-}
-
-
-#tab-history:hover{
-
-    background:#eef2f6;
-
-}
-
-
-#tab-history.active{
-
-    background:#eef3f8;
-
-    color:#526174;
-
-    border-bottom-color:#94a3b8;
-
-}
-
-
-/* ======================================================
-   04.4 TAB NOTIFICATION
-====================================================== */
+.payment-tab:hover{background:#f7f9fc;color:#3d4d63;}
+.payment-tab.active{background:#fff;color:#2864e8;border-bottom-color:#2864e8;}
+
+#tab-unpaid{background:#fff5f5;color:#b42323;}
+#tab-unpaid:hover{background:#ffeded;}
+#tab-unpaid.active{background:#fff0f0;color:#c62828;border-bottom-color:#ef4444;}
+
+#tab-paid{background:#f2fbf6;color:#16834b;}
+#tab-paid:hover{background:#e9f8ef;}
+#tab-paid.active{background:#ecfaf2;color:#16834b;border-bottom-color:#20a464;}
+
+#tab-history{background:#f5f7fa;color:#526174;}
+#tab-history:hover{background:#eef2f6;}
+#tab-history.active{background:#eef3f8;color:#526174;border-bottom-color:#94a3b8;}
 
 .tab-notification{
-
     min-width:26px;
-
     height:26px;
-
     padding:0 7px;
-
     box-sizing:border-box;
-
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
     border-radius:50%;
-
     font-size:12px;
-
     font-weight:700;
-
     line-height:1;
-
 }
 
-
-.unpaid-count{
-
-    background:#fee2e2;
-
-    color:#dc2626;
-
-}
-
-
-.paid-count{
-
-    background:#dcfce7;
-
-    color:#16834b;
-
-}
-
-
-.history-count{
-
-    background:#e8eef5;
-
-    color:#526174;
-
-}
-
-
-html[dir="rtl"] .payments-tabs{
-
-    direction:rtl;
-
-}
-
-
-html[dir="ltr"] .payments-tabs{
-
-    direction:ltr;
-
-}
-
+.unpaid-count{background:#fee2e2;color:#dc2626;}
+.paid-count{background:#dcfce7;color:#16834b;}
+.history-count{background:#e8eef5;color:#526174;}
 
 /* ======================================================
-   END OF PART 1/3
+   06. TABLE BASE
 ====================================================== */
-
-/* ======================================================
-   05. PAYMENTS — TABLE COMMON
-====================================================== */
-
-
-/* ======================================================
-   05.1 TABLE CONTAINER
-====================================================== */
-
-#payments-table-container{
-
-    width:100%;
-
-    box-sizing:border-box;
-
-    background:#ffffff;
-
-    overflow-x:auto;
-
-}
-
-
-/* ======================================================
-   05.2 MAIN TABLE
-====================================================== */
-
 #payments-table-container .payments-table{
-
     width:100%;
-
-    min-width:1100px;
-
+    min-width:0;
+    max-width:100%;
     box-sizing:border-box;
-
+    table-layout:fixed;
     border-collapse:separate;
-
     border-spacing:0;
-
-    direction:rtl;
-
-    background:#ffffff;
-
+    background:#fff;
 }
 
-
-/* ======================================================
-   05.3 TABLE HEADER
-====================================================== */
-
-#payments-table-container .payments-table thead{
-
-    background:#eef5ff;
-
-}
-
+#payments-table-container .payments-table thead{background:#eef5ff;}
 
 #payments-table-container .payments-table th{
-
-    height:54px;
-
-    padding:10px 12px;
-
+    height:48px;
+    padding:8px 8px;
     box-sizing:border-box;
-
     background:#eef5ff;
-
     color:#26364d;
-
     border-bottom:1px solid #dbe4f0;
-
     font-size:14px;
-
     font-weight:800;
-
     text-align:center;
-
     vertical-align:middle;
-
     white-space:nowrap;
-
 }
 
+#payments-table-container .payments-table tbody{background:#fff;}
 
-/* ======================================================
-   05.4 TABLE BODY
-====================================================== */
-
-#payments-table-container .payments-table tbody{
-
-    background:#ffffff;
-
-}
-
-
+/* Five rows are intentionally compact so the initial desktop view stays clean. */
 #payments-table-container .payments-table tbody tr{
-
-    height:72px;
-
-    background:#ffffff;
-
-    transition:
-        background .15s ease;
-
+    height:64px;
+    background:#fff;
+    transition:background .15s ease;
 }
 
-
-#payments-table-container .payments-table tbody tr:hover{
-
-    background:#fbfdff;
-
-}
-
+#payments-table-container .payments-table tbody tr:hover{background:#fbfdff;}
 
 #payments-table-container .payments-table tbody td{
-
-    height:72px;
-
-    padding:10px 12px;
-
+    height:64px;
+    padding:8px 8px;
     box-sizing:border-box;
-
     color:#334155;
-
     font-size:14px;
-
     font-weight:600;
-
     text-align:center;
-
     vertical-align:middle;
-
     border-bottom:1px solid #e5ebf3;
-
+    overflow:hidden;
 }
 
-
-#payments-table-container .payments-table tbody tr:last-child td{
-
-    border-bottom:none;
-
-}
-
-
-/* ======================================================
-   05.5 TABLE CONTENT CENTERING
-====================================================== */
+#payments-table-container .payments-table tbody tr:last-child td{border-bottom:none;}
 
 #payments-table-container .payments-table tbody td > input,
 #payments-table-container .payments-table tbody td > select,
 #payments-table-container .payments-table tbody td > button{
-
     display:block;
-
     margin-left:auto;
-
     margin-right:auto;
-
 }
-
 
 #payments-table-container .payments-table tbody td > span{
-
     margin-left:auto;
-
     margin-right:auto;
-
 }
 
+/* ======================================================
+   07. TABLE DIRECTIONS
+====================================================== */
+/* Do not hard-code RTL on every table: French/English must remain LTR. */
+html[dir="rtl"] #payments-table-container .payments-table,
+.payments-table.rtl{direction:rtl;}
+
+html[dir="ltr"] #payments-table-container .payments-table,
+.payments-table.ltr{direction:ltr;}
+
+/* Invoice values are always Latin/LTR even inside Arabic tables. */
+#payments-table-container .payments-table td.invoice-cell,
+#payments-table-container .payments-table td:nth-child(3){
+    direction:ltr;
+    text-align:center;
+    white-space:nowrap;
+}
 
 /* ======================================================
-   05.6 UNPAID — START DATE
+   08. UNPAID TABLE â€” 9 COLUMNS
 ====================================================== */
+#payments-table-container .unpaid-table th:nth-child(1),
+#payments-table-container .unpaid-table td:nth-child(1){width:11%;}
+
+#payments-table-container .unpaid-table th:nth-child(2),
+#payments-table-container .unpaid-table td:nth-child(2){width:12%;}
+
+#payments-table-container .unpaid-table th:nth-child(3),
+#payments-table-container .unpaid-table td:nth-child(3){width:20%;}
+
+#payments-table-container .unpaid-table th:nth-child(4),
+#payments-table-container .unpaid-table td:nth-child(4){width:10%;}
+
+#payments-table-container .unpaid-table th:nth-child(5),
+#payments-table-container .unpaid-table td:nth-child(5){width:12%;}
+
+#payments-table-container .unpaid-table th:nth-child(6),
+#payments-table-container .unpaid-table td:nth-child(6){width:10%;}
+
+#payments-table-container .unpaid-table th:nth-child(7),
+#payments-table-container .unpaid-table td:nth-child(7){width:11%;}
+
+#payments-table-container .unpaid-table th:nth-child(8),
+#payments-table-container .unpaid-table td:nth-child(8){width:9%;}
+
+#payments-table-container .unpaid-table th:nth-child(9),
+#payments-table-container .unpaid-table td:nth-child(9){width:5%;}
+
+#payments-table-container .unpaid-table td:nth-child(1),
+#payments-table-container .unpaid-table td:nth-child(2){
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
 
 #payments-table-container .payment-start-date{
-
-    width:130px;
-
-    height:40px;
-
-    display:block;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
-    padding:0 10px;
-
+    width:125px;
+    max-width:100%;
+    height:38px;
+    padding:0 8px;
     box-sizing:border-box;
-
     border:1px solid #d5dfeb;
-
     border-radius:6px;
-
-    background:#ffffff;
-
+    background:#fff;
     color:#334155;
-
     font-family:inherit;
-
     font-size:13px;
-
     font-weight:700;
-
     text-align:center;
-
     outline:none;
-
     cursor:pointer;
-
-    transition:
-        border-color .15s ease,
-        box-shadow .15s ease,
-        background .15s ease;
-
 }
-
-
-#payments-table-container .payment-start-date:hover{
-
-    border-color:#b8cbe3;
-
-    background:#fbfdff;
-
-}
-
 
 #payments-table-container .payment-start-date:focus{
-
     border-color:#6fa3ff;
-
-    box-shadow:
-        0 0 0 3px rgba(40,100,232,.10);
-
+    box-shadow:0 0 0 3px rgba(40,100,232,.10);
 }
 
-
-/* ======================================================
-   05.7 UNPAID — DURATION COMBOBOX
-====================================================== */
-
-#payments-table-container .payment-duration{
-
-    width:115px !important;
-
-    height:40px !important;
-
-    display:block !important;
-
-    margin-left:auto !important;
-
-    margin-right:auto !important;
-
+/* Shared compact combobox geometry. */
+#payments-table-container .payment-duration,
+#payments-table-container .subscription-plan,
+#payments-table-container .subscription-operation{
+    height:38px;
+    max-width:100%;
     box-sizing:border-box;
-
-    padding:0 32px 0 10px;
-
-    border:1px solid #d5dfeb !important;
-
-    border-radius:7px !important;
-
-    background-color:#ffffff !important;
-
-    color:#334155 !important;
-
+    padding:0 28px 0 9px;
+    border:1px solid #d5dfeb;
+    border-radius:7px;
+    background-color:#fff;
+    color:#334155;
     font-family:inherit;
-
-    font-size:14px;
-
+    font-size:13px;
     font-weight:700;
-
     text-align:center;
-
     outline:none;
-
     cursor:pointer;
-
-    appearance:none !important;
-
-    -webkit-appearance:none !important;
-
-    -moz-appearance:none !important;
-
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
     background-image:
-        linear-gradient(
-            45deg,
-            transparent 50%,
-            #64748b 50%
-        ),
-        linear-gradient(
-            135deg,
-            #64748b 50%,
-            transparent 50%
-        );
-
-    background-position:
-        calc(100% - 15px) 17px,
-        calc(100% - 10px) 17px;
-
-    background-size:
-        5px 5px,
-        5px 5px;
-
+        linear-gradient(45deg,transparent 50%,#64748b 50%),
+        linear-gradient(135deg,#64748b 50%,transparent 50%);
+    background-position:calc(100% - 13px) 16px,calc(100% - 8px) 16px;
+    background-size:5px 5px,5px 5px;
     background-repeat:no-repeat;
-
-    transition:
-        border-color .15s ease,
-        box-shadow .15s ease,
-        background-color .15s ease;
-
 }
 
-
-#payments-table-container .payment-duration:hover{
-
-    border-color:#b8cbe3 !important;
-
-    background-color:#fbfdff !important;
-
-}
-
-
-#payments-table-container .payment-duration:focus{
-
-    border-color:#6fa3ff !important;
-
-    box-shadow:
-        0 0 0 3px rgba(40,100,232,.10);
-
-    background-color:#ffffff !important;
-
-    outline:none !important;
-
-}
-
-
-/* ======================================================
-   05.8 UNPAID — ACTION BUTTON
-====================================================== */
-
+#payments-table-container .payment-duration{width:105px;}
 #payments-table-container .payment-action-btn{
-
-    width:42px;
-
-    height:42px;
-
+    width:40px;
+    height:40px;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
     padding:0;
-
     box-sizing:border-box;
-
     border:1px solid #cfe0fb;
-
     border-radius:6px;
-
     background:#eef5ff;
-
     color:#2864e8;
-
-    font-size:17px;
-
+    font-size:16px;
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        border-color .15s ease,
-        transform .15s ease;
-
 }
 
-
-#payments-table-container .payment-action-btn:hover{
-
-    background:#dceaff;
-
-    border-color:#a9c8f7;
-
-    transform:translateY(-1px);
-
-}
-
-
-#payments-table-container .payment-action-btn:active{
-
-    transform:translateY(0);
-
-}
-
-
-/* ======================================================
-   05.9 UNPAID — PAYMENT STATUS
-====================================================== */
-
-#payments-table-container .status.unpaid{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:6px;
-
-    min-width:105px;
-
-    min-height:32px;
-
-    padding:0 11px;
-
-    box-sizing:border-box;
-
-    border-radius:6px;
-
-    background:#fef2f2;
-
-    color:#b91c1c;
-
-    border:1px solid #fecaca;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    white-space:nowrap;
-
-}
-
-
-/* ======================================================
-   05.10 UNPAID — ACCOUNT STATUS
-====================================================== */
-
+#payments-table-container .status.unpaid,
 #payments-table-container .account-active,
 #payments-table-container .account-pending,
 #payments-table-container .account-suspended{
-
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
-    gap:6px;
-
-    min-width:100px;
-
-    min-height:32px;
-
-    padding:0 11px;
-
+    gap:5px;
+    min-height:30px;
+    padding:0 9px;
     box-sizing:border-box;
-
     border-radius:6px;
-
     font-size:12px;
-
     font-weight:800;
-
     white-space:nowrap;
-
 }
 
-
-#payments-table-container .account-active{
-
-    background:#f0fdf4;
-
-    color:#15803d;
-
-    border:1px solid #bbf7d0;
-
-}
-
-
-#payments-table-container .account-pending{
-
-    background:#fffbeb;
-
-    color:#a16207;
-
-    border:1px solid #fde68a;
-
-}
-
-
-#payments-table-container .account-suspended{
-
+#payments-table-container .status.unpaid{
+    min-width:96px;
     background:#fef2f2;
-
     color:#b91c1c;
-
     border:1px solid #fecaca;
-
 }
 
+#payments-table-container .account-active{min-width:90px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+#payments-table-container .account-pending{min-width:90px;background:#fffbeb;color:#a16207;border:1px solid #fde68a;}
+#payments-table-container .account-suspended{min-width:90px;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;}
+
+#payments-table-container .unpaid-table tbody tr td:first-child{border-right:4px solid #ef4444;}
 
 /* ======================================================
-   05.11 UNPAID — SUBSCRIPTION END
+   09. PAID TABLE â€” 9 COLUMNS
 ====================================================== */
+#payments-table-container .paid-table th:nth-child(1),
+#payments-table-container .paid-table td:nth-child(1){width:11%;}
 
-#payments-table-container .payment-date-text{
+#payments-table-container .paid-table th:nth-child(2),
+#payments-table-container .paid-table td:nth-child(2){width:9%;}
 
-    color:#34465c;
+/* Invoice gets the largest column so the full value remains visible. */
+#payments-table-container .paid-table th:nth-child(3),
+#payments-table-container .paid-table td:nth-child(3){width:23%;}
 
-    font-weight:700;
+#payments-table-container .paid-table th:nth-child(4),
+#payments-table-container .paid-table td:nth-child(4){width:11%;}
 
+#payments-table-container .paid-table th:nth-child(5),
+#payments-table-container .paid-table td:nth-child(5){width:10%;}
+
+#payments-table-container .paid-table th:nth-child(6),
+#payments-table-container .paid-table td:nth-child(6){width:10%;}
+
+#payments-table-container .paid-table th:nth-child(7),
+#payments-table-container .paid-table td:nth-child(7){width:9%;}
+
+#payments-table-container .paid-table th:nth-child(8),
+#payments-table-container .paid-table td:nth-child(8){width:12%;}
+
+#payments-table-container .paid-table th:nth-child(9),
+#payments-table-container .paid-table td:nth-child(9){width:5%;}
+
+#payments-table-container .paid-table td:nth-child(1),
+#payments-table-container .paid-table td:nth-child(2){
     white-space:nowrap;
-
+    text-overflow:ellipsis;
 }
 
-
-#payments-table-container .payment-empty-value{
-
-    color:#9aa7b7;
-
-}
-
-
-/* ======================================================
-   05.12 UNPAID — RED ROW LINE
-====================================================== */
-
-#payments-table-container .payments-table tbody tr td:first-child{
-
-    border-right:4px solid #ef4444;
-
-}
-
-
-/* ======================================================
-   06. PAYMENTS — PAID
-====================================================== */
-
-
-/* ======================================================
-   06.1 PAID — PLAN
-====================================================== */
-
-#payments-table-container .subscription-plan{
-
-    width:115px;
-
-    height:40px;
-
-    display:block;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
-    box-sizing:border-box;
-
-    padding:0 32px 0 10px;
-
-    border:1px solid #d5dfeb;
-
-    border-radius:7px;
-
-    background-color:#ffffff;
-
-    color:#334155;
-
-    font-family:inherit;
-
-    font-size:14px;
-
-    font-weight:700;
-
+#payments-table-container .paid-table td:nth-child(3),
+#payments-table-container .paid-table td:nth-child(3) .invoice-text{
+    direction:ltr;
     text-align:center;
-
-    outline:none;
-
-    cursor:pointer;
-
-    appearance:none;
-
-    -webkit-appearance:none;
-
-    -moz-appearance:none;
-
-    background-image:
-        linear-gradient(
-            45deg,
-            transparent 50%,
-            #64748b 50%
-        ),
-        linear-gradient(
-            135deg,
-            #64748b 50%,
-            transparent 50%
-        );
-
-    background-position:
-        calc(100% - 15px) 17px,
-        calc(100% - 10px) 17px;
-
-    background-size:
-        5px 5px,
-        5px 5px;
-
-    background-repeat:no-repeat;
-
-    transition:
-        border-color .15s ease,
-        box-shadow .15s ease,
-        background-color .15s ease;
-
-}
-
-
-#payments-table-container .subscription-plan:hover{
-
-    border-color:#b8cbe3;
-
-    background-color:#fbfdff;
-
-}
-
-
-#payments-table-container .subscription-plan:focus{
-
-    border-color:#6fa3ff;
-
-    box-shadow:
-        0 0 0 3px rgba(40,100,232,.10);
-
-    background-color:#ffffff;
-
-    outline:none;
-
-}
-
-
-/* ======================================================
-   06.2 PAID — OPERATION
-====================================================== */
-
-#payments-table-container .subscription-operation{
-
-    width:125px;
-
-    height:40px;
-
-    display:block;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
-    box-sizing:border-box;
-
-    padding:0 32px 0 10px;
-
-    border:1px solid #d5dfeb;
-
-    border-radius:7px;
-
-    background-color:#ffffff;
-
-    color:#334155;
-
-    font-family:inherit;
-
-    font-size:14px;
-
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+    font-size:13px;
     font-weight:700;
-
-    text-align:center;
-
-    outline:none;
-
-    cursor:pointer;
-
-    appearance:none;
-
-    -webkit-appearance:none;
-
-    -moz-appearance:none;
-
-    background-image:
-        linear-gradient(
-            45deg,
-            transparent 50%,
-            #64748b 50%
-        ),
-        linear-gradient(
-            135deg,
-            #64748b 50%,
-            transparent 50%
-        );
-
-    background-position:
-        calc(100% - 15px) 17px,
-        calc(100% - 10px) 17px;
-
-    background-size:
-        5px 5px,
-        5px 5px;
-
-    background-repeat:no-repeat;
-
-    transition:
-        border-color .15s ease,
-        box-shadow .15s ease,
-        background-color .15s ease;
-
 }
 
+#payments-table-container .subscription-plan{width:105px;}
+#payments-table-container .subscription-operation{width:118px;}
 
-#payments-table-container .subscription-operation:hover{
-
-    border-color:#b8cbe3;
-
-    background-color:#fbfdff;
-
+#payments-table-container .status.paid{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    min-width:108px;
+    height:38px;
+    padding:0 12px;
+    border:1px solid #a7f3c7;
+    border-radius:9px;
+    background:#effcf5;
+    color:#15803d;
+    font-size:14px;
+    font-weight:700;
+    box-sizing:border-box;
+    white-space:nowrap;
 }
-
-
-#payments-table-container .subscription-operation:focus{
-
-    border-color:#6fa3ff;
-
-    box-shadow:
-        0 0 0 3px rgba(40,100,232,.10);
-
-    background-color:#ffffff;
-
-    outline:none;
-
-}
-
-
-/* ======================================================
-   06.3 PAID — SAVE BUTTON
-====================================================== */
 
 #payments-table-container .subscription-operation + .btn-primary{
-
-    width:42px;
-
-    height:42px;
-
+    width:40px;
+    height:40px;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
     padding:0;
-
     box-sizing:border-box;
-
     border:1px solid #cfe8d8;
-
     border-radius:6px;
-
     background:#eefaf2;
-
     color:#16834b;
-
-    font-size:17px;
-
+    font-size:16px;
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        border-color .15s ease,
-        transform .15s ease;
-
 }
 
+#payments-table-container .paid-table tbody tr td:first-child{border-right:4px solid #22c55e;}
 
-#payments-table-container .subscription-operation + .btn-primary:hover{
+/* ======================================================
+   10. HISTORY TABLE â€” 6 COLUMNS
+====================================================== */
+#payments-table-container .history-table th:nth-child(1),
+#payments-table-container .history-table td:nth-child(1){width:16%;}
 
-    background:#ddf5e6;
+#payments-table-container .history-table th:nth-child(2),
+#payments-table-container .history-table td:nth-child(2){width:13%;}
 
-    border-color:#a9dbba;
+#payments-table-container .history-table th:nth-child(3),
+#payments-table-container .history-table td:nth-child(3){width:29%;}
 
-    transform:translateY(-1px);
+#payments-table-container .history-table th:nth-child(4),
+#payments-table-container .history-table td:nth-child(4){width:16%;}
 
+#payments-table-container .history-table th:nth-child(5),
+#payments-table-container .history-table td:nth-child(5){width:16%;}
+
+#payments-table-container .history-table th:nth-child(6),
+#payments-table-container .history-table td:nth-child(6){width:10%;}
+
+#payments-table-container .history-table td:nth-child(3){
+    direction:ltr;
+    text-align:center;
+    white-space:nowrap;
+    overflow:visible;
 }
 
-
-#payments-table-container .subscription-operation + .btn-primary:active{
-
-    transform:translateY(0);
-
-}
-
-
-/* ======================================================
-   06.4 PAID — GREEN ROW LINE
-====================================================== */
-
-#payments-table-container .payments-table tbody tr:has(.status.paid)
-td:first-child{
-
-    border-right:4px solid #22c55e;
-
-}
-
-
-/* ======================================================
-   END OF PART 2/3
-====================================================== */
-
-/* ======================================================
-   07. PAYMENTS — HISTORY
-====================================================== */
-
-
-/* ======================================================
-   07.1 HISTORY — PRINT BUTTON
-====================================================== */
+#payments-table-container .history-table tbody tr td:first-child{border-right:4px solid #94a3b8;}
 
 #payments-table-container .btn-print{
-
-    width:42px;
-
-    height:42px;
-
+    width:40px;
+    height:40px;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
+    margin:0 auto;
     padding:0;
-
     box-sizing:border-box;
-
     border:1px solid #d8e0ea;
-
     border-radius:6px;
-
     background:#f5f7fa;
-
     color:#526174;
-
-    font-size:17px;
-
+    font-size:16px;
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        border-color .15s ease,
-        color .15s ease,
-        transform .15s ease;
-
-}
-
-
-#payments-table-container .btn-print:hover{
-
-    background:#e9eef4;
-
-    border-color:#c5d0dc;
-
-    color:#334155;
-
-    transform:translateY(-1px);
-
-}
-
-
-#payments-table-container .btn-print:active{
-
-    transform:translateY(0);
-
-}
-
-
-/* ======================================================
-   07.2 HISTORY — TABLE CONTENT
-====================================================== */
-
-#payments-table-container .payments-table tbody td{
-
-    text-align:center;
-
-    vertical-align:middle;
-
-}
-
-
-
-
-
-/* ======================================================
-   07.3 HISTORY — GRAY ROW LINE
-====================================================== */
-
-#payments-table-container
-.payments-table.history-table
-tbody tr
-td:first-child{
-
-    border-right:4px solid #94a3b8;
-
 }
 
 /* ======================================================
-   08. PAYMENTS — PAGINATION
+   11. PAGINATION
 ====================================================== */
-
-#payments-pagination-container{
-
-    width:100%;
-
-    min-height:52px;
-
-    box-sizing:border-box;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:6px;
-
-    padding:8px 14px;
-
-    background:#ffffff;
-
-    border-top:1px solid #e5ebf3;
-
-}
-
-
 #payments-pagination-container .page-btn{
-
     min-width:36px;
-
     height:36px;
-
     box-sizing:border-box;
-
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:0 10px;
-
     border:1px solid #d5dfeb;
-
     border-radius:5px;
-
-    background:#ffffff;
-
+    background:#fff;
     color:#526174;
-
     font-family:inherit;
-
     font-size:13px;
-
     font-weight:700;
-
     line-height:1;
-
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        border-color .15s ease,
-        color .15s ease,
-        transform .15s ease;
-
+    transition:.15s ease;
 }
-
 
 #payments-pagination-container .page-btn:hover:not(:disabled){
-
     background:#f3f7fc;
-
     border-color:#b8cbe3;
-
     color:#2864e8;
-
     transform:translateY(-1px);
-
 }
-
-
-#payments-pagination-container .page-btn:active:not(:disabled){
-
-    transform:translateY(0);
-
-}
-
 
 #payments-pagination-container .page-btn.active{
-
     background:#2864e8;
-
     border-color:#2864e8;
-
-    color:#ffffff;
-
+    color:#fff;
 }
-
-
-#payments-pagination-container .page-btn.active:hover{
-
-    background:#1f5bd8;
-
-    border-color:#1f5bd8;
-
-    color:#ffffff;
-
-}
-
 
 #payments-pagination-container .page-btn:disabled{
-
     opacity:.45;
-
     background:#f5f7fa;
-
     border-color:#e1e7ef;
-
     color:#94a3b8;
-
     cursor:not-allowed;
-
 }
 
-
 /* ======================================================
-   09. PAYMENTS — EMPTY STATE
+   12. EMPTY STATE / FORM COMMON
 ====================================================== */
-
 #payments-table-container .payments-empty-state{
-
     width:100%;
-
-    min-height:170px;
-
+    min-height:150px;
     box-sizing:border-box;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
-
     gap:10px;
-
     padding:30px;
-
-    background:#ffffff;
-
+    background:#fff;
     color:#7b8a9e;
-
     text-align:center;
-
 }
 
-
-#payments-table-container .payments-empty-icon{
-
-    font-size:28px;
-
-    opacity:.7;
-
-}
-
-
-#payments-table-container .payments-empty-text{
-
-    font-size:14px;
-
-    font-weight:600;
-
-}
-
-
-/* ======================================================
-   10. PAYMENTS — COMMON FORM CONTROLS
-====================================================== */
+#payments-table-container .payments-empty-icon{font-size:28px;opacity:.7;}
+#payments-table-container .payments-empty-text{font-size:14px;font-weight:600;}
 
 #payments-table-container input,
 #payments-table-container select,
-#payments-table-container button{
-
-    font-family:inherit;
-
-}
-
+#payments-table-container button{font-family:inherit;}
 
 #payments-table-container input:focus,
 #payments-table-container select:focus,
-#payments-table-container button:focus-visible{
-
-    outline:none;
-
-}
-
+#payments-table-container button:focus-visible{outline:none;}
 
 /* ======================================================
-   11. PAYMENTS — DIRECTION
+   13. RTL COMBOBOX ARROW
 ====================================================== */
-
-html[dir="rtl"] #payments-table-container{
-
-    direction:rtl;
-
-}
-
-
-html[dir="ltr"] #payments-table-container{
-
-    direction:ltr;
-
-}
-
-
-/* ======================================================
-   12. PAYMENTS — RESPONSIVE
-====================================================== */
-
-@media(max-width:1200px){
-
-    #payments-table-container .payments-table{
-
-        min-width:1100px;
-
-    }
-
-}
-
-
-@media(max-width:900px){
-
-    .payments-controls{
-
-        flex-wrap:wrap;
-
-    }
-
-
-    .payments-search{
-
-        flex:1 1 100%;
-
-    }
-
-
-    .payments-date,
-    .payments-order{
-
-        flex:1;
-
-        width:auto;
-
-    }
-
-
-    .payments-controls > button{
-
-        flex:0 0 auto;
-
-    }
-
-}
-
-
-@media(max-width:700px){
-
-    #payments-table-container .payments-table{
-
-        min-width:1050px;
-
-    }
-
-
-    .payments-header{
-
-        padding:8px 12px;
-
-    }
-
-
-    .payments-header-text{
-
-        flex-wrap:wrap;
-
-        gap:6px;
-
-    }
-
-
-    .payments-header p{
-
-        white-space:normal;
-
-    }
-
-
-    .payments-workspace-header{
-
-        min-height:48px;
-
-        padding:0 12px;
-
-    }
-
-
-    .payments-workspace-title{
-
-        font-size:15px;
-
-    }
-
-
-    #payments-pagination-container{
-
-        padding:8px 10px;
-
-    }
-
-}
-
-
-@media(max-width:600px){
-
-    .payments-date,
-    .payments-order{
-
-        flex:1 1 100%;
-
-        width:100%;
-
-    }
-
-
-    .payments-controls > button{
-
-        width:100%;
-
-    }
-
-
-    .payment-tab{
-
-        font-size:13px;
-
-        gap:6px;
-
-        padding:0 6px;
-
-    }
-
-
-    .tab-notification{
-
-        min-width:22px;
-
-        height:22px;
-
-        font-size:11px;
-
-    }
-
-
-    #payments-pagination-container .page-btn{
-
-        min-width:32px;
-
-        height:34px;
-
-        padding:0 8px;
-
-        font-size:12px;
-
-    }
-
-}
-
-
-@media(max-width:450px){
-
-    .payments-tabs{
-
-        min-height:52px;
-
-    }
-
-
-    .payment-tab{
-
-        height:52px;
-
-        font-size:12px;
-
-    }
-
-
-    #payments-pagination-container{
-
-        gap:4px;
-
-    }
-
-
-    #payments-pagination-container .page-btn{
-
-        min-width:30px;
-
-        height:32px;
-
-        padding:0 6px;
-
-    }
-
+html[dir="rtl"] #payments-table-container .payment-duration,
+html[dir="rtl"] #payments-table-container .subscription-plan,
+html[dir="rtl"] #payments-table-container .subscription-operation{
+    padding:0 9px 0 28px;
+    background-position:13px 16px,8px 16px;
 }
 
 /* ======================================================
-   CONFIRM DIALOG — FINAL POLISH
+   14. CONFIRM MODALS
 ====================================================== */
-
-
-/* ------------------------------------------------------
-   01. MODAL OVERLAY
------------------------------------------------------- */
-
 #payment-confirm-modal,
 #subscription-confirm-modal{
-
     position:fixed;
-
     inset:0;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:24px;
-
-    background:rgba(
-        15,
-        23,
-        42,
-        0.46
-    );
-
+    background:rgba(15,23,42,.46);
     backdrop-filter:blur(4px);
-
     -webkit-backdrop-filter:blur(4px);
-
     z-index:9999;
-
 }
 
-
-/* ------------------------------------------------------
-   02. CONFIRM BOX
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-box,
-
-#subscription-confirm-modal
-.reset-confirm-box{
-
+#payment-confirm-modal .reset-confirm-box,
+#subscription-confirm-modal .reset-confirm-box{
     position:relative;
-
-    width:min(
-        520px,
-        calc(100vw - 48px)
-    );
-
+    width:min(520px,calc(100vw - 48px));
     min-height:0;
-
     padding:32px 34px 28px;
-
-    background:#ffffff;
-
+    background:#fff;
     border:1px solid #e3eaf4;
-
     border-radius:18px;
-
-    box-shadow:
-        0 24px 60px rgba(
-            15,
-            23,
-            42,
-            0.18
-        ),
-        0 4px 14px rgba(
-            15,
-            23,
-            42,
-            0.06
-        );
-
+    box-shadow:0 24px 60px rgba(15,23,42,.18),0 4px 14px rgba(15,23,42,.06);
     direction:rtl;
-
 }
-
-
-/* ------------------------------------------------------
-   03. CLOSE BUTTON
------------------------------------------------------- */
-
-#payment-confirm-modal
-.modal-close,
-
-#subscription-confirm-modal
-.modal-close{
-
-    position:absolute;
-
-    top:18px;
-
-    left:18px;
-
-    width:38px;
-
-    height:38px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:0;
-
-    border:1px solid #dbe4f0;
-
-    border-radius:10px;
-
-    background:#f8fafc;
-
-    color:#64748b;
-
-    font-size:18px;
-
-    line-height:1;
-
-    cursor:pointer;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-
-}
-
-
-#payment-confirm-modal
-.modal-close:hover,
-
-#subscription-confirm-modal
-.modal-close:hover{
-
-    background:#eef4ff;
-
-    border-color:#b9d2ff;
-
-    color:#2563eb;
-
-    transform:translateY(-1px);
-
-}
-
-
-/* ------------------------------------------------------
-   04. CONTENT
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-content,
-
-#subscription-confirm-modal
-.reset-confirm-content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:stretch;
-
-    gap:0;
-
-}
-
-
-/* ------------------------------------------------------
-   05. HEADER
------------------------------------------------------- */
-
-#payment-confirm-modal
-.confirm-header,
-
-#subscription-confirm-modal
-.confirm-header{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    margin-bottom:22px;
-
-    padding-left:48px;
-
-}
-
-
-/* ------------------------------------------------------
-   06. ICON
------------------------------------------------------- */
-
-#payment-confirm-modal
-.confirm-icon,
-
-#subscription-confirm-modal
-.confirm-icon{
-
-    width:48px;
-
-    height:48px;
-
-    flex:0 0 48px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:14px;
-
-    background:#eef4ff;
-
-    border:1px solid #d7e5ff;
-
-    color:#2563eb;
-
-    font-size:22px;
-
-}
-
-
-/* Subscription icon */
-
-#subscription-confirm-modal
-.confirm-icon{
-
-    background:#eef4ff;
-
-    border-color:#d7e5ff;
-
-}
-
-
-/* ------------------------------------------------------
-   07. TITLE
------------------------------------------------------- */
-
-#payment-confirm-modal
-.confirm-title,
-
-#subscription-confirm-modal
-.confirm-title{
-
-    margin:0;
-
-    color:#1e293b;
-
-    font-size:22px;
-
-    font-weight:700;
-
-    line-height:1.4;
-
-}
-
-
-/* ------------------------------------------------------
-   08. MESSAGE
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-content > p,
-
-#subscription-confirm-modal
-.reset-confirm-content > p{
-
-    margin:0 0 28px;
-
-    color:#64748b;
-
-    font-size:16px;
-
-    font-weight:500;
-
-    line-height:1.8;
-
-    text-align:right;
-
-}
-
-
-/* ------------------------------------------------------
-   09. ACTIONS
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-actions,
-
-#subscription-confirm-modal
-.reset-confirm-actions{
-
-    display:flex;
-
-    flex-direction:row;
-
-    align-items:center;
-
-   justify-content:center;
-
-    gap:12px;
-
-    margin-top:4px;
-
-}
-
-
-/* ------------------------------------------------------
-   10. BUTTONS
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-actions button,
-
-#subscription-confirm-modal
-.reset-confirm-actions button{
-
-    min-width:120px;
-
-    height:44px;
-
-    padding:0 24px;
-
-    border-radius:10px;
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        background .2s ease,
-        border-color .2s ease;
-
-}
-
-
-/* ------------------------------------------------------
-   11. CANCEL
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-actions
-.btn-secondary,
-
-#subscription-confirm-modal
-.reset-confirm-actions
-.btn-secondary{
-
-    background:#ffffff;
-
-    border:1px solid #d8e1ed;
-
-    color:#475569;
-
-}
-
-
-#payment-confirm-modal
-.reset-confirm-actions
-.btn-secondary:hover,
-
-#subscription-confirm-modal
-.reset-confirm-actions
-.btn-secondary:hover{
-
-    background:#f8fafc;
-
-    border-color:#c5d2e2;
-
-    transform:translateY(-1px);
-
-}
-
-
-/* ------------------------------------------------------
-   12. CONFIRM
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-actions
-.btn-primary,
-
-#subscription-confirm-modal
-.reset-confirm-actions
-.btn-primary{
-
-    background:#2563eb;
-
-    border:1px solid #2563eb;
-
-    color:#ffffff;
-
-    box-shadow:
-        0 6px 14px rgba(
-            37,
-            99,
-            235,
-            0.20
-        );
-
-}
-
-
-#payment-confirm-modal
-.reset-confirm-actions
-.btn-primary:hover,
-
-#subscription-confirm-modal
-.reset-confirm-actions
-.btn-primary:hover{
-
-    background:#1d4ed8;
-
-    border-color:#1d4ed8;
-
-    box-shadow:
-        0 8px 18px rgba(
-            37,
-            99,
-            235,
-            0.26
-        );
-
-    transform:translateY(-1px);
-
-}
-
-
-/* ------------------------------------------------------
-   13. ACTIVE
------------------------------------------------------- */
-
-#payment-confirm-modal
-.reset-confirm-actions button:active,
-
-#subscription-confirm-modal
-.reset-confirm-actions button:active{
-
-    transform:translateY(0);
-
-}
-
-
-/* ------------------------------------------------------
-   14. MOBILE
------------------------------------------------------- */
-
-@media (max-width:600px){
-
-    #payment-confirm-modal,
-    #subscription-confirm-modal{
-
-        padding:16px;
-
-    }
-
-
-    #payment-confirm-modal
-    .reset-confirm-box,
-
-    #subscription-confirm-modal
-    .reset-confirm-box{
-
-        width:100%;
-
-        padding:28px 22px 22px;
-
-        border-radius:16px;
-
-    }
-
-
-    #payment-confirm-modal
-    .confirm-header,
-
-    #subscription-confirm-modal
-    .confirm-header{
-
-        padding-left:42px;
-
-    }
-
-
-    #payment-confirm-modal
-    .confirm-title,
-
-    #subscription-confirm-modal
-    .confirm-title{
-
-        font-size:19px;
-
-    }
-
-
-    #payment-confirm-modal
-    .reset-confirm-actions,
-
-    #subscription-confirm-modal
-    .reset-confirm-actions{
-
-        width:100%;
-
-    }
-
-
-    #payment-confirm-modal
-    .reset-confirm-actions button,
-
-    #subscription-confirm-modal
-    .reset-confirm-actions button{
-
-        flex:1;
-
-        min-width:0;
-
-    }
-
-}
-
-/* ======================================================
-   CONFIRM DIALOG
-   CLOSE BUTTON — LEFT SIDE
-====================================================== */
 
 #payment-confirm-modal .modal-close,
 #subscription-confirm-modal .modal-close{
-
     position:absolute;
-
     top:18px;
-
-    left:18px !important;
-
-    right:auto !important;
-
+    left:18px;
+    right:auto;
     width:58px;
-
     height:58px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:0;
-
     border:1px solid #d8e3f1;
-
     border-radius:12px;
-
-    background:#ffffff;
-
+    background:#fff;
     color:#64748b;
-
     font-size:25px;
-
     font-weight:700;
-
     line-height:1;
-
     cursor:pointer;
-
     box-sizing:border-box;
-
-    transition:
-        background .25s ease,
-        border-color .25s ease,
-        color .25s ease,
-        transform .35s ease,
-        box-shadow .25s ease;
-
+    transition:.25s ease;
 }
-
 
 #payment-confirm-modal .modal-close:hover,
 #subscription-confirm-modal .modal-close:hover{
-
     background:#ef4444;
-
     border-color:#ef4444;
-
-    color:#ffffff;
-
+    color:#fff;
     transform:rotate(90deg);
+    box-shadow:0 6px 16px rgba(239,68,68,.25);
+}
 
-    box-shadow:
-        0 6px 16px rgba(
-            239,
-            68,
-            68,
-            0.25
-        );
+#payment-confirm-modal .reset-confirm-content,
+#subscription-confirm-modal .reset-confirm-content{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+}
 
+#payment-confirm-modal .confirm-header,
+#subscription-confirm-modal .confirm-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:22px;
+    padding-left:48px;
+}
+
+#payment-confirm-modal .confirm-icon,
+#subscription-confirm-modal .confirm-icon{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:#eef4ff;
+    border:1px solid #d7e5ff;
+    color:#2563eb;
+    font-size:22px;
+}
+
+#payment-confirm-modal .confirm-title,
+#subscription-confirm-modal .confirm-title{
+    margin:0;
+    color:#1e293b;
+    font-size:22px;
+    font-weight:700;
+    line-height:1.4;
+}
+
+#payment-confirm-modal .reset-confirm-content > p,
+#subscription-confirm-modal .reset-confirm-content > p{
+    margin:0 0 28px;
+    color:#64748b;
+    font-size:16px;
+    font-weight:500;
+    line-height:1.8;
+    text-align:right;
+}
+
+#payment-confirm-modal .reset-confirm-actions,
+#subscription-confirm-modal .reset-confirm-actions{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-top:4px;
+}
+
+#payment-confirm-modal .reset-confirm-actions button,
+#subscription-confirm-modal .reset-confirm-actions button{
+    min-width:120px;
+    height:44px;
+    padding:0 24px;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+#payment-confirm-modal .reset-confirm-actions .btn-secondary,
+#subscription-confirm-modal .reset-confirm-actions .btn-secondary{
+    background:#fff;
+    border:1px solid #d8e1ed;
+    color:#475569;
+}
+
+#payment-confirm-modal .reset-confirm-actions .btn-primary,
+#subscription-confirm-modal .reset-confirm-actions .btn-primary{
+    background:#2563eb;
+    border:1px solid #2563eb;
+    color:#fff;
+    box-shadow:0 6px 14px rgba(37,99,235,.20);
+}
+
+#payment-confirm-modal .reset-confirm-actions .btn-primary:hover,
+#subscription-confirm-modal .reset-confirm-actions .btn-primary:hover{
+    background:#1d4ed8;
+    border-color:#1d4ed8;
+    transform:translateY(-1px);
 }
 
 /* ======================================================
-   END — PAYMENTS CSS
+   15. RESPONSIVE
+====================================================== */
+@media(max-width:1200px){
+    /* Keep desktop/tablet readable; scrolling is only introduced when
+       the available width is genuinely too small for the 9-column table. */
+    #payments-table-container{
+        overflow-x:auto;
+    }
+
+    #payments-table-container .payments-table{
+        min-width:1050px;
+    }
+}
+
+@media(max-width:900px){
+    .payments-controls{flex-wrap:wrap;}
+    .payments-search{flex:1 1 100%;}
+    .payments-date,
+    .payments-order{flex:1;width:auto;}
+    .payments-controls > button{flex:0 0 auto;}
+}
+
+@media(max-width:700px){
+    .payments-header{padding:8px 12px;}
+    .payments-header-text{flex-wrap:wrap;gap:6px;}
+    .payments-header p{white-space:normal;}
+    .payments-workspace-header{min-height:48px;padding:0 12px;}
+    .payments-workspace-title{font-size:15px;}
+    #payments-pagination-container{padding:8px 10px;}
+}
+
+@media(max-width:600px){
+    .payments-date,
+    .payments-order{flex:1 1 100%;width:100%;}
+    .payments-controls > button{width:100%;}
+    .payment-tab{font-size:13px;gap:6px;padding:0 6px;}
+    .tab-notification{min-width:22px;height:22px;font-size:11px;}
+    #payments-pagination-container .page-btn{min-width:32px;height:34px;padding:0 8px;font-size:12px;}
+
+    #payment-confirm-modal,
+    #subscription-confirm-modal{padding:16px;}
+
+    #payment-confirm-modal .reset-confirm-box,
+    #subscription-confirm-modal .reset-confirm-box{
+        width:100%;
+        padding:28px 22px 22px;
+        border-radius:16px;
+    }
+
+    #payment-confirm-modal .confirm-header,
+    #subscription-confirm-modal .confirm-header{padding-left:42px;}
+
+    #payment-confirm-modal .confirm-title,
+    #subscription-confirm-modal .confirm-title{font-size:19px;}
+
+    #payment-confirm-modal .reset-confirm-actions,
+    #subscription-confirm-modal .reset-confirm-actions{width:100%;}
+
+    #payment-confirm-modal .reset-confirm-actions button,
+    #subscription-confirm-modal .reset-confirm-actions button{
+        flex:1;
+        min-width:0;
+    }
+}
+
+@media(max-width:450px){
+    .payments-tabs{min-height:52px;}
+    .payment-tab{height:52px;font-size:12px;}
+    #payments-pagination-container{gap:4px;}
+    #payments-pagination-container .page-btn{min-width:30px;height:32px;padding:0 6px;}
+}
+
+/* ======================================================
+   END â€” PAYMENTS CSS
 ====================================================== */
