@@ -742,10 +742,9 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
    SECTION 28 - RECENT CENTRES
-   CENTRIA PREMIUM UI
+   CENTRIA COMPACT UI
 ========================================================= */
 
 
@@ -761,14 +760,14 @@ html[dir="rtl"] .home-page{
 
     border: 1px solid #e4eaf2;
 
-    border-radius: 20px;
+    border-radius: 4px;
 
     overflow: hidden;
 
     box-sizing: border-box;
 
     box-shadow:
-        0 8px 26px rgba(15, 23, 42, 0.055);
+        0 6px 20px rgba(15, 23, 42, 0.045);
 
 }
 
@@ -785,9 +784,9 @@ html[dir="rtl"] .home-page{
 
     justify-content: space-between;
 
-    min-height: 70px;
+    min-height: 54px;
 
-    padding: 0 22px;
+    padding: 0 16px;
 
     box-sizing: border-box;
 
@@ -823,13 +822,13 @@ html[dir="rtl"] .home-page{
 
     align-items: center;
 
-    gap: 11px;
+    gap: 8px;
 
     margin: 0;
 
     color: #172033;
 
-    font-size: 19px;
+    font-size: 16px;
 
     line-height: 1;
 
@@ -856,17 +855,17 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    width: 34px;
+    width: 28px;
 
-    height: 34px;
+    height: 28px;
 
-    border-radius: 11px;
+    border-radius: 4px;
 
     background: #eef5ff;
 
     color: #2563eb;
 
-    font-size: 16px;
+    font-size: 14px;
 
     line-height: 1;
 
@@ -885,17 +884,17 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    gap: 8px;
+    gap: 6px;
 
-    height: 38px;
+    height: 32px;
 
-    min-width: 92px;
+    min-width: 78px;
 
-    padding: 0 14px;
+    padding: 0 10px;
 
     border: 1px solid #d8e5f7;
 
-    border-radius: 11px;
+    border-radius: 4px;
 
     background: #f5f9ff;
 
@@ -903,7 +902,7 @@ html[dir="rtl"] .home-page{
 
     font-family: inherit;
 
-    font-size: 13px;
+    font-size: 11px;
 
     line-height: 1;
 
@@ -933,7 +932,7 @@ html[dir="rtl"] .home-page{
 
     content: "←";
 
-    font-size: 14px;
+    font-size: 12px;
 
     font-weight: 800;
 
@@ -955,7 +954,7 @@ html[dir="rtl"] .home-page{
     color: #ffffff;
 
     box-shadow:
-        0 6px 16px rgba(37, 99, 235, 0.18);
+        0 5px 14px rgba(37, 99, 235, 0.16);
 
     transform: translateY(-1px);
 
@@ -970,7 +969,7 @@ html[dir="rtl"] .home-page{
 
     width: 100%;
 
-    padding: 10px 12px 13px;
+    padding: 7px 9px 8px;
 
     box-sizing: border-box;
 
@@ -989,7 +988,7 @@ html[dir="rtl"] .home-page{
 
     width: 100%;
 
-    gap: 5px;
+    gap: 4px;
 
 }
 
@@ -1004,22 +1003,22 @@ html[dir="rtl"] .home-page{
 
     grid-template-columns:
         minmax(0, 1fr)
-        135px
-        105px;
+        118px
+        92px;
 
     align-items: center;
 
     width: 100%;
 
-    min-height: 58px;
+    min-height: 46px;
 
-    padding: 0 15px;
+    padding: 0 11px;
 
     box-sizing: border-box;
 
     border: 1px solid transparent;
 
-    border-radius: 14px;
+    border-radius: 4px;
 
     background: #ffffff;
 
@@ -1073,7 +1072,7 @@ html[dir="rtl"] .home-page{
     border-color: #dbe8f8;
 
     box-shadow:
-        0 5px 16px rgba(37, 99, 235, 0.07);
+        0 4px 12px rgba(37, 99, 235, 0.06);
 
     transform: translateY(-1px);
 
@@ -1113,7 +1112,7 @@ html[dir="rtl"] .home-page{
 
     color: #172033;
 
-    font-size: 16px;
+    font-size: 13px;
 
     line-height: 1.2;
 
@@ -1146,21 +1145,21 @@ html[dir="rtl"] .home-page{
 
     flex: 0 0 auto;
 
-    width: 34px;
+    width: 28px;
 
-    height: 34px;
+    height: 28px;
 
-    margin-left: 10px;
+    margin-left: 7px;
 
     border: 1px solid #dbe8fa;
 
-    border-radius: 10px;
+    border-radius: 4px;
 
     background: #eef5ff;
 
     color: #2563eb;
 
-    font-size: 16px;
+    font-size: 13px;
 
     line-height: 1;
 
@@ -1181,7 +1180,7 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    gap: 7px;
+    gap: 5px;
 
     min-width: 0;
 
@@ -1189,7 +1188,7 @@ html[dir="rtl"] .home-page{
 
     color: #64748b;
 
-    font-size: 13px;
+    font-size: 11px;
 
     line-height: 1;
 
@@ -1218,13 +1217,13 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    width: 15px;
+    width: 13px;
 
-    height: 15px;
+    height: 13px;
 
     color: #7c91aa;
 
-    font-size: 13px;
+    font-size: 11px;
 
     line-height: 1;
 
@@ -1277,25 +1276,25 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    gap: 6px;
+    gap: 4px;
 
-    width: 82px;
+    width: 70px;
 
-    height: 31px;
+    height: 26px;
 
-    padding: 0 9px;
+    padding: 0 7px;
 
     box-sizing: border-box;
 
     border: 1px solid #cfe0fa;
 
-    border-radius: 999px;
+    border-radius: 4px;
 
     background: #f0f6ff;
 
     color: #2563eb;
 
-    font-size: 12px;
+    font-size: 10px;
 
     line-height: 1;
 
@@ -1316,7 +1315,7 @@ html[dir="rtl"] .home-page{
 
     content: "◷";
 
-    font-size: 14px;
+    font-size: 12px;
 
     line-height: 1;
 
@@ -1335,9 +1334,9 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    min-height: 145px;
+    min-height: 120px;
 
-    padding: 20px;
+    padding: 14px;
 
     color: #94a3b8;
 
@@ -1381,19 +1380,19 @@ html[dir="rtl"] .home-page{
 
     justify-content: center;
 
-    width: 38px;
+    width: 32px;
 
-    height: 38px;
+    height: 32px;
 
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 
-    border-radius: 11px;
+    border-radius: 4px;
 
     background: #f8fafc;
 
     color: #94a3b8;
 
-    font-size: 18px;
+    font-size: 15px;
 
 }
 
@@ -1408,7 +1407,7 @@ html[dir="rtl"] .home-page{
 
     color: #94a3b8;
 
-    font-size: 14px;
+    font-size: 11px;
 
     font-weight: 600;
 
@@ -1444,7 +1443,7 @@ html[dir="rtl"]
 .recent-widget
 .recent-centre-name::before {
 
-    margin-left: 10px;
+    margin-left: 7px;
 
     margin-right: 0;
 
@@ -1492,7 +1491,7 @@ html[dir="ltr"]
 
     margin-left: 0;
 
-    margin-right: 10px;
+    margin-right: 7px;
 
 }
 
@@ -1517,9 +1516,9 @@ html[dir="ltr"]
     .recent-widget
     .recent-widget-header {
 
-        min-height: 60px;
+        min-height: 48px;
 
-        padding: 0 14px;
+        padding: 0 11px;
 
     }
 
@@ -1528,9 +1527,9 @@ html[dir="ltr"]
     .recent-widget
     .recent-widget-eyebrow {
 
-        font-size: 16px;
+        font-size: 14px;
 
-        gap: 8px;
+        gap: 6px;
 
     }
 
@@ -1539,26 +1538,11 @@ html[dir="ltr"]
     .recent-widget
     .recent-widget-eyebrow::before {
 
-        width: 29px;
+        width: 25px;
 
-        height: 29px;
+        height: 25px;
 
-        border-radius: 9px;
-
-        font-size: 14px;
-
-    }
-
-
-    .home-page
-    .recent-widget
-    .recent-widget-link {
-
-        min-width: 78px;
-
-        height: 34px;
-
-        padding: 0 10px;
+        border-radius: 4px;
 
         font-size: 12px;
 
@@ -1567,9 +1551,24 @@ html[dir="ltr"]
 
     .home-page
     .recent-widget
+    .recent-widget-link {
+
+        min-width: 70px;
+
+        height: 29px;
+
+        padding: 0 8px;
+
+        font-size: 10px;
+
+    }
+
+
+    .home-page
+    .recent-widget
     .recent-widget-body {
 
-        padding: 8px;
+        padding: 6px;
 
     }
 
@@ -1578,7 +1577,7 @@ html[dir="ltr"]
     .recent-widget
     .recent-centres-list {
 
-        gap: 4px;
+        gap: 3px;
 
     }
 
@@ -1589,14 +1588,14 @@ html[dir="ltr"]
 
         grid-template-columns:
             minmax(0, 1fr)
-            100px
-            75px;
+            90px
+            68px;
 
-        min-height: 50px;
+        min-height: 40px;
 
-        padding: 0 9px;
+        padding: 0 8px;
 
-        border-radius: 11px;
+        border-radius: 4px;
 
     }
 
@@ -1605,7 +1604,7 @@ html[dir="ltr"]
     .recent-widget
     .recent-centre-name {
 
-        font-size: 13px;
+        font-size: 11px;
 
     }
 
@@ -1614,15 +1613,15 @@ html[dir="ltr"]
     .recent-widget
     .recent-centre-name::before {
 
-        width: 27px;
+        width: 24px;
 
-        height: 27px;
+        height: 24px;
 
-        margin-left: 7px;
+        margin-left: 5px;
 
-        border-radius: 8px;
+        border-radius: 4px;
 
-        font-size: 13px;
+        font-size: 11px;
 
     }
 
@@ -1631,7 +1630,7 @@ html[dir="ltr"]
     .recent-widget
     .recent-centre-date {
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
@@ -1649,11 +1648,11 @@ html[dir="ltr"]
     .recent-widget
     .recent-duration-value {
 
-        width: 65px;
+        width: 58px;
 
-        height: 26px;
+        height: 23px;
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
@@ -1667,7 +1666,7 @@ html[dir="ltr"]
 
 /* =========================================================
    SECTION 29 - HOME CHARTS
-   CENTRIA PREMIUM CHART UI
+   CENTRIA COMPACT UI
 ========================================================= */
 
 
@@ -1683,12 +1682,12 @@ html[dir="ltr"]
 
     border: 1px solid #dfe7f2;
 
-    border-radius: 22px;
+    border-radius: 4px;
 
     overflow: hidden;
 
     box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.055);
+        0 7px 23px rgba(15, 23, 42, 0.045);
 
 }
 
@@ -1699,9 +1698,9 @@ html[dir="ltr"]
 
 .home-page .overview-widget .widget-header {
 
-    min-height: 74px;
+    min-height: 56px;
 
-    padding: 0 24px;
+    padding: 0 18px;
 
     display: flex;
 
@@ -1733,7 +1732,7 @@ html[dir="ltr"]
 
     align-items: center;
 
-    gap: 10px;
+    gap: 7px;
 
 }
 
@@ -1744,7 +1743,7 @@ html[dir="ltr"]
 
     color: #172033;
 
-    font-size: 20px;
+    font-size: 16px;
 
     line-height: 1.2;
 
@@ -1765,15 +1764,15 @@ html[dir="ltr"]
 
     justify-content: center;
 
-    gap: 9px;
+    gap: 7px;
 
-    min-height: 38px;
+    min-height: 31px;
 
-    padding: 0 14px;
+    padding: 0 10px;
 
     border: 1px solid #dce6f2;
 
-    border-radius: 12px;
+    border-radius: 4px;
 
     background: #f7faff;
 
@@ -1781,7 +1780,7 @@ html[dir="ltr"]
 
     font-family: inherit;
 
-    font-size: 13px;
+    font-size: 11px;
 
     font-weight: 750;
 
@@ -1803,7 +1802,7 @@ html[dir="ltr"]
     border-color: #cfe0fa;
 
     box-shadow:
-        0 5px 14px rgba(37, 99, 235, 0.08);
+        0 4px 11px rgba(37, 99, 235, 0.07);
 
     transform: translateY(-1px);
 
@@ -1820,9 +1819,9 @@ html[dir="ltr"]
 
     height: auto;
 
-    min-height: 320px;
+    min-height: 0;
 
-    padding: 20px;
+    padding: 12px;
 
     display: block;
 
@@ -1842,10 +1841,10 @@ html[dir="ltr"]
     display: grid;
 
     grid-template-columns:
-        minmax(440px, 1.15fr)
-        minmax(340px, 0.85fr);
+        minmax(0, 1.15fr)
+        minmax(0, 0.85fr);
 
-    gap: 18px;
+    gap: 12px;
 
     width: 100%;
 
@@ -1862,9 +1861,9 @@ html[dir="ltr"]
 
     min-width: 0;
 
-    min-height: 300px;
+    min-height: 225px;
 
-    padding: 20px;
+    padding: 14px;
 
     box-sizing: border-box;
 
@@ -1872,10 +1871,10 @@ html[dir="ltr"]
 
     border: 1px solid #e4ebf4;
 
-    border-radius: 18px;
+    border-radius: 4px;
 
     box-shadow:
-        0 5px 18px rgba(15, 23, 42, 0.035);
+        0 4px 14px rgba(15, 23, 42, 0.03);
 
 }
 
@@ -1892,9 +1891,9 @@ html[dir="ltr"]
 
     justify-content: space-between;
 
-    gap: 16px;
+    gap: 12px;
 
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 
 }
 
@@ -1909,13 +1908,13 @@ html[dir="ltr"]
 
     align-items: center;
 
-    gap: 10px;
+    gap: 7px;
 
     min-width: 0;
 
     color: #172033;
 
-    font-size: 16px;
+    font-size: 13px;
 
     line-height: 1.2;
 
@@ -1924,11 +1923,15 @@ html[dir="ltr"]
 }
 
 
+/* =========================================================
+   29.10 - CHART ICON
+========================================================= */
+
 .home-page .overview-chart-card-title i {
 
-    width: 34px;
+    width: 28px;
 
-    height: 34px;
+    height: 28px;
 
     display: inline-flex;
 
@@ -1938,19 +1941,19 @@ html[dir="ltr"]
 
     flex: 0 0 auto;
 
-    border-radius: 11px;
+    border-radius: 4px;
 
     background: #eef5ff;
 
     color: #2563eb;
 
-    font-size: 14px;
+    font-size: 12px;
 
 }
 
 
 /* =========================================================
-   29.10 - CHART SUBTITLE
+   29.11 - CHART SUBTITLE
 ========================================================= */
 
 .home-page .overview-chart-card-subtitle {
@@ -1959,7 +1962,7 @@ html[dir="ltr"]
 
     color: #94a3b8;
 
-    font-size: 12px;
+    font-size: 10px;
 
     line-height: 1;
 
@@ -1971,12 +1974,12 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.11 - CHART CONTENT
+   29.12 - CHART CONTENT
 ========================================================= */
 
 .home-page .overview-chart-content {
 
-    min-height: 220px;
+    min-height: 165px;
 
     display: flex;
 
@@ -1990,32 +1993,32 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.12 - PAYMENT CHART CONTENT
+   29.13 - PAYMENT CHART CONTENT
 ========================================================= */
 
 .home-page .overview-chart-card#monthlyPaymentChart
 .overview-chart-content {
 
-    gap: 26px;
+    gap: 20px;
 
-    padding-top: 4px;
+    padding-top: 2px;
 
 }
 
 
 /* =========================================================
-   29.13 - DONUT
+   29.14 - DONUT
 ========================================================= */
 
 .home-page .monthly-payment-donut {
 
     position: relative;
 
-    width: 184px;
+    width: 138px;
 
-    height: 184px;
+    height: 138px;
 
-    flex: 0 0 184px;
+    flex: 0 0 138px;
 
     border-radius: 50%;
 
@@ -2028,7 +2031,7 @@ html[dir="ltr"]
     justify-content: center;
 
     box-shadow:
-        0 12px 28px rgba(15, 23, 42, 0.09);
+        0 9px 21px rgba(15, 23, 42, 0.07);
 
     isolation: isolate;
 
@@ -2036,7 +2039,7 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.14 - DONUT INNER HOLE
+   29.15 - DONUT INNER HOLE
 ========================================================= */
 
 .home-page .monthly-payment-donut::after {
@@ -2045,7 +2048,7 @@ html[dir="ltr"]
 
     position: absolute;
 
-    inset: 24px;
+    inset: 18px;
 
     border-radius: 50%;
 
@@ -2060,7 +2063,7 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.15 - DONUT CENTER
+   29.16 - DONUT CENTER
 ========================================================= */
 
 .home-page .monthly-payment-donut-center {
@@ -2086,24 +2089,24 @@ html[dir="ltr"]
 
     color: #172033;
 
-    font-size: 34px;
+    font-size: 26px;
 
     line-height: 1;
 
     font-weight: 900;
 
-    letter-spacing: -0.5px;
+    letter-spacing: -0.4px;
 
 }
 
 
 .home-page .monthly-payment-donut-center span {
 
-    margin-top: 7px;
+    margin-top: 5px;
 
     color: #64748b;
 
-    font-size: 13px;
+    font-size: 11px;
 
     line-height: 1.2;
 
@@ -2113,50 +2116,58 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.16 - PAYMENT LEGEND
+   29.17 - PAYMENT LEGEND
 ========================================================= */
 
 .home-page .monthly-payment-legend {
 
-    min-width: 145px;
+    min-width: 115px;
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 16px;
+    gap: 10px;
 
 }
 
+
+/* =========================================================
+   29.18 - PAYMENT LEGEND ITEM
+========================================================= */
 
 .home-page .payment-legend-item {
 
     display: grid;
 
     grid-template-columns:
-        10px
+        8px
         minmax(0, 1fr)
         auto;
 
     align-items: center;
 
-    column-gap: 9px;
+    column-gap: 7px;
 
-    padding: 10px 0;
+    padding: 6px 0;
 
 }
 
 
+/* =========================================================
+   29.19 - PAYMENT LEGEND MARKER
+========================================================= */
+
 .home-page .payment-legend-marker {
 
-    width: 10px;
+    width: 8px;
 
-    height: 10px;
+    height: 8px;
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 4px rgba(148, 163, 184, 0.08);
+        0 0 0 3px rgba(148, 163, 184, 0.08);
 
 }
 
@@ -2166,7 +2177,7 @@ html[dir="ltr"]
     background: #16a34a;
 
     box-shadow:
-        0 0 0 4px rgba(22, 163, 74, 0.10);
+        0 0 0 3px rgba(22, 163, 74, 0.10);
 
 }
 
@@ -2176,16 +2187,20 @@ html[dir="ltr"]
     background: #f43f5e;
 
     box-shadow:
-        0 0 0 4px rgba(244, 63, 94, 0.10);
+        0 0 0 3px rgba(244, 63, 94, 0.10);
 
 }
 
+
+/* =========================================================
+   29.20 - PAYMENT LEGEND TEXT
+========================================================= */
 
 .home-page .payment-legend-label {
 
     color: #475569;
 
-    font-size: 14px;
+    font-size: 11px;
 
     font-weight: 750;
 
@@ -2196,7 +2211,7 @@ html[dir="ltr"]
 
     color: #172033;
 
-    font-size: 15px;
+    font-size: 12px;
 
     font-weight: 900;
 
@@ -2204,17 +2219,21 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.17 - STATUS CHART
+   29.21 - STATUS CHART
 ========================================================= */
 
 .home-page .status-chart-content {
 
     display: block;
 
-    min-height: 220px;
+    min-height: 165px;
 
 }
 
+
+/* =========================================================
+   29.22 - STATUS BARS
+========================================================= */
 
 .home-page .centre-status-bars {
 
@@ -2224,13 +2243,13 @@ html[dir="ltr"]
 
     flex-direction: column;
 
-    gap: 15px;
+    gap: 10px;
 
 }
 
 
 /* =========================================================
-   29.18 - STATUS ROW
+   29.23 - STATUS ROW
 ========================================================= */
 
 .home-page .centre-status-bar-row {
@@ -2248,9 +2267,9 @@ html[dir="ltr"]
 
     justify-content: space-between;
 
-    gap: 14px;
+    gap: 10px;
 
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 
 }
 
@@ -2261,11 +2280,11 @@ html[dir="ltr"]
 
     align-items: center;
 
-    gap: 9px;
+    gap: 7px;
 
     color: #334155;
 
-    font-size: 14px;
+    font-size: 11px;
 
     font-weight: 750;
 
@@ -2276,7 +2295,7 @@ html[dir="ltr"]
 
     color: #172033;
 
-    font-size: 14px;
+    font-size: 11px;
 
     font-weight: 900;
 
@@ -2284,7 +2303,7 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.19 - STATUS MARKER
+   29.24 - STATUS MARKER
 ========================================================= */
 
 .home-page .centre-status-bar-row::before {
@@ -2298,11 +2317,11 @@ html[dir="ltr"]
 
     content: "";
 
-    width: 10px;
+    width: 8px;
 
-    height: 10px;
+    height: 8px;
 
-    flex: 0 0 10px;
+    flex: 0 0 8px;
 
     border-radius: 50%;
 
@@ -2316,7 +2335,7 @@ html[dir="ltr"]
     background: #16a34a;
 
     box-shadow:
-        0 0 0 4px rgba(22, 163, 74, 0.10);
+        0 0 0 3px rgba(22, 163, 74, 0.10);
 
 }
 
@@ -2328,7 +2347,7 @@ html[dir="ltr"]
     background: #f59e0b;
 
     box-shadow:
-        0 0 0 4px rgba(245, 158, 11, 0.10);
+        0 0 0 3px rgba(245, 158, 11, 0.10);
 
 }
 
@@ -2340,7 +2359,7 @@ html[dir="ltr"]
     background: #94a3b8;
 
     box-shadow:
-        0 0 0 4px rgba(148, 163, 184, 0.12);
+        0 0 0 3px rgba(148, 163, 184, 0.12);
 
 }
 
@@ -2352,7 +2371,7 @@ html[dir="ltr"]
     background: #64748b;
 
     box-shadow:
-        0 0 0 4px rgba(100, 116, 139, 0.10);
+        0 0 0 3px rgba(100, 116, 139, 0.10);
 
 }
 
@@ -2364,24 +2383,24 @@ html[dir="ltr"]
     background: #ef4444;
 
     box-shadow:
-        0 0 0 4px rgba(239, 68, 68, 0.10);
+        0 0 0 3px rgba(239, 68, 68, 0.10);
 
 }
 
 
 /* =========================================================
-   29.20 - TRACK
+   29.25 - TRACK
 ========================================================= */
 
 .home-page .centre-status-track {
 
     width: 100%;
 
-    height: 10px;
+    height: 7px;
 
     overflow: hidden;
 
-    border-radius: 999px;
+    border-radius: 4px;
 
     background: #eef2f6;
 
@@ -2389,7 +2408,7 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.21 - BAR
+   29.26 - BAR
 ========================================================= */
 
 .home-page .centre-status-bar {
@@ -2400,7 +2419,7 @@ html[dir="ltr"]
 
     min-width: 0;
 
-    border-radius: inherit;
+    border-radius: 4px;
 
     transition:
         width .55s ease;
@@ -2444,12 +2463,12 @@ html[dir="ltr"]
 
 
 /* =========================================================
-   29.22 - EMPTY
+   29.27 - EMPTY
 ========================================================= */
 
 .home-page .overview-status-empty {
 
-    min-height: 180px;
+    min-height: 135px;
 
     display: flex;
 
@@ -2459,7 +2478,7 @@ html[dir="ltr"]
 
     justify-content: center;
 
-    gap: 9px;
+    gap: 7px;
 
     color: #94a3b8;
 
@@ -2468,15 +2487,13 @@ html[dir="ltr"]
 
 .home-page .overview-status-empty i {
 
-    font-size: 28px;
-
-    color: #cbd5e1;
+    font-size: 22px;
 
 }
 
 
 /* =========================================================
-   29.23 - RTL
+   29.28 - RTL
 ========================================================= */
 
 html[dir="rtl"] .home-page
@@ -2512,7 +2529,7 @@ html[dir="rtl"] .home-page
 
 
 /* =========================================================
-   29.24 - LTR
+   29.29 - LTR
 ========================================================= */
 
 html[dir="ltr"] .home-page
@@ -2524,7 +2541,7 @@ html[dir="ltr"] .home-page
 
 
 /* =========================================================
-   29.25 - RESPONSIVE
+   29.30 - RESPONSIVE
 ========================================================= */
 
 @media (max-width: 1000px) {
@@ -2544,32 +2561,34 @@ html[dir="ltr"] .home-page
     .home-page .overview-widget
     .widget-header {
 
-        min-height: 64px;
+        min-height: 50px;
 
-        padding: 0 14px;
+        padding: 0 11px;
 
     }
 
 
     .home-page .overview-header-title h2 {
 
-        font-size: 17px;
+        font-size: 14px;
 
     }
 
 
     .home-page .overview-chart-card {
 
-        padding: 15px;
+        padding: 11px;
 
-        min-height: 260px;
+        min-height: 210px;
+
+        border-radius: 4px;
 
     }
 
 
     .home-page .overview-chart-content {
 
-        min-height: 195px;
+        min-height: 150px;
 
     }
 
@@ -2578,25 +2597,25 @@ html[dir="ltr"] .home-page
     .overview-chart-card#monthlyPaymentChart
     .overview-chart-content {
 
-        gap: 18px;
+        gap: 14px;
 
     }
 
 
     .home-page .monthly-payment-donut {
 
-        width: 145px;
+        width: 120px;
 
-        height: 145px;
+        height: 120px;
 
-        flex-basis: 145px;
+        flex-basis: 120px;
 
     }
 
 
     .home-page .monthly-payment-donut::after {
 
-        inset: 19px;
+        inset: 16px;
 
     }
 
@@ -2604,34 +2623,61 @@ html[dir="ltr"] .home-page
     .home-page
     .monthly-payment-donut-center strong {
 
-        font-size: 27px;
+        font-size: 23px;
 
     }
 
 
     .home-page .monthly-payment-legend {
 
-        min-width: 108px;
+        min-width: 95px;
 
     }
 
 
     .home-page .payment-legend-label {
 
-        font-size: 12px;
+        font-size: 10px;
 
     }
 
 
     .home-page .payment-legend-value {
 
-        font-size: 13px;
+        font-size: 11px;
 
     }
 
 }
 
 
+
+
 /* =========================================================
    END SECTION 29 - HOME CHARTS
 ========================================================= */
+
+
+/* =========================================================
+   HOME - FINAL HEIGHT COMPRESSION
+========================================================= */
+
+.home-page .home-banner {
+    margin-bottom: 10px;
+}
+
+.home-page .stats-grid {
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.home-page .dashboard-grid {
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.home-page .system-notification {
+    height: 58px;
+    min-height: 58px;
+    border-radius: 4px;
+}

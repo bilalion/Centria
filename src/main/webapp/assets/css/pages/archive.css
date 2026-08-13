@@ -1395,3 +1395,229 @@ PAGINATION
     }
 
 }
+/* =========================================================
+   CENTRIA ARCHIVE — COMPACT SPACING
+   Keep the existing design / reduce unnecessary space
+========================================================= */
+
+.archive-page{
+    gap:0;
+}
+
+
+/* =========================================================
+   BANNER
+========================================================= */
+
+.archive-banner{
+    height:40px;
+    min-height:40px;
+    margin-bottom:10px;
+    padding:0 12px;
+    gap:8px;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.archive-statistics{
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.archive-stat-card{
+    min-height:96px;
+    padding:12px;
+    gap:10px;
+}
+
+.archive-stat-icon{
+    width:48px;
+    height:48px;
+    flex-basis:48px;
+    font-size:18px;
+}
+
+.archive-stat-label{
+    font-size:13px;
+}
+
+.archive-stat-value{
+    margin-top:2px;
+    font-size:24px;
+}
+
+.archive-stat-description{
+    margin-top:2px;
+    font-size:11px;
+}
+
+
+/* =========================================================
+   CONTROL DECK
+========================================================= */
+
+.archive-control-deck{
+    gap:8px;
+    margin-bottom:9px;
+}
+
+.archive-search-field input{
+    height:38px;
+    padding-inline-start:36px;
+    padding-inline-end:12px;
+    font-size:13px;
+}
+
+.archive-select-field{
+    width:170px;
+    height:38px;
+    padding:0 10px;
+    gap:7px;
+}
+
+.archive-select{
+    font-size:13px;
+}
+
+.archive-search-button,
+.archive-export-button{
+    height:38px;
+    padding:0 14px;
+    gap:6px;
+    font-size:13px;
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+.archive-register-header{
+    height:46px;
+    min-height:46px;
+    padding:0 12px;
+    gap:8px;
+}
+
+.archive-register-title-wrap{
+    gap:7px;
+}
+
+.archive-register-title-wrap > div{
+    gap:6px;
+}
+
+.archive-register-icon{
+    width:30px;
+    height:30px;
+    font-size:.78rem;
+}
+
+.archive-register-title-wrap h2{
+    font-size:.88rem;
+}
+
+.archive-total{
+    min-width:20px;
+    height:20px;
+    font-size:.68rem;
+}
+
+
+/* =========================================================
+   BULK OPERATIONS
+========================================================= */
+
+.archive-bulk-actions{
+    gap:7px;
+}
+
+.archive-operation-label{
+    font-size:12px;
+}
+
+.archive-operation-select{
+    height:36px;
+    min-width:135px;
+    padding:0 10px;
+    font-size:12px;
+}
+
+.archive-apply-button{
+    height:36px;
+    padding:0 13px;
+    font-size:12px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.archive-table-stage{
+    padding:3px 6px;
+}
+
+.archive-table-stage thead th{
+    padding:7px 9px;
+    font-size:.74rem;
+}
+
+.archive-table-stage tbody td{
+    padding:9px 9px;
+    font-size:.78rem;
+    line-height:1.35;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.archive-table-loading{
+    min-height:120px;
+    font-size:16px;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.archive-pagination{
+    gap:5px;
+    min-height:44px;
+    padding:6px 12px;
+}
+
+
+/* =========================================================
+   LAST ARCHIVE ACTIVITY
+========================================================= */
+
+.archive-notification{
+    height:58px;
+    min-height:58px;
+    margin-top:9px;
+    padding:0 12px;
+    gap:10px;
+    border-radius:4px;
+}
+
+.archive-notification-icon{
+    width:34px;
+    height:34px;
+    font-size:15px;
+}
+
+.archive-notification-content h4{
+    font-size:13px;
+}
+
+.archive-notification-content p{
+    margin-top:1px;
+    font-size:11px;
+}

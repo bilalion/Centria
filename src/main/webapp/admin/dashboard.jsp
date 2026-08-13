@@ -190,8 +190,7 @@ if (
       href="<%=request.getContextPath()%>/assets/css/layout/sidebar.css?v=1">
 
 
-<link rel="stylesheet"
-      href="<%=request.getContextPath()%>/assets/css/layout/footer.css?v=1">
+
 
 
 <!-- =================================================
@@ -430,15 +429,7 @@ else {
 <!-- END APP BODY -->
 
 
-<!-- =================================================
-     FOOTER
-================================================= -->
 
-
-<jsp:include page="components/footer.jsp"/>
-
-
-</div>
 <!-- END APP SHELL -->
 
 

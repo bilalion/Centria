@@ -2,15 +2,36 @@
 <%@page import="com.centria.language.LanguageManager"%>
 
 
+<%
+/*
+======================================================
+CURRENT SECTION
+======================================================
+
+Used to keep the correct Sidebar item active when
+the dashboard is opened with:
+
+?section=home
+?section=centres
+?section=payments
+?section=archive
+======================================================
+*/
+
+String currentSection = request.getParameter("section");
+
+if (currentSection == null || currentSection.isEmpty()) {
+    currentSection = "home";
+}
+%>
+
+
 <!-- =================================================
      SECTION 01 - SIDEBAR
 ================================================= -->
 
 
 <aside class="sidebar">
-
-
-
 
 
     <!-- =============================================
@@ -21,19 +42,18 @@
     <nav class="sidebar-menu">
 
 
+        <!-- =========================================
+             HOME
+        ========================================== -->
 
 
+        <a id="sidebar-home"
 
+           href="javascript:void(0)"
 
-        <!-- HOME -->
+           class="sidebar-link <%= "home".equals(currentSection) ? "active" : "" %>"
 
-
-        <a href="javascript:void(0)"
-
-           class="sidebar-link"
-
-          onclick="loadContent('HomeServlet', this)">
-
+           onclick="loadContent('HomeServlet', this)">
 
 
             <span class="sidebar-icon"
@@ -44,8 +64,6 @@
 
 
             </span>
-
-
 
 
             <span class="sidebar-text">
@@ -60,26 +78,21 @@
             </span>
 
 
-
         </a>
 
 
+        <!-- =========================================
+             CENTRES
+        ========================================== -->
 
 
+        <a id="sidebar-centres"
 
+           href="javascript:void(0)"
 
-
-
-
-        <!-- CENTRES -->
-
-
-        <a href="javascript:void(0)"
-
-           class="sidebar-link"
+           class="sidebar-link <%= "centres".equals(currentSection) ? "active" : "" %>"
 
            onclick="loadContent('CentreServlet?action=list', this)">
-
 
 
             <span class="sidebar-icon"
@@ -90,8 +103,6 @@
 
 
             </span>
-
-
 
 
             <span class="sidebar-text">
@@ -106,26 +117,21 @@
             </span>
 
 
-
         </a>
 
 
+        <!-- =========================================
+             PAYMENTS
+        ========================================== -->
 
 
+        <a id="sidebar-payments"
 
+           href="javascript:void(0)"
 
-
-
-
-        <!-- PAYMENTS -->
-
-
-        <a href="javascript:void(0)"
-
-           class="sidebar-link"
+           class="sidebar-link <%= "payments".equals(currentSection) ? "active" : "" %>"
 
            onclick="loadContent('payments.jsp', this)">
-
 
 
             <span class="sidebar-icon"
@@ -136,8 +142,6 @@
 
 
             </span>
-
-
 
 
             <span class="sidebar-text">
@@ -152,26 +156,21 @@
             </span>
 
 
-
         </a>
 
 
+        <!-- =========================================
+             ARCHIVE
+        ========================================== -->
 
 
+        <a id="sidebar-archive"
 
+           href="javascript:void(0)"
 
+           class="sidebar-link <%= "archive".equals(currentSection) ? "active" : "" %>"
 
-
-
-        <!-- ARCHIVE -->
-
-
-        <a href="javascript:void(0)"
-
-           class="sidebar-link"
-
-           onclick="loadContent('ArchiveServlet?action=list', this)" >
-
+           onclick="loadContent('ArchiveServlet?action=list', this)">
 
 
             <span class="sidebar-icon"
@@ -182,8 +181,6 @@
 
 
             </span>
-
-
 
 
             <span class="sidebar-text">
@@ -198,22 +195,10 @@
             </span>
 
 
-
         </a>
 
 
-
-
-
-
     </nav>
-
-
-
-
-
-
-
 
 
     <!-- =============================================
@@ -224,17 +209,14 @@
     <div class="sidebar-footer">
 
 
-
-
-
-
-        <!-- LOGOUT -->
+        <!-- =========================================
+             LOGOUT
+        ========================================== -->
 
 
         <a href="<%=request.getContextPath()%>/LogoutServlet"
 
            class="sidebar-logout">
-
 
 
             <span class="sidebar-icon"
@@ -245,8 +227,6 @@
 
 
             </span>
-
-
 
 
             <span class="sidebar-text">
@@ -261,17 +241,10 @@
             </span>
 
 
-
         </a>
 
 
-
-
-
     </div>
-
-
-
 
 
 </aside>

@@ -4832,7 +4832,227 @@ html[dir="ltr"] .created-dialog-value{
 
 }
 
+/* =========================================================
+   CENTRIA CENTRES - GLOBAL COMPACT SPACING
+========================================================= */
 
+.centres-page{
+    gap:6px;
+}
+
+.centres-workspace{
+    gap:6px;
+}
+
+
+/* =========================================================
+   PAGE BANNER
+========================================================= */
+
+.centres-page .centre-banner{
+    min-height:40px;
+    padding:0 14px;
+    gap:8px;
+}
+
+
+/* =========================================================
+   CONTROL DECK
+========================================================= */
+
+.centres-page .centres-control-deck{
+    gap:8px;
+    padding:8px 14px;
+}
+
+.centres-page .centres-filter-form{
+    gap:8px;
+}
+
+
+/* =========================================================
+   STATUS FILTERS
+========================================================= */
+
+.centres-page .centres-status-filters{
+    gap:5px;
+    padding-top:6px;
+}
+
+.centres-page .centre-status-filter{
+    min-height:30px;
+    padding:0 9px;
+}
+
+
+/* =========================================================
+   REGISTER HEADER
+========================================================= */
+
+.centres-page .centres-register-header{
+    height:48px;
+    min-height:48px;
+    padding:0 12px;
+}
+
+.centres-page .centres-register-title-wrap{
+    gap:7px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.centres-page .centres-table-stage{
+    padding:3px 6px;
+}
+
+.centres-page .table-content-area thead th{
+    padding:8px 10px;
+}
+
+.centres-page .table-content-area tbody td{
+    padding:9px 10px;
+}
+
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.centres-page .centres-table-loading,
+.centres-page .centres-table-error,
+.centres-page .empty-state{
+    min-height:130px;
+    gap:8px;
+    padding:16px;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.centres-page .pagination,
+.centres-page .centres-pagination,
+.centres-page #centres-pagination-container{
+    gap:5px;
+    padding-top:4px;
+}
+
+
+/* =========================================================
+   VIEW DIALOG
+========================================================= */
+
+.centres-page .centre-view-container{
+    gap:6px;
+}
+
+.centres-page .dialog-view{
+    height:40px;
+    margin-bottom:8px;
+    padding:0 14px;
+    gap:8px;
+}
+
+.centres-page .centre-card{
+    gap:6px;
+}
+
+.centres-page .info-row{
+    min-height:50px;
+    padding:7px 9px;
+    gap:8px;
+}
+
+
+/* =========================================================
+   EDIT DIALOG
+========================================================= */
+
+.centres-page .edit-dialog{
+    gap:14px;
+}
+
+.centres-page .edit-dialog-top{
+    gap:12px;
+}
+
+.centres-page .edit-dialog-form{
+    gap:14px;
+}
+
+.centres-page .edit-dialog-section{
+    gap:8px;
+}
+
+.centres-page .edit-dialog-grid{
+    gap:8px;
+}
+
+.centres-page .edit-dialog-row{
+    min-height:52px;
+    padding:7px 9px;
+    gap:10px;
+}
+
+.centres-page .edit-dialog-footer{
+    margin-top:6px;
+    gap:12px;
+    padding-top:12px;
+}
+
+
+/* =========================================================
+   RESET DIALOG
+========================================================= */
+
+.centres-page .reset-top{
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.centres-page .reset-grid{
+    gap:8px;
+}
+
+.centres-page .reset-row{
+    min-height:50px;
+    padding:7px 9px;
+    gap:8px;
+}
+
+.centres-page .reset-actions{
+    gap:10px;
+    padding-top:12px;
+}
+
+
+/* =========================================================
+   ADD DIALOG
+========================================================= */
+
+.centres-page .add-dialog{
+    gap:14px;
+}
+
+.centres-page .add-dialog-top{
+    gap:12px;
+}
+
+.centres-page .add-dialog form{
+    gap:14px;
+}
+
+.centres-page .add-dialog-section{
+    gap:8px;
+}
+
+.centres-page .add-dialog-grid{
+    gap:8px;
+}
 /* ======================================================
    END OF FILE
 ====================================================== */

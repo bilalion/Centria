@@ -1025,18 +1025,19 @@ SimpleDateFormat recentDateFormat =
         </div>
 
 
-        <button
-                type="button"
-                class="recent-widget-link">
+ <a
+    href="javascript:void(0);"
+    class="recent-widget-link"
+   onclick="document.getElementById('sidebar-centres').click();">
 
-            <span>
-                <%= LanguageManager.get(
-                        "dashboard.view.all",
-                        session
-                ) %>
-            </span>
+    <span>
+        <%= LanguageManager.get(
+                "dashboard.view.all",
+                session
+        ) %>
+    </span>
 
-        </button>
+</a>
 
     </div>
 
@@ -1296,17 +1297,17 @@ SimpleDateFormat recentDateFormat =
     </div>
 
 
-    <a
-            class="notification-action"
-            href="javascript:void(0);"
-            onclick="loadContent('PaymentServlet?action=list&tab=UNPAID', null)">
+<a
+    class="notification-action"
+    href="javascript:void(0);"
+    onclick="document.getElementById('sidebar-payments').click();">
 
-        <%= LanguageManager.get(
-                "dashboard.view.payments",
-                session
-        ) %>
+    <%= LanguageManager.get(
+            "dashboard.view.payments",
+            session
+    ) %>
 
-    </a>
+</a>
 
 
 </section>
