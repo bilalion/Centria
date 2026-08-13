@@ -49,7 +49,7 @@ Determine which dashboard section should be displayed.
 Supported Home values:
 
 home
-accueil
+
 
 Internally CENTRIA uses:
 
@@ -76,13 +76,6 @@ NORMALIZE HOME SECTION
 ======================================================
 */
 
-if (
-        "accueil".equals(section)
-) {
-
-    section = "home";
-
-}
 
 
 /*
@@ -105,7 +98,7 @@ request attributes
       ↓
 dashboard.jsp
       ↓
-accueil.jsp
+home.jsp
 ======================================================
 */
 
@@ -207,7 +200,7 @@ if (
 
 
 <link rel="stylesheet"
-      href="<%=request.getContextPath()%>/assets/css/pages/accueil.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/pages/home.css?v=1">
 
 
 <link rel="stylesheet"
@@ -305,7 +298,7 @@ if ("home".equals(section)) {
 %>
 
 
-    <jsp:include page="pages/accueil.jsp"/>
+    <jsp:include page="pages/home.jsp"/>
 
 
 <%
@@ -420,7 +413,7 @@ else {
 %>
 
 
-    <jsp:include page="pages/accueil.jsp"/>
+    <jsp:include page="pages/home.jsp"/>
 
 
 <%
@@ -460,7 +453,7 @@ else {
 
 
 <script defer
-        src="<%=request.getContextPath()%>/assets/js/accueil.js?v=2">
+        src="<%=request.getContextPath()%>/assets/js/home.js?v=3">
 </script>
 
 

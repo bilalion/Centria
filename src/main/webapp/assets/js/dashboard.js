@@ -12,6 +12,12 @@
 ==================================================
 */
 
+/*
+==============================================
+LOAD DASHBOARD CONTENT
+==============================================
+*/
+
 function loadContent(
     page,
     element
@@ -41,195 +47,218 @@ function loadContent(
             );
 
 
-        element.classList.add(
-            "active"
-        );
-
-
         /*
-        ==============================================
-        UPDATE BROWSER URL
-        ==============================================
-        */
-
-        let sectionName = page;
-
-
-        /*
-        HomeServlet
+        Only activate sidebar links.
+        Do not add "active" to buttons
+        such as Recent Centres -> View All.
         */
 
         if (
-            page.startsWith(
-                "HomeServlet"
+            element.classList
+            &&
+            element.classList.contains(
+                "sidebar-link"
             )
         ) {
 
-            sectionName = "home";
+            element.classList.add(
+                "active"
+            );
 
         }
-
-
-        /*
-        CentreServlet
-        */
-
-        if (
-            page.startsWith(
-                "CentreServlet"
-            )
-        ) {
-
-            sectionName = "centres";
-
-        }
-
-
-        /*
-        PaymentServlet
-        */
-
-        if (
-            page.startsWith(
-                "PaymentServlet"
-            )
-        ) {
-
-            sectionName = "payments";
-
-        }
-
-
-        /*
-        ArchiveServlet
-        */
-
-        if (
-            page.startsWith(
-                "ArchiveServlet"
-            )
-        ) {
-
-            sectionName = "archive";
-
-        }
-
-
-        /*
-        Normal JSP pages
-        */
-
-        if (
-            page.includes("/")
-        ) {
-
-            sectionName =
-
-                page
-                    .replace(".jsp", "")
-                    .split("/")
-                    .pop();
-
-        }
-
-
-        history.pushState(
-            null,
-            "",
-            window.contextPath
-            +
-            "/admin/dashboard.jsp?section="
-            +
-            sectionName
-        );
 
     }
 
 
- /*
-==============================================
-BUILD URL
-==============================================
-*/
+    /*
+    ==============================================
+    DETERMINE SECTION
+    ==============================================
+    */
 
-let url;
+    let sectionName = "home";
 
 
-/*
-==================================================
-HOME SERVLET
-==================================================
-*/
+    /*
+    HOME
+    */
 
-if (
-    page.startsWith(
-        "HomeServlet"
-    )
-) {
+    if (
+        page.startsWith(
+            "HomeServlet"
+        )
+    ) {
 
-    url =
+        sectionName = "home";
 
+    }
+
+
+    /*
+    CENTRES
+    */
+
+    else if (
+        page.startsWith(
+            "CentreServlet"
+        )
+    ) {
+
+        sectionName = "centres";
+
+    }
+
+
+    /*
+    PAYMENTS
+    */
+
+    else if (
+        page.startsWith(
+            "PaymentServlet"
+        )
+    ) {
+
+        sectionName = "payments";
+
+    }
+
+
+    /*
+    ARCHIVE
+    */
+
+    else if (
+        page.startsWith(
+            "ArchiveServlet"
+        )
+    ) {
+
+        sectionName = "archive";
+
+    }
+
+
+    /*
+    NORMAL JSP PAGE
+    */
+
+    else if (
+        page.endsWith(
+            ".jsp"
+        )
+    ) {
+
+        sectionName =
+            page
+                .replace(
+                    ".jsp",
+                    ""
+                )
+                .split("/")
+                .pop();
+
+    }
+
+
+    /*
+    ==============================================
+    UPDATE BROWSER URL
+    ==============================================
+    */
+
+    history.pushState(
+        null,
+        "",
         window.contextPath
         +
-        "/admin/home?ajax=true";
-
-}
-
-
-/*
-==============================================
-CENTRE / PAYMENT / ARCHIVE SERVLETS
-==============================================
-*/
-
-else if (
-    page.startsWith(
-        "CentreServlet"
-    )
-    ||
-    page.startsWith(
-        "PaymentServlet"
-    )
-    ||
-    page.startsWith(
-        "ArchiveServlet"
-    )
-) {
-
-    url =
-
-        window.contextPath
+        "/admin/dashboard.jsp?section="
         +
-        "/"
-        +
-        page;
-
-}
+        sectionName
+    );
 
 
-/*
-==============================================
-NORMAL JSP PAGES
-==============================================
-*/
+    /*
+    ==============================================
+    BUILD URL
+    ==============================================
+    */
 
-else {
-
-    url =
-
-        window.contextPath
-        +
-        "/admin/pages/"
-        +
-        page;
-
-}
+    let url;
 
 
-console.log(
-    "Loading:",
-    url
-);
+    /*
+    HOME SERVLET
+    */
+
+    if (
+        page.startsWith(
+            "HomeServlet"
+        )
+    ) {
+
+        url =
+            window.contextPath
+            +
+            "/admin/home?ajax=true";
+
+    }
+
+
+    /*
+    CENTRE / PAYMENT / ARCHIVE SERVLETS
+    */
+
+    else if (
+        page.startsWith(
+            "CentreServlet"
+        )
+        ||
+        page.startsWith(
+            "PaymentServlet"
+        )
+        ||
+        page.startsWith(
+            "ArchiveServlet"
+        )
+    ) {
+
+        url =
+            window.contextPath
+            +
+            "/"
+            +
+            page;
+
+    }
+
+
+    /*
+    NORMAL JSP PAGES
+    */
+
+    else {
+
+        url =
+            window.contextPath
+            +
+            "/admin/pages/"
+            +
+            page;
+
+    }
+
+
+    console.log(
+        "Loading:",
+        url
+    );
+
+    console.log(
+        "Section:",
+        sectionName
+    );
+
 
     /*
     ==============================================
@@ -238,7 +267,6 @@ console.log(
     */
 
     fetch(url)
-
 
         .then(
             response => {
@@ -265,7 +293,6 @@ console.log(
 
 
                 let container =
-
                     document.getElementById(
                         "content-area"
                     );
@@ -281,13 +308,8 @@ console.log(
 
                 /*
                 ==========================================
-                MODULE INITIALIZATION
-                ==========================================
-                */
-
-
-                /*
                 ACCUEIL
+                ==========================================
                 */
 
                 if (
@@ -310,7 +332,9 @@ console.log(
 
 
                 /*
+                ==========================================
                 CENTRES
+                ==========================================
                 */
 
                 if (
@@ -333,7 +357,9 @@ console.log(
 
 
                 /*
+                ==========================================
                 PAYMENTS
+                ==========================================
                 */
 
                 if (
@@ -356,7 +382,9 @@ console.log(
 
 
                 /*
+                ==========================================
                 ARCHIVE
+                ==========================================
                 */
 
                 if (
@@ -393,7 +421,6 @@ console.log(
         );
 
 }
-
 
 /*
 ==================================================

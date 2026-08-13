@@ -43,6 +43,8 @@ function initAccueilPage() {
     initRecentCentres();
 
     initHomeActions();
+    
+    initHomeChart();
 
 }
 
@@ -71,7 +73,7 @@ function initRecentCentres() {
 
     /*
     Recent centres are already rendered
-    by accueil.jsp.
+    by ahome.jsp
 
     JavaScript is only responsible
     for page initialization here.
@@ -205,30 +207,40 @@ function initHomeActions() {
 }
 
 
+
+
+
+
 /*
 ==================================================
- HOME CHART
+HOME CHARTS
 ==================================================
 */
 
 function initHomeChart() {
 
+    initMonthlyPaymentDonut();
 
-    /*
-    Chart data will be connected later
-    when HomeDAO provides the overview
-    data.
+    initCentreStatusBars();
 
-    Nothing is rendered here yet.
-    */
+}
 
-    const chart =
-        document.querySelector(
-            ".chart-placeholder"
+
+/*
+==================================================
+MONTHLY PAYMENT DONUT
+==================================================
+*/
+
+function initMonthlyPaymentDonut() {
+
+    const donut =
+        document.getElementById(
+            "monthlyPaymentDonut"
         );
 
 
-    if (!chart) {
+    if (!donut) {
 
         return;
 
@@ -236,11 +248,236 @@ function initHomeChart() {
 
 
     /*
-    Keep the current placeholder
-    until the chart data is implemented.
+    ==========================================
+    READ PAYMENT PERCENTAGE FROM JSP
+    ==========================================
     */
 
+    const centerValue =
+        document.getElementById(
+            "monthlyPaymentPercent"
+        );
+
+
+    if (!centerValue) {
+
+        return;
+
+    }
+
+
+    const paid =
+        parseFloat(
+            centerValue.textContent
+                .replace("%", "")
+                .trim()
+        ) || 0;
+
+
+    const unpaid =
+        100 - paid;
+
+
+    /*
+    ==========================================
+    DRAW DONUT
+    ==========================================
+    */
+
+    donut.style.background =
+        "conic-gradient(" +
+
+        "#22c55e 0% " +
+        paid +
+        "%, " +
+
+        "#f43f5e " +
+        paid +
+        "% 100%" +
+
+        ")";
+
+
+    /*
+    ==========================================
+    CENTER VALUE
+    ==========================================
+    */
+
+    centerValue.textContent =
+        Math.round(paid) + "%";
+
 }
+
+
+/*
+==================================================
+CENTRE STATUS BARS
+==================================================
+*/
+
+function initCentreStatusBars() {
+
+    const container =
+        document.getElementById(
+            "centreStatusBars"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const rows =
+        container.querySelectorAll(
+            ".centre-status-bar-row"
+        );
+
+
+    if (!rows.length) {
+
+        return;
+
+    }
+
+
+    /*
+    ==========================================
+    READ VALUES
+    ==========================================
+    */
+
+    const values = [];
+
+
+    rows.forEach(
+        function (row) {
+
+            const valueElement =
+                row.querySelector(
+                    ".centre-status-value"
+                );
+
+
+            const value =
+                valueElement
+                ?
+                parseInt(
+                    valueElement.textContent.trim(),
+                    10
+                ) || 0
+                :
+                0;
+
+
+            values.push(
+                value
+            );
+
+        }
+    );
+
+
+    /*
+    ==========================================
+    FIND MAXIMUM
+    ==========================================
+    */
+
+    const maxValue =
+        Math.max.apply(
+            null,
+            values
+        );
+
+
+    /*
+    ==========================================
+    NO DATA
+    ==========================================
+    */
+
+    if (maxValue <= 0) {
+
+        rows.forEach(
+            function (row) {
+
+                const bar =
+                    row.querySelector(
+                        ".centre-status-bar"
+                    );
+
+
+                if (bar) {
+
+                    bar.style.width =
+                        "0%";
+
+                }
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+    ==========================================
+    DRAW BARS
+    ==========================================
+    */
+
+    rows.forEach(
+        function (
+            row,
+            index
+        ) {
+
+
+            const bar =
+                row.querySelector(
+                    ".centre-status-bar"
+                );
+
+
+            if (!bar) {
+
+                return;
+
+            }
+
+
+            const value =
+                values[index];
+
+
+            const width =
+                (
+                    value
+                    /
+                    maxValue
+                )
+                *
+                100;
+
+
+            bar.style.width =
+                width + "%";
+
+
+        }
+    );
+
+}
+
+
+
 
 
 /*

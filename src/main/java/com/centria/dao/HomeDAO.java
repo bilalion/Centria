@@ -15,7 +15,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class HomeDAO {
@@ -260,6 +262,298 @@ public class HomeDAO {
         return revenue;
     }
 
+    
+    /*
+======================================================
+MONTHLY PAYMENT STATUS
+======================================================
+
+*/
+
+public Map<String, Integer> getMonthlyPaymentStatus() {
+
+    Map<String, Integer> statusCounts =
+            new LinkedHashMap<>();
+
+
+    /*
+    ==================================================
+    DEFAULT VALUES
+    ==================================================
+    */
+
+    statusCounts.put(
+            "PAID",
+            0
+    );
+
+
+    statusCounts.put(
+            "UNPAID",
+            0
+    );
+
+
+    String sql =
+            "SELECT " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN p.status_payment = 'PAID' " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS paid_count, " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN p.status_payment = 'UNPAID' " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS unpaid_count " +
+
+            "FROM centres c " +
+
+            "LEFT JOIN payments p " +
+            "ON p.centre_code = c.centre_code " +
+
+            "WHERE c.status NOT IN " +
+            "('ARCHIVED', 'DELETED')";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ResultSet rs =
+                    ps.executeQuery()
+    ) {
+
+
+        if (rs.next()) {
+
+            statusCounts.put(
+                    "PAID",
+                    rs.getInt(
+                            "paid_count"
+                    )
+            );
+
+
+            statusCounts.put(
+                    "UNPAID",
+                    rs.getInt(
+                            "unpaid_count"
+                    )
+            );
+
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "ERROR - HomeDAO.getMonthlyPaymentStatus()"
+        );
+
+        e.printStackTrace();
+
+    }
+
+
+    return statusCounts;
+}
+
+/*
+======================================================
+CENTRE STATUS OVERVIEW
+======================================================
+
+*/
+
+public Map<String, Integer> getCentreStatusOverview() {
+
+    Map<String, Integer> statusCounts =
+            new LinkedHashMap<>();
+
+
+    /*
+    ==================================================
+    DEFAULT VALUES
+    ==================================================
+    */
+
+    statusCounts.put(
+            "ACTIVE",
+            0
+    );
+
+
+    statusCounts.put(
+            "FOLLOW_UP",
+            0
+    );
+
+
+    statusCounts.put(
+            "INACTIVE",
+            0
+    );
+
+
+    statusCounts.put(
+            "ARCHIVED",
+            0
+    );
+
+
+    statusCounts.put(
+            "DELETED",
+            0
+    );
+
+
+    String sql =
+            "SELECT " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN status = 'ACTIVE' " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS active_count, " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN status IN ('PENDING', 'SUSPENDED') " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS follow_up_count, " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN status = 'INACTIVE' " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS inactive_count, " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN status = 'ARCHIVED' " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS archived_count, " +
+
+            "COALESCE(" +
+                "SUM(" +
+                    "CASE " +
+                    "WHEN status = 'DELETED' " +
+                    "THEN 1 " +
+                    "ELSE 0 " +
+                    "END" +
+                "), " +
+                "0" +
+            ") AS deleted_count " +
+
+            "FROM centres";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ResultSet rs =
+                    ps.executeQuery()
+    ) {
+
+
+        if (rs.next()) {
+
+
+            statusCounts.put(
+                    "ACTIVE",
+                    rs.getInt(
+                            "active_count"
+                    )
+            );
+
+
+            statusCounts.put(
+                    "FOLLOW_UP",
+                    rs.getInt(
+                            "follow_up_count"
+                    )
+            );
+
+
+            statusCounts.put(
+                    "INACTIVE",
+                    rs.getInt(
+                            "inactive_count"
+                    )
+            );
+
+
+            statusCounts.put(
+                    "ARCHIVED",
+                    rs.getInt(
+                            "archived_count"
+                    )
+            );
+
+
+            statusCounts.put(
+                    "DELETED",
+                    rs.getInt(
+                            "deleted_count"
+                    )
+            );
+
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "ERROR - HomeDAO.getCentreStatusOverview()"
+        );
+
+        e.printStackTrace();
+
+    }
+
+
+    return statusCounts;
+}
 
     /*
     ======================================================

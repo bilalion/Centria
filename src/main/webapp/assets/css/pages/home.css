@@ -1663,3 +1663,975 @@ html[dir="ltr"]
 /* =========================================================
    END SECTION 28
 ========================================================= */
+
+
+/* =========================================================
+   SECTION 29 - HOME CHARTS
+   CENTRIA PREMIUM CHART UI
+========================================================= */
+
+
+/* =========================================================
+   29.01 - OVERVIEW WIDGET
+========================================================= */
+
+.home-page .overview-widget {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe7f2;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.055);
+
+}
+
+
+/* =========================================================
+   29.02 - OVERVIEW HEADER
+========================================================= */
+
+.home-page .overview-widget .widget-header {
+
+    min-height: 74px;
+
+    padding: 0 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fbfdff 100%
+        );
+
+    border-bottom: 1px solid #edf2f7;
+
+}
+
+
+/* =========================================================
+   29.03 - HEADER TITLE
+========================================================= */
+
+.home-page .overview-header-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.home-page .overview-header-title h2 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 20px;
+
+    line-height: 1.2;
+
+    font-weight: 850;
+
+}
+
+
+/* =========================================================
+   29.04 - YEAR FILTER
+========================================================= */
+
+.home-page .overview-widget .widget-filter {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    min-height: 38px;
+
+    padding: 0 14px;
+
+    border: 1px solid #dce6f2;
+
+    border-radius: 12px;
+
+    background: #f7faff;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
+
+}
+
+
+.home-page .overview-widget .widget-filter:hover {
+
+    background: #eef5ff;
+
+    border-color: #cfe0fa;
+
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.08);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   29.05 - OVERVIEW BODY
+========================================================= */
+
+.home-page .overview-widget .widget-body {
+
+    width: 100%;
+
+    height: auto;
+
+    min-height: 320px;
+
+    padding: 20px;
+
+    display: block;
+
+    box-sizing: border-box;
+
+    background: #fbfdff;
+
+}
+
+
+/* =========================================================
+   29.06 - CHART GRID
+========================================================= */
+
+.home-page .overview-charts-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(440px, 1.15fr)
+        minmax(340px, 0.85fr);
+
+    gap: 18px;
+
+    width: 100%;
+
+}
+
+
+/* =========================================================
+   29.07 - CHART CARD
+========================================================= */
+
+.home-page .overview-chart-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 300px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e4ebf4;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.035);
+
+}
+
+
+/* =========================================================
+   29.08 - CHART CARD HEADER
+========================================================= */
+
+.home-page .overview-chart-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================================
+   29.09 - CHART TITLE
+========================================================= */
+
+.home-page .overview-chart-card-title {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+
+    color: #172033;
+
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    font-weight: 850;
+
+}
+
+
+.home-page .overview-chart-card-title i {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    border-radius: 11px;
+
+    background: #eef5ff;
+
+    color: #2563eb;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   29.10 - CHART SUBTITLE
+========================================================= */
+
+.home-page .overview-chart-card-subtitle {
+
+    flex: 0 0 auto;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   29.11 - CHART CONTENT
+========================================================= */
+
+.home-page .overview-chart-content {
+
+    min-height: 220px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   29.12 - PAYMENT CHART CONTENT
+========================================================= */
+
+.home-page .overview-chart-card#monthlyPaymentChart
+.overview-chart-content {
+
+    gap: 26px;
+
+    padding-top: 4px;
+
+}
+
+
+/* =========================================================
+   29.13 - DONUT
+========================================================= */
+
+.home-page .monthly-payment-donut {
+
+    position: relative;
+
+    width: 184px;
+
+    height: 184px;
+
+    flex: 0 0 184px;
+
+    border-radius: 50%;
+
+    background: #eef1f5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 12px 28px rgba(15, 23, 42, 0.09);
+
+    isolation: isolate;
+
+}
+
+
+/* =========================================================
+   29.14 - DONUT INNER HOLE
+========================================================= */
+
+.home-page .monthly-payment-donut::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 24px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 1px #edf2f7;
+
+    z-index: 1;
+
+}
+
+
+/* =========================================================
+   29.15 - DONUT CENTER
+========================================================= */
+
+.home-page .monthly-payment-donut-center {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+.home-page .monthly-payment-donut-center strong {
+
+    color: #172033;
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.home-page .monthly-payment-donut-center span {
+
+    margin-top: 7px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.2;
+
+    font-weight: 750;
+
+}
+
+
+/* =========================================================
+   29.16 - PAYMENT LEGEND
+========================================================= */
+
+.home-page .monthly-payment-legend {
+
+    min-width: 145px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+}
+
+
+.home-page .payment-legend-item {
+
+    display: grid;
+
+    grid-template-columns:
+        10px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    column-gap: 9px;
+
+    padding: 10px 0;
+
+}
+
+
+.home-page .payment-legend-marker {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 4px rgba(148, 163, 184, 0.08);
+
+}
+
+
+.home-page .payment-legend-marker.paid {
+
+    background: #16a34a;
+
+    box-shadow:
+        0 0 0 4px rgba(22, 163, 74, 0.10);
+
+}
+
+
+.home-page .payment-legend-marker.unpaid {
+
+    background: #f43f5e;
+
+    box-shadow:
+        0 0 0 4px rgba(244, 63, 94, 0.10);
+
+}
+
+
+.home-page .payment-legend-label {
+
+    color: #475569;
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+}
+
+
+.home-page .payment-legend-value {
+
+    color: #172033;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================================
+   29.17 - STATUS CHART
+========================================================= */
+
+.home-page .status-chart-content {
+
+    display: block;
+
+    min-height: 220px;
+
+}
+
+
+.home-page .centre-status-bars {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+/* =========================================================
+   29.18 - STATUS ROW
+========================================================= */
+
+.home-page .centre-status-bar-row {
+
+    width: 100%;
+
+}
+
+
+.home-page .centre-status-bar-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.home-page .centre-status-name {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+}
+
+
+.home-page .centre-status-value {
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================================
+   29.19 - STATUS MARKER
+========================================================= */
+
+.home-page .centre-status-bar-row::before {
+
+    display: none;
+
+}
+
+
+.home-page .centre-status-name::before {
+
+    content: "";
+
+    width: 10px;
+
+    height: 10px;
+
+    flex: 0 0 10px;
+
+    border-radius: 50%;
+
+}
+
+
+.home-page
+.centre-status-bar-row[data-status="ACTIVE"]
+.centre-status-name::before {
+
+    background: #16a34a;
+
+    box-shadow:
+        0 0 0 4px rgba(22, 163, 74, 0.10);
+
+}
+
+
+.home-page
+.centre-status-bar-row[data-status="FOLLOW_UP"]
+.centre-status-name::before {
+
+    background: #f59e0b;
+
+    box-shadow:
+        0 0 0 4px rgba(245, 158, 11, 0.10);
+
+}
+
+
+.home-page
+.centre-status-bar-row[data-status="INACTIVE"]
+.centre-status-name::before {
+
+    background: #94a3b8;
+
+    box-shadow:
+        0 0 0 4px rgba(148, 163, 184, 0.12);
+
+}
+
+
+.home-page
+.centre-status-bar-row[data-status="ARCHIVED"]
+.centre-status-name::before {
+
+    background: #64748b;
+
+    box-shadow:
+        0 0 0 4px rgba(100, 116, 139, 0.10);
+
+}
+
+
+.home-page
+.centre-status-bar-row[data-status="DELETED"]
+.centre-status-name::before {
+
+    background: #ef4444;
+
+    box-shadow:
+        0 0 0 4px rgba(239, 68, 68, 0.10);
+
+}
+
+
+/* =========================================================
+   29.20 - TRACK
+========================================================= */
+
+.home-page .centre-status-track {
+
+    width: 100%;
+
+    height: 10px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #eef2f6;
+
+}
+
+
+/* =========================================================
+   29.21 - BAR
+========================================================= */
+
+.home-page .centre-status-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    min-width: 0;
+
+    border-radius: inherit;
+
+    transition:
+        width .55s ease;
+
+}
+
+
+.home-page .centre-status-bar.active {
+
+    background: #16a34a;
+
+}
+
+
+.home-page .centre-status-bar.follow-up {
+
+    background: #f59e0b;
+
+}
+
+
+.home-page .centre-status-bar.inactive {
+
+    background: #94a3b8;
+
+}
+
+
+.home-page .centre-status-bar.archived {
+
+    background: #64748b;
+
+}
+
+
+.home-page .centre-status-bar.deleted {
+
+    background: #ef4444;
+
+}
+
+
+/* =========================================================
+   29.22 - EMPTY
+========================================================= */
+
+.home-page .overview-status-empty {
+
+    min-height: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    color: #94a3b8;
+
+}
+
+
+.home-page .overview-status-empty i {
+
+    font-size: 28px;
+
+    color: #cbd5e1;
+
+}
+
+
+/* =========================================================
+   29.23 - RTL
+========================================================= */
+
+html[dir="rtl"] .home-page
+.overview-chart-card {
+
+    direction: rtl;
+
+}
+
+
+html[dir="rtl"] .home-page
+.overview-chart-card-header {
+
+    direction: rtl;
+
+}
+
+
+html[dir="rtl"] .home-page
+.monthly-payment-legend {
+
+    direction: rtl;
+
+}
+
+
+html[dir="rtl"] .home-page
+.centre-status-bar-header {
+
+    direction: rtl;
+
+}
+
+
+/* =========================================================
+   29.24 - LTR
+========================================================= */
+
+html[dir="ltr"] .home-page
+.overview-chart-card {
+
+    direction: ltr;
+
+}
+
+
+/* =========================================================
+   29.25 - RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .home-page .overview-charts-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .home-page .overview-widget
+    .widget-header {
+
+        min-height: 64px;
+
+        padding: 0 14px;
+
+    }
+
+
+    .home-page .overview-header-title h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .home-page .overview-chart-card {
+
+        padding: 15px;
+
+        min-height: 260px;
+
+    }
+
+
+    .home-page .overview-chart-content {
+
+        min-height: 195px;
+
+    }
+
+
+    .home-page
+    .overview-chart-card#monthlyPaymentChart
+    .overview-chart-content {
+
+        gap: 18px;
+
+    }
+
+
+    .home-page .monthly-payment-donut {
+
+        width: 145px;
+
+        height: 145px;
+
+        flex-basis: 145px;
+
+    }
+
+
+    .home-page .monthly-payment-donut::after {
+
+        inset: 19px;
+
+    }
+
+
+    .home-page
+    .monthly-payment-donut-center strong {
+
+        font-size: 27px;
+
+    }
+
+
+    .home-page .monthly-payment-legend {
+
+        min-width: 108px;
+
+    }
+
+
+    .home-page .payment-legend-label {
+
+        font-size: 12px;
+
+    }
+
+
+    .home-page .payment-legend-value {
+
+        font-size: 13px;
+
+    }
+
+}
+
+
+/* =========================================================
+   END SECTION 29 - HOME CHARTS
+========================================================= */
