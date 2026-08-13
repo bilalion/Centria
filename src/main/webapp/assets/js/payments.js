@@ -280,6 +280,7 @@ function loadPayments(page = 1){
 
         container.innerHTML =
             fragment.innerHTML;
+    initSubscriptionOperationColors();
 
     }
 
@@ -944,6 +945,7 @@ function(){
 */
 
 
+
 function openSubscriptionConfirm(
     centreCode,
     codeFacture
@@ -1168,6 +1170,86 @@ formData.append(
     });
 
 
+
+}
+
+/*
+==========================================================
+  TAB2 - OPERATION COLOR
+  UPGRADE / EXTENDED
+==========================================================
+*/
+
+function updateSubscriptionOperationColor(select){
+
+    if(!select){
+        return;
+    }
+
+
+    /* Remove previous operation classes */
+
+    select.classList.remove(
+        "operation-upgrade",
+        "operation-extended"
+    );
+
+
+    /* Apply current operation class */
+
+    if(select.value === "UPGRADE"){
+
+        select.classList.add(
+            "operation-upgrade"
+        );
+
+    }
+    else if(select.value === "EXTENDED"){
+
+        select.classList.add(
+            "operation-extended"
+        );
+
+    }
+
+}
+
+
+/*
+==========================================================
+  INITIALIZE TAB2 OPERATION COLORS
+==========================================================
+*/
+
+function initSubscriptionOperationColors(){
+
+    const operations =
+        document.querySelectorAll(
+            "#payments-table-container .paid-table .subscription-operation"
+        );
+
+
+    operations.forEach(function(select){
+
+        /* Apply initial color */
+
+        updateSubscriptionOperationColor(select);
+
+
+        /* Update color when user changes operation */
+
+        select.addEventListener(
+            "change",
+            function(){
+
+                updateSubscriptionOperationColor(
+                    this
+                );
+
+            }
+        );
+
+    });
 
 }
 

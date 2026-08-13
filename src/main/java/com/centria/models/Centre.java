@@ -3,13 +3,11 @@ package com.centria.models;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-
 public class Centre {
-
 
     private int id;
 
-    // Nouveau : Code unique du centre
+    // Code unique du centre
     private String centreCode;
 
     private String name;
@@ -34,12 +32,24 @@ public class Centre {
 
     private Timestamp lastLogin;
 
+    /*
+    ==================================================
+    SUBSCRIPTION DURATION
+    ==================================================
+    */
+
+    private int durationMonths;
 
 
-    public Centre(){
+    /*
+    ==================================================
+    CONSTRUCTOR
+    ==================================================
+    */
+
+    public Centre() {
 
     }
-
 
 
     public Centre(
@@ -56,7 +66,7 @@ public class Centre {
             Timestamp createdAt,
             boolean mustChangePassword,
             Timestamp lastLogin
-    ){
+    ) {
 
         this.id = id;
         this.centreCode = centreCode;
@@ -75,15 +85,17 @@ public class Centre {
     }
 
 
-
-
+    /*
+    ==================================================
+    ID
+    ==================================================
+    */
 
     public int getId() {
 
         return id;
 
     }
-
 
 
     public void setId(int id) {
@@ -93,13 +105,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    CENTRE CODE
+    ==================================================
+    */
 
     public String getCentreCode() {
 
         return centreCode;
 
     }
-
 
 
     public void setCentreCode(String centreCode) {
@@ -109,15 +125,17 @@ public class Centre {
     }
 
 
-
-
+    /*
+    ==================================================
+    NAME
+    ==================================================
+    */
 
     public String getName() {
 
         return name;
 
     }
-
 
 
     public void setName(String name) {
@@ -127,13 +145,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    OWNER NAME
+    ==================================================
+    */
 
     public String getOwnerName() {
 
         return ownerName;
 
     }
-
 
 
     public void setOwnerName(String ownerName) {
@@ -143,13 +165,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    USERNAME
+    ==================================================
+    */
 
     public String getUsername() {
 
         return username;
 
     }
-
 
 
     public void setUsername(String username) {
@@ -159,13 +185,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    PASSWORD HASH
+    ==================================================
+    */
 
     public String getPasswordHash() {
 
         return passwordHash;
 
     }
-
 
 
     public void setPasswordHash(String passwordHash) {
@@ -175,13 +205,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    PHONE
+    ==================================================
+    */
 
     public String getPhone() {
 
         return phone;
 
     }
-
 
 
     public void setPhone(String phone) {
@@ -191,13 +225,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    SUBSCRIPTION START
+    ==================================================
+    */
 
     public Date getSubscriptionStart() {
 
         return subscriptionStart;
 
     }
-
 
 
     public void setSubscriptionStart(Date subscriptionStart) {
@@ -207,13 +245,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    SUBSCRIPTION END
+    ==================================================
+    */
 
     public Date getSubscriptionEnd() {
 
         return subscriptionEnd;
 
     }
-
 
 
     public void setSubscriptionEnd(Date subscriptionEnd) {
@@ -223,13 +265,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    STATUS
+    ==================================================
+    */
 
     public String getStatus() {
 
         return status;
 
     }
-
 
 
     public void setStatus(String status) {
@@ -239,13 +285,17 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    CREATED AT
+    ==================================================
+    */
 
     public Timestamp getCreatedAt() {
 
         return createdAt;
 
     }
-
 
 
     public void setCreatedAt(Timestamp createdAt) {
@@ -255,6 +305,11 @@ public class Centre {
     }
 
 
+    /*
+    ==================================================
+    MUST CHANGE PASSWORD
+    ==================================================
+    */
 
     public boolean isMustChangePassword() {
 
@@ -263,14 +318,20 @@ public class Centre {
     }
 
 
-
-    public void setMustChangePassword(boolean mustChangePassword) {
+    public void setMustChangePassword(
+            boolean mustChangePassword
+    ) {
 
         this.mustChangePassword = mustChangePassword;
 
     }
 
 
+    /*
+    ==================================================
+    LAST LOGIN
+    ==================================================
+    */
 
     public Timestamp getLastLogin() {
 
@@ -279,12 +340,32 @@ public class Centre {
     }
 
 
-
     public void setLastLogin(Timestamp lastLogin) {
 
         this.lastLogin = lastLogin;
 
     }
 
+
+    /*
+    ==================================================
+    DURATION MONTHS
+    ==================================================
+    */
+
+    public int getDurationMonths() {
+
+        return durationMonths;
+
+    }
+
+
+    public void setDurationMonths(
+            int durationMonths
+    ) {
+
+        this.durationMonths = durationMonths;
+
+    }
 
 }

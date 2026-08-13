@@ -741,3 +741,925 @@ html[dir="rtl"] .home-page{
 
 
 }
+
+
+/* =========================================================
+   SECTION 28 - RECENT CENTRES
+   CENTRIA PREMIUM UI
+========================================================= */
+
+
+/* =========================================================
+   28.01 - WIDGET
+========================================================= */
+
+.home-page .recent-widget {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e4eaf2;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 8px 26px rgba(15, 23, 42, 0.055);
+
+}
+
+
+/* =========================================================
+   28.02 - HEADER
+========================================================= */
+
+.home-page .recent-widget .recent-widget-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 70px;
+
+    padding: 0 22px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #edf1f6;
+
+}
+
+
+/* =========================================================
+   28.03 - HEADER TITLE
+========================================================= */
+
+.home-page .recent-widget .recent-widget-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+
+}
+
+
+/* =========================================================
+   28.04 - TITLE
+========================================================= */
+
+.home-page .recent-widget .recent-widget-eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 19px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   28.05 - TITLE ICON
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-widget-eyebrow::before {
+
+    content: "✦";
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 11px;
+
+    background: #eef5ff;
+
+    color: #2563eb;
+
+    font-size: 16px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   28.06 - VIEW ALL
+========================================================= */
+
+.home-page .recent-widget .recent-widget-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    height: 38px;
+
+    min-width: 92px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d8e5f7;
+
+    border-radius: 11px;
+
+    background: #f5f9ff;
+
+    color: #2563eb;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    line-height: 1;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+
+}
+
+
+/* =========================================================
+   28.07 - BUTTON ARROW
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-widget-link::after {
+
+    content: "←";
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   28.08 - BUTTON HOVER
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-widget-link:hover {
+
+    background: #2563eb;
+
+    border-color: #2563eb;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 16px rgba(37, 99, 235, 0.18);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   28.09 - BODY
+========================================================= */
+
+.home-page .recent-widget .recent-widget-body {
+
+    width: 100%;
+
+    padding: 10px 12px 13px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   28.10 - LIST
+========================================================= */
+
+.home-page .recent-widget .recent-centres-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 5px;
+
+}
+
+
+/* =========================================================
+   28.11 - ROW
+========================================================= */
+
+.home-page .recent-widget .recent-centre-item {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        135px
+        105px;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 58px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    transition:
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
+
+}
+
+
+/* =========================================================
+   28.12 - ALTERNATING ROW
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-centre-item:nth-child(even) {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   28.13 - FIRST ROW
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-centre-item:first-child {
+
+    background: #f4f8ff;
+
+    border-color: #edf4ff;
+
+}
+
+
+/* =========================================================
+   28.14 - ROW HOVER
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-centre-item:hover {
+
+    background: #f0f6ff;
+
+    border-color: #dbe8f8;
+
+    box-shadow:
+        0 5px 16px rgba(37, 99, 235, 0.07);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   28.15 - CENTRE INFO
+========================================================= */
+
+.home-page .recent-widget .recent-centre-info {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   28.16 - CENTRE NAME
+========================================================= */
+
+.home-page .recent-widget .recent-centre-name {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: #172033;
+
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* =========================================================
+   28.17 - CENTRE ICON
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-centre-name::before {
+
+    content: "▦";
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 34px;
+
+    height: 34px;
+
+    margin-left: 10px;
+
+    border: 1px solid #dbe8fa;
+
+    border-radius: 10px;
+
+    background: #eef5ff;
+
+    color: #2563eb;
+
+    font-size: 16px;
+
+    line-height: 1;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   28.18 - DATE CONTAINER
+========================================================= */
+
+.home-page .recent-widget .recent-centre-date {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-width: 0;
+
+    height: 100%;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1;
+
+    font-weight: 650;
+
+    direction: ltr;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   28.19 - DATE ICON
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-centre-date::before {
+
+    content: "▣";
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 15px;
+
+    height: 15px;
+
+    color: #7c91aa;
+
+    font-size: 13px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   28.20 - DATE VALUE
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-date-value {
+
+    display: inline-block;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   28.21 - DURATION
+========================================================= */
+
+.home-page .recent-widget .recent-centre-duration {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    min-width: 0;
+
+}
+
+
+/* =========================================================
+   28.22 - DURATION BADGE
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-duration-value {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    width: 82px;
+
+    height: 31px;
+
+    padding: 0 9px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #cfe0fa;
+
+    border-radius: 999px;
+
+    background: #f0f6ff;
+
+    color: #2563eb;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   28.23 - DURATION ICON
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-duration-value::before {
+
+    content: "◷";
+
+    font-size: 14px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   28.24 - EMPTY
+========================================================= */
+
+.home-page .recent-widget .recent-empty {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 145px;
+
+    padding: 20px;
+
+    color: #94a3b8;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   28.25 - EMPTY CONTENT
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-empty-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+/* =========================================================
+   28.26 - EMPTY ICON
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-empty-content::before {
+
+    content: "—";
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 38px;
+
+    height: 38px;
+
+    margin-bottom: 8px;
+
+    border-radius: 11px;
+
+    background: #f8fafc;
+
+    color: #94a3b8;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   28.27 - EMPTY TEXT
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-empty-title {
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   28.28 - RTL
+========================================================= */
+
+html[dir="rtl"]
+.home-page
+.recent-widget
+.recent-centre-item {
+
+    direction: rtl;
+
+}
+
+
+html[dir="rtl"]
+.home-page
+.recent-widget
+.recent-centre-name {
+
+    text-align: right;
+
+}
+
+
+html[dir="rtl"]
+.home-page
+.recent-widget
+.recent-centre-name::before {
+
+    margin-left: 10px;
+
+    margin-right: 0;
+
+}
+
+
+html[dir="rtl"]
+.home-page
+.recent-widget
+.recent-centre-duration {
+
+    justify-content: flex-start;
+
+}
+
+
+/* =========================================================
+   28.29 - LTR
+========================================================= */
+
+html[dir="ltr"]
+.home-page
+.recent-widget
+.recent-centre-item {
+
+    direction: ltr;
+
+}
+
+
+html[dir="ltr"]
+.home-page
+.recent-widget
+.recent-centre-name {
+
+    text-align: left;
+
+}
+
+
+html[dir="ltr"]
+.home-page
+.recent-widget
+.recent-centre-name::before {
+
+    margin-left: 0;
+
+    margin-right: 10px;
+
+}
+
+
+html[dir="ltr"]
+.home-page
+.recent-widget
+.recent-centre-duration {
+
+    justify-content: flex-end;
+
+}
+
+
+/* =========================================================
+   28.30 - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .home-page
+    .recent-widget
+    .recent-widget-header {
+
+        min-height: 60px;
+
+        padding: 0 14px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-widget-eyebrow {
+
+        font-size: 16px;
+
+        gap: 8px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-widget-eyebrow::before {
+
+        width: 29px;
+
+        height: 29px;
+
+        border-radius: 9px;
+
+        font-size: 14px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-widget-link {
+
+        min-width: 78px;
+
+        height: 34px;
+
+        padding: 0 10px;
+
+        font-size: 12px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-widget-body {
+
+        padding: 8px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centres-list {
+
+        gap: 4px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centre-item {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            100px
+            75px;
+
+        min-height: 50px;
+
+        padding: 0 9px;
+
+        border-radius: 11px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centre-name {
+
+        font-size: 13px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centre-name::before {
+
+        width: 27px;
+
+        height: 27px;
+
+        margin-left: 7px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centre-date {
+
+        font-size: 10px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centre-date::before {
+
+        display: none;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-duration-value {
+
+        width: 65px;
+
+        height: 26px;
+
+        font-size: 10px;
+
+    }
+
+}
+
+
+/* =========================================================
+   END SECTION 28
+========================================================= */

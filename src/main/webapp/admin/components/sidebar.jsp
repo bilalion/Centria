@@ -32,7 +32,7 @@
 
            class="sidebar-link"
 
-           onclick="loadContent('accueil.jsp', this)">
+          onclick="loadContent('HomeServlet', this)">
 
 
 

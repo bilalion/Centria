@@ -645,6 +645,64 @@ html[dir="ltr"] #payments-table-container .payments-table,
 }
 
 #payments-table-container .paid-table tbody tr td:first-child{border-right:4px solid #22c55e;}
+/* ======================================================
+   SUBSCRIPTION OPERATION COLORS
+====================================================== */
+
+#payments-table-container .paid-table .subscription-operation{
+
+    transition:
+        color .2s ease,
+        border-color .2s ease,
+        background-color .2s ease;
+
+}
+
+
+/* UPGRADE */
+
+#payments-table-container .paid-table .subscription-operation.operation-upgrade{
+
+    color:#2563eb;
+
+    border-color:#93c5fd;
+
+    background-color:#eff6ff;
+
+}
+
+
+/* EXTENDED */
+
+#payments-table-container .paid-table .subscription-operation.operation-extended{
+
+    color:#9333ea;
+
+    border-color:#d8b4fe;
+
+    background-color:#faf5ff;
+
+}
+
+
+/* OPTIONS */
+
+#payments-table-container .paid-table .subscription-operation option[value="UPGRADE"]{
+
+    color:#2563eb;
+
+    font-weight:700;
+
+}
+
+
+#payments-table-container .paid-table .subscription-operation option[value="EXTENDED"]{
+
+    color:#9333ea;
+
+    font-weight:700;
+
+}
 
 /* ======================================================
    10. HISTORY TABLE â€” 6 COLUMNS

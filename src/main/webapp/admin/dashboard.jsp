@@ -3,6 +3,12 @@
 
 
 <%
+/*
+======================================================
+LANGUAGE / DIRECTION
+======================================================
+*/
+
 String lang =
 
         session.getAttribute("lang") != null
@@ -32,19 +38,109 @@ String direction =
 
         "rtl";
 
+
+/*
+======================================================
+SECTION RESOLUTION
+======================================================
+
+Determine which dashboard section should be displayed.
+
+Supported Home values:
+
+home
+accueil
+
+Internally CENTRIA uses:
+
+home
+======================================================
+*/
+
+String section =
+
+        request.getAttribute("section") != null
+
+        ?
+
+        request.getAttribute("section").toString()
+
+        :
+
+        request.getParameter("section");
+
+
+/*
+======================================================
+NORMALIZE HOME SECTION
+======================================================
+*/
+
+if (
+        "accueil".equals(section)
+) {
+
+    section = "home";
+
+}
+
+
+/*
+======================================================
+INITIAL HOME LOAD
+======================================================
+
+If Home is requested but HomeDAO data has not yet
+been loaded, send the request through HomeServlet.
+
+Flow:
+
+dashboard.jsp
+      ↓
+HomeServlet
+      ↓
+HomeDAO
+      ↓
+request attributes
+      ↓
+dashboard.jsp
+      ↓
+accueil.jsp
+======================================================
+*/
+
+if (
+        section == null
+        ||
+        section.isEmpty()
+        ||
+        (
+            "home".equals(section)
+            &&
+            request.getAttribute("totalCentres") == null
+        )
+) {
+
+
+    request.getRequestDispatcher(
+            "/admin/home"
+    ).forward(
+            request,
+            response
+    );
+
+
+    return;
+
+}
+
 %>
-
-
-
 
 
 <!DOCTYPE html>
 
 <html lang="<%=lang%>"
       dir="<%=direction%>">
-
-
-
 
 
 <head>
@@ -57,7 +153,6 @@ String direction =
       content="width=device-width, initial-scale=1.0">
 
 
-
 <title>
 
 <%= LanguageManager.get(
@@ -68,105 +163,78 @@ String direction =
 </title>
 
 
-
-
-
-<!-- ==============================
+<!-- =================================================
      CORE CSS
-================================ -->
+================================================= -->
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/core/core.css?v=1">
-
-
+      href="<%=request.getContextPath()%>/assets/css/core/core.css?v=1">
 
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
-<!-- ==============================
+<!-- =================================================
      LAYOUT CSS
-================================ -->
+================================================= -->
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/layout/app-layout.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/layout/app-layout.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/layout/platform-banner.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/layout/platform-banner.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/layout/header.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/layout/header.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/layout/sidebar.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/layout/sidebar.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/layout/footer.css?v=1">
-
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/pages/accueil.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/layout/footer.css?v=1">
 
 
-
-
-
-
-
-
-<!-- ==============================
+<!-- =================================================
      PAGE CSS
-================================ -->
+================================================= -->
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/pages/accueil.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/pages/accueil.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/pages/centres.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/pages/centres.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/pages/payments.css?v=1">
-
+      href="<%=request.getContextPath()%>/assets/css/pages/payments.css?v=1">
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/pages/archive.css?v=1">
-
+      href="<%=request.getContextPath()%>/assets/css/pages/archive.css?v=1">
 
 
 <script>
 
 window.contextPath =
 
-"<%=request.getContextPath()%>";
+    "<%=request.getContextPath()%>";
 
 </script>
-
 
 
 </head>
 
 
-
-
-
-
-
 <body>
-
-
-
-
-
 
 
 <!-- =================================================
@@ -177,23 +245,12 @@ window.contextPath =
 <div class="app-shell">
 
 
-
-
-
-
-
-
 <!-- =================================================
      PLATFORM BANNER
 ================================================= -->
 
 
 <jsp:include page="components/platform-banner.jsp"/>
-
-
-
-
-
 
 
 <!-- =================================================
@@ -204,12 +261,6 @@ window.contextPath =
 <jsp:include page="components/header.jsp"/>
 
 
-
-
-
-
-
-
 <!-- =================================================
      APPLICATION BODY
 ================================================= -->
@@ -218,210 +269,172 @@ window.contextPath =
 <div class="app-body">
 
 
+<!-- =================================================
+     SIDEBAR
+================================================= -->
 
 
+<jsp:include page="components/sidebar.jsp"/>
 
 
+<!-- =================================================
+     CONTENT AREA
+================================================= -->
 
-    <!-- =============================================
-         SIDEBAR
-    ============================================== -->
 
+<main id="content-area"
+      class="content-area">
 
-    <jsp:include page="components/sidebar.jsp"/>
 
+<%
+/*
+======================================================
+SECTION CONTENT
+======================================================
+*/
 
 
+/*
+======================================================
+HOME
+======================================================
+*/
 
-
-
-
-
-
-    <!-- =============================================
-         CONTENT AREA
-    ============================================== -->
-
-
-    <main id="content-area"
-          class="content-area">
-
-
-
-
-
-
-
-        <%
-
-        String section =
-
-
-                request.getAttribute("section") != null
-
-
-                ?
-
-
-                request.getAttribute("section").toString()
-
-
-                :
-
-
-                request.getParameter("section");
-
-
-
-
-
-
-        if(section == null
-
-           || section.isEmpty()
-
-           || "home".equals(section)){
-
-
-        %>
-
-
-
-            <jsp:include page="pages/accueil.jsp"/>
-
-
-
-
-
-
-        <%
-
-        }
-
-        else if("centres".equals(section)){
-
-
-        %>
-
-
-
-            <jsp:include page="pages/centres.jsp"/>
-
-
-
-
-
-
-        <%
-
-        }
-
-        else if("centre-view".equals(section)){
-
-
-        %>
-
-
-
-            <jsp:include
-            page="pages/fragments/centres/centre-view.jsp"/>
-
-
-
-
-
-
-        <%
-
-        }
-
-        else if("payments".equals(section)){
-
-
-        %>
-
-
-
-            <jsp:include page="pages/payments.jsp"/>
-
-
-
-
-
-
-        <%
-
-        }
-
-
-else if("archive".equals(section)){
+if ("home".equals(section)) {
 
 %>
 
-    <jsp:include page="pages/archive.jsp"/>
+
+    <jsp:include page="pages/accueil.jsp"/>
+
 
 <%
 
 }
 
-        else if("settings".equals(section)){
+
+/*
+======================================================
+CENTRES
+======================================================
+*/
+
+else if ("centres".equals(section)) {
+
+%>
 
 
-        %>
+    <jsp:include page="pages/centres.jsp"/>
 
 
-            <jsp:include page="pages/settings.jsp"/>
+<%
+
+}
 
 
+/*
+======================================================
+CENTRE VIEW
+======================================================
+*/
+
+else if ("centre-view".equals(section)) {
+
+%>
 
 
-
-        <%
-
-        }
-
-        else{
+    <jsp:include
+        page="pages/fragments/centres/centre-view.jsp"/>
 
 
-        %>
+<%
+
+}
 
 
+/*
+======================================================
+PAYMENTS
+======================================================
+*/
 
-            <jsp:include page="pages/accueil.jsp"/>
+else if ("payments".equals(section)) {
 
-
-
-
-
-
-        <%
-
-        }
-
-        %>
+%>
 
 
+    <jsp:include page="pages/payments.jsp"/>
 
 
+<%
+
+}
 
 
-    </main>
+/*
+======================================================
+ARCHIVE
+======================================================
+*/
+
+else if ("archive".equals(section)) {
+
+%>
 
 
+    <jsp:include page="pages/archive.jsp"/>
 
 
+<%
 
+}
+
+
+/*
+======================================================
+SETTINGS
+======================================================
+*/
+
+else if ("settings".equals(section)) {
+
+%>
+
+
+    <jsp:include page="pages/settings.jsp"/>
+
+
+<%
+
+}
+
+
+/*
+======================================================
+FALLBACK
+======================================================
+*/
+
+else {
+
+%>
+
+
+    <jsp:include page="pages/accueil.jsp"/>
+
+
+<%
+
+}
+
+%>
+
+
+</main>
 
 
 </div>
 <!-- END APP BODY -->
-
-
-
-
-
-
-
 
 
 <!-- =================================================
@@ -432,19 +445,8 @@ else if("archive".equals(section)){
 <jsp:include page="components/footer.jsp"/>
 
 
-
-
-
-
-
-
 </div>
 <!-- END APP SHELL -->
-
-
-
-
-
 
 
 <!-- =================================================
@@ -453,28 +455,28 @@ else if("archive".equals(section)){
 
 
 <script defer
-src="<%=request.getContextPath()%>/assets/js/dashboard.js?v=2">
+        src="<%=request.getContextPath()%>/assets/js/dashboard.js?v=3">
 </script>
-
 
 
 <script defer
-src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
+        src="<%=request.getContextPath()%>/assets/js/accueil.js?v=2">
 </script>
-
 
 
 <script defer
-src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
+        src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
 </script>
-
 
 
 <script defer
-src="<%=request.getContextPath()%>/assets/js/archive.js?v=1">
+        src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
 </script>
 
 
+<script defer
+        src="<%=request.getContextPath()%>/assets/js/archive.js?v=1">
+</script>
 
 
 </body>

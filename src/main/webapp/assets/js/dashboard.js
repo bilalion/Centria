@@ -1,16 +1,16 @@
 /*
- * ==================================================
- * CENTRIA
- * Dashboard JavaScript
- * ==================================================
- */
+==================================================
+ CENTRIA
+ Dashboard JavaScript
+==================================================
+*/
 
 
 /*
- * ==================================================
- * LOAD DASHBOARD CONTENT
- * ==================================================
- */
+==================================================
+ LOAD DASHBOARD CONTENT
+==================================================
+*/
 
 function loadContent(
     page,
@@ -25,11 +25,6 @@ function loadContent(
     */
 
     if (element) {
-
-
-        /*
-        Remove active from all sidebar links
-        */
 
         document
             .querySelectorAll(
@@ -46,10 +41,6 @@ function loadContent(
             );
 
 
-        /*
-        Add active to clicked link
-        */
-
         element.classList.add(
             "active"
         );
@@ -62,6 +53,21 @@ function loadContent(
         */
 
         let sectionName = page;
+
+
+        /*
+        HomeServlet
+        */
+
+        if (
+            page.startsWith(
+                "HomeServlet"
+            )
+        ) {
+
+            sectionName = "home";
+
+        }
 
 
         /*
@@ -140,59 +146,90 @@ function loadContent(
     }
 
 
-    /*
-    ==============================================
-    BUILD URL
-    ==============================================
-    */
+ /*
+==============================================
+BUILD URL
+==============================================
+*/
 
-    let url;
-
-
-    if (
-        page.startsWith(
-            "CentreServlet"
-        )
-        ||
-        page.startsWith(
-            "PaymentServlet"
-        )
-        ||
-        page.startsWith(
-            "ArchiveServlet"
-        )
-    ) {
+let url;
 
 
-        url =
+/*
+==================================================
+HOME SERVLET
+==================================================
+*/
 
-            window.contextPath
-            +
-            "/"
-            +
-            page;
+if (
+    page.startsWith(
+        "HomeServlet"
+    )
+) {
 
-    }
+    url =
 
-    else {
+        window.contextPath
+        +
+        "/admin/home?ajax=true";
 
-
-        url =
-
-            window.contextPath
-            +
-            "/admin/pages/"
-            +
-            page;
-
-    }
+}
 
 
-    console.log(
-        "Loading:",
-        url
-    );
+/*
+==============================================
+CENTRE / PAYMENT / ARCHIVE SERVLETS
+==============================================
+*/
 
+else if (
+    page.startsWith(
+        "CentreServlet"
+    )
+    ||
+    page.startsWith(
+        "PaymentServlet"
+    )
+    ||
+    page.startsWith(
+        "ArchiveServlet"
+    )
+) {
+
+    url =
+
+        window.contextPath
+        +
+        "/"
+        +
+        page;
+
+}
+
+
+/*
+==============================================
+NORMAL JSP PAGES
+==============================================
+*/
+
+else {
+
+    url =
+
+        window.contextPath
+        +
+        "/admin/pages/"
+        +
+        page;
+
+}
+
+
+console.log(
+    "Loading:",
+    url
+);
 
     /*
     ==============================================
@@ -205,7 +242,6 @@ function loadContent(
 
         .then(
             response => {
-
 
                 if (
                     !response.ok
@@ -237,7 +273,6 @@ function loadContent(
 
                 if (container) {
 
-
                     container.innerHTML =
                         html;
 
@@ -252,6 +287,29 @@ function loadContent(
 
 
                 /*
+                ACCUEIL
+                */
+
+                if (
+                    typeof initAccueilPage
+                    ===
+                    "function"
+                ) {
+
+                    if (
+                        document.querySelector(
+                            ".home-page"
+                        )
+                    ) {
+
+                        initAccueilPage();
+
+                    }
+
+                }
+
+
+                /*
                 CENTRES
                 */
 
@@ -261,13 +319,11 @@ function loadContent(
                     "function"
                 ) {
 
-
                     if (
                         document.getElementById(
                             "centres-table-container"
                         )
                     ) {
-
 
                         initCentresPage();
 
@@ -286,13 +342,11 @@ function loadContent(
                     "function"
                 ) {
 
-
                     if (
                         document.getElementById(
                             "payments-table-container"
                         )
                     ) {
-
 
                         initPaymentsPage();
 
@@ -311,20 +365,17 @@ function loadContent(
                     "function"
                 ) {
 
-
                     if (
                         document.getElementById(
                             "archive-table-container"
                         )
                     ) {
 
-
                         initArchivePage();
 
                     }
 
                 }
-
 
             }
         )
@@ -333,12 +384,10 @@ function loadContent(
         .catch(
             error => {
 
-
                 console.error(
                     "Dashboard loading error:",
                     error
                 );
-
 
             }
         );
@@ -347,10 +396,10 @@ function loadContent(
 
 
 /*
- * ==================================================
- * SIDEBAR TOGGLE
- * ==================================================
- */
+==================================================
+ SIDEBAR TOGGLE
+==================================================
+*/
 
 function toggleSidebar() {
 
@@ -383,7 +432,6 @@ function toggleSidebar() {
 
     if (appBody) {
 
-
         appBody.classList.toggle(
             "sidebar-collapsed"
         );
@@ -415,10 +463,10 @@ function toggleSidebar() {
 
 
 /*
- * ==================================================
- * RESTORE SIDEBAR STATE
- * ==================================================
- */
+==================================================
+ RESTORE SIDEBAR STATE
+==================================================
+*/
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -450,10 +498,34 @@ document.addEventListener(
             state === "collapsed"
         ) {
 
-
             sidebar.classList.add(
                 "collapsed"
             );
+
+        }
+
+
+        /*
+        ==========================================
+        INITIAL ACCUEIL
+        ==========================================
+        */
+
+        if (
+            document.querySelector(
+                ".home-page"
+            )
+        ) {
+
+            if (
+                typeof initAccueilPage
+                ===
+                "function"
+            ) {
+
+                initAccueilPage();
+
+            }
 
         }
 
