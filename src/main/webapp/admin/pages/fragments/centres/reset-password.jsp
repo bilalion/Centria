@@ -20,15 +20,6 @@ String password =
 
 <div class="reset-top">
 
-    <button
-            type="button"
-            class="reset-dialog-close"
-            onclick="closeCentreModal()">
-
-        <i class="fa-solid fa-xmark"></i>
-
-    </button>
-
     <div class="reset-header">
 
         <div class="reset-icon">
@@ -39,14 +30,14 @@ String password =
 
         <div class="reset-divider"></div>
 
-        <h2 class="reset-title">
+        <h3 class="reset-title">
 
             <%= LanguageManager.get(
                     "centers.reset.title",
                     session
             ) %>
 
-        </h2>
+        </h3>
 
     </div>
 

@@ -15,12 +15,6 @@ Centre centre =
 
     <div class="edit-dialog-top">
 
-      
-
-            
-
-        </button>
-
         <div class="edit-dialog-header">
 
             <div class="edit-dialog-icon">

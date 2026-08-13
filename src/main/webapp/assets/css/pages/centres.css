@@ -1429,8 +1429,14 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
 /* ======================================================
    القسم 20 - النوافذ المنبثقة
+====================================================== */
+
+
+/* ======================================================
+   MODAL OVERLAY
 ====================================================== */
 
 .centre-modal{
@@ -1463,6 +1469,7 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
 .centre-modal.show{
 
     opacity:1;
@@ -1473,6 +1480,11 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
+/* ======================================================
+   MODAL CONTENT
+====================================================== */
+
 .centre-modal-content{
 
     position:relative;
@@ -1482,6 +1494,8 @@ html[dir="ltr"] .centre-status-select{
     max-height:calc(100vh - 48px);
 
     overflow:auto;
+
+    box-sizing:border-box;
 
     padding:24px;
 
@@ -1499,18 +1513,36 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
 .centre-modal.show .centre-modal-content{
 
     transform:translateY(0) scale(1);
 
 }
 
+
+/* ======================================================
+   MODAL BODY
+====================================================== */
+
 .centre-modal-content #centre-modal-body{
 
+    width:100%;
+
     max-width:100%;
-    padding-inline-start:40px;
+
+    min-width:0;
+
+    box-sizing:border-box;
+
+    padding:0;
 
 }
+
+
+/* ======================================================
+   CONFIRM DIALOG WIDTH
+====================================================== */
 
 .reset-confirm-box{
 
@@ -1518,25 +1550,36 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
+/* ======================================================
+   SHARED CLOSE BUTTON
+====================================================== */
+
 .modal-close{
 
     position:absolute;
 
     top:20px;
 
-    left:20px;
-
     z-index:1000;
 
-    width:32px;
+    width:36px;
 
-    height:32px;
+    height:36px;
+
+    min-width:36px;
+
+    min-height:36px;
 
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+
+    padding:0;
+
+    box-sizing:border-box;
 
     color:#64748b;
 
@@ -1556,6 +1599,29 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
+/* ======================================================
+   RTL / LTR - SHARED CLOSE BUTTON
+====================================================== */
+
+html[dir="rtl"] .modal-close{
+
+    right:20px;
+
+    left:auto;
+
+}
+
+
+html[dir="ltr"] .modal-close{
+
+    left:20px;
+
+    right:auto;
+
+}
+
+
 .modal-close:hover{
 
     background:#ef4444;
@@ -1568,33 +1634,74 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
+/* ======================================================
+   CONFIRM CONTENT
+====================================================== */
+
 .reset-confirm-content{
 
-    display:grid;
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
 
     gap:18px;
 
     padding-top:10px;
 
+    box-sizing:border-box;
+
+    text-align:center;
+
 }
+
+
+/* ======================================================
+   CONFIRM HEADER
+====================================================== */
 
 .confirm-header{
 
+    width:100%;
+
     display:flex;
+
+    flex-direction:column;
 
     align-items:center;
 
-    gap:11px;
+    justify-content:center;
 
-    padding-inline-end:38px;
+    gap:8px;
+
+    padding:0;
+
+    margin:0;
+
+    box-sizing:border-box;
+
+    text-align:center;
 
 }
+
+
+/* ======================================================
+   CONFIRM ICON
+====================================================== */
 
 .confirm-icon{
 
     width:42px;
 
     height:42px;
+
+    flex:0 0 42px;
 
     display:inline-flex;
 
@@ -1604,25 +1711,33 @@ html[dir="ltr"] .centre-status-select{
 
     color:var(--primary);
 
-/*  background:#eff6ff; */
-
     border-radius:4px;
 
     font-size:1rem;
 
 }
 
+
 .confirm-icon.is-warning{
 
-   color:#b45309;
-
-/* background:transparent; */
+    color:#b45309;
 
 }
 
+
+/* ======================================================
+   CONFIRM TITLE
+====================================================== */
+
 .confirm-title{
 
+    width:100%;
+
+    min-width:0;
+
     margin:0;
+
+    padding:0;
 
     color:var(--text);
 
@@ -1630,11 +1745,24 @@ html[dir="ltr"] .centre-status-select{
 
     font-weight:800;
 
+    line-height:1.5;
+
+    text-align:center;
+
 }
+
+
+/* ======================================================
+   CONFIRM MESSAGE
+====================================================== */
 
 .reset-confirm-content > p{
 
+    width:100%;
+
     margin:0;
+
+    padding:0;
 
     color:var(--text-light);
 
@@ -1642,25 +1770,209 @@ html[dir="ltr"] .centre-status-select{
 
     line-height:1.7;
 
+    text-align:center;
+
 }
+
+
+/* ======================================================
+   CONFIRM BUTTONS
+====================================================== */
 
 .reset-confirm-actions{
 
+    width:100%;
+
     display:flex;
 
-    justify-content:flex-end;
+    align-items:center;
+
+    justify-content:center;
 
     gap:10px;
 
     padding-top:4px;
 
+    margin:0;
+
+    box-sizing:border-box;
+
 }
 
-.reset-confirm-actions .btn-primary,
 
+.reset-confirm-actions .btn-primary,
 .reset-confirm-actions .btn-secondary{
 
     min-width:106px;
+
+}
+
+
+/* ======================================================
+   CONFIRM DIALOG - RTL
+====================================================== */
+
+html[dir="rtl"] .reset-confirm-content{
+
+    direction:rtl;
+
+    text-align:center;
+
+}
+
+
+html[dir="rtl"] .confirm-header{
+
+    direction:rtl;
+
+    text-align:center;
+
+}
+
+
+html[dir="rtl"] .confirm-title{
+
+    text-align:center;
+
+}
+
+
+html[dir="rtl"] .reset-confirm-content > p{
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   CONFIRM DIALOG - LTR
+====================================================== */
+
+html[dir="ltr"] .reset-confirm-content{
+
+    direction:ltr;
+
+    text-align:center;
+
+}
+
+
+html[dir="ltr"] .confirm-header{
+
+    direction:ltr;
+
+    text-align:center;
+
+}
+
+
+html[dir="ltr"] .confirm-title{
+
+    text-align:center;
+
+}
+
+
+html[dir="ltr"] .reset-confirm-content > p{
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   CONFIRM DIALOG - MOBILE
+====================================================== */
+
+@media(max-width:650px){
+
+    .centre-modal{
+
+        padding:10px;
+
+    }
+
+
+    .centre-modal-content{
+
+        max-height:calc(100vh - 20px);
+
+        padding:22px 18px;
+
+        border-radius:4px;
+
+    }
+
+
+    .reset-confirm-box{
+
+        width:100%;
+
+    }
+
+
+    .reset-confirm-content{
+
+        gap:16px;
+
+        padding-top:8px;
+
+    }
+
+
+    .confirm-header{
+
+        gap:7px;
+
+    }
+
+
+    .confirm-icon{
+
+        width:40px;
+
+        height:40px;
+
+        flex-basis:40px;
+
+    }
+
+
+    .confirm-title{
+
+        font-size:.96rem;
+
+    }
+
+
+    .reset-confirm-content > p{
+
+        font-size:.84rem;
+
+        line-height:1.7;
+
+    }
+
+
+    .reset-confirm-actions{
+
+        flex-direction:column-reverse;
+
+        width:100%;
+
+        gap:8px;
+
+    }
+
+
+    .reset-confirm-actions .btn-primary,
+    .reset-confirm-actions .btn-secondary{
+
+        width:100%;
+
+        min-width:0;
+
+    }
 
 }
 
@@ -1823,6 +2135,8 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
+
 /* ======================================================
    SECTION 23 - VIEW DIALOG
 ====================================================== */
@@ -1841,6 +2155,7 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
 /* ======================================================
    DIALOG STRIPE (DNA DESIGN)
 ====================================================== */
@@ -1851,7 +2166,7 @@ html[dir="ltr"] .centre-status-select{
 
     align-items:center;
 
-    margin-inline-start:54px;
+    margin-inline-start:56px;
 
     border-radius:4px;
 
@@ -1869,24 +2184,34 @@ html[dir="ltr"] .centre-status-select{
 
 }
 
+
 html[dir="rtl"] .dialog-stripe{
 
-     justify-content:flex-start;
+    justify-content:flex-start;
 
 }
+
+
 html[dir="ltr"] .dialog-stripe{
 
-     justify-content:flex-start;
+    justify-content:flex-start;
 
 }
+
 
 .dialog-view{
 
-      height:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
 
     gap:10px;
 
     padding:0 16px;
+
+    margin-inline-start:56px;
 
     margin-bottom:12px;
 
@@ -1897,6 +2222,7 @@ html[dir="ltr"] .dialog-stripe{
     color:var(--text);
 
 }
+
 
 .dialog-stripe-content{
 
@@ -1910,17 +2236,20 @@ html[dir="ltr"] .dialog-stripe{
 
 }
 
+
 html[dir="rtl"] .dialog-stripe-content{
 
     flex-direction:row;
 
 }
 
+
 html[dir="ltr"] .dialog-stripe-content{
 
     flex-direction:row-reverse;
 
 }
+
 
 .dialog-divider{
 
@@ -1930,6 +2259,7 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
+
 /* ======================================================
    INFORMATION GRID
 ====================================================== */
@@ -1938,11 +2268,12 @@ html[dir="ltr"] .dialog-stripe-content{
 
     display:grid;
 
-  grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
 
     gap:8px;
 
 }
+
 
 /* ======================================================
    INFORMATION CARD
@@ -1969,10 +2300,10 @@ html[dir="ltr"] .dialog-stripe-content{
     border-radius:4px;
 
     box-shadow:
-
         0 2px 6px rgba(15,23,42,.04);
 
 }
+
 
 /* ======================================================
    LABEL
@@ -2006,6 +2337,7 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
+
 /* ======================================================
    VALUE
 ====================================================== */
@@ -2025,6 +2357,7 @@ html[dir="ltr"] .dialog-stripe-content{
     white-space:nowrap;
 
 }
+
 
 /* ======================================================
    STATUS
@@ -2052,6 +2385,7 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
+
 .status-active{
 
     background:#dcfce7;
@@ -2061,6 +2395,7 @@ html[dir="ltr"] .dialog-stripe-content{
     border:1px solid #86efac;
 
 }
+
 
 .status-pending{
 
@@ -2072,6 +2407,7 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
+
 .status-suspended{
 
     background:#fee2e2;
@@ -2081,6 +2417,7 @@ html[dir="ltr"] .dialog-stripe-content{
     border:1px solid #fca5a5;
 
 }
+
 
 .status-archived{
 
@@ -2092,77 +2429,6 @@ html[dir="ltr"] .dialog-stripe-content{
 
 }
 
-/* ======================================================
-   CLOSE BUTTON
-====================================================== */
-
-.modal-close{
-
-    position:absolute;
-
-    height:40px;
-    width:40px;
-
-    top:25px;
-    margin-bottom:12px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border:1px solid #dbe4f0;
-
-    border-radius:4px;
-
-    background:#ffffff;
-
-    color:#64748b;
-
-    cursor:pointer;
-
-    z-index:1000;
-
-    transition:
-        transform .25s,
-        background .25s,
-        border-color .25s,
-        color .25s;
-
-}
-
-/* Arabic */
-
-html[dir="rtl"] .modal-close{
-
-    right:20px;
-
-    left:auto;
-
-}
-
-/* French / English */
-
-html[dir="ltr"] .modal-close{
-
-    left:20px;
-
-    right:auto;
-
-}
-
-.modal-close:hover{
-
-    transform:rotate(90deg);
-
-    background:#ef4444;
-
-    border-color:#ef4444;
-
-    color:#ffffff;
-
-}
 
 /* ======================================================
    RTL / LTR
@@ -2174,11 +2440,13 @@ html[dir="rtl"] .info-row strong{
 
 }
 
+
 html[dir="ltr"] .info-row strong{
 
     text-align:left;
 
 }
+
 
 /* ======================================================
    RESPONSIVE
@@ -2191,6 +2459,7 @@ html[dir="ltr"] .info-row strong{
         grid-template-columns:1fr;
 
     }
+
 
     .info-row{
 
@@ -2206,6 +2475,7 @@ html[dir="ltr"] .info-row strong{
 
     }
 
+
     .info-row span{
 
         width:100%;
@@ -2213,6 +2483,7 @@ html[dir="ltr"] .info-row strong{
         min-width:unset;
 
     }
+
 
     .info-row strong{
 
@@ -2223,6 +2494,7 @@ html[dir="ltr"] .info-row strong{
     }
 
 }
+
 
 .centres-pagination{
 
@@ -2236,9 +2508,21 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
+/* ======================================================
+   VIEW HEADER / CLOSE SPACE
+====================================================== */
+
+.dialog-view{
+
+    margin-inline-start:56px;
+
+}
+
 /* ======================================================
               Section 24 : EDIT DIALOG
 ====================================================== */
+
 
 /* ======================================================
    CONTAINER
@@ -2254,6 +2538,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    TOP BAR
 ====================================================== */
@@ -2268,13 +2553,14 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    CLOSE BUTTON
 ====================================================== */
 
 .edit-dialog-close{
 
-    flex:0 0 54px;
+    flex:0 0 40px;
 
     width:40px;
 
@@ -2304,6 +2590,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 .edit-dialog-close:hover{
 
     background:#ef4444;
@@ -2316,6 +2603,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    HEADER
 ====================================================== */
@@ -2323,6 +2611,8 @@ html[dir="ltr"] .info-row strong{
 .edit-dialog-header{
 
     flex:1;
+
+    min-width:0;
 
     display:flex;
 
@@ -2334,11 +2624,14 @@ html[dir="ltr"] .info-row strong{
 
     padding:0 18px;
 
+    margin-inline-start:56px;
+
     background:#eef5ff;
 
     border-radius:4px;
 
 }
+
 
 .edit-dialog-icon{
 
@@ -2354,6 +2647,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 .edit-dialog-divider{
 
     width:1px;
@@ -2363,6 +2657,7 @@ html[dir="ltr"] .info-row strong{
     background:#cbd5e1;
 
 }
+
 
 .edit-dialog-title{
 
@@ -2375,6 +2670,7 @@ html[dir="ltr"] .info-row strong{
     font-weight:700;
 
 }
+
 
 /* ======================================================
    FORM
@@ -2390,6 +2686,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    SECTION
 ====================================================== */
@@ -2403,6 +2700,7 @@ html[dir="ltr"] .info-row strong{
     gap:10px;
 
 }
+
 
 .edit-dialog-section-title{
 
@@ -2422,6 +2720,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    GRID
 ====================================================== */
@@ -2435,6 +2734,7 @@ html[dir="ltr"] .info-row strong{
     gap:10px;
 
 }
+
 
 /* ======================================================
    ROW
@@ -2462,6 +2762,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    LABEL
 ====================================================== */
@@ -2477,7 +2778,8 @@ html[dir="ltr"] .info-row strong{
     gap:6px;
 
     min-width:130px;
-    height: 44px;
+
+    height:44px;
 
     padding:6px 12px;
 
@@ -2497,6 +2799,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    VALUE
 ====================================================== */
@@ -2509,9 +2812,10 @@ html[dir="ltr"] .info-row strong{
 
     align-items:center;
 
-    height: 44px;
+    height:44px;
 
 }
+
 
 .edit-dialog-value strong{
 
@@ -2524,6 +2828,7 @@ html[dir="ltr"] .info-row strong{
     font-weight:700;
 
 }
+
 
 /* ======================================================
    INPUT
@@ -2557,6 +2862,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 .edit-dialog-input:focus{
 
     border-color:#3b82f6;
@@ -2564,6 +2870,7 @@ html[dir="ltr"] .info-row strong{
     box-shadow:0 0 0 3px rgba(59,130,246,.12);
 
 }
+
 
 .edit-dialog-readonly{
 
@@ -2575,6 +2882,7 @@ html[dir="ltr"] .info-row strong{
 
 }
 
+
 /* ======================================================
    FOOTER
 ====================================================== */
@@ -2582,6 +2890,7 @@ html[dir="ltr"] .info-row strong{
 .edit-dialog-footer{
 
     margin-top:10px;
+
     display:flex;
 
     justify-content:center;
@@ -2595,12 +2904,15 @@ html[dir="ltr"] .info-row strong{
     border-top:1px solid #edf2f7;
 
 }
+
+
 .edit-dialog-footer .btn-primary,
 .edit-dialog-footer .btn-secondary{
 
     min-width:120px;
 
 }
+
 
 /* ======================================================
    RTL / LTR
@@ -2612,11 +2924,13 @@ html[dir="rtl"] .edit-dialog-input{
 
 }
 
+
 html[dir="ltr"] .edit-dialog-input{
 
     text-align:left;
 
 }
+
 
 html[dir="rtl"] .edit-dialog-value strong{
 
@@ -2624,11 +2938,13 @@ html[dir="rtl"] .edit-dialog-value strong{
 
 }
 
+
 html[dir="ltr"] .edit-dialog-value strong{
 
     text-align:left;
 
 }
+
 
 /* ======================================================
    RESPONSIVE
@@ -2642,11 +2958,13 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     }
 
+
     .edit-dialog-grid{
 
         grid-template-columns:1fr;
 
     }
+
 
     .edit-dialog-row{
 
@@ -2656,6 +2974,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     }
 
+
     .edit-dialog-label{
 
         width:100%;
@@ -2663,7 +2982,6 @@ html[dir="ltr"] .edit-dialog-value strong{
     }
 
 }
-
 
 /* ======================================================
    Section 25 : RESET DIALOG
@@ -2707,11 +3025,14 @@ html[dir="ltr"] .edit-dialog-value strong{
 
     padding:0 18px;
 
+    margin-inline-start:56px;
+
     background:#eef5ff;
 
     border-radius:4px;
 
 }
+
 
 .reset-icon{
 
@@ -2729,6 +3050,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 .reset-divider{
 
     width:1px;
@@ -2740,6 +3062,7 @@ html[dir="ltr"] .edit-dialog-value strong{
     background:#cbd5e1;
 
 }
+
 
 .reset-title{
 
@@ -2810,6 +3133,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 .reset-dialog-close:hover{
 
     background:#ef4444;
@@ -2847,6 +3171,7 @@ html[dir="ltr"] .edit-dialog-value strong{
     gap:10px;
 
 }
+
 
 .reset-section-title{
 
@@ -2916,6 +3241,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 .reset-row-full{
 
     grid-column:1 / -1;
@@ -2932,13 +3258,17 @@ html[dir="ltr"] .edit-dialog-value strong{
     flex:0 0 130px;
 
     width:130px;
+
     min-width:130px;
+
     max-width:130px;
 
     height:40px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     gap:6px;
@@ -2996,6 +3326,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 .reset-value strong{
 
     display:block;
@@ -3038,6 +3369,7 @@ html[dir="ltr"] .edit-dialog-value strong{
     gap:10px;
 
 }
+
 
 .reset-password-value{
 
@@ -3084,6 +3416,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 .reset-copy-button{
 
     flex:0 0 40px;
@@ -3118,6 +3451,7 @@ html[dir="ltr"] .edit-dialog-value strong{
         border-color .25s;
 
 }
+
 
 .reset-copy-button:hover{
 
@@ -3160,6 +3494,7 @@ html[dir="ltr"] .edit-dialog-value strong{
 
 }
 
+
 .reset-note i{
 
     flex:0 0 auto;
@@ -3189,6 +3524,7 @@ html[dir="ltr"] .edit-dialog-value strong{
         visibility .25s;
 
 }
+
 
 .reset-copy-status.show{
 
@@ -3234,23 +3570,26 @@ html[dir="rtl"] .reset-password-box{
 
 }
 
+
 html[dir="rtl"] .reset-value{
 
     justify-content:flex-start;
+
     direction:ltr;
 
     text-align:left;
 
     white-space:nowrap;
 
-
 }
+
 
 html[dir="ltr"] .reset-value{
 
     justify-content:flex-start;
 
 }
+
 
 html[dir="ltr"] .reset-value strong{
 
@@ -3267,17 +3606,18 @@ html[dir="ltr"] .reset-value strong{
 
 html[dir="rtl"] .reset-dialog .modal-close{
 
-    left:20px;
-
-    right:auto;
-
-}
-
-html[dir="ltr"] .reset-dialog .modal-close{
-
     right:20px;
 
     left:auto;
+
+}
+
+
+html[dir="ltr"] .reset-dialog .modal-close{
+
+    left:20px;
+
+    right:auto;
 
 }
 
@@ -3300,6 +3640,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-value strong{
 
         font-size:12px;
@@ -3317,11 +3658,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-grid{
 
         grid-template-columns:1fr;
 
     }
+
 
     .reset-row{
 
@@ -3340,13 +3683,17 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-header{
 
         padding:0 12px;
 
         gap:10px;
 
+        margin-inline-start:56px;
+
     }
+
 
     .reset-title{
 
@@ -3354,11 +3701,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-grid{
 
         gap:8px;
 
     }
+
 
     .reset-row{
 
@@ -3372,6 +3721,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-label{
 
         flex:0 0 auto;
@@ -3384,11 +3734,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-value{
 
         width:100%;
 
     }
+
 
     .reset-password-box{
 
@@ -3396,11 +3748,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     }
 
+
     .reset-password-value{
 
         font-size:17px;
 
     }
+
 
     .reset-actions{
 
@@ -3416,9 +3770,11 @@ html[dir="ltr"] .reset-dialog .modal-close{
 /* ======================================================
    END : RESET DIALOG
 ====================================================== */
+
 /* ======================================================
               Section 26 : ADD DIALOG
 ====================================================== */
+
 
 /* ======================================================
    CONTAINER
@@ -3434,6 +3790,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    TOP BAR
 ====================================================== */
@@ -3448,9 +3805,16 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    CLOSE BUTTON
 ====================================================== */
+
+/*
+   The dialog uses the shared .modal-close.
+   No separate positioning is required here.
+*/
+
 
 /* ======================================================
    HEADER
@@ -3459,6 +3823,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
 .add-dialog-header{
 
     flex:1;
+
+    min-width:0;
 
     display:flex;
 
@@ -3470,13 +3836,14 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     padding:0 18px;
 
+    margin-inline-start:56px;
+
     background:#eef5ff;
 
     border-radius:4px;
 
-    margin:0 20px 0 0;
-
 }
+
 
 .add-dialog-icon{
 
@@ -3492,6 +3859,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .add-dialog-divider{
 
     width:1px;
@@ -3501,6 +3869,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     background:#cbd5e1;
 
 }
+
 
 .add-dialog-title{
 
@@ -3513,6 +3882,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-weight:700;
 
 }
+
 
 /* ======================================================
    FORM
@@ -3528,6 +3898,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    SECTION
 ====================================================== */
@@ -3541,6 +3912,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:10px;
 
 }
+
 
 .add-dialog-section-title{
 
@@ -3560,6 +3932,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    GRID
 ====================================================== */
@@ -3573,6 +3946,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:10px;
 
 }
+
 
 /* ======================================================
    ROW
@@ -3600,11 +3974,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .add-dialog-row-full{
 
     grid-column:1 / -1;
 
 }
+
 
 /* ======================================================
    LABEL
@@ -3644,6 +4020,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    INPUT
 ====================================================== */
@@ -3657,9 +4034,11 @@ html[dir="ltr"] .reset-dialog .modal-close{
     display:flex;
 
     align-items:center;
+
     height:44px;
 
 }
+
 
 .add-dialog-input,
 .add-dialog-select{
@@ -3688,6 +4067,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .add-dialog-input:focus,
 .add-dialog-select:focus{
 
@@ -3696,6 +4076,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     box-shadow:0 0 0 3px rgba(59,130,246,.12);
 
 }
+
 
 /* ======================================================
    DATE INPUT
@@ -3710,6 +4091,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     padding-inline:12px 40px;
 
 }
+
 
 /* ======================================================
    NOTE
@@ -3737,6 +4119,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .add-dialog-note i{
 
     color:#2563eb;
@@ -3744,6 +4127,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-size:18px;
 
 }
+
 
 /* ======================================================
    FOOTER
@@ -3765,15 +4149,134 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .add-dialog ~ .modal-close{
 
     display:none;
 
 }
 
+
+/* ======================================================
+   RTL / LTR
+====================================================== */
+
+html[dir="rtl"] .add-dialog-input{
+
+    text-align:right;
+
+}
+
+
+html[dir="ltr"] .add-dialog-input{
+
+    text-align:left;
+
+}
+
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width:992px){
+
+    .add-dialog-top{
+
+        align-items:flex-start;
+
+    }
+
+
+    .add-dialog-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .add-dialog-row{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .add-dialog-label{
+
+        width:100%;
+
+    }
+
+}
+
+
+@media (max-width:650px){
+
+    .add-dialog{
+
+        gap:16px;
+
+    }
+
+
+    .add-dialog-top{
+
+        gap:10px;
+
+    }
+
+
+    .add-dialog-header{
+
+        margin-inline-start:56px;
+
+        padding:0 12px;
+
+        gap:10px;
+
+    }
+
+
+    .add-dialog-title{
+
+        font-size:16px;
+
+    }
+
+
+    .add-dialog-grid{
+
+        gap:8px;
+
+    }
+
+
+    .add-dialog-row{
+
+        gap:8px;
+
+        padding:8px;
+
+    }
+
+
+    .add-dialog-footer{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+}
+
 /* ======================================================
               Section 27 : CREATED DIALOG
 ====================================================== */
+
 
 /* ======================================================
    27.1 CONTAINER
@@ -3788,8 +4291,10 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:20px;
 
 }
+
+
 /* ======================================================
-  27.2 TOP BAR
+   27.2 TOP BAR
 ====================================================== */
 
 .created-dialog-top{
@@ -3802,6 +4307,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    27.3.1 HEADER
 ====================================================== */
@@ -3809,6 +4315,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
 .created-dialog-header{
 
     flex:1;
+
+    min-width:0;
 
     display:flex;
 
@@ -3820,11 +4328,14 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     padding:0 18px;
 
+    margin-inline-start:56px;
+
     background:#eef5ff;
 
     border-radius:4px;
 
 }
+
 
 /* ======================================================
    27.3.2 - ICON
@@ -3844,6 +4355,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    27.3.3 - DIVIDER
 ====================================================== */
@@ -3858,8 +4370,9 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
-   27.3.4 -  TITLE
+   27.3.4 - TITLE
 ====================================================== */
 
 .created-dialog-title{
@@ -3873,6 +4386,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-weight:700;
 
 }
+
+
 /* ======================================================
    27.4 - SECTION
 ====================================================== */
@@ -3886,6 +4401,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     gap:10px;
 
 }
+
 
 .created-dialog-section-title{
 
@@ -3905,8 +4421,9 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
-  27.5 - GRID
+   27.5 - GRID
 ====================================================== */
 
 .created-dialog-grid{
@@ -3919,8 +4436,9 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
-  27.6 - ROW
+   27.6 - ROW
 ====================================================== */
 
 .created-dialog-row{
@@ -3941,11 +4459,13 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .created-dialog-row-full{
 
     width:100%;
 
 }
+
 
 /* ======================================================
    27.7 - LABEL
@@ -3980,6 +4500,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-weight:700;
 
 }
+
+
 /* ======================================================
    27.8 - VALUE
 ====================================================== */
@@ -3991,6 +4513,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
     display:flex;
 
     align-items:center;
+
+    min-width:0;
 
     min-height:44px;
 
@@ -4010,6 +4534,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    27.9 - PASSWORD
 ====================================================== */
@@ -4017,6 +4542,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
 .created-dialog-password-box{
 
     flex:1;
+
+    min-width:0;
 
     display:flex;
 
@@ -4026,9 +4553,12 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .created-dialog-password-value{
 
     flex:1;
+
+    min-width:0;
 
     height:44px;
 
@@ -4052,6 +4582,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 /* ======================================================
    27.10 - COPY BUTTON
 ====================================================== */
@@ -4061,6 +4592,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
     width:44px;
 
     height:44px;
+
+    flex:0 0 44px;
 
     display:flex;
 
@@ -4085,6 +4618,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .created-copy-button:hover{
 
     background:#2563eb;
@@ -4095,6 +4629,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .created-copy-button.copied{
 
     background:#16a34a;
@@ -4104,6 +4639,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     color:#ffffff;
 
 }
+
 
 /* ======================================================
    27.11 - NOTE
@@ -4131,6 +4667,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
 .created-dialog-note i{
 
     color:#2563eb;
@@ -4138,6 +4675,7 @@ html[dir="ltr"] .reset-dialog .modal-close{
     font-size:18px;
 
 }
+
 
 /* ======================================================
    27.12 - FOOTER
@@ -4149,6 +4687,8 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
     justify-content:flex-start;
 
+    align-items:center;
+
     gap:12px;
 
     padding-top:16px;
@@ -4157,6 +4697,143 @@ html[dir="ltr"] .reset-dialog .modal-close{
 
 }
 
+
+/* ======================================================
+   RTL / LTR
+====================================================== */
+
+html[dir="rtl"] .created-dialog-value{
+
+    text-align:right;
+
+}
+
+
+html[dir="ltr"] .created-dialog-value{
+
+    text-align:left;
+
+}
+
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width:992px){
+
+    .created-dialog-top{
+
+        align-items:flex-start;
+
+    }
+
+
+    .created-dialog-row{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .created-dialog-label{
+
+        flex:0 0 auto;
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+
+    .created-dialog-value{
+
+        width:100%;
+
+    }
+
+
+    .created-dialog-password-box{
+
+        width:100%;
+
+    }
+
+}
+
+
+@media (max-width:650px){
+
+    .created-dialog{
+
+        gap:16px;
+
+    }
+
+
+    .created-dialog-top{
+
+        gap:10px;
+
+    }
+
+
+    .created-dialog-header{
+
+        margin-inline-start:56px;
+
+        padding:0 12px;
+
+        gap:10px;
+
+    }
+
+
+    .created-dialog-title{
+
+        font-size:16px;
+
+    }
+
+
+    .created-dialog-row{
+
+        gap:10px;
+
+        padding:10px;
+
+    }
+
+
+    .created-dialog-label{
+
+        font-size:13px;
+
+    }
+
+
+    .created-dialog-value{
+
+        font-size:14px;
+
+    }
+
+
+    .created-dialog-footer{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+}
+
+
 /* ======================================================
    END OF FILE
 ====================================================== */
+

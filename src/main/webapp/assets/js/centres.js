@@ -61,28 +61,31 @@ function openCentreModal(modal) {
         return;
     }
 
-    const modalClose = modal.querySelector(".modal-close");
-    const resetDialog = modal.querySelector(".reset-dialog");
+    const modalClose =
+        modal.querySelector(".modal-close");
+
+    /*
+     * The close button is shared by the modal
+     * and must always remain visible.
+     *
+     * View / Edit / Reset dialogs all use
+     * the same shared close button.
+     */
 
     if (modalClose) {
 
-        if (resetDialog) {
-
-            modalClose.style.display = "none";
-
-        } else {
-
-            modalClose.style.display = "flex";
-
-        }
+        modalClose.style.display = "flex";
 
     }
 
     modal.classList.add("show");
-    modal.setAttribute("aria-hidden", "false");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
 }
-
 
 function closeCentreModalElement(modal) {
 
