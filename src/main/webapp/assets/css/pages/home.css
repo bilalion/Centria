@@ -15,160 +15,95 @@ Version :
    SECTION 01 - HOME PAGE
 ====================================================== */
 
-
 .home-page{
-
 
     width:100%;
 
-
 }
-
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 02 - HOME BANNER
 ====================================================== */
 
-
 .home-banner{
 
-
-    height:42px;
-
+    height:38px;
 
     display:flex;
 
-
     align-items:center;
-
 
     gap:10px;
 
+    padding:0 14px;
 
-    padding:0 16px;
-
-
-    margin-bottom:16px;
-
+    margin-bottom:8px;
 
     background:#eef5ff;
 
- color:var(--text);
-    border-radius:8px;
+    color:var(--text);
 
-
-   
-
-
+    border-radius:4px;
 
 }
-
-
-
-
 
 
 .home-banner-icon{
 
-
     display:flex;
-
 
     align-items:center;
 
-
     justify-content:center;
-
 
     color:var(--primary);
 
-
     font-size:15px;
 
-
-
 }
-
-
 
 
 .home-banner-title{
 
-
     margin:0;
-
 
     font-size:15px;
 
-
     font-weight:700;
-
 
     color:var(--title);
 
-
     white-space:nowrap;
 
-
-
 }
-
-
-
 
 
 .home-banner-separator{
 
-
     color:var(--text-light);
-
 
     font-size:14px;
 
-
-
 }
-
-
-
 
 
 .home-banner-description{
 
-
     margin:0;
-
 
     font-size:13px;
 
-
     color:var(--text-light);
-
 
     white-space:nowrap;
 
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 03 - STATISTICS GRID
 ====================================================== */
-
 
 .stats-grid{
 
@@ -180,144 +115,85 @@ Version :
         1fr
         2fr;
 
-    gap:16px;
+    gap:10px;
 
-    margin-bottom:18px;
+    margin-bottom:8px;
 
 }
-
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 04 - STAT CARD
 ====================================================== */
 
-
 .stat-card{
 
-
-    min-height:135px; /*115*/
-
+    min-height:112px;
 
     display:flex;
 
-
     align-items:center;
-
 
     gap:14px;
 
-
-    padding:16px;
-
+    padding:12px;
 
     background:#ffffff;
 
-
     border:1px solid #e5e7eb;
 
-
-    border-radius:10px;
-
+    border-radius:4px;
 
     box-shadow:
-
-    0 2px 8px rgba(0,0,0,.04);
-
-
+        0 2px 8px rgba(0,0,0,.04);
 
 }
-
-
-
-
-
-
 
 
 .stat-icon{
 
+    width:50px;
 
-    width:56px; /*48 */
-
-
-    height:56px;/*48 */
-
+    height:50px;
 
     display:flex;
 
-
     align-items:center;
-
 
     justify-content:center;
 
-
     border-radius:50%;
-
 
     font-size:20px;
 
-
     flex-shrink:0;
 
-
-
 }
-
-
-
-
-
-
 
 
 .stat-content{
 
-
     display:flex;
-
 
     flex-direction:column;
 
-
-
 }
-
-
 
 
 .stat-title{
 
-
     font-size:14px;
-
 
     font-weight:600;
 
-
     color:var(--text);
-
-
 
 }
 
+
 /* ======================================================
-   REVENUE PERIOD SELECT
+   REVENUE CARD
 ====================================================== */
-
-
-/*
-======================================================
- REVENUE CARD
-======================================================
-*/
 
 .stat-card:has(#revenuePeriod){
 
@@ -326,17 +202,16 @@ Version :
 }
 
 
-/*
-======================================================
- REVENUE CONTENT
-======================================================
-*/
+/* ======================================================
+   REVENUE CONTENT
+====================================================== */
 
 .stat-card:has(#revenuePeriod) .stat-content{
 
     flex:1;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
@@ -350,11 +225,9 @@ Version :
 }
 
 
-/*
-======================================================
- REVENUE TITLE ROW
-======================================================
-*/
+/* ======================================================
+   REVENUE TITLE ROW
+====================================================== */
 
 .stat-card:has(#revenuePeriod) .stat-title-row{
 
@@ -377,11 +250,9 @@ Version :
 }
 
 
-/*
-======================================================
- REVENUE TITLE
-======================================================
-*/
+/* ======================================================
+   REVENUE TITLE
+====================================================== */
 
 .stat-card:has(#revenuePeriod) .stat-title{
 
@@ -392,17 +263,16 @@ Version :
 }
 
 
-/*
-======================================================
- REVENUE VALUE
-======================================================
-*/
+/* ======================================================
+   REVENUE VALUE
+====================================================== */
 
 .stat-card:has(#revenuePeriod) .stat-value{
 
     width:100%;
 
     margin-left:auto;
+
     margin-right:auto;
 
     text-align:center;
@@ -410,17 +280,16 @@ Version :
 }
 
 
-/*
-======================================================
- REVENUE DESCRIPTION
-======================================================
-*/
+/* ======================================================
+   REVENUE DESCRIPTION
+====================================================== */
 
 .stat-card:has(#revenuePeriod) .stat-description{
 
     width:100%;
 
     margin-left:auto;
+
     margin-right:auto;
 
     text-align:center;
@@ -428,11 +297,9 @@ Version :
 }
 
 
-/*
-======================================================
- PERIOD SELECT
-======================================================
-*/
+/* ======================================================
+   PERIOD SELECT
+====================================================== */
 
 .stat-period-select{
 
@@ -452,7 +319,7 @@ Version :
 
     border:1px solid #dbe3ef;
 
-    border-radius:6px;
+    border-radius:4px;
 
     background:#ffffff;
 
@@ -475,11 +342,9 @@ Version :
 }
 
 
-/*
-======================================================
- RTL
-======================================================
-*/
+/* ======================================================
+   REVENUE SELECT - RTL
+====================================================== */
 
 html[dir="rtl"] .stat-card:has(#revenuePeriod)
 .stat-period-select{
@@ -491,11 +356,9 @@ html[dir="rtl"] .stat-card:has(#revenuePeriod)
 }
 
 
-/*
-======================================================
- LTR
-======================================================
-*/
+/* ======================================================
+   REVENUE SELECT - LTR
+====================================================== */
 
 html[dir="ltr"] .stat-card:has(#revenuePeriod)
 .stat-period-select{
@@ -507,11 +370,9 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 }
 
 
-/*
-======================================================
- HOVER
-======================================================
-*/
+/* ======================================================
+   REVENUE SELECT - HOVER
+====================================================== */
 
 .stat-period-select:hover{
 
@@ -520,11 +381,9 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 }
 
 
-/*
-======================================================
- FOCUS
-======================================================
-*/
+/* ======================================================
+   REVENUE SELECT - FOCUS
+====================================================== */
 
 .stat-period-select:focus{
 
@@ -535,57 +394,41 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 }
 
 
-
-
+/* ======================================================
+   STAT VALUE
+====================================================== */
 
 .stat-value{
 
-
     font-size:30px;
-
 
     font-weight:800;
 
-
     line-height:1.1;
-
 
     margin-top:4px;
 
-
-
 }
 
 
-
-
+/* ======================================================
+   STAT DESCRIPTION
+====================================================== */
 
 .stat-description{
 
-
     margin-top:5px;
-
 
     font-size:12px;
 
-
     color:var(--text-light);
 
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 05 - COLORS
 ====================================================== */
-
 
 .stat-blue .stat-icon{
 
@@ -623,518 +466,393 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 }
 
 
-
-
-
-
-
-
 /* ======================================================
    SECTION 06 - DASHBOARD GRID
 ====================================================== */
 
-
 .dashboard-grid{
-
 
     display:grid;
 
-
     grid-template-columns:
+        2fr
+        1fr;
 
-    2fr 1fr;
+    gap:8px;
 
-
-    gap:16px;
-
-
-    margin-bottom:16px;
-
-
+    margin-bottom:6px;
 
 }
-
-
-
-
-
-
 
 
 .dashboard-widget{
 
-    
-    
-
     background:#ffffff;
-
 
     border:1px solid #e5e7eb;
 
-
-    border-radius:10px;
-
+    border-radius:4px;
 
     box-shadow:
-
-    0 2px 8px rgba(0,0,0,.04);
-
+        0 2px 8px rgba(0,0,0,.04);
 
 }
-
-
-
-
-
-
 
 
 .widget-header{
 
-
     height:50px;
-
 
     display:flex;
 
-
     align-items:center;
-
 
     justify-content:space-between;
 
-
     padding:0 16px;
-
 
     border-bottom:1px solid #eef0f3;
 
-
-
 }
-
 
 
 .widget-header h2{
 
-
     margin:0;
-
 
     font-size:16px;
 
-
     font-weight:700;
 
-
 }
-
 
 
 .widget-body{
 
-
-    height:190px; /*190*/
-
+    height:190px;
 
     display:flex;
 
-
     justify-content:center;
-
 
     align-items:center;
 
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 07 - SYSTEM NOTIFICATION
 ====================================================== */
 
-
 .system-notification{
 
+    height:46px;
 
-    height:65px;
-
+    min-height:46px;
 
     display:flex;
 
-
     align-items:center;
 
+    gap:2px;
 
-    gap:14px;
+    padding:10px 14px;
 
+    margin-top:6px;
 
-    padding:0 16px;
-
-
-    background:#ffffff;
-
+     background:#eef5ff;
 
     border:1px solid #e5e7eb;
 
-
-    border-radius:10px;
-
+    border-radius:4px;
 
     box-shadow:
-
-    0 2px 8px rgba(0,0,0,.04);
-    
-    margin-top:auto;/* none */
-
-
+        0 2px 8px rgba(0,0,0,.04);
 
 }
-
 
 
 .notification-icon{
 
+    width:36px;
 
-    width:40px;
-
-
-    height:40px;
-
+    height:36px;
 
     display:flex;
 
-
     align-items:center;
-
 
     justify-content:center;
 
-
     border-radius:50%;
 
-
-    background:#fff7ed;
-
+   background:#eef5ff;
 
     color:#f59e0b;
 
-
-
 }
-
 
 
 .notification-content{
 
-
     flex:1;
 
-
 }
-
 
 
 .notification-content h3{
 
-
     margin:0;
-
 
     font-size:14px;
 
-
 }
-
 
 
 .notification-content p{
 
-
     margin:2px 0 0;
-
 
     font-size:12px;
 
-
     color:var(--text-light);
 
-
-
 }
-
 
 
 .notification-action{
 
-
     color:var(--primary);
-
 
     font-size:13px;
 
-
     font-weight:600;
 
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    RTL
 ====================================================== */
 
-
 html[dir="rtl"] .home-page{
-
 
     direction:rtl;
 
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    RESPONSIVE
 ====================================================== */
 
-
 @media(max-width:1200px){
-
 
     .stats-grid{
 
-
         grid-template-columns:
-
-        repeat(2,1fr);
-
+            repeat(2,1fr);
 
     }
 
-
 }
-
 
 
 @media(max-width:900px){
 
-
     .dashboard-grid{
-
 
         grid-template-columns:1fr;
 
-
     }
 
-
 }
-
 
 
 @media(max-width:600px){
 
-
     .stats-grid{
-
 
         grid-template-columns:1fr;
 
-
     }
-
 
 }
 
+
+
 /* =========================================================
-   SECTION 28 - RECENT CENTRES
+   SECTION 08 - RECENT CENTRES
    CENTRIA COMPACT UI
 ========================================================= */
 
 
-/* =========================================================
-   28.01 - WIDGET
-========================================================= */
+.home-page .recent-widget{
 
-.home-page .recent-widget {
+    width:100%;
 
-    width: 100%;
+    height:100%;
 
-    background: #ffffff;
+    display:flex;
 
-    border: 1px solid #e4eaf2;
+    flex-direction:column;
 
-    border-radius: 4px;
+    background:#ffffff;
 
-    overflow: hidden;
+    border:1px solid #e4eaf2;
 
-    box-sizing: border-box;
+    border-radius:4px;
+
+    overflow:hidden;
+
+    box-sizing:border-box;
 
     box-shadow:
-        0 6px 20px rgba(15, 23, 42, 0.045);
+        0 6px 20px rgba(15,23,42,0.045);
 
 }
 
 
 /* =========================================================
-   28.02 - HEADER
+   08.02 - HEADER
 ========================================================= */
 
-.home-page .recent-widget .recent-widget-header {
+.home-page .recent-widget .recent-widget-header{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: space-between;
+    justify-content:space-between;
 
-    min-height: 54px;
+    min-height:36px;
 
-    padding: 0 16px;
+    padding:0 16px;
 
-    box-sizing: border-box;
+    box-sizing:border-box;
 
-    background: #ffffff;
+    background:#eef5ff;
 
-    border-bottom: 1px solid #edf1f6;
+    border-bottom:1px solid #edf1f6;
 
 }
 
 
 /* =========================================================
-   28.03 - HEADER TITLE
+   08.03 - HEADER TITLE
 ========================================================= */
 
-.home-page .recent-widget .recent-widget-heading {
+.home-page .recent-widget .recent-widget-heading{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    min-width: 0;
+    min-width:0;
 
 }
 
 
 /* =========================================================
-   28.04 - TITLE
+   08.04 - TITLE
 ========================================================= */
 
-.home-page .recent-widget .recent-widget-eyebrow {
+.home-page .recent-widget .recent-widget-eyebrow{
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 8px;
+    gap:8px;
 
-    margin: 0;
+    margin:0;
 
-    color: #172033;
+    color:#172033;
 
-    font-size: 16px;
+    font-size:16px;
 
-    line-height: 1;
+    line-height:1;
 
-    font-weight: 800;
+    font-weight:800;
 
-    white-space: nowrap;
+    white-space:nowrap;
 
 }
 
 
 /* =========================================================
-   28.05 - TITLE ICON
+   08.05 - TITLE ICON
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-widget-eyebrow::before {
+.recent-widget-eyebrow::before{
 
-    content: "✦";
+    content:"✦";
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    width: 28px;
+    width:36px;
 
-    height: 28px;
+    height:36px;
 
-    border-radius: 4px;
+    border-radius:4px;
 
-    background: #eef5ff;
+    background:#eef5ff;
 
-    color: #2563eb;
+    color:#2563eb;
 
-    font-size: 14px;
+    font-size:14px;
 
-    line-height: 1;
+    line-height:1;
 
 }
 
 
 /* =========================================================
-   28.06 - VIEW ALL
+   08.06 - VIEW ALL
 ========================================================= */
 
-.home-page .recent-widget .recent-widget-link {
+.home-page .recent-widget .recent-widget-link{
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    gap: 6px;
+    gap:6px;
 
-    height: 32px;
+    height:28px;
 
-    min-width: 78px;
+    min-width:78px;
 
-    padding: 0 10px;
+    padding:0 10px;
 
-    border: 1px solid #d8e5f7;
+    border:1px solid #d8e5f7;
 
-    border-radius: 4px;
+    border-radius:4px;
 
-    background: #f5f9ff;
+    background:#2563eb;
 
-    color: #2563eb;
+     border-color:#2563eb;
+      color:#ffffff;
 
-    font-family: inherit;
+    font-family:inherit;
 
-    font-size: 11px;
+    font-size:11px;
 
-    line-height: 1;
+    line-height:1;
 
-    font-weight: 750;
+    font-weight:750;
 
-    cursor: pointer;
+    cursor:pointer;
 
-    box-sizing: border-box;
+    box-sizing:border-box;
 
     transition:
         background .2s ease,
@@ -1147,104 +865,125 @@ html[dir="rtl"] .home-page{
 
 
 /* =========================================================
-   28.07 - BUTTON ARROW
+   08.07 - BUTTON ARROW
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-widget-link::after {
+.recent-widget-link::after{
 
-    content: "←";
+    content:"←";
 
-    font-size: 12px;
+    font-size:12px;
 
-    font-weight: 800;
+    font-weight:800;
 
 }
 
 
 /* =========================================================
-   28.08 - BUTTON HOVER
+   08.08 - BUTTON HOVER
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-widget-link:hover {
+.recent-widget-link:hover{
 
-    background: #2563eb;
+    background:#2563eb;
 
-    border-color: #2563eb;
+    border-color:#2563eb;
 
-    color: #ffffff;
+    color:#ffffff;
 
     box-shadow:
-        0 5px 14px rgba(37, 99, 235, 0.16);
+        0 5px 14px rgba(37,99,235,0.16);
 
-    transform: translateY(-1px);
+    transform:translateY(-1px);
+
+}
+
+
+
+
+/* =========================================================
+   08.09 - BODY
+========================================================= */
+
+.home-page .recent-widget .recent-widget-body{
+
+    width:100%;
+
+    flex:1;
+
+    min-height:0;
+
+    padding:5px 7px 6px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    flex-direction:column;
 
 }
 
 
 /* =========================================================
-   28.09 - BODY
+   08.10 - LIST
+   DISTRIBUTE ROWS OVER FULL CARD HEIGHT
 ========================================================= */
 
-.home-page .recent-widget .recent-widget-body {
+.home-page .recent-widget .recent-centres-list{
 
-    width: 100%;
+    width:100%;
 
-    padding: 7px 9px 8px;
+    height:100%;
 
-    box-sizing: border-box;
+    flex:1;
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    grid-auto-rows:minmax(0,1fr);
+
+    gap:3px;
 
 }
 
 
 /* =========================================================
-   28.10 - LIST
+   08.11 - ROW
 ========================================================= */
 
-.home-page .recent-widget .recent-centres-list {
+.home-page .recent-widget .recent-centre-item{
 
-    display: flex;
-
-    flex-direction: column;
-
-    width: 100%;
-
-    gap: 4px;
-
-}
-
-
-/* =========================================================
-   28.11 - ROW
-========================================================= */
-
-.home-page .recent-widget .recent-centre-item {
-
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-        minmax(0, 1fr)
+        minmax(0,1fr)
         118px
         92px;
 
-    align-items: center;
+    align-items:center;
 
-    width: 100%;
+    width:100%;
 
-    min-height: 46px;
+    min-height:0;
 
-    padding: 0 11px;
+    height:100%;
 
-    box-sizing: border-box;
+    padding:0 11px;
 
-    border: 1px solid transparent;
+    box-sizing:border-box;
 
-    border-radius: 4px;
+    border:1px solid transparent;
 
-    background: #ffffff;
+    border-radius:4px;
+
+    background:#ffffff;
 
     transition:
         background .18s ease,
@@ -1254,410 +993,399 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
-   28.12 - ALTERNATING ROW
+   08.12 - ALTERNATING ROW
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-centre-item:nth-child(even) {
+.recent-centre-item:nth-child(even){
 
-    background: #f8fafc;
+    background:#fff;
 
 }
 
 
 /* =========================================================
-   28.13 - FIRST ROW
+   08.13 - FIRST ROW
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-centre-item:first-child {
+.recent-centre-item:first-child{
 
-    background: #f4f8ff;
+   background:#fff;
 
-    border-color: #edf4ff;
+    border-color:#fff;
 
 }
 
 
 /* =========================================================
-   28.14 - ROW HOVER
+   08.14 - ROW HOVER
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-centre-item:hover {
+.recent-centre-item:hover{
 
-    background: #f0f6ff;
+    background:#f0f6ff;
 
-    border-color: #dbe8f8;
+    border-color:#dbe8f8;
 
     box-shadow:
-        0 4px 12px rgba(37, 99, 235, 0.06);
+        0 4px 12px rgba(37,99,235,0.06);
 
-    transform: translateY(-1px);
+    transform:translateY(-1px);
 
 }
 
 
 /* =========================================================
-   28.15 - CENTRE INFO
+   08.15 - CENTRE INFO
 ========================================================= */
 
-.home-page .recent-widget .recent-centre-info {
+.home-page .recent-widget .recent-centre-info{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    min-width: 0;
+    min-width:0;
 
-    overflow: hidden;
+    overflow:hidden;
 
 }
 
 
 /* =========================================================
-   28.16 - CENTRE NAME
+   08.16 - CENTRE NAME
 ========================================================= */
 
-.home-page .recent-widget .recent-centre-name {
+.home-page .recent-widget .recent-centre-name{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    min-width: 0;
+    min-width:0;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    color: #172033;
+    color:#172033;
 
-    font-size: 13px;
+    font-size:13px;
 
-    line-height: 1.2;
+    line-height:1.2;
 
-    font-weight: 800;
+    font-weight:800;
 
-    text-align: right;
+    text-align:right;
 
-    white-space: nowrap;
+    white-space:nowrap;
 
-    text-overflow: ellipsis;
-
-}
-
-
-/* =========================================================
-   28.17 - CENTRE ICON
-========================================================= */
-
-.home-page
-.recent-widget
-.recent-centre-name::before {
-
-    content: "▦";
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex: 0 0 auto;
-
-    width: 28px;
-
-    height: 28px;
-
-    margin-left: 7px;
-
-    border: 1px solid #dbe8fa;
-
-    border-radius: 4px;
-
-    background: #eef5ff;
-
-    color: #2563eb;
-
-    font-size: 13px;
-
-    line-height: 1;
-
-    box-sizing: border-box;
+    text-overflow:ellipsis;
 
 }
 
 
 /* =========================================================
-   28.18 - DATE CONTAINER
-========================================================= */
-
-.home-page .recent-widget .recent-centre-date {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 5px;
-
-    min-width: 0;
-
-    height: 100%;
-
-    color: #64748b;
-
-    font-size: 11px;
-
-    line-height: 1;
-
-    font-weight: 650;
-
-    direction: ltr;
-
-    white-space: nowrap;
-
-}
-
-
-/* =========================================================
-   28.19 - DATE ICON
+   08.17 - CENTRE ICON
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-centre-date::before {
+.recent-centre-name::before{
 
-    content: "▣";
+    content:"▦";
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    width: 13px;
+    flex:0 0 auto;
 
-    height: 13px;
+    width:28px;
 
-    color: #7c91aa;
+    height:28px;
 
-    font-size: 11px;
+    margin-left:5px;
 
-    line-height: 1;
+    border:1px solid #dbe8fa;
+
+    border-radius:4px;
+
+    background:#eef5ff;
+
+    color:#2563eb;
+
+    font-size:13px;
+
+    line-height:1;
+
+    box-sizing:border-box;
 
 }
 
 
 /* =========================================================
-   28.20 - DATE VALUE
+   08.18 - DATE CONTAINER
+========================================================= */
+
+.home-page .recent-widget .recent-centre-date{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    min-width:0;
+
+    height:100%;
+
+    color:#64748b;
+
+    font-size:11px;
+
+    line-height:1;
+
+    font-weight:650;
+
+    direction:ltr;
+
+    white-space:nowrap;
+
+}
+
+
+/* =========================================================
+   08.19 - DATE ICON
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-date-value {
+.recent-centre-date::before{
 
-    display: inline-block;
+    content:"▣";
 
-    white-space: nowrap;
+    display:inline-flex;
 
-}
+    align-items:center;
 
+    justify-content:center;
 
-/* =========================================================
-   28.21 - DURATION
-========================================================= */
+    width:13px;
 
-.home-page .recent-widget .recent-centre-duration {
+    height:13px;
 
-    display: flex;
+    color:#7c91aa;
 
-    align-items: center;
+    font-size:11px;
 
-    justify-content: flex-start;
-
-    min-width: 0;
+    line-height:1;
 
 }
 
 
 /* =========================================================
-   28.22 - DURATION BADGE
+   08.20 - DATE VALUE
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-duration-value {
+.recent-date-value{
 
-    display: inline-flex;
+    display:inline-block;
 
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 4px;
-
-    width: 70px;
-
-    height: 26px;
-
-    padding: 0 7px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #cfe0fa;
-
-    border-radius: 4px;
-
-    background: #f0f6ff;
-
-    color: #2563eb;
-
-    font-size: 10px;
-
-    line-height: 1;
-
-    font-weight: 800;
-
-    white-space: nowrap;
+    white-space:nowrap;
 
 }
 
 
 /* =========================================================
-   28.23 - DURATION ICON
+   08.21 - DURATION
+========================================================= */
+
+.home-page .recent-widget .recent-centre-duration{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    min-width:0;
+
+}
+
+
+/* =========================================================
+   08.22 - DURATION BADGE
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-duration-value::before {
+.recent-duration-value{
 
-    content: "◷";
+    display:inline-flex;
 
-    font-size: 12px;
+    align-items:center;
 
-    line-height: 1;
+    justify-content:center;
 
-}
+    gap:4px;
 
+    width:70px;
 
-/* =========================================================
-   28.24 - EMPTY
-========================================================= */
+    height:26px;
 
-.home-page .recent-widget .recent-empty {
+    padding:0 7px;
 
-    display: flex;
+    box-sizing:border-box;
 
-    align-items: center;
+    border:1px solid #cfe0fa;
 
-    justify-content: center;
+    border-radius:4px;
 
-    min-height: 120px;
+    background:#f0f6ff;
 
-    padding: 14px;
+    color:#2563eb;
 
-    color: #94a3b8;
+    font-size:10px;
 
-    text-align: center;
+    line-height:1;
 
-}
+    font-weight:800;
 
-
-/* =========================================================
-   28.25 - EMPTY CONTENT
-========================================================= */
-
-.home-page
-.recent-widget
-.recent-empty-content {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
+    white-space:nowrap;
 
 }
 
 
 /* =========================================================
-   28.26 - EMPTY ICON
+   08.23 - DURATION ICON
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-empty-content::before {
+.recent-duration-value::before{
 
-    content: "—";
+    content:"◷";
 
-    display: flex;
+    font-size:12px;
 
-    align-items: center;
-
-    justify-content: center;
-
-    width: 32px;
-
-    height: 32px;
-
-    margin-bottom: 5px;
-
-    border-radius: 4px;
-
-    background: #f8fafc;
-
-    color: #94a3b8;
-
-    font-size: 15px;
+    line-height:1;
 
 }
 
 
 /* =========================================================
-   28.27 - EMPTY TEXT
+   08.24 - EMPTY
+========================================================= */
+
+.home-page .recent-widget .recent-empty{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:120px;
+
+    padding:14px;
+
+    color:#94a3b8;
+
+    text-align:center;
+
+}
+
+
+/* =========================================================
+   08.25 - EMPTY CONTENT
 ========================================================= */
 
 .home-page
 .recent-widget
-.recent-empty-title {
+.recent-empty-content{
 
-    color: #94a3b8;
+    display:flex;
 
-    font-size: 11px;
+    flex-direction:column;
 
-    font-weight: 600;
+    align-items:center;
+
+    justify-content:center;
 
 }
 
 
 /* =========================================================
-   28.28 - RTL
+   08.26 - EMPTY ICON
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-empty-content::before{
+
+    content:"—";
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:32px;
+
+    height:32px;
+
+    margin-bottom:5px;
+
+    border-radius:4px;
+
+    background:#f8fafc;
+
+    color:#94a3b8;
+
+    font-size:15px;
+
+}
+
+
+/* =========================================================
+   08.27 - EMPTY TEXT
+========================================================= */
+
+.home-page
+.recent-widget
+.recent-empty-title{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+
+/* =========================================================
+   08.28 - RTL
 ========================================================= */
 
 html[dir="rtl"]
 .home-page
 .recent-widget
-.recent-centre-item {
+.recent-centre-item{
 
-    direction: rtl;
-
-}
-
-
-html[dir="rtl"]
-.home-page
-.recent-widget
-.recent-centre-name {
-
-    text-align: right;
+    direction:rtl;
 
 }
 
@@ -1665,11 +1393,9 @@ html[dir="rtl"]
 html[dir="rtl"]
 .home-page
 .recent-widget
-.recent-centre-name::before {
+.recent-centre-name{
 
-    margin-left: 7px;
-
-    margin-right: 0;
+    text-align:right;
 
 }
 
@@ -1677,33 +1403,35 @@ html[dir="rtl"]
 html[dir="rtl"]
 .home-page
 .recent-widget
-.recent-centre-duration {
+.recent-centre-name::before{
 
-    justify-content: flex-start;
+    margin-left:7px;
+
+    margin-right:0;
+
+}
+
+
+html[dir="rtl"]
+.home-page
+.recent-widget
+.recent-centre-duration{
+
+    justify-content:flex-start;
 
 }
 
 
 /* =========================================================
-   28.29 - LTR
+   08.29 - LTR
 ========================================================= */
 
 html[dir="ltr"]
 .home-page
 .recent-widget
-.recent-centre-item {
+.recent-centre-item{
 
-    direction: ltr;
-
-}
-
-
-html[dir="ltr"]
-.home-page
-.recent-widget
-.recent-centre-name {
-
-    text-align: left;
+    direction:ltr;
 
 }
 
@@ -1711,11 +1439,9 @@ html[dir="ltr"]
 html[dir="ltr"]
 .home-page
 .recent-widget
-.recent-centre-name::before {
+.recent-centre-name{
 
-    margin-left: 0;
-
-    margin-right: 7px;
+    text-align:left;
 
 }
 
@@ -1723,290 +1449,298 @@ html[dir="ltr"]
 html[dir="ltr"]
 .home-page
 .recent-widget
-.recent-centre-duration {
+.recent-centre-name::before{
 
-    justify-content: flex-end;
+    margin-left:0;
+
+    margin-right:7px;
+
+}
+
+
+html[dir="ltr"]
+.home-page
+.recent-widget
+.recent-centre-duration{
+
+    justify-content:flex-end;
 
 }
 
 
 /* =========================================================
-   28.30 - MOBILE
+   08.30 - MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width:700px){
 
     .home-page
     .recent-widget
-    .recent-widget-header {
+    .recent-widget-header{
 
-        min-height: 48px;
+        min-height:48px;
 
-        padding: 0 11px;
+        padding:0 11px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-widget-eyebrow {
+    .recent-widget-eyebrow{
 
-        font-size: 14px;
+        font-size:14px;
 
-        gap: 6px;
-
-    }
-
-
-    .home-page
-    .recent-widget
-    .recent-widget-eyebrow::before {
-
-        width: 25px;
-
-        height: 25px;
-
-        border-radius: 4px;
-
-        font-size: 12px;
+        gap:6px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-widget-link {
+    .recent-widget-eyebrow::before{
 
-        min-width: 70px;
+        width:25px;
 
-        height: 29px;
+        height:25px;
 
-        padding: 0 8px;
+        border-radius:4px;
 
-        font-size: 10px;
-
-    }
-
-
-    .home-page
-    .recent-widget
-    .recent-widget-body {
-
-        padding: 6px;
+        font-size:12px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-centres-list {
+    .recent-widget-link{
 
-        gap: 3px;
+        min-width:70px;
+
+        height:29px;
+
+        padding:0 8px;
+
+        font-size:10px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-centre-item {
+    .recent-widget-body{
+
+        padding:6px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centres-list{
+
+        gap:3px;
+
+    }
+
+
+    .home-page
+    .recent-widget
+    .recent-centre-item{
 
         grid-template-columns:
-            minmax(0, 1fr)
+            minmax(0,1fr)
             90px
             68px;
 
-        min-height: 40px;
+        min-height:40px;
 
-        padding: 0 8px;
+        padding:0 8px;
 
-        border-radius: 4px;
-
-    }
-
-
-    .home-page
-    .recent-widget
-    .recent-centre-name {
-
-        font-size: 11px;
+        border-radius:4px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-centre-name::before {
+    .recent-centre-name{
 
-        width: 24px;
-
-        height: 24px;
-
-        margin-left: 5px;
-
-        border-radius: 4px;
-
-        font-size: 11px;
+        font-size:11px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-centre-date {
+    .recent-centre-name::before{
 
-        font-size: 9px;
+        width:24px;
+
+        height:24px;
+
+        margin-left:5px;
+
+        border-radius:4px;
+
+        font-size:11px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-centre-date::before {
+    .recent-centre-date{
 
-        display: none;
+        font-size:9px;
 
     }
 
 
     .home-page
     .recent-widget
-    .recent-duration-value {
+    .recent-centre-date::before{
 
-        width: 58px;
+        display:none;
 
-        height: 23px;
+    }
 
-        font-size: 9px;
+
+    .home-page
+    .recent-widget
+    .recent-duration-value{
+
+        width:58px;
+
+        height:23px;
+
+        font-size:9px;
 
     }
 
 }
 
 
+
+
 /* =========================================================
-   END SECTION 28
-========================================================= */
-/* =========================================================
-   SECTION 29 - HOME CHARTS
+   SECTION 09 - HOME CHARTS
    CENTRIA COMPACT UI
 ========================================================= */
 
 
 /* =========================================================
-   29.01 - OVERVIEW WIDGET
+   09.01 - OVERVIEW WIDGET
 ========================================================= */
 
-.home-page .overview-widget {
+.home-page .overview-widget{
 
-    width: 100%;
+    width:100%;
 
-    background: #ffffff;
+    background:#eef5ff;
 
-    border: 1px solid #dfe7f2;
+    border:1px solid #dfe7f2;
 
-    border-radius: 4px;
+    border-radius:4px;
 
-    overflow: hidden;
+    overflow:hidden;
 
     box-shadow:
-        0 7px 23px rgba(15, 23, 42, 0.045);
+        0 7px 23px rgba(15,23,42,0.045);
 
 }
 
 
 /* =========================================================
-   29.02 - OVERVIEW HEADER
+   09.02 - OVERVIEW HEADER
 ========================================================= */
 
-.home-page .overview-widget .widget-header {
+.home-page .overview-widget .widget-header{
 
-    min-height: 56px;
+    min-height:36px;
 
-    padding: 0 18px;
+    height:36px;
 
-    display: flex;
+    padding:0 12px;
 
-    align-items: center;
+    display:flex;
 
-    justify-content: space-between;
+    align-items:center;
 
-    box-sizing: border-box;
+    justify-content:space-between;
 
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #fbfdff 100%
-        );
+    box-sizing:border-box;
 
-    border-bottom: 1px solid #edf2f7;
+   background:#eef5ff;
+
+    border-bottom:1px solid #edf2f7;
 
 }
 
 
 /* =========================================================
-   29.03 - HEADER TITLE
+   09.03 - HEADER TITLE
 ========================================================= */
 
-.home-page .overview-header-title {
+.home-page .overview-header-title{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 7px;
+    gap:5px;
 
 }
 
 
-.home-page .overview-header-title h2 {
+.home-page .overview-header-title h2{
 
-    margin: 0;
+    margin:0;
 
-    color: #172033;
+    color:#172033;
 
-    font-size: 16px;
+    font-size:16px;
+   
+    line-height:1.2;
 
-    line-height: 1.2;
-
-    font-weight: 850;
+    font-weight:850;
 
 }
 
 
 /* =========================================================
-   29.04 - YEAR FILTER
+   09.04 - YEAR FILTER
 ========================================================= */
 
-.home-page .overview-widget .widget-filter {
+.home-page .overview-widget .widget-filter{
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    gap: 7px;
+    gap:5px;
 
-    min-height: 31px;
+    min-height:30px;
 
-    padding: 0 10px;
+    padding:0 10px;
 
-    border: 1px solid #dce6f2;
+    border:1px solid #dce6f2;
 
-    border-radius: 4px;
+    border-radius:4px;
 
-    background: #f7faff;
+    background:#f7faff;
 
-    color: #334155;
+    color:#334155;
 
-    font-family: inherit;
+    font-family:inherit;
 
-    font-size: 11px;
+    font-size:10px;
 
-    font-weight: 750;
+    font-weight:750;
 
-    cursor: pointer;
+    cursor:pointer;
 
     transition:
         background .18s ease,
@@ -2017,671 +1751,741 @@ html[dir="ltr"]
 }
 
 
-.home-page .overview-widget .widget-filter:hover {
+.home-page .overview-widget .widget-filter:hover{
 
-    background: #eef5ff;
+    background:#eef5ff;
 
-    border-color: #cfe0fa;
+    border-color:#cfe0fa;
 
     box-shadow:
-        0 4px 11px rgba(37, 99, 235, 0.07);
+        0 4px 11px rgba(37,99,235,0.07);
 
-    transform: translateY(-1px);
-
-}
-
-
-/* =========================================================
-   29.05 - OVERVIEW BODY
-========================================================= */
-
-.home-page .overview-widget .widget-body {
-
-    width: 100%;
-
-    height: auto;
-
-    min-height: 0;
-
-    padding: 12px;
-
-    display: block;
-
-    box-sizing: border-box;
-
-    background: #fbfdff;
+    transform:translateY(-1px);
 
 }
 
 
 /* =========================================================
-   29.06 - CHART GRID
+   09.05 - OVERVIEW BODY
 ========================================================= */
 
-.home-page .overview-charts-grid {
+.home-page .overview-widget .widget-body{
 
-    display: grid;
+    width:100%;
+
+    height:auto;
+
+    min-height:0;
+
+    padding:4px;
+
+    display:block;
+
+    box-sizing:border-box;
+
+    background:#fbfdff;
+
+}
+
+
+/* =========================================================
+   09.06 - CHART GRID
+========================================================= */
+
+.home-page .overview-charts-grid{
+
+    display:grid;
 
     grid-template-columns:
-        minmax(0, 1.15fr)
-        minmax(0, 0.85fr);
+        minmax(0,1.15fr)
+        minmax(0,0.85fr);
 
-    gap: 12px;
+    gap:4px;
 
-    width: 100%;
+    width:100%;
 
 }
 
 
 /* =========================================================
-   29.07 - CHART CARD
+   09.07 - CHART CARD
 ========================================================= */
 
-.home-page .overview-chart-card {
+.home-page .overview-chart-card{
 
-    position: relative;
+    position:relative;
 
-    min-width: 0;
+    min-width:0;
 
-    min-height: 315px;
+    min-height:300px;
 
-    padding: 14px;
+    padding:8px;
 
-    box-sizing: border-box;
+    box-sizing:border-box;
 
-    background: #ffffff;
+    background:#ffffff;
 
-    border: 1px solid #e4ebf4;
+  
 
-    border-radius: 4px;
+    border-radius:4px;
 
     box-shadow:
-        0 4px 14px rgba(15, 23, 42, 0.03);
+        0 4px 14px rgba(15,23,42,0.03);
 
 }
 
 
 /* =========================================================
-   29.08 - CHART CARD HEADER
+   09.08 - CHART CARD HEADER
 ========================================================= */
 
-.home-page .overview-chart-card-header {
+.home-page .overview-chart-card-header{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: space-between;
+    justify-content:space-between;
 
-    gap: 12px;
+    gap:12px;
 
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+ 
+   padding: 5px;
+      background:#eef5ff;
+      border-radius: 4px;
+      
 
 }
 
 
 /* =========================================================
-   29.09 - CHART TITLE
+   09.09 - CHART TITLE
 ========================================================= */
 
-.home-page .overview-chart-card-title {
+.home-page .overview-chart-card-title{
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 7px;
+    gap:7px;
 
-    min-width: 0;
+    min-width:0;
 
-    color: #172033;
+    color:#172033;
 
-    font-size: 13px;
+    font-size:13px;
 
-    line-height: 1.2;
+    line-height:1.2;
 
-    font-weight: 850;
+    font-weight:850;
 
 }
 
 
 /* =========================================================
-   29.10 - CHART ICON
+   09.10 - CHART ICON
 ========================================================= */
 
-.home-page .overview-chart-card-title i {
+.home-page .overview-chart-card-title i{
 
-    width: 28px;
+    width:28px;
 
-    height: 28px;
+    height:28px;
 
-    display: inline-flex;
+    display:inline-flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    flex: 0 0 auto;
+    flex:0 0 auto;
 
-    border-radius: 4px;
+    border-radius:4px;
 
-    background: #eef5ff;
+    background:#eef5ff;
 
-    color: #2563eb;
+    color:#2563eb;
 
-    font-size: 12px;
+    font-size:12px;
 
 }
 
 
 /* =========================================================
-   29.11 - CHART SUBTITLE
+   09.11 - CHART SUBTITLE
 ========================================================= */
 
-.home-page .overview-chart-card-subtitle {
+.home-page .overview-chart-card-subtitle{
 
-    flex: 0 0 auto;
+    flex:0 0 auto;
 
-    color: #94a3b8;
+    color:#94a3b8;
 
-    font-size: 10px;
+    font-size:10px;
 
-    line-height: 1;
+    line-height:1;
 
-    font-weight: 700;
+    font-weight:700;
 
-    white-space: nowrap;
+    white-space:nowrap;
 
 }
 
 
 /* =========================================================
-   29.12 - CHART CONTENT
+   09.12 - CHART CONTENT
 ========================================================= */
 
-.home-page .overview-chart-content {
+.home-page .overview-chart-content{
 
-    min-height: 260px;
+    min-height:255px;
 
-    display: flex;
+    display:flex;
 
-   
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    box-sizing: border-box;
+    box-sizing:border-box;
 
 }
 
 
 /* =========================================================
-   29.13 - PAYMENT CHART CONTENT
+   09.13 - PAYMENT CHART
 
    DONUT
       ↓
    LEGEND
-
-   بدل:
-
-   DONUT | LEGEND
 ========================================================= */
 
-.home-page .overview-chart-card#monthlyPaymentChart
-.overview-chart-content {
+.home-page
+.overview-chart-card#monthlyPaymentChart
+.overview-chart-content{
 
-    display: flex;
+    display:flex;
 
-    flex-direction: column;
+    flex-direction:column;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    gap: 18px;
+    min-height:255px;
 
-    padding: 4px 0 8px;
+    gap:6px;
+
+    padding:0;
 
 }
 
 
 /* =========================================================
-   29.14 - DONUT
+   09.14 - DONUT
 ========================================================= */
 
-.home-page .monthly-payment-donut {
+.home-page .monthly-payment-donut{
 
-    position: relative;
+    position:relative;
 
-    width: 240px;
+    width:240px;
 
-    height: 240px;
+    height:240px;
 
-    flex: 0 0 240px;
+    flex:0 0 240px;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    background: #eef1f5;
+    background:#eef1f5;
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
     box-shadow:
-        0 9px 21px rgba(15, 23, 42, 0.07);
+        0 9px 21px rgba(15,23,42,0.07);
 
-    isolation: isolate;
+    isolation:isolate;
 
 }
 
 
 /* =========================================================
-   29.15 - DONUT INNER HOLE
+   09.15 - DONUT INNER HOLE
 ========================================================= */
 
-.home-page .monthly-payment-donut::after {
+.home-page .monthly-payment-donut::after{
 
-    content: "";
+    content:"";
 
-    position: absolute;
+    position:absolute;
 
-    inset: 30px;
+    inset:30px;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    background: #ffffff;
+    background:#ffffff;
 
     box-shadow:
         0 0 0 1px #edf2f7;
 
-    z-index: 1;
+    z-index:1;
 
 }
 
 
 /* =========================================================
-   29.16 - DONUT CENTER
+   09.16 - DONUT CENTER
 ========================================================= */
 
-.home-page .monthly-payment-donut-center {
+.home-page .monthly-payment-donut-center{
 
-    position: relative;
+    position:relative;
 
-    z-index: 2;
+    z-index:2;
 
-    display: flex;
+    display:flex;
 
-    flex-direction: column;
+    flex-direction:column;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    text-align: center;
-
-}
-
-
-.home-page .monthly-payment-donut-center strong {
-
-    color: #172033;
-
-    font-size: 48px;
-
-    line-height: 1;
-
-    font-weight: 900;
-
-    letter-spacing: -1px;
+    text-align:center;
 
 }
 
 
-.home-page .monthly-payment-donut-center span {
+.home-page .monthly-payment-donut-center strong{
 
-    margin-top: 7px;
+    color:#172033;
 
-    color: #64748b;
+    font-size:48px;
 
-    font-size: 16px;
+    line-height:1;
 
-    line-height: 1.2;
+    font-weight:900;
 
-    font-weight: 750;
+    letter-spacing:-1px;
+
+}
+
+
+.home-page .monthly-payment-donut-center span{
+
+    margin-top:7px;
+
+    color:#64748b;
+
+    font-size:16px;
+
+    line-height:1.2;
+
+    font-weight:750;
 
 }
 
 
 /* =========================================================
-   29.17 - PAYMENT LEGEND
-
-   الآن أسفل الدائرة
+   09.17 - PAYMENT LEGEND
 ========================================================= */
 
-.home-page .monthly-payment-legend {
+.home-page .monthly-payment-legend{
 
-    width: min(100%, 430px);
+    width:min(100%,430px);
 
-    min-width: 0;
+    min-width:0;
 
-    display: flex;
+    display:flex;
 
-    flex-direction: row;
+    flex-direction:row;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    gap: 38px;
+    gap:28px;
 
 }
 
 
 /* =========================================================
-   29.18 - PAYMENT LEGEND ITEM
-
-   العدد دائمًا في أقصى اليمين
+   09.18 - PAYMENT LEGEND ITEM
+   العدد دائمًا في أقصى اليمين بصريًا
 ========================================================= */
 
-.home-page .payment-legend-item {
+.home-page .payment-legend-item{
 
-    min-width: 150px;
+    min-width:150px;
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
         10px
-        minmax(0, 1fr)
+        minmax(0,1fr)
         auto;
 
-    align-items: center;
+    align-items:center;
 
-    column-gap: 8px;
+    column-gap:8px;
 
-    padding: 5px 0;
+    padding:5px 0;
 
-    /*
-       نحافظ على ترتيب بصري ثابت:
-       marker → label → value
-    */
-    direction: ltr;
+    direction:ltr;
 
 }
 
 
 /* =========================================================
-   29.19 - PAYMENT LEGEND MARKER
+   09.19 - PAYMENT LEGEND MARKER
 ========================================================= */
 
-.home-page .payment-legend-marker {
+.home-page .payment-legend-marker{
 
-    width: 10px;
+    width:10px;
 
-    height: 10px;
+    height:10px;
 
-    border-radius: 50%;
+    border-radius:50%;
 
 }
 
 
-.home-page .payment-legend-marker.paid {
+.home-page .payment-legend-marker.paid{
 
-    background: #16a34a;
+    background:#16a34a;
 
     box-shadow:
-        0 0 0 4px rgba(22, 163, 74, 0.10);
+        0 0 0 4px rgba(22,163,74,0.10);
 
 }
 
 
-.home-page .payment-legend-marker.unpaid {
+.home-page .payment-legend-marker.unpaid{
 
-    background: #f43f5e;
+    background:#f43f5e;
 
     box-shadow:
-        0 0 0 4px rgba(244, 63, 94, 0.10);
+        0 0 0 4px rgba(244,63,94,0.10);
 
 }
 
 
 /* =========================================================
-   29.20 - PAYMENT LEGEND TEXT
+   09.20 - PAYMENT LEGEND TEXT
 ========================================================= */
 
-.home-page .payment-legend-label {
+.home-page .payment-legend-label{
 
-    color: #475569;
+    color:#475569;
 
-    font-size: 13px;
+    font-size:13px;
 
-    font-weight: 750;
+    font-weight:750;
 
-    text-align: center;
+    text-align:center;
 
-    white-space: nowrap;
+    white-space:nowrap;
 
 }
 
 
-.home-page .payment-legend-value {
+.home-page .payment-legend-value{
 
-    color: #172033;
+    color:#172033;
 
-    font-size: 15px;
+    font-size:15px;
 
-    font-weight: 900;
+    font-weight:900;
 
-    text-align: right;
+    text-align:right;
 
-    min-width: 20px;
+    min-width:20px;
 
 }
 
 
 /* =========================================================
-   29.21 - STATUS CHART
+   09.21 - STATUS CHART
 ========================================================= */
 
-.home-page .status-chart-content {
+.home-page .status-chart-content{
 
-    display: block;
+    height:255px;
 
-    min-height: 280px;
+    min-height:255px;
+
+    display:block;
+
+    box-sizing:border-box;
 
 }
 
 
 /* =========================================================
-   29.22 - STATUS BARS
+   09.22 - STATUS BARS
+   DISTRIBUTE ALL ROWS EQUALLY
 ========================================================= */
 
-.home-page .centre-status-bars {
+.home-page .centre-status-bars{
 
-    width: 100%;
+    width:100%;
 
-    display: flex;
+    height:100%;
 
-    flex-direction: column;
+    display:grid;
 
-    gap: 10px;
+    grid-template-rows:
+        repeat(5, 1fr);
+
+    gap:0;
 
 }
 
 
 /* =========================================================
-   29.23 - STATUS ROW
+   09.23 - STATUS ROW
 ========================================================= */
 
-.home-page .centre-status-bar-row {
+.home-page .centre-status-bar-row{
 
-    width: 100%;
+    width:100%;
 
-}
+    height:100%;
 
+    display:flex;
 
-.home-page .centre-status-bar-header {
+    flex-direction:column;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-bottom: 5px;
-
-}
-
-
-.home-page .centre-status-name {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    color: #334155;
-
-    font-size: 11px;
-
-    font-weight: 750;
-
-}
-
-
-.home-page .centre-status-value {
-
-    color: #172033;
-
-    font-size: 11px;
-
-    font-weight: 900;
+    justify-content:center;
 
 }
 
 
 /* =========================================================
-   29.24 - STATUS MARKER
+   STATUS HEADER
 ========================================================= */
 
-.home-page .centre-status-bar-row::before {
+.home-page .centre-status-bar-header{
 
-    display: none;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:5px;
 
 }
 
 
-.home-page .centre-status-name::before {
+.home-page .centre-status-name{
 
-    content: "";
+    display:inline-flex;
 
-    width: 8px;
+    align-items:center;
 
-    height: 8px;
+    gap:7px;
 
-    flex: 0 0 8px;
+    color:#334155;
 
-    border-radius: 50%;
+    font-size:11px;
+
+    font-weight:750;
+
+}
+
+
+.home-page .centre-status-value{
+
+    color:#172033;
+
+    font-size:11px;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================================
+   09.23 - STATUS ROW
+========================================================= */
+
+.home-page .centre-status-bar-row{
+
+    width:100%;
+
+}
+
+
+.home-page .centre-status-bar-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:5px;
+
+}
+
+
+.home-page .centre-status-name{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:#334155;
+
+    font-size:11px;
+
+    font-weight:750;
+
+}
+
+
+.home-page .centre-status-value{
+
+    color:#172033;
+
+    font-size:11px;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================================
+   09.24 - STATUS MARKER
+========================================================= */
+
+.home-page .centre-status-bar-row::before{
+
+    display:none;
+
+}
+
+
+.home-page .centre-status-name::before{
+
+    content:"";
+
+    width:8px;
+
+    height:8px;
+
+    flex:0 0 8px;
+
+    border-radius:50%;
 
 }
 
 
 .home-page
 .centre-status-bar-row[data-status="ACTIVE"]
-.centre-status-name::before {
+.centre-status-name::before{
 
-    background: #16a34a;
+    background:#16a34a;
 
     box-shadow:
-        0 0 0 3px rgba(22, 163, 74, 0.10);
+        0 0 0 3px rgba(22,163,74,0.10);
 
 }
 
 
 .home-page
 .centre-status-bar-row[data-status="FOLLOW_UP"]
-.centre-status-name::before {
+.centre-status-name::before{
 
-    background: #f59e0b;
+    background:#f59e0b;
 
     box-shadow:
-        0 0 0 3px rgba(245, 158, 11, 0.10);
+        0 0 0 3px rgba(245,158,11,0.10);
 
 }
 
 
 .home-page
 .centre-status-bar-row[data-status="INACTIVE"]
-.centre-status-name::before {
+.centre-status-name::before{
 
-    background: #94a3b8;
+    background:#94a3b8;
 
     box-shadow:
-        0 0 0 3px rgba(148, 163, 184, 0.12);
+        0 0 0 3px rgba(148,163,184,0.12);
 
 }
 
 
 .home-page
 .centre-status-bar-row[data-status="ARCHIVED"]
-.centre-status-name::before {
+.centre-status-name::before{
 
-    background: #64748b;
+    background:#64748b;
 
     box-shadow:
-        0 0 0 3px rgba(100, 116, 139, 0.10);
+        0 0 0 3px rgba(100,116,139,0.10);
 
 }
 
 
 .home-page
 .centre-status-bar-row[data-status="DELETED"]
-.centre-status-name::before {
+.centre-status-name::before{
 
-    background: #ef4444;
+    background:#ef4444;
 
     box-shadow:
-        0 0 0 3px rgba(239, 68, 68, 0.10);
+        0 0 0 3px rgba(239,68,68,0.10);
 
 }
 
 
 /* =========================================================
-   29.25 - TRACK
+   09.25 - TRACK
 ========================================================= */
 
-.home-page .centre-status-track {
+.home-page .centre-status-track{
 
-    width: 100%;
+    width:100%;
 
-    height: 7px;
+    height:7px;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    border-radius: 4px;
+    border-radius:4px;
 
-    background: #eef2f6;
+    background:#eef2f6;
 
 }
 
 
 /* =========================================================
-   29.26 - BAR
+   09.26 - BAR
 ========================================================= */
 
-.home-page .centre-status-bar {
+.home-page .centre-status-bar{
 
-    width: 0%;
+    width:0%;
 
-    height: 100%;
+    height:100%;
 
-    min-width: 0;
+    min-width:0;
 
-    border-radius: 4px;
+    border-radius:4px;
 
     transition:
         width .55s ease;
@@ -2689,164 +2493,164 @@ html[dir="ltr"]
 }
 
 
-.home-page .centre-status-bar.active {
+.home-page .centre-status-bar.active{
 
-    background: #16a34a;
-
-}
-
-
-.home-page .centre-status-bar.follow-up {
-
-    background: #f59e0b;
+    background:#16a34a;
 
 }
 
 
-.home-page .centre-status-bar.inactive {
+.home-page .centre-status-bar.follow-up{
 
-    background: #94a3b8;
-
-}
-
-
-.home-page .centre-status-bar.archived {
-
-    background: #64748b;
+    background:#f59e0b;
 
 }
 
 
-.home-page .centre-status-bar.deleted {
+.home-page .centre-status-bar.inactive{
 
-    background: #ef4444;
-
-}
-
-
-/* =========================================================
-   29.27 - EMPTY
-========================================================= */
-
-.home-page .overview-status-empty {
-
-    min-height: 135px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    color: #94a3b8;
+    background:#94a3b8;
 
 }
 
 
-.home-page .overview-status-empty i {
+.home-page .centre-status-bar.archived{
 
-    font-size: 22px;
+    background:#64748b;
+
+}
+
+
+.home-page .centre-status-bar.deleted{
+
+    background:#ef4444;
 
 }
 
 
 /* =========================================================
-   29.28 - RTL
+   09.27 - EMPTY
+========================================================= */
+
+.home-page .overview-status-empty{
+
+    min-height:135px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    color:#94a3b8;
+
+}
+
+
+.home-page .overview-status-empty i{
+
+    font-size:22px;
+
+}
+
+
+/* =========================================================
+   09.28 - RTL
 ========================================================= */
 
 html[dir="rtl"] .home-page
-.overview-chart-card {
+.overview-chart-card{
 
-    direction: rtl;
-
-}
-
-
-html[dir="rtl"] .home-page
-.overview-chart-card-header {
-
-    direction: rtl;
+    direction:rtl;
 
 }
 
 
 html[dir="rtl"] .home-page
-.monthly-payment-legend {
+.overview-chart-card-header{
 
-    direction: rtl;
+    direction:rtl;
+
+}
+
+
+html[dir="rtl"] .home-page
+.monthly-payment-legend{
+
+    direction:rtl;
 
 }
 
 
 /*
    مهم:
-   كل Legend Item يحتفظ بترتيب بصري ثابت
+   Legend Item يحتفظ بترتيب بصري ثابت
    حتى يبقى العدد في اليمين.
 */
 
 html[dir="rtl"] .home-page
-.payment-legend-item {
+.payment-legend-item{
 
-    direction: ltr;
-
-}
-
-
-html[dir="rtl"] .home-page
-.payment-legend-label {
-
-    direction: rtl;
+    direction:ltr;
 
 }
 
 
 html[dir="rtl"] .home-page
-.centre-status-bar-header {
+.payment-legend-label{
 
-    direction: rtl;
+    direction:rtl;
+
+}
+
+
+html[dir="rtl"] .home-page
+.centre-status-bar-header{
+
+    direction:rtl;
 
 }
 
 
 /* =========================================================
-   29.29 - LTR
+   09.29 - LTR
 ========================================================= */
 
 html[dir="ltr"] .home-page
-.overview-chart-card {
+.overview-chart-card{
 
-    direction: ltr;
-
-}
-
-
-html[dir="ltr"] .home-page
-.overview-chart-card-header {
-
-    direction: ltr;
+    direction:ltr;
 
 }
 
 
 html[dir="ltr"] .home-page
-.payment-legend-item {
+.overview-chart-card-header{
 
-    direction: ltr;
+    direction:ltr;
+
+}
+
+
+html[dir="ltr"] .home-page
+.payment-legend-item{
+
+    direction:ltr;
 
 }
 
 
 /* =========================================================
-   29.30 - RESPONSIVE
+   09.30 - RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1000px) {
+@media (max-width:1000px){
 
-    .home-page .overview-charts-grid {
+    .home-page .overview-charts-grid{
 
         grid-template-columns:
             1fr;
@@ -2857,414 +2661,131 @@ html[dir="ltr"] .home-page
 
 
 /* =========================================================
-   MOBILE
+   09.31 - MOBILE
 ========================================================= */
 
-@media (max-width: 650px) {
+@media (max-width:650px){
 
-    .home-page .overview-widget
-    .widget-header {
+    .home-page
+    .overview-widget
+    .widget-header{
 
-        min-height: 50px;
+        min-height:50px;
 
-        padding: 0 11px;
-
-    }
-
-
-    .home-page .overview-header-title h2 {
-
-        font-size: 14px;
+        padding:0 11px;
 
     }
 
 
-    .home-page .overview-chart-card {
+    .home-page
+    .overview-header-title
+    h2{
 
-        padding: 11px;
-
-        min-height: 310px;
-
-        border-radius: 4px;
+        font-size:14px;
 
     }
 
 
-    .home-page .overview-chart-content {
+    .home-page
+    .overview-chart-card{
 
-        min-height: 245px;
+        padding:11px;
+
+        min-height:310px;
+
+        border-radius:4px;
+
+    }
+
+
+    .home-page
+    .overview-chart-content{
+
+        min-height:245px;
 
     }
 
 
     .home-page
     .overview-chart-card#monthlyPaymentChart
-    .overview-chart-content {
+    .overview-chart-content{
 
-        gap: 14px;
-
-    }
-
-
-    .home-page .monthly-payment-donut {
-
-        width: 180px;
-
-        height: 180px;
-
-        flex-basis: 180px;
-
-    }
-
-
-    .home-page .monthly-payment-donut::after {
-
-        inset: 22px;
+        gap:14px;
 
     }
 
 
     .home-page
-    .monthly-payment-donut-center strong {
+    .monthly-payment-donut{
 
-        font-size: 34px;
+        width:180px;
 
-    }
+        height:180px;
 
-
-    .home-page .monthly-payment-donut-center span {
-
-        font-size: 13px;
+        flex-basis:180px;
 
     }
 
 
-    .home-page .monthly-payment-legend {
+    .home-page
+    .monthly-payment-donut::after{
 
-        width: 100%;
-
-        gap: 12px;
-
-    }
-
-
-    .home-page .payment-legend-item {
-
-        min-width: 0;
-
-        flex: 1 1 0;
+        inset:22px;
 
     }
 
 
-    .home-page .payment-legend-label {
+    .home-page
+    .monthly-payment-donut-center
+    strong{
 
-        font-size: 10px;
+        font-size:34px;
+
+    }
+
+
+    .home-page
+    .monthly-payment-donut-center
+    span{
+
+        font-size:13px;
 
     }
 
 
-    .home-page .payment-legend-value {
+    .home-page
+    .monthly-payment-legend{
 
-        font-size: 12px;
+        width:100%;
+
+        gap:12px;
 
     }
 
-}
 
+    .home-page
+    .payment-legend-item{
 
-/* =========================================================
-   END SECTION 29 - HOME CHARTS
-========================================================= */
+        min-width:0;
 
+        flex:1 1 0;
 
-/* =========================================================
-   HOME - FINAL HEIGHT COMPRESSION
-========================================================= */
+    }
 
-.home-page .home-banner {
-    margin-bottom: 10px;
-}
 
-.home-page .stats-grid {
-    gap: 12px;
-    margin-bottom: 10px;
-}
+    .home-page
+    .payment-legend-label{
 
-.home-page .dashboard-grid {
-    gap: 10px;
-    margin-bottom: 8px;
-}
+        font-size:10px;
 
-.home-page .system-notification {
-    height: 46px;
-    min-height: 46px;
-    border-radius: 4px;
-}
-/* =========================================================
-   HOME - FINAL COMPACT HEIGHT
-   KEEP LARGE PAYMENT DONUT
-========================================================= */
+    }
 
 
-/* =========================================================
-   BANNER
-========================================================= */
+    .home-page
+    .payment-legend-value{
 
-.home-page .home-banner {
+        font-size:12px;
 
-    height: 38px;
+    }
 
-    margin-bottom: 8px;
-
-    padding: 0 14px;
-
-}
-
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-.home-page .stats-grid {
-
-    gap: 10px;
-
-    margin-bottom: 8px;
-
-}
-
-
-.home-page .stat-card {
-
-    min-height: 112px;
-
-    padding: 12px;
-
-}
-
-
-/* أصغر قليلاً لأن المحتوى بسيط */
-
-.home-page .stat-icon {
-
-    width: 50px;
-
-    height: 50px;
-
-}
-
-
-/* =========================================================
-   MAIN DASHBOARD GRID
-========================================================= */
-
-.home-page .dashboard-grid {
-
-    gap: 8px;
-
-    margin-bottom: 6px;
-
-}
-
-
-/* =========================================================
-   OVERVIEW WIDGET
-========================================================= */
-
-.home-page .overview-widget .widget-header {
-
-    min-height: 44px;
-
-    height: 44px;
-
-    padding: 0 14px;
-
-}
-
-
-.home-page .overview-widget .widget-body {
-
-    padding: 8px;
-
-}
-
-
-/* =========================================================
-   CHART GRID
-========================================================= */
-
-.home-page .overview-charts-grid {
-
-    gap: 8px;
-
-}
-
-
-/* =========================================================
-   CHART CARDS
-========================================================= */
-
-.home-page .overview-chart-card {
-
-    min-height: 325px;
-
-    padding: 8px;
-
-}
-
-
-/* =========================================================
-   CHART HEADER
-========================================================= */
-
-.home-page .overview-chart-card-header {
-
-    margin-bottom: 4px;
-
-}
-
-
-/* =========================================================
-   CHART CONTENT
-========================================================= */
-
-.home-page .overview-chart-content {
-
-    min-height: 270px;
-
-}
-
-
-/* =========================================================
-   PAYMENT CHART
-   DONUT REMAINS 240px
-========================================================= */
-
-.home-page
-.overview-chart-card#monthlyPaymentChart
-.overview-chart-content {
-
-    min-height: 270px;
-
-    gap: 6px;
-
-    padding: 0;
-
-}
-
-
-/* =========================================================
-   DONUT — DO NOT REDUCE
-========================================================= */
-
-.home-page .monthly-payment-donut {
-
-    width: 240px;
-
-    height: 240px;
-
-    flex: 0 0 240px;
-
-}
-
-
-/* =========================================================
-   LEGEND
-========================================================= */
-
-.home-page .monthly-payment-legend {
-
-    width: min(100%, 430px);
-
-    gap: 28px;
-
-}
-
-
-/* =========================================================
-   STATUS BARS
-========================================================= */
-
-.home-page .status-chart-content {
-
-    min-height: 270px;
-
-}
-
-
-.home-page .centre-status-bars {
-
-    gap: 6px;
-
-}
-
-
-/* =========================================================
-   RECENT CENTRES
-========================================================= */
-
-.home-page .recent-widget .recent-widget-header {
-
-    min-height: 46px;
-
-}
-
-
-.home-page .recent-widget .recent-widget-body {
-
-    padding: 5px 7px 6px;
-
-}
-
-
-.home-page .recent-widget .recent-centres-list {
-
-    gap: 3px;
-
-}
-
-
-.home-page .recent-widget .recent-centre-item {
-
-    min-height: 42px;
-
-}
-
-
-/* =========================================================
-   NOTIFICATION
-========================================================= */
-
-.home-page .system-notification {
-
-    height: 50px;
-
-    min-height: 50px;
-
-    margin-top: 6px;
-
-    padding: 0 12px;
-
-}
-
-/* FINAL 1% - REMOVE LAST VERTICAL OVERFLOW */
-
-.home-page .overview-chart-card {
-    min-height: 310px;
-}
-
-.home-page .overview-chart-content {
-    min-height: 255px;
-}
-
-.home-page
-.overview-chart-card#monthlyPaymentChart
-.overview-chart-content {
-    min-height: 255px;
-}
-
-.home-page .system-notification {
-    height: 44px;
-    min-height: 44px;
 }
