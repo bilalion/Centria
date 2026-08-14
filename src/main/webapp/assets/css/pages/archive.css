@@ -1621,3 +1621,124 @@ PAGINATION
     margin-top:1px;
     font-size:11px;
 }
+
+/* =========================================================
+   CENTRIA ARCHIVE — FINAL STAT CARDS
+   Compact / Clean / Consistent
+========================================================= */
+
+.archive-statistics{
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.archive-stat-card{
+    min-height:94px;
+    padding:12px 14px;
+    gap:11px;
+
+    border:1px solid #e5e7eb;
+    border-radius:4px;
+
+    box-shadow:0 1px 3px rgba(15,23,42,.04);
+}
+
+.archive-stat-icon{
+    width:46px;
+    height:46px;
+    flex:0 0 46px;
+
+    border-radius:50%;
+    font-size:17px;
+}
+
+.archive-stat-content{
+    justify-content:center;
+}
+
+.archive-stat-label{
+    font-size:13px;
+    font-weight:700;
+    line-height:1.35;
+}
+
+.archive-stat-value{
+    margin-top:2px;
+    font-size:25px;
+    font-weight:800;
+    line-height:1.15;
+}
+
+.archive-stat-description{
+    margin-top:2px;
+    font-size:11px;
+    line-height:1.25;
+}
+
+
+/* ---------------------------------------------------------
+   TOTAL
+--------------------------------------------------------- */
+
+.archive-stat-total .archive-stat-icon{
+    background:#f1f5f9;
+    color:#475569;
+}
+
+
+/* ---------------------------------------------------------
+   ARCHIVED / RESTORABLE
+--------------------------------------------------------- */
+
+.archive-stat-restorable .archive-stat-icon{
+    background:#f1f5f9;
+    color:#64748b;
+}
+
+
+/* ---------------------------------------------------------
+   PENDING DELETE
+   Red warning tone
+--------------------------------------------------------- */
+
+.archive-stat-pending .archive-stat-icon{
+    background:#fef2f2;
+    color:#ef4444;
+}
+
+
+/* ---------------------------------------------------------
+   DELETED
+--------------------------------------------------------- */
+
+.archive-stat-deleted .archive-stat-icon{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+
+/* =========================================================
+   PENDING DELETE — WARNING CARD
+========================================================= */
+
+.archive-stat-pending{
+    border-inline-start:4px solid #ef4444;
+    background:#fffafa;
+}
+
+.archive-stat-pending .archive-stat-icon{
+    background:#fef2f2;
+    color:#ef4444;
+}
+
+.archive-stat-pending .archive-stat-label{
+    color:#b91c1c;
+}
+
+.archive-stat-pending .archive-stat-value{
+    color:#dc2626;
+}
+
+.archive-stat-pending .archive-stat-description{
+    color:#ef4444;
+}

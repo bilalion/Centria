@@ -53,9 +53,7 @@
     min-width:0;
 }
 
-.payments-header h1{
-    margin:0;
-    color:var(--text);
+.payments-header h1{margin:0;color:var(--text);
     font-size:15px;
     font-weight:700;
     line-height:1.3;
@@ -1256,4 +1254,65 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
 }
 /* ======================================================
    END  PAYMENTS CSS
+====================================================== */
+
+/* ======================================================
+   16. PAYMENT ROW STATUS INDICATOR
+   OUTER EDGE OF THE ROW
+====================================================== */
+
+
+/* ======================================================
+   UNPAID
+====================================================== */
+
+#payments-table-container
+.unpaid-table
+tbody
+tr
+td:first-child{
+
+    border-right:none;
+
+    border-inline-start:4px solid #ef4444;
+
+}
+
+
+/* ======================================================
+   PAID
+====================================================== */
+
+#payments-table-container
+.paid-table
+tbody
+tr
+td:first-child{
+
+    border-right:none;
+
+    border-inline-start:4px solid #22c55e;
+
+}
+
+
+/* ======================================================
+   HISTORY
+====================================================== */
+
+#payments-table-container
+.history-table
+tbody
+tr
+td:first-child{
+
+    border-right:none;
+
+    border-inline-start:4px solid #94a3b8;
+
+}
+
+
+/* ======================================================
+   END SECTION 16
 ====================================================== */

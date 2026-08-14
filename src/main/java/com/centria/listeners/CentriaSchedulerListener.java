@@ -132,6 +132,14 @@ public class CentriaSchedulerListener
                     */
 
                     monitor.checkSuspendedCentres();
+                    
+                    /*
+                    ======================================================
+                    CHECK ARCHIVED CENTRES
+                    ======================================================
+                    */
+                    
+                    monitor.checkArchivedCentres();
 
 
                 },

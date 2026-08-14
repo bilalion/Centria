@@ -283,5 +283,70 @@ public class AccountStatusMonitor {
         }
 
     }
+    
+    /*
+======================================================
+CHECK ARCHIVED CENTRES
+======================================================
+
+ARCHIVED
+    ↓ retention_until reached
+PENDING_DELETE
+
+IMPORTANT:
+- Only archive status changes
+- Centre remains ARCHIVED
+- No DELETE is performed
+======================================================
+*/
+
+public void checkArchivedCentres() {
+
+    try {
+
+        int updatedCount =
+                new com.centria.dao.ArchiveDAO()
+                        .monitorArchivedCentres();
+
+
+        /*
+        ------------------------------------------------
+        Logging
+        ------------------------------------------------
+        */
+
+        if (updatedCount > 0) {
+
+            System.out.println(
+                    "[CENTRIA MONITOR] "
+                    + updatedCount
+                    + " centre(s) changed: "
+                    + "ARCHIVED -> PENDING_DELETE"
+            );
+
+        }
+        else {
+
+            System.out.println(
+                    "[CENTRIA MONITOR] "
+                    + "No ARCHIVED centres reached "
+                    + "the retention period."
+            );
+
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA MONITOR] "
+                + "Error while checking archived centres."
+        );
+
+        e.printStackTrace();
+
+    }
+
+}
 
 }

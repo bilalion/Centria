@@ -454,4 +454,75 @@ public boolean restoreCentre(String centreCode) {
         return false;
     }
 }
+    
+    
+    /*
+==========================================================
+04- MONITOR ARCHIVED CENTRES
+==========================================================
+
+ARCHIVED
+    ↓ retention_until reached
+PENDING_DELETE
+
+IMPORTANT:
+- centres.status remains ARCHIVED
+- Only centres_archive.archive_status changes
+- No DELETE is performed
+==========================================================
+*/
+
+public int monitorArchivedCentres() {
+
+    String sql =
+            "UPDATE centres_archive ca " +
+            "INNER JOIN centres c " +
+            "    ON c.centre_code = ca.centre_code " +
+            "SET ca.archive_status = 'PENDING_DELETE' " +
+            "WHERE ca.archive_status = 'ARCHIVED' " +
+            "AND c.status = 'ARCHIVED' " +
+            "AND ca.retention_until <= CURRENT_DATE";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql)
+    ) {
+
+        int updatedCount =
+                ps.executeUpdate();
+
+
+        /*
+        --------------------------------------------------
+        Logging
+        --------------------------------------------------
+        */
+
+        System.out.println(
+                "[CENTRIA ARCHIVE] "
+                + updatedCount
+                + " centre(s) changed: "
+                + "ARCHIVED -> PENDING_DELETE"
+        );
+
+
+        return updatedCount;
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] "
+                + "Error while monitoring archived centres."
+        );
+
+        e.printStackTrace();
+
+        return 0;
+    }
+}
 }

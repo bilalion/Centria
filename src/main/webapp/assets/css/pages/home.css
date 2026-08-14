@@ -2789,3 +2789,31 @@ html[dir="ltr"] .home-page
     }
 
 }
+
+/* =========================================================
+   REVENUE VALUE POSITION
+   Move value toward the icon to avoid the period select
+========================================================= */
+
+html[dir="rtl"]
+.home-page
+.stat-card:has(#revenuePeriod)
+.stat-value{
+
+    transform:translateX(45px);
+
+}
+
+
+/* =========================================================
+   LTR
+========================================================= */
+
+html[dir="ltr"]
+.home-page
+.stat-card:has(#revenuePeriod)
+.stat-value{
+
+    transform:translateX(-45px);
+
+}
