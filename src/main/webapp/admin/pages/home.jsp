@@ -1261,6 +1261,27 @@ SimpleDateFormat recentDateFormat =
      SECTION 04 - SYSTEM NOTIFICATION
 ================================================= -->
 
+
+<%
+int pendingPaymentsCount =
+        request.getAttribute("pendingPaymentsCount") != null
+        ?
+        (Integer) request.getAttribute("pendingPaymentsCount")
+        :
+        0;
+
+
+String pendingPaymentsMessage =
+        LanguageManager.get(
+                "dashboard.pending.payments.message",
+                session
+        ).replace(
+                "{0}",
+                String.valueOf(pendingPaymentsCount)
+        );
+%>
+
+
 <section class="system-notification">
 
 
@@ -1286,10 +1307,7 @@ SimpleDateFormat recentDateFormat =
 
         <p>
 
-            <%= LanguageManager.get(
-                    "dashboard.pending.payments.message",
-                    session
-            ) %>
+            <%= pendingPaymentsMessage %>
 
         </p>
 
@@ -1297,17 +1315,17 @@ SimpleDateFormat recentDateFormat =
     </div>
 
 
-<a
-    class="notification-action"
-    href="javascript:void(0);"
-    onclick="document.getElementById('sidebar-payments').click();">
+    <a
+        class="notification-action"
+        href="javascript:void(0);"
+        onclick="document.getElementById('sidebar-payments').click();">
 
-    <%= LanguageManager.get(
-            "dashboard.view.payments",
-            session
-    ) %>
+        <%= LanguageManager.get(
+                "dashboard.view.payments",
+                session
+        ) %>
 
-</a>
+    </a>
 
 
 </section>

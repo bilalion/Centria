@@ -11,7 +11,7 @@ package com.centria.controllers.admin;
 
 import com.centria.dao.HomeDAO;
 import com.centria.models.Centre;
-
+import com.centria.dao.PaymentDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +30,7 @@ public class HomeServlet extends HttpServlet {
 
 
     private HomeDAO homeDAO;
-
+    private PaymentDAO paymentDAO;
 
     /*
     ======================================================
@@ -42,8 +42,8 @@ public class HomeServlet extends HttpServlet {
     public void init()
             throws ServletException {
 
-        homeDAO =
-                new HomeDAO();
+        homeDAO = new HomeDAO();
+        paymentDAO = new PaymentDAO();
 
     }
 
@@ -152,6 +152,11 @@ public class HomeServlet extends HttpServlet {
 
         Map<String, Integer> centreStatusOverview =
                 homeDAO.getCentreStatusOverview();
+        
+        
+        
+        int pendingPaymentsCount =
+        paymentDAO.countUnpaidPayments();
 
 
         /*
@@ -200,7 +205,11 @@ public class HomeServlet extends HttpServlet {
                 "centreStatusOverview",
                 centreStatusOverview
         );
-
+        
+        request.setAttribute(
+        "pendingPaymentsCount",
+        pendingPaymentsCount
+);
 
         /*
         ==================================================
