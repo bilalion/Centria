@@ -94,13 +94,21 @@ public class HomeServlet extends HttpServlet {
 
         /*
         ==================================================
-        4. MONTHLY REVENUE
+        4.1 MONTHLY REVENUE
         ==================================================
         */
 
         double monthlyRevenue =
                 homeDAO.getMonthlyRevenue();
 
+   /*
+        ==================================================
+        4.2 Annual REVENUE
+        ==================================================
+        */
+
+        double annualRevenue =
+        homeDAO.getAnnualRevenue();
 
         /*
         ==================================================
@@ -188,6 +196,10 @@ public class HomeServlet extends HttpServlet {
                 monthlyRevenue
         );
 
+        request.setAttribute(
+        "annualRevenue",
+        annualRevenue
+);
 
         request.setAttribute(
                 "recentCentres",

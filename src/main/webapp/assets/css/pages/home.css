@@ -311,8 +311,80 @@ Version :
 
 }
 
+/* ======================================================
+   REVENUE PERIOD SELECT
+====================================================== */
+
+.stat-title-row{
+    display:flex;
+    align-items:right;
+    width:100%;
+    gap:15px;
+}
 
 
+.stat-period-select{
+    flex-shrink:0;
+
+    height:28px;
+    min-width:88px;
+
+    padding:0 15px;
+
+    border:1px solid #dbe3ef;
+    border-radius:5px;
+
+    background:#ffffff;
+    color:#dc2626;
+
+    font-size:10px;
+    font-weight:700;
+
+    outline:none;
+    cursor:pointer;
+
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+
+/* ======================================================
+   RTL
+====================================================== */
+
+html[dir="rtl"] .stat-title-row{
+    justify-content:flex-start;
+
+}
+
+html[dir="rtl"] .stat-period-select{
+     margin-left:-10px;
+}
+
+
+/* ======================================================
+   LTR
+====================================================== */
+
+html[dir="ltr"] .stat-title-row{
+    justify-content:flex-start;
+}
+
+html[dir="ltr"] .stat-period-select{
+    margin-left:auto;
+}
+
+
+.stat-period-select:hover{
+    border-color:#c7d2e3;
+}
+
+
+.stat-period-select:focus{
+    border-color:#dbe3ef;
+    box-shadow:none;
+}
 
 .stat-value{
 

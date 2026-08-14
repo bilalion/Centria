@@ -38,6 +38,10 @@ Double monthlyRevenue =
                 "monthlyRevenue"
         );
 
+Double annualRevenue =
+        (Double) request.getAttribute(
+                "annualRevenue"
+        );
 
 List<Centre> recentCentres =
         (List<Centre>) request.getAttribute(
@@ -207,6 +211,12 @@ if (centresRequiringAttention == null) {
 if (monthlyRevenue == null) {
 
     monthlyRevenue = 0.00;
+
+}
+
+if (annualRevenue == null) {
+
+    annualRevenue = 0.00;
 
 }
 
@@ -451,59 +461,110 @@ SimpleDateFormat recentDateFormat =
     </div>
 
 
-    <!-- =================================================
-         MONTHLY REVENUE
-    ================================================= -->
+ <!-- =================================================
+     MONTHLY REVENUE
+================================================= -->
 
-    <div class="stat-card stat-red">
+<div class="stat-card stat-red"
+     data-monthly-revenue="<%= monthlyRevenue %>"
+     data-annual-revenue="<%= annualRevenue %>"
+     data-monthly-title="<%= LanguageManager.get(
+            "dashboard.monthly.revenue",
+            session
+     ) %>"
+     data-annual-title="<%= LanguageManager.get(
+            "dashboard.annual.revenue",
+            session
+     ) %>"
+     data-monthly-description="<%= LanguageManager.get(
+            "dashboard.monthly.revenue.description",
+            session
+     ) %>"
+     data-annual-description="<%= LanguageManager.get(
+            "dashboard.annual.revenue.description",
+            session
+     ) %>">
+
+    <div class="stat-icon">
+
+        <i class="fa-solid fa-money-bill-wave"></i>
+
+    </div>
 
 
-        <div class="stat-icon">
+    <div class="stat-content">
 
-            <i class="fa-solid fa-money-bill-wave"></i>
+
+        <div class="stat-title-row">
+
+
+         <span class="stat-title" id="revenueTitle">
+
+    <%= LanguageManager.get(
+            "dashboard.monthly.revenue",
+            session
+    ) %>
+
+</span>
+
+
+            <select
+                    class="stat-period-select"
+                    id="revenuePeriod">
+
+                <option value="month">
+
+                    <%= LanguageManager.get(
+                            "dashboard.this.month",
+                            session
+                    ) %>
+
+                </option>
+
+
+                <option value="year">
+
+                    <%= LanguageManager.get(
+                            "dashboard.this.year",
+                            session
+                    ) %>
+
+                </option>
+
+            </select>
+
 
         </div>
 
 
-        <div class="stat-content">
+   <strong
+        class="stat-value"
+        id="revenueValue">
+
+    <%= String.format(
+            "%.2f DH",
+            monthlyRevenue
+    ) %>
+
+</strong>
 
 
-            <span class="stat-title">
+    <span
+        class="stat-description"
+        id="revenueDescription">
 
-                <%= LanguageManager.get(
-                        "dashboard.monthly.revenue",
-                        session
-                ) %>
+    <%= LanguageManager.get(
+            "dashboard.monthly.revenue.description",
+            session
+    ) %>
 
-            </span>
-
-
-            <strong
-                    class="stat-value"
-                    id="monthlyRevenue">
-
-                <%= String.format(
-                        "%.2f DH",
-                        monthlyRevenue
-                ) %>
-
-            </strong>
-
-
-            <span class="stat-description">
-
-                <%= LanguageManager.get(
-                        "dashboard.monthly.revenue.description",
-                        session
-                ) %>
-
-            </span>
-
-
-        </div>
+</span>
 
 
     </div>
+
+
+</div>
 
 
 </section>
@@ -546,19 +607,7 @@ SimpleDateFormat recentDateFormat =
         </div>
 
 
-        <button
-                type="button"
-                class="widget-filter"
-                id="overviewYearFilter">
-
-            <%= LanguageManager.get(
-                    "dashboard.this.year",
-                    session
-            ) %>
-
-            <i class="fa-solid fa-chevron-down"></i>
-
-        </button>
+  
 
 
     </div>

@@ -45,6 +45,8 @@ function initAccueilPage() {
     initHomeActions();
     
     initHomeChart();
+    
+    initRevenuePeriod();
 
 }
 
@@ -476,8 +478,215 @@ function initCentreStatusBars() {
 
 }
 
+/*
+==================================================
+ REVENUE PERIOD
+==================================================
+*/
+
+/*
+==================================================
+ REVENUE PERIOD
+==================================================
+*/
+
+/*
+==================================================
+ REVENUE PERIOD
+==================================================
+*/
+
+function initRevenuePeriod() {
 
 
+    const select =
+        document.getElementById(
+            "revenuePeriod"
+        );
+
+
+    if (!select) {
+
+        return;
+
+    }
+
+
+    const card =
+        select.closest(
+            ".stat-card"
+        );
+
+
+    if (!card) {
+
+        return;
+
+    }
+
+
+    /*
+    ==============================================
+    REVENUE VALUES
+    ==============================================
+    */
+
+    const monthlyRevenue =
+        parseFloat(
+            card.getAttribute(
+                "data-monthly-revenue"
+            )
+        ) || 0;
+
+
+    const annualRevenue =
+        parseFloat(
+            card.getAttribute(
+                "data-annual-revenue"
+            )
+        ) || 0;
+
+
+    /*
+    ==============================================
+    TRANSLATED TEXT
+    ==============================================
+    */
+
+    const monthlyTitle =
+        card.getAttribute(
+            "data-monthly-title"
+        ) || "";
+
+
+    const annualTitle =
+        card.getAttribute(
+            "data-annual-title"
+        ) || "";
+
+
+    const monthlyDescription =
+        card.getAttribute(
+            "data-monthly-description"
+        ) || "";
+
+
+    const annualDescription =
+        card.getAttribute(
+            "data-annual-description"
+        ) || "";
+
+
+    /*
+    ==============================================
+    TARGET ELEMENTS
+    ==============================================
+    */
+
+    const title =
+        document.getElementById(
+            "revenueTitle"
+        );
+
+
+    const value =
+        document.getElementById(
+            "revenueValue"
+        );
+
+
+    const description =
+        document.getElementById(
+            "revenueDescription"
+        );
+
+
+    if (
+        !title ||
+        !value ||
+        !description
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+    ==============================================
+    UPDATE REVENUE
+    ==============================================
+    */
+
+    function updateRevenue() {
+
+
+        if (
+            select.value === "year"
+        ) {
+
+
+            /*
+            ANNUAL
+            */
+
+            title.textContent =
+                annualTitle;
+
+
+            value.textContent =
+                annualRevenue.toFixed(2)
+                + " DH";
+
+
+            description.textContent =
+                annualDescription;
+
+
+        }
+        else {
+
+
+            /*
+            MONTHLY
+            */
+
+            title.textContent =
+                monthlyTitle;
+
+
+            value.textContent =
+                monthlyRevenue.toFixed(2)
+                + " DH";
+
+
+            description.textContent =
+                monthlyDescription;
+
+        }
+
+    }
+
+
+    /*
+    ==============================================
+    CHANGE EVENT
+    ==============================================
+    */
+
+    select.onchange =
+        updateRevenue;
+
+
+    /*
+    ==============================================
+    INITIAL VALUE
+    ==============================================
+    */
+
+    updateRevenue();
+
+}
 
 
 /*
