@@ -1718,27 +1718,70 @@ PAGINATION
 
 
 /* =========================================================
-   PENDING DELETE — WARNING CARD
+   ARCHIVE STATUS BADGES
 ========================================================= */
 
-.archive-stat-pending{
-    border-inline-start:4px solid #ef4444;
-    background:#fffafa;
+.archive-status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:110px;
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:12px;
+    font-weight:700;
+    line-height:1.2;
+
+    white-space:nowrap;
 }
 
-.archive-stat-pending .archive-stat-icon{
-    background:#fef2f2;
-    color:#ef4444;
+
+/* =========================================================
+   ARCHIVED
+   Gray / Neutral
+========================================================= */
+
+.archive-status-archived{
+    color:#475569;
+    background:#f1f5f9;
+    border:1px solid #e2e8f0;
 }
 
-.archive-stat-pending .archive-stat-label{
-    color:#b91c1c;
+
+/* =========================================================
+   RESTORED
+   Green / Success
+========================================================= */
+
+.archive-status-restored{
+    color:#15803d;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
 }
 
-.archive-stat-pending .archive-stat-value{
+
+/* =========================================================
+   PENDING DELETE
+   Red / Warning
+========================================================= */
+
+.archive-status-pending_delete{
     color:#dc2626;
+    background:#fef2f2;
+    border:1px solid #fecaca;
 }
 
-.archive-stat-pending .archive-stat-description{
-    color:#ef4444;
+
+/* =========================================================
+   DELETED
+   Dark Red / Final
+========================================================= */
+
+.archive-status-deleted{
+    color:#991b1b;
+    background:#fee2e2;
+    border:1px solid #fecaca;
 }

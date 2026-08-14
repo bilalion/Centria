@@ -132,11 +132,11 @@ public List<Archive> getArchivedCentres() {
 
 public boolean restoreCentre(String centreCode) {
 
-    String updateCentreSql =
-            "UPDATE centres " +
-            "SET status = 'PENDING', " +
-            "    subscription_end = DATE_SUB(CURDATE(), INTERVAL 1 DAY) " +
-            "WHERE centre_code = ?";
+ String updateCentreSql =
+        "UPDATE centres " +
+        "SET status = 'SUSPENDED', " +
+        "    subscription_end = DATE_ADD(CURDATE(), INTERVAL 3 DAY) " +
+        "WHERE centre_code = ?";
 
     String updateArchiveSql =
             "UPDATE centres_archive " +
@@ -455,7 +455,117 @@ public boolean restoreCentre(String centreCode) {
     }
 }
     
+   
+ 
     
+    
+    
+    public int countArchivedCentres() {
+
+    String sql =
+            "SELECT COUNT(*) " +
+            "FROM centres_archive " +
+            "WHERE archive_status = 'ARCHIVED'";
+
+    try (
+            Connection connection =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement statement =
+                    connection.prepareStatement(sql);
+
+            ResultSet resultSet =
+                    statement.executeQuery()
+    ) {
+
+        if (resultSet.next()) {
+
+            return resultSet.getInt(1);
+
+        }
+
+    }
+    catch (Exception e) {
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+
+}
+
+
+public int countPendingDeleteCentres() {
+
+    String sql =
+            "SELECT COUNT(*) " +
+            "FROM centres_archive " +
+            "WHERE archive_status = 'PENDING_DELETE'";
+
+    try (
+            Connection connection =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement statement =
+                    connection.prepareStatement(sql);
+
+            ResultSet resultSet =
+                    statement.executeQuery()
+    ) {
+
+        if (resultSet.next()) {
+
+            return resultSet.getInt(1);
+
+        }
+
+    }
+    catch (Exception e) {
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+
+}
+
+
+public int countDeletedCentres() {
+
+    String sql =
+            "SELECT COUNT(*) " +
+            "FROM centres_archive " +
+            "WHERE archive_status = 'DELETED'";
+
+    try (
+            Connection connection =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement statement =
+                    connection.prepareStatement(sql);
+
+            ResultSet resultSet =
+                    statement.executeQuery()
+    ) {
+
+        if (resultSet.next()) {
+
+            return resultSet.getInt(1);
+
+        }
+
+    }
+    catch (Exception e) {
+
+        e.printStackTrace();
+
+    }
+
+    return 0;
+
+}
     /*
 ==========================================================
 04- MONITOR ARCHIVED CENTRES
@@ -471,6 +581,12 @@ IMPORTANT:
 - No DELETE is performed
 ==========================================================
 */
+    
+    
+ 
+    
+    
+    
 
 public int monitorArchivedCentres() {
 

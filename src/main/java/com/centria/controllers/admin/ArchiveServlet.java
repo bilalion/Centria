@@ -96,7 +96,82 @@ public class ArchiveServlet extends HttpServlet {
                 archivedCentres
         );
 
+        
+        /*
+--------------------------------------------------
+ARCHIVE STATISTICS
+--------------------------------------------------
+*/
 
+int archivedCount =
+        archiveDAO.countArchivedCentres();
+
+
+int pendingDeleteCount =
+        archiveDAO.countPendingDeleteCentres();
+
+
+int deletedCount =
+        archiveDAO.countDeletedCentres();
+
+
+/*
+--------------------------------------------------
+SEND STATISTICS TO JSP
+--------------------------------------------------
+*/
+
+request.setAttribute(
+        "archivedCount",
+        archivedCount
+);
+
+
+request.setAttribute(
+        "pendingDeleteCount",
+        pendingDeleteCount
+);
+
+
+request.setAttribute(
+        "deletedCount",
+        deletedCount
+);
+
+        
+        /*
+--------------------------------------------------
+AJAX REQUEST
+--------------------------------------------------
+
+When Archive is loaded through AJAX,
+return only the archive table fragment.
+
+This follows the same pattern used
+by CentreServlet.
+--------------------------------------------------
+*/
+
+if (
+        "true".equals(
+                request.getParameter(
+                        "ajax"
+                )
+        )
+) {
+
+
+    request.getRequestDispatcher(
+            "/admin/pages/fragments/archive/archive-table.jsp"
+    ).forward(
+            request,
+            response
+    );
+
+
+    return;
+
+}
         /*
         --------------------------------------------------
         Open Archive page

@@ -97,12 +97,16 @@
                 </span>
 
 
-                <strong class="archive-stat-value"
-                        data-archive-stat="total">
+              <strong class="archive-stat-value"
+        data-archive-stat="total">
 
-                    0
+    <%= 
+        ((Integer) request.getAttribute("archivedCount"))
+        +
+        ((Integer) request.getAttribute("pendingDeleteCount"))
+    %>
 
-                </strong>
+</strong>
 
             </div>
 
@@ -134,12 +138,12 @@
                 </span>
 
 
-                <strong class="archive-stat-value"
-                        data-archive-stat="restorable">
+               <strong class="archive-stat-value"
+        data-archive-stat="restorable">
 
-                    0
+    <%= request.getAttribute("archivedCount") %>
 
-                </strong>
+</strong>
 
 
                 <span class="archive-stat-description">
@@ -181,13 +185,12 @@
                 </span>
 
 
-                <strong class="archive-stat-value"
-                        data-archive-stat="pending-delete">
+              <strong class="archive-stat-value"
+        data-archive-stat="pending-delete">
 
-                    0
+    <%= request.getAttribute("pendingDeleteCount") %>
 
-                </strong>
-
+</strong>
 
                 <span class="archive-stat-description">
 
@@ -228,12 +231,12 @@
                 </span>
 
 
-                <strong class="archive-stat-value"
-                        data-archive-stat="deleted">
+             <strong class="archive-stat-value"
+        data-archive-stat="deleted">
 
-                    0
+    <%= request.getAttribute("deletedCount") %>
 
-                </strong>
+</strong>
 
 
                 <span class="archive-stat-description">

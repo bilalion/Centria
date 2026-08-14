@@ -28,6 +28,90 @@ Delete will be added later.
 */
 
 
+
+
+/*
+==================================================
+ LOAD ARCHIVE TABLE
+==================================================
+*/
+
+function loadArchive() {
+
+
+    const container =
+            document.getElementById(
+                    "archive-table-container"
+            );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const url =
+            window.contextPath
+            +
+            "/ArchiveServlet?action=list&ajax=true";
+
+
+    fetch(url)
+
+        .then(
+                response => {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                                "HTTP "
+                                +
+                                response.status
+                        );
+
+                    }
+
+
+                    return response.text();
+
+                }
+        )
+
+
+        .then(
+                html => {
+
+                    container.innerHTML =
+                            html;
+
+
+                    /*
+                    ----------------------------------
+                    Reinitialize Archive controls
+                    ----------------------------------
+                    */
+
+                    initArchivePage();
+
+                }
+        )
+
+
+        .catch(
+                error => {
+
+                    console.error(
+                            "[CENTRIA ARCHIVE] "
+                            + "Load error:",
+                            error
+                    );
+
+                }
+        );
+
+}
 /*
 ==================================================
 01 - ARCHIVE PAGE INITIALIZATION
@@ -740,6 +824,8 @@ document.addEventListener(
         function () {
 
             initArchivePage();
+
+            loadArchive();
 
         }
 );
