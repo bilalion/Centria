@@ -194,10 +194,12 @@ function initHomeActions() {
                 ) {
 
 
-                    loadContent(
-                        "PaymentServlet?action=list&tab=UNPAID",
-                        null
-                    );
+                 loadContent(
+    "payments.jsp",
+    document.getElementById(
+        "sidebar-payments"
+    )
+);
 
                 }
 
@@ -385,14 +387,31 @@ function initCentreStatusBars() {
 
     /*
     ==========================================
-    FIND MAXIMUM
+    CALCULATE TOTAL
     ==========================================
+
+    The total is the sum of all
+    displayed centre statuses.
+
+    Example:
+
+    ACTIVE      = 4
+    FOLLOW_UP   = 1
+    INACTIVE    = 1
+    ARCHIVED    = 1
+    DELETED     = 1
+
+    TOTAL       = 8
     */
 
-    const maxValue =
-        Math.max.apply(
-            null,
-            values
+    const totalValue =
+        values.reduce(
+            function (sum, value) {
+
+                return sum + value;
+
+            },
+            0
         );
 
 
@@ -402,7 +421,7 @@ function initCentreStatusBars() {
     ==========================================
     */
 
-    if (maxValue <= 0) {
+    if (totalValue <= 0) {
 
         rows.forEach(
             function (row) {
@@ -459,11 +478,17 @@ function initCentreStatusBars() {
                 values[index];
 
 
+            /*
+            ==========================================
+            CALCULATE PERCENTAGE OF TOTAL
+            ==========================================
+            */
+
             const width =
                 (
                     value
                     /
-                    maxValue
+                    totalValue
                 )
                 *
                 100;
@@ -634,9 +659,12 @@ function initRevenuePeriod() {
                 annualTitle;
 
 
-            value.textContent =
-                annualRevenue.toFixed(2)
-                + " DH";
+   value.textContent =
+    annualRevenue.toFixed(2)
+    + " DH";
+
+value.style.direction = "ltr";
+value.style.unicodeBidi = "isolate";
 
 
             description.textContent =
@@ -655,9 +683,12 @@ function initRevenuePeriod() {
                 monthlyTitle;
 
 
-            value.textContent =
-                monthlyRevenue.toFixed(2)
-                + " DH";
+           value.textContent =
+    monthlyRevenue.toFixed(2)
+    + " DH";
+
+value.style.direction = "ltr";
+value.style.unicodeBidi = "isolate";
 
 
             description.textContent =

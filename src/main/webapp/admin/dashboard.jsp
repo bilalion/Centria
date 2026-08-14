@@ -444,7 +444,7 @@ else {
 
 
 <script defer
-        src="<%=request.getContextPath()%>/assets/js/home.js?v=3">
+        src="<%=request.getContextPath()%>/assets/js/home.js?v=4">
 </script>
 
 

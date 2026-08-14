@@ -172,23 +172,20 @@ Version :
 
 .stats-grid{
 
-
     display:grid;
 
-
     grid-template-columns:
-
-    repeat(4,1fr);
-
+        1fr
+        1fr
+        1fr
+        2fr;
 
     gap:16px;
 
-
     margin-bottom:18px;
 
-
-
 }
+
 
 
 
@@ -315,76 +312,231 @@ Version :
    REVENUE PERIOD SELECT
 ====================================================== */
 
-.stat-title-row{
-    display:flex;
-    align-items:right;
-    width:100%;
-    gap:15px;
+
+/*
+======================================================
+ REVENUE CARD
+======================================================
+*/
+
+.stat-card:has(#revenuePeriod){
+
+    position:relative;
+
 }
 
 
+/*
+======================================================
+ REVENUE CONTENT
+======================================================
+*/
+
+.stat-card:has(#revenuePeriod) .stat-content{
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    width:100%;
+
+}
+
+
+/*
+======================================================
+ REVENUE TITLE ROW
+======================================================
+*/
+
+.stat-card:has(#revenuePeriod) .stat-title-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+    gap:12px;
+
+    margin:0;
+
+    padding:0;
+
+    text-align:center;
+
+}
+
+
+/*
+======================================================
+ REVENUE TITLE
+======================================================
+*/
+
+.stat-card:has(#revenuePeriod) .stat-title{
+
+    margin:0;
+
+    text-align:center;
+
+}
+
+
+/*
+======================================================
+ REVENUE VALUE
+======================================================
+*/
+
+.stat-card:has(#revenuePeriod) .stat-value{
+
+    width:100%;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    text-align:center;
+
+}
+
+
+/*
+======================================================
+ REVENUE DESCRIPTION
+======================================================
+*/
+
+.stat-card:has(#revenuePeriod) .stat-description{
+
+    width:100%;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    text-align:center;
+
+}
+
+
+/*
+======================================================
+ PERIOD SELECT
+======================================================
+*/
+
 .stat-period-select{
+
+    position:absolute;
+
+    top:16px;
+
+    z-index:5;
+
     flex-shrink:0;
 
-    height:28px;
-    min-width:88px;
+    height:30px;
 
-    padding:0 15px;
+    min-width:92px;
+
+    padding:0 12px;
 
     border:1px solid #dbe3ef;
-    border-radius:5px;
+
+    border-radius:6px;
 
     background:#ffffff;
+
     color:#dc2626;
 
-    font-size:10px;
+    font-family:inherit;
+
+    font-size:11px;
+
     font-weight:700;
 
     outline:none;
+
     cursor:pointer;
 
     transition:
         border-color .15s ease,
         box-shadow .15s ease;
-}
-
-
-/* ======================================================
-   RTL
-====================================================== */
-
-html[dir="rtl"] .stat-title-row{
-    justify-content:flex-start;
 
 }
 
-html[dir="rtl"] .stat-period-select{
-     margin-left:-10px;
+
+/*
+======================================================
+ RTL
+======================================================
+*/
+
+html[dir="rtl"] .stat-card:has(#revenuePeriod)
+.stat-period-select{
+
+    left:16px;
+
+    right:auto;
+
 }
 
 
-/* ======================================================
-   LTR
-====================================================== */
+/*
+======================================================
+ LTR
+======================================================
+*/
 
-html[dir="ltr"] .stat-title-row{
-    justify-content:flex-start;
+html[dir="ltr"] .stat-card:has(#revenuePeriod)
+.stat-period-select{
+
+    right:16px;
+
+    left:auto;
+
 }
 
-html[dir="ltr"] .stat-period-select{
-    margin-left:auto;
-}
 
+/*
+======================================================
+ HOVER
+======================================================
+*/
 
 .stat-period-select:hover{
+
     border-color:#c7d2e3;
+
 }
 
+
+/*
+======================================================
+ FOCUS
+======================================================
+*/
 
 .stat-period-select:focus{
+
     border-color:#dbe3ef;
+
     box-shadow:none;
+
 }
+
+
+
+
 
 .stat-value{
 
@@ -1734,8 +1886,6 @@ html[dir="ltr"]
 /* =========================================================
    END SECTION 28
 ========================================================= */
-
-
 /* =========================================================
    SECTION 29 - HOME CHARTS
    CENTRIA COMPACT UI
@@ -1933,7 +2083,7 @@ html[dir="ltr"]
 
     min-width: 0;
 
-    min-height: 225px;
+    min-height: 315px;
 
     padding: 14px;
 
@@ -1965,7 +2115,7 @@ html[dir="ltr"]
 
     gap: 12px;
 
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 
 }
 
@@ -2051,10 +2201,11 @@ html[dir="ltr"]
 
 .home-page .overview-chart-content {
 
-    min-height: 165px;
+    min-height: 260px;
 
     display: flex;
 
+   
     align-items: center;
 
     justify-content: center;
@@ -2066,14 +2217,30 @@ html[dir="ltr"]
 
 /* =========================================================
    29.13 - PAYMENT CHART CONTENT
+
+   DONUT
+      ↓
+   LEGEND
+
+   بدل:
+
+   DONUT | LEGEND
 ========================================================= */
 
 .home-page .overview-chart-card#monthlyPaymentChart
 .overview-chart-content {
 
-    gap: 20px;
+    display: flex;
 
-    padding-top: 2px;
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    padding: 4px 0 8px;
 
 }
 
@@ -2086,11 +2253,11 @@ html[dir="ltr"]
 
     position: relative;
 
-    width: 138px;
+    width: 240px;
 
-    height: 138px;
+    height: 240px;
 
-    flex: 0 0 138px;
+    flex: 0 0 240px;
 
     border-radius: 50%;
 
@@ -2120,7 +2287,7 @@ html[dir="ltr"]
 
     position: absolute;
 
-    inset: 18px;
+    inset: 30px;
 
     border-radius: 50%;
 
@@ -2161,24 +2328,24 @@ html[dir="ltr"]
 
     color: #172033;
 
-    font-size: 26px;
+    font-size: 48px;
 
     line-height: 1;
 
     font-weight: 900;
 
-    letter-spacing: -0.4px;
+    letter-spacing: -1px;
 
 }
 
 
 .home-page .monthly-payment-donut-center span {
 
-    margin-top: 5px;
+    margin-top: 7px;
 
     color: #64748b;
 
-    font-size: 11px;
+    font-size: 16px;
 
     line-height: 1.2;
 
@@ -2189,39 +2356,57 @@ html[dir="ltr"]
 
 /* =========================================================
    29.17 - PAYMENT LEGEND
+
+   الآن أسفل الدائرة
 ========================================================= */
 
 .home-page .monthly-payment-legend {
 
-    min-width: 115px;
+    width: min(100%, 430px);
+
+    min-width: 0;
 
     display: flex;
 
-    flex-direction: column;
+    flex-direction: row;
 
-    gap: 10px;
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 38px;
 
 }
 
 
 /* =========================================================
    29.18 - PAYMENT LEGEND ITEM
+
+   العدد دائمًا في أقصى اليمين
 ========================================================= */
 
 .home-page .payment-legend-item {
 
+    min-width: 150px;
+
     display: grid;
 
     grid-template-columns:
-        8px
+        10px
         minmax(0, 1fr)
         auto;
 
     align-items: center;
 
-    column-gap: 7px;
+    column-gap: 8px;
 
-    padding: 6px 0;
+    padding: 5px 0;
+
+    /*
+       نحافظ على ترتيب بصري ثابت:
+       marker → label → value
+    */
+    direction: ltr;
 
 }
 
@@ -2232,14 +2417,11 @@ html[dir="ltr"]
 
 .home-page .payment-legend-marker {
 
-    width: 8px;
+    width: 10px;
 
-    height: 8px;
+    height: 10px;
 
     border-radius: 50%;
-
-    box-shadow:
-        0 0 0 3px rgba(148, 163, 184, 0.08);
 
 }
 
@@ -2249,7 +2431,7 @@ html[dir="ltr"]
     background: #16a34a;
 
     box-shadow:
-        0 0 0 3px rgba(22, 163, 74, 0.10);
+        0 0 0 4px rgba(22, 163, 74, 0.10);
 
 }
 
@@ -2259,7 +2441,7 @@ html[dir="ltr"]
     background: #f43f5e;
 
     box-shadow:
-        0 0 0 3px rgba(244, 63, 94, 0.10);
+        0 0 0 4px rgba(244, 63, 94, 0.10);
 
 }
 
@@ -2272,9 +2454,13 @@ html[dir="ltr"]
 
     color: #475569;
 
-    font-size: 11px;
+    font-size: 13px;
 
     font-weight: 750;
+
+    text-align: center;
+
+    white-space: nowrap;
 
 }
 
@@ -2283,9 +2469,13 @@ html[dir="ltr"]
 
     color: #172033;
 
-    font-size: 12px;
+    font-size: 15px;
 
     font-weight: 900;
+
+    text-align: right;
+
+    min-width: 20px;
 
 }
 
@@ -2298,7 +2488,7 @@ html[dir="ltr"]
 
     display: block;
 
-    min-height: 165px;
+    min-height: 280px;
 
 }
 
@@ -2592,6 +2782,28 @@ html[dir="rtl"] .home-page
 }
 
 
+/*
+   مهم:
+   كل Legend Item يحتفظ بترتيب بصري ثابت
+   حتى يبقى العدد في اليمين.
+*/
+
+html[dir="rtl"] .home-page
+.payment-legend-item {
+
+    direction: ltr;
+
+}
+
+
+html[dir="rtl"] .home-page
+.payment-legend-label {
+
+    direction: rtl;
+
+}
+
+
 html[dir="rtl"] .home-page
 .centre-status-bar-header {
 
@@ -2606,6 +2818,22 @@ html[dir="rtl"] .home-page
 
 html[dir="ltr"] .home-page
 .overview-chart-card {
+
+    direction: ltr;
+
+}
+
+
+html[dir="ltr"] .home-page
+.overview-chart-card-header {
+
+    direction: ltr;
+
+}
+
+
+html[dir="ltr"] .home-page
+.payment-legend-item {
 
     direction: ltr;
 
@@ -2627,6 +2855,10 @@ html[dir="ltr"] .home-page
 
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 650px) {
 
@@ -2651,7 +2883,7 @@ html[dir="ltr"] .home-page
 
         padding: 11px;
 
-        min-height: 210px;
+        min-height: 310px;
 
         border-radius: 4px;
 
@@ -2660,7 +2892,7 @@ html[dir="ltr"] .home-page
 
     .home-page .overview-chart-content {
 
-        min-height: 150px;
+        min-height: 245px;
 
     }
 
@@ -2676,18 +2908,18 @@ html[dir="ltr"] .home-page
 
     .home-page .monthly-payment-donut {
 
-        width: 120px;
+        width: 180px;
 
-        height: 120px;
+        height: 180px;
 
-        flex-basis: 120px;
+        flex-basis: 180px;
 
     }
 
 
     .home-page .monthly-payment-donut::after {
 
-        inset: 16px;
+        inset: 22px;
 
     }
 
@@ -2695,14 +2927,32 @@ html[dir="ltr"] .home-page
     .home-page
     .monthly-payment-donut-center strong {
 
-        font-size: 23px;
+        font-size: 34px;
+
+    }
+
+
+    .home-page .monthly-payment-donut-center span {
+
+        font-size: 13px;
 
     }
 
 
     .home-page .monthly-payment-legend {
 
-        min-width: 95px;
+        width: 100%;
+
+        gap: 12px;
+
+    }
+
+
+    .home-page .payment-legend-item {
+
+        min-width: 0;
+
+        flex: 1 1 0;
 
     }
 
@@ -2716,13 +2966,11 @@ html[dir="ltr"] .home-page
 
     .home-page .payment-legend-value {
 
-        font-size: 11px;
+        font-size: 12px;
 
     }
 
 }
-
-
 
 
 /* =========================================================
@@ -2749,7 +2997,274 @@ html[dir="ltr"] .home-page
 }
 
 .home-page .system-notification {
-    height: 58px;
-    min-height: 58px;
+    height: 46px;
+    min-height: 46px;
     border-radius: 4px;
+}
+/* =========================================================
+   HOME - FINAL COMPACT HEIGHT
+   KEEP LARGE PAYMENT DONUT
+========================================================= */
+
+
+/* =========================================================
+   BANNER
+========================================================= */
+
+.home-page .home-banner {
+
+    height: 38px;
+
+    margin-bottom: 8px;
+
+    padding: 0 14px;
+
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.home-page .stats-grid {
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.home-page .stat-card {
+
+    min-height: 112px;
+
+    padding: 12px;
+
+}
+
+
+/* أصغر قليلاً لأن المحتوى بسيط */
+
+.home-page .stat-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+}
+
+
+/* =========================================================
+   MAIN DASHBOARD GRID
+========================================================= */
+
+.home-page .dashboard-grid {
+
+    gap: 8px;
+
+    margin-bottom: 6px;
+
+}
+
+
+/* =========================================================
+   OVERVIEW WIDGET
+========================================================= */
+
+.home-page .overview-widget .widget-header {
+
+    min-height: 44px;
+
+    height: 44px;
+
+    padding: 0 14px;
+
+}
+
+
+.home-page .overview-widget .widget-body {
+
+    padding: 8px;
+
+}
+
+
+/* =========================================================
+   CHART GRID
+========================================================= */
+
+.home-page .overview-charts-grid {
+
+    gap: 8px;
+
+}
+
+
+/* =========================================================
+   CHART CARDS
+========================================================= */
+
+.home-page .overview-chart-card {
+
+    min-height: 325px;
+
+    padding: 8px;
+
+}
+
+
+/* =========================================================
+   CHART HEADER
+========================================================= */
+
+.home-page .overview-chart-card-header {
+
+    margin-bottom: 4px;
+
+}
+
+
+/* =========================================================
+   CHART CONTENT
+========================================================= */
+
+.home-page .overview-chart-content {
+
+    min-height: 270px;
+
+}
+
+
+/* =========================================================
+   PAYMENT CHART
+   DONUT REMAINS 240px
+========================================================= */
+
+.home-page
+.overview-chart-card#monthlyPaymentChart
+.overview-chart-content {
+
+    min-height: 270px;
+
+    gap: 6px;
+
+    padding: 0;
+
+}
+
+
+/* =========================================================
+   DONUT — DO NOT REDUCE
+========================================================= */
+
+.home-page .monthly-payment-donut {
+
+    width: 240px;
+
+    height: 240px;
+
+    flex: 0 0 240px;
+
+}
+
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.home-page .monthly-payment-legend {
+
+    width: min(100%, 430px);
+
+    gap: 28px;
+
+}
+
+
+/* =========================================================
+   STATUS BARS
+========================================================= */
+
+.home-page .status-chart-content {
+
+    min-height: 270px;
+
+}
+
+
+.home-page .centre-status-bars {
+
+    gap: 6px;
+
+}
+
+
+/* =========================================================
+   RECENT CENTRES
+========================================================= */
+
+.home-page .recent-widget .recent-widget-header {
+
+    min-height: 46px;
+
+}
+
+
+.home-page .recent-widget .recent-widget-body {
+
+    padding: 5px 7px 6px;
+
+}
+
+
+.home-page .recent-widget .recent-centres-list {
+
+    gap: 3px;
+
+}
+
+
+.home-page .recent-widget .recent-centre-item {
+
+    min-height: 42px;
+
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.home-page .system-notification {
+
+    height: 50px;
+
+    min-height: 50px;
+
+    margin-top: 6px;
+
+    padding: 0 12px;
+
+}
+
+/* FINAL 1% - REMOVE LAST VERTICAL OVERFLOW */
+
+.home-page .overview-chart-card {
+    min-height: 310px;
+}
+
+.home-page .overview-chart-content {
+    min-height: 255px;
+}
+
+.home-page
+.overview-chart-card#monthlyPaymentChart
+.overview-chart-content {
+    min-height: 255px;
+}
+
+.home-page .system-notification {
+    height: 44px;
+    min-height: 44px;
 }

@@ -727,11 +727,9 @@ SimpleDateFormat recentDateFormat =
                             </span>
 
 
-                            <strong class="payment-legend-value">
-
-                                <%= paidPercent %>%
-
-                            </strong>
+                       <strong class="payment-legend-value">
+                           <%= paidCount %>
+                       </strong>
 
                         </div>
 
@@ -757,9 +755,7 @@ SimpleDateFormat recentDateFormat =
 
 
                             <strong class="payment-legend-value">
-
-                                <%= unpaidPercent %>%
-
+                                <%= unpaidCount %>
                             </strong>
 
                         </div>
