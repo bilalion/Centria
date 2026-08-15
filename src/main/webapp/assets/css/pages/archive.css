@@ -1785,3 +1785,60 @@ PAGINATION
     background:#fee2e2;
     border:1px solid #fecaca;
 }
+
+/* ==================================================
+   ARCHIVE DELETE CONFIRM MODAL
+   ================================================== */
+
+#archive-delete-confirm-modal .centre-modal-content {
+    max-width: 650px;
+    width: 90%;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+}
+
+#archive-delete-confirm-modal .confirm-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+#archive-delete-confirm-modal .confirm-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+#archive-delete-confirm-modal .confirm-title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+#archive-delete-confirm-modal
+#archive-delete-confirm-message {
+    margin: 20px 0 30px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+#archive-delete-confirm-modal .reset-confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+#archive-delete-confirm-modal .reset-confirm-actions button {
+    min-width: 140px;
+    height: 48px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
