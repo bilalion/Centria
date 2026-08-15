@@ -1,124 +1,52 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
- * to change this license
+ * ==========================================================
+ * CENTRIA
+ * Archive Management JavaScript
  *
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js
- * to edit this template
+ * AJAX Archive / Bulk Operations / Restore / Delete
+ *
+ * No Java or Servlet logic is modified.
+ * ==========================================================
  */
 
+"use strict";
+
 
 /*
 ==================================================
-CENTRIA
-Archive JavaScript
-==================================================
-
-Responsible for:
-
-- Archive table selection
-- Select All
-- Row selection
-- Bulk action state
-- Bulk operation
-
-Restore / Delete:
-Restore is currently supported.
-Delete will be added later.
+ PAGE STATE
 ==================================================
 */
 
-
+let archiveDeleteCentres = [];
 
 
 /*
 ==================================================
- LOAD ARCHIVE TABLE
-==================================================
-*/
-
-function loadArchive() {
-
-
-    const container =
-            document.getElementById(
-                    "archive-table-container"
-            );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    const url =
-            window.contextPath
-            +
-            "/ArchiveServlet?action=list&ajax=true";
-
-
-    fetch(url)
-
-        .then(
-                response => {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                                "HTTP "
-                                +
-                                response.status
-                        );
-
-                    }
-
-
-                    return response.text();
-
-                }
-        )
-
-
-        .then(
-                html => {
-
-                    container.innerHTML =
-                            html;
-
-
-                    /*
-                    ----------------------------------
-                    Reinitialize Archive controls
-                    ----------------------------------
-                    */
-
-                    initArchivePage();
-
-                }
-        )
-
-
-        .catch(
-                error => {
-
-                    console.error(
-                            "[CENTRIA ARCHIVE] "
-                            + "Load error:",
-                            error
-                    );
-
-                }
-        );
-
-}
-/*
-==================================================
-01 - ARCHIVE PAGE INITIALIZATION
+01 - INITIALIZE ARCHIVE PAGE
 ==================================================
 */
 
 function initArchivePage() {
+
+
+    /*
+    --------------------------------------------------
+    Check Archive page
+    --------------------------------------------------
+    */
+
+    const archivePage =
+            document.querySelector(
+                    ".archive-page"
+            );
+
+
+    if (!archivePage) {
+
+        return;
+
+    }
 
 
     /*
@@ -171,7 +99,7 @@ function initArchivePage() {
 
     /*
     --------------------------------------------------
-    No Archive Table
+    Safety
     --------------------------------------------------
     */
 
@@ -183,9 +111,9 @@ function initArchivePage() {
 
 
     /*
-    ==================================================
-    INITIAL STATE
-    ==================================================
+    --------------------------------------------------
+    Initial bulk state
+    --------------------------------------------------
     */
 
     updateArchiveBulkActionState(
@@ -197,7 +125,7 @@ function initArchivePage() {
 
     /*
     ==================================================
-    SELECT ALL
+    SELECT ALL EVENT
     ==================================================
     */
 
@@ -216,19 +144,11 @@ function initArchivePage() {
                 );
 
 
-                /*
-                Update Select All state
-                */
-
                 updateArchiveSelectAllState(
                         selectAll,
                         rowCheckboxes
                 );
 
-
-                /*
-                Update bulk actions
-                */
 
                 updateArchiveBulkActionState(
                         rowCheckboxes,
@@ -236,29 +156,23 @@ function initArchivePage() {
                         operationSelect
                 );
 
-
             }
     );
 
 
     /*
     ==================================================
-    ROW SELECTION
+    ROW CHECKBOX EVENTS
     ==================================================
     */
 
     rowCheckboxes.forEach(
             function (checkbox) {
 
-
                 checkbox.addEventListener(
                         "change",
                         function () {
 
-
-                            /*
-                            Update Select All
-                            */
 
                             updateArchiveSelectAllState(
                                     selectAll,
@@ -266,20 +180,14 @@ function initArchivePage() {
                             );
 
 
-                            /*
-                            Update Apply button
-                            */
-
                             updateArchiveBulkActionState(
                                     rowCheckboxes,
                                     applyButton,
                                     operationSelect
                             );
 
-
                         }
                 );
-
 
             }
     );
@@ -287,17 +195,15 @@ function initArchivePage() {
 
     /*
     ==================================================
-    APPLY BUTTON
+    APPLY EVENT
     ==================================================
     */
 
     if (applyButton) {
 
-
         applyButton.addEventListener(
                 "click",
                 function () {
-
 
                     applyArchiveOperation(
                             rowCheckboxes,
@@ -305,11 +211,19 @@ function initArchivePage() {
                             applyButton
                     );
 
-
                 }
         );
 
     }
+
+
+    /*
+    ==================================================
+    LOAD ARCHIVE
+    ==================================================
+    */
+
+    loadArchive();
 
 }
 
@@ -332,7 +246,11 @@ function updateArchiveSelectAllState(
     --------------------------------------------------
     */
 
-    if (rowCheckboxes.length === 0) {
+    if (
+            !rowCheckboxes
+            ||
+            rowCheckboxes.length === 0
+    ) {
 
         selectAll.checked = false;
 
@@ -376,7 +294,7 @@ function updateArchiveSelectAllState(
             rowCheckboxes.length
             &&
             selectedCount > 0
-            ) {
+    ) {
 
         selectAll.checked = true;
 
@@ -391,7 +309,9 @@ function updateArchiveSelectAllState(
     --------------------------------------------------
     */
 
-    else if (selectedCount > 0) {
+    else if (
+            selectedCount > 0
+    ) {
 
         selectAll.checked = false;
 
@@ -471,7 +391,9 @@ function updateArchiveBulkActionState(
     --------------------------------------------------
     */
 
-    if (selectedCount > 0) {
+    if (
+            selectedCount > 0
+    ) {
 
 
         /*
@@ -526,10 +448,6 @@ function updateArchiveBulkActionState(
 
             operationSelect.disabled = true;
 
-            /*
-            Reset operation
-            */
-
             operationSelect.value = "";
 
         }
@@ -573,29 +491,358 @@ function getSelectedArchiveCentres() {
 }
 
 
-
-
-
 /*
 ==================================================
-ARCHIVE DELETE MODAL STATE
+05 - LOAD ARCHIVE
 ==================================================
 */
 
-let archiveDeleteCentres = [];
+function loadArchive() {
+
+
+    /*
+    --------------------------------------------------
+    Get table container
+    --------------------------------------------------
+    */
+
+    const container =
+            document.getElementById(
+                    "archive-table-container"
+            );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    Build AJAX URL
+    --------------------------------------------------
+    */
+
+    const url =
+            window.contextPath
+            +
+            "/ArchiveServlet"
+            +
+            "?action=list"
+            +
+            "&ajax=true"
+            +
+            "&_refresh="
+            +
+            Date.now();
+
+
+    /*
+    --------------------------------------------------
+    Show loading state
+    --------------------------------------------------
+    */
+
+    container.setAttribute(
+            "aria-busy",
+            "true"
+    );
+
+
+    /*
+    --------------------------------------------------
+    Request Archive table
+    --------------------------------------------------
+    */
+
+    fetch(url)
+
+        .then(
+                response => {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                                "HTTP ERROR "
+                                +
+                                response.status
+                        );
+
+                    }
+
+
+                    return response.text();
+
+                }
+        )
+
+
+        .then(
+                html => {
+
+
+                    /*
+                    --------------------------------------------------
+                    Inject Archive table
+                    --------------------------------------------------
+                    */
+
+                    container.innerHTML =
+                            html;
+
+
+                    container.setAttribute(
+                            "aria-busy",
+                            "false"
+                    );
+
+
+                    /*
+                    --------------------------------------------------
+                    Reinitialize Archive controls
+                    --------------------------------------------------
+                    */
+
+                    initArchiveControlsOnly();
+
+                }
+        )
+
+
+        .catch(
+                error => {
+
+
+                    console.error(
+                            "[CENTRIA ARCHIVE] "
+                            + "Load error:",
+                            error
+                    );
+
+
+                    container.setAttribute(
+                            "aria-busy",
+                            "false"
+                    );
+
+                }
+        );
+
+}
+
+
 /*
 ==================================================
-OPEN DELETE CONFIRM MODAL
+06 - INITIALIZE ARCHIVE CONTROLS ONLY
 ==================================================
+*/
+
+function initArchiveControlsOnly() {
+
+
+    /*
+    --------------------------------------------------
+    SELECT ALL
+    --------------------------------------------------
+    */
+
+    const selectAll =
+            document.getElementById(
+                    "archiveSelectAll"
+            );
+
+
+    /*
+    --------------------------------------------------
+    ROW CHECKBOXES
+    --------------------------------------------------
+    */
+
+    const rowCheckboxes =
+            document.querySelectorAll(
+                    ".archive-row-checkbox"
+            );
+
+
+    /*
+    --------------------------------------------------
+    APPLY BUTTON
+    --------------------------------------------------
+    */
+
+    const applyButton =
+            document.getElementById(
+                    "archiveApplyButton"
+            );
+
+
+    /*
+    --------------------------------------------------
+    OPERATION SELECT
+    --------------------------------------------------
+    */
+
+    const operationSelect =
+            document.getElementById(
+                    "archiveOperation"
+            );
+
+
+    if (!selectAll) {
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    Initial state
+    --------------------------------------------------
+    */
+
+    updateArchiveSelectAllState(
+            selectAll,
+            rowCheckboxes
+    );
+
+
+    updateArchiveBulkActionState(
+            rowCheckboxes,
+            applyButton,
+            operationSelect
+    );
+
+
+    /*
+    --------------------------------------------------
+    SELECT ALL
+    --------------------------------------------------
+    */
+
+    selectAll.addEventListener(
+            "change",
+            function () {
+
+                rowCheckboxes.forEach(
+                        function (checkbox) {
+
+                            checkbox.checked =
+                                    selectAll.checked;
+
+                        }
+                );
+
+
+                updateArchiveSelectAllState(
+                        selectAll,
+                        rowCheckboxes
+                );
+
+
+                updateArchiveBulkActionState(
+                        rowCheckboxes,
+                        applyButton,
+                        operationSelect
+                );
+
+            }
+    );
+
+
+    /*
+    --------------------------------------------------
+    ROW CHECKBOXES
+    --------------------------------------------------
+    */
+
+    rowCheckboxes.forEach(
+            function (checkbox) {
+
+                checkbox.addEventListener(
+                        "change",
+                        function () {
+
+                            updateArchiveSelectAllState(
+                                    selectAll,
+                                    rowCheckboxes
+                            );
+
+
+                            updateArchiveBulkActionState(
+                                    rowCheckboxes,
+                                    applyButton,
+                                    operationSelect
+                            );
+
+                        }
+                );
+
+            }
+    );
+
+
+    /*
+    --------------------------------------------------
+    APPLY
+    --------------------------------------------------
+    */
+
+    if (applyButton) {
+
+        applyButton.addEventListener(
+                "click",
+                function () {
+
+                    applyArchiveOperation(
+                            rowCheckboxes,
+                            operationSelect,
+                            applyButton
+                    );
+
+                }
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+07 - DELETE MODAL
+==================================================
+*/
+
+
+/*
+--------------------------------------------------
+OPEN DELETE CONFIRM MODAL
+--------------------------------------------------
 */
 
 function openArchiveDeleteConfirm(
         selectedCentres
 ) {
 
+
+    /*
+    --------------------------------------------------
+    Store selected centres
+    --------------------------------------------------
+    */
+
     archiveDeleteCentres =
             selectedCentres.slice();
 
+
+    /*
+    --------------------------------------------------
+    Get modal
+    --------------------------------------------------
+    */
 
     const modal =
             document.getElementById(
@@ -603,34 +850,87 @@ function openArchiveDeleteConfirm(
             );
 
 
+    /*
+    --------------------------------------------------
+    Get message
+    --------------------------------------------------
+    */
+
     const message =
             document.getElementById(
                     "archive-delete-confirm-message"
             );
 
 
-    if (!modal || !message) {
+    /*
+    --------------------------------------------------
+    Safety
+    --------------------------------------------------
+    */
+
+    if (
+            !modal
+            ||
+            !message
+    ) {
+
+        console.error(
+                "[CENTRIA ARCHIVE] "
+                + "DELETE modal not found."
+        );
 
         return;
 
     }
 
 
-    message.textContent =
-            "هل أنت متأكد من حذف "
-            +
-            archiveDeleteCentres.length
-            +
-            " مراكز نهائيًا؟";
+    /*
+    --------------------------------------------------
+    Get translated message
+    --------------------------------------------------
+    */
+
+    const messageTemplate =
+            modal.getAttribute(
+                    "data-delete-message-template"
+            );
+
+
+    if (!messageTemplate) {
+
+        console.error(
+                "[CENTRIA ARCHIVE] "
+                + "DELETE message template not found."
+        );
+
+        return;
+
+    }
 
 
     /*
     --------------------------------------------------
-    Open same CENTRIA modal style
+    Replace {0}
     --------------------------------------------------
     */
 
-    modal.classList.add("show");
+    message.textContent =
+            messageTemplate.replace(
+                    "{0}",
+                    archiveDeleteCentres.length
+            );
+
+
+    /*
+    --------------------------------------------------
+    Open modal
+    --------------------------------------------------
+    */
+
+    modal.classList.add(
+            "show"
+    );
+
 
     modal.setAttribute(
             "aria-hidden",
@@ -641,12 +941,13 @@ function openArchiveDeleteConfirm(
 
 
 /*
-==================================================
+--------------------------------------------------
 CLOSE DELETE CONFIRM MODAL
-==================================================
+--------------------------------------------------
 */
 
 function closeArchiveDeleteConfirm() {
+
 
     const modal =
             document.getElementById(
@@ -656,7 +957,10 @@ function closeArchiveDeleteConfirm() {
 
     if (modal) {
 
-        modal.classList.remove("show");
+        modal.classList.remove(
+                "show"
+        );
+
 
         modal.setAttribute(
                 "aria-hidden",
@@ -666,17 +970,31 @@ function closeArchiveDeleteConfirm() {
     }
 
 
+    /*
+    --------------------------------------------------
+    Clear selected centres
+    --------------------------------------------------
+    */
+
     archiveDeleteCentres = [];
 
 }
 
+
 /*
-==================================================
-CONFIRM ARCHIVE DELETE
-==================================================
+--------------------------------------------------
+CONFIRM DELETE
+--------------------------------------------------
 */
 
 function confirmArchiveDelete() {
+
+
+    /*
+    --------------------------------------------------
+    Safety
+    --------------------------------------------------
+    */
 
     if (
             archiveDeleteCentres.length === 0
@@ -687,12 +1005,55 @@ function confirmArchiveDelete() {
     }
 
 
+    /*
+    --------------------------------------------------
+    Copy selected centres
+    --------------------------------------------------
+    */
+
     const selectedCentres =
             archiveDeleteCentres.slice();
 
 
+    /*
+    --------------------------------------------------
+    Close modal
+    --------------------------------------------------
+    */
+
     closeArchiveDeleteConfirm();
 
+
+    /*
+    --------------------------------------------------
+    Get Apply button
+    --------------------------------------------------
+    */
+
+    const applyButton =
+            document.getElementById(
+                    "archiveApplyButton"
+            );
+
+
+    /*
+    --------------------------------------------------
+    Disable Apply
+    --------------------------------------------------
+    */
+
+    if (applyButton) {
+
+        applyButton.disabled = true;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    Build request
+    --------------------------------------------------
+    */
 
     const formData =
             new URLSearchParams();
@@ -710,6 +1071,12 @@ function confirmArchiveDelete() {
     );
 
 
+    /*
+    --------------------------------------------------
+    Add selected centres
+    --------------------------------------------------
+    */
+
     selectedCentres.forEach(
             function (centreCode) {
 
@@ -722,6 +1089,12 @@ function confirmArchiveDelete() {
     );
 
 
+    /*
+    --------------------------------------------------
+    Send DELETE
+    --------------------------------------------------
+    */
+
     fetch(
             window.contextPath
             +
@@ -731,13 +1104,14 @@ function confirmArchiveDelete() {
 
                 headers: {
                     "Content-Type":
-                        "application/x-www-form-urlencoded"
+                            "application/x-www-form-urlencoded"
                 },
 
                 body:
-                    formData.toString()
+                        formData.toString()
             }
     )
+
 
     .then(
             response => {
@@ -745,15 +1119,19 @@ function confirmArchiveDelete() {
                 if (!response.ok) {
 
                     throw new Error(
+                            "HTTP ERROR "
+                            +
                             response.status
                     );
 
                 }
 
+
                 return response.text();
 
             }
     )
+
 
     .then(
             result => {
@@ -764,6 +1142,12 @@ function confirmArchiveDelete() {
                 );
 
 
+                /*
+                --------------------------------------------------
+                Reload Archive
+                --------------------------------------------------
+                */
+
                 loadContent(
                         "ArchiveServlet?action=list",
                         null
@@ -772,25 +1156,34 @@ function confirmArchiveDelete() {
             }
     )
 
+
     .catch(
             error => {
 
                 console.error(
-                        "Archive DELETE error:",
+                        "[CENTRIA ARCHIVE] "
+                        + "DELETE error:",
                         error
                 );
+
+
+                if (applyButton) {
+
+                    applyButton.disabled = false;
+
+                }
 
             }
     );
 
 }
 
+
 /*
 ==================================================
-05 - APPLY ARCHIVE OPERATION
+08 - APPLY ARCHIVE OPERATION
 ==================================================
 */
-
 
 function applyArchiveOperation(
         rowCheckboxes,
@@ -814,7 +1207,7 @@ function applyArchiveOperation(
 
     /*
     --------------------------------------------------
-    Get selected operation
+    Get operation
     --------------------------------------------------
     */
 
@@ -851,7 +1244,7 @@ function applyArchiveOperation(
 
     /*
     --------------------------------------------------
-    At least one centre required
+    At least one centre
     --------------------------------------------------
     */
 
@@ -869,9 +1262,9 @@ function applyArchiveOperation(
 
 
     /*
-    --------------------------------------------------
+    ==================================================
     RESTORE
-    --------------------------------------------------
+    ==================================================
     */
 
     if (
@@ -881,7 +1274,9 @@ function applyArchiveOperation(
 
 
         /*
-        Disable button while processing
+        --------------------------------------------------
+        Disable button
+        --------------------------------------------------
         */
 
         if (applyButton) {
@@ -907,14 +1302,16 @@ function applyArchiveOperation(
         );
 
 
-       formData.append(
-        "operation",
-        operation
-);
+        formData.append(
+                "operation",
+                operation
+        );
 
 
         /*
-        Add selected centre codes
+        --------------------------------------------------
+        Add selected centres
+        --------------------------------------------------
         */
 
         selectedCentres.forEach(
@@ -931,7 +1328,7 @@ function applyArchiveOperation(
 
         /*
         --------------------------------------------------
-        Send request
+        Send RESTORE request
         --------------------------------------------------
         */
 
@@ -956,10 +1353,11 @@ function applyArchiveOperation(
         .then(
                 response => {
 
-
                     if (!response.ok) {
 
                         throw new Error(
+                                "HTTP ERROR "
+                                +
                                 response.status
                         );
 
@@ -975,16 +1373,15 @@ function applyArchiveOperation(
         .then(
                 result => {
 
-
                     console.log(
-                            "Archive operation result:",
+                            "Archive RESTORE result:",
                             result
                     );
 
 
                     /*
                     --------------------------------------------------
-                    Reload Archive page
+                    Reload Archive
                     --------------------------------------------------
                     */
 
@@ -993,7 +1390,6 @@ function applyArchiveOperation(
                             null
                     );
 
-
                 }
         )
 
@@ -1001,16 +1397,12 @@ function applyArchiveOperation(
         .catch(
                 error => {
 
-
                     console.error(
-                            "Archive operation error:",
+                            "[CENTRIA ARCHIVE] "
+                            + "RESTORE error:",
                             error
                     );
 
-
-                    /*
-                    Re-enable button
-                    */
 
                     if (applyButton) {
 
@@ -1021,54 +1413,59 @@ function applyArchiveOperation(
                 }
         );
 
+
+        /*
+        --------------------------------------------------
+        Stop RESTORE
+        --------------------------------------------------
+        */
+
+        return;
+
     }
-    
-    
-    
-  /*
---------------------------------------------------
-DELETE
---------------------------------------------------
-*/
-
-if (
-        operation ===
-        "DELETE"
-) {
-
-    /*
-    --------------------------------------------------
-    Open custom DELETE confirmation modal
-    --------------------------------------------------
-    */
-
-    openArchiveDeleteConfirm(
-            selectedCentres
-    );
 
 
     /*
-    --------------------------------------------------
-    Stop here
-    --------------------------------------------------
-
-    DELETE request will only be sent
-    after the user clicks CONFIRM
-    inside the modal.
-    --------------------------------------------------
+    ==================================================
+    DELETE
+    ==================================================
     */
 
-    return;
+    if (
+            operation ===
+            "DELETE"
+    ) {
+
+
+        /*
+        --------------------------------------------------
+        Open custom confirmation modal
+        --------------------------------------------------
+        */
+
+        openArchiveDeleteConfirm(
+                selectedCentres
+        );
+
+
+        /*
+        --------------------------------------------------
+        STOP HERE
+        --------------------------------------------------
+
+        DELETE request is sent only after
+        the user clicks CONFIRM.
+        --------------------------------------------------
+        */
+
+        return;
+
+    }
 
 }
-
-
-
-
-
 /*
 ==================================================
-06 - INITIALIZE ARCHIVE PAGE
+09 - PAGE INITIALIZATION
 ==================================================
 */
 
@@ -1076,11 +1473,15 @@ document.addEventListener(
         "DOMContentLoaded",
         function () {
 
-            initArchivePage();
+            if (
+                    document.getElementById(
+                            "archive-table-container"
+                    )
+            ) {
 
-            loadArchive();
+                initArchivePage();
+
+            }
 
         }
 );
-
-}

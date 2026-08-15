@@ -558,3 +558,55 @@ document.addEventListener(
 
     }
 );
+
+
+/*
+==================================================
+ RESTORE ARCHIVE AFTER PAGE REFRESH
+==================================================
+*/
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        /*
+        --------------------------------------------------
+        Read current section
+        --------------------------------------------------
+        */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const section =
+            params.get("section");
+
+
+        /*
+        --------------------------------------------------
+        Archive only
+        --------------------------------------------------
+        */
+
+        if (
+            section === "archive"
+        ) {
+
+            console.log(
+                "Restoring Archive after refresh"
+            );
+
+
+            loadContent(
+                "ArchiveServlet?action=list",
+                null
+            );
+
+        }
+
+    }
+);

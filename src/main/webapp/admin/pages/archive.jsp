@@ -8,6 +8,207 @@
 <%@page import="com.centria.language.LanguageManager"%>
 
 
+<%
+/*
+======================================================
+ARCHIVE DATA SAFETY
+======================================================
+
+When Archive is loaded directly from dashboard.jsp
+during browser refresh, some request attributes may
+not yet exist.
+
+Use safe default values instead of allowing JSP
+to fail because of null Integer casts.
+======================================================
+*/
+
+Integer archivedCount =
+        (Integer) request.getAttribute(
+                "archivedCount"
+        );
+
+Integer pendingDeleteCount =
+        (Integer) request.getAttribute(
+                "pendingDeleteCount"
+        );
+
+Integer deletedCount =
+        (Integer) request.getAttribute(
+                "deletedCount"
+        );
+
+
+if (archivedCount == null) {
+
+    archivedCount = 0;
+
+}
+
+
+if (pendingDeleteCount == null) {
+
+    pendingDeleteCount = 0;
+
+}
+
+
+if (deletedCount == null) {
+
+    deletedCount = 0;
+
+}
+
+
+Integer archiveTotal =
+        archivedCount
+        +
+        pendingDeleteCount;
+
+
+/*
+======================================================
+LAST ARCHIVE OPERATION
+======================================================
+*/
+
+java.util.Map<String, Object> lastArchiveOperation =
+        (java.util.Map<String, Object>)
+                request.getAttribute(
+                        "lastArchiveOperation"
+                );
+
+
+String lastActionMessage = "";
+
+
+if (lastArchiveOperation != null) {
+
+
+    String operator =
+            (String)
+                    lastArchiveOperation.get(
+                            "operator"
+                    );
+
+
+    String operationType =
+            (String)
+                    lastArchiveOperation.get(
+                            "operationType"
+                    );
+
+
+    Integer operationCountValue =
+            (Integer)
+                    lastArchiveOperation.get(
+                            "operationCount"
+                    );
+
+
+    java.sql.Timestamp operationAt =
+            (java.sql.Timestamp)
+                    lastArchiveOperation.get(
+                            "operationAt"
+                    );
+
+
+    /*
+    --------------------------------------------------
+    Safety
+    --------------------------------------------------
+    */
+
+    if (operator == null) {
+
+        operator = "";
+
+    }
+
+
+    int operationCount =
+            operationCountValue != null
+            ?
+            operationCountValue
+            :
+            0;
+
+
+    /*
+    --------------------------------------------------
+    Date / Time
+    --------------------------------------------------
+    */
+
+    String operationDate = "";
+
+    String operationTime = "";
+
+
+    if (operationAt != null) {
+
+
+        operationDate =
+                new java.text.SimpleDateFormat(
+                        "dd/MM/yyyy"
+                ).format(
+                        operationAt
+                );
+
+
+        operationTime =
+                new java.text.SimpleDateFormat(
+                        "HH:mm"
+                ).format(
+                        operationAt
+                );
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    Language key
+    --------------------------------------------------
+    */
+
+    String languageKey =
+            "RESTORE".equalsIgnoreCase(
+                    operationType
+            )
+            ?
+            "archive.last.action.restore"
+            :
+            "archive.last.action.delete";
+
+
+    String messageTemplate =
+            LanguageManager.get(
+                    languageKey,
+                    session
+            );
+
+
+    /*
+    --------------------------------------------------
+    Build translated message
+    --------------------------------------------------
+    */
+
+    lastActionMessage =
+            java.text.MessageFormat.format(
+                    messageTemplate,
+                    operator,
+                    operationCount,
+                    operationDate,
+                    operationTime
+            );
+
+}
+
+%>
+
+
 <div class="page-section archive-page">
 
 
@@ -17,6 +218,7 @@
 
     <section class="archive-banner"
              aria-labelledby="archive-page-title">
+
 
         <span class="archive-banner-icon"
               aria-hidden="true">
@@ -58,10 +260,6 @@
 
 
 
-
-
-
-
     <!-- =====================================================
          ARCHIVE STATISTICS
          ===================================================== -->
@@ -77,6 +275,7 @@
 
         <article class="archive-stat-card archive-stat-total">
 
+
             <div class="archive-stat-icon"
                  aria-hidden="true">
 
@@ -86,6 +285,7 @@
 
 
             <div class="archive-stat-content">
+
 
                 <span class="archive-stat-label">
 
@@ -97,16 +297,13 @@
                 </span>
 
 
-              <strong class="archive-stat-value"
-        data-archive-stat="total">
+                <strong class="archive-stat-value"
+                        data-archive-stat="total">
 
-    <%= 
-        ((Integer) request.getAttribute("archivedCount"))
-        +
-        ((Integer) request.getAttribute("pendingDeleteCount"))
-    %>
+                    <%= archiveTotal %>
 
-</strong>
+                </strong>
+
 
             </div>
 
@@ -118,6 +315,7 @@
 
         <article class="archive-stat-card archive-stat-restorable">
 
+
             <div class="archive-stat-icon"
                  aria-hidden="true">
 
@@ -127,6 +325,7 @@
 
 
             <div class="archive-stat-content">
+
 
                 <span class="archive-stat-label">
 
@@ -138,12 +337,12 @@
                 </span>
 
 
-               <strong class="archive-stat-value"
-        data-archive-stat="restorable">
+                <strong class="archive-stat-value"
+                        data-archive-stat="restorable">
 
-    <%= request.getAttribute("archivedCount") %>
+                    <%= archivedCount %>
 
-</strong>
+                </strong>
 
 
                 <span class="archive-stat-description">
@@ -155,6 +354,7 @@
 
                 </span>
 
+
             </div>
 
         </article>
@@ -164,6 +364,7 @@
         <!-- PENDING DELETE -->
 
         <article class="archive-stat-card archive-stat-pending">
+
 
             <div class="archive-stat-icon"
                  aria-hidden="true">
@@ -175,6 +376,7 @@
 
             <div class="archive-stat-content">
 
+
                 <span class="archive-stat-label">
 
                     <%= LanguageManager.get(
@@ -185,12 +387,13 @@
                 </span>
 
 
-              <strong class="archive-stat-value"
-        data-archive-stat="pending-delete">
+                <strong class="archive-stat-value"
+                        data-archive-stat="pending-delete">
 
-    <%= request.getAttribute("pendingDeleteCount") %>
+                    <%= pendingDeleteCount %>
 
-</strong>
+                </strong>
+
 
                 <span class="archive-stat-description">
 
@@ -200,6 +403,7 @@
                     ) %>
 
                 </span>
+
 
             </div>
 
@@ -211,6 +415,7 @@
 
         <article class="archive-stat-card archive-stat-deleted">
 
+
             <div class="archive-stat-icon"
                  aria-hidden="true">
 
@@ -220,6 +425,7 @@
 
 
             <div class="archive-stat-content">
+
 
                 <span class="archive-stat-label">
 
@@ -231,12 +437,12 @@
                 </span>
 
 
-             <strong class="archive-stat-value"
-        data-archive-stat="deleted">
+                <strong class="archive-stat-value"
+                        data-archive-stat="deleted">
 
-    <%= request.getAttribute("deletedCount") %>
+                    <%= deletedCount %>
 
-</strong>
+                </strong>
 
 
                 <span class="archive-stat-description">
@@ -247,6 +453,7 @@
                     ) %>
 
                 </span>
+
 
             </div>
 
@@ -274,6 +481,7 @@
 
             <div class="archive-search-field">
 
+
                 <i class="fa-solid fa-magnifying-glass"
                    aria-hidden="true"></i>
 
@@ -287,6 +495,7 @@
                                session
                        ) %>">
 
+
             </div>
 
 
@@ -295,6 +504,7 @@
 
             <div class="archive-select-field">
 
+
                 <i class="fa-solid fa-filter"
                    aria-hidden="true"></i>
 
@@ -302,6 +512,7 @@
                 <select id="archiveStatus"
                         name="status"
                         class="archive-select">
+
 
                     <option value="ALL">
 
@@ -342,6 +553,7 @@
 
                     </option>
 
+
                 </select>
 
             </div>
@@ -353,6 +565,7 @@
             <button type="button"
                     id="archiveSearchButton"
                     class="btn-primary archive-search-button">
+
 
                 <i class="fa-solid fa-magnifying-glass"
                    aria-hidden="true"></i>
@@ -367,6 +580,7 @@
 
                 </span>
 
+
             </button>
 
 
@@ -376,6 +590,7 @@
             <button type="button"
                     id="archiveExportButton"
                     class="btn-secondary archive-export-button">
+
 
                 <i class="fa-solid fa-download"
                    aria-hidden="true"></i>
@@ -387,7 +602,9 @@
 
                 </span>
 
+
             </button>
+
 
         </div>
 
@@ -410,6 +627,7 @@
 
                 <div class="archive-register-title-wrap">
 
+
                     <span class="archive-register-icon"
                           aria-hidden="true">
 
@@ -419,6 +637,7 @@
 
 
                     <div>
+
 
                         <h2 id="archive-register-title">
 
@@ -436,9 +655,11 @@
 
                         </span>
 
+
                     </div>
 
                 </div>
+
 
 
                 <!-- BULK OPERATIONS -->
@@ -460,6 +681,7 @@
                     <select id="archiveOperation"
                             class="archive-operation-select"
                             disabled>
+
 
                         <option value="">
 
@@ -490,7 +712,9 @@
 
                         </option>
 
+
                     </select>
+
 
 
                     <button type="button"
@@ -498,14 +722,18 @@
                             class="btn-primary archive-apply-button"
                             disabled>
 
+
                         <%= LanguageManager.get(
                                 "archive.apply",
                                 session
                         ) %>
 
+
                     </button>
 
+
                 </div>
+
 
             </header>
 
@@ -517,10 +745,17 @@
 
             <div class="archive-table-stage">
 
-              <div id="archive-table-container"
-     class="table-content-area">
-                  <jsp:include page="fragments/archive/archive-table.jsp" />
-              </div>
+
+                <div id="archive-table-container"
+                     class="table-content-area">
+
+
+                    <jsp:include
+                            page="fragments/archive/archive-table.jsp"/>
+
+
+                </div>
+
 
             </div>
 
@@ -540,182 +775,195 @@
         </section>
 
 
-<!-- =====================================================
-     LAST ARCHIVE ACTIVITY
-     ===================================================== -->
 
-<section class="archive-notification"
-         aria-labelledby="archive-last-action-title">
+        <!-- =====================================================
+             LAST ARCHIVE ACTIVITY
+             ===================================================== -->
 
-
-    <div class="archive-notification-icon"
-         aria-hidden="true">
-
-        <i class="fa-solid fa-clock-rotate-left"></i>
-
-    </div>
+        <section class="archive-notification"
+                 aria-labelledby="archive-last-action-title">
 
 
-    <div class="archive-notification-content">
+            <div class="archive-notification-icon"
+                 aria-hidden="true">
 
-        <h4 id="archive-last-action-title">
+                <i class="fa-solid fa-clock-rotate-left"></i>
 
-            <%= LanguageManager.get(
-                    "archive.last.action",
-                    session
-            ) %>
-
-        </h4>
+            </div>
 
 
-   <%
-    java.util.Map<String, Object> lastArchiveOperation =
-            (java.util.Map<String, Object>)
-                    request.getAttribute(
-                            "lastArchiveOperation"
-                    );
-
-    String lastActionMessage = "";
-
-    if (lastArchiveOperation != null) {
-
-        String operator =
-                (String) lastArchiveOperation.get("operator");
-
-        String operationType =
-                (String) lastArchiveOperation.get("operationType");
-
-        int operationCount =
-                (Integer) lastArchiveOperation.get("operationCount");
-
-        java.sql.Timestamp operationAt =
-                (java.sql.Timestamp)
-                        lastArchiveOperation.get("operationAt");
+            <div class="archive-notification-content">
 
 
-        String operationDate =
-                new java.text.SimpleDateFormat(
-                        "dd/MM/yyyy"
-                ).format(operationAt);
+                <h4 id="archive-last-action-title">
 
-
-        String operationTime =
-                new java.text.SimpleDateFormat(
-                        "HH:mm"
-                ).format(operationAt);
-
-
-        String languageKey =
-                "RESTORE".equalsIgnoreCase(operationType)
-                ? "archive.last.action.restore"
-                : "archive.last.action.delete";
-
-
-       String messageTemplate =
-        LanguageManager.get(
-                languageKey,
-                session
-        );
-       lastActionMessage =
-        java.text.MessageFormat.format(
-                messageTemplate,
-                operator,
-                operationCount,
-                operationDate,
-                operationTime
-        );
-    }
-%>
-
-
-<p data-archive-last-action>
-
-    <%= lastActionMessage %>
-
-</p>
-    </div>
-
-
-</section>
-
-    
-    <!-- DELETE CONFIRM MODAL -->
-
-<div id="archive-delete-confirm-modal"
-     class="centre-modal"
-     role="dialog"
-     aria-modal="true"
-     aria-hidden="true">
-
-    <div class="centre-modal-content reset-confirm-box">
-
-        <button type="button"
-                class="modal-close"
-                onclick="closeArchiveDeleteConfirm()"
-                aria-label="<%= LanguageManager.get(
-                        "centers.cancel",
-                        session
-                ) %>">
-
-            <i class="fa-solid fa-xmark"
-               aria-hidden="true"></i>
-
-        </button>
-
-
-        <div class="reset-confirm-content">
-
-            <div class="confirm-header">
-
-                <span class="confirm-icon is-warning"
-                      aria-hidden="true">
-
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-
-                </span>
-
-
-                <h4 class="confirm-title">
-
-                    حذف نهائي
+                    <%= LanguageManager.get(
+                            "archive.last.action",
+                            session
+                    ) %>
 
                 </h4>
 
+
+                <p data-archive-last-action>
+
+                    <%= lastActionMessage %>
+
+                </p>
+
+
             </div>
 
 
-            <p id="archive-delete-confirm-message">
-
-                هل أنت متأكد من حذف المراكز المحددة نهائيًا؟
-
-            </p>
+        </section>
 
 
-            <div class="reset-confirm-actions">
+
+        <!-- =====================================================
+             DELETE CONFIRM MODAL
+             ===================================================== -->
+
+        <div id="archive-delete-confirm-modal"
+             class="centre-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-hidden="true"
+
+             data-delete-message-template="<%= LanguageManager.get(
+                     "archive.delete.message",
+                     session
+             ) %>">
+
+
+            <div class="centre-modal-content reset-confirm-box">
+
+
+                <!-- CLOSE -->
 
                 <button type="button"
-                        class="btn-secondary"
-                        onclick="closeArchiveDeleteConfirm()">
+                        class="modal-close"
+                        onclick="closeArchiveDeleteConfirm()"
+                        aria-label="<%= LanguageManager.get(
+                                "archive.delete.cancel",
+                                session
+                        ) %>">
 
-                    إلغاء
+
+                    <i class="fa-solid fa-xmark"
+                       aria-hidden="true"></i>
+
 
                 </button>
 
 
-                <button type="button"
-                        class="btn-primary"
-                        onclick="confirmArchiveDelete()">
 
-                    تأكيد
+                <!-- CONTENT -->
 
-                </button>
+                <div class="reset-confirm-content">
+
+
+                    <!-- HEADER -->
+
+                    <div class="confirm-header">
+
+
+                        <!-- WARNING ICON -->
+
+                        <span class="confirm-icon is-warning"
+                              aria-hidden="true">
+
+
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+
+
+                        </span>
+
+
+
+                        <!-- TITLE -->
+
+                        <h4 class="confirm-title">
+
+
+                            <%= LanguageManager.get(
+                                    "archive.delete.title",
+                                    session
+                            ) %>
+
+
+                        </h4>
+
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <p id="archive-delete-confirm-message">
+
+
+                        <%= LanguageManager.get(
+                                "archive.delete.message",
+                                session
+                        ) %>
+
+
+                    </p>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="reset-confirm-actions">
+
+
+                        <!-- CANCEL -->
+
+                        <button type="button"
+                                class="btn-secondary"
+                                onclick="closeArchiveDeleteConfirm()">
+
+
+                            <%= LanguageManager.get(
+                                    "archive.delete.cancel",
+                                    session
+                            ) %>
+
+
+                        </button>
+
+
+
+                        <!-- CONFIRM -->
+
+                        <button type="button"
+                                class="btn-primary"
+                                onclick="confirmArchiveDelete()">
+
+
+                            <%= LanguageManager.get(
+                                    "archive.delete.confirm",
+                                    session
+                            ) %>
+
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
 
             </div>
+
 
         </div>
 
-    </div>
 
-</div>
-    
+    </section>
+
+
 </div>
