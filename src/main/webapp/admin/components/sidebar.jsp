@@ -15,6 +15,9 @@ the dashboard is opened with:
 ?section=centres
 ?section=payments
 ?section=archive
+?section=reports
+?section=settings
+?section=cloud
 ======================================================
 */
 
@@ -188,6 +191,123 @@ if (currentSection == null || currentSection.isEmpty()) {
 
                 <%= LanguageManager.get(
                         "dashboard.archive",
+                        session
+                ) %>
+
+
+            </span>
+
+
+        </a>
+
+
+        <!-- =========================================
+             REPORTS
+        ========================================== -->
+
+
+        <a id="sidebar-reports"
+
+           href="javascript:void(0)"
+
+           class="sidebar-link <%= "reports".equals(currentSection) ? "active" : "" %>"
+
+           onclick="loadContent('reports.jsp', this)">
+
+
+            <span class="sidebar-icon"
+                  title="Reports">
+
+
+                <i class="fa-solid fa-chart-column"></i>
+
+
+            </span>
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.reports",
+                        session
+                ) %>
+
+
+            </span>
+
+
+        </a>
+
+
+        <!-- =========================================
+             SETTINGS
+        ========================================== -->
+
+
+        <a id="sidebar-settings"
+
+           href="javascript:void(0)"
+
+           class="sidebar-link <%= "settings".equals(currentSection) ? "active" : "" %>"
+
+           onclick="loadContent('settings.jsp', this)">
+
+
+            <span class="sidebar-icon"
+                  title="Settings">
+
+
+                <i class="fa-solid fa-gear"></i>
+
+
+            </span>
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.settings",
+                        session
+                ) %>
+
+
+            </span>
+
+
+        </a>
+
+
+        <!-- =========================================
+             CLOUD BACKUP
+        ========================================== -->
+
+
+        <a id="sidebar-cloud"
+
+           href="javascript:void(0)"
+
+           class="sidebar-link <%= "cloud".equals(currentSection) ? "active" : "" %>"
+
+           onclick="loadContent('cloud.jsp', this)">
+
+
+            <span class="sidebar-icon"
+                  title="Cloud Backup">
+
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+
+            </span>
+
+
+            <span class="sidebar-text">
+
+
+                <%= LanguageManager.get(
+                        "dashboard.cloud",
                         session
                 ) %>
 

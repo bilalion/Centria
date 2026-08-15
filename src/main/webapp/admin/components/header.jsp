@@ -156,19 +156,15 @@
         <!-- SETTINGS -->
 
 
-        <a href="javascript:void(0)"
+  <!-- SETTINGS -->
 
-           class="header-action"
+<a href="#"
+   class="header-action"
+   onclick="return false;">
 
-           onclick="loadContent('settings.jsp', this)">
+    <i class="fa-solid fa-gear"></i>
 
-
-
-            <i class="fa-solid fa-gear"></i>
-
-
-
-        </a>
+</a>
 
 
 
