@@ -270,30 +270,38 @@ if (
                 );
 
 
-        /*
-        --------------------------------------------------
-        Only RESTORE is handled for now
-        --------------------------------------------------
-        */
+     /*
+--------------------------------------------------
+Validate operation
+--------------------------------------------------
 
-        if (
-                operation == null
-                ||
-                !"RESTORE".equalsIgnoreCase(operation)
-        ) {
+Supported operations:
+- RESTORE
+- DELETE
+--------------------------------------------------
+*/
 
-            response.setStatus(
-                    HttpServletResponse.SC_BAD_REQUEST
-            );
+if (
+        operation == null
+        ||
+        (
+            !"RESTORE".equalsIgnoreCase(operation)
+            &&
+            !"DELETE".equalsIgnoreCase(operation)
+        )
+) {
 
-            response.getWriter().write(
-                    "INVALID_OPERATION"
-            );
+    response.setStatus(
+            HttpServletResponse.SC_BAD_REQUEST
+    );
 
-            return;
+    response.getWriter().write(
+            "INVALID_OPERATION"
+    );
 
-        }
+    return;
 
+}
 
         /*
         --------------------------------------------------
@@ -366,43 +374,78 @@ if (
                 continue;
 
             }
+       
+
+      /*
+--------------------------------------------------
+Apply selected operation
+--------------------------------------------------
+
+Supported operations:
+
+RESTORE
+DELETE
+--------------------------------------------------
+*/
+
+boolean operationSuccess;
 
 
-            /*
-            --------------------------------------------------
-            Restore one centre
-            --------------------------------------------------
-            */
-
-            boolean restored =
-                    archiveDAO.restoreCentre(
-                            centreCode.trim()
-                    );
+if (
+        "RESTORE".equalsIgnoreCase(
+                operation
+        )
+) {
 
 
-            /*
-            --------------------------------------------------
-            Result
-            --------------------------------------------------
-            */
+    /*
+    --------------------------------------------------
+    RESTORE ONE CENTRE
+    --------------------------------------------------
+    */
 
-            if (restored) {
+    operationSuccess =
+            archiveDAO.restoreCentre(
+                    centreCode.trim()
+            );
 
-                successCount++;
-
-            }
-            else {
-
-                failedCount++;
-
-            }
-
-        }
+}
+else {
 
 
+    /*
+    --------------------------------------------------
+    DELETE ONE CENTRE
+    --------------------------------------------------
+    */
+
+    operationSuccess =
+            archiveDAO.deleteCentre(
+                    centreCode.trim()
+            );
+
+}
+
+
+/*
+--------------------------------------------------
+Result
+--------------------------------------------------
+*/
+
+if (operationSuccess) {
+
+    successCount++;
+
+}
+else {
+
+    failedCount++;
+
+}
         
         
-        
+         }// end for
         /*
 --------------------------------------------------
 UPDATE ARCHIVE OPERATION

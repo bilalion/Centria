@@ -638,4 +638,84 @@
 
 </section>
 
+    
+    <!-- DELETE CONFIRM MODAL -->
+
+<div id="archive-delete-confirm-modal"
+     class="centre-modal"
+     role="dialog"
+     aria-modal="true"
+     aria-hidden="true">
+
+    <div class="centre-modal-content reset-confirm-box">
+
+        <button type="button"
+                class="modal-close"
+                onclick="closeArchiveDeleteConfirm()"
+                aria-label="<%= LanguageManager.get(
+                        "centers.cancel",
+                        session
+                ) %>">
+
+            <i class="fa-solid fa-xmark"
+               aria-hidden="true"></i>
+
+        </button>
+
+
+        <div class="reset-confirm-content">
+
+            <div class="confirm-header">
+
+                <span class="confirm-icon is-warning"
+                      aria-hidden="true">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </span>
+
+
+                <h4 class="confirm-title">
+
+                    حذف نهائي
+
+                </h4>
+
+            </div>
+
+
+            <p id="archive-delete-confirm-message">
+
+                هل أنت متأكد من حذف المراكز المحددة نهائيًا؟
+
+            </p>
+
+
+            <div class="reset-confirm-actions">
+
+                <button type="button"
+                        class="btn-secondary"
+                        onclick="closeArchiveDeleteConfirm()">
+
+                    إلغاء
+
+                </button>
+
+
+                <button type="button"
+                        class="btn-primary"
+                        onclick="confirmArchiveDelete()">
+
+                    تأكيد
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+    
 </div>

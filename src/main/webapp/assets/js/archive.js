@@ -573,11 +573,224 @@ function getSelectedArchiveCentres() {
 }
 
 
+
+
+
+/*
+==================================================
+ARCHIVE DELETE MODAL STATE
+==================================================
+*/
+
+let archiveDeleteCentres = [];
+/*
+==================================================
+OPEN DELETE CONFIRM MODAL
+==================================================
+*/
+
+function openArchiveDeleteConfirm(
+        selectedCentres
+) {
+
+    archiveDeleteCentres =
+            selectedCentres.slice();
+
+
+    const modal =
+            document.getElementById(
+                    "archive-delete-confirm-modal"
+            );
+
+
+    const message =
+            document.getElementById(
+                    "archive-delete-confirm-message"
+            );
+
+
+    if (!modal || !message) {
+
+        return;
+
+    }
+
+
+    message.textContent =
+            "هل أنت متأكد من حذف "
+            +
+            archiveDeleteCentres.length
+            +
+            " مراكز نهائيًا؟";
+
+
+    /*
+    --------------------------------------------------
+    Open same CENTRIA modal style
+    --------------------------------------------------
+    */
+
+    modal.classList.add("show");
+
+    modal.setAttribute(
+            "aria-hidden",
+            "false"
+    );
+
+}
+
+
+/*
+==================================================
+CLOSE DELETE CONFIRM MODAL
+==================================================
+*/
+
+function closeArchiveDeleteConfirm() {
+
+    const modal =
+            document.getElementById(
+                    "archive-delete-confirm-modal"
+            );
+
+
+    if (modal) {
+
+        modal.classList.remove("show");
+
+        modal.setAttribute(
+                "aria-hidden",
+                "true"
+        );
+
+    }
+
+
+    archiveDeleteCentres = [];
+
+}
+
+/*
+==================================================
+CONFIRM ARCHIVE DELETE
+==================================================
+*/
+
+function confirmArchiveDelete() {
+
+    if (
+            archiveDeleteCentres.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const selectedCentres =
+            archiveDeleteCentres.slice();
+
+
+    closeArchiveDeleteConfirm();
+
+
+    const formData =
+            new URLSearchParams();
+
+
+    formData.append(
+            "action",
+            "apply"
+    );
+
+
+    formData.append(
+            "operation",
+            "DELETE"
+    );
+
+
+    selectedCentres.forEach(
+            function (centreCode) {
+
+                formData.append(
+                        "centreCodes",
+                        centreCode
+                );
+
+            }
+    );
+
+
+    fetch(
+            window.contextPath
+            +
+            "/ArchiveServlet",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+                },
+
+                body:
+                    formData.toString()
+            }
+    )
+
+    .then(
+            response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                            response.status
+                    );
+
+                }
+
+                return response.text();
+
+            }
+    )
+
+    .then(
+            result => {
+
+                console.log(
+                        "Archive DELETE result:",
+                        result
+                );
+
+
+                loadContent(
+                        "ArchiveServlet?action=list",
+                        null
+                );
+
+            }
+    )
+
+    .catch(
+            error => {
+
+                console.error(
+                        "Archive DELETE error:",
+                        error
+                );
+
+            }
+    );
+
+}
+
 /*
 ==================================================
 05 - APPLY ARCHIVE OPERATION
 ==================================================
 */
+
 
 function applyArchiveOperation(
         rowCheckboxes,
@@ -810,195 +1023,47 @@ function applyArchiveOperation(
 
     }
     
-        /*
+    
+    
+  /*
+--------------------------------------------------
+DELETE
+--------------------------------------------------
+*/
+
+if (
+        operation ===
+        "DELETE"
+) {
+
+    /*
     --------------------------------------------------
-    DELETE
+    Open custom DELETE confirmation modal
     --------------------------------------------------
     */
 
-    if (
-            operation ===
-            "DELETE"
-    ) {
-
-        /*
-        --------------------------------------------------
-        Count selected centres
-        --------------------------------------------------
-        */
-
-        const selectedCount =
-                selectedCentres.length;
+    openArchiveDeleteConfirm(
+            selectedCentres
+    );
 
 
-        /*
-        --------------------------------------------------
-        Confirm DELETE
-        --------------------------------------------------
-        */
+    /*
+    --------------------------------------------------
+    Stop here
+    --------------------------------------------------
 
-        const confirmed =
-                confirm(
-                        "هل أنت متأكد من حذف "
-                        +
-                        selectedCount
-                        +
-                        " مراكز نهائيًا؟"
-                );
+    DELETE request will only be sent
+    after the user clicks CONFIRM
+    inside the modal.
+    --------------------------------------------------
+    */
 
-
-        /*
-        --------------------------------------------------
-        Cancel
-        --------------------------------------------------
-        */
-
-        if (!confirmed) {
-
-            return;
-
-        }
-
-
-        /*
-        --------------------------------------------------
-        Disable button
-        --------------------------------------------------
-        */
-
-        if (applyButton) {
-
-            applyButton.disabled = true;
-
-        }
-
-
-        /*
-        --------------------------------------------------
-        Build request
-        --------------------------------------------------
-        */
-
-        const formData =
-                new URLSearchParams();
-
-
-        formData.append(
-                "action",
-                "apply"
-        );
-
-
-        formData.append(
-                "operation",
-                operation
-        );
-
-
-        /*
-        --------------------------------------------------
-        Add selected centre codes
-        --------------------------------------------------
-        */
-
-        selectedCentres.forEach(
-                function (centreCode) {
-
-                    formData.append(
-                            "centreCodes",
-                            centreCode
-                    );
-
-                }
-        );
-
-
-        /*
-        --------------------------------------------------
-        Send DELETE request
-        --------------------------------------------------
-        */
-
-        fetch(
-                window.contextPath
-                +
-                "/ArchiveServlet",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                                "application/x-www-form-urlencoded"
-                    },
-
-                    body:
-                            formData.toString()
-                }
-        )
-
-
-        .then(
-                response => {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                                response.status
-                        );
-
-                    }
-
-                    return response.text();
-
-                }
-        )
-
-
-        .then(
-                result => {
-
-                    console.log(
-                            "Archive DELETE result:",
-                            result
-                    );
-
-
-                    /*
-                    --------------------------------------------------
-                    Reload Archive
-                    --------------------------------------------------
-                    */
-
-                    loadContent(
-                            "ArchiveServlet?action=list",
-                            null
-                    );
-
-                }
-        )
-
-
-        .catch(
-                error => {
-
-                    console.error(
-                            "Archive DELETE error:",
-                            error
-                    );
-
-
-                    if (applyButton) {
-
-                        applyButton.disabled = false;
-
-                    }
-
-                }
-        );
-
-    }
+    return;
 
 }
+
+
+
 
 
 /*
@@ -1017,3 +1082,5 @@ document.addEventListener(
 
         }
 );
+
+}
