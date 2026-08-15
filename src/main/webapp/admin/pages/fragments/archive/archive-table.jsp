@@ -12,6 +12,28 @@ List<Archive> archivedCentres =
                 "archivedCentres"
         );
 
+
+/*
+=====================================================
+PAGINATION
+=====================================================
+*/
+
+int currentPage =
+        request.getAttribute("currentPage") != null
+        ?
+        (Integer) request.getAttribute("currentPage")
+        :
+        1;
+
+
+int totalPages =
+        request.getAttribute("totalPages") != null
+        ?
+        (Integer) request.getAttribute("totalPages")
+        :
+        1;
+
 %>
 
 
@@ -127,11 +149,17 @@ List<Archive> archivedCentres =
 
 
         <%
-        if (archivedCentres != null &&
-            !archivedCentres.isEmpty()) {
+        if (
+                archivedCentres != null
+                &&
+                !archivedCentres.isEmpty()
+        ) {
 
 
-            for (Archive archive : archivedCentres) {
+            for (
+                    Archive archive :
+                    archivedCentres
+            ) {
         %>
 
 
@@ -222,7 +250,8 @@ List<Archive> archivedCentres =
         <%
             }
 
-        } else {
+        }
+        else {
         %>
 
 
@@ -261,3 +290,125 @@ List<Archive> archivedCentres =
 
 
 </table>
+
+
+<!-- =====================================================
+     PAGINATION
+     ===================================================== -->
+
+<%
+if (totalPages > 1) {
+%>
+
+
+<div id="archive-pagination-container"
+     class="archive-pagination"
+     dir="ltr">
+
+
+    <!-- =================================================
+         FIRST
+         ================================================= -->
+
+    <button type="button"
+            class="pagination-button"
+            onclick="changeArchivePage(1)"
+            <%= currentPage <= 1 ? "disabled" : "" %>>
+
+        <i class="fa-solid fa-angles-left"></i>
+
+    </button>
+
+
+    <!-- =================================================
+         PREVIOUS
+         ================================================= -->
+
+    <button type="button"
+            class="pagination-button"
+            onclick="changeArchivePage(<%= currentPage - 1 %>)"
+            <%= currentPage <= 1 ? "disabled" : "" %>>
+
+        <i class="fa-solid fa-angle-left"></i>
+
+    </button>
+
+
+    <!-- =================================================
+         PAGE NUMBERS
+         ================================================= -->
+
+    <%
+    int startPage =
+            Math.max(
+                    1,
+                    currentPage - 2
+            );
+
+
+    int endPage =
+            Math.min(
+                    totalPages,
+                    currentPage + 2
+            );
+
+
+    for (
+            int pageNumber = startPage;
+            pageNumber <= endPage;
+            pageNumber++
+    ) {
+    %>
+
+
+        <button type="button"
+                class="pagination-button
+                <%= pageNumber == currentPage
+                        ? "active"
+                        : "" %>"
+                onclick="changeArchivePage(<%= pageNumber %>)">
+
+            <%= pageNumber %>
+
+        </button>
+
+
+    <%
+    }
+    %>
+
+
+    <!-- =================================================
+         NEXT
+         ================================================= -->
+
+    <button type="button"
+            class="pagination-button"
+            onclick="changeArchivePage(<%= currentPage + 1 %>)"
+            <%= currentPage >= totalPages ? "disabled" : "" %>>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+    </button>
+
+
+    <!-- =================================================
+         LAST
+         ================================================= -->
+
+    <button type="button"
+            class="pagination-button"
+            onclick="changeArchivePage(<%= totalPages %>)"
+            <%= currentPage >= totalPages ? "disabled" : "" %>>
+
+        <i class="fa-solid fa-angles-right"></i>
+
+    </button>
+
+
+</div>
+
+
+<%
+}
+%>

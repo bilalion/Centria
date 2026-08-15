@@ -20,7 +20,7 @@
 
 let archiveDeleteCentres = [];
 
-
+let activeArchivePage = 1;
 /*
 ==================================================
 01 - INITIALIZE ARCHIVE PAGE
@@ -275,7 +275,7 @@ if (archiveStatus) {
     ==================================================
     */
 
-    loadArchive();
+   loadArchive(1);
     
 /*
 ==================================================
@@ -557,184 +557,27 @@ function getSelectedArchiveCentres() {
 ==================================================
 */
 
-function loadArchive() {
-
-
-    /*
-    --------------------------------------------------
-    Get table container
-    --------------------------------------------------
-    */
-
-    const container =
-            document.getElementById(
-                    "archive-table-container"
-            );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    /*
-    --------------------------------------------------
-    Build AJAX URL
-    --------------------------------------------------
-    */
-
-    const url =
-            window.contextPath
-            +
-            "/ArchiveServlet"
-            +
-            "?action=list"
-            +
-            "&ajax=true"
-            +
-            "&_refresh="
-            +
-            Date.now();
-
-
-    /*
-    --------------------------------------------------
-    Show loading state
-    --------------------------------------------------
-    */
-
-    container.setAttribute(
-            "aria-busy",
-            "true"
-    );
-
-
-    /*
-    --------------------------------------------------
-    Request Archive table
-    --------------------------------------------------
-    */
-
-    fetch(url)
-
-        .then(
-                response => {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                                "HTTP ERROR "
-                                +
-                                response.status
-                        );
-
-                    }
-
-
-                    return response.text();
-
-                }
-        )
-
-
-        .then(
-                html => {
-
-
-                    /*
-                    --------------------------------------------------
-                    Inject Archive table
-                    --------------------------------------------------
-                    */
-
-                    container.innerHTML =
-                            html;
-
-
-                    container.setAttribute(
-                            "aria-busy",
-                            "false"
-                    );
-
-
-                    /*
-                    --------------------------------------------------
-                    Reinitialize Archive controls
-                    --------------------------------------------------
-                    */
-
-                    initArchiveControlsOnly();
-
-                }
-        )
-
-
-        .catch(
-                error => {
-
-
-                    console.error(
-                            "[CENTRIA ARCHIVE] "
-                            + "Load error:",
-                            error
-                    );
-
-
-                    container.setAttribute(
-                            "aria-busy",
-                            "false"
-                    );
-
-                }
-        );
-
-}
-
-
 /*
 ==================================================
-05.1 - SEARCH / FILTER ARCHIVED CENTRES
-==================================================
-
-Search by:
-- Centre Code
-- Centre Name
-- Phone
-
-Filter by:
-- ALL
-- ARCHIVED
-- PENDING_DELETE
+05 - LOAD ARCHIVE
 ==================================================
 */
 
-function searchArchivedCentres() {
+function loadArchive(page) {
 
 
     /*
     --------------------------------------------------
-    GET SEARCH INPUT
+    CURRENT PAGE
     --------------------------------------------------
     */
 
-    const searchInput =
-            document.getElementById(
-                    "archiveSearch"
-            );
+    const currentPage =
+            Number(page) || 1;
 
 
-    /*
-    --------------------------------------------------
-    GET STATUS FILTER
-    --------------------------------------------------
-    */
-
-    const statusSelect =
-            document.getElementById(
-                    "archiveStatus"
-            );
+    activeArchivePage =
+            currentPage;
 
 
     /*
@@ -749,12 +592,6 @@ function searchArchivedCentres() {
             );
 
 
-    /*
-    --------------------------------------------------
-    SAFETY
-    --------------------------------------------------
-    */
-
     if (!container) {
 
         return;
@@ -764,9 +601,15 @@ function searchArchivedCentres() {
 
     /*
     --------------------------------------------------
-    READ SEARCH
+    GET SEARCH
     --------------------------------------------------
     */
+
+    const searchInput =
+            document.getElementById(
+                    "archiveSearch"
+            );
+
 
     const search =
             searchInput
@@ -778,9 +621,15 @@ function searchArchivedCentres() {
 
     /*
     --------------------------------------------------
-    READ STATUS
+    GET STATUS
     --------------------------------------------------
     */
+
+    const statusSelect =
+            document.getElementById(
+                    "archiveStatus"
+            );
+
 
     const status =
             statusSelect
@@ -792,7 +641,7 @@ function searchArchivedCentres() {
 
     /*
     --------------------------------------------------
-    BUILD URL
+    BUILD PARAMETERS
     --------------------------------------------------
     */
 
@@ -813,6 +662,12 @@ function searchArchivedCentres() {
 
 
     parameters.append(
+            "page",
+            currentPage
+    );
+
+
+    parameters.append(
             "search",
             search
     );
@@ -829,6 +684,12 @@ function searchArchivedCentres() {
             Date.now()
     );
 
+
+    /*
+    --------------------------------------------------
+    BUILD URL
+    --------------------------------------------------
+    */
 
     const url =
             window.contextPath
@@ -852,7 +713,7 @@ function searchArchivedCentres() {
 
     /*
     --------------------------------------------------
-    AJAX SEARCH / FILTER
+    AJAX LOAD
     --------------------------------------------------
     */
 
@@ -871,6 +732,7 @@ function searchArchivedCentres() {
 
                     }
 
+
                     return response.text();
 
                 }
@@ -880,9 +742,10 @@ function searchArchivedCentres() {
         .then(
                 html => {
 
+
                     /*
                     --------------------------------------------------
-                    REPLACE TABLE
+                    REPLACE TABLE + PAGINATION
                     --------------------------------------------------
                     */
 
@@ -898,7 +761,7 @@ function searchArchivedCentres() {
 
                     /*
                     --------------------------------------------------
-                    REINITIALIZE TABLE CONTROLS
+                    REINITIALIZE CONTROLS
                     --------------------------------------------------
                     */
 
@@ -914,7 +777,7 @@ function searchArchivedCentres() {
                     console.error(
                             "[CENTRIA ARCHIVE] "
                             +
-                            "Search / Filter error:",
+                            "Load error:",
                             error
                     );
 
@@ -930,6 +793,76 @@ function searchArchivedCentres() {
 }
 
 
+/*
+==================================================
+05.1 - SEARCH / FILTER ARCHIVED CENTRES
+==================================================
+*/
+
+function searchArchivedCentres() {
+
+
+    /*
+    --------------------------------------------------
+    RESET TO FIRST PAGE
+    --------------------------------------------------
+    */
+
+    activeArchivePage = 1;
+
+
+    /*
+    --------------------------------------------------
+    LOAD FIRST PAGE
+    --------------------------------------------------
+    */
+
+    loadArchive(1);
+
+}
+
+
+/*
+==================================================
+05.2 - CHANGE ARCHIVE PAGE
+==================================================
+*/
+
+function changeArchivePage(page) {
+
+
+    /*
+    --------------------------------------------------
+    SAFETY
+    --------------------------------------------------
+    */
+
+    const requestedPage =
+            Number(page);
+
+
+    if (
+            !requestedPage
+            ||
+            requestedPage < 1
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    LOAD REQUESTED PAGE
+    --------------------------------------------------
+    */
+
+    loadArchive(
+            requestedPage
+    );
+
+}
 /*
 ==================================================
 06 - INITIALIZE ARCHIVE CONTROLS ONLY

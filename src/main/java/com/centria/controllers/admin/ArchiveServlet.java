@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -29,6 +30,9 @@ import java.util.List;
  * Responsible for:
  *
  * - Loading archived centres.
+ * - Searching archived centres.
+ * - Filtering archived centres.
+ * - Pagination.
  * - Displaying archived centres.
  * - Handling bulk archive operations.
  */
@@ -75,74 +79,227 @@ public class ArchiveServlet extends HttpServlet {
     ) throws ServletException, IOException {
 
 
-        
-        
-/*
---------------------------------------------------
-LOAD / SEARCH / FILTER ARCHIVED CENTRES
---------------------------------------------------
-*/
-
-String search =
-        request.getParameter(
-                "search"
-        );
-
-
-String status =
-        request.getParameter(
-                "status"
-        );
-
-
-/*
---------------------------------------------------
-DEFAULT STATUS
---------------------------------------------------
-
-If no status is provided,
-show all archive records allowed
-by DAO:
-
-ARCHIVED + PENDING_DELETE
---------------------------------------------------
-*/
-
-if (
-        status == null
-        ||
-        status.trim().isEmpty()
-) {
-
-    status = "ALL";
-
-}
-
-
-/*
---------------------------------------------------
-LOAD ARCHIVE
---------------------------------------------------
-
-One DAO function handles:
-
-- Search
-- Status filter
-- ALL
---------------------------------------------------
-*/
-
-List<Archive> archivedCentres =
-        archiveDAO.getArchivedCentres(
-                search,
-                status
-        );
+        /*
+        ==================================================
+        LOAD / SEARCH / FILTER / PAGINATION
+        ==================================================
+        */
 
 
         /*
         --------------------------------------------------
-        Send data to JSP
+        SEARCH
         --------------------------------------------------
+        */
+
+        String search =
+                request.getParameter(
+                        "search"
+                );
+
+
+        /*
+        --------------------------------------------------
+        STATUS
+        --------------------------------------------------
+        */
+
+        String status =
+                request.getParameter(
+                        "status"
+                );
+
+
+        /*
+        --------------------------------------------------
+        DEFAULT STATUS
+        --------------------------------------------------
+
+        If no status is provided:
+
+        ALL
+        =
+        ARCHIVED + PENDING_DELETE
+        --------------------------------------------------
+        */
+
+        if (
+                status == null
+                ||
+                status.trim().isEmpty()
+        ) {
+
+            status = "ALL";
+
+        }
+
+
+        /*
+        ==================================================
+        PAGE
+        ==================================================
+        */
+
+        int page = 1;
+
+
+        try {
+
+            if (
+                    request.getParameter(
+                            "page"
+                    ) != null
+            ) {
+
+                page =
+                        Integer.parseInt(
+                                request.getParameter(
+                                        "page"
+                                )
+                        );
+
+            }
+
+        }
+        catch (Exception e) {
+
+            page = 1;
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        PAGE MUST NEVER BE LESS THAN 1
+        --------------------------------------------------
+        */
+
+        if (page < 1) {
+
+            page = 1;
+
+        }
+
+
+        /*
+        ==================================================
+        PAGE SIZE
+        ==================================================
+
+        Same approach used by Centres.
+
+        Current value:
+        4 records per page.
+        ==================================================
+        */
+
+        int pageSize = 4;
+
+
+        /*
+        ==================================================
+        LOAD ARCHIVE
+        ==================================================
+        */
+
+        List<Archive> archivedCentres =
+                archiveDAO.getArchivedCentres(
+                        search,
+                        status,
+                        page,
+                        pageSize
+                );
+
+
+        /*
+        ==================================================
+        COUNT FILTERED RESULTS
+        ==================================================
+
+        IMPORTANT:
+
+        Count must use the SAME:
+
+        - search
+        - status
+
+        Otherwise pagination would be incorrect.
+        ==================================================
+        */
+
+        int totalArchives =
+                archiveDAO.countArchivedCentres(
+                        search,
+                        status
+                );
+
+
+        /*
+        ==================================================
+        CALCULATE TOTAL PAGES
+        ==================================================
+        */
+
+        int totalPages =
+                (int) Math.ceil(
+                        (double) totalArchives
+                        /
+                        pageSize
+                );
+
+
+        /*
+        --------------------------------------------------
+        NO RESULTS
+        --------------------------------------------------
+
+        Keep one logical page for the JSP.
+        --------------------------------------------------
+        */
+
+        if (totalPages < 1) {
+
+            totalPages = 1;
+
+        }
+
+
+        /*
+        ==================================================
+        CORRECT PAGE IF OUT OF RANGE
+        ==================================================
+
+        Example:
+
+        User is on page 3.
+
+        Then search/filter changes the result
+        to only one page.
+
+        We automatically return to page 1.
+        ==================================================
+        */
+
+        if (page > totalPages) {
+
+            page = totalPages;
+
+
+            archivedCentres =
+                    archiveDAO.getArchivedCentres(
+                            search,
+                            status,
+                            page,
+                            pageSize
+                    );
+
+        }
+
+
+        /*
+        ==================================================
+        SEND ARCHIVE DATA TO JSP
+        ==================================================
         */
 
         request.setAttribute(
@@ -150,106 +307,135 @@ List<Archive> archivedCentres =
                 archivedCentres
         );
 
-        
+
         /*
---------------------------------------------------
-ARCHIVE STATISTICS
---------------------------------------------------
-*/
+        ==================================================
+        SEND PAGINATION DATA
+        ==================================================
+        */
 
-int archivedCount =
-        archiveDAO.countArchivedCentres();
-
-
-int pendingDeleteCount =
-        archiveDAO.countPendingDeleteCentres();
+        request.setAttribute(
+                "currentPage",
+                page
+        );
 
 
-int deletedCount =
-        archiveDAO.countDeletedCentres();
+        request.setAttribute(
+                "totalPages",
+                totalPages
+        );
 
 
-/*
---------------------------------------------------
-SEND STATISTICS TO JSP
---------------------------------------------------
-*/
-
-request.setAttribute(
-        "archivedCount",
-        archivedCount
-);
+        request.setAttribute(
+                "totalArchives",
+                totalArchives
+        );
 
 
-request.setAttribute(
-        "pendingDeleteCount",
-        pendingDeleteCount
-);
-
-
-request.setAttribute(
-        "deletedCount",
-        deletedCount
-);
-
-/*
---------------------------------------------------
-LAST ARCHIVE OPERATION
---------------------------------------------------
-*/
-
-java.util.Map<String, Object> lastArchiveOperation =
-        archiveDAO.getLastArchiveOperation();
-
-
-/*
---------------------------------------------------
-SEND LAST OPERATION TO JSP
---------------------------------------------------
-*/
-
-request.setAttribute(
-        "lastArchiveOperation",
-        lastArchiveOperation
-);
-        
         /*
---------------------------------------------------
-AJAX REQUEST
---------------------------------------------------
+        ==================================================
+        ARCHIVE STATISTICS
+        ==================================================
+        */
 
-When Archive is loaded through AJAX,
-return only the archive table fragment.
+        int archivedCount =
+                archiveDAO.countArchivedCentres();
 
-This follows the same pattern used
-by CentreServlet.
---------------------------------------------------
-*/
 
-if (
-        "true".equals(
-                request.getParameter(
-                        "ajax"
+        int pendingDeleteCount =
+                archiveDAO.countPendingDeleteCentres();
+
+
+        int deletedCount =
+                archiveDAO.countDeletedCentres();
+
+
+        /*
+        ==================================================
+        SEND STATISTICS TO JSP
+        ==================================================
+        */
+
+        request.setAttribute(
+                "archivedCount",
+                archivedCount
+        );
+
+
+        request.setAttribute(
+                "pendingDeleteCount",
+                pendingDeleteCount
+        );
+
+
+        request.setAttribute(
+                "deletedCount",
+                deletedCount
+        );
+
+
+        /*
+        ==================================================
+        LAST ARCHIVE OPERATION
+        ==================================================
+        */
+
+        java.util.Map<String, Object>
+                lastArchiveOperation =
+                archiveDAO.getLastArchiveOperation();
+
+
+        /*
+        ==================================================
+        SEND LAST OPERATION TO JSP
+        ==================================================
+        */
+
+        request.setAttribute(
+                "lastArchiveOperation",
+                lastArchiveOperation
+        );
+
+
+        /*
+        ==================================================
+        AJAX REQUEST
+        ==================================================
+
+        When Archive is loaded through AJAX,
+        return only the archive table fragment.
+
+        This follows the same pattern used
+        by CentreServlet.
+        ==================================================
+        */
+
+        if (
+                "true".equals(
+                        request.getParameter(
+                                "ajax"
+                        )
                 )
-        )
-) {
+        ) {
 
 
-    request.getRequestDispatcher(
-            "/admin/pages/fragments/archive/archive-table.jsp"
-    ).forward(
-            request,
-            response
-    );
+            request.getRequestDispatcher(
+                    "/admin/pages/fragments/archive/archive-table.jsp"
+            ).forward(
+                    request,
+                    response
+            );
 
 
-    return;
+            return;
 
-}
+        }
+
+
         /*
-        --------------------------------------------------
-        Open Archive page
-        --------------------------------------------------
+        ==================================================
+        OPEN ARCHIVE PAGE
+        ==================================================
         */
 
         request.getRequestDispatcher(
@@ -296,16 +482,20 @@ if (
         if (
                 action == null
                 ||
-                !"apply".equalsIgnoreCase(action)
+                !"apply".equalsIgnoreCase(
+                        action
+                )
         ) {
 
             response.setStatus(
                     HttpServletResponse.SC_BAD_REQUEST
             );
 
+
             response.getWriter().write(
                     "INVALID_ACTION"
             );
+
 
             return;
 
@@ -324,38 +514,46 @@ if (
                 );
 
 
-     /*
---------------------------------------------------
-Validate operation
---------------------------------------------------
+        /*
+        ==================================================
+        Validate operation
+        ==================================================
 
-Supported operations:
-- RESTORE
-- DELETE
---------------------------------------------------
-*/
+        Supported operations:
 
-if (
-        operation == null
-        ||
-        (
-            !"RESTORE".equalsIgnoreCase(operation)
-            &&
-            !"DELETE".equalsIgnoreCase(operation)
-        )
-) {
+        - RESTORE
+        - DELETE
+        ==================================================
+        */
 
-    response.setStatus(
-            HttpServletResponse.SC_BAD_REQUEST
-    );
+        if (
+                operation == null
+                ||
+                (
+                        !"RESTORE".equalsIgnoreCase(
+                                operation
+                        )
+                        &&
+                        !"DELETE".equalsIgnoreCase(
+                                operation
+                        )
+                )
+        ) {
 
-    response.getWriter().write(
-            "INVALID_OPERATION"
-    );
+            response.setStatus(
+                    HttpServletResponse.SC_BAD_REQUEST
+            );
 
-    return;
 
-}
+            response.getWriter().write(
+                    "INVALID_OPERATION"
+            );
+
+
+            return;
+
+        }
+
 
         /*
         --------------------------------------------------
@@ -385,9 +583,11 @@ if (
                     HttpServletResponse.SC_BAD_REQUEST
             );
 
+
             response.getWriter().write(
                     "NO_CENTRES_SELECTED"
             );
+
 
             return;
 
@@ -395,9 +595,9 @@ if (
 
 
         /*
-        --------------------------------------------------
-        Restore selected centres
-        --------------------------------------------------
+        ==================================================
+        RESTORE / DELETE
+        ==================================================
         */
 
         int successCount = 0;
@@ -428,114 +628,117 @@ if (
                 continue;
 
             }
-       
-
-      /*
---------------------------------------------------
-Apply selected operation
---------------------------------------------------
-
-Supported operations:
-
-RESTORE
-DELETE
---------------------------------------------------
-*/
-
-boolean operationSuccess;
 
 
-if (
-        "RESTORE".equalsIgnoreCase(
-                operation
-        )
-) {
+            /*
+            ==================================================
+            APPLY SELECTED OPERATION
+            ==================================================
+            */
+
+            boolean operationSuccess;
 
 
-    /*
-    --------------------------------------------------
-    RESTORE ONE CENTRE
-    --------------------------------------------------
-    */
-
-    operationSuccess =
-            archiveDAO.restoreCentre(
-                    centreCode.trim()
-            );
-
-}
-else {
+            if (
+                    "RESTORE".equalsIgnoreCase(
+                            operation
+                    )
+            ) {
 
 
-    /*
-    --------------------------------------------------
-    DELETE ONE CENTRE
-    --------------------------------------------------
-    */
+                /*
+                --------------------------------------------------
+                RESTORE ONE CENTRE
+                --------------------------------------------------
+                */
 
-    operationSuccess =
-            archiveDAO.deleteCentre(
-                    centreCode.trim()
-            );
+                operationSuccess =
+                        archiveDAO.restoreCentre(
+                                centreCode.trim()
+                        );
 
-}
+            }
+            else {
 
 
-/*
---------------------------------------------------
-Result
---------------------------------------------------
-*/
+                /*
+                --------------------------------------------------
+                DELETE ONE CENTRE
+                --------------------------------------------------
+                */
 
-if (operationSuccess) {
+                operationSuccess =
+                        archiveDAO.deleteCentre(
+                                centreCode.trim()
+                        );
 
-    successCount++;
+            }
 
-}
-else {
 
-    failedCount++;
+            /*
+            ==================================================
+            RESULT
+            ==================================================
+            */
 
-}
-        
-        
-         }// end for
+            if (operationSuccess) {
+
+                successCount++;
+
+            }
+            else {
+
+                failedCount++;
+
+            }
+
+        }
+
+
         /*
---------------------------------------------------
-UPDATE ARCHIVE OPERATION
---------------------------------------------------
-*/
+        ==================================================
+        UPDATE ARCHIVE OPERATION
+        ==================================================
+        */
 
-if (successCount > 0) {
-
-    HttpSession session =
-            request.getSession(false);
-
-    String adminUsername =
-            session != null
-            ? (String) session.getAttribute("adminUsername")
-            : null;
+        if (successCount > 0) {
 
 
-    if (
-            adminUsername != null
-            &&
-            !adminUsername.trim().isEmpty()
-    ) {
+            HttpSession session =
+                    request.getSession(false);
 
-    archiveDAO.updateArchiveOperation(
-        adminUsername,
-        operation,
-        successCount
-);
 
-    }
+            String adminUsername =
+                    session != null
+                    ? (String)
+                        session.getAttribute(
+                                "adminUsername"
+                        )
+                    : null;
 
-}
+
+            if (
+                    adminUsername != null
+                    &&
+                    !adminUsername.trim().isEmpty()
+            ) {
+
+
+                archiveDAO.updateArchiveOperation(
+                        adminUsername,
+                        operation,
+                        successCount
+                );
+
+            }
+
+        }
+
+
         /*
-        --------------------------------------------------
-        Send operation result
-        --------------------------------------------------
+        ==================================================
+        SEND OPERATION RESULT
+        ==================================================
         */
 
         response.setContentType(

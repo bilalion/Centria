@@ -39,9 +39,17 @@ Rules:
 
 public List<Archive> getArchivedCentres(
         String search,
-        String status
+        String status,
+        int page,
+        int pageSize
 ) {
 
+
+    /*
+    ==================================================
+    01 - BUILD SQL
+    ==================================================
+    */
 
     StringBuilder sql =
             new StringBuilder();
@@ -52,6 +60,7 @@ public List<Archive> getArchivedCentres(
             + "ca.id, "
             + "ca.centre_code, "
             + "c.name AS centre_name, "
+            + "c.phone, "
             + "ca.archive_status, "
             + "ca.archived_at, "
             + "ca.retention_until, "
@@ -66,9 +75,9 @@ public List<Archive> getArchivedCentres(
 
 
     /*
-    --------------------------------------------------
-    STATUS FILTER
-    --------------------------------------------------
+    ==================================================
+    02 - STATUS FILTER
+    ==================================================
     */
 
     if (
@@ -89,9 +98,16 @@ public List<Archive> getArchivedCentres(
 
 
     /*
-    --------------------------------------------------
-    SEARCH FILTER
-    --------------------------------------------------
+    ==================================================
+    03 - SEARCH FILTER
+    ==================================================
+
+    Search by:
+
+    - centre_code
+    - centre name
+    - phone
+    ==================================================
     */
 
     if (
@@ -112,19 +128,46 @@ public List<Archive> getArchivedCentres(
 
 
     /*
-    --------------------------------------------------
-    ORDER
-    --------------------------------------------------
+    ==================================================
+    04 - ORDER
+    ==================================================
     */
 
     sql.append(
-            "ORDER BY ca.archived_at DESC"
+            "ORDER BY ca.archived_at DESC "
     );
 
+
+    /*
+    ==================================================
+    05 - PAGINATION
+    ==================================================
+    */
+
+    int offset =
+            (page - 1) * pageSize;
+
+
+    sql.append(
+            "LIMIT ? OFFSET ? "
+    );
+
+
+    /*
+    ==================================================
+    06 - RESULT LIST
+    ==================================================
+    */
 
     List<Archive> archives =
             new ArrayList<>();
 
+
+    /*
+    ==================================================
+    07 - DATABASE
+    ==================================================
+    */
 
     try (
             Connection con =
@@ -141,9 +184,9 @@ public List<Archive> getArchivedCentres(
 
 
         /*
-        --------------------------------------------------
-        STATUS PARAMETER
-        --------------------------------------------------
+        ==================================================
+        08 - STATUS PARAMETER
+        ==================================================
         */
 
         if (
@@ -165,9 +208,9 @@ public List<Archive> getArchivedCentres(
 
 
         /*
-        --------------------------------------------------
-        SEARCH PARAMETERS
-        --------------------------------------------------
+        ==================================================
+        09 - SEARCH PARAMETERS
+        ==================================================
         */
 
         if (
@@ -184,17 +227,29 @@ public List<Archive> getArchivedCentres(
                     "%";
 
 
-            ps.setString(
-                    parameterIndex++,
-                    keyword
-            );
-
+            /*
+            centre_code
+            */
 
             ps.setString(
                     parameterIndex++,
                     keyword
             );
 
+
+            /*
+            centre name
+            */
+
+            ps.setString(
+                    parameterIndex++,
+                    keyword
+            );
+
+
+            /*
+            phone
+            */
 
             ps.setString(
                     parameterIndex++,
@@ -205,9 +260,27 @@ public List<Archive> getArchivedCentres(
 
 
         /*
-        --------------------------------------------------
-        EXECUTE
-        --------------------------------------------------
+        ==================================================
+        10 - PAGINATION PARAMETERS
+        ==================================================
+        */
+
+        ps.setInt(
+                parameterIndex++,
+                pageSize
+        );
+
+
+        ps.setInt(
+                parameterIndex++,
+                offset
+        );
+
+
+        /*
+        ==================================================
+        11 - EXECUTE QUERY
+        ==================================================
         */
 
         try (
@@ -215,6 +288,12 @@ public List<Archive> getArchivedCentres(
                         ps.executeQuery()
         ) {
 
+
+            /*
+            ==================================================
+            12 - READ RESULTS
+            ==================================================
+            */
 
             while (rs.next()) {
 
@@ -305,9 +384,17 @@ public List<Archive> getArchivedCentres(
     }
 
 
+    /*
+    ==================================================
+    13 - RETURN
+    ==================================================
+    */
+
     return archives;
 }
-     
+
+
+
     /*
 ==========================================================
 02- BUTTON RESTORE CENTRE
@@ -721,7 +808,7 @@ public java.util.Map<String, Object> getLastArchiveOperation() {
             return false;
         }
     }
-    
+   
     public boolean archiveCentre(
         Connection con,
         String centreCode) {
@@ -792,10 +879,185 @@ public java.util.Map<String, Object> getLastArchiveOperation() {
     
    
  
+    public int countArchivedCentres(
+        String search,
+        String status
+) {
+
+    StringBuilder sql =
+            new StringBuilder(
+                    "SELECT COUNT(*) "
+                    + "FROM centres_archive ca "
+                    + "INNER JOIN centres c "
+                    + "ON c.centre_code = ca.centre_code "
+                    + "WHERE ca.archive_status IN "
+                    + "('ARCHIVED', 'PENDING_DELETE') "
+            );
+
+
+    /*
+    --------------------------------------------------
+    STATUS FILTER
+    --------------------------------------------------
+    */
+
+    if (
+            status != null
+            &&
+            !status.trim().isEmpty()
+            &&
+            !"ALL".equalsIgnoreCase(
+                    status.trim()
+            )
+    ) {
+
+        sql.append(
+                "AND ca.archive_status = ? "
+        );
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    SEARCH FILTER
+    --------------------------------------------------
+    */
+
+    if (
+            search != null
+            &&
+            !search.trim().isEmpty()
+    ) {
+
+        sql.append(
+                "AND ( "
+                + "ca.centre_code LIKE ? "
+                + "OR c.name LIKE ? "
+                + "OR c.phone LIKE ? "
+                + ") "
+        );
+
+    }
+
+
+    try (
+            Connection connection =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement statement =
+                    connection.prepareStatement(
+                            sql.toString()
+                    )
+    ) {
+
+        int parameterIndex = 1;
+
+
+        /*
+        --------------------------------------------------
+        STATUS PARAMETER
+        --------------------------------------------------
+        */
+
+        if (
+                status != null
+                &&
+                !status.trim().isEmpty()
+                &&
+                !"ALL".equalsIgnoreCase(
+                        status.trim()
+                )
+        ) {
+
+            statement.setString(
+                    parameterIndex++,
+                    status.trim()
+            );
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        SEARCH PARAMETERS
+        --------------------------------------------------
+        */
+
+        if (
+                search != null
+                &&
+                !search.trim().isEmpty()
+        ) {
+
+            String keyword =
+                    "%"
+                    +
+                    search.trim()
+                    +
+                    "%";
+
+
+            statement.setString(
+                    parameterIndex++,
+                    keyword
+            );
+
+
+            statement.setString(
+                    parameterIndex++,
+                    keyword
+            );
+
+
+            statement.setString(
+                    parameterIndex++,
+                    keyword
+            );
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        EXECUTE
+        --------------------------------------------------
+        */
+
+        try (
+                ResultSet resultSet =
+                        statement.executeQuery()
+        ) {
+
+            if (resultSet.next()) {
+
+                return resultSet.getInt(1);
+
+            }
+
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] "
+                +
+                "Error while counting filtered "
+                +
+                "archived centres."
+        );
+
+        e.printStackTrace();
+
+    }
+
+
+    return 0;
+}
     
     
-    
-    public int countArchivedCentres() {
+public int countArchivedCentres() {
 
     String sql =
             "SELECT COUNT(*) " +
@@ -829,8 +1091,6 @@ public java.util.Map<String, Object> getLastArchiveOperation() {
     return 0;
 
 }
-
-
 public int countPendingDeleteCentres() {
 
     String sql =

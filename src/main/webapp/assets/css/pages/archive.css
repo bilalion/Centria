@@ -2036,3 +2036,122 @@ button:active {
     }
 
 }
+
+
+/* ==================================================
+   ARCHIVE PAGINATION
+================================================== */
+
+.archive-pagination {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 18px 10px;
+
+}
+
+
+/* ==================================================
+   PAGINATION BUTTON
+================================================== */
+
+.archive-pagination .pagination-button {
+
+    min-width: 34px;
+
+    height: 34px;
+
+    padding: 0 9px;
+
+    border: 1px solid #d9e1ec;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+
+}
+
+
+/* ==================================================
+   HOVER
+================================================== */
+
+.archive-pagination
+.pagination-button:hover:not(:disabled) {
+
+    background: #f1f5f9;
+
+    border-color: #cbd5e1;
+
+    color: #1e3a8a;
+
+}
+
+
+/* ==================================================
+   ACTIVE PAGE
+================================================== */
+
+.archive-pagination
+.pagination-button.active {
+
+    background: #2563eb;
+
+    border-color: #2563eb;
+
+    color: #ffffff;
+
+}
+
+
+/* ==================================================
+   DISABLED
+================================================== */
+
+.archive-pagination
+.pagination-button:disabled {
+
+    opacity: 0.45;
+
+    cursor: not-allowed;
+
+    background: #f8fafc;
+
+}
+
+
+/* ==================================================
+   ICONS
+================================================== */
+
+.archive-pagination
+.pagination-button i {
+
+    font-size: 12px;
+
+}
