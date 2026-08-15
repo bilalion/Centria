@@ -296,9 +296,160 @@ public boolean restoreCentre(String centreCode) {
     }
 }
 
+
+
 /*
 ==========================================================
- 03-  function for Monitor Only
+03.1 - UPDATE ARCHIVE OPERATION
+==========================================================
+*/
+
+
+
+public boolean updateArchiveOperation(
+        String operator,
+        String operationType,
+        int operationCount) {
+
+    String sql =
+            "UPDATE archive_operation " +
+            "SET operator = ?, " +
+            "operation_type = ?, " +
+            "operation_count = ?, " +
+            "operation_at = NOW() " +
+            "WHERE id = 1";
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql)
+    ) {
+
+        ps.setString(1, operator);
+        ps.setString(2, operationType);
+        ps.setInt(3, operationCount);
+
+
+        System.out.println(
+                "[CENTRIA ARCHIVE] "
+                + "Updating archive operation: "
+                + "operator=" + operator
+                + ", operationType=" + operationType
+                + ", operationCount=" + operationCount
+        );
+
+
+        int updatedRows =
+                ps.executeUpdate();
+
+
+        System.out.println(
+                "[CENTRIA ARCHIVE] "
+                + "Archive operation rows updated: "
+                + updatedRows
+        );
+
+
+        return updatedRows > 0;
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] "
+                + "Error while updating archive operation."
+        );
+
+        e.printStackTrace();
+
+        return false;
+    }
+}
+
+
+
+/*
+==========================================================
+03.2 - GET LAST ARCHIVE OPERATION
+==========================================================
+*/
+
+public java.util.Map<String, Object> getLastArchiveOperation() {
+
+    String sql =
+            "SELECT " +
+            "    operator, " +
+            "    operation_type, " +
+            "    operation_count, " +
+            "    operation_at " +
+            "FROM archive_operation " +
+            "WHERE id = 1";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ResultSet rs =
+                    ps.executeQuery()
+    ) {
+
+        if (rs.next()) {
+
+            java.util.Map<String, Object> operation =
+                    new java.util.HashMap<>();
+
+
+            operation.put(
+                    "operator",
+                    rs.getString("operator")
+            );
+
+
+            operation.put(
+                    "operationType",
+                    rs.getString("operation_type")
+            );
+
+
+            operation.put(
+                    "operationCount",
+                    rs.getInt("operation_count")
+            );
+
+
+            operation.put(
+                    "operationAt",
+                    rs.getTimestamp("operation_at")
+            );
+
+
+            return operation;
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] " +
+                "Error while loading last archive operation."
+        );
+
+        e.printStackTrace();
+    }
+
+
+    return null;
+}
+
+/*
+==========================================================
+ 04-  function for Monitor Only
 ==========================================================
 */
 
@@ -568,7 +719,7 @@ public int countDeletedCentres() {
 }
     /*
 ==========================================================
-04- MONITOR ARCHIVED CENTRES
+05- MONITOR ARCHIVED CENTRES
 ==========================================================
 
 ARCHIVED
@@ -641,4 +792,242 @@ public int monitorArchivedCentres() {
         return 0;
     }
 }
+
+
+
+
+/*
+==========================================================
+03- DELETE CENTRE
+==========================================================
+
+SUPER ADMIN ONLY
+
+CURRENT SUPER ADMIN TABLES:
+
+KEEP:
+- centres
+- centres_archive
+- history_payment
+
+DELETE:
+- payments
+
+UPDATE:
+- centres.status = DELETED
+- centres_archive.archive_status = DELETED
+- centres_archive.deleted_at = NOW()
+
+IMPORTANT:
+- history_payment is NEVER deleted.
+- Future Manager APP tables will be handled later.
+==========================================================
+*/
+
+public boolean deleteCentre(String centreCode) {
+
+    String deletePaymentsSql =
+            "DELETE FROM payments " +
+            "WHERE centre_code = ?";
+
+
+    String updateCentreSql =
+            "UPDATE centres " +
+            "SET status = 'DELETED' " +
+            "WHERE centre_code = ?";
+
+
+    String updateArchiveSql =
+            "UPDATE centres_archive " +
+            "SET archive_status = 'DELETED', " +
+            "    deleted_at = NOW() " +
+            "WHERE centre_code = ? " +
+            "AND archive_status IN ('ARCHIVED', 'PENDING_DELETE')";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection()
+    ) {
+
+        /*
+        --------------------------------------------------
+        START TRANSACTION
+        --------------------------------------------------
+        */
+
+        con.setAutoCommit(false);
+
+
+        try {
+
+            /*
+            --------------------------------------------------
+            01 - DELETE PAYMENTS
+            --------------------------------------------------
+
+            Current operational payment records
+            are deleted.
+
+            history_payment is NOT touched.
+            --------------------------------------------------
+            */
+
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(
+                                    deletePaymentsSql
+                            )
+            ) {
+
+                ps.setString(
+                        1,
+                        centreCode
+                );
+
+                ps.executeUpdate();
+            }
+
+
+            /*
+            --------------------------------------------------
+            02 - UPDATE CENTRES
+            --------------------------------------------------
+            */
+
+            int centreUpdated;
+
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(
+                                    updateCentreSql
+                            )
+            ) {
+
+                ps.setString(
+                        1,
+                        centreCode
+                );
+
+                centreUpdated =
+                        ps.executeUpdate();
+            }
+
+
+            /*
+            --------------------------------------------------
+            CENTRE MUST EXIST
+            --------------------------------------------------
+            */
+
+            if (centreUpdated == 0) {
+
+                con.rollback();
+
+                return false;
+            }
+
+
+            /*
+            --------------------------------------------------
+            03 - UPDATE CENTRES_ARCHIVE
+            --------------------------------------------------
+            */
+
+            int archiveUpdated;
+
+            try (
+                    PreparedStatement ps =
+                            con.prepareStatement(
+                                    updateArchiveSql
+                            )
+            ) {
+
+                ps.setString(
+                        1,
+                        centreCode
+                );
+
+                archiveUpdated =
+                        ps.executeUpdate();
+            }
+
+
+            /*
+            --------------------------------------------------
+            ARCHIVE RECORD MUST EXIST
+            --------------------------------------------------
+            */
+
+            if (archiveUpdated == 0) {
+
+                con.rollback();
+
+                return false;
+            }
+
+
+            /*
+            --------------------------------------------------
+            04 - FUTURE MANAGER APP DATA
+            --------------------------------------------------
+
+            IMPORTANT:
+            Do NOT add Manager APP tables here yet.
+
+            They will be added later after their
+            database structure is finalized.
+            --------------------------------------------------
+            */
+
+
+            /*
+            --------------------------------------------------
+            05 - COMMIT
+            --------------------------------------------------
+            */
+
+            con.commit();
+
+
+            return true;
+
+        }
+        catch (Exception e) {
+
+            /*
+            --------------------------------------------------
+            ROLLBACK
+            --------------------------------------------------
+            */
+
+            try {
+
+                con.rollback();
+
+            }
+            catch (Exception rollbackException) {
+
+                rollbackException.printStackTrace();
+            }
+
+
+            throw e;
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] " +
+                "Error while deleting centre: "
+                + centreCode
+        );
+
+        e.printStackTrace();
+
+        return false;
+    }
+}
+
 }

@@ -568,8 +568,70 @@
         </h4>
 
 
-     <p data-archive-last-action>
-    تم استرجاع المركز CTR001
+   <%
+    java.util.Map<String, Object> lastArchiveOperation =
+            (java.util.Map<String, Object>)
+                    request.getAttribute(
+                            "lastArchiveOperation"
+                    );
+
+    String lastActionMessage = "";
+
+    if (lastArchiveOperation != null) {
+
+        String operator =
+                (String) lastArchiveOperation.get("operator");
+
+        String operationType =
+                (String) lastArchiveOperation.get("operationType");
+
+        int operationCount =
+                (Integer) lastArchiveOperation.get("operationCount");
+
+        java.sql.Timestamp operationAt =
+                (java.sql.Timestamp)
+                        lastArchiveOperation.get("operationAt");
+
+
+        String operationDate =
+                new java.text.SimpleDateFormat(
+                        "dd/MM/yyyy"
+                ).format(operationAt);
+
+
+        String operationTime =
+                new java.text.SimpleDateFormat(
+                        "HH:mm"
+                ).format(operationAt);
+
+
+        String languageKey =
+                "RESTORE".equalsIgnoreCase(operationType)
+                ? "archive.last.action.restore"
+                : "archive.last.action.delete";
+
+
+       String messageTemplate =
+        LanguageManager.get(
+                languageKey,
+                session
+        );
+       lastActionMessage =
+        java.text.MessageFormat.format(
+                messageTemplate,
+                operator,
+                operationCount,
+                operationDate,
+                operationTime
+        );
+    }
+%>
+
+
+<p data-archive-last-action>
+
+    <%= lastActionMessage %>
+
 </p>
     </div>
 

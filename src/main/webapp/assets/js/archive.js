@@ -694,10 +694,10 @@ function applyArchiveOperation(
         );
 
 
-        formData.append(
-                "operation",
-                "RESTORE"
-        );
+       formData.append(
+        "operation",
+        operation
+);
 
 
         /*
@@ -798,6 +798,194 @@ function applyArchiveOperation(
                     /*
                     Re-enable button
                     */
+
+                    if (applyButton) {
+
+                        applyButton.disabled = false;
+
+                    }
+
+                }
+        );
+
+    }
+    
+        /*
+    --------------------------------------------------
+    DELETE
+    --------------------------------------------------
+    */
+
+    if (
+            operation ===
+            "DELETE"
+    ) {
+
+        /*
+        --------------------------------------------------
+        Count selected centres
+        --------------------------------------------------
+        */
+
+        const selectedCount =
+                selectedCentres.length;
+
+
+        /*
+        --------------------------------------------------
+        Confirm DELETE
+        --------------------------------------------------
+        */
+
+        const confirmed =
+                confirm(
+                        "هل أنت متأكد من حذف "
+                        +
+                        selectedCount
+                        +
+                        " مراكز نهائيًا؟"
+                );
+
+
+        /*
+        --------------------------------------------------
+        Cancel
+        --------------------------------------------------
+        */
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        Disable button
+        --------------------------------------------------
+        */
+
+        if (applyButton) {
+
+            applyButton.disabled = true;
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        Build request
+        --------------------------------------------------
+        */
+
+        const formData =
+                new URLSearchParams();
+
+
+        formData.append(
+                "action",
+                "apply"
+        );
+
+
+        formData.append(
+                "operation",
+                operation
+        );
+
+
+        /*
+        --------------------------------------------------
+        Add selected centre codes
+        --------------------------------------------------
+        */
+
+        selectedCentres.forEach(
+                function (centreCode) {
+
+                    formData.append(
+                            "centreCodes",
+                            centreCode
+                    );
+
+                }
+        );
+
+
+        /*
+        --------------------------------------------------
+        Send DELETE request
+        --------------------------------------------------
+        */
+
+        fetch(
+                window.contextPath
+                +
+                "/ArchiveServlet",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                                "application/x-www-form-urlencoded"
+                    },
+
+                    body:
+                            formData.toString()
+                }
+        )
+
+
+        .then(
+                response => {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                                response.status
+                        );
+
+                    }
+
+                    return response.text();
+
+                }
+        )
+
+
+        .then(
+                result => {
+
+                    console.log(
+                            "Archive DELETE result:",
+                            result
+                    );
+
+
+                    /*
+                    --------------------------------------------------
+                    Reload Archive
+                    --------------------------------------------------
+                    */
+
+                    loadContent(
+                            "ArchiveServlet?action=list",
+                            null
+                    );
+
+                }
+        )
+
+
+        .catch(
+                error => {
+
+                    console.error(
+                            "Archive DELETE error:",
+                            error
+                    );
+
 
                     if (applyButton) {
 

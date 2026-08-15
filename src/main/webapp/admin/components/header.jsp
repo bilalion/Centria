@@ -2,6 +2,32 @@
 <%@page import="com.centria.language.LanguageManager"%>
 
 
+<%
+    /*
+    =================================================
+     LOGGED-IN SUPER ADMIN
+    =================================================
+    */
+
+    String adminUsername =
+            (String) session.getAttribute("adminUsername");
+
+
+    /*
+    -------------------------------------------------
+     Fallback
+    -------------------------------------------------
+    */
+
+    if (adminUsername == null ||
+        adminUsername.trim().isEmpty()) {
+
+        adminUsername = "Super Admin";
+
+    }
+%>
+
+
 <!-- =================================================
      SECTION 01 - HEADER
 ================================================= -->
@@ -210,7 +236,7 @@
                 <span class="header-username">
 
 
-                    CHENTOUF BILAL
+                    <%= adminUsername %>
 
 
                 </span>

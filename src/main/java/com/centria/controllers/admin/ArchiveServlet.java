@@ -18,7 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -138,6 +138,26 @@ request.setAttribute(
         deletedCount
 );
 
+/*
+--------------------------------------------------
+LAST ARCHIVE OPERATION
+--------------------------------------------------
+*/
+
+java.util.Map<String, Object> lastArchiveOperation =
+        archiveDAO.getLastArchiveOperation();
+
+
+/*
+--------------------------------------------------
+SEND LAST OPERATION TO JSP
+--------------------------------------------------
+*/
+
+request.setAttribute(
+        "lastArchiveOperation",
+        lastArchiveOperation
+);
         
         /*
 --------------------------------------------------
@@ -380,6 +400,41 @@ if (
         }
 
 
+        
+        
+        
+        /*
+--------------------------------------------------
+UPDATE ARCHIVE OPERATION
+--------------------------------------------------
+*/
+
+if (successCount > 0) {
+
+    HttpSession session =
+            request.getSession(false);
+
+    String adminUsername =
+            session != null
+            ? (String) session.getAttribute("adminUsername")
+            : null;
+
+
+    if (
+            adminUsername != null
+            &&
+            !adminUsername.trim().isEmpty()
+    ) {
+
+    archiveDAO.updateArchiveOperation(
+        adminUsername,
+        operation,
+        successCount
+);
+
+    }
+
+}
         /*
         --------------------------------------------------
         Send operation result
