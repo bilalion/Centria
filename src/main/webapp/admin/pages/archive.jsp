@@ -544,14 +544,7 @@ if (lastArchiveOperation != null) {
                     </option>
 
 
-                    <option value="DELETED">
-
-                        <%= LanguageManager.get(
-                                "archive.deleted",
-                                session
-                        ) %>
-
-                    </option>
+                 
 
 
                 </select>
@@ -562,26 +555,7 @@ if (lastArchiveOperation != null) {
 
             <!-- SEARCH ACTION -->
 
-            <button type="button"
-                    id="archiveSearchButton"
-                    class="btn-primary archive-search-button">
-
-
-                <i class="fa-solid fa-magnifying-glass"
-                   aria-hidden="true"></i>
-
-
-                <span>
-
-                    <%= LanguageManager.get(
-                            "archive.filter",
-                            session
-                    ) %>
-
-                </span>
-
-
-            </button>
+           
 
 
 

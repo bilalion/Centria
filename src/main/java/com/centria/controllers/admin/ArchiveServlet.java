@@ -75,14 +75,68 @@ public class ArchiveServlet extends HttpServlet {
     ) throws ServletException, IOException {
 
 
-        /*
-        --------------------------------------------------
-        Load archived centres
-        --------------------------------------------------
-        */
+        
+        
+/*
+--------------------------------------------------
+LOAD / SEARCH / FILTER ARCHIVED CENTRES
+--------------------------------------------------
+*/
 
-        List<Archive> archivedCentres =
-                archiveDAO.getArchivedCentres();
+String search =
+        request.getParameter(
+                "search"
+        );
+
+
+String status =
+        request.getParameter(
+                "status"
+        );
+
+
+/*
+--------------------------------------------------
+DEFAULT STATUS
+--------------------------------------------------
+
+If no status is provided,
+show all archive records allowed
+by DAO:
+
+ARCHIVED + PENDING_DELETE
+--------------------------------------------------
+*/
+
+if (
+        status == null
+        ||
+        status.trim().isEmpty()
+) {
+
+    status = "ALL";
+
+}
+
+
+/*
+--------------------------------------------------
+LOAD ARCHIVE
+--------------------------------------------------
+
+One DAO function handles:
+
+- Search
+- Status filter
+- ALL
+--------------------------------------------------
+*/
+
+List<Archive> archivedCentres =
+        archiveDAO.getArchivedCentres(
+                search,
+                status
+        );
 
 
         /*

@@ -217,6 +217,58 @@ function initArchivePage() {
     }
 
 
+/*
+==================================================
+ARCHIVE SEARCH
+==================================================
+*/
+
+const archiveSearch =
+        document.getElementById(
+                "archiveSearch"
+        );
+
+
+if (archiveSearch) {
+
+    archiveSearch.addEventListener(
+            "input",
+            function () {
+
+                searchArchivedCentres();
+
+            }
+    );
+
+}
+
+
+
+
+/*
+==================================================
+ARCHIVE STATUS FILTER
+==================================================
+*/
+
+const archiveStatus =
+        document.getElementById(
+                "archiveStatus"
+        );
+
+
+if (archiveStatus) {
+
+    archiveStatus.addEventListener(
+            "change",
+            function () {
+
+                searchArchivedCentres();
+
+            }
+    );
+
+}
     /*
     ==================================================
     LOAD ARCHIVE
@@ -224,6 +276,14 @@ function initArchivePage() {
     */
 
     loadArchive();
+    
+/*
+==================================================
+INITIALIZE SEARCH
+==================================================
+*/
+
+initArchiveSearch();
 
 }
 
@@ -618,6 +678,243 @@ function loadArchive() {
                     console.error(
                             "[CENTRIA ARCHIVE] "
                             + "Load error:",
+                            error
+                    );
+
+
+                    container.setAttribute(
+                            "aria-busy",
+                            "false"
+                    );
+
+                }
+        );
+
+}
+
+
+/*
+==================================================
+05.1 - SEARCH / FILTER ARCHIVED CENTRES
+==================================================
+
+Search by:
+- Centre Code
+- Centre Name
+- Phone
+
+Filter by:
+- ALL
+- ARCHIVED
+- PENDING_DELETE
+==================================================
+*/
+
+function searchArchivedCentres() {
+
+
+    /*
+    --------------------------------------------------
+    GET SEARCH INPUT
+    --------------------------------------------------
+    */
+
+    const searchInput =
+            document.getElementById(
+                    "archiveSearch"
+            );
+
+
+    /*
+    --------------------------------------------------
+    GET STATUS FILTER
+    --------------------------------------------------
+    */
+
+    const statusSelect =
+            document.getElementById(
+                    "archiveStatus"
+            );
+
+
+    /*
+    --------------------------------------------------
+    GET TABLE CONTAINER
+    --------------------------------------------------
+    */
+
+    const container =
+            document.getElementById(
+                    "archive-table-container"
+            );
+
+
+    /*
+    --------------------------------------------------
+    SAFETY
+    --------------------------------------------------
+    */
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    READ SEARCH
+    --------------------------------------------------
+    */
+
+    const search =
+            searchInput
+            ?
+            searchInput.value.trim()
+            :
+            "";
+
+
+    /*
+    --------------------------------------------------
+    READ STATUS
+    --------------------------------------------------
+    */
+
+    const status =
+            statusSelect
+            ?
+            statusSelect.value
+            :
+            "ALL";
+
+
+    /*
+    --------------------------------------------------
+    BUILD URL
+    --------------------------------------------------
+    */
+
+    const parameters =
+            new URLSearchParams();
+
+
+    parameters.append(
+            "action",
+            "list"
+    );
+
+
+    parameters.append(
+            "ajax",
+            "true"
+    );
+
+
+    parameters.append(
+            "search",
+            search
+    );
+
+
+    parameters.append(
+            "status",
+            status
+    );
+
+
+    parameters.append(
+            "_refresh",
+            Date.now()
+    );
+
+
+    const url =
+            window.contextPath
+            +
+            "/ArchiveServlet?"
+            +
+            parameters.toString();
+
+
+    /*
+    --------------------------------------------------
+    LOADING
+    --------------------------------------------------
+    */
+
+    container.setAttribute(
+            "aria-busy",
+            "true"
+    );
+
+
+    /*
+    --------------------------------------------------
+    AJAX SEARCH / FILTER
+    --------------------------------------------------
+    */
+
+    fetch(url)
+
+        .then(
+                response => {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                                "HTTP ERROR "
+                                +
+                                response.status
+                        );
+
+                    }
+
+                    return response.text();
+
+                }
+        )
+
+
+        .then(
+                html => {
+
+                    /*
+                    --------------------------------------------------
+                    REPLACE TABLE
+                    --------------------------------------------------
+                    */
+
+                    container.innerHTML =
+                            html;
+
+
+                    container.setAttribute(
+                            "aria-busy",
+                            "false"
+                    );
+
+
+                    /*
+                    --------------------------------------------------
+                    REINITIALIZE TABLE CONTROLS
+                    --------------------------------------------------
+                    */
+
+                    initArchiveControlsOnly();
+
+                }
+        )
+
+
+        .catch(
+                error => {
+
+                    console.error(
+                            "[CENTRIA ARCHIVE] "
+                            +
+                            "Search / Filter error:",
                             error
                     );
 

@@ -14,33 +14,112 @@ import java.util.List;
 public class ArchiveDAO {
 
 
-    
-    /*
+/*
 ==========================================================
-01- GET ARCHIVED CENTRES
+01 - GET / SEARCH / FILTER ARCHIVED CENTRES
 ==========================================================
 
+Search by:
+- centre_code
+- centre name
+- phone
+
+Filter by:
+- ALL
+- ARCHIVED
+- PENDING_DELETE
+
+Rules:
+- Empty search = all matching statuses
+- ALL = ARCHIVED + PENDING_DELETE
+- ARCHIVED = ARCHIVED only
+- PENDING_DELETE = PENDING_DELETE only
+==========================================================
 */
 
+public List<Archive> getArchivedCentres(
+        String search,
+        String status
+) {
 
-public List<Archive> getArchivedCentres() {
 
-    String sql =
-            "SELECT " +
-            "    ca.id, " +
-            "    ca.centre_code, " +
-            "    c.name AS centre_name, " +
-            "    ca.archive_status, " +
-            "    ca.archived_at, " +
-            "    ca.retention_until, " +
-            "    ca.restored_at, " +
-            "    ca.deleted_at " +
-            "FROM centres_archive ca " +
-            "INNER JOIN centres c " +
-            "    ON c.centre_code = ca.centre_code " +
-            "WHERE ca.archive_status IN " +
-            "    ('ARCHIVED', 'PENDING_DELETE') " +
-            "ORDER BY ca.archived_at DESC";
+    StringBuilder sql =
+            new StringBuilder();
+
+
+    sql.append(
+            "SELECT "
+            + "ca.id, "
+            + "ca.centre_code, "
+            + "c.name AS centre_name, "
+            + "ca.archive_status, "
+            + "ca.archived_at, "
+            + "ca.retention_until, "
+            + "ca.restored_at, "
+            + "ca.deleted_at "
+            + "FROM centres_archive ca "
+            + "INNER JOIN centres c "
+            + "ON c.centre_code = ca.centre_code "
+            + "WHERE ca.archive_status IN "
+            + "('ARCHIVED', 'PENDING_DELETE') "
+    );
+
+
+    /*
+    --------------------------------------------------
+    STATUS FILTER
+    --------------------------------------------------
+    */
+
+    if (
+            status != null
+            &&
+            !status.trim().isEmpty()
+            &&
+            !"ALL".equalsIgnoreCase(
+                    status.trim()
+            )
+    ) {
+
+        sql.append(
+                "AND ca.archive_status = ? "
+        );
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    SEARCH FILTER
+    --------------------------------------------------
+    */
+
+    if (
+            search != null
+            &&
+            !search.trim().isEmpty()
+    ) {
+
+        sql.append(
+                "AND ( "
+                + "ca.centre_code LIKE ? "
+                + "OR c.name LIKE ? "
+                + "OR c.phone LIKE ? "
+                + ") "
+        );
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    ORDER
+    --------------------------------------------------
+    */
+
+    sql.append(
+            "ORDER BY ca.archived_at DESC"
+    );
 
 
     List<Archive> archives =
@@ -52,60 +131,160 @@ public List<Archive> getArchivedCentres() {
                     DatabaseConfig.getConnection();
 
             PreparedStatement ps =
-                    con.prepareStatement(sql);
-
-            ResultSet rs =
-                    ps.executeQuery()
+                    con.prepareStatement(
+                            sql.toString()
+                    )
     ) {
 
 
-        while (rs.next()) {
-
-            Archive archive =
-                    new Archive();
+        int parameterIndex = 1;
 
 
-            archive.setId(
-                    rs.getInt("id")
+        /*
+        --------------------------------------------------
+        STATUS PARAMETER
+        --------------------------------------------------
+        */
+
+        if (
+                status != null
+                &&
+                !status.trim().isEmpty()
+                &&
+                !"ALL".equalsIgnoreCase(
+                        status.trim()
+                )
+        ) {
+
+            ps.setString(
+                    parameterIndex++,
+                    status.trim()
+            );
+
+        }
+
+
+        /*
+        --------------------------------------------------
+        SEARCH PARAMETERS
+        --------------------------------------------------
+        */
+
+        if (
+                search != null
+                &&
+                !search.trim().isEmpty()
+        ) {
+
+            String keyword =
+                    "%"
+                    +
+                    search.trim()
+                    +
+                    "%";
+
+
+            ps.setString(
+                    parameterIndex++,
+                    keyword
             );
 
 
-            archive.setCentreCode(
-                    rs.getString("centre_code")
+            ps.setString(
+                    parameterIndex++,
+                    keyword
             );
 
 
-            archive.setCentreName(
-                    rs.getString("centre_name")
+            ps.setString(
+                    parameterIndex++,
+                    keyword
             );
 
-
-            archive.setArchiveStatus(
-                    rs.getString("archive_status")
-            );
+        }
 
 
-            archive.setArchivedAt(
-                    rs.getTimestamp("archived_at")
-            );
+        /*
+        --------------------------------------------------
+        EXECUTE
+        --------------------------------------------------
+        */
+
+        try (
+                ResultSet rs =
+                        ps.executeQuery()
+        ) {
 
 
-            archive.setRetentionUntil(
-                    rs.getTimestamp("retention_until")
-            );
+            while (rs.next()) {
 
 
-            archive.setRestoredAt(
-                    rs.getTimestamp("restored_at")
-            );
+                Archive archive =
+                        new Archive();
 
 
-            archive.setDeletedAt(
-                    rs.getTimestamp("deleted_at")
-            );
+                archive.setId(
+                        rs.getInt(
+                                "id"
+                        )
+                );
 
 
-            archives.add(archive);
+                archive.setCentreCode(
+                        rs.getString(
+                                "centre_code"
+                        )
+                );
+
+
+                archive.setCentreName(
+                        rs.getString(
+                                "centre_name"
+                        )
+                );
+
+
+                archive.setArchiveStatus(
+                        rs.getString(
+                                "archive_status"
+                        )
+                );
+
+
+                archive.setArchivedAt(
+                        rs.getTimestamp(
+                                "archived_at"
+                        )
+                );
+
+
+                archive.setRetentionUntil(
+                        rs.getTimestamp(
+                                "retention_until"
+                        )
+                );
+
+
+                archive.setRestoredAt(
+                        rs.getTimestamp(
+                                "restored_at"
+                        )
+                );
+
+
+                archive.setDeletedAt(
+                        rs.getTimestamp(
+                                "deleted_at"
+                        )
+                );
+
+
+                archives.add(
+                        archive
+                );
+
+            }
+
         }
 
 
@@ -113,11 +292,16 @@ public List<Archive> getArchivedCentres() {
     catch (Exception e) {
 
         System.err.println(
-                "[CENTRIA ARCHIVE] " +
-                "Error while loading archived centres."
+                "[CENTRIA ARCHIVE] "
+                +
+                "Error while loading/searching "
+                +
+                "archived centres."
         );
 
+
         e.printStackTrace();
+
     }
 
 
