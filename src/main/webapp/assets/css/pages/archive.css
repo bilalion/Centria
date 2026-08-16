@@ -125,104 +125,76 @@ core.css
     margin-bottom:18px;
 
 }
-
-
 .archive-stat-card{
 
     display:flex;
-
     align-items:center;
-
     gap:16px;
-
     min-height:118px;
-
     padding:18px;
-
     background:var(--white);
-
     border:1px solid var(--border);
-
     border-radius:  4px; /* var(--radius-md); */
-
     box-shadow:var(--shadow-sm);
 
 }
-
-
 .archive-stat-icon{
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     width:58px;
-
     height:58px;
-
     flex:0 0 58px;
-
     border-radius:50%;
-
     font-size:21px;
 
 }
 
-
 /* ------------------------------------------------------
    TOTAL ARCHIVED
-   إجمالي المراكز المؤرشفة
 ------------------------------------------------------ */
 
 .archive-stat-total .archive-stat-icon{
 
-    background:#f1f5f9;
-
-    color:#475569;
+    background: var(--primary-light);
+    color: var(--primary);
 
 }
 
 
 /* ------------------------------------------------------
    ARCHIVED / RESTORABLE
-   مؤرشف — قابل للاسترجاع
 ------------------------------------------------------ */
 
 .archive-stat-restorable .archive-stat-icon{
 
-    background:#f1f5f9;
-
-    color:#64748b;
+    background: var(--primary-light);
+    color: var(--primary);
 
 }
 
 
 /* ------------------------------------------------------
    PENDING DELETE
-   بانتظار الحذف
 ------------------------------------------------------ */
 
 .archive-stat-pending .archive-stat-icon{
 
-    background:#fef2f2;
-
-    color:#ef4444;
+    background: var(--primary-light);
+    color: var(--primary);
 
 }
 
 
 /* ------------------------------------------------------
    DELETED
-   محذوف نهائياً
 ------------------------------------------------------ */
 
 .archive-stat-deleted .archive-stat-icon{
 
-    background:#fef2f2;
-
-    color:#dc2626;
+    background: var(--primary-light);
+    color: var(--primary);
 
 }
 
@@ -230,9 +202,7 @@ core.css
 .archive-stat-content{
 
     display:flex;
-
     flex-direction:column;
-
     min-width:0;
 
 }
@@ -241,11 +211,8 @@ core.css
 .archive-stat-label{
 
     color:var(--text);
-
     font-size:14px;
-
     font-weight:600;
-
     line-height:1.5;
 
 }
@@ -324,8 +291,6 @@ core.css
     min-width:0;
 
 }
-
-
 .archive-search-field > i{
 
     position:absolute;
@@ -345,8 +310,6 @@ core.css
     pointer-events:none;
 
 }
-
-
 .archive-search-field input{
 
     width:100%;
@@ -376,19 +339,12 @@ core.css
         box-shadow var(--transition);
 
 }
-
-
 .archive-search-field input::placeholder{
-
     color:#94a3b8;
-
 }
-
-
 .archive-search-field input:focus{
 
     border-color:var(--primary);
-
     box-shadow:
         0 0 0 3px
         rgba(37,99,235,.10);
@@ -422,8 +378,6 @@ core.css
     border-radius:4px;
 
 }
-
-
 .archive-select-field > i{
 
     color:#94a3b8;
@@ -431,8 +385,6 @@ core.css
     font-size:.9rem;
 
 }
-
-
 .archive-select{
 
     width:100%;
@@ -458,8 +410,6 @@ core.css
     cursor:pointer;
 
 }
-
-
 
 /* ======================================================
    SEARCH / EXPORT BUTTONS
@@ -492,8 +442,6 @@ core.css
 
 }
 
-
-
 /* ======================================================
    PRIMARY SEARCH BUTTON
 ====================================================== */
@@ -505,14 +453,11 @@ core.css
     color:var(--white);
 
 }
-
-
 .archive-search-button:hover{
 
     background:var(--primary-dark);
 
 }
-
 
 
 /* ======================================================
@@ -835,15 +780,11 @@ SECTION 08 - TABLE
     border-radius:4px;
 
 }
-
-
 .archive-table-stage .table-content-area{
 
     min-width:0;
  
 }
-
-
 .archive-table-stage .table-container{
 
     overflow:hidden;
@@ -876,7 +817,6 @@ TABLE
    
 }
 
-
 /* ======================================================
 TABLE HEADER
 ====================================================== */
@@ -886,8 +826,6 @@ TABLE HEADER
     padding:10px 12px;
 
     color:#0f172a;
-    
- 
    
     border-bottom:1px solid #eef5ff;
 
@@ -900,7 +838,6 @@ TABLE HEADER
     white-space:nowrap;
 
 }
-
 
 /* ======================================================
 TABLE ROWS
@@ -927,16 +864,12 @@ TABLE ROWS
     transition:background var(--transition);
 
 }
-
-
 .archive-table-stage tbody tr:last-child td{
 
     border-bottom:none;
     
 
 }
-
-
 .archive-table-stage tbody tr:hover td{
 
     background:#f8fbff;
@@ -963,14 +896,11 @@ LOADING
     font-size:18px;
 
 }
-
-
 .archive-table-loading i{
 
     font-size:18px;
 
 }
-
 
 /* ======================================================
 PAGINATION
@@ -1024,7 +954,6 @@ PAGINATION
         0 2px 8px rgba(0,0,0,.04);
 }
 
-
 /* ======================================================
    ICON
    ====================================================== */
@@ -1052,7 +981,6 @@ PAGINATION
     font-size: 17px;
 }
 
-
 /* ======================================================
    CONTENT
    ====================================================== */
@@ -1069,7 +997,6 @@ PAGINATION
 
     justify-content: center;
 }
-
 
 /* ======================================================
    TITLE
@@ -1089,7 +1016,6 @@ PAGINATION
 
     white-space: nowrap;
 }
-
 
 /* ======================================================
    MESSAGE
@@ -1149,8 +1075,6 @@ PAGINATION
     }
 
 }
-
-
 @media (max-width:950px){
 
     .archive-control-deck{
@@ -1213,8 +1137,6 @@ PAGINATION
     }
 
 }
-
-
 @media (max-width:700px){
 
     .archive-banner{
@@ -1324,8 +1246,6 @@ PAGINATION
     }
 
 }
-
-
 @media (max-width:480px){
 
     .archive-banner-title{
@@ -1395,8 +1315,11 @@ PAGINATION
     }
 
 }
+
+
+
 /* =========================================================
-   CENTRIA ARCHIVE — COMPACT SPACING
+   CENTRIA ARCHIVE â€” COMPACT SPACING
    Keep the existing design / reduce unnecessary space
 ========================================================= */
 
@@ -1623,7 +1546,7 @@ PAGINATION
 }
 
 /* =========================================================
-   CENTRIA ARCHIVE — FINAL STAT CARDS
+   CENTRIA ARCHIVE â€” FINAL STAT CARDS
    Compact / Clean / Consistent
 ========================================================= */
 
@@ -1830,31 +1753,20 @@ PAGINATION
 
     width: 82px !important;
     height: 82px !important;
-
     min-width: 82px;
     min-height: 82px;
-
     margin: 0 0 18px 0;
-
     padding: 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     box-sizing: border-box;
-
     border-radius: 50% !important;
-
-    background: #fef2f2;
-
+    background: var(--danger);
     border: 3px solid #fecaca;
-
-    color: #dc2626;
-
+    color: var(--white);
     font-size: 42px;
     font-weight: 700;
-
     flex-shrink: 0;
 }
 
@@ -1869,8 +1781,7 @@ PAGINATION
 
     font-size: 26px;
     font-weight: 700;
-
-    color: #1e293b;
+    color: var(--black);
 }
 
 
@@ -1882,12 +1793,9 @@ PAGINATION
 #archive-delete-confirm-message {
 
     margin: 20px 0 30px;
-
     font-size: 18px;
-
     line-height: 1.8;
-
-    color: #64748b;
+     color: var(--black);
 }
 
 
@@ -1898,9 +1806,7 @@ PAGINATION
 #archive-delete-confirm-modal .reset-confirm-actions {
 
     display: flex;
-
     justify-content: center;
-
     gap: 16px;
 }
 
@@ -1914,18 +1820,12 @@ PAGINATION
 
     min-width: 140px;
     height: 48px;
-
     padding: 0 24px;
-
     border-radius: 8px;
-
     font-family: inherit;
-
     font-size: 16px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         border-color 0.2s ease,
@@ -1942,9 +1842,9 @@ PAGINATION
 .reset-confirm-actions
 .btn-secondary {
 
-    background: #ffffff !important;
+    background: var(--white) !important;
 
-    color: #475569 !important;
+    color: var(--black) !important;
 
     border: 1px solid #cbd5e1 !important;
 }
@@ -1954,9 +1854,9 @@ PAGINATION
 .reset-confirm-actions
 .btn-secondary:hover {
 
-    background: #f1f5f9 !important;
+    background: var(--primary-light) !important;
 
-    color: #334155 !important;
+    color: var(--black) !important;
 }
 
 
@@ -1968,11 +1868,11 @@ PAGINATION
 .reset-confirm-actions
 .btn-primary {
 
-    background: #dc2626 !important;
+    background: var(--primary) !important;
 
-    color: #ffffff !important;
+    color: var(--white) !important;
 
-    border: 1px solid #dc2626 !important;
+    border: 1px solid #cbd5e1 !important;
 
     box-shadow:
         0 4px 12px
@@ -1984,11 +1884,11 @@ PAGINATION
 .reset-confirm-actions
 .btn-primary:hover {
 
-    background: #b91c1c !important;
+    background: var(--danger) !important;
 
-    color: #ffffff !important;
+    color: var(--white) !important;
 
-    border-color: #b91c1c !important;
+    border-color: #cbd5e1 !important;
 }
 
 
@@ -2104,11 +2004,11 @@ button:active {
 .archive-pagination
 .pagination-button:hover:not(:disabled) {
 
-    background: #f1f5f9;
+    background: var(--primary-light);
 
     border-color: #cbd5e1;
 
-    color: #1e3a8a;
+    color: var(--black);
 
 }
 
@@ -2120,11 +2020,11 @@ button:active {
 .archive-pagination
 .pagination-button.active {
 
-    background: #2563eb;
+    background: var(--primary);
 
     border-color: #2563eb;
 
-    color: #ffffff;
+    color: var(--white);
 
 }
 
@@ -2140,7 +2040,7 @@ button:active {
 
     cursor: not-allowed;
 
-    background: #f8fafc;
+    background: var(--primary-light);
 
 }
 
@@ -2154,4 +2054,34 @@ button:active {
 
     font-size: 12px;
 
+}
+
+.archive-stat-icon .fa-box-archive {
+    color: var(--primary);
+}
+/* =========================================================
+   CENTRIA ARCHIVE â€” CORE COLOR CONSISTENCY
+   Icons + Last Activity
+========================================================= */
+
+.archive-stat-total .archive-stat-icon,
+.archive-stat-restorable .archive-stat-icon,
+.archive-stat-pending .archive-stat-icon,
+.archive-stat-deleted .archive-stat-icon{
+    background:var(--primary-light);
+    color:var(--primary);
+}
+
+.archive-notification{
+    background:var(--primary-light);
+    border-color:var(--primary-border);
+}
+
+.archive-notification-icon{
+    background:var(--white);
+    color:var(--primary);
+}
+
+.archive-view-container .dialog-stripe i {
+    color: var(--primary) !important;
 }

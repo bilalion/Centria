@@ -267,6 +267,7 @@
 /* ======================================================
    05. TABS
 ====================================================== */
+
 .payments-tabs{
     width:100%;
     min-height:58px;
@@ -275,10 +276,9 @@
     align-items:stretch;
     gap:0;
     padding:0;
-    background:#fff;
-    border-bottom:1px solid #dfe6ef;
+    background:var(--white);
+    border-bottom:1px solid var(--border);
 }
-
 .payment-tab{
     width:33.333333%;
     flex:1 1 33.333333%;
@@ -292,8 +292,8 @@
     border:0;
     border-bottom:3px solid transparent;
     border-radius:0;
-    background:#fff;
-    color:#718096;
+    background:var(--white);
+    color:var(--text-light);
     font-family:inherit;
     font-size:15px;
     font-weight:700;
@@ -301,39 +301,56 @@
     cursor:pointer;
     transition:.15s ease;
 }
-
-.payment-tab:hover{background:#f7f9fc;color:#3d4d63;}
-.payment-tab.active{background:#fff;color:#2864e8;border-bottom-color:#2864e8;}
-
-#tab-unpaid{background:#fff5f5;color:#b42323;}
-#tab-unpaid:hover{background:#ffeded;}
-#tab-unpaid.active{background:#fff0f0;color:#c62828;border-bottom-color:#ef4444;}
-
-#tab-paid{background:#f2fbf6;color:#16834b;}
-#tab-paid:hover{background:#e9f8ef;}
-#tab-paid.active{background:#ecfaf2;color:#16834b;border-bottom-color:#20a464;}
-
-#tab-history{background:#f5f7fa;color:#526174;}
-#tab-history:hover{background:#eef2f6;}
-#tab-history.active{background:#eef3f8;color:#526174;border-bottom-color:#94a3b8;}
-
-.tab-notification{
-    min-width:26px;
-    height:26px;
-    padding:0 7px;
-    box-sizing:border-box;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    font-size:12px;
-    font-weight:700;
-    line-height:1;
+.payment-tab:hover{
+    background:var(--primary-light);
+    color:var(--primary);
+}
+.payment-tab.active{
+    background:var(--primary-light);
+    color:var(--primary);
+    border-bottom-color:var(--primary);
+}
+#tab-unpaid{
+    background:var(--white);
+    color:var(--text-light);
+}
+#tab-unpaid:hover{
+    background:var(--primary-light);
+    color:var(--primary);
+}
+#tab-unpaid.active{
+    background:var(--primary-light);
+    color:var(--primary);
+    border-bottom-color:#ef4444;
+}
+#tab-paid{
+    background:var(--white);
+    color:var(--text-light);
+}
+#tab-paid:hover{
+    background:var(--primary-light);
+    color:var(--primary);
+}
+#tab-paid.active{
+    background:var(--primary-light);
+    color:var(--primary);
+    border-bottom-color:var(--primary);
+}
+#tab-history{
+    background:var(--white);
+    color:var(--text-light);
+}
+#tab-history:hover{
+    background:var(--primary-light);
+    color:var(--primary);
+}
+#tab-history.active{
+    background:var(--primary-light);
+    color:var(--primary);
+    border-bottom-color:var(--primary);
 }
 
-.unpaid-count{background:#fee2e2;color:#dc2626;}
-.paid-count{background:#dcfce7;color:#16834b;}
-.history-count{background:#e8eef5;color:#526174;}
+
 
 /* ======================================================
    06. TABLE BASE

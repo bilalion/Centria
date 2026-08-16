@@ -17,9 +17,6 @@ Contains:
 */
 
 
-
-
-
 /* ======================================================
    SECTION 01 - PLATFORM BANNER
 ====================================================== */
@@ -40,304 +37,168 @@ Contains:
 
     padding:0 16px;
 
-    background:#2563EB;
+    background:var(--primary-dark);
 
-    box-shadow:0 2px 8px rgba(15,23,42,.05);
-
+    box-shadow:
+        0 2px 8px rgba(15,23,42,.05);
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 02 - PLATFORM BRAND
 ====================================================== */
 
-
 .platform-brand{
-
 
     display:flex;
 
-
     align-items:center;
 
-
     gap:8px;
-
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 03 - PLATFORM LOGO
 ====================================================== */
 
-
 .platform-logo{
-
 
     width:30px;
 
-
     height:30px;
 
-
     object-fit:contain;
-    
-    border-radius: 5px;
 
-
-
+    border-radius:5px;
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 04 - PLATFORM TITLE
 ====================================================== */
 
-
 .platform-title{
-
 
     font-size:15px;
 
-
     font-weight:800;
 
-
-   /* color:#1e293b;*/
-   
-   color: #fff;
-
+    color:var(--white);
 
     white-space:nowrap;
-
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 05 - SEPARATOR
 ====================================================== */
 
-
 .platform-separator{
 
-
-    /*color:#94a3b8;*/
-     color: #fff;
-
+    color:var(--white);
 
     font-size:15px;
-
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 06 - PLATFORM INFORMATION
 ====================================================== */
 
-
 .platform-information{
-
 
     display:flex;
 
-
     align-items:center;
-
-
 }
-
 
 
 .platform-message{
 
-
     font-size:13px;
-
 
     font-weight:500;
 
-
-   /* color:#64748b;*/
-   
-    color: #fff;
-
+    color:var(--white);
 
     white-space:nowrap;
-
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 07 - RTL SUPPORT
 ====================================================== */
 
-
 html[dir="rtl"] .platform-banner{
 
-
     direction:rtl;
-
-
 }
-
-
-
 
 
 html[dir="ltr"] .platform-banner{
 
-
     direction:ltr;
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================
    SECTION 08 - RESPONSIVE
 ====================================================== */
 
-
 @media(max-width:900px){
-
 
     .platform-banner{
 
-
         justify-content:flex-start;
 
-
         overflow:hidden;
-
-
-
     }
-
 
 
     .platform-message{
 
-
         text-overflow:ellipsis;
 
-
         overflow:hidden;
-
-
-
     }
-
-
-
 }
-
-
-
-
-
-
 
 
 @media(max-width:600px){
 
-
     .platform-banner{
-
 
         height:auto;
 
-
         min-height:45px;
 
-
         padding:8px 12px;
-
-
     }
-
 
 
     .platform-logo{
 
-
         width:26px;
 
-
         height:26px;
-
-
     }
-
 
 
     .platform-title{
 
-
         font-size:14px;
-
-
     }
-
 
 
     .platform-message{
 
-
         font-size:12px;
-
-
     }
-
-
-
 }
+
+
+/* ======================================================
+   END OF FILE
+======================================================
+*/
