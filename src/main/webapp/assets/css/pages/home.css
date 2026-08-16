@@ -189,7 +189,6 @@ Version :
 
 }
 
-
 /* ======================================================
    SECTION 04.1 - REVENUE CARD
 ====================================================== */
@@ -201,6 +200,10 @@ Version :
 }
 
 
+/* ======================================================
+   SECTION 04.2 - REVENUE TITLE HIDDEN
+====================================================== */
+
 #revenueTitle{
 
     display:none;
@@ -209,33 +212,37 @@ Version :
 
 
 /* ======================================================
-   SECTION 04.2 - REVENUE CONTENT
+   SECTION 04.3 - REVENUE BANK CARD
 ====================================================== */
 
-.stat-card:has(#revenuePeriod) .stat-content{
+#monthlyRevenueCard{
 
-    flex:1;
+    display:grid;
 
-    display:flex;
+    grid-template-columns:30% 70%;
 
-    flex-direction:column;
+    min-height:112px;
 
-    align-items:center;
+    padding:0;
 
-    justify-content:center;
+    gap:0;
 
-    text-align:center;
-
-    width:100%;
+    overflow:hidden;
 
 }
 
 
 /* ======================================================
-   SECTION 04.3 - REVENUE TITLE ROW
+   SECTION 04.4 - REVENUE ICON PANEL
 ====================================================== */
 
-.stat-card:has(#revenuePeriod) .stat-title-row{
+#monthlyRevenueCard .stat-icon{
+
+    width:100%;
+
+    height:100%;
+
+    min-height:112px;
 
     display:flex;
 
@@ -243,75 +250,117 @@ Version :
 
     justify-content:center;
 
+    margin:0;
+
+    border-radius:0;
+
+    background:var(--primary);
+
+}
+
+
+/* ======================================================
+   SECTION 04.5 - REVENUE ICON
+====================================================== */
+
+#monthlyRevenueCard .stat-icon i{
+
+    width:48px;
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:var(--white);
+
+    color:var(--primary);
+
+    font-size:1.25rem;
+
+}
+
+
+/* ======================================================
+   SECTION 04.6 - REVENUE CONTENT
+====================================================== */
+
+#monthlyRevenueCard .stat-content{
+
+    width:auto;
+
+    min-width:0;
+
+    height:100%;
+
+    padding:12px 20px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    justify-content:flex-start;
+
+    text-align:start;
+}
+
+
+/* ======================================================
+   SECTION 04.7 - REVENUE TITLE ROW
+====================================================== */
+
+#monthlyRevenueCard .stat-title-row{
+
     width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
 
     gap:12px;
 
     margin:0;
 
     padding:0;
-
-    text-align:center;
-
 }
 
 
 /* ======================================================
-   SECTION 04.4 - REVENUE TITLE
+   SECTION 04.8 - REVENUE TITLE
 ====================================================== */
 
-.stat-card:has(#revenuePeriod) .stat-title{
+#monthlyRevenueCard .stat-title{
 
     margin:0;
 
-    text-align:center;
-
+    text-align:start;
 }
 
 
 /* ======================================================
-   SECTION 04.5 - REVENUE VALUE
+   SECTION 04.9 - PERIOD SELECT
 ====================================================== */
 
-.stat-card:has(#revenuePeriod) .stat-value{
-
-    width:100%;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
-    text-align:center;
-
-}
-
-
-/* ======================================================
-   SECTION 04.6 - REVENUE DESCRIPTION
-====================================================== */
-
-.stat-card:has(#revenuePeriod) .stat-description{
-
-    width:100%;
-
-    margin-left:auto;
-
-    margin-right:auto;
-
-    text-align:center;
-
-}
-
-
-/* ======================================================
-   SECTION 04.7 - PERIOD SELECT
-====================================================== */
-
-.stat-period-select{
+#monthlyRevenueCard .stat-period-select{
 
     position:relative;
 
     top:auto;
+
+    left:auto;
+
+    right:auto;
 
     z-index:5;
 
@@ -344,42 +393,14 @@ Version :
     transition:
         border-color .15s ease,
         box-shadow .15s ease;
-
 }
 
 
 /* ======================================================
-   SECTION 04.8 - REVENUE SELECT RTL
+   SECTION 04.10 - PERIOD SELECT HOVER
 ====================================================== */
 
-html[dir="rtl"] .stat-card:has(#revenuePeriod)
-.stat-period-select{
-
-    left:auto;
-
-    right:auto;
-
-}
-
-/* ======================================================
-   SECTION 04.9 - REVENUE SELECT LTR
-====================================================== */
-
-html[dir="ltr"] .stat-card:has(#revenuePeriod)
-.stat-period-select{
-
-    right:auto;
-
-    left:auto;
-
-}
-
-
-/* ======================================================
-   SECTION 04.10 - REVENUE SELECT HOVER
-====================================================== */
-
-.stat-period-select:hover{
+#monthlyRevenueCard .stat-period-select:hover{
 
     border-color:var(--border);
 
@@ -387,10 +408,10 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 
 /* ======================================================
-   SECTION 04.11 - REVENUE SELECT FOCUS
+   SECTION 04.11 - PERIOD SELECT FOCUS
 ====================================================== */
 
-.stat-period-select:focus{
+#monthlyRevenueCard .stat-period-select:focus{
 
     border-color:var(--border);
 
@@ -400,10 +421,20 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 
 /* ======================================================
-   SECTION 04.12 - STAT VALUE
+   SECTION 04.12 - REVENUE VALUE
 ====================================================== */
 
-.stat-value{
+#monthlyRevenueCard .stat-value{
+
+    width:100%;
+
+    margin-top:4px;
+
+    margin-left:0;
+
+    margin-right:0;
+
+    text-align:start;
 
     font-size:30px;
 
@@ -411,18 +442,26 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
     line-height:1.1;
 
-    margin-top:4px;
+    transform:none;
 
 }
 
 
 /* ======================================================
-   SECTION 04.13 - STAT DESCRIPTION
+   SECTION 04.13 - REVENUE DESCRIPTION
 ====================================================== */
 
-.stat-description{
+#monthlyRevenueCard .stat-description{
+
+    width:100%;
 
     margin-top:5px;
+
+    margin-left:0;
+
+    margin-right:0;
+
+    text-align:start;
 
     font-size:12px;
 
@@ -432,216 +471,100 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 
 /* ======================================================
-   SECTION 04.14 - REVENUE BANK CARD
+   SECTION 04.14 - RTL
 ====================================================== */
 
-#monthlyRevenueCard{
+html[dir="rtl"] #monthlyRevenueCard{
 
-    display:grid;
-
-    grid-template-columns:30% 70%;
-
-    min-height:112px;
-
-    padding:0;
-
-    gap:0;
-
-    overflow:hidden;
+    direction:rtl;
 
 }
 
 
 /* ======================================================
-   SECTION 04.15 - REVENUE ICON PANEL
+   SECTION 04.15 - RTL CONTENT
 ====================================================== */
 
-#monthlyRevenueCard .stat-icon{
-
-    width:100%;
-
-    height:100%;
-
-    min-height:112px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin:0;
-
-    border-radius:0;
-
-    background:var(--primary);
-
-}
-
-
-/* ======================================================
-   SECTION 04.16 - REVENUE ICON
-====================================================== */
-
-#monthlyRevenueCard .stat-icon i{
-
-    width:48px;
-
-    height:48px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:var(--white);
-
-    color:var(--primary);
-
-    font-size:1.25rem;
-
-}
-
-
-/* ======================================================
-   SECTION 04.17 - REVENUE CONTENT PANEL
-====================================================== */
-
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-content{
-
-    width:auto;
-
-    min-width:0;
-
-    height:100%;
-
-    padding:12px 20px;
-
-    box-sizing:border-box;
-
-    align-items:center;
-
-    justify-content:flex-start;
-
-}
-
-
-/* ======================================================
-   SECTION 04.18 - REVENUE TITLE ROW
-====================================================== */
-
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-title-row{
-
-    width:100%;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-
-/* ======================================================
-   SECTION 04.19 - REVENUE VALUE
-====================================================== */
-
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-value{
-
-    width:100%;
-
-    margin-top:4px;
-
-    margin-left:0;
-
-    margin-right:0;
-
-    text-align:center;
-
-}
-
-
-/* ======================================================
-   SECTION 04.20 - REVENUE DESCRIPTION
-====================================================== */
-
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-description{
-
-    width:100%;
-
-    margin-top:5px;
-
-    margin-left:0;
-
-    margin-right:0;
-
-    text-align:center;
-
-}
-/* ======================================================
-   SECTION 04.21 - REVENUE CONTENT START ALIGNMENT
-====================================================== */
-
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-content{
+html[dir="rtl"] #monthlyRevenueCard .stat-content{
 
     align-items:flex-start;
 
-    justify-content:flex-start;
-
-    text-align:start;
+    text-align:right;
 
 }
 
 
 /* ======================================================
-   SECTION 04.21.1 - REVENUE PERIOD
+   SECTION 04.16 - RTL TITLE ROW
 ====================================================== */
 
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-title-row{
-
-    width:100%;
+html[dir="rtl"] #monthlyRevenueCard .stat-title-row{
 
     justify-content:flex-start;
 
-    align-items:center;
+}
+
+
+/* ======================================================
+   SECTION 04.17 - RTL VALUE
+====================================================== */
+
+html[dir="rtl"] #monthlyRevenueCard .stat-value{
+
+    text-align:right;
 
 }
 
 
 /* ======================================================
-   SECTION 04.21.2 - REVENUE VALUE
+   SECTION 04.18 - RTL DESCRIPTION
 ====================================================== */
 
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-value{
+html[dir="rtl"] #monthlyRevenueCard .stat-description{
 
-    width:100%;
-
-    margin-left:0;
-
-    margin-right:0;
-
-    text-align:start;
-
-    transform:none;
+    text-align:right;
 
 }
 
 
 /* ======================================================
-   SECTION 04.21.3 - REVENUE DESCRIPTION
+   SECTION 04.19 - LTR
 ====================================================== */
 
-#monthlyRevenueCard.stat-card:has(#revenuePeriod) .stat-description{
+html[dir="ltr"] #monthlyRevenueCard{
 
-    width:100%;
+    direction:ltr;
 
-    margin-left:0;
+}
 
-    margin-right:0;
 
-    text-align:start;
+/* ======================================================
+   SECTION 04.20 - LTR CONTENT
+====================================================== */
+
+html[dir="ltr"] #monthlyRevenueCard .stat-content{
+
+    align-items:flex-start;
+
+    text-align:left;
+
+}
+
+
+/* ======================================================
+   SECTION 04.21 - LTR VALUE & DESCRIPTION
+====================================================== */
+
+html[dir="ltr"] #monthlyRevenueCard .stat-value{
+
+    text-align:left;
+
+}
+
+
+html[dir="ltr"] #monthlyRevenueCard .stat-description{
+
+    text-align:left;
 
 }
 
@@ -2749,30 +2672,6 @@ html[dir="ltr"] .home-page
 
 }
 
-/* =========================================================
-   REVENUE VALUE POSITION
-   Move value toward the icon to avoid the period select
-========================================================= */
-
-html[dir="rtl"]
-.home-page
-.stat-card:has(#revenuePeriod)
-.stat-value{
-
-    transform:translateX(45px);
-
-}
 
 
-/* =========================================================
-   LTR
-========================================================= */
 
-html[dir="ltr"]
-.home-page
-.stat-card:has(#revenuePeriod)
-.stat-value{
-
-    transform:translateX(-45px);
-
-}

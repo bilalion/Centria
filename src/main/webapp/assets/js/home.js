@@ -643,7 +643,7 @@ function initRevenuePeriod() {
 
         if (revenueHidden) {
 
-            value.textContent ="*****";
+         value.textContent = "\u2605\u2605\u2605\u2605\u2605";
 
         } else {
 
