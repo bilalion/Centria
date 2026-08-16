@@ -1,3 +1,5 @@
+
+
 /*
 ==========================================================
 File        : home.css
@@ -121,7 +123,6 @@ Version :
 
 }
 
-
 /* ======================================================
    SECTION 04 - STAT CARD
 ====================================================== */
@@ -148,8 +149,6 @@ Version :
         0 2px 8px rgba(0,0,0,.04);
 
 }
-
-
 .stat-icon{
 
     width:50px;
@@ -169,8 +168,6 @@ Version :
     flex-shrink:0;
 
 }
-
-
 .stat-content{
 
     display:flex;
@@ -178,8 +175,6 @@ Version :
     flex-direction:column;
 
 }
-
-
 .stat-title{
 
     font-size:14px;
@@ -200,7 +195,6 @@ Version :
     position:relative;
 
 }
-
 
 /* ======================================================
    REVENUE CONTENT
@@ -223,7 +217,6 @@ Version :
     width:100%;
 
 }
-
 
 /* ======================================================
    REVENUE TITLE ROW
@@ -249,7 +242,6 @@ Version :
 
 }
 
-
 /* ======================================================
    REVENUE TITLE
 ====================================================== */
@@ -261,7 +253,6 @@ Version :
     text-align:center;
 
 }
-
 
 /* ======================================================
    REVENUE VALUE
@@ -279,7 +270,6 @@ Version :
 
 }
 
-
 /* ======================================================
    REVENUE DESCRIPTION
 ====================================================== */
@@ -295,7 +285,6 @@ Version :
     text-align:center;
 
 }
-
 
 /* ======================================================
    PERIOD SELECT
@@ -341,7 +330,6 @@ Version :
 
 }
 
-
 /* ======================================================
    REVENUE SELECT - RTL
 ====================================================== */
@@ -354,7 +342,6 @@ html[dir="rtl"] .stat-card:has(#revenuePeriod)
     right:auto;
 
 }
-
 
 /* ======================================================
    REVENUE SELECT - LTR
@@ -369,7 +356,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 }
 
-
 /* ======================================================
    REVENUE SELECT - HOVER
 ====================================================== */
@@ -379,7 +365,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     border-color:#c7d2e3;
 
 }
-
 
 /* ======================================================
    REVENUE SELECT - FOCUS
@@ -392,7 +377,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     box-shadow:none;
 
 }
-
 
 /* ======================================================
    STAT VALUE
@@ -410,7 +394,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 }
 
-
 /* ======================================================
    STAT DESCRIPTION
 ====================================================== */
@@ -425,7 +408,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 }
 
-
 /* ======================================================
    SECTION 05 - COLORS
 ====================================================== */
@@ -437,8 +419,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     color:#2563eb;
 
 }
-
-
 .stat-green .stat-icon{
 
     background:#ecfdf5;
@@ -446,8 +426,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     color:#16a34a;
 
 }
-
-
 .stat-orange .stat-icon{
 
     background:#fff7ed;
@@ -455,8 +433,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     color:#f97316;
 
 }
-
-
 .stat-red .stat-icon{
 
     background:#fef2f2;
@@ -464,7 +440,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     color:#ef4444;
 
 }
-
 
 /* ======================================================
    SECTION 06 - DASHBOARD GRID
@@ -480,11 +455,9 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
     gap:8px;
 
-    margin-bottom:6px;
+    margin-bottom:2px;
 
 }
-
-
 .dashboard-widget{
 
     background:#ffffff;
@@ -497,8 +470,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
         0 2px 8px rgba(0,0,0,.04);
 
 }
-
-
 .widget-header{
 
     height:50px;
@@ -514,8 +485,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     border-bottom:1px solid #eef0f3;
 
 }
-
-
 .widget-header h2{
 
     margin:0;
@@ -525,8 +494,6 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
     font-weight:700;
 
 }
-
-
 .widget-body{
 
     height:190px;
@@ -539,38 +506,40 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
 }
 
-
 /* ======================================================
    SECTION 07 - SYSTEM NOTIFICATION
 ====================================================== */
 
 .system-notification{
 
-    height:46px;
+    height:48px;
 
-    min-height:46px;
+    min-height:48px;
 
     display:flex;
 
     align-items:center;
 
-    gap:2px;
+    gap:8px;
 
-    padding:10px 14px;
+    padding:8px 14px;
 
     margin-top:6px;
 
-     background:#eef5ff;
+    background:#fff7ed;
 
-    border:1px solid #e5e7eb;
+    border:1px solid #fed7aa;
 
     border-radius:4px;
 
     box-shadow:
-        0 2px 8px rgba(0,0,0,.04);
+        0 2px 8px rgba(249,115,22,.08);
 
 }
 
+/* ======================================================
+   NOTIFICATION ICON
+====================================================== */
 
 .notification-icon{
 
@@ -584,114 +553,114 @@ html[dir="ltr"] .stat-card:has(#revenuePeriod)
 
     justify-content:center;
 
+    flex-shrink:0;
+
     border-radius:50%;
 
-   background:#eef5ff;
+    background:#ffedd5;
 
-    color:#f59e0b;
+    color:#f97316;
 
 }
-
-
 .notification-content{
 
     flex:1;
 
+    min-width:0;
+
 }
-
-
 .notification-content h3{
 
     margin:0;
 
-    font-size:14px;
+    font-size:12px;
+
+    font-weight:700;
+
+    color:#9a3412;
 
 }
-
-
 .notification-content p{
 
     margin:2px 0 0;
 
     font-size:12px;
 
-    color:var(--text-light);
+    color:#c2410c;
 
 }
 
+/* ======================================================
+   SYSTEM NOTIFICATION ACTION
+====================================================== */
 
 .notification-action{
 
-    color:var(--primary);
+    display:inline-flex;
+    align-items:center;
 
-    font-size:13px;
+    justify-content:center;
 
-    font-weight:600;
+    min-height:28px;
+    min-width:78px;
 
-}
+    padding:0 12px;
 
+    background:#f97316;
 
-/* ======================================================
-   RTL
-====================================================== */
+    color:#ffffff;
 
-html[dir="rtl"] .home-page{
+    border:1px solid #f97316;
 
-    direction:rtl;
+    border-radius:4px;
 
-}
+    font-size:12px;
 
+    font-weight:700;
 
-/* ======================================================
-   RESPONSIVE
-====================================================== */
+    text-decoration:none;
 
-@media(max-width:1200px){
+    white-space:nowrap;
 
-    .stats-grid{
+    cursor:pointer;
 
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-}
-
-
-@media(max-width:900px){
-
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
-
-    }
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
 
 }
+.notification-action:hover{
 
+    background:#ea580c;
 
-@media(max-width:600px){
+    color:#ffffff;
 
-    .stats-grid{
+    border-color:#ea580c;
 
-        grid-template-columns:1fr;
-
-    }
+    box-shadow:
+        0 3px 8px rgba(234,88,12,.20);
 
 }
+.notification-action:active{
 
+    transform:translateY(1px);
 
+}
 
 /* =========================================================
    SECTION 08 - RECENT CENTRES
    CENTRIA COMPACT UI
 ========================================================= */
 
-
 .home-page .recent-widget{
 
     width:100%;
 
-    height:100%;
+    height:auto;
+
+    min-height:0;
 
     display:flex;
 
@@ -711,7 +680,6 @@ html[dir="rtl"] .home-page{
         0 6px 20px rgba(15,23,42,0.045);
 
 }
-
 
 /* =========================================================
    08.02 - HEADER
@@ -737,7 +705,6 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
    08.03 - HEADER TITLE
 ========================================================= */
@@ -751,7 +718,6 @@ html[dir="rtl"] .home-page{
     min-width:0;
 
 }
-
 
 /* =========================================================
    08.04 - TITLE
@@ -778,7 +744,6 @@ html[dir="rtl"] .home-page{
     white-space:nowrap;
 
 }
-
 
 /* =========================================================
    08.05 - TITLE ICON
@@ -820,17 +785,15 @@ html[dir="rtl"] .home-page{
 .home-page .recent-widget .recent-widget-link{
 
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:6px;
 
     height:28px;
-
-    min-width:78px;
-
+   
+    
+    min-width:120px;
     padding:0 10px;
 
     border:1px solid #d8e5f7;
@@ -902,9 +865,6 @@ html[dir="rtl"] .home-page{
 
 }
 
-
-
-
 /* =========================================================
    08.09 - BODY
 ========================================================= */
@@ -926,7 +886,6 @@ html[dir="rtl"] .home-page{
     flex-direction:column;
 
 }
-
 
 /* =========================================================
    08.10 - LIST
@@ -952,7 +911,6 @@ html[dir="rtl"] .home-page{
     gap:3px;
 
 }
-
 
 /* =========================================================
    08.11 - ROW
@@ -1005,7 +963,6 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
    08.13 - FIRST ROW
 ========================================================= */
@@ -1020,7 +977,6 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
    08.14 - ROW HOVER
 ========================================================= */
@@ -1030,12 +986,9 @@ html[dir="rtl"] .home-page{
 .recent-centre-item:hover{
 
     background:#f0f6ff;
-
     border-color:#dbe8f8;
-
     box-shadow:
         0 4px 12px rgba(37,99,235,0.06);
-
     transform:translateY(-1px);
 
 }
@@ -1048,13 +1001,9 @@ html[dir="rtl"] .home-page{
 .home-page .recent-widget .recent-centre-info{
 
     display:flex;
-
     align-items:center;
-
     min-width:0;
-
     overflow:hidden;
-
 }
 
 
@@ -1129,7 +1078,6 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
    08.18 - DATE CONTAINER
 ========================================================= */
@@ -1162,7 +1110,6 @@ html[dir="rtl"] .home-page{
 
 }
 
-
 /* =========================================================
    08.19 - DATE ICON
 ========================================================= */
@@ -1172,21 +1119,13 @@ html[dir="rtl"] .home-page{
 .recent-centre-date::before{
 
     content:"▣";
-
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
     width:13px;
-
     height:13px;
-
     color:#7c91aa;
-
     font-size:11px;
-
     line-height:1;
 
 }
@@ -1201,7 +1140,6 @@ html[dir="rtl"] .home-page{
 .recent-date-value{
 
     display:inline-block;
-
     white-space:nowrap;
 
 }
@@ -1214,11 +1152,8 @@ html[dir="rtl"] .home-page{
 .home-page .recent-widget .recent-centre-duration{
 
     display:flex;
-
     align-items:center;
-
     justify-content:flex-start;
-
     min-width:0;
 
 }
@@ -1231,39 +1166,22 @@ html[dir="rtl"] .home-page{
 .home-page
 .recent-widget
 .recent-duration-value{
-
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:4px;
-
     width:70px;
-
     height:26px;
-
     padding:0 7px;
-
     box-sizing:border-box;
-
     border:1px solid #cfe0fa;
-
     border-radius:4px;
-
     background:#f0f6ff;
-
     color:#2563eb;
-
     font-size:10px;
-
     line-height:1;
-
     font-weight:800;
-
     white-space:nowrap;
-
 }
 
 
@@ -1274,13 +1192,9 @@ html[dir="rtl"] .home-page{
 .home-page
 .recent-widget
 .recent-duration-value::before{
-
     content:"◷";
-
     font-size:12px;
-
     line-height:1;
-
 }
 
 
@@ -1289,21 +1203,13 @@ html[dir="rtl"] .home-page{
 ========================================================= */
 
 .home-page .recent-widget .recent-empty{
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     min-height:120px;
-
     padding:14px;
-
     color:#94a3b8;
-
     text-align:center;
-
 }
 
 
@@ -1316,13 +1222,9 @@ html[dir="rtl"] .home-page{
 .recent-empty-content{
 
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
-
 }
 
 
@@ -1516,11 +1418,9 @@ html[dir="ltr"]
     .recent-widget-link{
 
         min-width:70px;
-
+       
         height:29px;
-
         padding:0 8px;
-
         font-size:10px;
 
     }
@@ -1814,13 +1714,9 @@ html[dir="ltr"]
 .home-page .overview-chart-card{
 
     position:relative;
-
     min-width:0;
-
     min-height:300px;
-
     padding:8px;
-
     box-sizing:border-box;
 
     background:#ffffff;
@@ -1842,18 +1738,13 @@ html[dir="ltr"]
 .home-page .overview-chart-card-header{
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
-    gap:12px;
-
-    margin-bottom: 10px;
- 
-   padding: 5px;
-      background:#eef5ff;
-      border-radius: 4px;
+    gap:8px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background:#eef5ff;
+    border-radius: 4px;
       
 
 }
@@ -1866,21 +1757,13 @@ html[dir="ltr"]
 .home-page .overview-chart-card-title{
 
     display:inline-flex;
-
     align-items:center;
-
     gap:7px;
-
     min-width:0;
-
     color:#172033;
-
     font-size:13px;
-
     line-height:1.2;
-
     font-weight:850;
-
 }
 
 
@@ -1889,27 +1772,16 @@ html[dir="ltr"]
 ========================================================= */
 
 .home-page .overview-chart-card-title i{
-
     width:28px;
-
     height:28px;
-
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
     flex:0 0 auto;
-
     border-radius:4px;
-
     background:#eef5ff;
-
     color:#2563eb;
-
     font-size:12px;
-
 }
 
 
@@ -1920,17 +1792,11 @@ html[dir="ltr"]
 .home-page .overview-chart-card-subtitle{
 
     flex:0 0 auto;
-
     color:#94a3b8;
-
     font-size:10px;
-
     line-height:1;
-
     font-weight:700;
-
     white-space:nowrap;
-
 }
 
 
@@ -1939,17 +1805,11 @@ html[dir="ltr"]
 ========================================================= */
 
 .home-page .overview-chart-content{
-
     min-height:255px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     box-sizing:border-box;
-
 }
 
 
@@ -1966,17 +1826,11 @@ html[dir="ltr"]
 .overview-chart-content{
 
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
-
-    min-height:255px;
-
+    min-height:245px;
     gap:6px;
-
     padding:0;
 
 }
@@ -1989,30 +1843,19 @@ html[dir="ltr"]
 .home-page .monthly-payment-donut{
 
     position:relative;
-
     width:240px;
-
     height:240px;
-
     flex:0 0 240px;
-
     border-radius:50%;
-
     background:#eef1f5;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     box-shadow:
         0 9px 21px rgba(15,23,42,0.07);
-
     isolation:isolate;
 
 }
-
 
 /* =========================================================
    09.15 - DONUT INNER HOLE
@@ -2021,20 +1864,13 @@ html[dir="ltr"]
 .home-page .monthly-payment-donut::after{
 
     content:"";
-
     position:absolute;
-
     inset:30px;
-
     border-radius:50%;
-
     background:#ffffff;
-
     box-shadow:
         0 0 0 1px #edf2f7;
-
     z-index:1;
-
 }
 
 
@@ -2045,32 +1881,22 @@ html[dir="ltr"]
 .home-page .monthly-payment-donut-center{
 
     position:relative;
-
     z-index:2;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
-
     text-align:center;
-
+    
 }
 
 
 .home-page .monthly-payment-donut-center strong{
 
     color:#172033;
-
     font-size:48px;
-
     line-height:1;
-
     font-weight:900;
-
     letter-spacing:-1px;
 
 }
@@ -2079,13 +1905,9 @@ html[dir="ltr"]
 .home-page .monthly-payment-donut-center span{
 
     margin-top:7px;
-
     color:#64748b;
-
     font-size:16px;
-
     line-height:1.2;
-
     font-weight:750;
 
 }
@@ -2098,17 +1920,11 @@ html[dir="ltr"]
 .home-page .monthly-payment-legend{
 
     width:min(100%,430px);
-
     min-width:0;
-
     display:flex;
-
     flex-direction:row;
-
     align-items:center;
-
     justify-content:center;
-
     gap:28px;
 
 }
@@ -2122,20 +1938,14 @@ html[dir="ltr"]
 .home-page .payment-legend-item{
 
     min-width:150px;
-
     display:grid;
-
     grid-template-columns:
         10px
         minmax(0,1fr)
         auto;
-
     align-items:center;
-
     column-gap:8px;
-
     padding:5px 0;
-
     direction:ltr;
 
 }
@@ -2148,18 +1958,13 @@ html[dir="ltr"]
 .home-page .payment-legend-marker{
 
     width:10px;
-
     height:10px;
-
     border-radius:50%;
-
 }
-
 
 .home-page .payment-legend-marker.paid{
 
     background:#16a34a;
-
     box-shadow:
         0 0 0 4px rgba(22,163,74,0.10);
 
@@ -2169,7 +1974,6 @@ html[dir="ltr"]
 .home-page .payment-legend-marker.unpaid{
 
     background:#f43f5e;
-
     box-shadow:
         0 0 0 4px rgba(244,63,94,0.10);
 
@@ -2183,13 +1987,9 @@ html[dir="ltr"]
 .home-page .payment-legend-label{
 
     color:#475569;
-
     font-size:13px;
-
     font-weight:750;
-
     text-align:center;
-
     white-space:nowrap;
 
 }
@@ -2198,13 +1998,9 @@ html[dir="ltr"]
 .home-page .payment-legend-value{
 
     color:#172033;
-
     font-size:15px;
-
     font-weight:900;
-
     text-align:right;
-
     min-width:20px;
 
 }
@@ -2217,11 +2013,8 @@ html[dir="ltr"]
 .home-page .status-chart-content{
 
     height:255px;
-
     min-height:255px;
-
     display:block;
-
     box-sizing:border-box;
 
 }
@@ -2235,14 +2028,10 @@ html[dir="ltr"]
 .home-page .centre-status-bars{
 
     width:100%;
-
     height:100%;
-
     display:grid;
-
     grid-template-rows:
         repeat(5, 1fr);
-
     gap:0;
 
 }
@@ -2255,13 +2044,9 @@ html[dir="ltr"]
 .home-page .centre-status-bar-row{
 
     width:100%;
-
     height:100%;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
 
 }
@@ -2274,13 +2059,9 @@ html[dir="ltr"]
 .home-page .centre-status-bar-header{
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:10px;
-
     margin-bottom:5px;
 
 }
@@ -2289,15 +2070,10 @@ html[dir="ltr"]
 .home-page .centre-status-name{
 
     display:inline-flex;
-
     align-items:center;
-
     gap:7px;
-
     color:#334155;
-
     font-size:11px;
-
     font-weight:750;
 
 }
@@ -2306,9 +2082,7 @@ html[dir="ltr"]
 .home-page .centre-status-value{
 
     color:#172033;
-
     font-size:11px;
-
     font-weight:900;
 
 }
@@ -2328,13 +2102,9 @@ html[dir="ltr"]
 .home-page .centre-status-bar-header{
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:10px;
-
     margin-bottom:5px;
 
 }
@@ -2343,15 +2113,10 @@ html[dir="ltr"]
 .home-page .centre-status-name{
 
     display:inline-flex;
-
     align-items:center;
-
     gap:7px;
-
     color:#334155;
-
     font-size:11px;
-
     font-weight:750;
 
 }
@@ -2360,11 +2125,8 @@ html[dir="ltr"]
 .home-page .centre-status-value{
 
     color:#172033;
-
     font-size:11px;
-
     font-weight:900;
-
 }
 
 
@@ -2382,13 +2144,9 @@ html[dir="ltr"]
 .home-page .centre-status-name::before{
 
     content:"";
-
     width:8px;
-
     height:8px;
-
     flex:0 0 8px;
-
     border-radius:50%;
 
 }
@@ -2399,7 +2157,6 @@ html[dir="ltr"]
 .centre-status-name::before{
 
     background:#16a34a;
-
     box-shadow:
         0 0 0 3px rgba(22,163,74,0.10);
 
@@ -2411,7 +2168,6 @@ html[dir="ltr"]
 .centre-status-name::before{
 
     background:#f59e0b;
-
     box-shadow:
         0 0 0 3px rgba(245,158,11,0.10);
 
@@ -2423,7 +2179,6 @@ html[dir="ltr"]
 .centre-status-name::before{
 
     background:#94a3b8;
-
     box-shadow:
         0 0 0 3px rgba(148,163,184,0.12);
 
@@ -2435,7 +2190,6 @@ html[dir="ltr"]
 .centre-status-name::before{
 
     background:#64748b;
-
     box-shadow:
         0 0 0 3px rgba(100,116,139,0.10);
 
@@ -2447,7 +2201,6 @@ html[dir="ltr"]
 .centre-status-name::before{
 
     background:#ef4444;
-
     box-shadow:
         0 0 0 3px rgba(239,68,68,0.10);
 
@@ -2461,13 +2214,9 @@ html[dir="ltr"]
 .home-page .centre-status-track{
 
     width:100%;
-
     height:7px;
-
     overflow:hidden;
-
     border-radius:4px;
-
     background:#eef2f6;
 
 }
@@ -2480,13 +2229,9 @@ html[dir="ltr"]
 .home-page .centre-status-bar{
 
     width:0%;
-
     height:100%;
-
     min-width:0;
-
     border-radius:4px;
-
     transition:
         width .55s ease;
 
@@ -2535,17 +2280,11 @@ html[dir="ltr"]
 .home-page .overview-status-empty{
 
     min-height:135px;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
-
     gap:7px;
-
     color:#94a3b8;
 
 }
@@ -2671,7 +2410,6 @@ html[dir="ltr"] .home-page
     .widget-header{
 
         min-height:50px;
-
         padding:0 11px;
 
     }
@@ -2690,9 +2428,7 @@ html[dir="ltr"] .home-page
     .overview-chart-card{
 
         padding:11px;
-
         min-height:310px;
-
         border-radius:4px;
 
     }
@@ -2719,9 +2455,7 @@ html[dir="ltr"] .home-page
     .monthly-payment-donut{
 
         width:180px;
-
         height:180px;
-
         flex-basis:180px;
 
     }
@@ -2757,7 +2491,6 @@ html[dir="ltr"] .home-page
     .monthly-payment-legend{
 
         width:100%;
-
         gap:12px;
 
     }
@@ -2767,7 +2500,6 @@ html[dir="ltr"] .home-page
     .payment-legend-item{
 
         min-width:0;
-
         flex:1 1 0;
 
     }

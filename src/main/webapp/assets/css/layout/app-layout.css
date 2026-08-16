@@ -28,391 +28,126 @@ Development
 */
 
 
-
-
-
 /* ======================================================
    SECTION 01 - APPLICATION SHELL
 ====================================================== */
 
-
 .app-shell{
-
-
     width:100%;
-
-
     height:100vh;
-
-
     min-height:100vh;
-
-
     display:flex;
-
-    
-
     flex-direction:column;
-
-
     background:var(--background);
-
-
     overflow:hidden;
-
-
-
 }
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 02 - APPLICATION BODY
    Sidebar + Content
 ====================================================== */
 
-
 .app-body{
-
     display:flex;
-
     flex-direction:row;
-
     flex:1;
-
     width:100%;
-
     min-height:0;
-
     overflow:hidden;
-
 }
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 03 - CONTENT AREA
 ====================================================== */
 
-
 #content-area,
 .content-area{
-
-
     flex:1;
-
-
     width:100%;
-
-
     min-width:0;
-
-
     min-height:0;
-
-
     overflow-y:auto;
-
-
     overflow-x:hidden;
-
-
   padding:
     var(--space-lg)
     var(--space-lg)
     8px
     var(--space-lg);
-
     background:var(--background);
-
-
-
 }
-
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 04 - RTL SUPPORT
 ====================================================== */
 
-
 html[dir="rtl"] .app-shell{
-
-
     direction:rtl;
-
-
-
 }
-
-
-
-
 html[dir="rtl"] .app-body{
-
-
     direction:rtl;
-
-
-
 }
-
-
-
-
 html[dir="rtl"] .content-area{
-
-
     direction:rtl;
-
-
-
 }
-
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 05 - LTR SUPPORT
 ====================================================== */
-
-
 html[dir="ltr"] .app-shell{
-
-
     direction:ltr;
-
-
-
 }
-
-
-
-
 html[dir="ltr"] .app-body{
-
-
     direction:ltr;
-
-
-
 }
-
-
-
 
 html[dir="ltr"] .content-area{
 
-
     direction:ltr;
-
-
-
 }
-
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 06 - SCROLL MANAGEMENT
 ====================================================== */
 
-
 body{
-
-
     overflow:hidden;
-
-
-
 }
-
-
-
-
-
-
 #content-area::-webkit-scrollbar,
 .content-area::-webkit-scrollbar{
-
-
     width:8px;
-
-
-
 }
-
-
-
 #content-area::-webkit-scrollbar-thumb,
 .content-area::-webkit-scrollbar-thumb{
 
-
     background:#cbd5e1;
-
-
-    border-radius:20px;
-
-
-
+    border-radius:4px;
 }
-
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 07 - TABLET
 ====================================================== */
 
-
 @media(max-width:1100px){
-
-
-
     #content-area,
     .content-area{
-
-
         padding:var(--space-md);
-
-
-
     }
-
-
-
 }
-
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 08 - MOBILE
 ====================================================== */
 
 
 @media(max-width:700px){
-
-
-
     .app-body{
-
-
         flex-direction:column;
-
-
-
     }
-
-
-
-
     #content-area,
     .content-area{
-
-
         padding:var(--space-sm);
-
-
-
     }
-
-
-
 }
-
-
-
-
-
-
-
-
 /* ======================================================
    SECTION 09 - ACCESSIBILITY
 ====================================================== */
 
-
 *{
-
-
     scrollbar-width:thin;
-
-
-
 }
-
-
-
-
-
-
-
-
-/* ======================================================
-   END OF FILE
-======================================================
-*//*
-==========================================================
-File        : app-layout.css
-Project     : CENTRIA
-Layer       : Layout
-Component   : Application Shell
-
-Description :
-Main application structure.
-
-Responsibilities :
-- Application shell
-- Top sections layout
-- Body layout
-- Content container
-- Footer support
-- RTL / LTR Support
-
-Dependencies :
-core.css
-
-Version :
-2.1
-
-Status :
-Development
-==========================================================
-*/
-
-
-
-
 
 /* ======================================================
    SECTION 01 - APPLICATION SHELL
@@ -420,37 +155,14 @@ Development
 
 
 .app-shell{
-
-
     width:100%;
-
-
     height:100vh;
-
-
     min-height:100vh;
-
-
     display:flex;
-
-
     flex-direction:column;
-
-
     background:var(--background);
-
-
     overflow:hidden;
-
-
-
 }
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 02 - APPLICATION BODY
@@ -461,157 +173,61 @@ Development
 .app-body{
 
     display:flex;
-
     flex-direction:row;
-
     flex:1;
-
     width:100%;
-
     min-height:0;
-
     overflow:hidden;
 
 }
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 03 - CONTENT AREA
 ====================================================== */
 
-
 #content-area,
 .content-area{
 
-
     flex:1;
-
-
     width:100%;
-
-
     min-width:0;
-
-
     min-height:0;
-
-
+    box-sizing:border-box;
     overflow-y:auto;
-
-
     overflow-x:hidden;
-
-
     padding:var(--space-lg);
-
-
     background:var(--background);
-
-
-
 }
-
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 04 - RTL SUPPORT
 ====================================================== */
-
-
 html[dir="rtl"] .app-shell{
-
-
     direction:rtl;
-
-
-
 }
-
-
-
-
 html[dir="rtl"] .app-body{
-
-
     direction:rtl;
-
-
-
 }
-
-
-
-
 html[dir="rtl"] .content-area{
-
-
     direction:rtl;
-
-
-
 }
-
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 05 - LTR SUPPORT
 ====================================================== */
-
-
 html[dir="ltr"] .app-shell{
-
-
     direction:ltr;
 
-
-
 }
-
-
-
 
 html[dir="ltr"] .app-body{
 
-
     direction:ltr;
-
-
-
 }
-
-
-
 
 html[dir="ltr"] .content-area{
-
-
     direction:ltr;
-
-
-
 }
-
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 06 - SCROLL MANAGEMENT
@@ -619,80 +235,32 @@ html[dir="ltr"] .content-area{
 
 
 body{
-
-
     overflow:hidden;
-
-
-
 }
-
-
-
-
-
 
 #content-area::-webkit-scrollbar,
 .content-area::-webkit-scrollbar{
-
-
     width:8px;
-
-
-
 }
-
-
 
 #content-area::-webkit-scrollbar-thumb,
 .content-area::-webkit-scrollbar-thumb{
 
-
     background:#cbd5e1;
-
-
-    border-radius:20px;
-
-
+    border-radius:4px;
 
 }
-
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 07 - TABLET
 ====================================================== */
 
-
 @media(max-width:1100px){
-
-
-
     #content-area,
     .content-area{
-
-
         padding:var(--space-md);
-
-
-
     }
-
-
-
 }
-
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 08 - MOBILE
@@ -700,61 +268,25 @@ body{
 
 
 @media(max-width:700px){
-
-
-
     .app-body{
-
-
         flex-direction:column;
-
-
-
     }
-
-
-
-
     #content-area,
     .content-area{
-
-
         padding:var(--space-sm);
-
-
-
     }
-
 
 
 }
-
-
-
-
-
-
-
 
 /* ======================================================
    SECTION 09 - ACCESSIBILITY
 ====================================================== */
 
-
 *{
-
-
     scrollbar-width:thin;
 
-
-
 }
-
-
-
-
-
-
 
 
 /* ======================================================

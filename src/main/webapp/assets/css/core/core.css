@@ -292,36 +292,53 @@ textarea{
 }
 
 
-
-
 /* ======================================================
    SECTION 05 - SCROLLBAR
 ====================================================== */
 
-::-webkit-scrollbar{
+/*
+   Keep scrolling functional
+   Hide all visible scrollbars
+*/
 
-    width:8px;
+/* Firefox */
+html,
+body,
+*{
+
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+
+}
+
+
+/* Chrome / Edge / Safari */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar{
+
+    width:0;
+    height:0;
 
 }
 
 
+/* Completely transparent */
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb{
 
-::-webkit-scrollbar-thumb{
-
-    background:#cbd5e1;
-
-    border-radius:20px;
-
-}
-
-
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#94a3b8;
+    background:transparent;
 
 }
 
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
 
 
 
@@ -396,7 +413,7 @@ textarea{
 
     text-align:center;
 
-    border-radius:8px;
+    border-radius:4px;
 
     box-shadow:0 10px 30px rgba(0,0,0,.20);
 
