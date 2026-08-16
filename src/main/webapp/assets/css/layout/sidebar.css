@@ -141,7 +141,7 @@ Development
 
     padding:13px 14px;
 
-    border-radius:8px;
+    border-radius:4px;
 
     color:rgba(255,255,255,.88);
 
@@ -211,7 +211,7 @@ Development
 
     border:1px solid transparent;
 
-    border-radius:14px;
+    border-radius:4px;
 
     box-shadow:
         0 0 12px rgba(37,99,235,.80),
@@ -296,7 +296,7 @@ html[dir="ltr"] .sidebar-link.active::before{
 
     padding:13px 14px;
 
-    border-radius:8px;
+    border-radius:4px;
 
     background:var(--danger);
 

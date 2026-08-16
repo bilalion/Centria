@@ -148,8 +148,6 @@ Version :
         0 2px 8px rgba(0,0,0,.04);
 
 }
-
-
 .stat-icon{
 
     width:50px;
@@ -169,8 +167,6 @@ Version :
     flex-shrink:0;
 
 }
-
-
 .stat-content{
 
     display:flex;
@@ -178,24 +174,22 @@ Version :
     flex-direction:column;
 
 }
-
 .stat-title{
     font-size:0.75rem;
     font-weight:600;
     color:#64748b;
 }
-
 .stat-value{
     font-size:2.4rem;
     font-weight:800;
     color:#1e293b;
 }
-
 .stat-description{
     font-size:0.75rem;
     font-weight:500;
     color:#64748b;
 }
+
 /* ======================================================
    SECTION 04.1 - REVENUE CARD
 ====================================================== */
@@ -205,7 +199,6 @@ Version :
     position:relative;
 
 }
-
 
 /* ======================================================
    SECTION 04.2 - REVENUE TITLE HIDDEN
@@ -217,27 +210,18 @@ Version :
 
 }
 
-
 /* ======================================================
    SECTION 04.3 - REVENUE BANK CARD
 ====================================================== */
 
 #monthlyRevenueCard{
-
     display:grid;
-
     grid-template-columns:30% 70%;
-
     min-height:112px;
-
     padding:0;
-
     gap:0;
-
     overflow:hidden;
-
 }
-
 
 /* ======================================================
    SECTION 04.4 - REVENUE ICON PANEL
@@ -246,25 +230,16 @@ Version :
 #monthlyRevenueCard .stat-icon{
 
     width:100%;
-
     height:100%;
-
     min-height:112px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     margin:0;
-
     border-radius:0;
-
     background:var(--primary);
 
 }
-
 
 /* ======================================================
    SECTION 04.5 - REVENUE ICON
@@ -273,25 +248,16 @@ Version :
 #monthlyRevenueCard .stat-icon i{
 
     width:48px;
-
     height:48px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     border-radius:50%;
-
     background:var(--white);
-
     color:var(--primary);
-
     font-size:1.25rem;
 
 }
-
 
 /* ======================================================
    SECTION 04.6 - REVENUE CONTENT
@@ -300,23 +266,14 @@ Version :
 #monthlyRevenueCard .stat-content{
 
     width:auto;
-
     min-width:0;
-
     height:100%;
-
     padding:12px 20px;
-
     box-sizing:border-box;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:flex-start;
-
     justify-content:flex-start;
-
     text-align:start;
 }
 
@@ -328,20 +285,13 @@ Version :
 #monthlyRevenueCard .stat-title-row{
 
     width:100%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:flex-start;
-
     gap:12px;
-
     margin:0;
-
     padding:0;
 }
-
 
 /* ======================================================
    SECTION 04.8 - REVENUE TITLE
@@ -350,7 +300,6 @@ Version :
 #monthlyRevenueCard .stat-title{
 
     margin:0;
-
     text-align:start;
 }
 
@@ -362,41 +311,23 @@ Version :
 #monthlyRevenueCard .stat-period-select{
 
     position:relative;
-
     top:auto;
-
     left:auto;
-
     right:auto;
-
     z-index:5;
-
     flex-shrink:0;
-
     height:30px;
-
     min-width:92px;
-
     padding:0 12px;
-
     border:1px solid var(--border);
-
     border-radius:4px;
-
     background:var(--white);
-
     color:var(--primary);
-
     font-family:inherit;
-
     font-size:11px;
-
     font-weight:700;
-
     outline:none;
-
     cursor:pointer;
-
     transition:
         border-color .15s ease,
         box-shadow .15s ease;
