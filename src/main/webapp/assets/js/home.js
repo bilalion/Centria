@@ -641,15 +641,13 @@ function initRevenuePeriod() {
             currentDescription;
 
 
-        if (revenueHidden) {
-
-         value.textContent = "\u2605\u2605\u2605\u2605\u2605";
-
-        } else {
-
-            value.textContent =
-                revenue.toFixed(2) + " DH";
-        }
+     if (revenueHidden) {
+    value.textContent = "\u2605\u2605\u2605\u2605\u2605";
+    value.classList.add("revenue-hidden");
+} else {
+    value.textContent = revenue.toFixed(2) + " DH";
+    value.classList.remove("revenue-hidden");
+}
 
 
         value.style.direction = "ltr";

@@ -362,6 +362,13 @@ Version :
    SECTION 04.12 - REVENUE VALUE
 ====================================================== */
 
+
+.home-page
+.stat-card:has(#revenuePeriod)
+.stat-value.revenue-hidden{
+    color:#94a3b8;
+}
+
 #monthlyRevenueCard .stat-value{
 
     width:100%;
