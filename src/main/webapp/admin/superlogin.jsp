@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@page import="com.centria.language.LanguageManager"%>
 
 
@@ -40,9 +39,6 @@ boolean loginError =
         "invalid".equals(error);
 
 %>
-
-
-
 
 
 <!DOCTYPE html>
