@@ -69,7 +69,7 @@ min-height:72px;
     border-bottom:1px solid var(--border);
 
 
-    border-radius:0;
+    border-radius:4px;
 
 
     overflow:hidden;
@@ -102,7 +102,7 @@ min-height:72px;
     gap:16px;
 
 
-    padding-left:20px;
+    padding-left:25px;
 
 
 
@@ -147,7 +147,7 @@ min-height:72px;
     border:1px solid var(--border);
 
 
-    border-radius:10px;
+    border-radius:4px;
 
 
     font-size:1.1rem;
@@ -304,7 +304,7 @@ min-height:72px;
 
 
 /* ======================================================
-   SECTION 07 - HEADER BUTTON
+   SECTION 07 - HEADER BUTTON Setting
 ====================================================== */
 
 
@@ -338,7 +338,7 @@ min-height:72px;
     border:1px solid var(--border);
 
 
-    border-radius:10px;
+    border-radius:4px;
 
 
     transition:var(--transition);
@@ -431,14 +431,14 @@ min-height:72px;
 
     gap:12px;
 
-
+    margin: 0px 0px 0px 20px; 
     padding:5px 12px 5px 5px;
 
 
     border:1px solid var(--border);
 
 
-    border-radius:14px;
+    border-radius:4px;
 
 
     background:var(--white);

@@ -1695,6 +1695,288 @@ function applyArchiveOperation(
 }
 /*
 ==================================================
+08.1 - VIEW ARCHIVE
+==================================================
+*/
+
+function viewArchivedCentre(centreCode) {
+
+
+    /*
+    --------------------------------------------------
+    SAFETY
+    --------------------------------------------------
+    */
+
+    if (
+            !centreCode
+            ||
+            centreCode.trim() === ""
+    ) {
+
+        console.error(
+                "[CENTRIA ARCHIVE] " +
+                "Centre code is missing."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    GET VIEW MODAL
+    --------------------------------------------------
+    */
+
+    const modal =
+            document.getElementById(
+                    "archive-view-modal"
+            );
+
+
+    const modalBody =
+            document.getElementById(
+                    "archive-view-modal-body"
+            );
+
+
+    /*
+    --------------------------------------------------
+    SAFETY
+    --------------------------------------------------
+    */
+
+    if (
+            !modal
+            ||
+            !modalBody
+    ) {
+
+        console.error(
+                "[CENTRIA ARCHIVE] " +
+                "Archive View modal not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    SHOW LOADING
+    --------------------------------------------------
+    */
+
+    modalBody.innerHTML =
+            `
+            <div class="archive-view-loading">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+            </div>
+            `;
+
+
+    /*
+    --------------------------------------------------
+    OPEN MODAL
+    --------------------------------------------------
+    */
+
+    modal.classList.add(
+            "show"
+    );
+
+
+    modal.setAttribute(
+            "aria-hidden",
+            "false"
+    );
+
+
+    /*
+    --------------------------------------------------
+    BUILD URL
+    --------------------------------------------------
+    */
+
+    const parameters =
+            new URLSearchParams();
+
+
+    parameters.append(
+            "action",
+            "view"
+    );
+
+
+    parameters.append(
+            "centreCode",
+            centreCode.trim()
+    );
+
+
+    const url =
+            window.contextPath
+            +
+            "/ArchiveServlet?"
+            +
+            parameters.toString();
+
+
+    /*
+    --------------------------------------------------
+    LOAD VIEW FRAGMENT
+    --------------------------------------------------
+    */
+
+    fetch(url)
+
+        .then(
+                response => {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                                "HTTP ERROR "
+                                +
+                                response.status
+                        );
+
+                    }
+
+
+                    return response.text();
+
+                }
+        )
+
+
+        .then(
+                html => {
+
+                    modalBody.innerHTML =
+                            html;
+
+                }
+        )
+
+
+        .catch(
+                error => {
+
+                    console.error(
+                            "[CENTRIA ARCHIVE] " +
+                            "View error:",
+                            error
+                    );
+
+
+                    modalBody.innerHTML =
+                            `
+                            <div class="empty-state">
+                                <p>
+                                    Unable to load archive details.
+                                </p>
+                            </div>
+                            `;
+
+                }
+        );
+
+}
+
+
+/*
+--------------------------------------------------
+CLOSE VIEW MODAL
+--------------------------------------------------
+*/
+
+function closeArchiveView() {
+
+
+    const modal =
+            document.getElementById(
+                    "archive-view-modal"
+            );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.remove(
+            "show"
+    );
+
+
+    modal.setAttribute(
+            "aria-hidden",
+            "true"
+    );
+
+
+    const modalBody =
+            document.getElementById(
+                    "archive-view-modal-body"
+            );
+
+
+    if (modalBody) {
+
+        modalBody.innerHTML = "";
+
+    }
+
+}
+
+
+/*
+--------------------------------------------------
+VIEW BUTTON EVENT DELEGATION
+--------------------------------------------------
+*/
+
+document.addEventListener(
+        "click",
+        function (event) {
+
+
+            const button =
+                    event.target.closest(
+                            ".archive-view-button"
+                    );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            const centreCode =
+                    button.getAttribute(
+                            "data-centre-code"
+                    );
+
+
+            viewArchivedCentre(
+                    centreCode
+            );
+
+        }
+);
+/*
+==================================================
 09 - PAGE INITIALIZATION
 ==================================================
 */

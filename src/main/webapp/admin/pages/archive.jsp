@@ -937,6 +937,45 @@ if (lastArchiveOperation != null) {
         </div>
 
 
+                            
+        <!-- =====================================================
+     ARCHIVE VIEW MODAL
+     ===================================================== -->
+
+<div id="archive-view-modal"
+     class="centre-modal"
+     role="dialog"
+     aria-modal="true"
+     aria-hidden="true">
+
+
+    <div class="centre-modal-content">
+
+
+        <!-- CLOSE -->
+
+        <button type="button"
+                class="modal-close archive-view-modal-close"
+                onclick="closeArchiveView()"
+                aria-label="Close">
+
+            <i class="fa-solid fa-xmark"
+               aria-hidden="true"></i>
+
+        </button>
+
+
+        <!-- VIEW CONTENT -->
+
+        <div id="archive-view-modal-body">
+
+        </div>
+
+
+    </div>
+
+</div>                    
+                            
     </section>
 
 

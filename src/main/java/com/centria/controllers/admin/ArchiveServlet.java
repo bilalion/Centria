@@ -79,6 +79,81 @@ public class ArchiveServlet extends HttpServlet {
     ) throws ServletException, IOException {
 
 
+        
+        /*
+==================================================
+VIEW ARCHIVE DETAILS
+==================================================
+*/
+
+String action =
+        request.getParameter("action");
+
+
+if (
+        "view".equalsIgnoreCase(action)
+) {
+
+    String centreCode =
+            request.getParameter("centreCode");
+
+
+    if (
+            centreCode == null
+            ||
+            centreCode.trim().isEmpty()
+    ) {
+
+        response.setStatus(
+                HttpServletResponse.SC_BAD_REQUEST
+        );
+
+        response.getWriter().write(
+                "CENTRE_CODE_REQUIRED"
+        );
+
+        return;
+    }
+
+
+    Archive archive =
+            archiveDAO.getArchiveForView(
+                    centreCode.trim()
+            );
+
+
+    if (archive == null) {
+
+        response.setStatus(
+                HttpServletResponse.SC_NOT_FOUND
+        );
+
+        request.setAttribute(
+                "archive",
+                null
+        );
+
+    }
+    else {
+
+        request.setAttribute(
+                "archive",
+                archive
+        );
+
+    }
+
+
+    request.getRequestDispatcher(
+            "/admin/pages/fragments/archive/archive-view.jsp"
+    ).forward(
+            request,
+            response
+    );
+
+    return;
+}
+        
         /*
         ==================================================
         LOAD / SEARCH / FILTER / PAGINATION

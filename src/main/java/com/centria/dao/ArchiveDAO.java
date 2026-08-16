@@ -395,6 +395,131 @@ public List<Archive> getArchivedCentres(
 
 
 
+/*
+==========================================================
+01.1 - GET ARCHIVE DETAILS FOR VIEW
+==========================================================
+
+Purpose:
+- Load complete archive information for View dialog only.
+- Does NOT modify any data.
+- Does NOT affect Restore / Delete / Monitor.
+==========================================================
+*/
+
+public Archive getArchiveForView(String centreCode) {
+
+    String sql =
+            "SELECT " +
+            "    ca.id, " +
+            "    ca.centre_code, " +
+            "    c.name AS centre_name, " +
+            "    c.phone, " +
+            "    ca.archive_status, " +
+            "    ca.archived_at, " +
+            "    ca.retention_until, " +
+            "    ca.restored_at, " +
+            "    ca.deleted_at " +
+            "FROM centres_archive ca " +
+            "LEFT JOIN centres c " +
+            "    ON c.centre_code = ca.centre_code " +
+            "WHERE ca.centre_code = ? " +
+            "LIMIT 1";
+
+
+    try (
+            Connection con =
+                    DatabaseConfig.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql)
+    ) {
+
+        ps.setString(
+                1,
+                centreCode
+        );
+
+
+        try (
+                ResultSet rs =
+                        ps.executeQuery()
+        ) {
+
+            if (rs.next()) {
+
+                Archive archive =
+                        new Archive();
+
+
+                archive.setId(
+                        rs.getInt("id")
+                );
+
+
+                archive.setCentreCode(
+                        rs.getString("centre_code")
+                );
+
+
+                archive.setCentreName(
+                        rs.getString("centre_name")
+                );
+
+
+                archive.setArchiveStatus(
+                        rs.getString("archive_status")
+                );
+
+
+                archive.setArchivedAt(
+                        rs.getTimestamp("archived_at")
+                );
+
+
+                archive.setRetentionUntil(
+                        rs.getTimestamp(
+                                "retention_until"
+                        )
+                );
+
+
+                archive.setRestoredAt(
+                        rs.getTimestamp(
+                                "restored_at"
+                        )
+                );
+
+
+                archive.setDeletedAt(
+                        rs.getTimestamp(
+                                "deleted_at"
+                        )
+                );
+
+
+                return archive;
+            }
+        }
+
+    }
+    catch (Exception e) {
+
+        System.err.println(
+                "[CENTRIA ARCHIVE] " +
+                "Error while loading archive details for view: "
+                + centreCode
+        );
+
+        e.printStackTrace();
+    }
+
+
+    return null;
+}
+
+
+
     /*
 ==========================================================
 02- BUTTON RESTORE CENTRE
