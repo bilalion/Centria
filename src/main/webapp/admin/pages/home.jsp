@@ -461,29 +461,37 @@ SimpleDateFormat recentDateFormat =
     </div>
 
 
- <!-- =================================================
+<!-- =================================================
      MONTHLY REVENUE
 ================================================= -->
 
 <div class="stat-card stat-red"
+     id="monthlyRevenueCard"
+
      data-monthly-revenue="<%= monthlyRevenue %>"
+
      data-annual-revenue="<%= annualRevenue %>"
+
      data-monthly-title="<%= LanguageManager.get(
             "dashboard.monthly.revenue",
             session
      ) %>"
+
      data-annual-title="<%= LanguageManager.get(
             "dashboard.annual.revenue",
             session
      ) %>"
+
      data-monthly-description="<%= LanguageManager.get(
             "dashboard.monthly.revenue.description",
             session
      ) %>"
+
      data-annual-description="<%= LanguageManager.get(
             "dashboard.annual.revenue.description",
             session
      ) %>">
+
 
     <div class="stat-icon">
 
@@ -495,18 +503,15 @@ SimpleDateFormat recentDateFormat =
     <div class="stat-content">
 
 
+        <!-- TITLE -->
+
         <div class="stat-title-row">
 
-
-         <span class="stat-title" id="revenueTitle">
-
-    <%= LanguageManager.get(
-            "dashboard.monthly.revenue",
-            session
-    ) %>
-
-</span>
-
+         
+            <span
+                    class="stat-title"
+                    id="revenueTitle">
+            </span>
 
             <select
                     class="stat-period-select"
@@ -521,7 +526,6 @@ SimpleDateFormat recentDateFormat =
 
                 </option>
 
-
                 <option value="year">
 
                     <%= LanguageManager.get(
@@ -533,39 +537,40 @@ SimpleDateFormat recentDateFormat =
 
             </select>
 
-
         </div>
 
 
-   <strong
-        class="stat-value"
-        id="revenueValue">
+        <!-- REVENUE -->
 
-    <%= String.format(
-            "%.2f DH",
-            monthlyRevenue
-    ) %>
+        <strong
+                class="stat-value"
+                id="revenueValue">
 
-</strong>
+            <%= String.format(
+                    "%.2f DH",
+                    monthlyRevenue
+            ) %>
+
+        </strong>
 
 
-    <span
-        class="stat-description"
-        id="revenueDescription">
+        <!-- DESCRIPTION -->
 
-    <%= LanguageManager.get(
-            "dashboard.monthly.revenue.description",
-            session
-    ) %>
+        <span
+                class="stat-description"
+                id="revenueDescription">
 
-</span>
+            <%= LanguageManager.get(
+                    "dashboard.monthly.revenue.description",
+                    session
+            ) %>
+
+        </span>
 
 
     </div>
 
-
 </div>
-
 
 </section>
 

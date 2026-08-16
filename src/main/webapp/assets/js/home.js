@@ -523,197 +523,178 @@ function initCentreStatusBars() {
 
 function initRevenuePeriod() {
 
-
     const select =
-        document.getElementById(
-            "revenuePeriod"
-        );
-
+        document.getElementById("revenuePeriod");
 
     if (!select) {
-
         return;
-
     }
-
 
     const card =
-        select.closest(
-            ".stat-card"
-        );
-
+        select.closest(".stat-card");
 
     if (!card) {
-
         return;
-
     }
 
 
-    /*
-    ==============================================
-    REVENUE VALUES
-    ==============================================
-    */
+    /* ==================================================
+       REVENUE VALUES
+    ================================================== */
 
     const monthlyRevenue =
         parseFloat(
-            card.getAttribute(
-                "data-monthly-revenue"
-            )
+            card.getAttribute("data-monthly-revenue")
         ) || 0;
-
 
     const annualRevenue =
         parseFloat(
-            card.getAttribute(
-                "data-annual-revenue"
-            )
+            card.getAttribute("data-annual-revenue")
         ) || 0;
 
 
-    /*
-    ==============================================
-    TRANSLATED TEXT
-    ==============================================
-    */
+    /* ==================================================
+       TRANSLATED TEXT
+    ================================================== */
 
     const monthlyTitle =
-        card.getAttribute(
-            "data-monthly-title"
-        ) || "";
-
+        card.getAttribute("data-monthly-title") || "";
 
     const annualTitle =
-        card.getAttribute(
-            "data-annual-title"
-        ) || "";
-
+        card.getAttribute("data-annual-title") || "";
 
     const monthlyDescription =
-        card.getAttribute(
-            "data-monthly-description"
-        ) || "";
-
+        card.getAttribute("data-monthly-description") || "";
 
     const annualDescription =
-        card.getAttribute(
-            "data-annual-description"
-        ) || "";
+        card.getAttribute("data-annual-description") || "";
 
 
-    /*
-    ==============================================
-    TARGET ELEMENTS
-    ==============================================
-    */
+    /* ==================================================
+       TARGET ELEMENTS
+    ================================================== */
 
     const title =
-        document.getElementById(
-            "revenueTitle"
-        );
-
+        document.getElementById("revenueTitle");
 
     const value =
-        document.getElementById(
-            "revenueValue"
-        );
-
+        document.getElementById("revenueValue");
 
     const description =
-        document.getElementById(
-            "revenueDescription"
-        );
+        document.getElementById("revenueDescription");
 
 
-    if (
-        !title ||
-        !value ||
-        !description
-    ) {
-
+    if (!title || !value || !description) {
         return;
-
     }
 
 
-    /*
-    ==============================================
-    UPDATE REVENUE
-    ==============================================
-    */
+    /* ==================================================
+       HIDE / SHOW STATE
+    ================================================== */
+
+    let revenueHidden = true;
+
+
+    /* ==================================================
+       UPDATE REVENUE
+    ================================================== */
 
     function updateRevenue() {
 
-
-        if (
-            select.value === "year"
-        ) {
-
-
-            /*
-            ANNUAL
-            */
-
-            title.textContent =
-                annualTitle;
+        let revenue;
+        let currentTitle;
+        let currentDescription;
 
 
-   value.textContent =
-    annualRevenue.toFixed(2)
-    + " DH";
+        if (select.value === "year") {
 
-value.style.direction = "ltr";
-value.style.unicodeBidi = "isolate";
+            revenue = annualRevenue;
+            currentTitle = annualTitle;
+            currentDescription = annualDescription;
 
+        } else {
 
-            description.textContent =
-                annualDescription;
-
-
-        }
-        else {
-
-
-            /*
-            MONTHLY
-            */
-
-            title.textContent =
-                monthlyTitle;
-
-
-           value.textContent =
-    monthlyRevenue.toFixed(2)
-    + " DH";
-
-value.style.direction = "ltr";
-value.style.unicodeBidi = "isolate";
-
-
-            description.textContent =
-                monthlyDescription;
+            revenue = monthlyRevenue;
+            currentTitle = monthlyTitle;
+            currentDescription = monthlyDescription;
 
         }
 
+
+        title.textContent =
+            currentTitle;
+
+        description.textContent =
+            currentDescription;
+
+
+        if (revenueHidden) {
+
+            value.textContent ="*****";
+
+        } else {
+
+            value.textContent =
+                revenue.toFixed(2) + " DH";
+        }
+
+
+        value.style.direction = "ltr";
+        value.style.unicodeBidi = "isolate";
     }
 
 
-    /*
-    ==============================================
-    CHANGE EVENT
-    ==============================================
-    */
+    /* ==================================================
+       PERIOD CHANGE
+    ================================================== */
 
     select.onchange =
         updateRevenue;
 
 
-    /*
-    ==============================================
-    INITIAL VALUE
-    ==============================================
-    */
+    /* ==================================================
+       CARD CLICK - HIDE / SHOW
+    ================================================== */
+
+    card.addEventListener(
+        "click",
+        function(event) {
+
+            /*
+             * Don't trigger Hide/Show when
+             * using the period selector.
+             */
+
+            if (
+                event.target === select ||
+                select.contains(event.target)
+            ) {
+                return;
+            }
+
+
+            revenueHidden =
+                !revenueHidden;
+
+
+            updateRevenue();
+
+        }
+    );
+
+
+    /* ==================================================
+       CARD INTERACTION
+    ================================================== */
+
+    card.style.cursor =
+        "pointer";
+
+
+    /* ==================================================
+       INITIAL VALUE
+    ================================================== */
 
     updateRevenue();
 
@@ -749,3 +730,4 @@ document.addEventListener(
 
     }
 );
+
