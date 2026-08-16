@@ -596,6 +596,8 @@ SimpleDateFormat recentDateFormat =
 
 
         <div class="overview-header-title">
+            
+           <i class="fa-solid fa-chart-pie"></i>
 
             <h2>
 
@@ -1053,7 +1055,7 @@ SimpleDateFormat recentDateFormat =
 
 <div class="dashboard-widget recent-widget">
 
-
+  
     <!-- =================================================
          SECTION 28.01 - RECENT HEADER
     ================================================= -->

@@ -101,7 +101,13 @@ body{
 
     --primary-dark:#1d4ed8;
 
-    --primary-light:#dbeafe;
+    --primary-light:#eff6ff;
+
+    --primary-soft:#dbeafe;
+
+    --primary-border:#bfdbfe;
+
+    --primary-text:#1e3a8a;
 
 
     /* =====================================
@@ -132,7 +138,7 @@ body{
     --border:#e5e7eb;
 
     /* --background:#f5f7fb; (old)   */
-   --background:#fdfdfd;
+    --background:#fdfdfd;
 
 
     /* =====================================
@@ -193,6 +199,44 @@ body{
     --transition:
         .25s ease;
 
+    
+    /* =====================================
+   Card Colors
+===================================== */
+
+--card-bg:#ffffff;
+
+--card-border:#e5e7eb;
+
+--card-hover:#f8fafc;
+
+
+/* =====================================
+   Status Colors
+===================================== */
+
+--success:#16a34a;
+--success-light:#f0fdf4;
+--success-border:#bbf7d0;
+--success-text:#166534;
+
+
+--warning:#f59e0b;
+--warning-light:#fffbeb;
+--warning-border:#fde68a;
+--warning-text:#92400e;
+
+
+--danger:#dc2626;
+--danger-light:#fef2f2;
+--danger-border:#fecaca;
+--danger-text:#991b1b;
+
+
+--info:#0891b2;
+--info-light:#ecfeff;
+--info-border:#a5f3fc;
+--info-text:#155e75;
 }
 
 
@@ -465,6 +509,9 @@ body::-webkit-scrollbar-track,
     background:var(--info);
 
 }
+
+
+
 
 
 /* ======================================================

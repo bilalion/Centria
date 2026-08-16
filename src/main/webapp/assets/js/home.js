@@ -288,18 +288,30 @@ function initMonthlyPaymentDonut() {
     ==========================================
     */
 
-    donut.style.background =
-        "conic-gradient(" +
+ const primaryColor =
+    getComputedStyle(document.documentElement)
+        .getPropertyValue("--primary")
+        .trim();
 
-        "#22c55e 0% " +
-        paid +
-        "%, " +
+const primaryLightColor =
+    getComputedStyle(document.documentElement)
+        .getPropertyValue("--primary-light")
+        .trim();
 
-        "#f43f5e " +
-        paid +
-        "% 100%" +
+donut.style.background =
+    "conic-gradient(" +
 
-        ")";
+    primaryColor +
+    " 0% " +
+    paid +
+    "%, " +
+
+    primaryLightColor +
+    " " +
+    paid +
+    "% 100%" +
+
+    ")";
 
 
     /*
