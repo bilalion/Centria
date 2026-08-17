@@ -75,17 +75,18 @@
     </div>
 
 </div>
-
-
+              
 <!-- ======================================================
      GLOBAL DIALOG TRANSLATIONS
 ====================================================== -->
 
-
-
 <script>
 
-    window.centriaDialogMessages = {
+window.centriaDialogMessages = {
+
+        /* ==================================================
+           ARCHIVE
+        ================================================== */
 
         "archive.error.operation.required":
             "<%= LanguageManager.get("archive.error.operation.required", session) %>",
@@ -109,8 +110,26 @@
             "<%= LanguageManager.get("archive.error.centre.code", session) %>",
 
         "archive.error.dialog":
-            "<%= LanguageManager.get("archive.error.dialog", session) %>"
+            "<%= LanguageManager.get("archive.error.dialog", session) %>",
+
+
+        /* ==================================================
+           PAYMENTS
+        ================================================== */
+
+        "payments.error.start.date.required":
+            "<%= LanguageManager.get("payments.error.start.date.required", session) %>",
+
+        "payments.error.confirm":
+            "<%= LanguageManager.get("payments.error.confirm", session) %>",
+
+        "payments.error.centre.required":
+            "<%= LanguageManager.get("payments.error.centre.required", session) %>",
+
+        "payments.error.subscription.update":
+            "<%= LanguageManager.get("payments.error.subscription.update", session) %>"
 
     };
 
 </script>
+

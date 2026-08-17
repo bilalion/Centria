@@ -868,6 +868,7 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
 /* ======================================================
    14. CONFIRM MODALS
 ====================================================== */
+
 #payment-confirm-modal,
 #subscription-confirm-modal{
     position:fixed;
@@ -882,6 +883,11 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
     z-index:9999;
 }
 
+
+/* ======================================================
+   MODAL BOX
+====================================================== */
+
 #payment-confirm-modal .reset-confirm-box,
 #subscription-confirm-modal .reset-confirm-box{
     position:relative;
@@ -891,9 +897,16 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
     background:#fff;
     border:1px solid #e3eaf4;
     border-radius:18px;
-    box-shadow:0 24px 60px rgba(15,23,42,.18),0 4px 14px rgba(15,23,42,.06);
+    box-shadow:
+        0 24px 60px rgba(15,23,42,.18),
+        0 4px 14px rgba(15,23,42,.06);
     direction:rtl;
 }
+
+
+/* ======================================================
+   CLOSE BUTTON
+====================================================== */
 
 #payment-confirm-modal .modal-close,
 #subscription-confirm-modal .modal-close{
@@ -901,21 +914,29 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
     top:18px;
     left:18px;
     right:auto;
+
     width:58px;
     height:58px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:0;
+
     border:1px solid #d8e3f1;
     border-radius:12px;
+
     background:#fff;
     color:#64748b;
+
     font-size:25px;
     font-weight:700;
     line-height:1;
+
     cursor:pointer;
     box-sizing:border-box;
+
     transition:.25s ease;
 }
 
@@ -924,83 +945,163 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
     background:#ef4444;
     border-color:#ef4444;
     color:#fff;
+
     transform:rotate(90deg);
+
     box-shadow:0 6px 16px rgba(239,68,68,.25);
 }
+
+
+/* ======================================================
+   CONTENT
+====================================================== */
 
 #payment-confirm-modal .reset-confirm-content,
 #subscription-confirm-modal .reset-confirm-content{
     display:flex;
     flex-direction:column;
-    align-items:stretch;
+    align-items:center;
+    justify-content:center;
+
+    width:100%;
     gap:0;
+
+    text-align:center;
 }
+
+
+/* ======================================================
+   ICON + TITLE
+   نفس السطر وفي الوسط
+====================================================== */
 
 #payment-confirm-modal .confirm-header,
 #subscription-confirm-modal .confirm-header{
+    width:100%;
+
     display:flex;
+    flex-direction:row;
+
     align-items:center;
+    justify-content:center;
+
     gap:14px;
-    margin-bottom:22px;
-    padding-left:48px;
+
+    margin:0 0 22px;
+    padding:0;
+
+    text-align:center;
 }
+
+
+/* ======================================================
+   CONFIRM ICON
+====================================================== */
 
 #payment-confirm-modal .confirm-icon,
 #subscription-confirm-modal .confirm-icon{
     width:48px;
     height:48px;
+
     flex:0 0 48px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     border-radius:14px;
+
     background:#eef4ff;
     border:1px solid #d7e5ff;
+
     color:#2563eb;
+
     font-size:22px;
 }
+
+
+/* ======================================================
+   CONFIRM TITLE
+====================================================== */
 
 #payment-confirm-modal .confirm-title,
 #subscription-confirm-modal .confirm-title{
     margin:0;
+
     color:#1e293b;
+
     font-size:22px;
     font-weight:700;
     line-height:1.4;
+
+    white-space:nowrap;
 }
+
+
+/* ======================================================
+   MESSAGE
+   تحت icon + title وفي الوسط
+====================================================== */
 
 #payment-confirm-modal .reset-confirm-content > p,
 #subscription-confirm-modal .reset-confirm-content > p{
+    width:100%;
+
     margin:0 0 28px;
+    padding:0;
+
     color:#64748b;
+
     font-size:16px;
     font-weight:500;
     line-height:1.8;
-    text-align:right;
+
+    text-align:center;
 }
+
+
+/* ======================================================
+   ACTIONS
+====================================================== */
 
 #payment-confirm-modal .reset-confirm-actions,
 #subscription-confirm-modal .reset-confirm-actions{
+    width:100%;
+
     display:flex;
     flex-direction:row;
+
     align-items:center;
     justify-content:center;
+
     gap:12px;
-    margin-top:4px;
+
+    margin:4px 0 0;
 }
+
+
+/* ======================================================
+   BUTTONS
+====================================================== */
 
 #payment-confirm-modal .reset-confirm-actions button,
 #subscription-confirm-modal .reset-confirm-actions button{
     min-width:120px;
     height:44px;
+
     padding:0 24px;
+
     border-radius:10px;
+
     font-family:inherit;
     font-size:15px;
     font-weight:700;
+
     cursor:pointer;
+
     transition:.2s ease;
 }
+
 
 #payment-confirm-modal .reset-confirm-actions .btn-secondary,
 #subscription-confirm-modal .reset-confirm-actions .btn-secondary{
@@ -1009,19 +1110,79 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
     color:#475569;
 }
 
+
 #payment-confirm-modal .reset-confirm-actions .btn-primary,
 #subscription-confirm-modal .reset-confirm-actions .btn-primary{
     background:#2563eb;
     border:1px solid #2563eb;
     color:#fff;
+
     box-shadow:0 6px 14px rgba(37,99,235,.20);
 }
+
 
 #payment-confirm-modal .reset-confirm-actions .btn-primary:hover,
 #subscription-confirm-modal .reset-confirm-actions .btn-primary:hover{
     background:#1d4ed8;
     border-color:#1d4ed8;
+
     transform:translateY(-1px);
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:600px){
+
+    #payment-confirm-modal,
+    #subscription-confirm-modal{
+        padding:16px;
+    }
+
+    #payment-confirm-modal .reset-confirm-box,
+    #subscription-confirm-modal .reset-confirm-box{
+        width:100%;
+        padding:28px 22px 22px;
+        border-radius:16px;
+    }
+
+    #payment-confirm-modal .confirm-header,
+    #subscription-confirm-modal .confirm-header{
+        gap:10px;
+        margin-bottom:18px;
+    }
+
+    #payment-confirm-modal .confirm-icon,
+    #subscription-confirm-modal .confirm-icon{
+        width:44px;
+        height:44px;
+        flex-basis:44px;
+        font-size:20px;
+    }
+
+    #payment-confirm-modal .confirm-title,
+    #subscription-confirm-modal .confirm-title{
+        font-size:19px;
+    }
+
+    #payment-confirm-modal .reset-confirm-content > p,
+    #subscription-confirm-modal .reset-confirm-content > p{
+        font-size:15px;
+        margin-bottom:22px;
+    }
+
+    #payment-confirm-modal .reset-confirm-actions,
+    #subscription-confirm-modal .reset-confirm-actions{
+        width:100%;
+    }
+
+    #payment-confirm-modal .reset-confirm-actions button,
+    #subscription-confirm-modal .reset-confirm-actions button{
+        flex:1;
+        min-width:0;
+    }
 }
 
 /* ======================================================

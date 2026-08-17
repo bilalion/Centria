@@ -12,9 +12,7 @@ LANGUAGE / DIRECTION
 String lang =
 
         session.getAttribute("lang") != null
-
         ?
-
         session.getAttribute("lang").toString()
 
         :
@@ -130,7 +128,6 @@ if (
 
 %>
 
-
 <!DOCTYPE html>
 
 <html lang="<%=lang%>"
@@ -171,14 +168,11 @@ if (
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/layout/app-layout.css?v=1">
 
-
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/layout/platform-banner.css?v=1">
 
-
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/layout/header.css?v=1">
-
 
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/layout/sidebar.css?v=1">
@@ -195,18 +189,14 @@ if (
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/pages/home.css?v=1">
 
-
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/pages/centres.css?v=1">
-
 
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/pages/payments.css?v=1">
 
-
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/pages/archive.css?v=1">
-
 
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/assets/css/components/dialog.css?v=2">
@@ -238,9 +228,7 @@ window.contextPath =
      PLATFORM BANNER
 ================================================= -->
 
-
 <jsp:include page="components/platform-banner.jsp"/>
-
 
 <!-- =================================================
      GLOBAL HEADER
@@ -452,17 +440,13 @@ else {
         src="<%=request.getContextPath()%>/assets/js/centres.js?v=3">
 </script>
 
-
 <script defer
         src="<%=request.getContextPath()%>/assets/js/payments.js?v=6">
 </script>
 
-
 <script defer
         src="<%=request.getContextPath()%>/assets/js/archive.js?v=1">
 </script>
-
-
 
 <script defer
         src="<%=request.getContextPath()%>/assets/js/dialog.js?v=2">
@@ -471,6 +455,4 @@ else {
 
 
 </body>
-
-
 </html>

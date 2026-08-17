@@ -22,18 +22,10 @@ console.log(
 );
 
 
-
 let currentPaymentTab = "UNPAID";
-
-
 let selectedCentreCode = null;
-
-
 let paymentSearchTimer = null;
-
-
 let selectedSubscriptionCentre = null
-
 let selectedSubscriptionFacture = null;
 
 let paymentCounters = {
@@ -591,37 +583,60 @@ function viewPayment(centreCode){
 ==========================================================
 */
 
-
 function openPaymentConfirm(centreCode){
 
-
-
     selectedCentreCode =
-    centreCode;
+        centreCode;
 
 
+    /*
+    ==================================================
+    CHECK SUBSCRIPTION START DATE
+    BEFORE OPENING CONFIRMATION DIALOG
+    ==================================================
+    */
+
+    const startDateElement =
+        document.querySelector(
+            '.payment-start-date[data-centre="' +
+            centreCode +
+            '"]'
+        );
 
 
-    let modal =
+    if(
+        !startDateElement ||
+        startDateElement.value.trim() === ""
+    ){
 
-    document.getElementById(
-        "payment-confirm-modal"
-    );
+        showErrorDialog(
+            "payments.error.start.date.required"
+        );
+
+        return;
+
+    }
 
 
+    /*
+    ==================================================
+    OPEN CONFIRMATION DIALOG
+    ==================================================
+    */
+
+    const modal =
+        document.getElementById(
+            "payment-confirm-modal"
+        );
 
 
     if(modal){
-
 
         modal.classList.add(
             "show"
         );
 
-
     }
-
-
 
 }
 
@@ -683,13 +698,15 @@ function confirmPayment(){
 
 
 
-    if(startDate === ""){
+if(startDate === ""){
 
-        alert("Please select the subscription start date.");
+    showErrorDialog(
+        "payments.error.start.date.required"
+    );
 
-        return;
+    return;
 
-    }
+}
 
 
 
@@ -765,15 +782,12 @@ function confirmPayment(){
 
 
         }
-        else{
+        
+        else {
 
+             showErrorDialog("payments.error.confirm");
 
-            alert(
-                "Payment confirmation failed."
-            );
-
-
-        }
+            }
 
 
     })
@@ -1019,18 +1033,15 @@ function updateSubscription(){
 
 
 
-    if(!selectedSubscriptionCentre){
+ if(!selectedSubscriptionCentre){
 
+    showErrorDialog(
+        "payments.error.centre.required"
+    );
 
-        alert(
-            "Centre not selected"
-        );
+    return;
 
-
-        return;
-
-
-    }
+}
 
 
 
@@ -1146,15 +1157,13 @@ formData.append(
 
 
         }
-        else{
+     else{
 
+    showErrorDialog(
+        "payments.error.subscription.update"
+    );
 
-            alert(
-                "Subscription update failed"
-            );
-
-
-        }
+}
 
 
 
