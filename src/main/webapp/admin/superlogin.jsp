@@ -46,45 +46,24 @@ boolean loginError =
 <html lang="<%=lang%>"
       dir="<%=direction%>">
 
-
 <head>
 
-
 <meta charset="UTF-8">
-
 
 <meta name="viewport"
       content="width=device-width,initial-scale=1.0">
 
-
 <title>CENTRIA</title>
-
-
 
 <link rel="stylesheet"
 
 href="<%=request.getContextPath()%>/assets/css/standalone/login.css?v=20">
 
-
 </head>
-
-
-
-
 
 <body>
 
-
-
-
-
 <div class="login-layout">
-
-
-
-
-
-
 
 <!-- ==================================================
      LEFT BRANDING PANEL
@@ -93,13 +72,7 @@ href="<%=request.getContextPath()%>/assets/css/standalone/login.css?v=20">
 
 <section class="branding-panel">
 
-
-
-
-
 <div class="branding-top">
-
-
 
 <img
 
@@ -109,42 +82,20 @@ class="platform-logo"
 
 alt="CENTRIA">
 
-
-
-
-
 <span class="platform-tag">
-
 
 <%=LanguageManager.get(
         "login.platform",
         session
 )%>
 
-
 </span>
-
-
 
 </div>
 
-
-
-
-
-
-
-
-
 <div class="branding-main">
 
-
-
-
-
 <div class="branding-content">
-
-
 
 <h1>
 
@@ -157,11 +108,6 @@ alt="CENTRIA">
 
 </h1>
 
-
-
-
-
-
 <p>
 
 
@@ -173,40 +119,20 @@ alt="CENTRIA">
 
 </p>
 
-
-
 </div>
 
-
-
-
-
-
-
-
-
 <div class="branding-features">
-
-
-
-
 
 <!-- CENTRES -->
 
 
 <div class="feature-card centres">
 
-
-
 <div class="feature-icon">
 
 🏫
 
 </div>
-
-
-
-
 
 <div class="feature-body">
 
@@ -222,8 +148,6 @@ alt="CENTRIA">
 
 </h3>
 
-
-
 <p>
 
 
@@ -235,20 +159,9 @@ alt="CENTRIA">
 
 </p>
 
-
-
 </div>
 
-
-
 </div>
-
-
-
-
-
-
-
 
 
 <!-- PAYMENTS -->
@@ -256,17 +169,11 @@ alt="CENTRIA">
 
 <div class="feature-card payments">
 
-
-
 <div class="feature-icon">
 
 💳
 
 </div>
-
-
-
-
 
 <div class="feature-body">
 
@@ -282,8 +189,6 @@ alt="CENTRIA">
 
 </h3>
 
-
-
 <p>
 
 
@@ -295,20 +200,9 @@ alt="CENTRIA">
 
 </p>
 
-
-
 </div>
 
-
-
 </div>
-
-
-
-
-
-
-
 
 
 <!-- ANALYTICS -->
@@ -316,23 +210,15 @@ alt="CENTRIA">
 
 <div class="feature-card analytics">
 
-
-
 <div class="feature-icon">
 
 📊
 
 </div>
 
-
-
-
-
 <div class="feature-body">
 
-
 <h3>
-
 
 <%=LanguageManager.get(
         "login.feature.analytics",
@@ -341,8 +227,6 @@ alt="CENTRIA">
 
 
 </h3>
-
-
 
 <p>
 
@@ -355,33 +239,13 @@ alt="CENTRIA">
 
 </p>
 
-
+</div>
 
 </div>
 
-
-
 </div>
 
-
-
-
-
-
-
 </div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
 
 <div class="branding-footer">
 
@@ -394,10 +258,6 @@ alt="CENTRIA">
 
 </div>
 
-
-
-
-
 </section>
 
 <!-- ==================================================
@@ -407,11 +267,7 @@ alt="CENTRIA">
 
 <section class="auth-panel">
 
-
-
 <div class="language-selector">
-
-
 
 <form action="<%=request.getContextPath()%>/LanguageServlet"
 
@@ -433,10 +289,6 @@ alt="CENTRIA">
 
 </option>
 
-
-
-
-
 <option value="fr"
 
 <%=lang.equals("fr") ? "selected" : ""%>>
@@ -444,10 +296,6 @@ alt="CENTRIA">
 🇫🇷 Français
 
 </option>
-
-
-
-
 
 <option value="ar"
 
@@ -460,22 +308,8 @@ alt="CENTRIA">
 
 
 </select>
-
-
-
 </form>
-
-
-
 </div>
-
-
-
-
-
-
-
-
 
 <!-- ==========================================
      LOGIN HEADER
@@ -483,11 +317,7 @@ alt="CENTRIA">
 
 
 <div class="login-header">
-
-
-
 <h2>
-
 
 <%=LanguageManager.get(
         "login.welcome",
@@ -496,9 +326,6 @@ alt="CENTRIA">
 
 
 </h2>
-
-
-
 
 
 <p>
@@ -516,24 +343,6 @@ alt="CENTRIA">
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- ==========================================
      LOGIN FORM
 =========================================== -->
@@ -546,16 +355,7 @@ action="<%=request.getContextPath()%>/SuperLoginServlet"
 method="POST">
 
 
-
-
-
-
-
-
-
 <div class="input-group">
-
-
 
 <span class="input-icon">
 
@@ -563,10 +363,7 @@ method="POST">
 
 </span>
 
-
-
-
-
+    
 <input
 
 
@@ -654,16 +451,7 @@ onclick="togglePassword()">
 </div>
 
 
-
-
-
 </div>
-
-
-
-
-
-
 
 
 
@@ -699,13 +487,6 @@ name="remember">
 </div>
 
 
-
-
-
-
-
-
-
 <button
 
 
@@ -728,14 +509,7 @@ class="<%= loginError ? "login-error-state" : "" %>"
 )%>
 
 
-
 </button>
-
-
-
-
-
-
 
 
 
@@ -817,15 +591,11 @@ else if("system_error".equals(error)){
 </div>
 
 
-
 <%
 
 }
 
 %>
-
-
-
 
 
 </form>
@@ -850,10 +620,6 @@ else if("system_error".equals(error)){
 
 </span>
 
-
-
-
-
 <small>
 
 
@@ -870,12 +636,7 @@ else if("system_error".equals(error)){
 
      class="db-status checking">
 
-
-
 </div>
-
-
-
 </div>
 
 
@@ -884,27 +645,10 @@ else if("system_error".equals(error)){
      DATABASE STATUS
 =========================================== -->
 
-
-
-
 </section>
 
 
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 <script>
@@ -981,10 +725,6 @@ const loginLanguage = {
 src="<%=request.getContextPath()%>/assets/js/superlogin.js?v=20">
 
 </script>
-
-
-
-
 
 
 

@@ -158,17 +158,26 @@ public class SuperLoginServlet extends HttpServlet {
 
 
 
-                /*
-                 =====================================
-                 حفظ اسم المستخدم
-                 =====================================
-                 */
-
                 session.setAttribute(
-                        "adminUsername",
-                        username
+                     "adminUsername",
+                     username
                 );
 
+
+/*
+ =====================================
+ حفظ نوع المستخدم
+ =====================================
+ */
+
+                  String adminType =
+                  rs.getString("type");
+
+
+                  session.setAttribute(
+                          "adminType",
+                          adminType
+                  );
 
 
                 /*
