@@ -5,7 +5,9 @@
  *
  * AJAX Search / Filter / Sort / Pagination / Modals
  *
- * No Java or Servlet logic is modified.
+ * Global Dialog is used for all errors.
+ * No alert() and no hardcoded error messages.
+ *
  * ==========================================================
  */
 
@@ -22,6 +24,7 @@ let editCentreId = null;
 let activeCentrePage = 1;
 let centresAbortController = null;
 let centresModalEventsBound = false;
+let centresAutoRefreshTimer = null;
 
 
 /* ======================================================
@@ -64,14 +67,6 @@ function openCentreModal(modal) {
     const modalClose =
         modal.querySelector(".modal-close");
 
-    /*
-     * The close button is shared by the modal
-     * and must always remain visible.
-     *
-     * View / Edit / Reset dialogs all use
-     * the same shared close button.
-     */
-
     if (modalClose) {
 
         modalClose.style.display = "flex";
@@ -87,20 +82,26 @@ function openCentreModal(modal) {
 
 }
 
+
 function closeCentreModalElement(modal) {
 
     if (!modal) {
         return;
     }
 
-    const modalClose = modal.querySelector(".modal-close");
+    const modalClose =
+        modal.querySelector(".modal-close");
 
     if (modalClose) {
         modalClose.style.display = "flex";
     }
 
     modal.classList.remove("show");
-    modal.setAttribute("aria-hidden", "true");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
 
 }
 
@@ -128,11 +129,40 @@ function normaliseCentreStatus(status) {
 
 function escapeCentreHtml(value) {
 
-    const container = document.createElement("div");
+    const container =
+        document.createElement("div");
 
-    container.textContent = value || "";
+    container.textContent =
+        value || "";
 
     return container.innerHTML;
+
+}
+
+
+/* ======================================================
+   GLOBAL DIALOG
+====================================================== */
+
+function showCentreDialog(errorKey) {
+
+    if (
+        typeof showDialog === "function"
+    ) {
+
+        showDialog(
+            "error",
+            errorKey || "server_error"
+        );
+
+        return;
+
+    }
+
+    console.error(
+        "Global dialog is not available:",
+        errorKey
+    );
 
 }
 
@@ -143,20 +173,27 @@ function escapeCentreHtml(value) {
 
 function showCentresLoading() {
 
-    const container = getCentresElement(
-        "centres-table-container"
-    );
+    const container =
+        getCentresElement(
+            "centres-table-container"
+        );
 
     if (!container) {
         return;
     }
 
-    container.setAttribute("aria-busy", "true");
+    container.setAttribute(
+        "aria-busy",
+        "true"
+    );
 
     container.innerHTML = `
-        <div class="centres-table-loading" aria-live="polite">
+        <div class="centres-table-loading"
+             aria-live="polite">
+
             <i class="fa-solid fa-spinner fa-spin"
                aria-hidden="true"></i>
+
         </div>
     `;
 
@@ -165,22 +202,25 @@ function showCentresLoading() {
 
 function showCentresLoadError() {
 
-    const container = getCentresElement(
-        "centres-table-container"
-    );
+    const container =
+        getCentresElement(
+            "centres-table-container"
+        );
 
     if (!container) {
         return;
     }
 
-    container.setAttribute("aria-busy", "false");
+    container.setAttribute(
+        "aria-busy",
+        "false"
+    );
 
-    container.innerHTML = `
-        <div class="centres-table-error" role="alert">
-            <i class="fa-solid fa-circle-exclamation"
-               aria-hidden="true"></i>
-        </div>
-    `;
+    container.innerHTML = "";
+
+    showCentreDialog(
+        "load_centres_error"
+    );
 
 }
 
@@ -191,34 +231,67 @@ function showCentresLoadError() {
 
 function loadCentres(page) {
 
-    const currentPage = Number(page) || 1;
+    const currentPage =
+        Number(page) || 1;
 
-    activeCentrePage = currentPage;
+    activeCentrePage =
+        currentPage;
 
-    const search = getCentreFilterValue(
-        "centreSearch",
-        ""
+    const search =
+        getCentreFilterValue(
+            "centreSearch",
+            ""
+        );
+
+    const status =
+        getCentreFilterValue(
+            "centreStatus",
+            "ALL"
+        );
+
+    const order =
+        getCentreFilterValue(
+            "centreOrder",
+            "NEW"
+        );
+
+    const parameters =
+        new URLSearchParams();
+
+    parameters.append(
+        "action",
+        "list"
     );
 
-    const status = getCentreFilterValue(
-        "centreStatus",
-        "ALL"
+    parameters.append(
+        "ajax",
+        "true"
     );
 
-    const order = getCentreFilterValue(
-        "centreOrder",
-        "NEW"
+    parameters.append(
+        "page",
+        currentPage
     );
 
-    const parameters = new URLSearchParams();
+    parameters.append(
+        "search",
+        search
+    );
 
-    parameters.append("action", "list");
-    parameters.append("ajax", "true");
-    parameters.append("page", currentPage);
-    parameters.append("search", search);
-    parameters.append("status", status);
-    parameters.append("order", order);
-    parameters.append("_refresh", Date.now());
+    parameters.append(
+        "status",
+        status
+    );
+
+    parameters.append(
+        "order",
+        order
+    );
+
+    parameters.append(
+        "_refresh",
+        Date.now()
+    );
 
     const url =
         getCentresContextPath()
@@ -226,27 +299,40 @@ function loadCentres(page) {
         + parameters.toString();
 
     if (centresAbortController) {
+
         centresAbortController.abort();
+
     }
 
-    centresAbortController = window.AbortController
+    centresAbortController =
+        window.AbortController
         ? new AbortController()
         : null;
 
-    const options = centresAbortController
-        ? { signal: centresAbortController.signal }
+    const options =
+        centresAbortController
+        ? {
+            signal:
+                centresAbortController.signal
+        }
         : {};
 
     showCentresLoading();
 
-    fetch(url, options)
+    fetch(
+        url,
+        options
+    )
 
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
-                    "HTTP ERROR " + response.status
+                    "HTTP ERROR "
+                    + response.status
                 );
+
             }
 
             return response.text();
@@ -255,26 +341,38 @@ function loadCentres(page) {
 
         .then(html => {
 
-            const container = getCentresElement(
-                "centres-table-container"
-            );
+            const container =
+                getCentresElement(
+                    "centres-table-container"
+                );
 
             if (!container) {
                 return;
             }
 
-            container.innerHTML = html;
-            container.setAttribute("aria-busy", "false");
+            container.innerHTML =
+                html;
+
+            container.setAttribute(
+                "aria-busy",
+                "false"
+            );
 
             activateCentreEvents();
+
             refreshCentresSummary();
 
         })
 
         .catch(error => {
 
-            if (error.name === "AbortError") {
+            if (
+                error.name ===
+                "AbortError"
+            ) {
+
                 return;
+
             }
 
             showCentresLoadError();
@@ -304,7 +402,10 @@ function searchCentres(event) {
 function filterCentres() {
 
     syncCentreStatusFilters(
-        getCentreFilterValue("centreStatus", "ALL")
+        getCentreFilterValue(
+            "centreStatus",
+            "ALL"
+        )
     );
 
     loadCentres(1);
@@ -325,40 +426,64 @@ function changeCentrePage(page) {
 
 function activateCentreStatusFilters() {
 
-    const filters = document.querySelectorAll(
-        "[data-centre-status-filter]"
-    );
+    const filters =
+        document.querySelectorAll(
+            "[data-centre-status-filter]"
+        );
 
-    filters.forEach(filter => {
+    filters.forEach(
+        filter => {
 
-        if (filter.dataset.centresBound === "true") {
-            return;
-        }
+            if (
+                filter.dataset
+                    .centresBound
+                    === "true"
+            ) {
 
-        filter.dataset.centresBound = "true";
-
-        filter.addEventListener("click", function () {
-
-            const status =
-                this.dataset.centreStatusFilter;
-
-            const statusSelect = getCentresElement(
-                "centreStatus"
-            );
-
-            if (!statusSelect || !status) {
                 return;
+
             }
 
-            statusSelect.value = status;
+            filter.dataset.centresBound =
+                "true";
 
-            syncCentreStatusFilters(status);
+            filter.addEventListener(
+                "click",
+                function () {
 
-            loadCentres(1);
+                    const status =
+                        this.dataset
+                            .centreStatusFilter;
 
-        });
+                    const statusSelect =
+                        getCentresElement(
+                            "centreStatus"
+                        );
 
-    });
+                    if (
+                        !statusSelect
+                        ||
+                        !status
+                    ) {
+
+                        return;
+
+                    }
+
+                    statusSelect.value =
+                        status;
+
+                    syncCentreStatusFilters(
+                        status
+                    );
+
+                    loadCentres(1);
+
+                }
+            );
+
+        }
+    );
 
 }
 
@@ -366,31 +491,39 @@ function activateCentreStatusFilters() {
 function syncCentreStatusFilters(status) {
 
     const activeStatus =
-        normaliseCentreStatus(status) || "ALL";
+        normaliseCentreStatus(status)
+        || "ALL";
 
-    const filters = document.querySelectorAll(
-        "[data-centre-status-filter]"
+    const filters =
+        document.querySelectorAll(
+            "[data-centre-status-filter]"
+        );
+
+    filters.forEach(
+        filter => {
+
+            const filterStatus =
+                filter.dataset
+                    .centreStatusFilter;
+
+            const isActive =
+                filterStatus ===
+                activeStatus;
+
+            filter.classList.toggle(
+                "is-active",
+                isActive
+            );
+
+            filter.setAttribute(
+                "aria-pressed",
+                isActive
+                ? "true"
+                : "false"
+            );
+
+        }
     );
-
-    filters.forEach(filter => {
-
-        const filterStatus =
-            filter.dataset.centreStatusFilter;
-
-        const isActive =
-            filterStatus === activeStatus;
-
-        filter.classList.toggle(
-            "is-active",
-            isActive
-        );
-
-        filter.setAttribute(
-            "aria-pressed",
-            isActive ? "true" : "false"
-        );
-
-    });
 
 }
 
@@ -407,43 +540,57 @@ function getCentreRowStatus(row) {
 
     const rowStatus =
         row.dataset.status
-        || row.dataset.centreStatus;
+        ||
+        row.dataset.centreStatus;
 
     if (rowStatus) {
-        return normaliseCentreStatus(rowStatus);
+
+        return normaliseCentreStatus(
+            rowStatus
+        );
+
     }
 
-    const statusElement = row.querySelector(
-        "[data-centre-status], [data-status]"
-    );
+    const statusElement =
+        row.querySelector(
+            "[data-centre-status], [data-status]"
+        );
 
     if (statusElement) {
 
         const elementStatus =
-            statusElement.dataset.centreStatus
-            || statusElement.dataset.status;
+            statusElement.dataset
+                .centreStatus
+            ||
+            statusElement.dataset
+                .status;
 
         if (elementStatus) {
+
             return normaliseCentreStatus(
                 elementStatus
             );
+
         }
 
     }
 
-  const statusSelect = row.querySelector(
-    "select[data-id], "
-    + "select.status-active, "
-    + "select.status-inactive, "
-    + "select.status-pending, "
-    + "select.status-suspended, "
-    + "select.status-archived"
-);
+    const statusSelect =
+        row.querySelector(
+            "select[data-id], "
+            + "select.status-active, "
+            + "select.status-inactive, "
+            + "select.status-pending, "
+            + "select.status-suspended, "
+            + "select.status-archived"
+        );
 
     if (statusSelect) {
+
         return normaliseCentreStatus(
             statusSelect.value
         );
+
     }
 
     return "";
@@ -453,62 +600,90 @@ function getCentreRowStatus(row) {
 
 function refreshCentresSummary() {
 
-    const container = getCentresElement(
-        "centres-table-container"
-    );
+    const container =
+        getCentresElement(
+            "centres-table-container"
+        );
 
     if (!container) {
         return;
     }
 
-const counts = {
-    ALL: 0,
-    ACTIVE: 0,
-    INACTIVE: 0,
-    PENDING: 0,
-    SUSPENDED: 0,
-    ARCHIVED: 0
-};
+    const counts = {
 
-    const rows = Array.from(
-        container.querySelectorAll("table tr")
-    ).filter(row => {
+        ALL: 0,
+        ACTIVE: 0,
+        INACTIVE: 0,
+        PENDING: 0,
+        SUSPENDED: 0,
+        ARCHIVED: 0
 
-        return row.querySelector("td")
-            && !row.querySelector("td[colspan]");
+    };
 
-    });
+    const rows =
+        Array.from(
+            container.querySelectorAll(
+                "table tr"
+            )
+        ).filter(
+            row => {
 
-    rows.forEach(row => {
+                return row.querySelector("td")
+                    &&
+                    !row.querySelector(
+                        "td[colspan]"
+                    );
 
-        counts.ALL += 1;
+            }
+        );
 
-        const status = getCentreRowStatus(row);
+    rows.forEach(
+        row => {
 
-        if (status && counts[status] !== undefined) {
-            counts[status] += 1;
+            counts.ALL += 1;
+
+            const status =
+                getCentreRowStatus(row);
+
+            if (
+                status
+                &&
+                counts[status] !==
+                undefined
+            ) {
+
+                counts[status] += 1;
+
+            }
+
         }
-
-    });
+    );
 
     document.querySelectorAll(
         "[data-centre-status-count]"
-    ).forEach(countElement => {
+    ).forEach(
+        countElement => {
 
-        const status =
-            countElement.dataset.centreStatusCount;
+            const status =
+                countElement.dataset
+                    .centreStatusCount;
 
-        countElement.textContent =
-            counts[status] || 0;
+            countElement.textContent =
+                counts[status] || 0;
 
-    });
-
-    const totalElement = document.querySelector(
-        "[data-centres-total]"
+        }
     );
 
+    const totalElement =
+        document.querySelector(
+            "[data-centres-total]"
+        );
+
     if (totalElement) {
-        totalElement.textContent = counts.ALL || "";
+
+        totalElement.textContent =
+            counts.ALL || "";
+
     }
 
 }
@@ -524,18 +699,35 @@ function updateCentreStatus(select) {
         return;
     }
 
-    const id = select.getAttribute("data-id");
-    const status = select.value;
+    const id =
+        select.getAttribute(
+            "data-id"
+        );
+
+    const status =
+        select.value;
 
     if (!id || !status) {
         return;
     }
 
-    const parameters = new URLSearchParams();
+    const parameters =
+        new URLSearchParams();
 
-    parameters.append("action", "status");
-    parameters.append("id", id);
-    parameters.append("status", status);
+    parameters.append(
+        "action",
+        "status"
+    );
+
+    parameters.append(
+        "id",
+        id
+    );
+
+    parameters.append(
+        "status",
+        status
+    );
 
     const url =
         getCentresContextPath()
@@ -547,9 +739,12 @@ function updateCentreStatus(select) {
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
-                    "HTTP ERROR " + response.status
+                    "HTTP ERROR "
+                    + response.status
                 );
+
             }
 
             return response.json();
@@ -560,28 +755,37 @@ function updateCentreStatus(select) {
 
             if (!data.success) {
 
-                alert("Erreur modification statut");
+                showCentreDialog(
+                    "status_update_error"
+                );
 
                 return;
+
             }
 
-        select.classList.remove(
-    "status-pending",
-    "status-active",
-    "status-inactive",
-    "status-suspended",
-    "status-archived"
-);
+            select.classList.remove(
+                "status-pending",
+                "status-active",
+                "status-inactive",
+                "status-suspended",
+                "status-archived"
+            );
 
             select.classList.add(
                 "status-"
-                + String(status).toLowerCase()
+                + String(
+                    status
+                ).toLowerCase()
             );
 
-            const row = select.closest("tr");
+            const row =
+                select.closest("tr");
 
             if (row) {
-                row.dataset.status = status;
+
+                row.dataset.status =
+                    status;
+
             }
 
             refreshCentresSummary();
@@ -590,7 +794,9 @@ function updateCentreStatus(select) {
 
         .catch(() => {
 
-            alert("Erreur serveur");
+            showCentreDialog(
+                "server_error"
+            );
 
         });
 
@@ -603,35 +809,51 @@ function updateCentreStatus(select) {
 
 function activateCentreEvents() {
 
-    const form = getCentresElement(
-        "centresFilterForm"
-    );
+    const form =
+        getCentresElement(
+            "centresFilterForm"
+        );
 
     if (form) {
-        form.onsubmit = searchCentres;
+
+        form.onsubmit =
+            searchCentres;
+
     }
 
-    const status = getCentresElement(
-        "centreStatus"
-    );
+    const status =
+        getCentresElement(
+            "centreStatus"
+        );
 
     if (status) {
-        status.onchange = filterCentres;
+
+        status.onchange =
+            filterCentres;
+
     }
 
-    const order = getCentresElement(
-        "centreOrder"
-    );
+    const order =
+        getCentresElement(
+            "centreOrder"
+        );
 
     if (order) {
-        order.onchange = filterCentres;
+
+        order.onchange =
+            filterCentres;
+
     }
 
     activateSearch();
+
     activateCentreStatusFilters();
 
     syncCentreStatusFilters(
-        getCentreFilterValue("centreStatus", "ALL")
+        getCentreFilterValue(
+            "centreStatus",
+            "ALL"
+        )
     );
 
 }
@@ -639,28 +861,33 @@ function activateCentreEvents() {
 
 function activateSearch() {
 
-    const search = getCentresElement(
-        "centreSearch"
-    );
+    const search =
+        getCentresElement(
+            "centreSearch"
+        );
 
     if (!search) {
         return;
     }
 
-    search.oninput = function () {
+    search.oninput =
+        function () {
 
-        clearTimeout(centreSearchTimer);
+            clearTimeout(
+                centreSearchTimer
+            );
 
-        centreSearchTimer = setTimeout(
-            function () {
+            centreSearchTimer =
+                setTimeout(
+                    function () {
 
-                loadCentres(1);
+                        loadCentres(1);
 
-            },
-            400
-        );
+                    },
+                    400
+                );
 
-    };
+        };
 
 }
 
@@ -685,9 +912,12 @@ function viewCentre(id) {
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
-                    "HTTP ERROR " + response.status
+                    "HTTP ERROR "
+                    + response.status
                 );
+
             }
 
             return response.text();
@@ -696,28 +926,39 @@ function viewCentre(id) {
 
         .then(html => {
 
-            const modalBody = getCentresElement(
-                "centre-modal-body"
-            );
+            const modalBody =
+                getCentresElement(
+                    "centre-modal-body"
+                );
 
-            const modal = getCentresElement(
-                "centre-modal"
-            );
+            const modal =
+                getCentresElement(
+                    "centre-modal"
+                );
 
-            if (!modalBody || !modal) {
+            if (
+                !modalBody
+                ||
+                !modal
+            ) {
+
                 return;
+
             }
 
-            modalBody.innerHTML = html;
+            modalBody.innerHTML =
+                html;
 
-            openCentreModal(modal);
+            openCentreModal(
+                modal
+            );
 
         })
 
         .catch(() => {
 
-            showCentreActionError(
-                "Unable to load centre details."
+            showCentreDialog(
+                "load_centre_error"
             );
 
         });
@@ -727,28 +968,40 @@ function viewCentre(id) {
 
 function closeCentreModal() {
 
-    const modal = getCentresElement(
-        "centre-modal"
-    );
+    const modal =
+        getCentresElement(
+            "centre-modal"
+        );
 
-    const modalBody = getCentresElement(
-        "centre-modal-body"
-    );
+    const modalBody =
+        getCentresElement(
+            "centre-modal-body"
+        );
 
     const reloadTable =
-        modalBody &&
+        modalBody
+        &&
         modalBody.querySelector(
             ".created-dialog"
         );
 
-    closeCentreModalElement(modal);
+    closeCentreModalElement(
+        modal
+    );
 
     if (modalBody) {
-        modalBody.innerHTML = "";
+
+        modalBody.innerHTML =
+            "";
+
     }
 
     if (reloadTable) {
-        loadCentres(activeCentrePage);
+
+        loadCentres(
+            activeCentrePage
+        );
+
     }
 
 }
@@ -761,15 +1014,23 @@ function closeCentreModal() {
 function openAddCentre() {
 
     const modal =
-        getCentresElement("centre-modal");
+        getCentresElement(
+            "centre-modal"
+        );
 
     const modalBody =
-        getCentresElement("centre-modal-body");
+        getCentresElement(
+            "centre-modal-body"
+        );
 
-    if (!modal || !modalBody) {
+    if (
+        !modal
+        ||
+        !modalBody
+    ) {
 
-        console.error(
-            "Centre modal not found."
+        showCentreDialog(
+            "centre_modal_error"
         );
 
         return;
@@ -781,51 +1042,55 @@ function openAddCentre() {
         + "/CentreServlet?action=add"
     )
 
-    .then(response => {
+        .then(response => {
 
-        if (!response.ok) {
+            if (!response.ok) {
 
-            throw new Error(
-                "HTTP " + response.status
+                throw new Error(
+                    "HTTP "
+                    + response.status
+                );
+
+            }
+
+            return response.text();
+
+        })
+
+        .then(html => {
+
+            modalBody.innerHTML =
+                html;
+
+            const form =
+                document.getElementById(
+                    "addCentreForm"
+                );
+
+            if (form) {
+
+                form.addEventListener(
+                    "submit",
+                    submitAddCentre
+                );
+
+            }
+
+            openCentreModal(
+                modal
             );
 
-        }
+        })
 
-        return response.text();
+        .catch(() => {
 
-    })
-
-    .then(html => {
-
-        modalBody.innerHTML = html;
-
-        const form =
-            document.getElementById("addCentreForm");
-
-        if (form) {
-
-            form.addEventListener(
-                "submit",
-                submitAddCentre
+            showCentreDialog(
+                "load_add_centre_error"
             );
 
-        }
-
-        openCentreModal(modal);
-
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Open Add Centre:",
-            error
-        );
-
-    });
+        });
 
 }
-
 
 
 /* ======================================================
@@ -837,73 +1102,76 @@ function submitAddCentre(event) {
     event.preventDefault();
 
     const form =
-        document.getElementById("addCentreForm");
+        document.getElementById(
+            "addCentreForm"
+        );
 
     if (!form) {
         return;
     }
 
-   const data =
-    new URLSearchParams(
-        new FormData(form)
-    );
-
-  const actionUrl =
-    form.getAttribute("action");
-
-fetch(
-    actionUrl,
-    {
-        method: "POST",
-        body: data
-    }
-)
-
-    .then(response => {
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP ERROR " + response.status
-            );
-
-        }
-
-        return response.json();
-
-    })
-
-    .then(json => {
-
-        if (!json.success) {
-
-            alert(
-                json.error ||
-                "Error creating centre."
-            );
-
-            return;
-
-        }
-
-        closeCentreModal();
-
-        openCreatedCentre();
-
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Create Centre:",
-            error
+    const data =
+        new URLSearchParams(
+            new FormData(form)
         );
 
-    });
+    const actionUrl =
+        form.getAttribute(
+            "action"
+        );
+
+    fetch(
+        actionUrl,
+        {
+            method: "POST",
+            body: data
+        }
+    )
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP ERROR "
+                    + response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(json => {
+
+            if (!json.success) {
+
+                showCentreDialog(
+                    json.error
+                    ||
+                    "create_centre_error"
+                );
+
+                return;
+
+            }
+
+            closeCentreModal();
+
+            openCreatedCentre();
+
+        })
+
+        .catch(() => {
+
+            showCentreDialog(
+                "create_centre_error"
+            );
+
+        });
 
 }
-
-
 
 
 /* ======================================================
@@ -916,10 +1184,13 @@ function resetCentrePassword(id) {
         return;
     }
 
-    resetCentreId = id;
+    resetCentreId =
+        id;
 
     openCentreModal(
-        getCentresElement("reset-confirm-modal")
+        getCentresElement(
+            "reset-confirm-modal"
+        )
     );
 
 }
@@ -928,7 +1199,9 @@ function resetCentrePassword(id) {
 function closeResetConfirm() {
 
     closeCentreModalElement(
-        getCentresElement("reset-confirm-modal")
+        getCentresElement(
+            "reset-confirm-modal"
+        )
     );
 
 }
@@ -940,25 +1213,32 @@ function confirmResetPassword() {
         return;
     }
 
-    const centreId = resetCentreId;
+    const centreId =
+        resetCentreId;
 
-    resetCentreId = null;
+    resetCentreId =
+        null;
 
     closeResetConfirm();
 
     const url =
         getCentresContextPath()
         + "/CentreServlet?action=resetPassword&id="
-        + encodeURIComponent(centreId);
+        + encodeURIComponent(
+            centreId
+        );
 
     fetch(url)
 
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
-                    "HTTP ERROR " + response.status
+                    "HTTP ERROR "
+                    + response.status
                 );
+
             }
 
             return response.text();
@@ -967,28 +1247,39 @@ function confirmResetPassword() {
 
         .then(html => {
 
-            const modalBody = getCentresElement(
-                "centre-modal-body"
-            );
+            const modalBody =
+                getCentresElement(
+                    "centre-modal-body"
+                );
 
-            const modal = getCentresElement(
-                "centre-modal"
-            );
+            const modal =
+                getCentresElement(
+                    "centre-modal"
+                );
 
-            if (!modalBody || !modal) {
+            if (
+                !modalBody
+                ||
+                !modal
+            ) {
+
                 return;
+
             }
 
-            modalBody.innerHTML = html;
+            modalBody.innerHTML =
+                html;
 
-            openCentreModal(modal);
+            openCentreModal(
+                modal
+            );
 
         })
 
         .catch(() => {
 
-            showCentreActionError(
-                "Error resetting password."
+            showCentreDialog(
+                "reset_password_error"
             );
 
         });
@@ -1002,32 +1293,46 @@ function confirmResetPassword() {
 
 function copyLoginInfo() {
 
-    const text = getCentresElement(
-        "loginInfoText"
-    );
+    const text =
+        getCentresElement(
+            "loginInfoText"
+        );
 
     if (!text) {
         return;
     }
 
-    const value = text.value || text.textContent || "";
+    const value =
+        text.value
+        ||
+        text.textContent
+        ||
+        "";
 
     if (
         navigator.clipboard
-        && navigator.clipboard.writeText
+        &&
+        navigator.clipboard.writeText
     ) {
 
         navigator.clipboard
             .writeText(value)
-            .then(showCopyMessage)
-            .catch(() => {});
+            .then(
+                showCopyMessage
+            )
+            .catch(
+                () => {}
+            );
 
         return;
+
     }
 
     text.select();
 
-    document.execCommand("copy");
+    document.execCommand(
+        "copy"
+    );
 
     showCopyMessage();
 
@@ -1036,30 +1341,42 @@ function copyLoginInfo() {
 
 function showCopyMessage() {
 
-    const button = document.querySelector(
-        ".copy-password-btn"
-    );
+    const button =
+        document.querySelector(
+            ".copy-password-btn"
+        );
 
     if (!button) {
         return;
     }
 
     const originalContent =
-        button.dataset.originalContent
-        || button.innerHTML;
+        button.dataset
+            .originalContent
+        ||
+        button.innerHTML;
 
-    button.dataset.originalContent =
+    button.dataset
+        .originalContent =
         originalContent;
 
-    button.classList.add("copied");
+    button.classList.add(
+        "copied"
+    );
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        button.innerHTML = originalContent;
+            button.innerHTML =
+                originalContent;
 
-        button.classList.remove("copied");
+            button.classList.remove(
+                "copied"
+            );
 
-    }, 2000);
+        },
+        2000
+    );
 
 }
 
@@ -1074,10 +1391,13 @@ function editCentre(id) {
         return;
     }
 
-    editCentreId = id;
+    editCentreId =
+        id;
 
     openCentreModal(
-        getCentresElement("edit-confirm-modal")
+        getCentresElement(
+            "edit-confirm-modal"
+        )
     );
 
 }
@@ -1086,10 +1406,13 @@ function editCentre(id) {
 function closeEditConfirm() {
 
     closeCentreModalElement(
-        getCentresElement("edit-confirm-modal")
+        getCentresElement(
+            "edit-confirm-modal"
+        )
     );
 
 }
+
 
 function confirmEditCentre() {
 
@@ -1097,25 +1420,32 @@ function confirmEditCentre() {
         return;
     }
 
-    const centreId = editCentreId;
+    const centreId =
+        editCentreId;
 
-    editCentreId = null;
+    editCentreId =
+        null;
 
     closeEditConfirm();
 
     const url =
         getCentresContextPath()
         + "/CentreServlet?action=edit&id="
-        + encodeURIComponent(centreId);
+        + encodeURIComponent(
+            centreId
+        );
 
     fetch(url)
 
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
-                    "HTTP ERROR " + response.status
+                    "HTTP ERROR "
+                    + response.status
                 );
+
             }
 
             return response.text();
@@ -1124,43 +1454,59 @@ function confirmEditCentre() {
 
         .then(html => {
 
-            const modalBody = getCentresElement(
-                "centre-modal-body"
-            );
+            const modalBody =
+                getCentresElement(
+                    "centre-modal-body"
+                );
 
-            const modal = getCentresElement(
-                "centre-modal"
-            );
+            const modal =
+                getCentresElement(
+                    "centre-modal"
+                );
 
-            if (!modalBody || !modal) {
+            if (
+                !modalBody
+                ||
+                !modal
+            ) {
+
                 return;
+
             }
 
-            modalBody.innerHTML = html;
+            modalBody.innerHTML =
+                html;
 
-            openCentreModal(modal);
+            openCentreModal(
+                modal
+            );
 
         })
 
         .catch(() => {
 
-            showCentreActionError(
-                "Unable to load the edit form."
+            showCentreDialog(
+                "load_edit_centre_error"
             );
 
         });
 
 }
 
+
 /* ======================================================
    SAVE EDIT CENTRE PROFILE
 ====================================================== */
 
-function getEditCentreFieldValue(form, name) {
+function getEditCentreFieldValue(
+    form,
+    name
+) {
 
-    const field = form.querySelector(
-        "[name='" + name + "']"
-    );
+    const field =
+        form.querySelector(
+            "[name='" + name + "']"
+        );
 
     return field
         ? field.value
@@ -1168,43 +1514,63 @@ function getEditCentreFieldValue(form, name) {
 
 }
 
+
 function saveEditCentre() {
 
-    const form = getCentresElement(
-        "editCentreForm"
-    );
+    const form =
+        getCentresElement(
+            "editCentreForm"
+        );
 
     if (!form) {
         return;
     }
 
-    const id = getEditCentreFieldValue(
-        form,
-        "id"
-    );
+    const id =
+        getEditCentreFieldValue(
+            form,
+            "id"
+        );
 
     if (!id) {
         return;
     }
 
-    const data = new URLSearchParams();
+    const data =
+        new URLSearchParams();
 
-    data.append("action", "updateProfile");
-    data.append("id", id);
+    data.append(
+        "action",
+        "updateProfile"
+    );
+
+    data.append(
+        "id",
+        id
+    );
 
     data.append(
         "name",
-        getEditCentreFieldValue(form, "name")
+        getEditCentreFieldValue(
+            form,
+            "name"
+        )
     );
 
     data.append(
         "owner_name",
-        getEditCentreFieldValue(form, "owner_name")
+        getEditCentreFieldValue(
+            form,
+            "owner_name"
+        )
     );
 
     data.append(
         "phone",
-        getEditCentreFieldValue(form, "phone")
+        getEditCentreFieldValue(
+            form,
+            "phone"
+        )
     );
 
     fetch(
@@ -1218,16 +1584,21 @@ function saveEditCentre() {
                     "application/x-www-form-urlencoded;charset=UTF-8"
             },
 
-            body: data.toString()
+            body:
+                data.toString()
+
         }
     )
 
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
-                    "HTTP ERROR " + response.status
+                    "HTTP ERROR "
+                    + response.status
                 );
+
             }
 
             return response.json();
@@ -1238,9 +1609,14 @@ function saveEditCentre() {
 
             if (!json.success) {
 
-                alert(json.error);
+                showCentreDialog(
+                    json.error
+                    ||
+                    "update_centre_error"
+                );
 
                 return;
+
             }
 
             closeCentreModal();
@@ -1249,39 +1625,35 @@ function saveEditCentre() {
 
         })
 
-        .catch(() => {});
+        .catch(() => {
+
+            showCentreDialog(
+                "update_centre_error"
+            );
+
+        });
 
 }
+
 
 /* ======================================================
-   MODAL ERROR / CLOSE EVENTS
+   MODAL ERROR
 ====================================================== */
 
-function showCentreActionError(message) {
+function showCentreActionError(
+    errorKey
+) {
 
-    const modalBody = getCentresElement(
-        "centre-modal-body"
+    showCentreDialog(
+        errorKey || "server_error"
     );
-
-    const modal = getCentresElement(
-        "centre-modal"
-    );
-
-    if (!modalBody || !modal) {
-        return;
-    }
-
-    modalBody.innerHTML = `
-        <div class="empty-state centre-action-error">
-            <i class="fa-solid fa-circle-exclamation"
-               aria-hidden="true"></i>
-            <p>${escapeCentreHtml(message)}</p>
-        </div>
-    `;
-
-    openCentreModal(modal);
 
 }
+
+
+/* ======================================================
+   MODAL EVENTS
+====================================================== */
 
 function bindCentresModalEvents() {
 
@@ -1289,80 +1661,67 @@ function bindCentresModalEvents() {
         return;
     }
 
-    centresModalEventsBound = true;
+    centresModalEventsBound =
+        true;
 
-    document.addEventListener("click", function (event) {
+    document.addEventListener(
+        "click",
+        function (event) {
 
-        if (
-            !event.target.classList
-            || !event.target.classList.contains(
-                "centre-modal"
-            )
-        ) {
-            return;
+            if (
+                !event.target.classList
+                ||
+                !event.target.classList.contains(
+                    "centre-modal"
+                )
+            ) {
+
+                return;
+
+            }
+
+            closeCentreModalElement(
+                event.target
+            );
+
         }
-
-        closeCentreModalElement(event.target);
-
-    });
-
-    document.addEventListener("keydown", function (event) {
-
-        if (event.key !== "Escape") {
-            return;
-        }
-
-        document.querySelectorAll(
-            ".centre-modal.show"
-        ).forEach(modal => {
-
-            closeCentreModalElement(modal);
-
-        });
-
-    });
-
-}
-
-/* ======================================================
-   PAGE INITIALIZATION
-====================================================== */
-
-function initCentresPage() {
-
-    const centresPage = document.querySelector(
-        ".centres-page"
     );
 
-    if (!centresPage) {
-        return;
-    }
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-    activateCentreEvents();
+            if (
+                event.key !==
+                "Escape"
+            ) {
 
-    bindCentresModalEvents();
+                return;
 
-    loadCentres(1);
+            }
 
-    startCentresAutoRefresh();
+            document.querySelectorAll(
+                ".centre-modal.show"
+            ).forEach(
+                modal => {
+
+                    closeCentreModalElement(
+                        modal
+                    );
+
+                }
+            );
+
+        }
+    );
 
 }
 
-
-document.addEventListener(
-    "DOMContentLoaded",
-    initCentresPage
-);
-
-
-document.addEventListener(
-    "centria:centres-ready",
-    initCentresPage
-);
 
 /* ======================================================
    COPY GENERATED PASSWORD
 ====================================================== */
+
 function copyGeneratedPassword() {
 
     const password =
@@ -1395,31 +1754,37 @@ function copyGeneratedPassword() {
             "copied"
         );
 
-        setTimeout(function () {
+        setTimeout(
+            function () {
 
-            copyButton.innerHTML =
-                '<i class="fa-solid fa-copy"></i>';
+                copyButton.innerHTML =
+                    '<i class="fa-solid fa-copy"></i>';
 
-            copyButton.classList.remove(
-                "copied"
-            );
+                copyButton.classList.remove(
+                    "copied"
+                );
 
-        }, 1500);
+            },
+            1500
+        );
 
     }
 
     if (
-        navigator.clipboard &&
+        navigator.clipboard
+        &&
         navigator.clipboard.writeText
     ) {
 
         navigator.clipboard
             .writeText(value)
-            .then(function () {
+            .then(
+                function () {
 
-                showCopiedState();
+                    showCopiedState();
 
-            });
+                }
+            );
 
         return;
 
@@ -1428,37 +1793,54 @@ function copyGeneratedPassword() {
     const range =
         document.createRange();
 
-    range.selectNodeContents(password);
+    range.selectNodeContents(
+        password
+    );
 
     const selection =
         window.getSelection();
 
     selection.removeAllRanges();
 
-    selection.addRange(range);
+    selection.addRange(
+        range
+    );
 
-    document.execCommand("copy");
+    document.execCommand(
+        "copy"
+    );
 
     selection.removeAllRanges();
 
     showCopiedState();
 
 }
+
+
 /* ======================================================
    CREATED CENTRE
 ====================================================== */
+
 function openCreatedCentre() {
 
     const modal =
-        getCentresElement("centre-modal");
+        getCentresElement(
+            "centre-modal"
+        );
 
     const modalBody =
-        getCentresElement("centre-modal-body");
+        getCentresElement(
+            "centre-modal-body"
+        );
 
-    if (!modal || !modalBody) {
+    if (
+        !modal
+        ||
+        !modalBody
+    ) {
 
-        console.error(
-            "Centre modal not found."
+        showCentreDialog(
+            "centre_modal_error"
         );
 
         return;
@@ -1470,41 +1852,47 @@ function openCreatedCentre() {
         + "/CentreServlet?action=created"
     )
 
-    .then(response => {
+        .then(response => {
 
-        if (!response.ok) {
+            if (!response.ok) {
 
-            throw new Error(
-                "HTTP " + response.status
+                throw new Error(
+                    "HTTP "
+                    + response.status
+                );
+
+            }
+
+            return response.text();
+
+        })
+
+        .then(html => {
+
+            modalBody.innerHTML =
+                html;
+
+            openCentreModal(
+                modal
             );
 
-        }
+        })
 
-        return response.text();
+        .catch(() => {
 
-    })
+            showCentreDialog(
+                "load_created_centre_error"
+            );
 
-    .then(html => {
-
-        modalBody.innerHTML = html;
-
-        openCentreModal(modal);
-
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Open Created Centre:",
-            error
-        );
-
-    });
+        });
 
 }
+
+
 /* ======================================================
    COPY CREATED CREDENTIALS
 ====================================================== */
+
 function copyCreatedCredentials() {
 
     const centreCode =
@@ -1523,27 +1911,31 @@ function copyCreatedCredentials() {
         );
 
     if (
-        !centreCode ||
-        !username ||
+        !centreCode
+        ||
+        !username
+        ||
         !password
     ) {
+
         return;
+
     }
 
-const value =
-    "CENTRIA"
-    + "\n"
-    + "------------------------"
-    + "\n"
-    + "Centre Code : "
-    + centreCode.textContent.trim()
-    + "\n"
-    + "Username : "
-    + username.textContent.trim()
-    + "\n"
-    + "Password : "
-    + password.textContent.trim();
-    
+    const value =
+        "CENTRIA"
+        + "\n"
+        + "------------------------"
+        + "\n"
+        + "Centre Code : "
+        + centreCode.textContent.trim()
+        + "\n"
+        + "Username : "
+        + username.textContent.trim()
+        + "\n"
+        + "Password : "
+        + password.textContent.trim();
+
     const copyButton =
         document.getElementById(
             "createdCopyButton"
@@ -1556,8 +1948,14 @@ const value =
 
     function showCopiedState() {
 
-        if (!copyButton || !copyIcon) {
+        if (
+            !copyButton
+            ||
+            !copyIcon
+        ) {
+
             return;
+
         }
 
         copyIcon.className =
@@ -1567,27 +1965,33 @@ const value =
             "copied"
         );
 
-        setTimeout(function () {
+        setTimeout(
+            function () {
 
-            copyIcon.className =
-                "fa-solid fa-copy";
+                copyIcon.className =
+                    "fa-solid fa-copy";
 
-            copyButton.classList.remove(
-                "copied"
-            );
+                copyButton.classList.remove(
+                    "copied"
+                );
 
-        }, 1500);
+            },
+            1500
+        );
 
     }
 
     if (
-        navigator.clipboard &&
+        navigator.clipboard
+        &&
         navigator.clipboard.writeText
     ) {
 
         navigator.clipboard
             .writeText(value)
-            .then(showCopiedState);
+            .then(
+                showCopiedState
+            );
 
         return;
 
@@ -1598,7 +2002,8 @@ const value =
             "textarea"
         );
 
-    textarea.value = value;
+    textarea.value =
+        value;
 
     document.body.appendChild(
         textarea
@@ -1606,7 +2011,9 @@ const value =
 
     textarea.select();
 
-    document.execCommand("copy");
+    document.execCommand(
+        "copy"
+    );
 
     document.body.removeChild(
         textarea
@@ -1616,6 +2023,7 @@ const value =
 
 }
 
+
 /* ======================================================
    CLOSE CREATED CENTRE
 ====================================================== */
@@ -1624,76 +2032,86 @@ function closeCreatedCentre() {
 
     closeCentreModal();
 
-    loadCentres(activeCentrePage);
+    loadCentres(
+        activeCentrePage
+    );
 
 }
+
+
+/* ======================================================
+   PAGE INITIALIZATION
+====================================================== */
+
+function initCentresPage() {
+
+    const centresPage =
+        document.querySelector(
+            ".centres-page"
+        );
+
+    if (!centresPage) {
+        return;
+    }
+
+    activateCentreEvents();
+
+    bindCentresModalEvents();
+
+    loadCentres(1);
+
+    startCentresAutoRefresh();
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initCentresPage
+);
+
+
+document.addEventListener(
+    "centria:centres-ready",
+    initCentresPage
+);
+
 
 /* ======================================================
    CENTRES AUTO REFRESH
    Refresh centres table every 60 seconds
-   ====================================================== */
-
-let centresAutoRefreshTimer = null;
-
+====================================================== */
 
 function startCentresAutoRefresh() {
 
-    /*
-    --------------------------------------------------
-    Prevent duplicate timers
-    --------------------------------------------------
-    */
-
-    if (centresAutoRefreshTimer !== null) {
+    if (
+        centresAutoRefreshTimer !==
+        null
+    ) {
 
         return;
 
     }
 
+    centresAutoRefreshTimer =
+        setInterval(
+            function () {
 
-    /*
-    --------------------------------------------------
-    Start timer
-    --------------------------------------------------
-    */
-
-    centresAutoRefreshTimer = setInterval(
-        function () {
-
-            /*
-            --------------------------------------------------
-            Make sure Centres page is still visible
-            --------------------------------------------------
-            */
-
-            const centresPage =
+                const centresPage =
                     document.querySelector(
-                            ".centres-page"
+                        ".centres-page"
                     );
 
+                if (!centresPage) {
+                    return;
+                }
 
-            if (!centresPage) {
-
-                return;
-
-            }
-
-  console.log(
-            "[CENTRIA] Auto refreshing centres page:",
-            activeCentrePage
-        );
-            /*
-            --------------------------------------------------
-            Refresh current page
-            --------------------------------------------------
-            */
-
-            loadCentres(
+                loadCentres(
                     activeCentrePage
-            );
+                );
 
-        },
-        60000
-    );
+            },
+            60000
+        );
 
 }

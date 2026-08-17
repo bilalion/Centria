@@ -208,6 +208,9 @@ if (
       href="<%=request.getContextPath()%>/assets/css/pages/archive.css?v=1">
 
 
+<link rel="stylesheet"
+      href="${pageContext.request.contextPath}/assets/css/components/dialog.css?v=2">
+
 <script>
 
 window.contextPath =
@@ -423,9 +426,12 @@ else {
 <!-- END APP BODY -->
 
 
-
 <!-- END APP SHELL -->
+<!-- =================================================
+     GLOBAL DIALOG
+================================================= -->
 
+<jsp:include page="pages/fragments/common/dialog-error.jsp"/>
 
 <!-- =================================================
      JAVASCRIPT
@@ -455,6 +461,13 @@ else {
 <script defer
         src="<%=request.getContextPath()%>/assets/js/archive.js?v=1">
 </script>
+
+
+
+<script defer
+        src="<%=request.getContextPath()%>/assets/js/dialog.js?v=2">
+</script>
+
 
 
 </body>

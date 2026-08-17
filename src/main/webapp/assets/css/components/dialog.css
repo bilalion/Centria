@@ -1,0 +1,583 @@
+/*
+==========================================================
+File        : dialog.css
+Project     : CENTRIA
+Layer       : Components
+Component   : Global Dialog
+
+Description :
+Reusable global dialog component.
+
+Responsibilities :
+- Error / Success / Warning / Info dialogs
+- Dynamic title
+- Dynamic message
+- Dynamic icon
+- RTL / LTR support
+- Responsive layout
+==========================================================
+*/
+
+
+/* ======================================================
+   SECTION 01 - GLOBAL DIALOG
+====================================================== */
+
+.global-dialog{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+}
+
+
+/* ======================================================
+   SECTION 01.1 - ACTIVE STATE
+====================================================== */
+
+.global-dialog.is-open{
+
+    display:flex;
+
+}
+
+
+/* ======================================================
+   SECTION 01.2 - HIDDEN STATE
+====================================================== */
+
+.global-dialog[aria-hidden="true"]{
+
+    display:none;
+
+}
+
+
+/* ======================================================
+   SECTION 02 - OVERLAY
+====================================================== */
+
+.global-dialog-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(15,23,42,.45);
+
+    backdrop-filter:blur(2px);
+
+}
+
+
+/* ======================================================
+   SECTION 03 - DIALOG BOX
+====================================================== */
+
+.global-dialog-box{
+
+    position:relative;
+
+    z-index:1;
+
+    width:90%;
+
+    max-width:440px;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(15,23,42,.18);
+
+    overflow:hidden;
+
+    animation:
+        globalDialogIn .18s ease-out;
+
+}
+
+
+/* ======================================================
+   SECTION 03.1 - OPEN ANIMATION
+====================================================== */
+
+@keyframes globalDialogIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px) scale(.98);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 04 - HEADER
+====================================================== */
+
+.global-dialog-header{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:28px 50px 10px;
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   SECTION 04.1 - ICON
+====================================================== */
+
+.global-dialog-icon{
+
+    width:46px;
+
+    height:46px;
+
+    flex:0 0 46px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+    font-size:19px;
+
+}
+
+
+/* ======================================================
+   SECTION 04.2 - TITLE
+====================================================== */
+
+.global-dialog-header h3{
+
+    width:100%;
+
+    min-width:0;
+
+    margin:0;
+
+    padding:0;
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    line-height:1.4;
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   SECTION 04.3 - CLOSE BUTTON
+====================================================== */
+
+.global-dialog-close{
+
+    position:absolute;
+
+    top:14px;
+
+    inset-inline-end:14px;
+
+    width:32px;
+
+    height:32px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0;
+
+    padding:0;
+
+    border:0;
+
+    border-radius:4px;
+
+    background:transparent;
+
+    color:var(--text-light);
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+
+}
+
+
+.global-dialog-close:hover{
+
+    background:#f1f5f9;
+
+    color:var(--text);
+
+}
+
+
+/* ======================================================
+   SECTION 05 - MESSAGE
+====================================================== */
+
+.global-dialog-body{
+
+    padding:4px 28px 22px;
+
+    text-align:center;
+
+}
+
+
+.global-dialog-body p{
+
+    margin:0;
+
+    color:var(--text-light);
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    line-height:1.7;
+
+    text-align:center;
+
+    white-space:pre-line;
+
+}
+
+
+/* ======================================================
+   SECTION 06 - ACTIONS
+====================================================== */
+
+.global-dialog-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:14px 22px 20px;
+
+    border-top:1px solid #eef1f5;
+
+}
+
+
+/* ======================================================
+   SECTION 06.1 - PRIMARY BUTTON
+====================================================== */
+
+.global-dialog-button{
+
+    min-width:90px;
+
+    height:38px;
+
+    padding:0 18px;
+
+    border:1px solid transparent;
+
+    border-radius:4px;
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .1s ease;
+
+}
+
+
+.global-dialog-button:active{
+
+    transform:translateY(1px);
+
+}
+
+
+/* ======================================================
+   SECTION 06.2 - PRIMARY
+====================================================== */
+
+.global-dialog-button-primary{
+
+    background:var(--primary);
+
+    color:var(--white);
+
+}
+
+
+.global-dialog-button-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+
+/* ======================================================
+   SECTION 07 - ERROR
+====================================================== */
+
+.global-dialog--error
+.global-dialog-icon{
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+}
+
+
+/* ======================================================
+   SECTION 08 - SUCCESS
+====================================================== */
+
+.global-dialog--success
+.global-dialog-icon{
+
+    background:#f0fdf4;
+
+    color:#16a34a;
+
+}
+
+
+/* ======================================================
+   SECTION 09 - WARNING
+====================================================== */
+
+.global-dialog--warning
+.global-dialog-icon{
+
+    background:#fffbeb;
+
+    color:#d97706;
+
+}
+
+
+/* ======================================================
+   SECTION 10 - INFO
+====================================================== */
+
+.global-dialog--info
+.global-dialog-icon{
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+}
+
+
+/* ======================================================
+   SECTION 11 - RTL
+====================================================== */
+
+html[dir="rtl"] .global-dialog{
+
+    direction:rtl;
+
+}
+
+
+/* ======================================================
+   SECTION 12 - LTR
+====================================================== */
+
+html[dir="ltr"] .global-dialog{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   SECTION 13 - RESPONSIVE
+====================================================== */
+
+@media(max-width:600px){
+
+    .global-dialog{
+
+        padding:14px;
+
+    }
+
+
+    .global-dialog-box{
+
+        width:100%;
+
+        max-width:none;
+
+    }
+
+
+    .global-dialog-header{
+
+        padding:24px 45px 10px;
+
+    }
+
+
+    .global-dialog-icon{
+
+        width:42px;
+
+        height:42px;
+
+        flex-basis:42px;
+
+        font-size:17px;
+
+    }
+
+
+    .global-dialog-header h3{
+
+        font-size:16px;
+
+    }
+
+
+    .global-dialog-body{
+
+        padding:4px 18px 18px;
+
+    }
+
+
+    .global-dialog-body p{
+
+        font-size:13px;
+
+        text-align:center;
+
+    }
+
+
+    .global-dialog-actions{
+
+        padding:12px 18px 18px;
+
+        justify-content:center;
+
+    }
+
+
+    .global-dialog-button{
+
+        width:auto;
+
+        min-width:100px;
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 14 - REDUCED MOTION
+====================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    .global-dialog-box{
+
+        animation:none;
+
+    }
+
+
+    .global-dialog-close,
+    .global-dialog-button{
+
+        transition:none;
+
+    }
+
+}
+
+
+/* ======================================================
+   END OF FILE
+====================================================== */

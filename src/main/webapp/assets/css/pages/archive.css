@@ -24,6 +24,8 @@ core.css
 
     color:var(--text);
 
+    gap:0;
+
 }
 
 
@@ -33,17 +35,17 @@ core.css
 
 .archive-banner{
 
-    height:42px;
+    height:40px;
+    min-height:40px;
 
     display:flex;
-
     align-items:center;
 
-    gap:10px;
+    gap:4px;
 
-    padding:0 16px;
+    padding:0 8px;
 
-    margin-bottom:16px;
+    margin-bottom:5px;
 
     background:#eef5ff;
 
@@ -54,12 +56,14 @@ core.css
 }
 
 
+/* ======================================================
+   SECTION 02.1 - BANNER ICON
+====================================================== */
+
 .archive-banner-icon{
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     color:var(--primary);
@@ -69,12 +73,15 @@ core.css
 }
 
 
+/* ======================================================
+   SECTION 02.2 - BANNER TITLE
+====================================================== */
+
 .archive-banner-title{
 
     margin:0;
 
     font-size:15px;
-
     font-weight:700;
 
     color:var(--text);
@@ -84,6 +91,10 @@ core.css
 }
 
 
+/* ======================================================
+   SECTION 02.3 - BANNER SEPARATOR
+====================================================== */
+
 .archive-banner-separator{
 
     color:var(--text-light);
@@ -92,6 +103,10 @@ core.css
 
 }
 
+
+/* ======================================================
+   SECTION 02.4 - BANNER DESCRIPTION
+====================================================== */
 
 .archive-banner-description{
 
@@ -106,7 +121,6 @@ core.css
 }
 
 
-
 /* ======================================================
    SECTION 03 - ARCHIVE STATISTICS
 ====================================================== */
@@ -118,133 +132,199 @@ core.css
     grid-template-columns:
         repeat(4,minmax(0,1fr));
 
-    gap:16px;
+    gap:6px;
 
     width:100%;
 
-    margin-bottom:18px;
+    margin-bottom:5px;
 
 }
+
+
+/* ======================================================
+   SECTION 03.1 - STAT CARD
+====================================================== */
+
 .archive-stat-card{
 
     display:flex;
+
     align-items:center;
-    gap:16px;
-    min-height:118px;
-    padding:18px;
+
+    gap:6px;
+
+    min-height:94px;
+
+    padding:10px 12px;
+
     background:var(--white);
-    border:1px solid var(--border);
-    border-radius:  4px; /* var(--radius-md); */
-    box-shadow:var(--shadow-sm);
+
+    border:1px solid #e5e7eb;
+
+    border-radius:4px;
+
+    box-shadow:
+        0 1px 3px
+        rgba(15,23,42,.04);
 
 }
+
+
+/* ======================================================
+   SECTION 03.2 - STAT ICON
+====================================================== */
+
 .archive-stat-icon{
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
-    width:58px;
-    height:58px;
-    flex:0 0 58px;
+
+    width:46px;
+    height:46px;
+
+    flex:0 0 46px;
+
     border-radius:50%;
-    font-size:21px;
 
-}
-
-/* ------------------------------------------------------
-   TOTAL ARCHIVED
------------------------------------------------------- */
-
-.archive-stat-total .archive-stat-icon{
-
-    background: var(--primary-light);
-    color: var(--primary);
+    font-size:17px;
 
 }
 
 
-/* ------------------------------------------------------
-   ARCHIVED / RESTORABLE
------------------------------------------------------- */
-
-.archive-stat-restorable .archive-stat-icon{
-
-    background: var(--primary-light);
-    color: var(--primary);
-
-}
-
-
-/* ------------------------------------------------------
-   PENDING DELETE
------------------------------------------------------- */
-
-.archive-stat-pending .archive-stat-icon{
-
-    background: var(--primary-light);
-    color: var(--primary);
-
-}
-
-
-/* ------------------------------------------------------
-   DELETED
------------------------------------------------------- */
-
-.archive-stat-deleted .archive-stat-icon{
-
-    background: var(--primary-light);
-    color: var(--primary);
-
-}
-
+/* ======================================================
+   SECTION 03.3 - STAT CONTENT
+====================================================== */
 
 .archive-stat-content{
 
     display:flex;
+
     flex-direction:column;
+
+    justify-content:center;
+
     min-width:0;
 
 }
 
 
+/* ======================================================
+   SECTION 03.4 - STAT LABEL
+====================================================== */
+
 .archive-stat-label{
 
-    color:var(--text);
+    margin:0;
+
+    color:#64748b;
+
     font-size:14px;
-    font-weight:600;
-    line-height:1.5;
-
-}
-
-
-.archive-stat-value{
-
-    margin-top:3px;
-
-    color:var(--text);
-
-    font-size:28px;
-
-    font-weight:700;
-
-    line-height:1.2;
-
-}
-
-
-.archive-stat-description{
-
-    margin-top:3px;
-
-    color:var(--text-light);
-
-    font-size:12px;
 
     font-weight:500;
 
+    line-height:1.15;
+
 }
 
+
+/* ======================================================
+   SECTION 03.5 - STAT VALUE
+====================================================== */
+
+.archive-stat-value{
+
+    margin-top:2px;
+
+    color:#1e293b;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    line-height:1;
+
+}
+
+
+/* ======================================================
+   SECTION 03.6 - STAT DESCRIPTION
+====================================================== */
+
+.archive-stat-description{
+
+    margin-top:1px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    font-weight:500;
+
+    line-height:1.25;
+
+}
+
+
+/* ======================================================
+   SECTION 03.7 - STAT ICON COLORS
+====================================================== */
+
+/* TOTAL */
+
+.archive-stat-total .archive-stat-icon{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+}
+
+
+/* ARCHIVED / RESTORABLE */
+
+.archive-stat-restorable .archive-stat-icon{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+}
+
+
+/* PENDING DELETE */
+
+.archive-stat-pending .archive-stat-icon{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+}
+
+
+/* DELETED */
+
+.archive-stat-deleted .archive-stat-icon{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+}
+
+
+/* ======================================================
+   SECTION 03.8 - ARCHIVE ICON
+====================================================== */
+
+.archive-stat-icon .fa-box-archive{
+
+    color:var(--primary);
+
+}
 
 
 /* ======================================================
@@ -268,18 +348,17 @@ core.css
 
     align-items:center;
 
-    gap:12px;
+    gap:8px;
 
     width:100%;
 
-    margin-bottom:14px;
+    margin-bottom:3px;
 
 }
 
 
-
 /* ======================================================
-   SEARCH
+   SECTION 05.1 - SEARCH FIELD
 ====================================================== */
 
 .archive-search-field{
@@ -291,6 +370,8 @@ core.css
     min-width:0;
 
 }
+
+
 .archive-search-field > i{
 
     position:absolute;
@@ -303,22 +384,24 @@ core.css
 
     color:#94a3b8;
 
-    font-size:.9rem;
+    font-size:.8rem;
 
     transform:translateY(-50%);
 
     pointer-events:none;
 
 }
+
+
 .archive-search-field input{
 
     width:100%;
 
-    height:44px;
+    height:38px;
 
-    padding-inline-start:42px;
+    padding-inline-start:36px;
 
-    padding-inline-end:16px;
+    padding-inline-end:12px;
 
     color:var(--text);
 
@@ -330,7 +413,7 @@ core.css
 
     font-family:inherit;
 
-    font-size:.86rem;
+    font-size:12px;
 
     outline:none;
 
@@ -339,12 +422,19 @@ core.css
         box-shadow var(--transition);
 
 }
+
+
 .archive-search-field input::placeholder{
+
     color:#94a3b8;
+
 }
+
+
 .archive-search-field input:focus{
 
     border-color:var(--primary);
+
     box-shadow:
         0 0 0 3px
         rgba(37,99,235,.10);
@@ -352,9 +442,8 @@ core.css
 }
 
 
-
 /* ======================================================
-   FILTER
+   SECTION 05.2 - FILTER
 ====================================================== */
 
 .archive-select-field{
@@ -363,13 +452,13 @@ core.css
 
     align-items:center;
 
-    gap:9px;
+    gap:5px;
 
-    width:190px;
+    width:170px;
 
-    height:44px;
+    height:38px;
 
-    padding:0 13px;
+    padding:0 5px;
 
     background:var(--white);
 
@@ -378,6 +467,8 @@ core.css
     border-radius:4px;
 
 }
+
+
 .archive-select-field > i{
 
     color:#94a3b8;
@@ -385,6 +476,8 @@ core.css
     font-size:.9rem;
 
 }
+
+
 .archive-select{
 
     width:100%;
@@ -403,7 +496,7 @@ core.css
 
     font-family:inherit;
 
-    font-size:.86rem;
+    font-size:13px;
 
     font-weight:600;
 
@@ -411,8 +504,9 @@ core.css
 
 }
 
+
 /* ======================================================
-   SEARCH / EXPORT BUTTONS
+   SECTION 05.3 - SEARCH / EXPORT BUTTONS
 ====================================================== */
 
 .archive-search-button,
@@ -424,17 +518,17 @@ core.css
 
     justify-content:center;
 
-    gap:8px;
+    gap:2px;
 
-    height:44px;
+    height:38px;
 
-    padding:0 18px;
+    padding:0 12px;
 
     border-radius:4px;
 
     font-family:inherit;
 
-    font-size:.86rem;
+    font-size:13px;
 
     font-weight:600;
 
@@ -442,8 +536,9 @@ core.css
 
 }
 
+
 /* ======================================================
-   PRIMARY SEARCH BUTTON
+   SECTION 05.4 - PRIMARY SEARCH BUTTON
 ====================================================== */
 
 .archive-search-button{
@@ -453,6 +548,8 @@ core.css
     color:var(--white);
 
 }
+
+
 .archive-search-button:hover{
 
     background:var(--primary-dark);
@@ -461,7 +558,7 @@ core.css
 
 
 /* ======================================================
-   EXPORT BUTTON
+   SECTION 05.5 - EXPORT BUTTON
 ====================================================== */
 
 .archive-export-button{
@@ -506,15 +603,14 @@ core.css
 
 
 /* ======================================================
-   REGISTER HEADER
-   Same visual language as Centres
+   SECTION 06.1 - REGISTER HEADER
 ====================================================== */
 
 .archive-register-header{
 
-    height:52px;
+    height:46px;
 
-    min-height:52px;
+    min-height:46px;
 
     display:flex;
 
@@ -522,11 +618,11 @@ core.css
 
     justify-content:space-between;
 
-    gap:12px;
+    gap:4px;
 
-    padding:0 14px;
+    padding:0 10px;
 
-       background:#eef5ff;
+    background:#eef5ff;
 
     border-bottom:1px solid #eef1f5;
 
@@ -534,7 +630,7 @@ core.css
 
 
 /* ======================================================
-   TITLE WRAPPER
+   SECTION 06.2 - TITLE WRAPPER
 ====================================================== */
 
 .archive-register-title-wrap{
@@ -543,14 +639,10 @@ core.css
 
     align-items:center;
 
-    gap:9px;
+    gap:7px;
 
 }
 
-
-/* ======================================================
-   TITLE INNER WRAPPER
-====================================================== */
 
 .archive-register-title-wrap > div{
 
@@ -558,20 +650,20 @@ core.css
 
     align-items:center;
 
-    gap:8px;
+    gap:6px;
 
 }
 
 
 /* ======================================================
-   REGISTER ICON
+   SECTION 06.3 - REGISTER ICON
 ====================================================== */
 
 .archive-register-icon{
 
-    width:34px;
+    width:30px;
 
-    height:34px;
+    height:30px;
 
     display:flex;
 
@@ -585,13 +677,13 @@ core.css
 
     border-radius:4px;
 
-    font-size:.88rem;
+    font-size:.78rem;
 
 }
 
 
 /* ======================================================
-   TITLE
+   SECTION 06.4 - REGISTER TITLE
 ====================================================== */
 
 .archive-register-title-wrap h2{
@@ -602,7 +694,7 @@ core.css
 
     color:var(--text);
 
-    font-size:.96rem;
+    font-size:.88rem;
 
     font-weight:800;
 
@@ -612,14 +704,14 @@ core.css
 
 
 /* ======================================================
-   TOTAL
+   SECTION 06.5 - TOTAL
 ====================================================== */
 
 .archive-total{
 
-    min-width:22px;
+    min-width:20px;
 
-    height:22px;
+    height:20px;
 
     display:inline-flex;
 
@@ -635,20 +727,19 @@ core.css
 
     border-radius:999px;
 
-    font-size:.72rem;
+    font-size:.68rem;
 
     font-weight:800;
 
 }
 
 
-/* Hide count when empty */
-
 .archive-total:empty{
 
     display:none;
 
 }
+
 
 /* ======================================================
    SECTION 07 - BULK OPERATIONS
@@ -660,7 +751,7 @@ core.css
 
     align-items:center;
 
-    gap:9px;
+    gap:7px;
 
 }
 
@@ -669,7 +760,7 @@ core.css
 
     color:var(--text-light);
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:600;
 
@@ -680,15 +771,15 @@ core.css
 
 .archive-operation-select{
 
-    height:42px;
+    height:36px;
 
-    min-width:150px;
+    min-width:135px;
 
-    padding:0 12px;
+    padding:0 10px;
 
     border:1px solid var(--border);
 
-    border-radius: 4px; /* var(--radius-sm); */
+    border-radius:4px;
 
     outline:none;
 
@@ -698,7 +789,7 @@ core.css
 
     font-family:inherit;
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:600;
 
@@ -727,17 +818,17 @@ core.css
 
 .archive-apply-button{
 
-    height:42px;
+    height:36px;
 
-    padding:0 16px;
+    padding:0 13px;
 
     background:var(--primary);
 
     color:var(--white);
 
-    border-radius: 4px; /* var(--radius-sm); */
+    border-radius:4px;
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:600;
 
@@ -760,31 +851,34 @@ core.css
 }
 
 
-
 /* ======================================================
-SECTION 08 - TABLE
+   SECTION 08 - TABLE
 ====================================================== */
 
 .archive-table-stage{
 
     width:100%;
 
-    padding:4px 8px;
+    padding:3px 6px;
 
     overflow-x:auto;
 
-     background:var(--white);
+    background:var(--white);
 
     color:var(--text);
 
     border-radius:4px;
 
 }
+
+
 .archive-table-stage .table-content-area{
 
     min-width:0;
- 
+
 }
+
+
 .archive-table-stage .table-container{
 
     overflow:hidden;
@@ -793,13 +887,11 @@ SECTION 08 - TABLE
 
     border-radius:4px;
 
-  
-
 }
 
 
 /* ======================================================
-TABLE
+   SECTION 08.1 - TABLE
 ====================================================== */
 
 .archive-table-stage table{
@@ -813,23 +905,23 @@ TABLE
     border-spacing:0;
 
     border-radius:4px;
-    
-   
+
 }
 
+
 /* ======================================================
-TABLE HEADER
+   SECTION 08.2 - TABLE HEADER
 ====================================================== */
 
 .archive-table-stage thead th{
 
-    padding:10px 12px;
+    padding:5px 7px;
 
     color:#0f172a;
-   
+
     border-bottom:1px solid #eef5ff;
 
-    font-size:.78rem;
+    font-size:.74rem;
 
     font-weight:800;
 
@@ -839,13 +931,14 @@ TABLE HEADER
 
 }
 
+
 /* ======================================================
-TABLE ROWS
+   SECTION 08.3 - TABLE ROWS
 ====================================================== */
 
 .archive-table-stage tbody td{
 
-    padding:12px 12px;
+    padding:6px 6px;
 
     color:#334155;
 
@@ -853,9 +946,9 @@ TABLE ROWS
 
     border-bottom:1px solid #edf1f5;
 
-    font-size:.82rem;
+    font-size:.78rem;
 
-    line-height:1.45;
+    line-height:1.35;
 
     text-align:start;
 
@@ -864,12 +957,15 @@ TABLE ROWS
     transition:background var(--transition);
 
 }
+
+
 .archive-table-stage tbody tr:last-child td{
 
     border-bottom:none;
-    
 
 }
+
+
 .archive-table-stage tbody tr:hover td{
 
     background:#f8fbff;
@@ -878,12 +974,12 @@ TABLE ROWS
 
 
 /* ======================================================
-LOADING
+   SECTION 08.4 - LOADING
 ====================================================== */
 
 .archive-table-loading{
 
-    min-height:160px;
+    min-height:120px;
 
     display:flex;
 
@@ -893,17 +989,20 @@ LOADING
 
     color:var(--primary);
 
-    font-size:18px;
+    font-size:16px;
 
 }
+
+
 .archive-table-loading i{
 
     font-size:18px;
 
 }
 
+
 /* ======================================================
-PAGINATION
+   SECTION 08.5 - PAGINATION
 ====================================================== */
 
 .archive-pagination{
@@ -916,133 +1015,568 @@ PAGINATION
 
     gap:6px;
 
-    min-height:64px;
+    min-height:44px;
 
-    padding:10px 18px;
+    padding:6px 12px;
 
     border-top:1px solid var(--border);
 
 }
 
+
+/* ======================================================
+   SECTION 08.6 - PAGINATION BUTTON
+====================================================== */
+
+.archive-pagination .pagination-button{
+
+    min-width:34px;
+
+    height:34px;
+
+    padding:0 9px;
+
+    border:1px solid #d9e1ec;
+
+    border-radius:6px;
+
+    background:#ffffff;
+
+    color:#475569;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:
+        background-color .15s ease,
+        color .15s ease,
+        border-color .15s ease;
+
+}
+
+
+.archive-pagination
+.pagination-button:hover:not(:disabled){
+
+    background:var(--primary-light);
+
+    border-color:#cbd5e1;
+
+    color:var(--black);
+
+}
+
+
+.archive-pagination
+.pagination-button.active{
+
+    background:var(--primary);
+
+    border-color:#2563eb;
+
+    color:var(--white);
+
+}
+
+
+.archive-pagination
+.pagination-button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    background:var(--primary-light);
+
+}
+
+
+.archive-pagination
+.pagination-button i{
+
+    font-size:12px;
+
+}
+
+
 /* ======================================================
    SECTION 09 - LAST ARCHIVE ACTIVITY
-   ====================================================== */
+====================================================== */
 
-.archive-notification {
+.archive-notification{
 
-    width: 100%;
+    width:100%;
 
-    height: 65px;
+    height:58px;
 
-    display: flex;
+    min-height:58px;
 
-    align-items: center;
+    display:flex;
 
-    gap: 14px;
+    align-items:center;
 
-    margin-top: 14px;
+    gap:5px;
 
-    padding: 0 16px;
+    margin-top:30px;
+    margin-bottom: 0px;
 
-    background: #ffffff;
+    padding:0 12px;
 
-    border: 1px solid #e5e7eb;
+    background:var(--primary-light);
 
-    border-radius: 10px;
+    border:1px solid var(--primary-border);
+
+    border-radius:4px;
 
     box-shadow:
-        0 2px 8px rgba(0,0,0,.04);
+        0 2px 8px
+        rgba(0,0,0,.04);
+
 }
 
+
 /* ======================================================
-   ICON
-   ====================================================== */
+   SECTION 09.1 - NOTIFICATION ICON
+====================================================== */
 
-.archive-notification-icon {
+.archive-notification-icon{
 
-    width: 40px;
+    width:34px;
 
-    height: 40px;
+    height:34px;
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    justify-content: center;
+    justify-content:center;
 
-    flex-shrink: 0;
+    flex-shrink:0;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    background: #f1f5f9;
+    background:var(--white);
 
-    color: #64748b;
+    color:var(--primary);
 
-    font-size: 17px;
+    font-size:15px;
+
 }
 
+
 /* ======================================================
-   CONTENT
-   ====================================================== */
+   SECTION 09.2 - NOTIFICATION CONTENT
+====================================================== */
 
-.archive-notification-content {
+.archive-notification-content{
 
-    flex: 1;
+    flex:1;
 
-    min-width: 0;
+    min-width:0;
 
-    display: flex;
+    display:flex;
 
-    flex-direction: column;
+    flex-direction:column;
 
-    justify-content: center;
+    justify-content:center;
+
 }
 
+
 /* ======================================================
-   TITLE
-   ====================================================== */
+   SECTION 09.3 - NOTIFICATION TITLE
+====================================================== */
 
-.archive-notification-content h4 {
+.archive-notification-content h4{
 
-    margin: 0;
+    margin:0;
 
-    color: var(--text);
+    color:var(--text);
 
-    font-size: 14px;
+    font-size:13px;
 
-    font-weight: 700;
+    font-weight:700;
 
-    line-height: 1.4;
+    line-height:1.4;
 
-    white-space: nowrap;
+    white-space:nowrap;
+
 }
 
+
 /* ======================================================
-   MESSAGE
-   ====================================================== */
+   SECTION 09.4 - NOTIFICATION MESSAGE
+====================================================== */
 
-.archive-notification-content p {
+.archive-notification-content p{
 
-    margin: 2px 0 0;
+    margin:1px 0 0;
 
-    color: var(--text-light);
+    color:var(--text-light);
 
-    font-size: 12px;
+    font-size:11px;
 
-    font-weight: 500;
+    font-weight:500;
 
-    line-height: 1.4;
+    line-height:1.4;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    text-overflow: ellipsis;
+    text-overflow:ellipsis;
 
-    white-space: nowrap;
+    white-space:nowrap;
 
-    min-width: 0;
+    min-width:0;
+
 }
+
+
 /* ======================================================
-   SECTION 10 - RESPONSIVE
+   SECTION 10 - ARCHIVE STATUS BADGES
+====================================================== */
+
+.archive-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:110px;
+
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+   SECTION 10.1 - ARCHIVED
+====================================================== */
+
+.archive-status-archived{
+
+    color:#475569;
+
+    background:#f1f5f9;
+
+    border:1px solid #e2e8f0;
+
+}
+
+
+/* ======================================================
+   SECTION 10.2 - RESTORED
+====================================================== */
+
+.archive-status-restored{
+
+    color:#15803d;
+
+    background:#f0fdf4;
+
+    border:1px solid #bbf7d0;
+
+}
+
+
+/* ======================================================
+   SECTION 10.3 - PENDING DELETE
+====================================================== */
+
+.archive-status-pending_delete{
+
+    color:#dc2626;
+
+    background:#fef2f2;
+
+    border:1px solid #fecaca;
+
+}
+
+
+/* ======================================================
+   SECTION 10.4 - DELETED
+====================================================== */
+
+.archive-status-deleted{
+
+    color:#991b1b;
+
+    background:#fee2e2;
+
+    border:1px solid #fecaca;
+
+}
+
+
+/* ======================================================
+   SECTION 11 - DELETE CONFIRM MODAL
+====================================================== */
+
+
+/* ======================================================
+   SECTION 11.1 - MODAL CONTENT
+====================================================== */
+
+#archive-delete-confirm-modal .centre-modal-content{
+
+    width:90%;
+
+    max-width:650px;
+
+    padding:40px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   SECTION 11.2 - CONFIRM HEADER
+====================================================== */
+
+#archive-delete-confirm-modal .confirm-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+
+/* ======================================================
+   SECTION 11.3 - WARNING ICON
+====================================================== */
+
+#archive-delete-confirm-modal .confirm-icon{
+
+    width:82px !important;
+
+    height:82px !important;
+
+    min-width:82px;
+
+    min-height:82px;
+
+    margin:0 0 18px 0;
+
+    padding:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-sizing:border-box;
+
+    border-radius:50% !important;
+
+    background:var(--danger);
+
+    border:3px solid #fecaca;
+
+    color:var(--white);
+
+    font-size:42px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+
+/* ======================================================
+   SECTION 11.4 - TITLE
+====================================================== */
+
+#archive-delete-confirm-modal .confirm-title{
+
+    margin:0;
+
+    font-size:26px;
+
+    font-weight:700;
+
+    color:var(--black);
+
+}
+
+
+/* ======================================================
+   SECTION 11.5 - CONFIRM MESSAGE
+====================================================== */
+
+#archive-delete-confirm-modal
+#archive-delete-confirm-message{
+
+    margin:20px 0 30px;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:var(--black);
+
+}
+
+
+/* ======================================================
+   SECTION 11.6 - ACTIONS
+====================================================== */
+
+#archive-delete-confirm-modal .reset-confirm-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:16px;
+
+}
+
+
+/* ======================================================
+   SECTION 11.7 - BUTTON BASE
+====================================================== */
+
+#archive-delete-confirm-modal
+.reset-confirm-actions button{
+
+    min-width:140px;
+
+    height:48px;
+
+    padding:0 24px;
+
+    border-radius:8px;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .1s ease;
+
+}
+
+
+/* ======================================================
+   SECTION 11.8 - CANCEL BUTTON
+====================================================== */
+
+#archive-delete-confirm-modal
+.reset-confirm-actions
+.btn-secondary{
+
+    background:var(--white) !important;
+
+    color:var(--black) !important;
+
+    border:1px solid #cbd5e1 !important;
+
+}
+
+
+#archive-delete-confirm-modal
+.reset-confirm-actions
+.btn-secondary:hover{
+
+    background:var(--primary-light) !important;
+
+    color:var(--black) !important;
+
+}
+
+
+/* ======================================================
+   SECTION 11.9 - DELETE CONFIRM BUTTON
+====================================================== */
+
+#archive-delete-confirm-modal
+.reset-confirm-actions
+.btn-primary{
+
+    background:var(--primary) !important;
+
+    color:var(--white) !important;
+
+    border:1px solid #cbd5e1 !important;
+
+    box-shadow:
+        0 4px 12px
+        rgba(220,38,38,.20);
+
+}
+
+
+#archive-delete-confirm-modal
+.reset-confirm-actions
+.btn-primary:hover{
+
+    background:var(--danger) !important;
+
+    color:var(--white) !important;
+
+    border-color:#cbd5e1 !important;
+
+}
+
+
+/* ======================================================
+   SECTION 11.10 - BUTTON ACTIVE
+====================================================== */
+
+#archive-delete-confirm-modal
+.reset-confirm-actions
+button:active{
+
+    transform:translateY(1px);
+
+}
+
+
+/* ======================================================
+   SECTION 12 - RESPONSIVE
+====================================================== */
+
+
+/* ======================================================
+   SECTION 12.1 - TABLET / 1200px
 ====================================================== */
 
 @media (max-width:1200px){
@@ -1075,6 +1609,12 @@ PAGINATION
     }
 
 }
+
+
+/* ======================================================
+   SECTION 12.2 - 950px
+====================================================== */
+
 @media (max-width:950px){
 
     .archive-control-deck{
@@ -1137,6 +1677,12 @@ PAGINATION
     }
 
 }
+
+
+/* ======================================================
+   SECTION 12.3 - 700px
+====================================================== */
+
 @media (max-width:700px){
 
     .archive-banner{
@@ -1246,6 +1792,49 @@ PAGINATION
     }
 
 }
+
+
+/* ======================================================
+   SECTION 12.4 - 600px / DELETE MODAL
+====================================================== */
+
+@media (max-width:600px){
+
+    #archive-delete-confirm-modal
+    .centre-modal-content{
+
+        width:92%;
+
+        padding:30px 22px;
+
+    }
+
+
+    #archive-delete-confirm-modal
+    .reset-confirm-actions{
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+
+    #archive-delete-confirm-modal
+    .reset-confirm-actions
+    button{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 12.5 - 480px
+====================================================== */
+
 @media (max-width:480px){
 
     .archive-banner-title{
@@ -1317,771 +1906,60 @@ PAGINATION
 }
 
 
+/* ======================================================
+   SECTION 13 - FINAL CORE COLOR CONSISTENCY
+====================================================== */
 
-/* =========================================================
-   CENTRIA ARCHIVE â€” COMPACT SPACING
-   Keep the existing design / reduce unnecessary space
-========================================================= */
 
-.archive-page{
-    gap:0;
-}
-
-
-/* =========================================================
-   BANNER
-========================================================= */
-
-.archive-banner{
-    height:40px;
-    min-height:40px;
-    margin-bottom:10px;
-    padding:0 12px;
-    gap:8px;
-}
-
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-.archive-statistics{
-    gap:10px;
-    margin-bottom:10px;
-}
-
-.archive-stat-card{
-    min-height:96px;
-    padding:12px;
-    gap:10px;
-}
-
-.archive-stat-icon{
-    width:48px;
-    height:48px;
-    flex-basis:48px;
-    font-size:18px;
-}
-
-.archive-stat-label{
-    font-size:13px;
-}
-
-.archive-stat-value{
-    margin-top:2px;
-    font-size:24px;
-}
-
-.archive-stat-description{
-    margin-top:2px;
-    font-size:11px;
-}
-
-
-/* =========================================================
-   CONTROL DECK
-========================================================= */
-
-.archive-control-deck{
-    gap:8px;
-    margin-bottom:9px;
-}
-
-.archive-search-field input{
-    height:38px;
-    padding-inline-start:36px;
-    padding-inline-end:12px;
-    font-size:13px;
-}
-
-.archive-select-field{
-    width:170px;
-    height:38px;
-    padding:0 10px;
-    gap:7px;
-}
-
-.archive-select{
-    font-size:13px;
-}
-
-.archive-search-button,
-.archive-export-button{
-    height:38px;
-    padding:0 14px;
-    gap:6px;
-    font-size:13px;
-}
-
-
-/* =========================================================
-   REGISTER
-========================================================= */
-
-.archive-register-header{
-    height:46px;
-    min-height:46px;
-    padding:0 12px;
-    gap:8px;
-}
-
-.archive-register-title-wrap{
-    gap:7px;
-}
-
-.archive-register-title-wrap > div{
-    gap:6px;
-}
-
-.archive-register-icon{
-    width:30px;
-    height:30px;
-    font-size:.78rem;
-}
-
-.archive-register-title-wrap h2{
-    font-size:.88rem;
-}
-
-.archive-total{
-    min-width:20px;
-    height:20px;
-    font-size:.68rem;
-}
-
-
-/* =========================================================
-   BULK OPERATIONS
-========================================================= */
-
-.archive-bulk-actions{
-    gap:7px;
-}
-
-.archive-operation-label{
-    font-size:12px;
-}
-
-.archive-operation-select{
-    height:36px;
-    min-width:135px;
-    padding:0 10px;
-    font-size:12px;
-}
-
-.archive-apply-button{
-    height:36px;
-    padding:0 13px;
-    font-size:12px;
-}
-
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-.archive-table-stage{
-    padding:3px 6px;
-}
-
-.archive-table-stage thead th{
-    padding:7px 9px;
-    font-size:.74rem;
-}
-
-.archive-table-stage tbody td{
-    padding:9px 9px;
-    font-size:.78rem;
-    line-height:1.35;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.archive-table-loading{
-    min-height:120px;
-    font-size:16px;
-}
-
-
-/* =========================================================
-   PAGINATION
-========================================================= */
-
-.archive-pagination{
-    gap:5px;
-    min-height:44px;
-    padding:6px 12px;
-}
-
-
-/* =========================================================
-   LAST ARCHIVE ACTIVITY
-========================================================= */
-
-.archive-notification{
-    height:58px;
-    min-height:58px;
-    margin-top:9px;
-    padding:0 12px;
-    gap:10px;
-    border-radius:4px;
-}
-
-.archive-notification-icon{
-    width:34px;
-    height:34px;
-    font-size:15px;
-}
-
-.archive-notification-content h4{
-    font-size:13px;
-}
-
-.archive-notification-content p{
-    margin-top:1px;
-    font-size:11px;
-}
-
-/* =========================================================
-   CENTRIA ARCHIVE â€” FINAL STAT CARDS
-   Compact / Clean / Consistent
-========================================================= */
-
-.archive-statistics{
-    gap:10px;
-    margin-bottom:10px;
-}
-
-.archive-stat-card{
-    min-height:94px;
-    padding:12px 14px;
-    gap:11px;
-
-    border:1px solid #e5e7eb;
-    border-radius:4px;
-
-    box-shadow:0 1px 3px rgba(15,23,42,.04);
-}
-
-.archive-stat-icon{
-    width:46px;
-    height:46px;
-    flex:0 0 46px;
-
-    border-radius:50%;
-    font-size:17px;
-}
-
-.archive-stat-content{
-    justify-content:center;
-}
-
-.archive-stat-label{
-    font-size:13px;
-    font-weight:700;
-    line-height:1.35;
-}
-
-.archive-stat-value{
-    margin-top:2px;
-    font-size:25px;
-    font-weight:800;
-    line-height:1.15;
-}
-
-.archive-stat-description{
-    margin-top:2px;
-    font-size:11px;
-    line-height:1.25;
-}
-
-
-/* ---------------------------------------------------------
-   TOTAL
---------------------------------------------------------- */
-
-.archive-stat-total .archive-stat-icon{
-    background:#f1f5f9;
-    color:#475569;
-}
-
-
-/* ---------------------------------------------------------
-   ARCHIVED / RESTORABLE
---------------------------------------------------------- */
-
-.archive-stat-restorable .archive-stat-icon{
-    background:#f1f5f9;
-    color:#64748b;
-}
-
-
-/* ---------------------------------------------------------
-   PENDING DELETE
-   Red warning tone
---------------------------------------------------------- */
-
-.archive-stat-pending .archive-stat-icon{
-    background:#fef2f2;
-    color:#ef4444;
-}
-
-
-/* ---------------------------------------------------------
-   DELETED
---------------------------------------------------------- */
-
-.archive-stat-deleted .archive-stat-icon{
-    background:#fef2f2;
-    color:#dc2626;
-}
-
-
-/* =========================================================
-   ARCHIVE STATUS BADGES
-========================================================= */
-
-.archive-status{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:110px;
-    padding:5px 10px;
-
-    border-radius:999px;
-
-    font-size:12px;
-    font-weight:700;
-    line-height:1.2;
-
-    white-space:nowrap;
-}
-
-
-/* =========================================================
-   ARCHIVED
-   Gray / Neutral
-========================================================= */
-
-.archive-status-archived{
-    color:#475569;
-    background:#f1f5f9;
-    border:1px solid #e2e8f0;
-}
-
-
-/* =========================================================
-   RESTORED
-   Green / Success
-========================================================= */
-
-.archive-status-restored{
-    color:#15803d;
-    background:#f0fdf4;
-    border:1px solid #bbf7d0;
-}
-
-
-/* =========================================================
-   PENDING DELETE
-   Red / Warning
-========================================================= */
-
-.archive-status-pending_delete{
-    color:#dc2626;
-    background:#fef2f2;
-    border:1px solid #fecaca;
-}
-
-
-/* =========================================================
-   DELETED
-   Dark Red / Final
-========================================================= */
-
-.archive-status-deleted{
-    color:#991b1b;
-    background:#fee2e2;
-    border:1px solid #fecaca;
-}
-
-/* ==================================================
-   11 - ARCHIVE DELETE CONFIRM MODAL
-   ================================================== */
-
-
-/* ==================================================
-   11.01 - MODAL CONTENT
-   ================================================== */
-
-#archive-delete-confirm-modal .centre-modal-content {
-
-    width: 90%;
-    max-width: 650px;
-
-    padding: 40px;
-
-    border-radius: 16px;
-
-    text-align: center;
-}
-
-
-/* ==================================================
-   11.02 - CONFIRM HEADER
-   ================================================== */
-
-#archive-delete-confirm-modal .confirm-header {
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 14px;
-}
-
-/* ==================================================
-   11.03 - WARNING ICON
-   ================================================== */
-
-#archive-delete-confirm-modal .confirm-icon {
-
-    width: 82px !important;
-    height: 82px !important;
-    min-width: 82px;
-    min-height: 82px;
-    margin: 0 0 18px 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    border-radius: 50% !important;
-    background: var(--danger);
-    border: 3px solid #fecaca;
-    color: var(--white);
-    font-size: 42px;
-    font-weight: 700;
-    flex-shrink: 0;
-}
-
-
-/* ==================================================
-   11.04 - TITLE
-   ================================================== */
-
-#archive-delete-confirm-modal .confirm-title {
-
-    margin: 0;
-
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--black);
-}
-
-
-/* ==================================================
-   11.05 - CONFIRM MESSAGE
-   ================================================== */
-
-#archive-delete-confirm-modal
-#archive-delete-confirm-message {
-
-    margin: 20px 0 30px;
-    font-size: 18px;
-    line-height: 1.8;
-     color: var(--black);
-}
-
-
-/* ==================================================
-   11.06 - ACTIONS
-   ================================================== */
-
-#archive-delete-confirm-modal .reset-confirm-actions {
-
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-}
-
-
-/* ==================================================
-   11.07 - BUTTON BASE
-   ================================================== */
-
-#archive-delete-confirm-modal
-.reset-confirm-actions button {
-
-    min-width: 140px;
-    height: 48px;
-    padding: 0 24px;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.1s ease;
-}
-
-
-/* ==================================================
-   11.08 - CANCEL BUTTON
-   ================================================== */
-
-#archive-delete-confirm-modal
-.reset-confirm-actions
-.btn-secondary {
-
-    background: var(--white) !important;
-
-    color: var(--black) !important;
-
-    border: 1px solid #cbd5e1 !important;
-}
-
-
-#archive-delete-confirm-modal
-.reset-confirm-actions
-.btn-secondary:hover {
-
-    background: var(--primary-light) !important;
-
-    color: var(--black) !important;
-}
-
-
-/* ==================================================
-   11.09 - DELETE CONFIRM BUTTON
-   ================================================== */
-
-#archive-delete-confirm-modal
-.reset-confirm-actions
-.btn-primary {
-
-    background: var(--primary) !important;
-
-    color: var(--white) !important;
-
-    border: 1px solid #cbd5e1 !important;
-
-    box-shadow:
-        0 4px 12px
-        rgba(220, 38, 38, 0.20);
-}
-
-
-#archive-delete-confirm-modal
-.reset-confirm-actions
-.btn-primary:hover {
-
-    background: var(--danger) !important;
-
-    color: var(--white) !important;
-
-    border-color: #cbd5e1 !important;
-}
-
-
-/* ==================================================
-   11.10 - BUTTON ACTIVE
-   ================================================== */
-
-#archive-delete-confirm-modal
-.reset-confirm-actions
-button:active {
-
-    transform: translateY(1px);
-}
-
-
-/* ==================================================
-   11.11 - MOBILE
-   ================================================== */
-
-@media (max-width: 600px) {
-
-    #archive-delete-confirm-modal
-    .centre-modal-content {
-
-        width: 92%;
-
-        padding: 30px 22px;
-    }
-
-
-    #archive-delete-confirm-modal
-    .reset-confirm-actions {
-
-        flex-direction: column;
-
-        width: 100%;
-    }
-
-
-    #archive-delete-confirm-modal
-    .reset-confirm-actions
-    button {
-
-        width: 100%;
-    }
-
-}
-
-
-/* ==================================================
-   ARCHIVE PAGINATION
-================================================== */
-
-.archive-pagination {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 6px;
-
-    padding: 18px 10px;
-
-}
-
-
-/* ==================================================
-   PAGINATION BUTTON
-================================================== */
-
-.archive-pagination .pagination-button {
-
-    min-width: 34px;
-
-    height: 34px;
-
-    padding: 0 9px;
-
-    border: 1px solid #d9e1ec;
-
-    border-radius: 6px;
-
-    background: #ffffff;
-
-    color: #475569;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    transition:
-        background-color 0.15s ease,
-        color 0.15s ease,
-        border-color 0.15s ease;
-
-}
-
-
-/* ==================================================
-   HOVER
-================================================== */
-
-.archive-pagination
-.pagination-button:hover:not(:disabled) {
-
-    background: var(--primary-light);
-
-    border-color: #cbd5e1;
-
-    color: var(--black);
-
-}
-
-
-/* ==================================================
-   ACTIVE PAGE
-================================================== */
-
-.archive-pagination
-.pagination-button.active {
-
-    background: var(--primary);
-
-    border-color: #2563eb;
-
-    color: var(--white);
-
-}
-
-
-/* ==================================================
-   DISABLED
-================================================== */
-
-.archive-pagination
-.pagination-button:disabled {
-
-    opacity: 0.45;
-
-    cursor: not-allowed;
-
-    background: var(--primary-light);
-
-}
-
-
-/* ==================================================
-   ICONS
-================================================== */
-
-.archive-pagination
-.pagination-button i {
-
-    font-size: 12px;
-
-}
-
-.archive-stat-icon .fa-box-archive {
-    color: var(--primary);
-}
-/* =========================================================
-   CENTRIA ARCHIVE â€” CORE COLOR CONSISTENCY
-   Icons + Last Activity
-========================================================= */
+/* ======================================================
+   SECTION 13.1 - STAT ICONS
+====================================================== */
 
 .archive-stat-total .archive-stat-icon,
 .archive-stat-restorable .archive-stat-icon,
 .archive-stat-pending .archive-stat-icon,
 .archive-stat-deleted .archive-stat-icon{
+
     background:var(--primary-light);
+
     color:var(--primary);
+
 }
+
+
+/* ======================================================
+   SECTION 13.2 - LAST ACTIVITY
+====================================================== */
 
 .archive-notification{
+
     background:var(--primary-light);
+
     border-color:var(--primary-border);
+
 }
+
 
 .archive-notification-icon{
+
     background:var(--white);
+
     color:var(--primary);
+
 }
 
-.archive-view-container .dialog-stripe i {
-    color: var(--primary) !important;
+
+/* ======================================================
+   SECTION 13.3 - ARCHIVE VIEW DIALOG ICON
+====================================================== */
+
+.archive-view-container .dialog-stripe i{
+
+    color:var(--primary) !important;
+
 }
+
+
+/* ======================================================
+   END OF FILE
+====================================================== */

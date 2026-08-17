@@ -111,9 +111,25 @@
     white-space:nowrap;
 }
 
-.payments-stats-grid .stat-title{font-size:18px;}
-.payments-stats-grid .stat-description{font-size:14px;}
-.payments-stats-grid .stat-value{font-size:28px;line-height:1;}
+.payments-stats-grid .stat-title{
+    font-size:16px;
+    font-weight:500;
+    color:#64748b;
+}
+
+.payments-stats-grid .stat-description{
+    font-size:13px;
+    font-weight:500;
+    color:#94a3b8;
+}
+
+.payments-stats-grid .stat-value{
+    font-size:36px;
+    line-height:1;
+    font-weight:800;
+    color:#1e293b;
+}
+
 .payments-stats-grid .stat-icon{
     width:48px;
     height:48px;
@@ -1102,15 +1118,22 @@ html[dir="rtl"] #payments-table-container .subscription-operation{
 }
 
 .payments-stats-grid .stat-title{
-    font-size:15px;
+    font-size:14px;
+    font-weight:500;
+    color:#64748b;
 }
 
 .payments-stats-grid .stat-description{
-    font-size:12px;
+    font-size:11px;
+    font-weight:500;
+    color:#94a3b8;
 }
 
 .payments-stats-grid .stat-value{
-    font-size:23px;
+    font-size:32px;
+    line-height:1;
+    font-weight:800;
+    color:#1e293b;
 }
 
 .payments-stats-grid .stat-icon{

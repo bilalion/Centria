@@ -5,6 +5,8 @@
  *
  * AJAX Archive / Bulk Operations / Restore / Delete
  *
+ * Global error dialog integration
+ *
  * No Java or Servlet logic is modified.
  * ==========================================================
  */
@@ -21,6 +23,8 @@
 let archiveDeleteCentres = [];
 
 let activeArchivePage = 1;
+
+
 /*
 ==================================================
 01 - INITIALIZE ARCHIVE PAGE
@@ -28,7 +32,6 @@ let activeArchivePage = 1;
 */
 
 function initArchivePage() {
-
 
     /*
     --------------------------------------------------
@@ -99,7 +102,7 @@ function initArchivePage() {
 
     /*
     --------------------------------------------------
-    Safety
+    SAFETY
     --------------------------------------------------
     */
 
@@ -112,7 +115,7 @@ function initArchivePage() {
 
     /*
     --------------------------------------------------
-    Initial bulk state
+    INITIAL BULK STATE
     --------------------------------------------------
     */
 
@@ -132,7 +135,6 @@ function initArchivePage() {
     selectAll.addEventListener(
             "change",
             function () {
-
 
                 rowCheckboxes.forEach(
                         function (checkbox) {
@@ -172,7 +174,6 @@ function initArchivePage() {
                 checkbox.addEventListener(
                         "change",
                         function () {
-
 
                             updateArchiveSelectAllState(
                                     selectAll,
@@ -217,73 +218,74 @@ function initArchivePage() {
     }
 
 
-/*
-==================================================
-ARCHIVE SEARCH
-==================================================
-*/
+    /*
+    ==================================================
+    ARCHIVE SEARCH
+    ==================================================
+    */
 
-const archiveSearch =
-        document.getElementById(
-                "archiveSearch"
+    const archiveSearch =
+            document.getElementById(
+                    "archiveSearch"
+            );
+
+
+    if (archiveSearch) {
+
+        archiveSearch.addEventListener(
+                "input",
+                function () {
+
+                    searchArchivedCentres();
+
+                }
         );
 
-
-if (archiveSearch) {
-
-    archiveSearch.addEventListener(
-            "input",
-            function () {
-
-                searchArchivedCentres();
-
-            }
-    );
-
-}
+    }
 
 
+    /*
+    ==================================================
+    ARCHIVE STATUS FILTER
+    ==================================================
+    */
+
+    const archiveStatus =
+            document.getElementById(
+                    "archiveStatus"
+            );
 
 
-/*
-==================================================
-ARCHIVE STATUS FILTER
-==================================================
-*/
+    if (archiveStatus) {
 
-const archiveStatus =
-        document.getElementById(
-                "archiveStatus"
+        archiveStatus.addEventListener(
+                "change",
+                function () {
+
+                    searchArchivedCentres();
+
+                }
         );
 
+    }
 
-if (archiveStatus) {
 
-    archiveStatus.addEventListener(
-            "change",
-            function () {
-
-                searchArchivedCentres();
-
-            }
-    );
-
-}
     /*
     ==================================================
     LOAD ARCHIVE
     ==================================================
     */
 
-   loadArchive(1);
-    
-/*
-==================================================
-INITIALIZE SEARCH
-==================================================
-*/
+    loadArchive(1);
 
-initArchiveSearch();
+
+    /*
+    ==================================================
+    INITIALIZE SEARCH
+    ==================================================
+    */
+
+    initArchiveSearch();
 
 }
 
@@ -299,10 +301,9 @@ function updateArchiveSelectAllState(
         rowCheckboxes
 ) {
 
-
     /*
     --------------------------------------------------
-    No rows
+    NO ROWS
     --------------------------------------------------
     */
 
@@ -323,7 +324,7 @@ function updateArchiveSelectAllState(
 
     /*
     --------------------------------------------------
-    Count selected rows
+    COUNT SELECTED ROWS
     --------------------------------------------------
     */
 
@@ -345,7 +346,7 @@ function updateArchiveSelectAllState(
 
     /*
     --------------------------------------------------
-    All selected
+    ALL SELECTED
     --------------------------------------------------
     */
 
@@ -365,7 +366,7 @@ function updateArchiveSelectAllState(
 
     /*
     --------------------------------------------------
-    Some selected
+    SOME SELECTED
     --------------------------------------------------
     */
 
@@ -382,7 +383,7 @@ function updateArchiveSelectAllState(
 
     /*
     --------------------------------------------------
-    None selected
+    NONE SELECTED
     --------------------------------------------------
     */
 
@@ -409,10 +410,9 @@ function updateArchiveBulkActionState(
         operationSelect
 ) {
 
-
     /*
     --------------------------------------------------
-    Safety
+    SAFETY
     --------------------------------------------------
     */
 
@@ -425,7 +425,7 @@ function updateArchiveBulkActionState(
 
     /*
     --------------------------------------------------
-    Count selected rows
+    COUNT SELECTED ROWS
     --------------------------------------------------
     */
 
@@ -447,7 +447,7 @@ function updateArchiveBulkActionState(
 
     /*
     --------------------------------------------------
-    Selection exists
+    SELECTION EXISTS
     --------------------------------------------------
     */
 
@@ -455,21 +455,12 @@ function updateArchiveBulkActionState(
             selectedCount > 0
     ) {
 
-
-        /*
-        Enable APPLY
-        */
-
         if (applyButton) {
 
             applyButton.disabled = false;
 
         }
 
-
-        /*
-        Enable OPERATION
-        */
 
         if (operationSelect) {
 
@@ -482,16 +473,11 @@ function updateArchiveBulkActionState(
 
     /*
     --------------------------------------------------
-    No selection
+    NO SELECTION
     --------------------------------------------------
     */
 
     else {
-
-
-        /*
-        Disable APPLY
-        */
 
         if (applyButton) {
 
@@ -499,10 +485,6 @@ function updateArchiveBulkActionState(
 
         }
 
-
-        /*
-        Disable OPERATION
-        */
 
         if (operationSelect) {
 
@@ -524,7 +506,6 @@ function updateArchiveBulkActionState(
 */
 
 function getSelectedArchiveCentres() {
-
 
     const rowCheckboxes =
             document.querySelectorAll(
@@ -557,14 +538,7 @@ function getSelectedArchiveCentres() {
 ==================================================
 */
 
-/*
-==================================================
-05 - LOAD ARCHIVE
-==================================================
-*/
-
 function loadArchive(page) {
-
 
     /*
     --------------------------------------------------
@@ -742,13 +716,6 @@ function loadArchive(page) {
         .then(
                 html => {
 
-
-                    /*
-                    --------------------------------------------------
-                    REPLACE TABLE + PAGINATION
-                    --------------------------------------------------
-                    */
-
                     container.innerHTML =
                             html;
 
@@ -758,12 +725,6 @@ function loadArchive(page) {
                             "false"
                     );
 
-
-                    /*
-                    --------------------------------------------------
-                    REINITIALIZE CONTROLS
-                    --------------------------------------------------
-                    */
 
                     initArchiveControlsOnly();
 
@@ -787,6 +748,17 @@ function loadArchive(page) {
                             "false"
                     );
 
+
+                    /*
+                    --------------------------------------------------
+                    GLOBAL ERROR DIALOG
+                    --------------------------------------------------
+                    */
+
+                    showArchiveErrorDialog(
+                            "archive.error.load"
+                    );
+
                 }
         );
 
@@ -801,21 +773,7 @@ function loadArchive(page) {
 
 function searchArchivedCentres() {
 
-
-    /*
-    --------------------------------------------------
-    RESET TO FIRST PAGE
-    --------------------------------------------------
-    */
-
     activeArchivePage = 1;
-
-
-    /*
-    --------------------------------------------------
-    LOAD FIRST PAGE
-    --------------------------------------------------
-    */
 
     loadArchive(1);
 
@@ -829,13 +787,6 @@ function searchArchivedCentres() {
 */
 
 function changeArchivePage(page) {
-
-
-    /*
-    --------------------------------------------------
-    SAFETY
-    --------------------------------------------------
-    */
 
     const requestedPage =
             Number(page);
@@ -852,17 +803,13 @@ function changeArchivePage(page) {
     }
 
 
-    /*
-    --------------------------------------------------
-    LOAD REQUESTED PAGE
-    --------------------------------------------------
-    */
-
     loadArchive(
             requestedPage
     );
 
 }
+
+
 /*
 ==================================================
 06 - INITIALIZE ARCHIVE CONTROLS ONLY
@@ -870,7 +817,6 @@ function changeArchivePage(page) {
 */
 
 function initArchiveControlsOnly() {
-
 
     /*
     --------------------------------------------------
@@ -929,7 +875,7 @@ function initArchiveControlsOnly() {
 
     /*
     --------------------------------------------------
-    Initial state
+    INITIAL STATE
     --------------------------------------------------
     */
 
@@ -1057,22 +1003,9 @@ function openArchiveDeleteConfirm(
         selectedCentres
 ) {
 
-
-    /*
-    --------------------------------------------------
-    Store selected centres
-    --------------------------------------------------
-    */
-
     archiveDeleteCentres =
             selectedCentres.slice();
 
-
-    /*
-    --------------------------------------------------
-    Get modal
-    --------------------------------------------------
-    */
 
     const modal =
             document.getElementById(
@@ -1080,23 +1013,11 @@ function openArchiveDeleteConfirm(
             );
 
 
-    /*
-    --------------------------------------------------
-    Get message
-    --------------------------------------------------
-    */
-
     const message =
             document.getElementById(
                     "archive-delete-confirm-message"
             );
 
-
-    /*
-    --------------------------------------------------
-    Safety
-    --------------------------------------------------
-    */
 
     if (
             !modal
@@ -1109,6 +1030,10 @@ function openArchiveDeleteConfirm(
                 + "DELETE modal not found."
         );
 
+        showArchiveErrorDialog(
+                "archive.error.dialog"
+        );
+
         return;
 
     }
@@ -1116,7 +1041,7 @@ function openArchiveDeleteConfirm(
 
     /*
     --------------------------------------------------
-    Get translated message
+    GET TRANSLATED MESSAGE
     --------------------------------------------------
     */
 
@@ -1133,6 +1058,10 @@ function openArchiveDeleteConfirm(
                 + "DELETE message template not found."
         );
 
+        showArchiveErrorDialog(
+                "archive.error.dialog"
+        );
+
         return;
 
     }
@@ -1140,7 +1069,7 @@ function openArchiveDeleteConfirm(
 
     /*
     --------------------------------------------------
-    Replace {0}
+    REPLACE {0}
     --------------------------------------------------
     */
 
@@ -1153,7 +1082,7 @@ function openArchiveDeleteConfirm(
 
     /*
     --------------------------------------------------
-    Open modal
+    OPEN MODAL
     --------------------------------------------------
     */
 
@@ -1178,7 +1107,6 @@ CLOSE DELETE CONFIRM MODAL
 
 function closeArchiveDeleteConfirm() {
 
-
     const modal =
             document.getElementById(
                     "archive-delete-confirm-modal"
@@ -1200,12 +1128,6 @@ function closeArchiveDeleteConfirm() {
     }
 
 
-    /*
-    --------------------------------------------------
-    Clear selected centres
-    --------------------------------------------------
-    */
-
     archiveDeleteCentres = [];
 
 }
@@ -1219,13 +1141,6 @@ CONFIRM DELETE
 
 function confirmArchiveDelete() {
 
-
-    /*
-    --------------------------------------------------
-    Safety
-    --------------------------------------------------
-    */
-
     if (
             archiveDeleteCentres.length === 0
     ) {
@@ -1235,30 +1150,12 @@ function confirmArchiveDelete() {
     }
 
 
-    /*
-    --------------------------------------------------
-    Copy selected centres
-    --------------------------------------------------
-    */
-
     const selectedCentres =
             archiveDeleteCentres.slice();
 
 
-    /*
-    --------------------------------------------------
-    Close modal
-    --------------------------------------------------
-    */
-
     closeArchiveDeleteConfirm();
 
-
-    /*
-    --------------------------------------------------
-    Get Apply button
-    --------------------------------------------------
-    */
 
     const applyButton =
             document.getElementById(
@@ -1266,24 +1163,12 @@ function confirmArchiveDelete() {
             );
 
 
-    /*
-    --------------------------------------------------
-    Disable Apply
-    --------------------------------------------------
-    */
-
     if (applyButton) {
 
         applyButton.disabled = true;
 
     }
 
-
-    /*
-    --------------------------------------------------
-    Build request
-    --------------------------------------------------
-    */
 
     const formData =
             new URLSearchParams();
@@ -1301,12 +1186,6 @@ function confirmArchiveDelete() {
     );
 
 
-    /*
-    --------------------------------------------------
-    Add selected centres
-    --------------------------------------------------
-    */
-
     selectedCentres.forEach(
             function (centreCode) {
 
@@ -1318,12 +1197,6 @@ function confirmArchiveDelete() {
             }
     );
 
-
-    /*
-    --------------------------------------------------
-    Send DELETE
-    --------------------------------------------------
-    */
 
     fetch(
             window.contextPath
@@ -1372,12 +1245,6 @@ function confirmArchiveDelete() {
                 );
 
 
-                /*
-                --------------------------------------------------
-                Reload Archive
-                --------------------------------------------------
-                */
-
                 loadContent(
                         "ArchiveServlet?action=list",
                         null
@@ -1403,6 +1270,11 @@ function confirmArchiveDelete() {
 
                 }
 
+
+                showArchiveErrorDialog(
+                        "archive.error.delete"
+                );
+
             }
     );
 
@@ -1421,10 +1293,9 @@ function applyArchiveOperation(
         applyButton
 ) {
 
-
     /*
     --------------------------------------------------
-    Validate operation selector
+    VALIDATE OPERATION
     --------------------------------------------------
     */
 
@@ -1437,7 +1308,7 @@ function applyArchiveOperation(
 
     /*
     --------------------------------------------------
-    Get operation
+    GET OPERATION
     --------------------------------------------------
     */
 
@@ -1447,14 +1318,14 @@ function applyArchiveOperation(
 
     /*
     --------------------------------------------------
-    Operation required
+    OPERATION REQUIRED
     --------------------------------------------------
     */
 
     if (!operation) {
 
-        alert(
-                "Please select an operation."
+        showArchiveErrorDialog(
+                "archive.error.operation.required"
         );
 
         return;
@@ -1464,7 +1335,7 @@ function applyArchiveOperation(
 
     /*
     --------------------------------------------------
-    Get selected centres
+    GET SELECTED CENTRES
     --------------------------------------------------
     */
 
@@ -1474,7 +1345,7 @@ function applyArchiveOperation(
 
     /*
     --------------------------------------------------
-    At least one centre
+    AT LEAST ONE CENTRE
     --------------------------------------------------
     */
 
@@ -1482,8 +1353,8 @@ function applyArchiveOperation(
             selectedCentres.length === 0
     ) {
 
-        alert(
-                "Please select at least one centre."
+        showArchiveErrorDialog(
+                "archive.error.selection.required"
         );
 
         return;
@@ -1502,25 +1373,12 @@ function applyArchiveOperation(
             "RESTORE"
     ) {
 
-
-        /*
-        --------------------------------------------------
-        Disable button
-        --------------------------------------------------
-        */
-
         if (applyButton) {
 
             applyButton.disabled = true;
 
         }
 
-
-        /*
-        --------------------------------------------------
-        Build request
-        --------------------------------------------------
-        */
 
         const formData =
                 new URLSearchParams();
@@ -1538,12 +1396,6 @@ function applyArchiveOperation(
         );
 
 
-        /*
-        --------------------------------------------------
-        Add selected centres
-        --------------------------------------------------
-        */
-
         selectedCentres.forEach(
                 function (centreCode) {
 
@@ -1555,12 +1407,6 @@ function applyArchiveOperation(
                 }
         );
 
-
-        /*
-        --------------------------------------------------
-        Send RESTORE request
-        --------------------------------------------------
-        */
 
         fetch(
                 window.contextPath
@@ -1609,12 +1455,6 @@ function applyArchiveOperation(
                     );
 
 
-                    /*
-                    --------------------------------------------------
-                    Reload Archive
-                    --------------------------------------------------
-                    */
-
                     loadContent(
                             "ArchiveServlet?action=list",
                             null
@@ -1640,15 +1480,14 @@ function applyArchiveOperation(
 
                     }
 
+
+                    showArchiveErrorDialog(
+                            "archive.error.restore"
+                    );
+
                 }
         );
 
-
-        /*
-        --------------------------------------------------
-        Stop RESTORE
-        --------------------------------------------------
-        */
 
         return;
 
@@ -1666,33 +1505,18 @@ function applyArchiveOperation(
             "DELETE"
     ) {
 
-
-        /*
-        --------------------------------------------------
-        Open custom confirmation modal
-        --------------------------------------------------
-        */
-
         openArchiveDeleteConfirm(
                 selectedCentres
         );
 
-
-        /*
-        --------------------------------------------------
-        STOP HERE
-        --------------------------------------------------
-
-        DELETE request is sent only after
-        the user clicks CONFIRM.
-        --------------------------------------------------
-        */
 
         return;
 
     }
 
 }
+
+
 /*
 ==================================================
 08.1 - VIEW ARCHIVE
@@ -1700,7 +1524,6 @@ function applyArchiveOperation(
 */
 
 function viewArchivedCentre(centreCode) {
-
 
     /*
     --------------------------------------------------
@@ -1714,9 +1537,8 @@ function viewArchivedCentre(centreCode) {
             centreCode.trim() === ""
     ) {
 
-        console.error(
-                "[CENTRIA ARCHIVE] " +
-                "Centre code is missing."
+        showArchiveErrorDialog(
+                "archive.error.centre.code"
         );
 
         return;
@@ -1755,8 +1577,12 @@ function viewArchivedCentre(centreCode) {
     ) {
 
         console.error(
-                "[CENTRIA ARCHIVE] " +
-                "Archive View modal not found."
+                "[CENTRIA ARCHIVE] "
+                + "Archive View modal not found."
+        );
+
+        showArchiveErrorDialog(
+                "archive.error.dialog"
         );
 
         return;
@@ -1867,20 +1693,30 @@ function viewArchivedCentre(centreCode) {
                 error => {
 
                     console.error(
-                            "[CENTRIA ARCHIVE] " +
-                            "View error:",
+                            "[CENTRIA ARCHIVE] "
+                            + "View error:",
                             error
                     );
 
 
-                    modalBody.innerHTML =
-                            `
-                            <div class="empty-state">
-                                <p>
-                                    Unable to load archive details.
-                                </p>
-                            </div>
-                            `;
+                    /*
+                    --------------------------------------------------
+                    CLOSE VIEW MODAL
+                    --------------------------------------------------
+                    */
+
+                    closeArchiveView();
+
+
+                    /*
+                    --------------------------------------------------
+                    GLOBAL ERROR DIALOG
+                    --------------------------------------------------
+                    */
+
+                    showArchiveErrorDialog(
+                            "archive.error.view"
+                    );
 
                 }
         );
@@ -1895,7 +1731,6 @@ CLOSE VIEW MODAL
 */
 
 function closeArchiveView() {
-
 
     const modal =
             document.getElementById(
@@ -1946,7 +1781,6 @@ document.addEventListener(
         "click",
         function (event) {
 
-
             const button =
                     event.target.closest(
                             ".archive-view-button"
@@ -1975,9 +1809,55 @@ document.addEventListener(
 
         }
 );
+
+
 /*
 ==================================================
-09 - PAGE INITIALIZATION
+09 - ARCHIVE ERROR DIALOG
+==================================================
+*/
+
+/*
+ * Global dialog.js is responsible for rendering
+ * the actual dialog.
+ *
+ * Archive only sends the language key.
+ */
+
+function showArchiveErrorDialog(messageKey) {
+
+    if (
+            typeof showErrorDialog ===
+            "function"
+    ) {
+
+        showErrorDialog(
+                messageKey
+        );
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    FALLBACK
+    --------------------------------------------------
+    */
+
+    console.error(
+            "[CENTRIA ARCHIVE] " +
+            "Global error dialog is not available:",
+            messageKey
+    );
+
+}
+
+
+/*
+==================================================
+10 - PAGE INITIALIZATION
 ==================================================
 */
 
@@ -1996,4 +1876,4 @@ document.addEventListener(
             }
 
         }
-);
+); 

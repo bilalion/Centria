@@ -1,24 +1,23 @@
 /*
-==================================================
- CENTRIA
- Accueil / Home JavaScript
-==================================================
+==========================================================
+01 - CENTRIA
+    Accueil / Home JavaScript
+==========================================================
 */
 
 
 /*
-==================================================
- INITIALIZE ACCUEIL PAGE
-==================================================
+==========================================================
+01.01 - INITIALIZE HOME PAGE
+==========================================================
 */
 
 function initAccueilPage() {
 
-
     /*
-    ==============================================
-    CHECK HOME PAGE
-    ==============================================
+    ======================================================
+    01.01.01 - CHECK HOME PAGE
+    ======================================================
     */
 
     const homePage =
@@ -35,30 +34,35 @@ function initAccueilPage() {
 
 
     /*
-    ==============================================
-    INITIALIZE HOME COMPONENTS
-    ==============================================
+    ======================================================
+    01.01.02 - INITIALIZE HOME COMPONENTS
+    ======================================================
     */
 
     initRecentCentres();
 
     initHomeActions();
-    
+
     initHomeChart();
-    
+
     initRevenuePeriod();
 
 }
 
 
 /*
-==================================================
- RECENT CENTRES
-==================================================
+==========================================================
+01.02 - RECENT CENTRES
+==========================================================
 */
 
 function initRecentCentres() {
 
+    /*
+    ======================================================
+    01.02.01 - GET RECENT CENTRES CONTAINER
+    ======================================================
+    */
 
     const recentCentresList =
         document.getElementById(
@@ -74,11 +78,16 @@ function initRecentCentres() {
 
 
     /*
-    Recent centres are already rendered
-    by ahome.jsp
+    ======================================================
+    01.02.02 - RECENT CENTRES ARE SERVER RENDERED
+    ======================================================
 
-    JavaScript is only responsible
-    for page initialization here.
+    The recent centres are already rendered
+    by home.jsp.
+
+    JavaScript only handles the visual
+    initialization state.
+    ======================================================
     */
 
     const items =
@@ -86,6 +95,12 @@ function initRecentCentres() {
             ".recent-centre-item"
         );
 
+
+    /*
+    ======================================================
+    01.02.03 - MARK ITEMS AS LOADED
+    ======================================================
+    */
 
     items.forEach(
         function (item) {
@@ -101,18 +116,17 @@ function initRecentCentres() {
 
 
 /*
-==================================================
- HOME ACTIONS
-==================================================
+==========================================================
+01.03 - HOME ACTIONS
+==========================================================
 */
 
 function initHomeActions() {
 
-
     /*
-    ==============================================
-    VIEW ALL CENTRES
-    ==============================================
+    ======================================================
+    01.03.01 - VIEW ALL CENTRES
+    ======================================================
     */
 
     const viewAllButton =
@@ -127,7 +141,6 @@ function initHomeActions() {
         !viewAllButton.dataset.initialized
     ) {
 
-
         viewAllButton.dataset.initialized =
             "true";
 
@@ -136,13 +149,17 @@ function initHomeActions() {
             "click",
             function () {
 
+                /*
+                ==================================================
+                01.03.01.01 - LOAD CENTRES
+                ==================================================
+                */
 
                 if (
                     typeof loadContent
                     ===
                     "function"
                 ) {
-
 
                     loadContent(
                         "CentreServlet?action=list",
@@ -158,9 +175,9 @@ function initHomeActions() {
 
 
     /*
-    ==============================================
-    VIEW PAYMENTS
-    ==============================================
+    ======================================================
+    01.03.02 - VIEW PAYMENTS
+    ======================================================
     */
 
     const paymentsAction =
@@ -175,7 +192,6 @@ function initHomeActions() {
         !paymentsAction.dataset.initialized
     ) {
 
-
         paymentsAction.dataset.initialized =
             "true";
 
@@ -184,8 +200,20 @@ function initHomeActions() {
             "click",
             function (event) {
 
+                /*
+                ==================================================
+                01.03.02.01 - PREVENT DEFAULT LINK
+                ==================================================
+                */
+
                 event.preventDefault();
 
+
+                /*
+                ==================================================
+                01.03.02.02 - LOAD PAYMENTS
+                ==================================================
+                */
 
                 if (
                     typeof loadContent
@@ -193,13 +221,12 @@ function initHomeActions() {
                     "function"
                 ) {
 
-
-                 loadContent(
-    "payments.jsp",
-    document.getElementById(
-        "sidebar-payments"
-    )
-);
+                    loadContent(
+                        "payments.jsp",
+                        document.getElementById(
+                            "sidebar-payments"
+                        )
+                    );
 
                 }
 
@@ -211,19 +238,28 @@ function initHomeActions() {
 }
 
 
-
-
-
-
 /*
-==================================================
-HOME CHARTS
-==================================================
+==========================================================
+01.04 - HOME CHARTS
+==========================================================
 */
 
 function initHomeChart() {
 
+    /*
+    ======================================================
+    01.04.01 - MONTHLY PAYMENT DONUT
+    ======================================================
+    */
+
     initMonthlyPaymentDonut();
+
+
+    /*
+    ======================================================
+    01.04.02 - CENTRE STATUS BARS
+    ======================================================
+    */
 
     initCentreStatusBars();
 
@@ -231,12 +267,18 @@ function initHomeChart() {
 
 
 /*
-==================================================
-MONTHLY PAYMENT DONUT
-==================================================
+==========================================================
+01.05 - MONTHLY PAYMENT DONUT
+==========================================================
 */
 
 function initMonthlyPaymentDonut() {
+
+    /*
+    ======================================================
+    01.05.01 - GET DONUT
+    ======================================================
+    */
 
     const donut =
         document.getElementById(
@@ -252,9 +294,9 @@ function initMonthlyPaymentDonut() {
 
 
     /*
-    ==========================================
-    READ PAYMENT PERCENTAGE FROM JSP
-    ==========================================
+    ======================================================
+    01.05.02 - GET CENTER VALUE
+    ======================================================
     */
 
     const centerValue =
@@ -270,6 +312,12 @@ function initMonthlyPaymentDonut() {
     }
 
 
+    /*
+    ======================================================
+    01.05.03 - READ PAYMENT PERCENTAGE
+    ======================================================
+    */
+
     const paid =
         parseFloat(
             centerValue.textContent
@@ -278,46 +326,74 @@ function initMonthlyPaymentDonut() {
         ) || 0;
 
 
+    /*
+    ======================================================
+    01.05.04 - CALCULATE UNPAID
+    ======================================================
+    */
+
     const unpaid =
         100 - paid;
 
 
     /*
-    ==========================================
-    DRAW DONUT
-    ==========================================
+    ======================================================
+    01.05.05 - READ CENTRIA COLORS
+    ======================================================
     */
 
- const primaryColor =
-    getComputedStyle(document.documentElement)
-        .getPropertyValue("--primary")
+    const primaryColor =
+        getComputedStyle(
+            document.documentElement
+        )
+        .getPropertyValue(
+            "--primary"
+        )
         .trim();
 
-const primaryLightColor =
-    getComputedStyle(document.documentElement)
-        .getPropertyValue("--primary-light")
+
+    const primaryLightColor =
+        getComputedStyle(
+            document.documentElement
+        )
+        .getPropertyValue(
+            "--primary-light"
+        )
         .trim();
-
-donut.style.background =
-    "conic-gradient(" +
-
-    primaryColor +
-    " 0% " +
-    paid +
-    "%, " +
-
-    primaryLightColor +
-    " " +
-    paid +
-    "% 100%" +
-
-    ")";
 
 
     /*
-    ==========================================
-    CENTER VALUE
-    ==========================================
+    ======================================================
+    01.05.06 - DRAW DONUT
+    ======================================================
+    */
+
+    donut.style.background =
+        "conic-gradient(" +
+
+        primaryColor +
+
+        " 0% " +
+
+        paid +
+
+        "%, " +
+
+        primaryLightColor +
+
+        " " +
+
+        paid +
+
+        "% 100%" +
+
+        ")";
+
+
+    /*
+    ======================================================
+    01.05.07 - UPDATE CENTER VALUE
+    ======================================================
     */
 
     centerValue.textContent =
@@ -327,12 +403,18 @@ donut.style.background =
 
 
 /*
-==================================================
-CENTRE STATUS BARS
-==================================================
+==========================================================
+01.06 - CENTRE STATUS BARS
+==========================================================
 */
 
 function initCentreStatusBars() {
+
+    /*
+    ======================================================
+    01.06.01 - GET STATUS CONTAINER
+    ======================================================
+    */
 
     const container =
         document.getElementById(
@@ -346,6 +428,12 @@ function initCentreStatusBars() {
 
     }
 
+
+    /*
+    ======================================================
+    01.06.02 - GET STATUS ROWS
+    ======================================================
+    */
 
     const rows =
         container.querySelectorAll(
@@ -361,9 +449,9 @@ function initCentreStatusBars() {
 
 
     /*
-    ==========================================
-    READ VALUES
-    ==========================================
+    ======================================================
+    01.06.03 - READ STATUS VALUES
+    ======================================================
     */
 
     const values = [];
@@ -398,12 +486,12 @@ function initCentreStatusBars() {
 
 
     /*
-    ==========================================
-    CALCULATE TOTAL
-    ==========================================
+    ======================================================
+    01.06.04 - CALCULATE TOTAL
+    ======================================================
 
-    The total is the sum of all
-    displayed centre statuses.
+    The total is the sum of all displayed
+    centre statuses.
 
     Example:
 
@@ -414,11 +502,15 @@ function initCentreStatusBars() {
     DELETED     = 1
 
     TOTAL       = 8
+    ======================================================
     */
 
     const totalValue =
         values.reduce(
-            function (sum, value) {
+            function (
+                sum,
+                value
+            ) {
 
                 return sum + value;
 
@@ -428,9 +520,9 @@ function initCentreStatusBars() {
 
 
     /*
-    ==========================================
-    NO DATA
-    ==========================================
+    ======================================================
+    01.06.05 - NO DATA
+    ======================================================
     */
 
     if (totalValue <= 0) {
@@ -461,9 +553,9 @@ function initCentreStatusBars() {
 
 
     /*
-    ==========================================
-    DRAW BARS
-    ==========================================
+    ======================================================
+    01.06.06 - DRAW STATUS BARS
+    ======================================================
     */
 
     rows.forEach(
@@ -471,7 +563,6 @@ function initCentreStatusBars() {
             row,
             index
         ) {
-
 
             const bar =
                 row.querySelector(
@@ -491,9 +582,9 @@ function initCentreStatusBars() {
 
 
             /*
-            ==========================================
-            CALCULATE PERCENTAGE OF TOTAL
-            ==========================================
+            ==================================================
+            01.06.06.01 - CALCULATE PERCENTAGE
+            ==================================================
             */
 
             const width =
@@ -506,183 +597,331 @@ function initCentreStatusBars() {
                 100;
 
 
+            /*
+            ==================================================
+            01.06.06.02 - APPLY WIDTH
+            ==================================================
+            */
+
             bar.style.width =
                 width + "%";
-
 
         }
     );
 
 }
 
-/*
-==================================================
- REVENUE PERIOD
-==================================================
-*/
 
 /*
-==================================================
- REVENUE PERIOD
-==================================================
-*/
-
-/*
-==================================================
- REVENUE PERIOD
-==================================================
+==========================================================
+01.07 - REVENUE PERIOD
+==========================================================
 */
 
 function initRevenuePeriod() {
 
+    /*
+    ======================================================
+    01.07.01 - GET PERIOD SELECT
+    ======================================================
+    */
+
     const select =
-        document.getElementById("revenuePeriod");
+        document.getElementById(
+            "revenuePeriod"
+        );
+
 
     if (!select) {
+
         return;
+
     }
+
+
+    /*
+    ======================================================
+    01.07.02 - GET REVENUE CARD
+    ======================================================
+    */
 
     const card =
-        select.closest(".stat-card");
+        select.closest(
+            ".stat-card"
+        );
+
 
     if (!card) {
+
         return;
+
     }
 
 
-    /* ==================================================
-       REVENUE VALUES
-    ================================================== */
+    /*
+    ======================================================
+    01.07.03 - REVENUE VALUES
+    ======================================================
+    */
 
     const monthlyRevenue =
         parseFloat(
-            card.getAttribute("data-monthly-revenue")
+            card.getAttribute(
+                "data-monthly-revenue"
+            )
         ) || 0;
+
 
     const annualRevenue =
         parseFloat(
-            card.getAttribute("data-annual-revenue")
+            card.getAttribute(
+                "data-annual-revenue"
+            )
         ) || 0;
 
 
-    /* ==================================================
-       TRANSLATED TEXT
-    ================================================== */
+    /*
+    ======================================================
+    01.07.04 - TRANSLATED TEXT
+    ======================================================
+    */
 
     const monthlyTitle =
-        card.getAttribute("data-monthly-title") || "";
+        card.getAttribute(
+            "data-monthly-title"
+        ) || "";
+
 
     const annualTitle =
-        card.getAttribute("data-annual-title") || "";
+        card.getAttribute(
+            "data-annual-title"
+        ) || "";
+
 
     const monthlyDescription =
-        card.getAttribute("data-monthly-description") || "";
+        card.getAttribute(
+            "data-monthly-description"
+        ) || "";
+
 
     const annualDescription =
-        card.getAttribute("data-annual-description") || "";
+        card.getAttribute(
+            "data-annual-description"
+        ) || "";
 
 
-    /* ==================================================
-       TARGET ELEMENTS
-    ================================================== */
+    /*
+    ======================================================
+    01.07.05 - TARGET ELEMENTS
+    ======================================================
+    */
 
     const title =
-        document.getElementById("revenueTitle");
+        document.getElementById(
+            "revenueTitle"
+        );
+
 
     const value =
-        document.getElementById("revenueValue");
+        document.getElementById(
+            "revenueValue"
+        );
+
 
     const description =
-        document.getElementById("revenueDescription");
+        document.getElementById(
+            "revenueDescription"
+        );
 
 
-    if (!title || !value || !description) {
+    if (
+        !title
+        ||
+        !value
+        ||
+        !description
+    ) {
+
         return;
+
     }
 
 
-    /* ==================================================
-       HIDE / SHOW STATE
-    ================================================== */
+    /*
+    ======================================================
+    01.07.06 - REVENUE VISIBILITY STATE
+    ======================================================
+    */
 
-    let revenueHidden = true;
+    let revenueHidden =
+        true;
 
 
-    /* ==================================================
-       UPDATE REVENUE
-    ================================================== */
+    /*
+    ======================================================
+    01.07.07 - UPDATE REVENUE
+    ======================================================
+    */
 
     function updateRevenue() {
 
         let revenue;
+
         let currentTitle;
+
         let currentDescription;
 
 
-        if (select.value === "year") {
+        /*
+        ==================================================
+        01.07.07.01 - YEAR
+        ==================================================
+        */
 
-            revenue = annualRevenue;
-            currentTitle = annualTitle;
-            currentDescription = annualDescription;
+        if (
+            select.value ===
+            "year"
+        ) {
 
-        } else {
+            revenue =
+                annualRevenue;
 
-            revenue = monthlyRevenue;
-            currentTitle = monthlyTitle;
-            currentDescription = monthlyDescription;
+            currentTitle =
+                annualTitle;
+
+            currentDescription =
+                annualDescription;
 
         }
 
 
+        /*
+        ==================================================
+        01.07.07.02 - MONTH
+        ==================================================
+        */
+
+        else {
+
+            revenue =
+                monthlyRevenue;
+
+            currentTitle =
+                monthlyTitle;
+
+            currentDescription =
+                monthlyDescription;
+
+        }
+
+
+        /*
+        ==================================================
+        01.07.07.03 - UPDATE TEXT
+        ==================================================
+        */
+
         title.textContent =
             currentTitle;
+
 
         description.textContent =
             currentDescription;
 
 
-     if (revenueHidden) {
-    value.textContent = "\u2605\u2605\u2605\u2605\u2605";
-    value.classList.add("revenue-hidden");
-} else {
-    value.textContent = revenue.toFixed(2) + " DH";
-    value.classList.remove("revenue-hidden");
-}
+        /*
+        ==================================================
+        01.07.07.04 - HIDE / SHOW VALUE
+        ==================================================
+        */
+
+        if (revenueHidden) {
+
+            value.textContent =
+                "\u2605\u2605\u2605\u2605\u2605";
 
 
-        value.style.direction = "ltr";
-        value.style.unicodeBidi = "isolate";
+            value.classList.add(
+                "revenue-hidden"
+            );
+
+        }
+
+        else {
+
+            value.textContent =
+                revenue.toFixed(2)
+                +
+                " DH";
+
+
+            value.classList.remove(
+                "revenue-hidden"
+            );
+
+        }
+
+
+        /*
+        ==================================================
+        01.07.07.05 - FORCE LTR MONEY DISPLAY
+        ==================================================
+        */
+
+        value.style.direction =
+            "ltr";
+
+
+        value.style.unicodeBidi =
+            "isolate";
+
     }
 
 
-    /* ==================================================
-       PERIOD CHANGE
-    ================================================== */
+    /*
+    ======================================================
+    01.07.08 - PERIOD CHANGE
+    ======================================================
+    */
 
     select.onchange =
         updateRevenue;
 
 
-    /* ==================================================
-       CARD CLICK - HIDE / SHOW
-    ================================================== */
+    /*
+    ======================================================
+    01.07.09 - CARD CLICK
+    ======================================================
+    */
 
     card.addEventListener(
         "click",
-        function(event) {
+        function (event) {
 
             /*
-             * Don't trigger Hide/Show when
-             * using the period selector.
-             */
+            ==================================================
+            01.07.09.01 - IGNORE SELECT CLICK
+            ==================================================
+            */
 
             if (
-                event.target === select ||
-                select.contains(event.target)
+                event.target === select
+                ||
+                select.contains(
+                    event.target
+                )
             ) {
+
                 return;
+
             }
 
+
+            /*
+            ==================================================
+            01.07.09.02 - TOGGLE VISIBILITY
+            ==================================================
+            */
 
             revenueHidden =
                 !revenueHidden;
@@ -694,17 +933,21 @@ function initRevenuePeriod() {
     );
 
 
-    /* ==================================================
-       CARD INTERACTION
-    ================================================== */
+    /*
+    ======================================================
+    01.07.10 - CARD POINTER
+    ======================================================
+    */
 
     card.style.cursor =
         "pointer";
 
 
-    /* ==================================================
-       INITIAL VALUE
-    ================================================== */
+    /*
+    ======================================================
+    01.07.11 - INITIAL VALUE
+    ======================================================
+    */
 
     updateRevenue();
 
@@ -712,19 +955,19 @@ function initRevenuePeriod() {
 
 
 /*
-==================================================
- DOM READY
-==================================================
+==========================================================
+01.08 - DOM READY
+==========================================================
 */
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
         /*
-        Only initialize if Home
-        is already displayed.
+        ==================================================
+        01.08.01 - INITIALIZE ONLY WHEN HOME EXISTS
+        ==================================================
         */
 
         if (
@@ -733,11 +976,9 @@ document.addEventListener(
             )
         ) {
 
-
             initAccueilPage();
 
         }
 
     }
 );
-
