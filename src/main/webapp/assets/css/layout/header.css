@@ -15,10 +15,11 @@ Responsibilities :
 - Header Actions
 - Notifications
 - User Profile
+- User Profile Dropdown
 - RTL / LTR Support
 
 Version :
-3.1
+3.3
 
 Status :
 Development
@@ -248,6 +249,7 @@ Development
     border-color:var(--primary);
 }
 
+
 .header-action:hover i{
 
     color:var(--white);
@@ -309,6 +311,10 @@ Development
     border-radius:4px;
 
     background:var(--white);
+
+    position:relative;
+
+    cursor:pointer;
 }
 
 
@@ -325,25 +331,23 @@ html[dir="rtl"] .header-profile{
    SECTION 10 - USER AVATAR
 ====================================================== */
 
-.header-avatar{
+.header-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
 
-    width:42px;
-
-    height:42px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:var(--primary);
-
-    color:var(--white);
-
-    border-radius:50%;
-
-    font-size:1.1rem;
+.header-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 
 
@@ -395,6 +399,20 @@ html[dir="rtl"] .header-profile{
 }
 
 
+.header-arrow i{
+
+    transition:
+        transform .2s ease;
+}
+
+
+.header-profile.dropdown-open
+.header-arrow i{
+
+    transform:rotate(180deg);
+}
+
+
 /* ======================================================
    SECTION 13 - HOVER
 ====================================================== */
@@ -416,13 +434,18 @@ html[dir="rtl"] .header-profile{
     color:var(--primary);
 }
 
+
 .header-action i{
+
     color:var(--primary);
 }
 
+
 .header-action:hover i{
+
     color:var(--white);
 }
+
 
 .notification-button .fa-bell{
 
@@ -445,7 +468,175 @@ html[dir="rtl"] .header-profile{
 
 
 /* ======================================================
-   SECTION 15 - RTL SUPPORT
+   SECTION 15 - USER DROPDOWN
+====================================================== */
+
+.user-dropdown{
+
+    position:absolute;
+
+    top:calc(100% + 6px);
+
+    right:0;
+
+    width:185px !important;
+
+    min-width:185px !important;
+
+    max-width:185px !important;
+
+    display:none;
+
+    flex-direction:column;
+
+    padding:4px;
+
+    margin:0;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:7px;
+
+    box-shadow:
+        0 6px 18px rgba(15, 23, 42, 0.12);
+
+    z-index:1000;
+
+    box-sizing:border-box;
+
+    overflow:hidden;
+}
+
+
+.user-dropdown.show{
+
+    display:flex;
+}
+
+/* ======================================================
+   SECTION 16 - USER DROPDOWN ITEM
+====================================================== */
+
+.user-dropdown-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    width:100%;
+
+    min-height:38px;
+
+    box-sizing:border-box;
+
+    padding:8px 10px;
+
+    margin:0;
+
+    border-radius:6px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-size:.85rem;
+
+    font-weight:500;
+
+    white-space:nowrap;
+
+    line-height:1.2;
+
+    transition:var(--transition);
+}
+
+
+.user-dropdown-item:hover{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+}
+
+
+.user-dropdown-item i{
+
+    width:18px;
+
+    min-width:18px;
+
+    text-align:center;
+
+    color:var(--primary);
+
+    font-size:.9rem;
+}
+
+
+/* ======================================================
+   SECTION 17 - USER DROPDOWN DIVIDER
+====================================================== */
+
+.user-dropdown-divider{
+
+    width:100%;
+
+    height:1px;
+
+    margin:5px 0;
+
+    background:var(--border);
+}
+
+
+/* ======================================================
+   SECTION 18 - LOGOUT
+====================================================== */
+
+.user-dropdown-item.logout-item{
+
+    color:var(--danger);
+}
+
+
+.user-dropdown-item.logout-item i{
+
+    color:var(--danger);
+}
+
+
+.user-dropdown-item.logout-item:hover{
+
+    background:rgba(220, 38, 38, 0.08);
+
+    color:var(--danger);
+}
+
+
+/* ======================================================
+   SECTION 19 - RTL DROPDOWN
+====================================================== */
+
+html[dir="rtl"] .user-dropdown{
+
+    right:auto;
+
+    left:0;
+}
+
+
+html[dir="rtl"] .user-dropdown-item{
+
+    flex-direction:row;
+}
+
+
+/* ======================================================
+   SECTION 20 - RTL SUPPORT
 ====================================================== */
 
 html[dir="rtl"] .header{
@@ -471,7 +662,7 @@ html[dir="rtl"] .header-profile{
 
 
 /* ======================================================
-   SECTION 16 - LTR SUPPORT
+   SECTION 21 - LTR SUPPORT
 ====================================================== */
 
 html[dir="ltr"] .header{
@@ -481,7 +672,7 @@ html[dir="ltr"] .header{
 
 
 /* ======================================================
-   SECTION 17 - TABLET
+   SECTION 22 - TABLET
 ====================================================== */
 
 @media(max-width:992px){
@@ -494,7 +685,7 @@ html[dir="ltr"] .header{
 
 
 /* ======================================================
-   SECTION 18 - MOBILE
+   SECTION 23 - MOBILE
 ====================================================== */
 
 @media(max-width:768px){
@@ -515,6 +706,14 @@ html[dir="ltr"] .header{
 
         justify-content:flex-end;
     }
+
+
+    .user-dropdown{
+
+        width:200px;
+
+    }
+
 }
 
 

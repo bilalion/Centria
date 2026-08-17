@@ -172,10 +172,12 @@ if (
       href="<%=request.getContextPath()%>/assets/css/layout/platform-banner.css?v=1">
 
 <link rel="stylesheet"
-      href="<%=request.getContextPath()%>/assets/css/layout/header.css?v=1">
+      href="<%=request.getContextPath()%>/assets/css/layout/header.css?v=2">
 
 <link rel="stylesheet"
       href="<%=request.getContextPath()%>/assets/css/layout/sidebar.css?v=1">
+
+
 
 
 
@@ -199,7 +201,13 @@ if (
       href="<%=request.getContextPath()%>/assets/css/pages/archive.css?v=1">
 
 <link rel="stylesheet"
+      href="<%=request.getContextPath()%>/assets/css/pages/profile.css?v=1">
+
+<link rel="stylesheet"
       href="${pageContext.request.contextPath}/assets/css/components/dialog.css?v=2">
+
+
+
 
 <script>
 
@@ -385,6 +393,22 @@ else if ("settings".equals(section)) {
 
 }
 
+/*
+======================================================
+PROFILE
+======================================================
+*/
+
+else if ("profile".equals(section)) {
+
+%>
+
+    <jsp:include page="pages/profile.jsp"/>
+
+<%
+
+}
+
 
 /*
 ======================================================
@@ -452,7 +476,9 @@ else {
         src="<%=request.getContextPath()%>/assets/js/dialog.js?v=2">
 </script>
 
-
+<script defer
+        src="<%=request.getContextPath()%>/assets/js/profile.js?v=1">
+</script>
 
 </body>
 </html>

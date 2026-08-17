@@ -162,6 +162,20 @@ public class SuperLoginServlet extends HttpServlet {
                      "adminUsername",
                      username
                 );
+                
+                /*
+ =====================================
+ حفظ ID 
+ =====================================
+ */
+
+int adminId =
+        rs.getInt("id");
+
+session.setAttribute(
+        "adminId",
+        adminId
+);
 
 
 /*
