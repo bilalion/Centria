@@ -124,13 +124,9 @@ public final class UploadConfig {
                         projectRoot
                 );
 
-
         if (avatarDirectory.exists()) {
-
             return avatarDirectory.isDirectory();
         }
-
-
         return avatarDirectory.mkdirs();
     }
 }

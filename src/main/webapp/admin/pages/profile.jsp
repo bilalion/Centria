@@ -184,14 +184,24 @@ Responsibilities :
     ======================================================
      */
 
-    if (avatarPath != null &&
-        !avatarPath.trim().isEmpty()) {
+  if (avatarPath != null &&
+    !avatarPath.trim().isEmpty()) {
+
+    if (avatarPath.startsWith("/")) {
+
+        avatarUrl =
+                request.getContextPath()
+                + avatarPath;
+
+    } else {
 
         avatarUrl =
                 request.getContextPath()
                 + "/"
                 + avatarPath;
+
     }
+}
 
 %>
 
