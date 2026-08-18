@@ -14,6 +14,7 @@
  * Description:
  * Handles Super Admin login process.
  * - Checks username and password
+ * - Updates last login time
  * - Creates admin session
  * - Keeps selected language
  * - Redirects to dashboard
@@ -77,6 +78,8 @@ public class SuperLoginServlet extends HttpServlet {
 
         PreparedStatement ps = null;
 
+        PreparedStatement lastLoginPs = null;
+
         ResultSet rs = null;
 
 
@@ -93,7 +96,6 @@ public class SuperLoginServlet extends HttpServlet {
             DBConnection.getConnection();
 
 
-
             /*
              =====================================
              التحقق من بيانات Super Admin
@@ -107,10 +109,8 @@ public class SuperLoginServlet extends HttpServlet {
             + "AND password=?";
 
 
-
             ps =
             con.prepareStatement(sql);
-
 
 
             ps.setString(
@@ -125,13 +125,11 @@ public class SuperLoginServlet extends HttpServlet {
             );
 
 
-
             rs =
             ps.executeQuery();
 
 
-
-            if(rs.next()){
+            if (rs.next()) {
 
 
                 /*
@@ -142,7 +140,6 @@ public class SuperLoginServlet extends HttpServlet {
 
                 HttpSession session =
                         request.getSession();
-
 
 
                 /*
@@ -157,41 +154,82 @@ public class SuperLoginServlet extends HttpServlet {
                 );
 
 
+                /*
+                 =====================================
+                 حفظ Username
+                 =====================================
+                 */
 
                 session.setAttribute(
-                     "adminUsername",
-                     username
+                        "adminUsername",
+                        username
                 );
-                
+
+
                 /*
- =====================================
- حفظ ID 
- =====================================
- */
+                 =====================================
+                 حفظ ID
+                 =====================================
+                 */
 
-int adminId =
-        rs.getInt("id");
-
-session.setAttribute(
-        "adminId",
-        adminId
-);
+                int adminId =
+                        rs.getInt("id");
 
 
-/*
- =====================================
- حفظ نوع المستخدم
- =====================================
- */
+                /*
+                 =====================================
+                 تحديث آخر تسجيل دخول
+                 =====================================
+                 */
 
-                  String adminType =
-                  rs.getString("type");
+                String lastLoginSql =
+
+                        "UPDATE super_admins "
+                        + "SET last_login = NOW() "
+                        + "WHERE id=?";
 
 
-                  session.setAttribute(
-                          "adminType",
-                          adminType
-                  );
+                lastLoginPs =
+                        con.prepareStatement(
+                                lastLoginSql
+                        );
+
+
+                lastLoginPs.setInt(
+                        1,
+                        adminId
+                );
+
+
+                lastLoginPs.executeUpdate();
+
+
+                /*
+                 =====================================
+                 حفظ ID في Session
+                 =====================================
+                 */
+
+                session.setAttribute(
+                        "adminId",
+                        adminId
+                );
+
+
+                /*
+                 =====================================
+                 حفظ نوع المستخدم
+                 =====================================
+                 */
+
+                String adminType =
+                        rs.getString("type");
+
+
+                session.setAttribute(
+                        "adminType",
+                        adminType
+                );
 
 
                 /*
@@ -207,8 +245,7 @@ session.setAttribute(
                         session.getAttribute("lang");
 
 
-
-                if(lang == null){
+                if (lang == null) {
 
                     session.setAttribute(
                             "lang",
@@ -216,7 +253,6 @@ session.setAttribute(
                     );
 
                 }
-
 
 
                 /*
@@ -235,7 +271,7 @@ session.setAttribute(
 
             }
 
-            else{
+            else {
 
 
                 /*
@@ -257,23 +293,23 @@ session.setAttribute(
 
         }
 
-    catch(Exception e){
+        catch (Exception e) {
 
 
-    e.printStackTrace();
+            e.printStackTrace();
 
 
-    response.sendRedirect(
+            response.sendRedirect(
 
-            request.getContextPath()
-            + "/admin/superlogin.jsp?error=system_error"
+                    request.getContextPath()
+                    + "/admin/superlogin.jsp?error=system_error"
 
-    );
+            );
 
 
-}
+        }
 
-        finally{
+        finally {
 
 
             /*
@@ -282,24 +318,28 @@ session.setAttribute(
              =====================================
              */
 
-            try{
+            try {
 
 
-                if(rs != null)
+                if (lastLoginPs != null)
+                    lastLoginPs.close();
+
+
+                if (rs != null)
                     rs.close();
 
 
-                if(ps != null)
+                if (ps != null)
                     ps.close();
 
 
-                if(con != null)
+                if (con != null)
                     con.close();
 
 
             }
 
-            catch(Exception e){
+            catch (Exception e) {
 
                 e.printStackTrace();
 

@@ -206,16 +206,31 @@ function uploadAvatar(file) {
                     );
 
 
+                const avatarUrl =
+                    contextPath +
+                    "/" +
+                    data.data +
+                    "?t=" +
+                    new Date().getTime();
+
+
                 if (avatarImage) {
 
                     avatarImage.src =
-                        contextPath +
-                        "/" +
-                        data.data +
-                        "?t=" +
-                        new Date().getTime();
+                        avatarUrl;
 
                 }
+
+
+                /*
+                 * Update header avatar immediately.
+                 *
+                 * No page refresh required.
+                 */
+
+                updateHeaderAvatar(
+                    avatarUrl
+                );
 
             }
 
@@ -321,12 +336,25 @@ function loadSavedAvatar() {
          * Load avatar stored in database.
          */
 
-        avatarImage.src =
+        const avatarUrl =
             contextPath +
             "/" +
             data.data +
             "?t=" +
             new Date().getTime();
+
+
+        avatarImage.src =
+            avatarUrl;
+
+
+        /*
+         * Also update header avatar.
+         */
+
+        updateHeaderAvatar(
+            avatarUrl
+        );
 
     })
 
@@ -343,7 +371,42 @@ function loadSavedAvatar() {
 
 
 /* ==========================================================
-   04 - PROFILE MESSAGE
+   04 - UPDATE HEADER AVATAR
+========================================================== */
+
+function updateHeaderAvatar(avatarUrl) {
+
+    if (!avatarUrl) {
+        return;
+    }
+
+
+    /*
+     * Find all header avatar images.
+     */
+
+    const headerAvatars =
+        document.querySelectorAll(
+            ".header-avatar img"
+        );
+
+
+    /*
+     * Update them immediately.
+     */
+
+    headerAvatars.forEach(function (img) {
+
+        img.src =
+            avatarUrl;
+
+    });
+
+}
+
+
+/* ==========================================================
+   05 - PROFILE MESSAGE
 ========================================================== */
 
 function showProfileMessage(
