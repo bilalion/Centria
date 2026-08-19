@@ -2,6 +2,7 @@ package com.centria.controllers.admin;
 
 import com.centria.config.UploadConfig;
 import com.centria.dao.ProfileDAO;
+import com.centria.models.Profile;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,18 +26,13 @@ import java.util.UUID;
  *
  * Responsibilities:
  *
- * 1. Upload avatar
- * 2. Save avatar physically in:
+ * 1. Get profile
+ * 2. Update username / email / phone
+ * 3. Upload avatar
+ * 4. Get avatar
+ * 5. Delete old avatar
  *
- *    Centria/uploads/avatars/
- *
- * 3. Save only the WEB path in database
- *
- *    /uploads/avatars/filename.jpg
- *
- * 4. Return saved avatar
- *
- * 5. Delete old avatar after successful database update
+ * Password is handled separately.
  *
  * ==========================================================
  */
@@ -52,20 +48,16 @@ import java.util.UUID;
 public class ProfileServlet extends HttpServlet {
 
 
-    /*
-     * ==========================================================
-     * PROFILE DAO
-     * ==========================================================
-     */
+    /* ==========================================================
+       PROFILE DAO
+    ========================================================== */
 
     private ProfileDAO profileDAO;
 
 
-    /*
-     * ==========================================================
-     * INIT
-     * ==========================================================
-     */
+    /* ==========================================================
+       INIT
+    ========================================================== */
 
     @Override
     public void init() throws ServletException {
@@ -75,17 +67,9 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * GET
-     * ==========================================================
-     *
-     * Supported:
-     *
-     * /ProfileServlet?action=getAvatar
-     *
-     * ==========================================================
-     */
+    /* ==========================================================
+       GET
+    ========================================================== */
 
     @Override
     protected void doGet(
@@ -97,6 +81,25 @@ public class ProfileServlet extends HttpServlet {
         String action =
                 request.getParameter("action");
 
+
+        /*
+         * GET PROFILE
+         */
+
+        if ("getProfile".equalsIgnoreCase(action)) {
+
+            getProfile(
+                    request,
+                    response
+            );
+
+            return;
+        }
+
+
+        /*
+         * GET AVATAR
+         */
 
         if ("getAvatar".equalsIgnoreCase(action)) {
 
@@ -117,17 +120,9 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * POST
-     * ==========================================================
-     *
-     * Supported:
-     *
-     * action=uploadAvatar
-     *
-     * ==========================================================
-     */
+    /* ==========================================================
+       POST
+    ========================================================== */
 
     @Override
     protected void doPost(
@@ -142,6 +137,25 @@ public class ProfileServlet extends HttpServlet {
         String action =
                 request.getParameter("action");
 
+
+        /*
+         * UPDATE PROFILE
+         */
+
+        if ("updateProfile".equalsIgnoreCase(action)) {
+
+            updateProfile(
+                    request,
+                    response
+            );
+
+            return;
+        }
+
+
+        /*
+         * UPLOAD AVATAR
+         */
 
         if ("uploadAvatar".equalsIgnoreCase(action)) {
 
@@ -162,11 +176,326 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * GET AVATAR
-     * ==========================================================
-     */
+    /* ==========================================================
+       GET PROFILE
+    ========================================================== */
+
+    private void getProfile(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws IOException {
+
+
+        /*
+         * SESSION
+         */
+
+        HttpSession session =
+                request.getSession(false);
+
+
+        if (session == null) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Session expired."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ADMIN ID FROM SESSION
+         */
+
+        Integer adminId =
+                getAdminId(session);
+
+
+        if (adminId == null) {
+
+            sendJson(
+                    response,
+                    false,
+                    "User session not found."
+            );
+
+            return;
+        }
+
+
+        /*
+         * GET PROFILE
+         */
+
+        Profile profile =
+                profileDAO.getProfile(
+                        adminId
+                );
+
+
+        if (profile == null) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Profile not found."
+            );
+
+            return;
+        }
+
+
+        /*
+         * RETURN PROFILE
+         */
+
+        sendProfileJson(
+                response,
+                profile
+        );
+    }
+
+
+    /* ==========================================================
+       UPDATE PROFILE
+    ========================================================== */
+
+    private void updateProfile(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws IOException {
+
+
+        /*
+         * ======================================================
+         * 01 - SESSION
+         * ======================================================
+         */
+
+        HttpSession session =
+                request.getSession(false);
+
+
+        if (session == null) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Session expired."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 02 - ADMIN ID
+         * ======================================================
+         */
+
+        Integer adminId =
+                getAdminId(session);
+
+
+        if (adminId == null) {
+
+            sendJson(
+                    response,
+                    false,
+                    "User session not found."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 03 - FORM DATA
+         * ======================================================
+         */
+
+        String username =
+                request.getParameter("username");
+
+
+        String email =
+                request.getParameter("email");
+
+
+        String phone =
+                request.getParameter("phone");
+
+
+        /*
+         * ======================================================
+         * 04 - CLEAN DATA
+         * ======================================================
+         */
+
+        username =
+                username == null
+                ? ""
+                : username.trim();
+
+
+        email =
+                email == null
+                ? ""
+                : email.trim();
+
+
+        phone =
+                phone == null
+                ? ""
+                : phone.trim();
+
+
+        /*
+         * ======================================================
+         * 05 - USERNAME REQUIRED
+         * ======================================================
+         */
+
+        if (username.isEmpty()) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Username is required."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 06 - EMAIL REQUIRED
+         * ======================================================
+         */
+
+        if (email.isEmpty()) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Email is required."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 07 - USERNAME DUPLICATE
+         * ======================================================
+         */
+
+        if (profileDAO.usernameExists(
+                username,
+                adminId
+        )) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Username already exists."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 08 - EMAIL DUPLICATE
+         * ======================================================
+         */
+
+        if (profileDAO.emailExists(
+                email,
+                adminId
+        )) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Email already exists."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 09 - UPDATE DATABASE
+         * ======================================================
+         */
+
+        boolean updated =
+                profileDAO.updateProfile(
+                        adminId,
+                        username,
+                        email,
+                        phone
+                );
+
+
+        if (!updated) {
+
+            sendJson(
+                    response,
+                    false,
+                    "Unable to update profile."
+            );
+
+            return;
+        }
+
+
+        /*
+         * ======================================================
+         * 10 - UPDATE SESSION USERNAME
+         * ======================================================
+         *
+         * Important:
+         *
+         * If username changed, the current session must
+         * also contain the new username.
+         *
+         * ======================================================
+         */
+
+        session.setAttribute(
+                "adminUsername",
+                username
+        );
+
+
+        /*
+         * ======================================================
+         * 11 - SUCCESS
+         * ======================================================
+         */
+
+        sendJson(
+                response,
+                true,
+                "Profile updated successfully."
+        );
+    }
+
+
+    /* ==========================================================
+       GET AVATAR
+    ========================================================== */
 
     private void getAvatar(
             HttpServletRequest request,
@@ -233,11 +562,9 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * UPLOAD AVATAR
-     * ==========================================================
-     */
+    /* ==========================================================
+       UPLOAD AVATAR
+    ========================================================== */
 
     private void uploadAvatar(
             HttpServletRequest request,
@@ -423,20 +750,6 @@ public class ProfileServlet extends HttpServlet {
          * ======================================================
          * 10 - APPLICATION DIRECTORY
          * ======================================================
-         *
-         * getRealPath("/") gives:
-         *
-         * Tomcat/webapps/Centria/
-         *
-         * We use its parent:
-         *
-         * Tomcat/webapps/
-         *
-         * Then UploadConfig creates:
-         *
-         * Tomcat/webapps/uploads/avatars/
-         *
-         * ======================================================
          */
 
         String applicationRoot =
@@ -489,10 +802,6 @@ public class ProfileServlet extends HttpServlet {
          * ======================================================
          * 12 - AVATAR DIRECTORY
          * ======================================================
-         *
-         * UploadConfig controls the location.
-         *
-         * ======================================================
          */
 
         File uploadDirectory =
@@ -503,7 +812,7 @@ public class ProfileServlet extends HttpServlet {
 
         /*
          * ======================================================
-         * 13 - CREATE AVATAR DIRECTORY
+         * 13 - CREATE DIRECTORY
          * ======================================================
          */
 
@@ -568,20 +877,6 @@ public class ProfileServlet extends HttpServlet {
          * ======================================================
          * 17 - DATABASE WEB PATH
          * ======================================================
-         *
-         * Database stores:
-         *
-         * /uploads/avatars/filename.jpg
-         *
-         * NOT:
-         *
-         * /Users/...
-         *
-         * NOT:
-         *
-         * Tomcat/webapps/...
-         *
-         * ======================================================
          */
 
         String databasePath =
@@ -617,7 +912,7 @@ public class ProfileServlet extends HttpServlet {
 
         /*
          * ======================================================
-         * 20 - DATABASE UPDATE FAILED
+         * 20 - DATABASE FAILED
          * ======================================================
          */
 
@@ -665,31 +960,14 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * DELETE OLD AVATAR FILE
-     * ==========================================================
-     *
-     * This function:
-     *
-     * 1. Validates the old database path
-     * 2. Gets only the filename
-     * 3. Uses UploadConfig for physical directory
-     * 4. Deletes the old physical file
-     *
-     * ==========================================================
-     */
+    /* ==========================================================
+       DELETE OLD AVATAR
+    ========================================================== */
 
     private void deleteOldAvatarFile(
             String oldAvatar,
             File projectRoot) {
 
-
-        /*
-         * ======================================================
-         * 01 - EMPTY PATH
-         * ======================================================
-         */
 
         if (oldAvatar == null ||
             oldAvatar.trim().isEmpty()) {
@@ -698,21 +976,9 @@ public class ProfileServlet extends HttpServlet {
         }
 
 
-        /*
-         * ======================================================
-         * 02 - EXPECTED WEB PATH
-         * ======================================================
-         */
-
         String avatarWebPath =
                 UploadConfig.getAvatarWebPath();
 
-
-        /*
-         * ======================================================
-         * 03 - SECURITY CHECK
-         * ======================================================
-         */
 
         if (!oldAvatar.startsWith(
                 avatarWebPath + "/")) {
@@ -721,23 +987,11 @@ public class ProfileServlet extends HttpServlet {
         }
 
 
-        /*
-         * ======================================================
-         * 04 - GET FILE NAME
-         * ======================================================
-         */
-
         String oldFileName =
                 oldAvatar.substring(
                         (avatarWebPath + "/").length()
                 );
 
-
-        /*
-         * ======================================================
-         * 05 - SECURITY CHECK
-         * ======================================================
-         */
 
         if (oldFileName.contains("/") ||
             oldFileName.contains("\\") ||
@@ -747,23 +1001,11 @@ public class ProfileServlet extends HttpServlet {
         }
 
 
-        /*
-         * ======================================================
-         * 06 - GET AVATAR DIRECTORY
-         * ======================================================
-         */
-
         File uploadDirectory =
                 UploadConfig.getAvatarDirectory(
                         projectRoot
                 );
 
-
-        /*
-         * ======================================================
-         * 07 - OLD FILE
-         * ======================================================
-         */
 
         File oldFile =
                 new File(
@@ -771,12 +1013,6 @@ public class ProfileServlet extends HttpServlet {
                         oldFileName
                 );
 
-
-        /*
-         * ======================================================
-         * 08 - DELETE
-         * ======================================================
-         */
 
         if (oldFile.exists() &&
             oldFile.isFile()) {
@@ -797,11 +1033,9 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * GET ADMIN ID
-     * ==========================================================
-     */
+    /* ==========================================================
+       GET ADMIN ID FROM SESSION
+    ========================================================== */
 
     private Integer getAdminId(
             HttpSession session) {
@@ -831,19 +1065,16 @@ public class ProfileServlet extends HttpServlet {
                     value.toString()
             );
 
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
 
             return null;
         }
     }
 
 
-    /*
-     * ==========================================================
-     * GET EXTENSION
-     * ==========================================================
-     */
+    /* ==========================================================
+       GET EXTENSION
+    ========================================================== */
 
     private String getExtension(
             String fileName) {
@@ -873,11 +1104,9 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * EXTENSION FROM CONTENT TYPE
-     * ==========================================================
-     */
+    /* ==========================================================
+       EXTENSION FROM CONTENT TYPE
+    ========================================================== */
 
     private String getExtensionFromContentType(
             String contentType) {
@@ -921,11 +1150,9 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * ALLOWED EXTENSIONS
-     * ==========================================================
-     */
+    /* ==========================================================
+       ALLOWED EXTENSIONS
+    ========================================================== */
 
     private boolean isAllowedExtension(
             String extension) {
@@ -950,11 +1177,76 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
-    /*
-     * ==========================================================
-     * JSON RESPONSE
-     * ==========================================================
-     */
+    /* ==========================================================
+       PROFILE JSON
+    ========================================================== */
+
+    private void sendProfileJson(
+            HttpServletResponse response,
+            Profile profile)
+            throws IOException {
+
+
+        response.setContentType(
+                "application/json"
+        );
+
+
+        response.setCharacterEncoding(
+                "UTF-8"
+        );
+
+
+        PrintWriter out =
+                response.getWriter();
+
+
+        out.print("{"
+                + "\"success\":true,"
+                + "\"data\":{"
+                + "\"id\":" + profile.getId() + ","
+                + "\"username\":\""
+                + escapeJson(profile.getUsername())
+                + "\","
+                + "\"type\":\""
+                + escapeJson(profile.getType())
+                + "\","
+                + "\"status\":\""
+                + escapeJson(profile.getStatus())
+                + "\","
+                + "\"email\":\""
+                + escapeJson(profile.getEmail())
+                + "\","
+                + "\"phone\":\""
+                + escapeJson(profile.getPhone())
+                + "\","
+                + "\"avatar\":\""
+                + escapeJson(profile.getAvatar())
+                + "\","
+                + "\"createdAt\":\""
+                + escapeJson(
+                        profile.getCreatedAt() == null
+                        ? ""
+                        : profile.getCreatedAt().toString()
+                )
+                + "\","
+                + "\"lastLogin\":\""
+                + escapeJson(
+                        profile.getLastLogin() == null
+                        ? ""
+                        : profile.getLastLogin().toString()
+                )
+                + "\""
+                + "}"
+                + "}");
+
+        out.flush();
+    }
+
+
+    /* ==========================================================
+       JSON RESPONSE
+    ========================================================== */
 
     private void sendJson(
             HttpServletResponse response,
@@ -978,15 +1270,7 @@ public class ProfileServlet extends HttpServlet {
 
 
         String safeData =
-                data == null
-                ?
-                ""
-                :
-                data
-                        .replace("\\", "\\\\")
-                        .replace("\"", "\\\"")
-                        .replace("\r", "\\r")
-                        .replace("\n", "\\n");
+                escapeJson(data);
 
 
         out.print(
@@ -1002,5 +1286,27 @@ public class ProfileServlet extends HttpServlet {
 
 
         out.flush();
+    }
+
+
+    /* ==========================================================
+       ESCAPE JSON
+    ========================================================== */
+
+    private String escapeJson(
+            String value) {
+
+
+        if (value == null) {
+
+            return "";
+        }
+
+
+        return value
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\r", "\\r")
+                .replace("\n", "\\n");
     }
 }

@@ -1,7 +1,7 @@
 /* ==========================================================
    CENTRIA
    PROFILE PAGE
-   DNA  CENTRIA PLATFORM
+   DNA — CENTRIA PLATFORM
 ========================================================== */
 
 
@@ -13,7 +13,7 @@
     width: 100%;
     box-sizing: border-box;
 
-    padding: 12px 18px 12px;
+    padding: 10px 18px;
 
     direction: rtl;
 }
@@ -21,13 +21,11 @@
 
 /* ==========================================================
 02. PAGE BANNER
-   Same style as:
-   Centres / Payments / Dashboard
 ========================================================== */
 
 .profile-banner {
     width: 100%;
-    min-height: 50px;
+    min-height: 46px;
 
     display: flex;
     align-items: center;
@@ -35,13 +33,11 @@
     box-sizing: border-box;
 
     padding: 0 12px;
-
     margin-bottom: 8px;
 
     background: #eef6ff;
 
     border: 1px solid #d8e8fb;
-
     border-radius: 4px;
 
     color: #1e293b;
@@ -79,12 +75,12 @@
 ========================================================== */
 
 .profile-banner-content {
+    min-width: 0;
+
     display: flex;
     align-items: center;
 
     gap: 8px;
-
-    min-width: 0;
 
     line-height: 1;
 }
@@ -93,10 +89,10 @@
 .profile-banner-content strong {
     margin: 0;
 
+    color: #1e293b;
+
     font-size: 17px;
     font-weight: 800;
-
-    color: #1e293b;
 
     white-space: nowrap;
 }
@@ -111,6 +107,8 @@
 
 
 .profile-banner-description {
+    min-width: 0;
+
     color: #64748b;
 
     font-size: 14px;
@@ -149,23 +147,24 @@
 ========================================================== */
 
 .profile-card {
+    width: 100%;
+
+    box-sizing: border-box;
+
     background: #ffffff;
 
     border: 1px solid #dfe7f1;
-
     border-radius: 4px;
 
     box-shadow:
         0 2px 8px rgba(15, 23, 42, 0.035);
 
     overflow: hidden;
-
-    box-sizing: border-box;
 }
 
 
 /* ==========================================================
-   04. MAIN PROFILE CARD
+07. MAIN PROFILE CARD
 ========================================================== */
 
 .profile-main-card {
@@ -179,37 +178,14 @@
     align-items: center;
     justify-content: center;
 
-    text-align: center;
-
     padding: 16px 14px;
 
-    box-sizing: border-box;
-}
-
-
-/* ==========================================================
-   05. PROFILE CONTENT
-   Photo + username + role + status
-   centered inside the card
-========================================================== */
-
-.profile-card-content {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
     text-align: center;
-
-    margin: 0;
-    padding: 0;
 }
 
+
 /* ==========================================================
-07. AVATAR WRAPPER
+08. AVATAR WRAPPER
 ========================================================== */
 
 .profile-avatar-wrapper {
@@ -218,21 +194,21 @@
     width: 140px;
     height: 140px;
 
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
 }
 
 
 /* ==========================================================
-08. LARGE AVATAR
+09. AVATAR
 ========================================================== */
 
 .profile-avatar-large {
     width: 140px;
     height: 140px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+
+    object-fit: cover;
 
     border-radius: 50%;
 
@@ -240,15 +216,13 @@
 
     color: #ffffff;
 
-    font-size: 54px;
-
     box-shadow:
         0 12px 25px rgba(37, 99, 235, 0.16);
 }
 
 
 /* ==========================================================
-09. CHANGE AVATAR BUTTON
+10. CHANGE AVATAR BUTTON
 ========================================================== */
 
 .profile-avatar-change {
@@ -264,8 +238,9 @@
     align-items: center;
     justify-content: center;
 
-    border: 3px solid #ffffff;
+    padding: 0;
 
+    border: 3px solid #ffffff;
     border-radius: 50%;
 
     background: #1e293b;
@@ -293,23 +268,23 @@
 
 
 /* ==========================================================
-10. USERNAME
+11. MAIN USERNAME
 ========================================================== */
 
 .profile-main-card h2 {
     margin: 0;
 
+    color: #1e293b;
+
     font-size: 27px;
     font-weight: 800;
 
     line-height: 1.25;
-
-    color: #1e293b;
 }
 
 
 /* ==========================================================
-11. ROLE
+12. ROLE
 ========================================================== */
 
 .profile-role {
@@ -317,15 +292,15 @@
 
     margin-top: 7px;
 
+    color: #64748b;
+
     font-size: 15px;
     font-weight: 500;
-
-    color: #64748b;
 }
 
 
 /* ==========================================================
-12. ACTIVE STATUS
+13. STATUS
 ========================================================== */
 
 .profile-status {
@@ -364,17 +339,13 @@
 
 
 /* ==========================================================
-13. ACCOUNT CARD
+14. GRID AREAS
 ========================================================== */
 
 .profile-account-card {
     grid-area: account;
 }
 
-
-/* ==========================================================
-14. SECURITY CARD
-========================================================== */
 
 .profile-security-card {
     grid-area: security;
@@ -386,15 +357,17 @@
 ========================================================== */
 
 .profile-card-header {
-    min-height: 54px;
+    min-height: 52px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    gap: 12px;
+
     box-sizing: border-box;
 
-    padding: 0 11px;
+    padding: 0 14px;
 
     border-bottom: 1px solid #e5ebf3;
 
@@ -407,6 +380,8 @@
 ========================================================== */
 
 .profile-card-title {
+    min-width: 0;
+
     display: flex;
     align-items: center;
 
@@ -420,6 +395,8 @@
 
 
 .profile-card-title i {
+    flex: 0 0 auto;
+
     color: #2563eb;
 
     font-size: 18px;
@@ -427,7 +404,58 @@
 
 
 /* ==========================================================
-17. EDIT PROFILE BUTTON
+17. EDIT CONTROLS
+========================================================== */
+
+.profile-edit-controls {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================
+18. EDIT CHECKBOX
+========================================================== */
+
+.profile-edit-checkbox {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    white-space: nowrap;
+}
+
+
+.profile-edit-checkbox input {
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    accent-color: #2563eb;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================================
+19. EDIT BUTTON
 ========================================================== */
 
 .profile-edit-button {
@@ -442,7 +470,6 @@
     padding: 0 11px;
 
     border: 1px solid #cfe0f5;
-
     border-radius: 4px;
 
     background: #ffffff;
@@ -456,6 +483,8 @@
 
     cursor: pointer;
 
+    white-space: nowrap;
+
     transition:
         background 0.2s ease,
         border-color 0.2s ease,
@@ -468,7 +497,7 @@
 }
 
 
-.profile-edit-button:hover {
+.profile-edit-button:hover:not(:disabled) {
     background: #eef6ff;
 
     border-color: #a9c9f7;
@@ -477,28 +506,47 @@
 }
 
 
-/* ==========================================================
-18. ACCOUNT INFORMATION LIST
-========================================================== */
+.profile-edit-button:disabled {
+    opacity: 0.45;
 
-.profile-info-list {
-    padding: 0 11px;
+    cursor: not-allowed;
+
+    transform: none;
+
+    background: #f8fafc;
+
+    border-color: #e2e8f0;
+
+    color: #94a3b8;
 }
 
 
 /* ==========================================================
-19. INFORMATION ROW
+20. INFORMATION LIST
+========================================================== */
+
+.profile-info-list {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 0 14px;
+}
+
+
+/* ==========================================================
+21. INFORMATION ROW
 ========================================================== */
 
 .profile-info-row {
-    min-height: 58px;
+    min-height: 70px;
 
     display: flex;
     align-items: center;
 
-    border-bottom: 1px solid #edf2f7;
-
     box-sizing: border-box;
+
+    border-bottom: 1px solid #edf2f7;
 }
 
 
@@ -508,7 +556,7 @@
 
 
 /* ==========================================================
-20. INFORMATION ICON
+22. INFORMATION ICON
 ========================================================== */
 
 .profile-info-icon {
@@ -532,55 +580,233 @@
 
 
 /* ==========================================================
-21. INFORMATION CONTENT
+23. INFORMATION CONTENT
 ========================================================== */
 
 .profile-info-content {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-right: 10px;
+}
+
+
+.profile-info-label {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+24. PROFILE INPUT
+========================================================== */
+
+.profile-info-input {
+    width: 100%;
+    height: 40px;
+
+    box-sizing: border-box;
+
+    padding: 0 10px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #1e293b;
+
+    font-family: inherit;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ==========================================================
+25. READONLY INPUT
+========================================================== */
+
+.profile-info-input[readonly] {
+    background: transparent;
+
+    border-color: transparent;
+
+    color: #1e293b;
+
+    cursor: default;
+}
+
+
+/* ==========================================================
+26. EDITABLE INPUT
+========================================================== */
+
+.profile-info-input:not([readonly]) {
+    background: #ffffff;
+
+    border-color: #a9c9f7;
+
+    color: #1e293b;
+
+    cursor: text;
+
+    box-shadow:
+        0 0 0 2px rgba(37, 99, 235, 0.05);
+}
+
+
+.profile-info-input:not([readonly]):focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* ==========================================================
+27. READONLY INFORMATION
+   TYPE / STATUS / CREATED AT
+========================================================== */
+
+.profile-readonly-list {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    box-sizing: border-box;
+
+    padding: 12px 14px 14px;
+
+    border-top: 1px solid #edf2f7;
+}
+
+
+/* ==========================================================
+28. READONLY ROW
+========================================================== */
+
+.profile-readonly-row {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 58px;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #edf2f7;
+
+    border-radius: 4px;
+
+    background: #fafcff;
+}
+
+
+/* ==========================================================
+29. READONLY ICON
+========================================================== */
+
+.profile-readonly-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+30. READONLY CONTENT
+========================================================== */
+
+.profile-readonly-content {
     min-width: 0;
 
     display: flex;
     flex-direction: column;
 
     gap: 3px;
-
-    margin-right: 8px;
 }
 
 
-.profile-info-label {
-    font-size: 13px;
-    font-weight: 500;
-
+.profile-readonly-label {
     color: #64748b;
+
+    font-size: 11px;
+    font-weight: 600;
 }
 
 
-.profile-info-value {
-    font-size: 15px;
-    font-weight: 700;
+.profile-readonly-content strong {
+    min-width: 0;
 
     color: #1e293b;
 
+    font-size: 13px;
+    font-weight: 800;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
 
 
 /* ==========================================================
-22. SECURITY CONTENT
+31. SECURITY CONTENT
 ========================================================== */
 
 .profile-security-content {
-    padding: 0 11px;
+    padding: 0 14px;
 }
 
 
 /* ==========================================================
-23. SECURITY ITEM
+32. SECURITY ITEM
 ========================================================== */
 
 .profile-security-item {
-    min-height: 76px;
+    min-height: 74px;
 
     display: flex;
     align-items: center;
@@ -592,7 +818,7 @@
 
 
 /* ==========================================================
-24. SECURITY ICON
+33. SECURITY ICON
 ========================================================== */
 
 .profile-security-icon {
@@ -616,7 +842,7 @@
 
 
 /* ==========================================================
-25. SECURITY TEXT
+34. SECURITY TEXT
 ========================================================== */
 
 .profile-security-text {
@@ -632,26 +858,26 @@
 
 
 .profile-security-text strong {
+    color: #1e293b;
+
     font-size: 14px;
     font-weight: 800;
-
-    color: #1e293b;
 }
 
 
 .profile-security-text span {
+    color: #475569;
+
     font-size: 15px;
 
     letter-spacing: 3px;
-
-    color: #475569;
 
     line-height: 1;
 }
 
 
 /* ==========================================================
-26. CHANGE PASSWORD BUTTON
+35. CHANGE PASSWORD
 ========================================================== */
 
 .profile-secondary-button {
@@ -668,7 +894,6 @@
     flex-shrink: 0;
 
     border: 1px solid #cfe0f5;
-
     border-radius: 4px;
 
     background: #ffffff;
@@ -691,11 +916,6 @@
 }
 
 
-.profile-secondary-button i {
-    font-size: 13px;
-}
-
-
 .profile-secondary-button:hover {
     background: #eef6ff;
 
@@ -706,7 +926,7 @@
 
 
 /* ==========================================================
-27. RTL
+36. RTL
 ========================================================== */
 
 html[dir="rtl"] .profile-page {
@@ -726,18 +946,13 @@ html[dir="rtl"] .profile-banner-icon {
 
 
 html[dir="rtl"] .profile-info-content {
-    margin-right: 8px;
+    margin-right: 10px;
     margin-left: 0;
 }
 
 
-html[dir="rtl"] .profile-security-item {
-    direction: rtl;
-}
-
-
 /* ==========================================================
-28. LTR
+37. LTR
 ========================================================== */
 
 html[dir="ltr"] .profile-page {
@@ -751,13 +966,13 @@ html[dir="ltr"] .profile-banner {
 
 
 html[dir="ltr"] .profile-banner-icon {
-    margin-right: 11px;
+    margin-right: 8px;
     margin-left: 0;
 }
 
 
 html[dir="ltr"] .profile-info-content {
-    margin-left: 13px;
+    margin-left: 10px;
     margin-right: 0;
 }
 
@@ -769,47 +984,50 @@ html[dir="ltr"] .profile-avatar-change {
 
 
 /* ==========================================================
-   RESPONSIVE Ã¢â‚¬â€ TABLET
+38. TABLET
 ========================================================== */
 
 @media (max-width: 1100px) {
 
     .profile-page {
-        padding: 16px;
+        padding: 10px 14px;
     }
+
 
     .profile-grid {
         grid-template-columns: 270px minmax(0, 1fr);
 
-        gap: 10px;
+        gap: 8px;
     }
 
-    .profile-main-card {
-        min-height: 0;
 
-        padding: 18px 16px;
-    }
-
-    .profile-avatar-large,
-    .profile-avatar-wrapper {
+    .profile-avatar-wrapper,
+    .profile-avatar-large {
         width: 125px;
         height: 125px;
     }
 
-    .profile-banner-description {
-        max-width: 55vw;
+
+    .profile-main-card {
+        padding: 14px 12px;
+    }
+
+
+    .profile-readonly-list {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
     }
 }
 
 
 /* ==========================================================
-   RESPONSIVE Ã¢â‚¬â€ MOBILE
+39. MOBILE
 ========================================================== */
 
 @media (max-width: 850px) {
 
     .profile-page {
-        padding: 14px 12px 18px;
+        padding: 10px 10px 14px;
     }
 
 
@@ -821,7 +1039,7 @@ html[dir="ltr"] .profile-avatar-change {
             "account"
             "security";
 
-        gap: 10px;
+        gap: 8px;
     }
 
 
@@ -839,30 +1057,21 @@ html[dir="ltr"] .profile-avatar-change {
     }
 
 
-    .profile-banner-content {
-        gap: 7px;
-    }
-
-
-    .profile-banner-content strong {
-        font-size: 15px;
-    }
-
-
-    .profile-banner-description {
-        font-size: 13px;
+    .profile-readonly-list {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
     }
 }
 
 
 /* ==========================================================
-   RESPONSIVE Ã¢â‚¬â€ SMALL MOBILE
+40. SMALL MOBILE
 ========================================================== */
 
 @media (max-width: 600px) {
 
     .profile-page {
-        padding: 12px 10px 16px;
+        padding: 10px 8px 14px;
     }
 
 
@@ -870,14 +1079,6 @@ html[dir="ltr"] .profile-avatar-change {
         align-items: flex-start;
 
         padding: 10px 12px;
-    }
-
-
-    .profile-banner-icon {
-        width: 32px;
-        height: 32px;
-
-        flex-basis: 32px;
     }
 
 
@@ -889,11 +1090,6 @@ html[dir="ltr"] .profile-avatar-change {
 
 
     .profile-banner-content strong {
-        font-size: 14px;
-    }
-
-
-    .profile-banner-separator {
         font-size: 14px;
     }
 
@@ -917,28 +1113,56 @@ html[dir="ltr"] .profile-avatar-change {
     }
 
 
-    .profile-info-list,
-    .profile-security-content {
-        padding-left: 16px;
-        padding-right: 16px;
+    .profile-edit-controls {
+        gap: 6px;
+    }
+
+
+    .profile-edit-checkbox span {
+        display: none;
+    }
+
+
+    .profile-edit-button {
+        width: 40px;
+
+        min-height: 40px;
+
+        padding: 0;
+    }
+
+
+    .profile-edit-button span {
+        display: none;
+    }
+
+
+    .profile-info-list {
+        padding: 0 12px;
     }
 
 
     .profile-info-row {
-        min-height: 64px;
+        min-height: 68px;
     }
 
 
-    .profile-info-icon {
-        width: 40px;
-        height: 40px;
+    .profile-readonly-list {
+        grid-template-columns: 1fr;
 
-        flex-basis: 40px;
+        gap: 8px;
+
+        padding: 10px 12px 12px;
     }
 
 
-    .profile-info-content {
-        margin-right: 10px;
+    .profile-readonly-row {
+        min-height: 54px;
+    }
+
+
+    .profile-security-content {
+        padding: 0 12px;
     }
 
 
@@ -963,158 +1187,34 @@ html[dir="ltr"] .profile-avatar-change {
 
         margin-top: 2px;
     }
-
-
-    .profile-edit-button span {
-        display: none;
-    }
-
-
-    .profile-edit-button {
-        width: 40px;
-
-        padding: 0;
-    }
 }
 
 
 /* ==========================================================
-32. ACCESSIBILITY
+41. ACCESSIBILITY
 ========================================================== */
 
 .profile-edit-button:focus-visible,
 .profile-secondary-button:focus-visible,
-.profile-avatar-change:focus-visible {
-    outline: 3px solid rgba(37, 99, 235, 0.25);
+.profile-avatar-change:focus-visible,
+.profile-edit-checkbox input:focus-visible,
+.profile-info-input:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.20);
 
     outline-offset: 2px;
 }
 
 
 /* ==========================================================
-33. REDUCE MOTION
+42. REDUCE MOTION
 ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
     .profile-edit-button,
     .profile-secondary-button,
-    .profile-avatar-change {
+    .profile-avatar-change,
+    .profile-info-input {
         transition: none;
-    }
-}
-
-/* ==========================================================
-   FINAL COMPACT OVERRIDES Ã¢â‚¬â€ NO EXTRA PAGE SCROLL
-   ========================================================== */
-
-.profile-page {
-    padding: 10px 18px !important;
-}
-
-.profile-banner {
-    min-height: 46px !important;
-    margin-bottom: 8px !important;
-    padding: 0 12px !important;
-    border-radius: 4px !important;
-}
-
-.profile-grid {
-    gap: 10px !important;
-}
-
-.profile-card {
-    border-radius: 4px !important;
-}
-
-.profile-main-card {
-    min-height: 0 !important;
-    padding: 16px 14px !important;
-}
-
-.profile-card-header {
-    min-height: 52px !important;
-    padding: 0 14px !important;
-}
-
-.profile-info-list,
-.profile-security-content {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-}
-
-.profile-info-row {
-    min-height: 58px !important;
-}
-
-.profile-security-item {
-    min-height: 74px !important;
-}
-
-.profile-edit-button,
-.profile-secondary-button {
-    border-radius: 4px !important;
-}
-
-.profile-info-icon,
-.profile-security-icon {
-    border-radius: 4px !important;
-}
-
-/* Photo remains centered in the profile grid/card. */
-.profile-main-card {
-    align-items: center !important;
-    text-align: center !important;
-}
-
-.profile-avatar-wrapper {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* Preserve the circular visual identity of the avatar itself. */
-.profile-avatar-large,
-.profile-avatar-change,
-.profile-status-dot {
-    border-radius: 50% !important;
-}
-
-/* Status badge follows the compact 4px card/button language. */
-.profile-status {
-    border-radius: 4px !important;
-}
-
-/* Keep all interactive rectangular controls at 4px. */
-.profile-page button,
-.profile-page .profile-edit-button,
-.profile-page .profile-secondary-button {
-    border-radius: 4px !important;
-}
-
-@media (max-width: 1100px) {
-    .profile-page {
-        padding: 10px 14px !important;
-    }
-
-    .profile-grid {
-        gap: 8px !important;
-    }
-
-    .profile-main-card {
-        padding: 14px 12px !important;
-    }
-}
-
-@media (max-width: 850px) {
-    .profile-page {
-        padding: 10px 10px 14px !important;
-    }
-
-    .profile-grid {
-        gap: 8px !important;
-    }
-
-    .profile-main-card {
-        min-height: auto !important;
     }
 }

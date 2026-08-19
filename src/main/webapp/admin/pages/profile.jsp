@@ -8,10 +8,15 @@ Component   : Profile
 Description :
 Logged-in administrator profile page.
 
-Responsibilities :
-- Profile overview
-- Account information
-- Security information
+Editable information :
+- username
+- email
+- phone
+
+Readonly information :
+- type
+- status
+- created_at
 ==========================================================
 --%>
 
@@ -37,21 +42,89 @@ Responsibilities :
 
     /*
     ======================================================
-     FALLBACK
+     PROFILE DATA
+     Loaded by ProfileServlet / Controller
     ======================================================
     */
 
-    if (adminUsername == null ||
-        adminUsername.trim().isEmpty()) {
+    Object profileUsernameObj =
+            request.getAttribute("profileUsername");
 
-        adminUsername = "Super Admin";
+    Object profileEmailObj =
+            request.getAttribute("profileEmail");
+
+    Object profilePhoneObj =
+            request.getAttribute("profilePhone");
+
+    Object profileTypeObj =
+            request.getAttribute("profileType");
+
+    Object profileStatusObj =
+            request.getAttribute("profileStatus");
+
+    Object profileCreatedAtObj =
+            request.getAttribute("profileCreatedAt");
+
+
+    /*
+    ======================================================
+     USERNAME
+    ======================================================
+    */
+
+    String profileUsername =
+            profileUsernameObj != null
+                    ? profileUsernameObj.toString()
+                    : adminUsername;
+
+
+    if (profileUsername == null ||
+        profileUsername.trim().isEmpty()) {
+
+        profileUsername = "admin";
     }
 
 
-    if (adminType == null ||
-        adminType.trim().isEmpty()) {
+    /*
+    ======================================================
+     EMAIL
+    ======================================================
+    */
 
-        adminType = "SUPER_ADMIN";
+    String profileEmail =
+            profileEmailObj != null
+                    ? profileEmailObj.toString()
+                    : "";
+
+
+    /*
+    ======================================================
+     PHONE
+    ======================================================
+    */
+
+    String profilePhone =
+            profilePhoneObj != null
+                    ? profilePhoneObj.toString()
+                    : "";
+
+
+    /*
+    ======================================================
+     TYPE
+    ======================================================
+    */
+
+    String profileType =
+            profileTypeObj != null
+                    ? profileTypeObj.toString()
+                    : adminType;
+
+
+    if (profileType == null ||
+        profileType.trim().isEmpty()) {
+
+        profileType = "SUPER_ADMIN";
     }
 
 
@@ -64,7 +137,7 @@ Responsibilities :
     String roleDisplay;
 
 
-    if ("SUPER_ADMIN".equalsIgnoreCase(adminType)) {
+    if ("SUPER_ADMIN".equalsIgnoreCase(profileType)) {
 
         roleDisplay =
                 LanguageManager.get(
@@ -74,7 +147,7 @@ Responsibilities :
 
     }
 
-    else if ("MANAGER".equalsIgnoreCase(adminType)) {
+    else if ("MANAGER".equalsIgnoreCase(profileType)) {
 
         roleDisplay =
                 LanguageManager.get(
@@ -84,7 +157,7 @@ Responsibilities :
 
     }
 
-    else if ("OPERATOR".equalsIgnoreCase(adminType)) {
+    else if ("OPERATOR".equalsIgnoreCase(profileType)) {
 
         roleDisplay =
                 LanguageManager.get(
@@ -96,16 +169,73 @@ Responsibilities :
 
     else {
 
-        roleDisplay = adminType;
+        roleDisplay = profileType;
 
     }
 
 
     /*
     ======================================================
+     STATUS
+    ======================================================
+    */
+
+    String profileStatus =
+            profileStatusObj != null
+                    ? profileStatusObj.toString()
+                    : "";
+
+
+    if (profileStatus == null ||
+        profileStatus.trim().isEmpty()) {
+
+        profileStatus = "—";
+    }
+
+
+    /*
+    ======================================================
+     STATUS DISPLAY
+    ======================================================
+    */
+
+    String statusDisplay;
+
+
+    if ("ACTIVE".equalsIgnoreCase(profileStatus)) {
+
+        statusDisplay =
+                LanguageManager.get(
+                        "profile.active",
+                        session
+                );
+
+    }
+
+    else {
+
+        statusDisplay = profileStatus;
+
+    }
+
+
+    /*
+    ======================================================
+     CREATED AT
+    ======================================================
+    */
+
+    String profileCreatedAt =
+            profileCreatedAtObj != null
+                    ? profileCreatedAtObj.toString()
+                    : "—";
+
+
+    /*
+    ======================================================
      USER ID
     ======================================================
-     */
+    */
 
     Integer adminId = null;
 
@@ -134,6 +264,7 @@ Responsibilities :
             adminId = null;
 
         }
+
     }
 
 
@@ -141,7 +272,7 @@ Responsibilities :
     ======================================================
      AVATAR
     ======================================================
-     */
+    */
 
     String avatarPath = null;
 
@@ -158,12 +289,15 @@ Responsibilities :
                             adminId
                     );
 
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
 
             e.printStackTrace();
 
             avatarPath = null;
         }
+
     }
 
 
@@ -171,7 +305,7 @@ Responsibilities :
     ======================================================
      DEFAULT AVATAR
     ======================================================
-     */
+    */
 
     String avatarUrl =
             request.getContextPath()
@@ -182,26 +316,29 @@ Responsibilities :
     ======================================================
      SAVED AVATAR
     ======================================================
-     */
+    */
 
-  if (avatarPath != null &&
-    !avatarPath.trim().isEmpty()) {
+    if (avatarPath != null &&
+        !avatarPath.trim().isEmpty()) {
 
-    if (avatarPath.startsWith("/")) {
+        if (avatarPath.startsWith("/")) {
 
-        avatarUrl =
-                request.getContextPath()
-                + avatarPath;
+            avatarUrl =
+                    request.getContextPath()
+                    + avatarPath;
 
-    } else {
+        }
 
-        avatarUrl =
-                request.getContextPath()
-                + "/"
-                + avatarPath;
+        else {
+
+            avatarUrl =
+                    request.getContextPath()
+                    + "/"
+                    + avatarPath;
+
+        }
 
     }
-}
 
 %>
 
@@ -229,6 +366,7 @@ Responsibilities :
 
         <div class="profile-banner-content">
 
+
             <strong>
 
                 <%= LanguageManager.get(
@@ -240,7 +378,9 @@ Responsibilities :
 
 
             <span class="profile-banner-separator">
+
                 |
+
             </span>
 
 
@@ -253,6 +393,7 @@ Responsibilities :
 
             </span>
 
+
         </div>
 
 
@@ -260,14 +401,14 @@ Responsibilities :
 
 
     <!-- =================================================
-         PROFILE CONTENT
+         PROFILE GRID
     ================================================== -->
 
     <div class="profile-grid">
 
 
         <!-- =============================================
-             MAIN PROFILE CARD
+             PROFILE SUMMARY
         ============================================== -->
 
         <div class="profile-card profile-main-card">
@@ -280,16 +421,12 @@ Responsibilities :
             <div class="profile-avatar-wrapper">
 
 
-                <!-- AVATAR IMAGE -->
-
                 <img
                     id="profileAvatar"
                     class="profile-avatar-large"
                     src="<%= avatarUrl %>"
                     alt="Profile Avatar">
 
-
-                <!-- HIDDEN FILE INPUT -->
 
                 <input
                     type="file"
@@ -298,8 +435,6 @@ Responsibilities :
                     accept="image/*"
                     style="display:none;">
 
-
-                <!-- CHANGE AVATAR -->
 
                 <button
                     type="button"
@@ -310,7 +445,9 @@ Responsibilities :
                             session
                         ) %>">
 
+
                     <i class="fa-solid fa-camera"></i>
+
 
                 </button>
 
@@ -322,7 +459,7 @@ Responsibilities :
 
             <h2>
 
-                <%= adminUsername %>
+                <%= profileUsername %>
 
             </h2>
 
@@ -340,16 +477,16 @@ Responsibilities :
 
             <div class="profile-status">
 
+
                 <span class="profile-status-dot"></span>
+
 
                 <span>
 
-                    <%= LanguageManager.get(
-                            "profile.active",
-                            session
-                        ) %>
+                    <%= statusDisplay %>
 
                 </span>
+
 
             </div>
 
@@ -364,14 +501,20 @@ Responsibilities :
         <div class="profile-card profile-account-card">
 
 
-            <!-- CARD HEADER -->
+            <!-- =========================================
+                 HEADER
+            ========================================== -->
 
             <div class="profile-card-header">
 
 
+                <!-- TITLE -->
+
                 <div class="profile-card-title">
 
+
                     <i class="fa-solid fa-id-card"></i>
+
 
                     <span>
 
@@ -382,38 +525,86 @@ Responsibilities :
 
                     </span>
 
+
                 </div>
 
 
-                <!-- EDIT PROFILE -->
+                <!-- =====================================
+                     EDIT CONTROLS
+                ====================================== -->
 
-                <button
-                    type="button"
-                    class="profile-edit-button">
+                <div class="profile-edit-controls">
 
-                    <i class="fa-solid fa-pen"></i>
 
-                    <span>
+                    <!-- CHECKBOX -->
 
-                        <%= LanguageManager.get(
-                                "profile.edit",
-                                session
-                            ) %>
+                    <label class="profile-edit-checkbox">
 
-                    </span>
 
-                </button>
+                        <input
+                            type="checkbox"
+                            id="profileEditCheckbox">
+
+
+                        <span>
+
+                            <%= LanguageManager.get(
+                                    "profile.edit",
+                                    session
+                                ) %>
+
+                        </span>
+
+
+                    </label>
+
+
+                    <!-- EDIT BUTTON -->
+
+                    <button
+                        type="button"
+                        id="profileEditButton"
+                        class="profile-edit-button"
+                        disabled>
+
+
+                        <i class="fa-solid fa-pen"></i>
+
+
+                        <span>
+
+                            <%= LanguageManager.get(
+                                    "profile.edit",
+                                    session
+                                ) %>
+
+                        </span>
+
+
+                    </button>
+
+
+                </div>
 
 
             </div>
 
 
-            <!-- ACCOUNT INFORMATION -->
+            <!-- =========================================
+                 EDITABLE INFORMATION
+                 
+                 ONLY:
+                 username
+                 email
+                 phone
+            ========================================== -->
 
             <div class="profile-info-list">
 
 
-                <!-- USERNAME -->
+                <!-- =====================================
+                     USERNAME
+                ====================================== -->
 
                 <div class="profile-info-row">
 
@@ -427,21 +618,27 @@ Responsibilities :
 
                     <div class="profile-info-content">
 
-                        <span class="profile-info-label">
+
+                        <label
+                            class="profile-info-label"
+                            for="profileUsername">
 
                             <%= LanguageManager.get(
                                     "profile.username",
                                     session
                                 ) %>
 
-                        </span>
+                        </label>
 
 
-                        <span class="profile-info-value">
+                        <input
+                            type="text"
+                            id="profileUsername"
+                            name="username"
+                            class="profile-info-input"
+                            value="<%= profileUsername %>"
+                            readonly>
 
-                            <%= adminUsername %>
-
-                        </span>
 
                     </div>
 
@@ -449,43 +646,9 @@ Responsibilities :
                 </div>
 
 
-                <!-- ROLE -->
-
-                <div class="profile-info-row">
-
-
-                    <div class="profile-info-icon">
-
-                        <i class="fa-solid fa-shield-halved"></i>
-
-                    </div>
-
-
-                    <div class="profile-info-content">
-
-                        <span class="profile-info-label">
-
-                            <%= LanguageManager.get(
-                                    "profile.role",
-                                    session
-                                ) %>
-
-                        </span>
-
-
-                        <span class="profile-info-value">
-
-                            <%= roleDisplay %>
-
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-                <!-- EMAIL -->
+                <!-- =====================================
+                     EMAIL
+                ====================================== -->
 
                 <div class="profile-info-row">
 
@@ -499,21 +662,27 @@ Responsibilities :
 
                     <div class="profile-info-content">
 
-                        <span class="profile-info-label">
+
+                        <label
+                            class="profile-info-label"
+                            for="profileEmail">
 
                             <%= LanguageManager.get(
                                     "profile.email",
                                     session
                                 ) %>
 
-                        </span>
+                        </label>
 
 
-                        <span class="profile-info-value">
+                        <input
+                            type="email"
+                            id="profileEmail"
+                            name="email"
+                            class="profile-info-input"
+                            value="<%= profileEmail %>"
+                            readonly>
 
-                            —
-
-                        </span>
 
                     </div>
 
@@ -521,7 +690,9 @@ Responsibilities :
                 </div>
 
 
-                <!-- PHONE -->
+                <!-- =====================================
+                     PHONE
+                ====================================== -->
 
                 <div class="profile-info-row">
 
@@ -535,21 +706,153 @@ Responsibilities :
 
                     <div class="profile-info-content">
 
-                        <span class="profile-info-label">
+
+                        <label
+                            class="profile-info-label"
+                            for="profilePhone">
 
                             <%= LanguageManager.get(
                                     "profile.phone",
                                     session
                                 ) %>
 
+                        </label>
+
+
+                        <input
+                            type="tel"
+                            id="profilePhone"
+                            name="phone"
+                            class="profile-info-input"
+                            value="<%= profilePhone %>"
+                            readonly>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================================
+                 READONLY INFORMATION
+                 
+                 NO INPUTS
+            ========================================== -->
+
+            <div class="profile-readonly-list">
+
+
+                <!-- =====================================
+                     TYPE
+                ====================================== -->
+
+                <div class="profile-readonly-row">
+
+
+                    <div class="profile-readonly-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+
+                    <div class="profile-readonly-content">
+
+
+                        <span class="profile-readonly-label">
+
+                            <%= LanguageManager.get(
+                                    "profile.role",
+                                    session
+                                ) %>
+
                         </span>
 
 
-                        <span class="profile-info-value">
+                        <strong>
 
-                            —
+                            <%= roleDisplay %>
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =====================================
+                     STATUS
+                ====================================== -->
+
+                <div class="profile-readonly-row">
+
+
+                    <div class="profile-readonly-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div class="profile-readonly-content">
+
+
+                        <span class="profile-readonly-label">
+
+                            Status
 
                         </span>
+
+
+                        <strong>
+
+                            <%= statusDisplay %>
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =====================================
+                     CREATED AT
+                ====================================== -->
+
+                <div class="profile-readonly-row">
+
+
+                    <div class="profile-readonly-icon">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                    </div>
+
+
+                    <div class="profile-readonly-content">
+
+
+                        <span class="profile-readonly-label">
+
+                            Created at
+
+                        </span>
+
+
+                        <strong>
+
+                            <%= profileCreatedAt %>
+
+                        </strong>
+
 
                     </div>
 
@@ -570,14 +873,16 @@ Responsibilities :
         <div class="profile-card profile-security-card">
 
 
-            <!-- CARD HEADER -->
+            <!-- HEADER -->
 
             <div class="profile-card-header">
 
 
                 <div class="profile-card-title">
 
+
                     <i class="fa-solid fa-lock"></i>
+
 
                     <span>
 
@@ -587,6 +892,7 @@ Responsibilities :
                             ) %>
 
                     </span>
+
 
                 </div>
 
@@ -606,7 +912,9 @@ Responsibilities :
 
                     <div class="profile-security-icon">
 
+
                         <i class="fa-solid fa-key"></i>
+
 
                     </div>
 
@@ -614,6 +922,7 @@ Responsibilities :
                     <!-- PASSWORD -->
 
                     <div class="profile-security-text">
+
 
                         <strong>
 
@@ -631,6 +940,7 @@ Responsibilities :
 
                         </span>
 
+
                     </div>
 
 
@@ -640,7 +950,9 @@ Responsibilities :
                         type="button"
                         class="profile-secondary-button">
 
+
                         <i class="fa-solid fa-pen"></i>
+
 
                         <span>
 
@@ -650,6 +962,7 @@ Responsibilities :
                                 ) %>
 
                         </span>
+
 
                     </button>
 
@@ -667,5 +980,3 @@ Responsibilities :
 
 
 </section>
-
-
