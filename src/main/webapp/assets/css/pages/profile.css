@@ -1218,3 +1218,30 @@ html[dir="ltr"] .profile-avatar-change {
         transition: none;
     }
 }
+
+/* ==========================================================
+   PROFILE STATUS - ACTIVE / INACTIVE
+========================================================== */
+
+.profile-status-active {
+    background: #ecfdf5;
+    color: #15803d;
+}
+
+.profile-status-inactive {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* ==========================================================
+   STATUS DOT
+========================================================== */
+
+.profile-status-dot-active {
+    background: #22c55e;
+}
+
+.profile-status-dot-inactive {
+    background: #ef4444;
+}

@@ -41,19 +41,9 @@ document.addEventListener(
 function loadProfile() {
 
     const contextPath =
-        window.contextPath ||
-        "";
+        window.contextPath || "";
 
 
-    /*
-     * Get complete profile from servlet.
-     *
-     * ProfileServlet
-     *      ↓
-     * ProfileDAO
-     *      ↓
-     * super_admins
-     */
     fetch(
         contextPath +
         "/ProfileServlet?action=getProfile",
@@ -89,9 +79,6 @@ function loadProfile() {
             );
 
 
-            /*
-             * Server error.
-             */
             if (!data.success) {
 
                 showProfileMessage(
@@ -105,9 +92,6 @@ function loadProfile() {
             }
 
 
-            /*
-             * Make sure profile data exists.
-             */
             if (!data.data) {
 
                 showProfileMessage(
@@ -134,7 +118,6 @@ function loadProfile() {
                EDITABLE INFORMATION
             ================================================== */
 
-
             setProfileField(
                 "profileUsername",
                 profile.username
@@ -156,16 +139,9 @@ function loadProfile() {
             /* ==================================================
                READONLY INFORMATION
 
-               IMPORTANT:
-
-               profile.jsp does NOT have:
-
-               #profileRole
-               #profileStatus
-               #profileCreatedAt
-
-               Therefore we update the real
-               .profile-readonly-row elements.
+               ROLE
+               STATUS
+               CREATED AT
             ================================================== */
 
             updateReadonlyProfileInformation(
@@ -174,7 +150,7 @@ function loadProfile() {
 
 
             /* ==================================================
-               MAIN USERNAME
+               USERNAME
             ================================================== */
 
             updateMainProfileUsername(
@@ -182,12 +158,17 @@ function loadProfile() {
             );
 
 
-            /* ==================================================
-               HEADER USERNAME
-            ================================================== */
-
             updateHeaderUsername(
                 profile.username
+            );
+
+
+            /* ==================================================
+               PROFILE STATUS UNDER PHOTO
+            ================================================== */
+
+            updateProfileStatus(
+                profile.status
             );
 
 
@@ -197,7 +178,7 @@ function loadProfile() {
 
             if (
                 profile.avatar &&
-                profile.avatar.trim() !== ""
+                profile.avatar.toString().trim() !== ""
             ) {
 
                 const avatarUrl =
@@ -230,7 +211,7 @@ function loadProfile() {
 
 
             /* ==================================================
-               SAVE ORIGINAL EDITABLE VALUES
+               SAVE ORIGINAL VALUES
             ================================================== */
 
             updateProfileOriginalValues(
@@ -277,23 +258,16 @@ function updateReadonlyProfileInformation(
     }
 
 
-    /*
-     * Get all readonly rows.
-     *
-     * profile.jsp structure:
-     *
-     * Row 1 = ROLE
-     * Row 2 = STATUS
-     * Row 3 = CREATED AT
-     */
     const rows =
         document.querySelectorAll(
             ".profile-readonly-list .profile-readonly-row"
         );
 
 
-    if (!rows ||
-        rows.length === 0) {
+    if (
+        !rows ||
+        rows.length === 0
+    ) {
 
         console.warn(
             "[CENTRIA PROFILE] Readonly profile rows not found."
@@ -319,11 +293,8 @@ function updateReadonlyProfileInformation(
         if (roleValue) {
 
             /*
-             * We intentionally do not replace
-             * the role with raw SUPER_ADMIN here.
-             *
-             * JSP already converts it to the
-             * correct translated display.
+             * Keep the role already rendered
+             * by JSP / LanguageManager.
              */
 
         }
@@ -345,18 +316,11 @@ function updateReadonlyProfileInformation(
 
         if (statusValue) {
 
-            let status =
-                profile.status;
-
-
-            if (
-                status == null ||
-                status.toString().trim() === ""
-            ) {
-
-                status = "—";
-
-            }
+            const status =
+                profile.status == null ||
+                profile.status.toString().trim() === ""
+                    ? "—"
+                    : profile.status.toString().trim();
 
 
             statusValue.textContent =
@@ -391,13 +355,10 @@ function updateReadonlyProfileInformation(
     }
 
 
-    /*
-     * Last login is optional.
-     *
-     * If later we add a fourth readonly row
-     * with id/class for last login, it can be
-     * handled separately.
-     */
+    /* ==================================================
+       LAST LOGIN
+    ================================================== */
+
     const lastLoginElement =
         document.getElementById(
             "profileLastLogin"
@@ -1692,5 +1653,163 @@ function updateHeaderUsername(
 
         }
     );
+
+}
+
+
+
+/* ==========================================================
+   UPDATE PROFILE STATUS
+========================================================== */
+
+function updateProfileStatus(
+    status
+) {
+
+    const statusElement =
+        document.querySelector(
+            ".profile-main-card .profile-status"
+        );
+
+
+    if (!statusElement) {
+
+        console.warn(
+            "[CENTRIA PROFILE] Profile status element not found."
+        );
+
+        return;
+
+    }
+
+
+    const statusDot =
+        statusElement.querySelector(
+            ".profile-status-dot"
+        );
+
+
+    const statusText =
+        statusElement.querySelector(
+            "span:not(.profile-status-dot)"
+        );
+
+
+    const normalizedStatus =
+        status == null
+            ? ""
+            : status.toString().trim().toUpperCase();
+
+
+    /*
+     * Remove previous classes.
+     */
+
+    statusElement.classList.remove(
+        "profile-status-active",
+        "profile-status-inactive"
+    );
+
+
+    if (statusDot) {
+
+        statusDot.classList.remove(
+            "profile-status-dot-active",
+            "profile-status-dot-inactive"
+        );
+
+    }
+
+
+    /*
+     * ACTIVE
+     */
+
+    if (normalizedStatus === "ACTIVE") {
+
+        statusElement.classList.add(
+            "profile-status-active"
+        );
+
+
+        if (statusDot) {
+
+            statusDot.classList.add(
+                "profile-status-dot-active"
+            );
+
+        }
+
+
+        if (statusText) {
+
+            statusText.textContent =
+                "ACTIVE";
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+     * INACTIVE
+     */
+
+    if (normalizedStatus === "INACTIVE") {
+
+        statusElement.classList.add(
+            "profile-status-inactive"
+        );
+
+
+        if (statusDot) {
+
+            statusDot.classList.add(
+                "profile-status-dot-inactive"
+            );
+
+        }
+
+
+        if (statusText) {
+
+            statusText.textContent =
+                "INACTIVE";
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+     * Unknown / empty
+     */
+
+    statusElement.classList.add(
+        "profile-status-inactive"
+    );
+
+
+    if (statusDot) {
+
+        statusDot.classList.add(
+            "profile-status-dot-inactive"
+        );
+
+    }
+
+
+    if (statusText) {
+
+        statusText.textContent =
+            "INACTIVE";
+
+    }
 
 }
