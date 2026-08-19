@@ -203,21 +203,33 @@ Readonly information :
 
 
     if ("ACTIVE".equalsIgnoreCase(profileStatus)) {
-
+        
         statusDisplay =
                 LanguageManager.get(
                         "profile.active",
                         session
                 );
-
+        
     }
+
+    
+   
+    
+    else if ("INACTIVE".equalsIgnoreCase(profileStatus)) {
+
+        statusDisplay =
+                LanguageManager.get(
+                        "profile.inactive",
+                        session
+                );
+    }
+    
 
     else {
 
         statusDisplay = profileStatus;
 
     }
-
 
     /*
     ======================================================
@@ -473,23 +485,24 @@ Readonly information :
             </span>
 
 
-            <!-- STATUS -->
+          <!-- STATUS -->
 
-            <div class="profile-status">
+<div
+    id="profileStatusBadge"
+    class="profile-status">
 
+    <span
+        class="profile-status-dot">
+    </span>
 
-                <span class="profile-status-dot"></span>
+    <span
+        class="profile-status-text">
 
+        <%= statusDisplay %>
 
-                <span>
+    </span>
 
-                    <%= statusDisplay %>
-
-                </span>
-
-
-            </div>
-
+</div>
 
         </div>
 
@@ -592,7 +605,7 @@ Readonly information :
 
             <!-- =========================================
                  EDITABLE INFORMATION
-                 
+
                  ONLY:
                  username
                  email
@@ -739,7 +752,7 @@ Readonly information :
 
             <!-- =========================================
                  READONLY INFORMATION
-                 
+
                  NO INPUTS
             ========================================== -->
 
@@ -805,16 +818,21 @@ Readonly information :
 
                         <span class="profile-readonly-label">
 
-                            Status
+                            <%= LanguageManager.get(
+                                    "profile.status",
+                                    session
+                                ) %>
 
                         </span>
 
 
-                        <strong>
-
-                            <%= statusDisplay %>
-
-                        </strong>
+                      <strong
+    class="profile-status-value"
+    data-active="<%= LanguageManager.get("profile.active", session) %>"
+    data-inactive="<%= LanguageManager.get("profile.inactive", session) %>"
+>
+    <%= statusDisplay %>
+</strong>
 
 
                     </div>
@@ -842,7 +860,10 @@ Readonly information :
 
                         <span class="profile-readonly-label">
 
-                            Created at
+                            <%= LanguageManager.get(
+                                    "profile.created.at",
+                                    session
+                                ) %>
 
                         </span>
 
