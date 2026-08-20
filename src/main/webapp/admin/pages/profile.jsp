@@ -581,13 +581,13 @@ Readonly information :
                         disabled>
 
 
-                        <i class="fa-solid fa-pen"></i>
+                       <i class="fa-solid fa-floppy-disk"></i>
 
 
                         <span>
 
                             <%= LanguageManager.get(
-                                    "profile.edit",
+                                    "profile.save",
                                     session
                                 ) %>
 
@@ -967,25 +967,15 @@ Readonly information :
 
                     <!-- CHANGE PASSWORD -->
 
-                    <button
-                        type="button"
-                        class="profile-secondary-button">
-
-
-                        <i class="fa-solid fa-pen"></i>
-
-
-                        <span>
-
-                            <%= LanguageManager.get(
-                                    "profile.change.password",
-                                    session
-                                ) %>
-
-                        </span>
-
-
-                    </button>
+               <button type="button"
+                       class="profile-secondary-button">
+                   <i class="fa-solid fa-key"></i>
+                   <span>
+                       <%= LanguageManager.get(
+                               "profile.change.password",
+                               session) %>
+                   </span>
+               </button>
 
 
                 </div>
