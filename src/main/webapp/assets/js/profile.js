@@ -1382,20 +1382,12 @@ function initProfileEditing() {
                 true;
 
 
-            /*
-             * Restore database values.
-             */
+           /*
+            * Reload official values from DATABASE.
+            * No page refresh.
+            */
 
-            usernameInput.value =
-                originalValues.username;
-
-
-            emailInput.value =
-                originalValues.email;
-
-
-            phoneInput.value =
-                originalValues.phone;
+         loadProfile();
 
         }
     );
