@@ -1,23 +1,34 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
+ * to change this license
  */
 
 
 /*
  * Centria
- * Super Admin Authentication Controller
+ * Account Authentication Controller
  *
  * Module : Login
  * Author : Chentouf Bilal
  *
  * Description:
- * Handles Super Admin login process.
- * - Checks username and password
- * - Updates last login time
- * - Creates admin session
- * - Keeps selected language
- * - Redirects to dashboard
+ * Handles authentication for all accounts stored
+ * in the super_admins table.
+ *
+ * Supported account types:
+ * - SUPER_ADMIN
+ * - MANAGER
+ * - OPERATOR
+ *
+ * Authentication:
+ * - Username
+ * - BCrypt password
+ * - ACTIVE status
+ *
+ * Session:
+ * - adminId
+ * - adminUsername
+ * - adminType
  */
 
 
@@ -31,6 +42,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.centria.utils.DBConnection;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,18 +65,18 @@ public class SuperLoginServlet extends HttpServlet {
 
 
         /*
-         =====================================
-         Encoding UTF-8
-         =====================================
+         =====================================================
+         UTF-8
+         =====================================================
          */
 
         request.setCharacterEncoding("UTF-8");
 
 
         /*
-         =====================================
-         استقبال بيانات الدخول
-         =====================================
+         =====================================================
+         GET LOGIN DATA
+         =====================================================
          */
 
         String username =
@@ -87,30 +100,68 @@ public class SuperLoginServlet extends HttpServlet {
 
 
             /*
-             =====================================
-             الاتصال بقاعدة البيانات
-             =====================================
+             =====================================================
+             BASIC VALIDATION
+             =====================================================
              */
 
-            con =
-            DBConnection.getConnection();
+            if (
+                    username == null
+                    || username.trim().isEmpty()
+                    || password == null
+                    || password.isEmpty()
+            ) {
+
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/admin/superlogin.jsp?error=invalid"
+                );
+
+                return;
+            }
+
+
+            username =
+                    username.trim();
 
 
             /*
-             =====================================
-             التحقق من بيانات Super Admin
-             =====================================
+             =====================================================
+             DATABASE CONNECTION
+             =====================================================
+             */
+
+            con =
+                    DBConnection.getConnection();
+
+
+            /*
+             =====================================================
+             FIND ACCOUNT
+             
+             IMPORTANT:
+             We search ONLY by username.
+             
+             We DO NOT check type here.
+             
+             Therefore:
+             SUPER_ADMIN
+             MANAGER
+             OPERATOR
+             
+             are all allowed.
+             =====================================================
              */
 
             String sql =
-
-            "SELECT * FROM super_admins "
-            + "WHERE username=? "
-            + "AND password=?";
+                    "SELECT id, username, type, status, password "
+                    + "FROM super_admins "
+                    + "WHERE username=?";
 
 
             ps =
-            con.prepareStatement(sql);
+                    con.prepareStatement(sql);
 
 
             ps.setString(
@@ -119,179 +170,257 @@ public class SuperLoginServlet extends HttpServlet {
             );
 
 
-            ps.setString(
-                    2,
-                    password
+            rs =
+                    ps.executeQuery();
+
+
+            /*
+             =====================================================
+             ACCOUNT NOT FOUND
+             =====================================================
+             */
+
+            if (!rs.next()) {
+
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/admin/superlogin.jsp?error=invalid"
+                );
+
+                return;
+            }
+
+
+            /*
+             =====================================================
+             GET ACCOUNT DATA
+             =====================================================
+             */
+
+            int adminId =
+                    rs.getInt("id");
+
+
+            String dbUsername =
+                    rs.getString("username");
+
+
+            String adminType =
+                    rs.getString("type");
+
+
+            String status =
+                    rs.getString("status");
+
+
+            String passwordHash =
+                    rs.getString("password");
+
+
+            /*
+             =====================================================
+             CHECK PASSWORD
+             =====================================================
+             */
+
+            boolean passwordCorrect = false;
+
+
+            if (
+                    passwordHash != null
+                    && !passwordHash.trim().isEmpty()
+            ) {
+
+
+                passwordCorrect =
+                        BCrypt.checkpw(
+                                password,
+                                passwordHash
+                        );
+            }
+
+
+            /*
+             =====================================================
+             WRONG PASSWORD
+             =====================================================
+             */
+
+            if (!passwordCorrect) {
+
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/admin/superlogin.jsp?error=invalid"
+                );
+
+                return;
+            }
+
+
+            /*
+             =====================================================
+             CHECK ACCOUNT STATUS
+             
+             Only ACTIVE accounts can login.
+             
+             Type does NOT matter here.
+             =====================================================
+             */
+
+            if (
+                    status == null
+                    || !"ACTIVE".equalsIgnoreCase(status)
+            ) {
+
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/admin/superlogin.jsp?error=inactive"
+                );
+
+                return;
+            }
+
+
+            /*
+             =====================================================
+             CREATE SESSION
+             =====================================================
+             */
+
+            HttpSession session =
+                    request.getSession(true);
+
+
+            /*
+             =====================================================
+             STORE ACCOUNT ID
+             =====================================================
+             */
+
+            session.setAttribute(
+                    "adminId",
+                    adminId
             );
 
 
-            rs =
-            ps.executeQuery();
+            /*
+             =====================================================
+             STORE USERNAME
+             =====================================================
+             */
+
+            session.setAttribute(
+                    "adminUsername",
+                    dbUsername
+            );
 
 
-            if (rs.next()) {
+            /*
+             =====================================================
+             STORE REAL ACCOUNT TYPE
+             
+             SUPER_ADMIN
+             MANAGER
+             OPERATOR
+             =====================================================
+             */
+
+            session.setAttribute(
+                    "adminType",
+                    adminType
+            );
 
 
-                /*
-                 =====================================
-                 إنشاء Session
-                 =====================================
-                 */
+            /*
+             =====================================================
+             COMPATIBILITY FLAG
+             
+             TRUE ONLY FOR SUPER_ADMIN.
+             
+             IMPORTANT:
+             This flag is NOT used to block
+             MANAGER or OPERATOR authentication.
+             =====================================================
+             */
 
-                HttpSession session =
-                        request.getSession();
-
-
-                /*
-                 =====================================
-                 تسجيل حالة Super Admin
-                 =====================================
-                 */
-
-                session.setAttribute(
-                        "isSuperAdmin",
-                        true
-                );
-
-
-                /*
-                 =====================================
-                 حفظ Username
-                 =====================================
-                 */
-
-                session.setAttribute(
-                        "adminUsername",
-                        username
-                );
-
-
-                /*
-                 =====================================
-                 حفظ ID
-                 =====================================
-                 */
-
-                int adminId =
-                        rs.getInt("id");
-
-
-                /*
-                 =====================================
-                 تحديث آخر تسجيل دخول
-                 =====================================
-                 */
-
-                String lastLoginSql =
-
-                        "UPDATE super_admins "
-                        + "SET last_login = NOW() "
-                        + "WHERE id=?";
-
-
-                lastLoginPs =
-                        con.prepareStatement(
-                                lastLoginSql
-                        );
-
-
-                lastLoginPs.setInt(
-                        1,
-                        adminId
-                );
-
-
-                lastLoginPs.executeUpdate();
-
-
-                /*
-                 =====================================
-                 حفظ ID في Session
-                 =====================================
-                 */
-
-                session.setAttribute(
-                        "adminId",
-                        adminId
-                );
-
-
-                /*
-                 =====================================
-                 حفظ نوع المستخدم
-                 =====================================
-                 */
-
-                String adminType =
-                        rs.getString("type");
-
-
-                session.setAttribute(
-                        "adminType",
-                        adminType
-                );
-
-
-                /*
-                 =====================================
-                 تثبيت اللغة المختارة
-
-                 اللغة يتم اختيارها فقط
-                 قبل الدخول
-                 =====================================
-                 */
-
-                Object lang =
-                        session.getAttribute("lang");
-
-
-                if (lang == null) {
-
-                    session.setAttribute(
-                            "lang",
-                            "ar"
+            boolean isSuperAdmin =
+                    "SUPER_ADMIN".equalsIgnoreCase(
+                            adminType
                     );
 
-                }
+
+            session.setAttribute(
+                    "isSuperAdmin",
+                    isSuperAdmin
+            );
 
 
-                /*
-                 =====================================
-                 الدخول إلى لوحة التحكم
-                 =====================================
-                 */
+            /*
+             =====================================================
+             UPDATE LAST LOGIN
+             =====================================================
+             */
 
-                response.sendRedirect(
+            String lastLoginSql =
+                    "UPDATE super_admins "
+                    + "SET last_login = NOW() "
+                    + "WHERE id=?";
 
-                        request.getContextPath()
-                        + "/admin/dashboard.jsp?section=home"
 
+            lastLoginPs =
+                    con.prepareStatement(
+                            lastLoginSql
+                    );
+
+
+            lastLoginPs.setInt(
+                    1,
+                    adminId
+            );
+
+
+            lastLoginPs.executeUpdate();
+
+
+            /*
+             =====================================================
+             KEEP SELECTED LANGUAGE
+             =====================================================
+             */
+
+            Object lang =
+                    session.getAttribute("lang");
+
+
+            if (lang == null) {
+
+
+                session.setAttribute(
+                        "lang",
+                        "ar"
                 );
-
-
             }
 
-            else {
 
+            /*
+             =====================================================
+             LOGIN SUCCESS
+             
+             ALL ACCOUNT TYPES GO TO THE DASHBOARD.
+             =====================================================
+             */
 
-                /*
-                 =====================================
-                 بيانات غير صحيحة
-                 =====================================
-                 */
-
-                response.sendRedirect(
-
-                        request.getContextPath()
-                        + "/admin/superlogin.jsp?error=invalid"
-
-                );
-
-
-            }
+            response.sendRedirect(
+                    request.getContextPath()
+                    + "/admin/dashboard.jsp?section=home"
+            );
 
 
         }
+
 
         catch (Exception e) {
 
@@ -299,57 +428,61 @@ public class SuperLoginServlet extends HttpServlet {
             e.printStackTrace();
 
 
-            response.sendRedirect(
+            /*
+             =====================================================
+             SYSTEM ERROR
+             =====================================================
+             */
 
+            response.sendRedirect(
                     request.getContextPath()
                     + "/admin/superlogin.jsp?error=system_error"
-
             );
 
 
         }
 
+
         finally {
 
 
             /*
-             =====================================
-             إغلاق الموارد
-             =====================================
+             =====================================================
+             CLOSE DATABASE RESOURCES
+             =====================================================
              */
 
             try {
 
 
-                if (lastLoginPs != null)
+                if (lastLoginPs != null) {
                     lastLoginPs.close();
+                }
 
 
-                if (rs != null)
+                if (rs != null) {
                     rs.close();
+                }
 
 
-                if (ps != null)
+                if (ps != null) {
                     ps.close();
+                }
 
 
-                if (con != null)
+                if (con != null) {
                     con.close();
+                }
 
 
             }
+
 
             catch (Exception e) {
 
                 e.printStackTrace();
 
             }
-
-
         }
-
-
     }
-
-
 }

@@ -29,6 +29,11 @@ document.addEventListener(
          * Profile editing.
          */
         initProfileEditing();
+        
+        /*
+ * Password editing.
+ */
+initPasswordEditing();
 
     }
 );
@@ -2010,4 +2015,657 @@ function updateProfileStatus(
         normalizedStatus
     );
 
+}
+
+
+
+/* ==========================================================
+   PASSWORD EDITING
+   DEBUG VERSION
+   ========================================================== */
+
+function initPasswordEditing() {
+
+    const changePasswordButton =
+        document.getElementById(
+            "profileChangePasswordButton"
+        );
+
+    const passwordEdit =
+        document.getElementById(
+            "profilePasswordEdit"
+        );
+
+    const currentPasswordInput =
+        document.getElementById(
+            "profileCurrentPassword"
+        );
+
+    const newPasswordInput =
+        document.getElementById(
+            "profileNewPassword"
+        );
+
+    const confirmPasswordInput =
+        document.getElementById(
+            "profileConfirmPassword"
+        );
+
+    const savePasswordButton =
+        document.getElementById(
+            "profilePasswordSave"
+        );
+
+    const cancelPasswordButton =
+        document.getElementById(
+            "profilePasswordCancel"
+        );
+
+
+    /* ==========================================================
+       CHECK ELEMENTS
+       ========================================================== */
+
+    if (
+        !changePasswordButton ||
+        !passwordEdit ||
+        !currentPasswordInput ||
+        !newPasswordInput ||
+        !confirmPasswordInput ||
+        !savePasswordButton ||
+        !cancelPasswordButton
+    ) {
+        return;
+    }
+
+
+    /* ==========================================================
+       OPEN EDIT MODE
+       ========================================================== */
+
+    changePasswordButton.addEventListener(
+        "click",
+        function () {
+
+            const securityItem =
+                changePasswordButton.closest(
+                    ".profile-security-item"
+                );
+
+            if (!securityItem) {
+                return;
+            }
+
+
+            const securityIcon =
+                securityItem.querySelector(
+                    ".profile-security-icon"
+                );
+
+            const securityText =
+                securityItem.querySelector(
+                    ".profile-security-text"
+                );
+
+
+            if (securityIcon) {
+                securityIcon.style.display =
+                    "none";
+            }
+
+
+            if (securityText) {
+                securityText.style.display =
+                    "none";
+            }
+
+
+            changePasswordButton.style.display =
+                "none";
+
+
+            securityItem.style.display =
+                "block";
+
+
+            passwordEdit.style.display =
+                "block";
+
+
+            currentPasswordInput.value =
+                "";
+
+            newPasswordInput.value =
+                "";
+
+            confirmPasswordInput.value =
+                "";
+
+
+            currentPasswordInput.type =
+                "password";
+
+            newPasswordInput.type =
+                "password";
+
+            confirmPasswordInput.type =
+                "password";
+
+
+            passwordEdit
+                .querySelectorAll(
+                    ".profile-password-toggle"
+                )
+                .forEach(
+                    function (toggleButton) {
+
+                        toggleButton.innerHTML =
+                            '<i class="fa-solid fa-eye"></i>';
+
+                        toggleButton.setAttribute(
+                            "aria-label",
+                            "Show password"
+                        );
+                    }
+                );
+
+
+            currentPasswordInput.focus();
+        }
+    );
+
+
+    /* ==========================================================
+       CANCEL
+       ========================================================== */
+
+    cancelPasswordButton.addEventListener(
+        "click",
+        function () {
+
+            closePasswordEditMode();
+
+        }
+    );
+
+
+    /* ==========================================================
+       SHOW / HIDE PASSWORD
+       ========================================================== */
+
+    passwordEdit
+        .querySelectorAll(
+            ".profile-password-toggle"
+        )
+        .forEach(
+            function (toggleButton) {
+
+                toggleButton.addEventListener(
+                    "click",
+                    function () {
+
+                        const targetId =
+                            toggleButton.dataset.target;
+
+
+                        const targetInput =
+                            document.getElementById(
+                                targetId
+                            );
+
+
+                        if (!targetInput) {
+                            return;
+                        }
+
+
+                        if (
+                            targetInput.type ===
+                            "password"
+                        ) {
+
+                            targetInput.type =
+                                "text";
+
+
+                            toggleButton.innerHTML =
+                                '<i class="fa-solid fa-eye-slash"></i>';
+
+
+                            toggleButton.setAttribute(
+                                "aria-label",
+                                "Hide password"
+                            );
+
+                        } else {
+
+                            targetInput.type =
+                                "password";
+
+
+                            toggleButton.innerHTML =
+                                '<i class="fa-solid fa-eye"></i>';
+
+
+                            toggleButton.setAttribute(
+                                "aria-label",
+                                "Show password"
+                            );
+                        }
+                    }
+                );
+            }
+        );
+
+
+    /* ==========================================================
+       SAVE PASSWORD
+       ========================================================== */
+
+    savePasswordButton.addEventListener(
+        "click",
+        async function () {
+
+
+            const currentPassword =
+                currentPasswordInput.value;
+
+            const newPassword =
+                newPasswordInput.value;
+
+            const confirmPassword =
+                confirmPasswordInput.value;
+
+
+            /* ==================================================
+               EMPTY FIELDS
+               ================================================== */
+
+            if (
+                !currentPassword ||
+                !newPassword ||
+                !confirmPassword
+            ) {
+
+                showErrorDialog(
+                    window.centriaDialogMessages[
+                        "profile.password.fields.required"
+                    ]
+                );
+
+
+                if (!currentPassword) {
+
+                    currentPasswordInput.focus();
+
+                } else if (!newPassword) {
+
+                    newPasswordInput.focus();
+
+                } else {
+
+                    confirmPasswordInput.focus();
+                }
+
+
+                return;
+            }
+
+
+            /* ==================================================
+               PASSWORD LENGTH
+               ================================================== */
+
+            if (newPassword.length < 8) {
+
+                showErrorDialog(
+                    window.centriaDialogMessages[
+                        "profile.password.too.short"
+                    ]
+                );
+
+                newPasswordInput.focus();
+
+                return;
+            }
+
+
+            /* ==================================================
+               PASSWORD MATCH
+               ================================================== */
+
+            if (
+                newPassword !==
+                confirmPassword
+            ) {
+
+                showErrorDialog(
+                    window.centriaDialogMessages[
+                        "profile.password.mismatch"
+                    ]
+                );
+
+                confirmPasswordInput.focus();
+
+                return;
+            }
+
+
+            /* ==================================================
+               FORM DATA
+               ================================================== */
+
+            const formData =
+                new URLSearchParams();
+
+
+            formData.append(
+                "action",
+                "changePassword"
+            );
+
+
+            formData.append(
+                "currentPassword",
+                currentPassword
+            );
+
+
+            formData.append(
+                "newPassword",
+                newPassword
+            );
+
+
+            formData.append(
+                "confirmPassword",
+                confirmPassword
+            );
+
+
+            /* ==================================================
+               DISABLE BUTTON
+               ================================================== */
+
+            savePasswordButton.disabled =
+                true;
+
+
+            try {
+
+                /* ==================================================
+                   SEND REQUEST
+                   ================================================== */
+
+                const response =
+                    await fetch(
+                        contextPath +
+                        "/ProfileServlet",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded; charset=UTF-8"
+                            },
+
+                            body:
+                                formData.toString()
+                        }
+                    );
+
+
+                /* ==================================================
+                   HTTP ERROR
+                   ================================================== */
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "HTTP " +
+                        response.status
+                    );
+                }
+
+
+                /* ==================================================
+                   RESPONSE
+                   ================================================== */
+
+                const data =
+                    await response.json();
+
+
+                /* ==================================================
+                   SUCCESS
+                   ================================================== */
+
+                if (data.success) {
+
+                    showSuccessDialog(
+                        window.centriaDialogMessages[
+                            "profile.password.changed.successfully"
+                        ]
+                    );
+
+
+                    currentPasswordInput.value =
+                        "";
+
+                    newPasswordInput.value =
+                        "";
+
+                    confirmPasswordInput.value =
+                        "";
+
+
+                    /*
+                     * Return to normal mode
+                     * WITHOUT REFRESH
+                     */
+
+                    closePasswordEditMode();
+
+
+                    return;
+                }
+
+
+                /* ==================================================
+                   SERVER ERROR
+                   ================================================== */
+
+                showErrorDialog(
+                    window.centriaDialogMessages[
+                        "profile.password.change.error"
+                    ]
+                );
+
+
+            } catch (error) {
+
+                /* ==================================================
+                   CONNECTION / SERVER ERROR
+                   ================================================== */
+
+                showErrorDialog(
+                    window.centriaDialogMessages[
+                        "profile.password.change.error"
+                    ]
+                );
+
+
+            } finally {
+
+                savePasswordButton.disabled =
+                    false;
+            }
+        }
+    );
+}
+
+function closePasswordEditMode() {
+
+    const passwordEdit =
+        document.getElementById(
+            "profilePasswordEdit"
+        );
+
+    const changePasswordButton =
+        document.getElementById(
+            "profileChangePasswordButton"
+        );
+
+    if (!passwordEdit || !changePasswordButton) {
+        return;
+    }
+
+
+    /* ==========================================================
+       SECURITY ITEM
+       ========================================================== */
+
+    const securityItem =
+        changePasswordButton.closest(
+            ".profile-security-item"
+        );
+
+    if (!securityItem) {
+        return;
+    }
+
+
+    /* ==========================================================
+       ORIGINAL ELEMENTS
+       ========================================================== */
+
+    const securityIcon =
+        securityItem.querySelector(
+            ".profile-security-icon"
+        );
+
+    const securityText =
+        securityItem.querySelector(
+            ".profile-security-text"
+        );
+
+
+    /* ==========================================================
+       CLOSE PASSWORD EDIT
+       ========================================================== */
+
+    passwordEdit.style.display =
+        "none";
+
+
+    /* ==========================================================
+       RESTORE ORIGINAL CONTENT
+       ========================================================== */
+
+    if (securityIcon) {
+
+        securityIcon.style.display =
+            "";
+
+    }
+
+
+    if (securityText) {
+
+        securityText.style.display =
+            "";
+
+    }
+
+
+    /* ==========================================================
+       RESTORE CHANGE PASSWORD BUTTON
+       ========================================================== */
+
+    changePasswordButton.style.display =
+        "";
+
+
+    /* ==========================================================
+       RESTORE ORIGINAL SECURITY ITEM LAYOUT
+       ========================================================== */
+
+    securityItem.style.display =
+        "";
+
+
+    /* ==========================================================
+       CLEAR PASSWORD FIELDS
+       ========================================================== */
+
+    const currentPasswordInput =
+        document.getElementById(
+            "profileCurrentPassword"
+        );
+
+    const newPasswordInput =
+        document.getElementById(
+            "profileNewPassword"
+        );
+
+    const confirmPasswordInput =
+        document.getElementById(
+            "profileConfirmPassword"
+        );
+
+
+    if (currentPasswordInput) {
+
+        currentPasswordInput.value =
+            "";
+
+        currentPasswordInput.type =
+            "password";
+
+    }
+
+
+    if (newPasswordInput) {
+
+        newPasswordInput.value =
+            "";
+
+        newPasswordInput.type =
+            "password";
+
+    }
+
+
+    if (confirmPasswordInput) {
+
+        confirmPasswordInput.value =
+            "";
+
+        confirmPasswordInput.type =
+            "password";
+
+    }
+
+
+    /* ==========================================================
+       RESET EYE BUTTONS
+       ========================================================== */
+
+    passwordEdit
+        .querySelectorAll(
+            ".profile-password-toggle"
+        )
+        .forEach(
+            function (toggleButton) {
+
+                toggleButton.innerHTML =
+                    '<i class="fa-solid fa-eye"></i>';
+
+                toggleButton.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+        );
 }

@@ -6,6 +6,7 @@ import com.centria.models.Profile;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 /**
@@ -575,4 +576,83 @@ public class ProfileDAO {
         }
     }
 
+    
+    /* ==========================================================
+   10 - CHANGE PASSWORD
+   ========================================================== */
+
+public boolean changePassword(
+        int userId,
+        String currentPassword,
+        String newPassword
+) {
+
+    try {
+
+        /*
+         * Get current password hash
+         */
+
+        String currentPasswordHash =
+                getPasswordHash(userId);
+
+
+        /*
+         * User does not exist
+         * or password hash is missing
+         */
+
+        if (
+                currentPasswordHash == null ||
+                currentPasswordHash.trim().isEmpty()
+        ) {
+
+            return false;
+        }
+
+
+        /*
+         * Verify current password
+         */
+
+        if (
+                !BCrypt.checkpw(
+                        currentPassword,
+                        currentPasswordHash
+                )
+        ) {
+
+            return false;
+        }
+
+
+        /*
+         * Generate new BCrypt hash
+         */
+
+        String newPasswordHash =
+                BCrypt.hashpw(
+                        newPassword,
+                        BCrypt.gensalt()
+                );
+
+
+        /*
+         * Update database
+         */
+
+        return updatePasswordHash(
+                userId,
+                newPasswordHash
+        );
+
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+
+        return false;
+    }
 }
+}
+

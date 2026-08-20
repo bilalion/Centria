@@ -33,7 +33,10 @@
 
 
             <h3 id="global-dialog-title">
-                <%= LanguageManager.get("common.error", session) %>
+                <%= LanguageManager.get(
+                        "common.error",
+                        session
+                    ) %>
             </h3>
 
 
@@ -65,7 +68,10 @@
                     class="global-dialog-button global-dialog-button-primary"
                     data-dialog-close>
 
-                <%= LanguageManager.get("common.ok", session) %>
+                <%= LanguageManager.get(
+                        "common.ok",
+                        session
+                    ) %>
 
             </button>
 
@@ -75,7 +81,8 @@
     </div>
 
 </div>
-              
+
+
 <!-- ======================================================
      GLOBAL DIALOG TRANSLATIONS
 ====================================================== -->
@@ -84,52 +91,113 @@
 
 window.centriaDialogMessages = {
 
-        /* ==================================================
-           ARCHIVE
-        ================================================== */
 
-        "archive.error.operation.required":
-            "<%= LanguageManager.get("archive.error.operation.required", session) %>",
+    /* ==================================================
+       COMMON
+    ================================================== */
 
-        "archive.error.selection.required":
-            "<%= LanguageManager.get("archive.error.selection.required", session) %>",
-
-        "archive.error.delete":
-            "<%= LanguageManager.get("archive.error.delete", session) %>",
-
-        "archive.error.restore":
-            "<%= LanguageManager.get("archive.error.restore", session) %>",
-
-        "archive.error.view":
-            "<%= LanguageManager.get("archive.error.view", session) %>",
-
-        "archive.error.load":
-            "<%= LanguageManager.get("archive.error.load", session) %>",
-
-        "archive.error.centre.code":
-            "<%= LanguageManager.get("archive.error.centre.code", session) %>",
-
-        "archive.error.dialog":
-            "<%= LanguageManager.get("archive.error.dialog", session) %>",
+    "common.error":
+        "<%= LanguageManager.get("common.error", session) %>",
 
 
-        /* ==================================================
-           PAYMENTS
-        ================================================== */
+    "common.success":
+        "<%= LanguageManager.get("common.success", session) %>",
 
-        "payments.error.start.date.required":
-            "<%= LanguageManager.get("payments.error.start.date.required", session) %>",
 
-        "payments.error.confirm":
-            "<%= LanguageManager.get("payments.error.confirm", session) %>",
+/* ==================================================
+   PROFILE - CHANGE PASSWORD
+================================================== */
 
-        "payments.error.centre.required":
-            "<%= LanguageManager.get("payments.error.centre.required", session) %>",
+"profile.password.fields.required":
+    "<%= LanguageManager.get("profile.password.fields.required", session) %>",
 
-        "payments.error.subscription.update":
-            "<%= LanguageManager.get("payments.error.subscription.update", session) %>"
 
-    };
+"profile.password.current.required":
+    "<%= LanguageManager.get("profile.password.current.required", session) %>",
+
+
+"profile.password.new.required":
+    "<%= LanguageManager.get("profile.password.new.required", session) %>",
+
+
+"profile.password.confirm.required":
+    "<%= LanguageManager.get("profile.password.confirm.required", session) %>",
+
+
+"profile.password.too.short":
+    "<%= LanguageManager.get("profile.password.too.short", session) %>",
+
+
+"profile.password.mismatch":
+    "<%= LanguageManager.get("profile.password.mismatch", session) %>",
+
+
+"profile.password.current.incorrect":
+    "<%= LanguageManager.get("profile.password.current.incorrect", session) %>",
+
+
+"profile.password.change.error":
+    "<%= LanguageManager.get("profile.password.change.error", session) %>",
+
+
+"profile.password.changed.successfully":
+    "<%= LanguageManager.get("profile.password.changed.successfully", session) %>",
+
+    /* ==================================================
+       ARCHIVE
+    ================================================== */
+
+    "archive.error.operation.required":
+        "<%= LanguageManager.get("archive.error.operation.required", session) %>",
+
+
+    "archive.error.selection.required":
+        "<%= LanguageManager.get("archive.error.selection.required", session) %>",
+
+
+    "archive.error.delete":
+        "<%= LanguageManager.get("archive.error.delete", session) %>",
+
+
+    "archive.error.restore":
+        "<%= LanguageManager.get("archive.error.restore", session) %>",
+
+
+    "archive.error.view":
+        "<%= LanguageManager.get("archive.error.view", session) %>",
+
+
+    "archive.error.load":
+        "<%= LanguageManager.get("archive.error.load", session) %>",
+
+
+    "archive.error.centre.code":
+        "<%= LanguageManager.get("archive.error.centre.code", session) %>",
+
+
+    "archive.error.dialog":
+        "<%= LanguageManager.get("archive.error.dialog", session) %>",
+
+
+    /* ==================================================
+       PAYMENTS
+    ================================================== */
+
+    "payments.error.start.date.required":
+        "<%= LanguageManager.get("payments.error.start.date.required", session) %>",
+
+
+    "payments.error.confirm":
+        "<%= LanguageManager.get("payments.error.confirm", session) %>",
+
+
+    "payments.error.centre.required":
+        "<%= LanguageManager.get("payments.error.centre.required", session) %>",
+
+
+    "payments.error.subscription.update":
+        "<%= LanguageManager.get("payments.error.subscription.update", session) %>"
+
+};
 
 </script>
-

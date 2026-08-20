@@ -934,6 +934,275 @@
 }
 
 
+
+
+/* ==========================================================
+   35A. PASSWORD INLINE EDIT
+   ========================================================== */
+
+.profile-password-edit {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 12px;
+    padding: 14px;
+    border: 1px solid #dfe7f1;
+    border-radius: 4px;
+    background: #fafcff;
+    margin-block: 10px; 
+}
+
+
+.profile-password-field {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+
+.profile-password-field:last-of-type {
+    margin-bottom: 14px;
+}
+
+
+.profile-password-field label {
+    display: block;
+    margin-bottom: 6px;
+
+    color: #475569;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.profile-password-input-wrapper {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.profile-password-input {
+    width: 100%;
+    height: 40px;
+
+    box-sizing: border-box;
+
+    padding: 0 42px 0 10px;
+
+    border: 1px solid #cfe0f5;
+    border-radius: 4px;
+
+    outline: none;
+
+    background: #ffffff;
+    color: #1e293b;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    direction: ltr;
+    text-align: left;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.profile-password-input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+.profile-password-toggle {
+    position: absolute;
+
+    top: 50%;
+    right: 0;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.profile-password-toggle:hover {
+    color: #2563eb;
+}
+
+
+/* ==========================================================
+   PASSWORD ACTIONS
+   ========================================================== */
+
+.profile-password-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    width: 100%;
+}
+
+
+.profile-password-save-button,
+.profile-password-cancel-button {
+    min-height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 12px;
+
+    border-radius: 4px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.profile-password-save-button {
+    border: 1px solid #2563eb;
+
+    background: #2563eb;
+    color: #ffffff;
+}
+
+
+.profile-password-save-button:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+.profile-password-cancel-button {
+    border: 1px solid #cfe0f5;
+
+    background: #ffffff;
+    color: #64748b;
+}
+
+
+.profile-password-cancel-button:hover {
+    background: #f8fafc;
+    border-color: #b8cbe3;
+    color: #334155;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   PASSWORD RTL / LTR
+   ========================================================== */
+
+html[dir="rtl"] .profile-password-input {
+    direction: ltr;
+    text-align: left;
+
+    padding-right: 42px;
+    padding-left: 10px;
+}
+
+
+html[dir="ltr"] .profile-password-input {
+    direction: ltr;
+    text-align: left;
+
+    padding-left: 10px;
+    padding-right: 42px;
+}
+
+
+/* ==========================================================
+   PASSWORD MOBILE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .profile-password-edit {
+        padding: 12px;
+    }
+
+
+    .profile-password-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .profile-password-save-button,
+    .profile-password-cancel-button {
+        width: 100%;
+    }
+}
+
+
+/* ==========================================================
+   PASSWORD ACCESSIBILITY
+   ========================================================== */
+
+.profile-password-input:focus-visible,
+.profile-password-toggle:focus-visible,
+.profile-password-save-button:focus-visible,
+.profile-password-cancel-button:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.20);
+    outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   PASSWORD REDUCE MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .profile-password-input,
+    .profile-password-toggle,
+    .profile-password-save-button,
+    .profile-password-cancel-button {
+        transition: none;
+    }
+}
+
+
 /* ==========================================================
 36. RTL
 ========================================================== */
@@ -1212,6 +1481,7 @@ html[dir="ltr"] .profile-avatar-change {
 
     outline-offset: 2px;
 }
+
 
 
 /* ==========================================================

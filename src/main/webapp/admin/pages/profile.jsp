@@ -965,17 +965,196 @@ Readonly information :
                     </div>
 
 
-                    <!-- CHANGE PASSWORD -->
+                    <!-- =====================================================
+     CHANGE PASSWORD BUTTON
+     ================================================== -->
 
-               <button type="button"
-                       class="profile-secondary-button">
+               <button
+                   type="button"
+                   id="profileChangePasswordButton"
+                   class="profile-secondary-button">
+
                    <i class="fa-solid fa-key"></i>
+
                    <span>
                        <%= LanguageManager.get(
                                "profile.change.password",
                                session) %>
                    </span>
+
                </button>
+
+
+               <!-- =================================================
+                    CHANGE PASSWORD EDIT AREA
+                    Hidden by default.
+                    ================================================== -->
+
+               <div
+                   class="profile-password-edit"
+                   id="profilePasswordEdit"
+                   style="display: none;">
+
+
+                   <!-- NEW PASSWORD -->
+
+             <!-- CURRENT PASSWORD -->
+
+<div class="profile-password-field">
+
+    <label for="profileCurrentPassword">
+
+        <%= LanguageManager.get(
+                "profile.current.password",
+                session
+            ) %>
+
+    </label>
+
+
+    <div class="profile-password-input-wrapper">
+
+        <input
+            type="password"
+            id="profileCurrentPassword"
+            name="currentPassword"
+            class="profile-password-input"
+            autocomplete="current-password">
+
+
+        <button
+            type="button"
+            class="profile-password-toggle"
+            data-target="profileCurrentPassword"
+            aria-label="Show password">
+
+            <i class="fa-solid fa-eye"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- NEW PASSWORD -->
+
+<div class="profile-password-field">
+
+    <label for="profileNewPassword">
+
+        <%= LanguageManager.get(
+                "profile.new.password",
+                session
+            ) %>
+
+    </label>
+
+
+    <div class="profile-password-input-wrapper">
+
+        <input
+            type="password"
+            id="profileNewPassword"
+            name="newPassword"
+            class="profile-password-input"
+            autocomplete="new-password">
+
+
+        <button
+            type="button"
+            class="profile-password-toggle"
+            data-target="profileNewPassword"
+            aria-label="Show password">
+
+            <i class="fa-solid fa-eye"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+                   <!-- CONFIRM PASSWORD -->
+
+                   <div class="profile-password-field">
+
+                       <label for="profileConfirmPassword">
+
+                           <%= LanguageManager.get(
+                                   "profile.confirm.password",
+                                   session
+                               ) %>
+
+                       </label>
+
+
+                       <div class="profile-password-input-wrapper">
+
+                           <input
+                               type="password"
+                               id="profileConfirmPassword"
+                               name="confirmPassword"
+                               class="profile-password-input"
+                               autocomplete="new-password">
+
+
+                           <button
+                               type="button"
+                               class="profile-password-toggle"
+                               data-target="profileConfirmPassword"
+                               aria-label="Show password">
+
+                               <i class="fa-solid fa-eye"></i>
+
+                           </button>
+
+                       </div>
+
+                   </div>
+
+
+                   <!-- ACTIONS -->
+
+                   <div class="profile-password-actions">
+
+                       <button
+                           type="button"
+                           id="profilePasswordSave"
+                           class="profile-password-save-button">
+
+                           <i class="fa-solid fa-floppy-disk"></i>
+
+                           <span>
+                               <%= LanguageManager.get(
+                                       "profile.save",
+                                       session
+                                   ) %>
+                           </span>
+
+                       </button>
+
+
+                       <button
+                           type="button"
+                           id="profilePasswordCancel"
+                           class="profile-password-cancel-button">
+
+                           <i class="fa-solid fa-xmark"></i>
+
+                           <span>
+                               <%= LanguageManager.get(
+                                       "profile.cancel",
+                                       session
+                                   ) %>
+                           </span>
+
+                       </button>
+
+                   </div>
+
+               </div>
 
 
                 </div>

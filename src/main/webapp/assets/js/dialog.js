@@ -11,7 +11,7 @@ Reusable global dialog controller.
 Responsibilities :
 - Open / close global dialog
 - Dynamic type
-- Fixed global title from JSP
+- Dynamic global title
 - Dynamic message
 - Dynamic icon
 - RTL / LTR support
@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function(){
     if(!globalDialog){
 
         return;
-
     }
 
 
@@ -105,7 +104,6 @@ function showDialog(options){
     if(!globalDialog){
 
         return;
-
     }
 
 
@@ -149,36 +147,115 @@ function showDialog(options){
 
     /*
     --------------------------------------------------
+    SET TITLE
+    --------------------------------------------------
+    */
+
+    let title = "";
+
+
+    if(
+        window.centriaDialogMessages
+    ){
+
+        if(type === "success"){
+
+            title =
+                window.centriaDialogMessages[
+                    "common.success"
+                ];
+
+        }
+
+        else if(type === "error"){
+
+            title =
+                window.centriaDialogMessages[
+                    "common.error"
+                ];
+
+        }
+
+        else if(type === "warning"){
+
+            title =
+                window.centriaDialogMessages[
+                    "common.warning"
+                ]
+                ||
+                window.centriaDialogMessages[
+                    "common.error"
+                ];
+
+        }
+
+        else if(type === "info"){
+
+            title =
+                window.centriaDialogMessages[
+                    "common.info"
+                ]
+                ||
+                window.centriaDialogMessages[
+                    "common.error"
+                ];
+
+        }
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    FALLBACK TITLE
+    --------------------------------------------------
+    */
+
+    if(!title){
+
+        if(type === "success"){
+
+            title = "Success";
+
+        }
+
+        else if(type === "warning"){
+
+            title = "Warning";
+
+        }
+
+        else if(type === "info"){
+
+            title = "Information";
+
+        }
+
+        else{
+
+            title = "Error";
+
+        }
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    APPLY TITLE
+    --------------------------------------------------
+    */
+
+    setGlobalDialogTitle(title);
+
+
+    /*
+    --------------------------------------------------
     SET MESSAGE
     --------------------------------------------------
     */
 
     setGlobalDialogMessage(message);
-
-
-    /*
-    --------------------------------------------------
-    IMPORTANT
-    --------------------------------------------------
-
-    TITLE IS GLOBAL.
-
-    The title is defined directly inside:
-
-        dialog-error.jsp
-
-    using LanguageManager.
-
-    Example:
-
-        Arabic  → خطأ
-        French  → Erreur
-        English → Error
-
-    JavaScript NEVER changes the title.
-
-    --------------------------------------------------
-    */
 
 
     /*
@@ -245,7 +322,6 @@ function closeGlobalDialog(){
     if(!globalDialog){
 
         return;
-
     }
 
 
@@ -430,30 +506,6 @@ function setGlobalDialogIcon(type){
    SECTION 07 - SET TITLE
 ====================================================== */
 
-/*
-----------------------------------------------------------
-GLOBAL TITLE
-
-The title is controlled by:
-
-    dialog-error.jsp
-
-through:
-
-    LanguageManager.get(
-        "common.error",
-        session
-    )
-
-Therefore this JavaScript file does NOT modify
-the title.
-
-This function is intentionally NOT used by
-showDialog().
-
-----------------------------------------------------------
-*/
-
 function setGlobalDialogTitle(title){
 
     const element =
@@ -494,7 +546,8 @@ function setGlobalDialogMessage(message){
     }
 
 
-    let translatedMessage = message || "";
+    let translatedMessage =
+        message || "";
 
 
     /*
@@ -571,14 +624,6 @@ function handleGlobalDialogKeydown(event){
 /*
 ----------------------------------------------------------
 ERROR
-----------------------------------------------------------
-
-Usage:
-
-showErrorDialog(
-    "archive.error.load"
-);
-
 ----------------------------------------------------------
 */
 

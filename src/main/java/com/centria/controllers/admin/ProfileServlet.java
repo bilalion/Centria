@@ -152,6 +152,22 @@ public class ProfileServlet extends HttpServlet {
             return;
         }
 
+        /*
+ * ======================================================
+ * CHANGE PASSWORD
+ * ======================================================
+ */
+
+if ("changePassword".equalsIgnoreCase(action)) {
+
+    changePassword(
+            request,
+            response
+    );
+
+    return;
+}
+        
 
         /*
          * UPLOAD AVATAR
@@ -562,6 +578,256 @@ public class ProfileServlet extends HttpServlet {
     }
 
 
+    
+    
+    /* ==========================================================
+   CHANGE PASSWORD
+   ========================================================== */
+
+private void changePassword(
+        HttpServletRequest request,
+        HttpServletResponse response)
+        throws IOException {
+
+
+    /*
+     * ======================================================
+     * 01 - SESSION
+     * ======================================================
+     */
+
+    HttpSession session =
+            request.getSession(false);
+
+
+    if (session == null) {
+
+        sendJson(
+                response,
+                false,
+                "Session expired."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 02 - ADMIN ID
+     * ======================================================
+     */
+
+    Integer adminId =
+            getAdminId(session);
+
+
+    if (adminId == null) {
+
+        sendJson(
+                response,
+                false,
+                "User session not found."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 03 - FORM DATA
+     * ======================================================
+     */
+
+    String currentPassword =
+            request.getParameter(
+                    "currentPassword"
+            );
+
+
+    String newPassword =
+            request.getParameter(
+                    "newPassword"
+            );
+
+
+    String confirmPassword =
+            request.getParameter(
+                    "confirmPassword"
+            );
+
+
+    /*
+     * ======================================================
+     * 04 - NULL CHECK
+     * ======================================================
+     */
+
+    currentPassword =
+            currentPassword == null
+            ? ""
+            : currentPassword;
+
+
+    newPassword =
+            newPassword == null
+            ? ""
+            : newPassword;
+
+
+    confirmPassword =
+            confirmPassword == null
+            ? ""
+            : confirmPassword;
+
+
+    /*
+     * ======================================================
+     * 05 - CURRENT PASSWORD REQUIRED
+     * ======================================================
+     */
+
+    if (currentPassword.isEmpty()) {
+
+        sendJson(
+                response,
+                false,
+                "Current password is required."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 06 - NEW PASSWORD REQUIRED
+     * ======================================================
+     */
+
+    if (newPassword.isEmpty()) {
+
+        sendJson(
+                response,
+                false,
+                "New password is required."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 07 - CONFIRM PASSWORD REQUIRED
+     * ======================================================
+     */
+
+    if (confirmPassword.isEmpty()) {
+
+        sendJson(
+                response,
+                false,
+                "Please confirm the new password."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 08 - MINIMUM PASSWORD LENGTH
+     * ======================================================
+     */
+
+    if (newPassword.length() < 8) {
+
+        sendJson(
+                response,
+                false,
+                "Password must contain at least 8 characters."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 09 - PASSWORD MATCH
+     * ======================================================
+     */
+
+    if (!newPassword.equals(
+            confirmPassword
+    )) {
+
+        sendJson(
+                response,
+                false,
+                "Passwords do not match."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 10 - CHANGE PASSWORD
+     * ======================================================
+     *
+     * DAO will:
+     *
+     * 1. Get old password hash
+     * 2. Verify current password with BCrypt
+     * 3. Generate new BCrypt hash
+     * 4. Update password_hash
+     *
+     * ======================================================
+     */
+
+    boolean changed =
+            profileDAO.changePassword(
+                    adminId,
+                    currentPassword,
+                    newPassword
+            );
+
+
+    /*
+     * ======================================================
+     * 11 - FAILED
+     * ======================================================
+     */
+
+    if (!changed) {
+
+        sendJson(
+                response,
+                false,
+                "Current password is incorrect."
+        );
+
+        return;
+    }
+
+
+    /*
+     * ======================================================
+     * 12 - SUCCESS
+     * ======================================================
+     */
+
+    sendJson(
+            response,
+            true,
+            "Password changed successfully."
+    );
+}
+    
     /* ==========================================================
        UPLOAD AVATAR
     ========================================================== */
