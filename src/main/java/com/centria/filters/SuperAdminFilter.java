@@ -129,10 +129,10 @@ public class SuperAdminFilter implements Filter {
 
 
         /*
+        
          ======================================================
          LOGIN / LANGUAGE RESOURCES
-         
-         These resources must remain accessible before login.
+        
          ======================================================
          */
 
