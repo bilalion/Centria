@@ -722,5 +722,478 @@ document.head.appendChild(
 
 
 /* ======================================================
+   SECTION 12 - GLOBAL CONFIRM DIALOG
+====================================================== */
+
+
+/* ======================================================
+   SECTION 12.1 - STATE
+====================================================== */
+
+let globalConfirmDialog = null;
+
+let globalConfirmAction = null;
+
+
+/* ======================================================
+   SECTION 12.2 - INITIALIZATION
+====================================================== */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    globalConfirmDialog =
+        document.getElementById(
+            "global-confirm-dialog"
+        );
+
+
+    if(!globalConfirmDialog){
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    CLOSE BUTTONS
+    --------------------------------------------------
+    */
+
+    globalConfirmDialog
+        .querySelectorAll(
+            "[data-confirm-dialog-close]"
+        )
+        .forEach(function(element){
+
+            element.addEventListener(
+                "click",
+                closeGlobalConfirmDialog
+            );
+
+        });
+
+
+    /*
+    --------------------------------------------------
+    CONFIRM BUTTON
+    --------------------------------------------------
+    */
+
+    const confirmButton =
+        document.getElementById(
+            "global-confirm-dialog-confirm"
+        );
+
+
+    if(confirmButton){
+
+        confirmButton.addEventListener(
+            "click",
+            executeGlobalConfirmDialog
+        );
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    KEYBOARD
+    --------------------------------------------------
+    */
+
+    document.addEventListener(
+        "keydown",
+        handleGlobalConfirmDialogKeydown
+    );
+
+});
+
+
+/* ======================================================
+   SECTION 12.3 - OPEN CONFIRM DIALOG
+====================================================== */
+
+function openGlobalConfirmDialog(options){
+
+    /*
+    --------------------------------------------------
+    GET GLOBAL CONFIRM DIALOG
+    --------------------------------------------------
+    */
+
+    if(!globalConfirmDialog){
+
+        globalConfirmDialog =
+            document.getElementById(
+                "global-confirm-dialog"
+            );
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    SAFETY
+    --------------------------------------------------
+    */
+
+    if(!globalConfirmDialog){
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    OPTIONS
+    --------------------------------------------------
+    */
+
+    options = options || {};
+
+
+    /*
+    --------------------------------------------------
+    STORE CONFIRM ACTION
+    --------------------------------------------------
+    */
+
+    globalConfirmAction =
+        typeof options.onConfirm === "function"
+            ? options.onConfirm
+            : null;
+
+
+    /*
+    --------------------------------------------------
+    SET TITLE
+    --------------------------------------------------
+    */
+
+    setGlobalConfirmDialogTitle(
+        options.title || "common.confirm.title"
+    );
+
+
+    /*
+    --------------------------------------------------
+    SET MESSAGE
+    --------------------------------------------------
+    */
+
+    setGlobalConfirmDialogMessage(
+        options.message || ""
+    );
+
+
+    /*
+    --------------------------------------------------
+    OPEN
+    --------------------------------------------------
+    */
+
+    globalConfirmDialog.classList.add(
+        "is-open"
+    );
+
+
+    globalConfirmDialog.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    /*
+    --------------------------------------------------
+    LOCK BODY SCROLL
+    --------------------------------------------------
+    */
+
+    document.body.classList.add(
+        "global-confirm-dialog-open"
+    );
+
+
+    /*
+    --------------------------------------------------
+    FOCUS CONFIRM BUTTON
+    --------------------------------------------------
+    */
+
+    const confirmButton =
+        document.getElementById(
+            "global-confirm-dialog-confirm"
+        );
+
+
+    if(confirmButton){
+
+        confirmButton.focus();
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 12.4 - CLOSE CONFIRM DIALOG
+====================================================== */
+
+function closeGlobalConfirmDialog(){
+
+    if(!globalConfirmDialog){
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    CLOSE
+    --------------------------------------------------
+    */
+
+    globalConfirmDialog.classList.remove(
+        "is-open"
+    );
+
+
+    globalConfirmDialog.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    /*
+    --------------------------------------------------
+    CLEAR ACTION
+    --------------------------------------------------
+    */
+
+    globalConfirmAction = null;
+
+
+    /*
+    --------------------------------------------------
+    UNLOCK BODY SCROLL
+    --------------------------------------------------
+    */
+
+    document.body.classList.remove(
+        "global-confirm-dialog-open"
+    );
+
+}
+
+
+/* ======================================================
+   SECTION 12.5 - SET TITLE
+====================================================== */
+
+function setGlobalConfirmDialogTitle(title){
+
+    const element =
+        document.getElementById(
+            "global-confirm-dialog-title"
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    let translatedTitle =
+        title || "";
+
+
+    /*
+    --------------------------------------------------
+    RESOLVE LANGUAGE KEY
+    --------------------------------------------------
+    */
+
+    if(
+        window.centriaConfirmDialogMessages &&
+        Object.prototype.hasOwnProperty.call(
+            window.centriaConfirmDialogMessages,
+            title
+        )
+    ){
+
+        translatedTitle =
+            window.centriaConfirmDialogMessages[
+                title
+            ];
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    APPLY TITLE
+    --------------------------------------------------
+    */
+
+    element.textContent =
+        translatedTitle;
+
+}
+
+
+/* ======================================================
+   SECTION 12.6 - SET MESSAGE
+====================================================== */
+
+function setGlobalConfirmDialogMessage(message){
+
+    const element =
+        document.getElementById(
+            "global-confirm-dialog-message"
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    let translatedMessage =
+        message || "";
+
+
+    /*
+    --------------------------------------------------
+    RESOLVE LANGUAGE KEY
+    --------------------------------------------------
+    */
+
+    if(
+        window.centriaConfirmDialogMessages &&
+        Object.prototype.hasOwnProperty.call(
+            window.centriaConfirmDialogMessages,
+            message
+        )
+    ){
+
+        translatedMessage =
+            window.centriaConfirmDialogMessages[
+                message
+            ];
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    APPLY MESSAGE
+    --------------------------------------------------
+    */
+
+    element.textContent =
+        translatedMessage;
+
+}
+
+
+/* ======================================================
+   SECTION 12.7 - EXECUTE CONFIRM ACTION
+====================================================== */
+
+function executeGlobalConfirmDialog(){
+
+    const action =
+        globalConfirmAction;
+
+
+    /*
+    --------------------------------------------------
+    CLOSE FIRST
+    --------------------------------------------------
+    */
+
+    closeGlobalConfirmDialog();
+
+
+    /*
+    --------------------------------------------------
+    EXECUTE CALLBACK
+    --------------------------------------------------
+    */
+
+    if(typeof action === "function"){
+
+        action();
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 12.8 - KEYBOARD
+====================================================== */
+
+function handleGlobalConfirmDialogKeydown(event){
+
+    if(!globalConfirmDialog){
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------
+    ESCAPE
+    --------------------------------------------------
+    */
+
+    if(
+        event.key === "Escape"
+        &&
+        globalConfirmDialog.getAttribute(
+            "aria-hidden"
+        ) === "false"
+    ){
+
+        closeGlobalConfirmDialog();
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 12.9 - BODY SCROLL LOCK
+====================================================== */
+
+const globalConfirmDialogStyle =
+    document.createElement("style");
+
+
+globalConfirmDialogStyle.textContent = `
+
+    body.global-confirm-dialog-open{
+
+        overflow:hidden;
+
+    }
+
+`;
+
+
+document.head.appendChild(
+    globalConfirmDialogStyle
+);
+
+/* ======================================================
    END OF FILE
 ====================================================== */

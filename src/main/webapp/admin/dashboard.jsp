@@ -440,10 +440,17 @@ else {
 
 <!-- END APP SHELL -->
 <!-- =================================================
-     GLOBAL DIALOG
+     GLOBAL ERROR DIALOG
 ================================================= -->
 
 <jsp:include page="pages/fragments/common/dialog-error.jsp"/>
+
+
+<!-- =================================================
+     GLOBAL CONFIRM DIALOG
+================================================= -->
+
+<jsp:include page="pages/fragments/common/dialog-confirm.jsp"/>
 
 <!-- =================================================
      JAVASCRIPT

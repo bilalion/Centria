@@ -577,7 +577,531 @@ html[dir="ltr"] .global-dialog{
 
 }
 
+/* ======================================================
+   SECTION 15 - GLOBAL CONFIRM DIALOG
+====================================================== */
 
+.global-confirm-dialog{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+}
+
+
+/* ======================================================
+   SECTION 15.1 - ACTIVE STATE
+====================================================== */
+
+.global-confirm-dialog.is-open{
+
+    display:flex;
+
+}
+
+
+/* ======================================================
+   SECTION 15.2 - HIDDEN STATE
+====================================================== */
+
+.global-confirm-dialog[aria-hidden="true"]{
+
+    display:none;
+
+}
+
+
+/* ======================================================
+   SECTION 16 - OVERLAY
+====================================================== */
+
+.global-confirm-dialog-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(15,23,42,.45);
+
+    backdrop-filter:blur(2px);
+
+}
+
+
+/* ======================================================
+   SECTION 17 - DIALOG BOX
+====================================================== */
+
+.global-confirm-dialog-box{
+
+    position:relative;
+
+    z-index:1;
+
+    width:90%;
+
+    max-width:440px;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(15,23,42,.18);
+
+    overflow:hidden;
+
+    animation:
+        globalConfirmDialogIn .18s ease-out;
+
+}
+
+
+/* ======================================================
+   SECTION 17.1 - OPEN ANIMATION
+====================================================== */
+
+@keyframes globalConfirmDialogIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px) scale(.98);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 18 - HEADER
+====================================================== */
+
+.global-confirm-dialog-header{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:28px 50px 10px;
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   SECTION 18.1 - ICON
+====================================================== */
+
+.global-confirm-dialog-icon{
+
+    width:46px;
+
+    height:46px;
+
+    flex:0 0 46px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+    font-size:19px;
+
+}
+
+
+/* ======================================================
+   SECTION 18.2 - TITLE
+====================================================== */
+
+.global-confirm-dialog-header h3{
+
+    width:100%;
+
+    min-width:0;
+
+    margin:0;
+
+    padding:0;
+
+    color:var(--text);
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    line-height:1.4;
+
+    text-align:center;
+
+}
+
+
+/* ======================================================
+   SECTION 18.3 - CLOSE BUTTON
+====================================================== */
+
+.global-confirm-dialog-close{
+
+    position:absolute;
+
+    top:14px;
+
+    inset-inline-end:14px;
+
+    width:32px;
+
+    height:32px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0;
+
+    padding:0;
+
+    border:0;
+
+    border-radius:4px;
+
+    background:transparent;
+
+    color:var(--text-light);
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+
+}
+
+
+.global-confirm-dialog-close:hover{
+
+    background:#f1f5f9;
+
+    color:var(--text);
+
+}
+
+
+/* ======================================================
+   SECTION 19 - MESSAGE
+====================================================== */
+
+.global-confirm-dialog-body{
+
+    padding:4px 28px 22px;
+
+    text-align:center;
+
+}
+
+
+.global-confirm-dialog-body p{
+
+    margin:0;
+
+    color:var(--text-light);
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    line-height:1.7;
+
+    text-align:center;
+
+    white-space:pre-line;
+
+}
+
+
+/* ======================================================
+   SECTION 20 - ACTIONS
+====================================================== */
+
+.global-confirm-dialog-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:14px 22px 20px;
+
+    border-top:1px solid #eef1f5;
+
+}
+
+
+/* ======================================================
+   SECTION 20.1 - BUTTON
+====================================================== */
+
+.global-confirm-dialog-button{
+
+    min-width:90px;
+
+    height:38px;
+
+    padding:0 18px;
+
+    border:1px solid transparent;
+
+    border-radius:4px;
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .1s ease;
+
+}
+
+
+.global-confirm-dialog-button:active{
+
+    transform:translateY(1px);
+
+}
+
+
+/* ======================================================
+   SECTION 20.2 - CONFIRM
+====================================================== */
+
+.global-confirm-dialog-button-primary{
+
+    background:var(--primary);
+
+    color:var(--white);
+
+}
+
+
+.global-confirm-dialog-button-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+
+/* ======================================================
+   SECTION 20.3 - CANCEL
+====================================================== */
+
+.global-confirm-dialog-button-secondary{
+
+    background:var(--white);
+
+    color:var(--text);
+
+    border-color:var(--border);
+
+}
+
+
+.global-confirm-dialog-button-secondary:hover{
+
+    background:#f8fafc;
+
+    border-color:#cbd5e1;
+
+}
+
+
+/* ======================================================
+   SECTION 21 - RTL
+====================================================== */
+
+html[dir="rtl"] .global-confirm-dialog{
+
+    direction:rtl;
+
+}
+
+
+/* ======================================================
+   SECTION 22 - LTR
+====================================================== */
+
+html[dir="ltr"] .global-confirm-dialog{
+
+    direction:ltr;
+
+}
+
+
+/* ======================================================
+   SECTION 23 - RESPONSIVE
+====================================================== */
+
+@media(max-width:600px){
+
+    .global-confirm-dialog{
+
+        padding:14px;
+
+    }
+
+
+    .global-confirm-dialog-box{
+
+        width:100%;
+
+        max-width:none;
+
+    }
+
+
+    .global-confirm-dialog-header{
+
+        padding:24px 45px 10px;
+
+    }
+
+
+    .global-confirm-dialog-icon{
+
+        width:42px;
+
+        height:42px;
+
+        flex-basis:42px;
+
+        font-size:17px;
+
+    }
+
+
+    .global-confirm-dialog-header h3{
+
+        font-size:16px;
+
+    }
+
+
+    .global-confirm-dialog-body{
+
+        padding:4px 18px 18px;
+
+    }
+
+
+    .global-confirm-dialog-body p{
+
+        font-size:13px;
+
+        text-align:center;
+
+    }
+
+
+    .global-confirm-dialog-actions{
+
+        padding:12px 18px 18px;
+
+        justify-content:center;
+
+    }
+
+
+    .global-confirm-dialog-button{
+
+        width:auto;
+
+        min-width:100px;
+
+    }
+
+}
+
+
+/* ======================================================
+   SECTION 24 - REDUCED MOTION
+====================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    .global-confirm-dialog-box{
+
+        animation:none;
+
+    }
+
+
+    .global-confirm-dialog-close,
+    .global-confirm-dialog-button{
+
+        transition:none;
+
+    }
+
+}
 /* ======================================================
    END OF FILE
 ====================================================== */

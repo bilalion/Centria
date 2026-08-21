@@ -1214,6 +1214,8 @@ function showProfileMessage(
 }
 
 
+
+
 /* ==========================================================
    12 - PROFILE EDITING
 ========================================================== */
@@ -1387,12 +1389,12 @@ function initProfileEditing() {
                 true;
 
 
-           /*
-            * Reload official values from DATABASE.
-            * No page refresh.
-            */
+            /*
+             * Reload official values from DATABASE.
+             * No page refresh.
+             */
 
-         loadProfile();
+            loadProfile();
 
         }
     );
@@ -1486,273 +1488,276 @@ function initProfileEditing() {
 
 
             /*
-             * CONFIRMATION
+             * CONFIRMATION DIALOG
+             *
+             * IMPORTANT:
+             * dialog.js uses:
+             *
+             * openGlobalConfirmDialog()
+             *
+             * NOT:
+             *
+             * showConfirmDialog()
              */
 
-            const confirmed =
-                window.confirm(
-                    "Are you sure you want to update your profile?"
-                );
+            openGlobalConfirmDialog({
+
+                title:
+                    "common.confirm.title",
 
 
-            if (!confirmed) {
-
-                return;
-
-            }
+                message:
+                    "profile.confirm.profile.update",
 
 
-            /*
-             * DISABLE BUTTON DURING REQUEST
-             */
-
-            editButton.disabled =
-                true;
-
-
-            /*
-             * FORM DATA
-             */
-
-            const formData =
-                new URLSearchParams();
-
-
-            formData.append(
-                "action",
-                "updateProfile"
-            );
-
-
-            formData.append(
-                "username",
-                username
-            );
-
-
-            formData.append(
-                "email",
-                email
-            );
-
-
-            formData.append(
-                "phone",
-                phone
-            );
-
-
-            /*
-             * SEND TO SERVLET
-             */
-
-            fetch(
-                contextPath +
-                "/ProfileServlet",
-                {
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/x-www-form-urlencoded; charset=UTF-8"
-
-                    },
-
-                    body:
-                        formData.toString()
-
-                }
-            )
-
-            .then(
-                function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Profile update failed: HTTP " +
-                            response.status
-                        );
-
-                    }
-
-
-                    return response.json();
-
-                }
-            )
-
-            .then(
-                function (data) {
-
-                    console.log(
-                        "[CENTRIA PROFILE] Update response:",
-                        data
-                    );
-
-
-                    /*
-                     * SUCCESS
-                     */
-
-                    if (data.success) {
-
-                        /*
-                         * Save official values.
-                         */
-
-                        originalValues = {
-
-                            username:
-                                username,
-
-                            email:
-                                email,
-
-                            phone:
-                                phone
-
-                        };
-
-
-                        window.profileOriginalValues =
-                            originalValues;
+                onConfirm:
+                    function () {
 
 
                         /*
-                         * Exit edit mode.
+                         * DISABLE BUTTON
+                         * DURING REQUEST
                          */
-
-                        checkbox.checked =
-                            false;
-
-
-                        usernameInput.readOnly =
-                            true;
-
-
-                        emailInput.readOnly =
-                            true;
-
-
-                        phoneInput.readOnly =
-                            true;
-
 
                         editButton.disabled =
                             true;
 
 
                         /*
-                         * Update username immediately.
+                         * FORM DATA
                          */
 
-                        updateMainProfileUsername(
+                        const formData =
+                            new URLSearchParams();
+
+
+                        formData.append(
+                            "action",
+                            "updateProfile"
+                        );
+
+
+                        formData.append(
+                            "username",
                             username
                         );
 
 
-                        updateHeaderUsername(
-                            username
+                        formData.append(
+                            "email",
+                            email
+                        );
+
+
+                        formData.append(
+                            "phone",
+                            phone
                         );
 
 
                         /*
-                         * Success message.
+                         * SEND TO SERVLET
                          */
 
-                        showProfileMessage(
-                            "success",
-                            data.data ||
-                            "Profile updated successfully."
+                        fetch(
+                            contextPath +
+                            "/ProfileServlet",
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/x-www-form-urlencoded; charset=UTF-8"
+
+                                },
+
+                                body:
+                                    formData.toString()
+
+                            }
+                        )
+
+                        .then(
+                            function (response) {
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        "Profile update failed: HTTP " +
+                                        response.status
+                                    );
+
+                                }
+
+
+                                return response.json();
+
+                            }
+                        )
+
+                        .then(
+                            function (data) {
+
+                                console.log(
+                                    "[CENTRIA PROFILE] Update response:",
+                                    data
+                                );
+
+
+                                /*
+                                 * SUCCESS
+                                 */
+
+                                if (data.success) {
+
+
+                                    /*
+                                     * Save official values.
+                                     */
+
+                                    originalValues = {
+
+                                        username:
+                                            username,
+
+                                        email:
+                                            email,
+
+                                        phone:
+                                            phone
+
+                                    };
+
+
+                                    window.profileOriginalValues =
+                                        originalValues;
+
+
+                                    /*
+                                     * Exit edit mode.
+                                     */
+
+                                    checkbox.checked =
+                                        false;
+
+
+                                    usernameInput.readOnly =
+                                        true;
+
+
+                                    emailInput.readOnly =
+                                        true;
+
+
+                                    phoneInput.readOnly =
+                                        true;
+
+
+                                    editButton.disabled =
+                                        true;
+
+
+                                    /*
+                                     * Update username immediately.
+                                     */
+
+                                    updateMainProfileUsername(
+                                        username
+                                    );
+
+
+                                    updateHeaderUsername(
+                                        username
+                                    );
+
+
+                                    /*
+                                     * Success message.
+                                     */
+
+                                    showProfileMessage(
+                                        "success",
+                                        data.data ||
+                                        "Profile updated successfully."
+                                    );
+
+
+                                    /*
+                                     * Reload profile from DATABASE.
+                                     */
+
+                                    loadProfile();
+
+                                    return;
+
+                                }
+
+
+                                /*
+                                 * SERVER ERROR
+                                 */
+
+                                editButton.disabled =
+                                    false;
+
+
+                                showProfileMessage(
+                                    "error",
+                                    data.data ||
+                                    "Unable to update profile."
+                                );
+
+                            }
+                        )
+
+                        .catch(
+                            function (error) {
+
+                                console.error(
+                                    "[CENTRIA PROFILE] Profile update error:",
+                                    error
+                                );
+
+
+                                editButton.disabled =
+                                    false;
+
+
+                                checkbox.checked =
+                                    true;
+
+
+                                usernameInput.readOnly =
+                                    false;
+
+
+                                emailInput.readOnly =
+                                    false;
+
+
+                                phoneInput.readOnly =
+                                    false;
+
+
+                                showProfileMessage(
+                                    "error",
+                                    "An error occurred while updating the profile."
+                                );
+
+                            }
                         );
-
-
-                        /*
-                         * Reload profile from DATABASE.
-                         *
-                         * This is important:
-                         *
-                         * UI
-                         * ↓
-                         * Servlet
-                         * ↓
-                         * DAO
-                         * ↓
-                         * MySQL
-                         * ↓
-                         * Servlet
-                         * ↓
-                         * UI
-                         */
-
-                        loadProfile();
-
-                        return;
 
                     }
 
-
-                    /*
-                     * SERVER ERROR
-                     */
-
-                    editButton.disabled =
-                        false;
-
-
-                    showProfileMessage(
-                        "error",
-                        data.data ||
-                        "Unable to update profile."
-                    );
-
-                }
-            )
-
-            .catch(
-                function (error) {
-
-                    console.error(
-                        "[CENTRIA PROFILE] Profile update error:",
-                        error
-                    );
-
-
-                    editButton.disabled =
-                        false;
-
-
-                    checkbox.checked =
-                        true;
-
-
-                    usernameInput.readOnly =
-                        false;
-
-
-                    emailInput.readOnly =
-                        false;
-
-
-                    phoneInput.readOnly =
-                        false;
-
-
-                    showProfileMessage(
-                        "error",
-                        "An error occurred while updating the profile."
-                    );
-
-                }
-            );
+            });
 
         }
     );
 
 }
-
 
 /* ==========================================================
    13 - UPDATE HEADER USERNAME
